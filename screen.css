@@ -1,0 +1,10 @@
+body { width: 750px; margin: auto; position: center; font-family: 'Lucida Sans', Verdana, sans-serif; font-size: 12px; }
+.xml { padding: 1em; border: silver 1px solid; background: #FFF68F; }
+.relaxngcompact { padding: 1em; border: silver 1px solid; background: #F6F9ED; }
+dl { background: #ECF1EF; padding:1em; border: silver 1px solid;}
+dt { font-weight: bold; }
+.version-info { text-align: center; font-size: 90%; }
+.title { text-align: center; margin: 4em; }
+.contributors { margin-left: 250px; margin-top: 2em; margin-bottom: 2em; }
+.contributors dl { background: white; border: none; }
+.contributors dt { margin: 1em; }
