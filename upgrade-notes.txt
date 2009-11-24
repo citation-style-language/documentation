@@ -990,14 +990,12 @@ Unfinished Business
 Errata
 ~~~~~~
 
-
 -  no more group-by (maybe we won't have to mention this, as none
    of the current styles seem to use it)
 -  is-date is no more (maybe we won't have to mention this, as none
    of the current styles seem to use it)
 
-Post 1.0rc1 changesets (rc1 was tagged 08/15/09), until september
-10th:
+Post 1.0rc1 changesets (rc1 was tagged 08/15/09), until November 24th:
 
 http://sourceforge.net/apps/trac/xbiblio/changeset/1157 Removing
 class attribute from cs:group and start/end-attributes from
@@ -1055,6 +1053,75 @@ csl-categories.rnc
 
 http://sourceforge.net/apps/trac/xbiblio/changeset/1192 Changed
 "true" value of second-field-align to "flush"
+
+http://sourceforge.net/apps/trac/xbiblio/changeset/1201
+Removed the "other" date-part.
+(csl.rnc)
+
+http://sourceforge.net/apps/trac/xbiblio/changeset/1207
+adding 'linguistics'
+(csl-categories.rnc)
+
+http://sourceforge.net/apps/trac/xbiblio/changeset/1210
+Changed name-particle-option to reflect current proposal.
+(csl.rnc)
+
+http://sourceforge.net/apps/trac/xbiblio/changeset/1212
+Changed demote-particles option into a global option, renamed it to demote-non-dropping-particle.
+(csl.rnc)
+
+Locales files:
+
+http://bitbucket.org/bdarcus/csl-locales/overview/
+(all changes here should be reflected in the schema, so we should be able to skip this one)
+
+Schema files:
+
+http://bitbucket.org/bdarcus/csl-schema/overview/
+
+http://bitbucket.org/bdarcus/csl-schema/changeset/528360192454/
+adding 'jurisdiction', fixes #2
+(csl-variables.rnc)
+
+http://bitbucket.org/bdarcus/csl-schema/changeset/1d4f814940d3/
+cleaned up pattern names on variable, moved dates to csl-variables.rnc file
+(csl.rnc, csl-variables.rnc)
+
+http://bitbucket.org/bdarcus/csl-schema/changeset/520dc1d2d993/
+added global initialize-with-hyphen option, introduced hierarchical name and et-al options.
+(csl.rnc)
+
+http://bitbucket.org/bdarcus/csl-schema/changeset/836ed337fc1e/
+adding csl data schema
+(csl-data.rnc)
+
+http://bitbucket.org/bdarcus/csl-schema/changeset/a14f0ded2c85/
+minor tweaks, adding metadata
+(csl-data.rnc)
+
+http://bitbucket.org/bdarcus/csl-schema/changeset/52373cf45c98/
+filling out rich-variable-pattern
+(csl-data.rnc)
+
+http://bitbucket.org/bdarcus/csl-schema/changeset/510b59327812/
+making attribute optional
+(csl-data.rnc)
+
+http://bitbucket.org/bdarcus/csl-schema/changeset/f5b5f3c3a661/
+Allow et-al-* attributes on cs:name
+(csl.rnc)
+
+http://bitbucket.org/bdarcus/csl-schema/changeset/bda1f0ab3f7e/
+Correct regular expression pattern for ISSN(-L)s, which can have a roman "X" or "x" as check digit
+(csl.rnc)
+
+http://bitbucket.org/bdarcus/csl-schema/changeset/26c675c1c603/
+Added required version attribute (with value "1.0") to cs:locale when occurring in standalone locale files 
+(csl.rnc)
+
+http://bitbucket.org/bdarcus/csl-schema/changeset/2aed27e6c033/
+Renamed "references" to "reference", removed "reference item", added season-terms ("season-01", etc), added "ad"/"bc", put some existing terms in alphabetical order
+(csl-terms.rnc)
 
 Links - Revision histories of schema files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
