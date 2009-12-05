@@ -1,6 +1,6 @@
-!!!!!!!!!!!!!!!!!!!!!!!!!!!
-`Citation Style Language`__
-!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+`Citation Style Language 1.0`__
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ?????????????
 Upgrade Notes
 ?????????????
@@ -13,7 +13,7 @@ __ `Table of Contents`_
 
 .. class:: info-date
 
-   21 November 2009
+   December 5, 2009
 
 .. class:: contributors
 
@@ -31,171 +31,105 @@ __ `Table of Contents`_
 
 ========
 
-
-
 Citation Style Language 1.0 - What's New?
 =========================================
 
-Version 1.0 of the
-`Citation Style Language <http://citationstyles.org/>`_ (CSL)
-comes not only with many new features, but also with updated
-documentation. There are now three primary sources: a) the
-`schema <http://sourceforge.net/apps/trac/xbiblio/browser/csl/schema/tags/0.8/csl.html?rev=1084>`_
-itself, which, although the most exact, may require some
-understanding of `Relax NG Compact <http://www.relaxng.org/>`_, the
-XML schema language in which the CSL schema is written, b) the
-complete `specification <http://www.citationstyles.org/>`_, which
-aims to describe all the parts of CSL 1.0, and c) this document, in
-which many of the recently added features are highlighted, so that
-existing CSL style authors can easily update their knowledge.
+`Citation Style Language 1.0 <http://citationstyles.org/citation-style-language/schema-and-specification/#CSL1.0>`_ represents a significant update of the Citation Style Language (CSL), an open XML-based standard to describe citation styles. This document describes the changes that have been made since the previous release (`CSL 0.8 <http://citationstyles.org/citation-style-language/schema-and-specification/#CSL0.8>`_, released in March 2009), and thus is primarily aimed at those with prior CSL experience.
 
-**Nota Bene** There are two details of how CSL styles in this
-document are described that deserve some attention. The first is
-that the included CSL style examples are often not valid CSL.
-Instead, the use of XML is kept to a minimum in demonstrating the
-use of each feature. Secondly, when the XML elements of CSL are
-mentioned, the CSL namespace ("cs") is always attached as a prefix
-(e.g. ``cs:citation`` for the citation element). However, CSL
-styles will generally define the default CSL namespace in the root
-``cs:style`` element (xmlns="http://purl.org/net/xbiblio/csl"), in
-which case it is not necessary to include the namespace prefix for
-each XML element.
+**Nota Bene** These notes include many XML examples to demonstrate new CSL features. Please note that these examples are reduced to a minimum, and often don't constitute valid CSL styles. In addition, when references are made to the XML elements of CSL, the CSL namespace ("cs") is always attached as a prefix (e.g. ``cs:citation`` for the ``citation`` element). However, for CSL styles it is customary to declare the default CSL namespace in the root ``cs:style`` element (<style xmlns="http://purl.org/net/xbiblio/csl" />), which eliminates the need to include this namespace for each element.
 
-Upgrading Pre-1.0 Styles
-------------------------
+Project Home(s)
++++++++++++++++
 
-A number of backward incompatible changes have been made to CSL to
-streamline its design and to accommodate new features. To allow you
-to continue to use existing CSL styles, an
-`XSLT stylesheet <https://sourceforge.net/apps/trac/xbiblio/browser/csl/scripts/update.xsl>`_
-has been written to automate the conversion of Pre-1.0 CSL styles
-to the new CSL 1.0 format. All the styles in the Zotero Style
-Repository will be (or may already have been) (TODO: this might
-require some updating) automatically converted (TODO: I assume that
-the Zotero team will update the repository, and perform a local
-conversion in the Zotero client for installed styles that do not
-originate from the style repository). If you however use CSL styles
-that are not hosted at the Zotero Style Repository, you can perform
-the conversion yourself using either command-line tools like
-`Saxon <http://saxon.sourceforge.net/>`_ and
-`xsltproc <http://xmlsoft.org/XSLT/xsltproc2.html>`_, or one of the
-(often more user-friendly) online XSLT-tools, such as the one
-offered by
-`www.shell-tools.net <http://www.shell-tools.net/index.php?op=xslt>`_.
-For this particular tool, the upgrade instructions are:
+The first change is that the CSL project has been moved to a new home at `CitationStyles.org <http://citationstyles.org/>`_ (the old project home was located at `<http://xbiblio.sourceforge.net/csl/>`_). This website will be the central location to find CSL schemas, CSL documentation and CSL styles.
 
+For development the `SourceForge CSL mailing list <http://sourceforge.net/mailarchive/forum.php?forum_name=xbiblio-devel>`_ will be kept in use, but a switch has been made from SourceForge.net to `Bitbucket.org <http://bitbucket.org/>`_ for hosting the project code. The current code repositories are:
 
-1. Paste the contents of the
-   `XSLT stylesheet <https://sourceforge.net/apps/trac/xbiblio/browser/csl/scripts/update.xsl>`_
-   into the "xslt" text box at
-   `http://www.shell-tools.net/index.php?op=xslt <http://www.shell-tools.net/index.php?op=xslt>`_
-2. Paste the contents of your CSL style into the "xml" text box
-3. Click the "Submit Query"-button
-4. Copy the text from the "output" text box to a text editor (e.g.
-   Notepad on Windows) and save the file with a .csl-extension.
+ * `<http://bitbucket.org/bdarcus/csl-schema/>`_ - CSL schema
+ * `<http://bitbucket.org/bdarcus/csl-locales/>`_ - CSL locale files
+ * `<http://bitbucket.org/bdarcus/csl-docs/>`_ - CSL documentation
+ * `<http://bitbucket.org/bdarcus/csl-utils/>`_ - CSL utilities (mostly scripts)
 
-It is highly recommended to always validate converted styles
-against the
-`CSL 1.0 schema <http://sourceforge.net/apps/trac/xbiblio/browser/csl/schema/tags/0.8/csl.html?rev=1084>`_
-to make sure valid CSL styles have been obtained.
+Documentation
++++++++++++++
+
+Prior to the release of CSL 1.0, CSL documentation was rather scarce. Most of what was available was hosted on the `Zotero wiki <http://www.zotero.org/support/dev/csl_syntax_summary>`_. With CSL 1.0, we hope to improve on this situation. In addition to these upgrade notes, a full specification_ has been made available. As before, the `schema <http://citationstyles.org/citation-style-language/schema-and-specification/#CSL1.0>`_ itself is also a source of information, although reading the schema requires some understanding of `RELAX NG Compact <http://www.relaxng.org/>`_, the XML schema language in which the CSL schema is written.
+
+.. _specification: http://citationstyles.org/citation-style-language/schema-and-specification/#CSL1.0
+
+Schema
+++++++
+
+Split Schema
+------------
+
+The schema of `CSL 0.8 <http://citationstyles.org/citation-style-language/schema-and-specification/#CSL0.8>`_ consists of a single file. With CSL 1.0, the schema has been split into multiple files:
+
+ * csl.rnc - The core of the CSL schema. This file contains most of the schema logic and calls the other schema files
+ * csl-categories.rnc
+ * csl-terms.rnc
+ * csl-types.rnc
+ * csl-variables.rnc
+
+The main advantage of splitting up the schema is that the schema will be easier to maintain. If you wish to validate styles against the CSL schema, make sure all the files are located in the same directory, and validate against csl.rnc.
+
+csl-data
+~~~~~~~~
+
+Although hosted in the same code repository as the rest of the schema, csl-data.rnc is not used for style validation. Instead, it describes how data can (and should) be presented to CSL processors, such as citeproc-js_. Note that the structured input data doesn't need to consist of XML (e.g. citeproc-js_ accepts JSON).
+
+.. _citeproc-js: http://bitbucket.org/fbennett/citeproc-js/
 
 Validation
 ----------
 
-Writing styles means validating. However, a few changes have been
-made to the schema that might have affect your validation process.
+The CSL 1.0 schema has been extended with two Schematron rules to make sure styles don't use ``cs:text`` and ``cs:key`` elements that call non-existing ``cs:macro`` elements. Note that not all validators support embedded Schematron code (e.g. `Jing <http://www.thaiopensource.com/relaxng/jing.html>`_ just ignores the rules). In addition, the CSL 1.0 schema can now be used to validate the `locales files`_ (e.g. "locales-en-US.xml"), which contain localizations of terms, date formats and style options.
 
-Split Schema
-~~~~~~~~~~~~
+.. _locales files: http://bitbucket.org/bdarcus/csl-locales/src/
 
-One of the more striking changes is that the schema is now split
-into multiple files: csl.rnc (containing most of the schema logic,
-this file calls the other schema parts), csl-variables.rnc,
-csl-terms.rnc and csl-types.rnc. To validate against the CSL
-schema, make sure all these files are located in the same
-directory, and validate against csl.rnc.
+Styles
+++++++
 
-Schematron
-~~~~~~~~~~
+Updating CSL 0.8 Styles
+-----------------------
 
-In addition to Relax NG code, the schema also contains two new
-Schematron rules to check for ``cs:text`` and ``cs:key`` elements
-that call undeclared ``cs:macro`` elements. Note that not all
-validators support embedded Schematron code (e.g.
-`Jing <http://www.thaiopensource.com/relaxng/jing.html>`_ ignores
-the Schematron rules in Relax NG Compact files).
+CSL 1.0 is backward incompatible with CSL 0.8, which means that 'old' styles written for CSL 0.8 won't work with CSL 1.0 processors. Fortunately, it is possible to (automatically) update CSL 0.8 styles to the CSL 1.0 format using the `upgrade.xsl <http://bitbucket.org/bdarcus/csl-utils/src/tip/update.xsl>`_ XSLT stylesheet. The developers of Zotero will perform this conversion for all the styles in the `Zotero Style Repository <http://www.zotero.org/styles>`_. However, if you use (custom) CSL styles that aren't included in this style repository, you might need to do this yourself.
 
-CSL Schema Formats: .rnc and .rng
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Using upgrade.xsl
+~~~~~~~~~~~~~~~~~
 
-The schema of CSL 1.0 has been developed in the compact syntax of
-Relax NG (schema files written in this syntax have the ".rnc"
-extension). As not all XML validators support the compact syntax,
-we now also provide the XML version of the schema (these are the
-files with the ".rng" extension).
+First, check whether the styles that you wish to update validate against the `CSL 0.8 schema <http://citationstyles.org/citation-style-language/schema-and-specification/#CSL0.8>`_.
 
-Validating Locale Files
-~~~~~~~~~~~~~~~~~~~~~~~
+Then use an XSLT processor to update the styles. Available options are the command-line tools `Saxon <http://saxon.sourceforge.net/>`_ and `xsltproc <http://xmlsoft.org/XSLT/xsltproc2.html>`_. Alternatively, one of the (more user-friendly) online converters, such as the one offered by `www.shell-tools.net <http://www.shell-tools.net/index.php?op=xslt>`_ can be used. For the latter tool, the instructions are:
 
-CSL ships with localized terms, dates and options, which are
-contained in the "locales-xx-XX.xml" files (the "xx-XX" indicating
-the locale). With the CSL 1.0 schema, it is now also possible to
-validate these locale files, which is especially useful if you wish
-to customize these files (although in most cases, in view of
-portability, you'd probably want to override locale data in the CSL
-style and not in the locale files).
+1. Paste the contents of `upgrade.xsl <http://bitbucket.org/bdarcus/csl-utils/src/tip/update.xsl>`_  into the "xslt" text box at `<http://www.shell-tools.net/index.php?op=xslt>`_
+2. Paste the contents of the CSL 0.8 style into the "xml" text box
+3. Click the "Submit Query"-button
+4. Copy the text from the "output" text box to a suitable text editor (e.g.
+   Notepad on Windows) and save the file with a .csl-extension.
 
-Style Structure
-~~~~~~~~~~~~~~~
+Finally, after the conversion, it is recommended to validate the converted style, this time against the `CSL 1.0 schema`_.
+
+.. _CSL 1.0 schema: http://citationstyles.org/citation-style-language/schema-and-specification/#CSL1.0
 
 Version Number
-^^^^^^^^^^^^^^
+--------------
 
-To facilitate future development of CSL, valid 1.0 styles now
-should specify the CSL version in which the style was written. For
-example:
+Starting with CSL 1.0, a style must indicate for which CSL version the style was written. All CSL 1.0 styles should carry the value "1.0" on the ``version``-attribute on the cs:style element, e.g.:
 
-::
+.. sourcecode:: xml
 
     <style version="1.0" class="in-text">
 
-Options
-^^^^^^^
+Options as Attributes
+---------------------
 
-Before CSL 1.0, options were set using the ``cs:option`` element.
-As it was recognized that this was non-standard use of XML, options
-in CSL 1.0 are set via attributes instead. Global options
-(affecting both the ``citation`` and ``bibliography`` output) are
-set as attributes in the ``cs:style`` element, citation-specific
-options in the ``cs:citation`` element, and bibliography-specific
-options in the ``cs:bibliography`` element. Localized options are
-treated slightly differently (see the section on Localization).
-
-Style Metadata
---------------
-
-Licensing
-~~~~~~~~~
-
-(TODO: are we settling on license URIs?)
+In CSL 0.8, citation- and bibliography-specific style options were set with ``cs:option`` elements. In CSL 1.0 this element is no longer used. Instead, options are set using attributes. CSL 1.0 includes global options, which affect the output of both the ``citation`` and ``bibliography`` sections, and which are set as attributes on the ``cs:style`` element. Options that are citation-specific are now set on the ``cs:citation`` element, while bibliography-specific options are set on the ``cs:bibliography`` element.
 
 ISSN and ISSN-L
-~~~~~~~~~~~~~~~
+---------------
 
-Identifying journals by their titles is not always straightforward.
-Special characters, spelling mistakes or multiple journals sharing
-the same name can sometimes pose problems. Because of this, it is a
-good idea to include ISSN-data in journal-specific styles when
-available. This unambiguously identifies the journal for which the
-style was written. It would also enable CSL style repositories to
-allow users to look up journal styles by means of the ISSN. In CSL
-1.0, multiple ``cs:issn`` elements are allowed, so that the ISSNs
-of both the print and online versions of a journal can be included.
-The info-section of the style may also contain a ``cs:issnl``
-element, which has been added for the new ISSN-L standard (unlike
-ISSNs, all media types of a certain journals share the same ISSN-L,
-see also http://www.issn.org/2-22637-What-is-an-ISSN-L.php). For
-example:
+ISSN-identifiers unambiguously identify journals. While CSL 0.8 allowed only a single ISSN identifier to be included in the style metadata section, CSL 1.0 now supports multiple ISSNs (e.g. the ISSNs of the print and online editions of a journal), as well as the relatively new `ISSN-L <http://www.issn.org/2-22637-What-is-an-ISSN-L.php>`_ identifier. For example:
 
 .. sourcecode:: xml
 
@@ -210,23 +144,7 @@ example:
 Localization
 ------------
 
-The "locales-xx-XX.xml" files (with "xx-XX" indicating the locale,
-e.g. "en-US") that ship with the CSL schema previously had only the
-role of supplying localized terms (translations are kindly prepared
-by the
-`Babelzilla translation effort <http://www.babelzilla.org/>`_).
-With CSL 1.0, these locale files also contain localized options and
-localized date formats. Because of this, some changes have been
-made to the XML format of these files: ``cs:locale`` has replaced
-``terms`` as the root element, both the ``xml:lang`` and ``xmlns``
-attributes are applied to the ``cs:locales`` element, and new
-elements have been introduced to localize dates and options
-(``cs:date`` and ``cs:style-options``). An example of the new
-locale file format can be found
-`here <http://bitbucket.org/fbennett/citeproc-js/src/tip/locale/locales-en-US.xml>`_.
-As before, any content of the "locales-xx-XX.xml" files can be
-overridden in the style itself (using the ``xml:lang`` attribute on
-``cs:locale`` to select the correct locale to override), e.g.:
+The "locales-xx-XX.xml" files (with "xx-XX" indicating the locale, e.g. "en-US" for "English - United States") that are part of CSL previously had only the role of supplying localized terms (translations are made via `BabelZilla <http://www.babelzilla.org/>`_). With CSL 1.0, these locale files also contain localized style options and localized date formats. Because of this, some changes have been made to the XML format of these files: ``cs:locale`` has replaced ``terms`` as the root element, both the ``xml:lang`` and ``xmlns`` attributes are applied to the ``cs:locales`` element, and new elements have been introduced to localize dates and options (``cs:date``, ``cs:date-part`` and ``cs:style-options``). As before, any content of the "locales-xx-XX.xml" files can be overridden in a CSL style (using the ``xml:lang`` attribute on ``cs:locale`` to select the correct locale to override), e.g.:
 
 .. sourcecode:: xml
 
@@ -234,7 +152,7 @@ overridden in the style itself (using the ``xml:lang`` attribute on
       <locale xml:lang="en">
         <style-options punctuation-in-quote="true" />
         <terms>
-          <term name="et-al">et al</term>
+          <term name="et-al">et alii</term>
         </terms>
         <date form="text">
           <date-part name="month" suffix=" " form="short"/>
@@ -244,73 +162,35 @@ overridden in the style itself (using the ``xml:lang`` attribute on
       </locale>
     </style>
 
-Localized Terms
-~~~~~~~~~~~~~~~
-
-A number of terms have been added to CSL 1.0. Most notably, the
-locales files now contain terms for inner ("open-inner-quote" and
-"close-inner-quote", e.g. ï¿½ and ï¿½) and outer quotes ("open-quote"
-and "close-quote", e.g. ï¿½ and ï¿½). This enables CSL to localize
-quotes that are specified by the ``quotes`` attribute, and to show
-correct nesting behavior (using alternating quote sets).
-
 Localized Dates
 ~~~~~~~~~~~~~~~
 
-CSL 1.0 offers support for date localization. This feature is
-entirely optional: dates can still be defined in the old
-(non-localized) format. To use a localized date, use ``cs:date``
-with the ``form`` attribute set to either ``text`` (resulting in a
-date like 'April 21, 2008') or ``numeric`` ('4/21/08'). Punctuation
-and the order of date-parts are specified in the
-"locales-xx-XX.xml" files, so correct dates are produced for each
-locale. As demonstrated in the example below, it is not necessary
+CSL 1.0 introduces support for date localization. This feature is optional: styles can still define dates in the usual non-localized format. To use a localized date, all you need to do is use ``cs:date`` with the ``form`` attribute set to either ``text`` (for dates like 'April 21, 2008') or ``numeric`` (e.g. '4/21/08'). As demonstrated in the example below, it is not necessary
 to specify any ``cs:date-part`` elements for localized dates:
 
 .. sourcecode:: xml
 
     <style>
       <bibliography>
-        <!-- old-fashioned, unlocalized date -->
         <layout>
+          <!-- old-fashioned, unlocalized date -->
           <date variable="accessed">
             <date-part name="year"/>
             <date-part name="month" form="numeric" prefix="-"/>
             <date-part name="day" prefix="-"/>
           </date>
-        </layout>
-        <!-- default localized date -->
-        <layout>
+          <!-- default localized date -->
           <date form="numeric"/>
         </layout>
       </bibliography>
     </style>
 
-The ``form`` attribute of ``cs:date`` is limited to only two
-values, but there are a number of ways to further customize
-localized dates. First, it is possible to limit the number of
-date-parts shown with the optional ``cs:date-parts`` attribute of
-``cs:date``: possible values are ``year-month-day`` (default),
-``year-month`` and ``year``. Secondly, it is possible to define one
-or more ``cs:date-part`` elements. Defining these elements has no
-effect on the order of the date-parts, which is specified in the
-"locales-xx-XX.xml" files. Neither do they control which date-parts
-are shown. Instead, they allow you to override specific properties
-of the localized dates. For instance, you can set the ``form`` of
-the month-date-part ``short`` for all locales. Finally, it is also
-possible to change date formats per locale in ``cs:locale``-section
-of the style. Note that here it is not allowed to apply affixes
-(prefixes and suffixes) to ``cs:date`` (the same holds for the date
-definitions in the "locales-xx-XX.xml" files). All punctuation
-should be applied to the different ``cs:date-part`` elements. This
-separates locale unspecific affixes (e.g. parentheses around the
-date, as in "(2000)") from locale-specific punctuation, a
-requirement for robust date localization. Examples:
+The format of localized dates (i.e. punctuation and the order of the date-parts) is specified in the "locales-xx-XX.xml". As with terms, localized date formats can be overridden within styles. In addition, localized dates can be customized within a style via two options. First, the ``date-parts`` attribute can be added to ``cs:date`` to control which date-parts are shown. With the default value of ``year-month-day`` the whole date is shown. With ``year-month`` and ``year`` only the year/month and year date-parts are shown, respectively. The second option is the ability to redefine how one or more ``cs:date-part`` element are formatted. Note that the order of ``cs:date-part`` elements for a localized date within ``cs:layout`` doesn't affect the rendering order of the date-parts (this in contrast with non-localized dates or dates specified within ``cs:locale``, where the order of the ``cs:date-part`` elements does control the rendering order). Neither does the presence or absence of ``cs:date-part`` elements affect which date-parts are shown (this is controlled via the ``date-parts`` attribute described above). Instead, ``cs:date-part`` elements allow you to override specific properties of the localized date-parts (e.g. the `form` of the month-date-part can be set to "short"). Note that changes made in this way affect all locales. An example illustrating the different options:
 
 .. sourcecode:: xml
 
     <style>
-      <!-- a changed date format for the English locale -->
+      <!-- a modified date format for the English locale -->
       <locale xml:lang="en">
         <date form="text">
           <date-part name="month" suffix=" " form="short"/>
@@ -320,9 +200,9 @@ requirement for robust date localization. Examples:
       </locale>
       <bibliography>
         <layout>
-          <!-- date limited to showing the year and month -->
+          <!-- localized date that only shows the year and month -->
           <date form="text" date-parts="year-month"/>
-          <!-- numeric date with customized form (leading zeros) and prefixes -->
+          <!-- localized date in numeric format with leading zeros and affixes for month and day -->
           <date form="numeric">
             <date-part name="month" form="numeric-leading-zeros" prefix="/"/>
             <date-part name="day" form="numeric-leading-zeros" prefix="/"/>
@@ -331,17 +211,13 @@ requirement for robust date localization. Examples:
       </bibliography>
     </style>
 
+Note that it is not allowed to apply affixes (prefixes and suffixes) to ``cs:date`` when used within ``cs:locale`` (either in styles or in the "locales-xx-XX.xml" files). Instead, all punctuation should be applied to the ``cs:date-part`` elements. This separates locale-independent affixes (e.g. parentheses around the date, as in "(2000)") from locale-dependent punctuation, a requirement for robust date localization.
+
 Localized Options
 ~~~~~~~~~~~~~~~~~
 
-In addition to localized dates and terms, CSL 1.0 now also supports
-localized options (even though there is, for now, only one such an
-option, ``punctuation-in-quote``). The default value of localized
-options is set for each locale in the "locales-xx-XX.xml" files,
-but these values can be overridden in the locale section of the CSL
-style. For this the ``cs:style-options`` element is used, since
-``punctuation-in-quote`` is a global option, affecting both the
-citation and bibliography. An example:
+In addition to localized dates and terms, CSL 1.0 now also supports localized options (although for now, there is only one such an option, ``punctuation-in-quote``). The default value of localized
+options is set for each locale in the "locales-xx-XX.xml" files, but these values can be overridden using the ``cs:style-options`` element within ``cs:locale`` in a CSL style. An example:
 
 .. sourcecode:: xml
 
@@ -351,61 +227,38 @@ citation and bibliography. An example:
       </locale>
     </style>
 
+Default Locale
+~~~~~~~~~~~~~~
+
+To prevent localization of styles (which might be desirable for journal-specific styles) the ``default-locale`` attribute can be included on the ``cs:style`` element (this attribute already existed in CSL 0.8, but was not supported by Zotero). The possible values of this attribute are the locale codes (e.g. "fr-FR" for French). A full list of locale codes can be found in `Zotero's chrome manifest <https://www.zotero.org/svn/extension/trunk/chrome.manifest>`_. An example:
+
+.. sourcecode:: xml
+
+    <style default-locale="fr-FR" />
+
+N.B. With CSL 0.8 there was some confusion about the use of ``default-locale``, and some style authors included the ``xml:lang`` attribute instead. In CSL 1.0 ``xml:lang`` is no longer allowed as an attribute on ``cs:style``.
+
+Formatting
+----------
+
+Quotes
+~~~~~~
+
+CSL 1.0 introduces new terms for inner ("open-inner-quote" and "close-inner-quote", e.g. ‘ and ’) and outer quotes ("open-quote" and "close-quote", e.g. “ and ”). Together with the new ``punctuation-in-quote``-option (see `Punctuation around Quotes`_), quotes can now be fully localized (as long as they are specified via the ``quotes`` attribute). In addition, quotes can now be properly nested (using alternating quotation marks), e.g.:
+
+ * title: My “Nested” Title
+ * title with quotes: “My ‘Nested’ Title”
+
 Punctuation around Quotes
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The option ``punctuation-in-quote`` is used to specify whether
-punctuation (commas and periods) should appear within ("true", e.g.
-for American English) or outside quotation marks that have been
-applied by the style ("false" (default value), e.g. for British
-English). As such, it can toggle the style output between
+The localized option ``punctuation-in-quote`` is used to specify whether punctuation (commas and periods) should appear within ("true", e.g. for American English) or outside quotation marks that have been applied by the style ("false" (default value), e.g. for British English). As such, it can toggle the style output between
 
     Douglas Adams, "The Hitchhiker's Guide to the Galaxy," 1979.
-
 
 and
 
     Douglas Adams, "The Hitchhiker's Guide to the Galaxy", 1979.
-
-
-Default Locale
-~~~~~~~~~~~~~~
-
-For certain styles (e.g. journal-specific styles) it is undesirable
-to have automatic localization applied. CSL 1.0 now supports the
-``default-locale`` attribute for the ``cs:style`` element. The
-possible values of this attribute are the locale codes (e.g.
-"fr-FR" for French). If the ``default-locale`` is set, the
-localization of the style is set to that particular locale. A full
-list of locale codes can be found in
-`Zotero's chrome manifest <https://www.zotero.org/svn/extension/trunk/chrome.manifest>`_.
-
-N.B. There has been some confusion as to the difference between the
-``default-locale`` and ``xml:lang`` attributes. The latter is a
-standard XML attribute, which should be used to indicate "the
-language (and optionally the locale) of the element content". As
-such, it can be used in the "locales-xx-XX.xml" files, or in the
-locale sections of a CSL style, both of which include localized
-content. The role of ``default-locale`` is different, as it
-indicates a preference of which locale should be used. In an effort
-to reduce this confusion, CSL 1.0 styles are no longer allowed to
-specify the ``xml:lang`` attribute for ``cs:style``. An example of
-proper use (a CSL style that defaults to French, but includes a
-customized English option):
-
-.. sourcecode:: xml
-
-    <style default-locale="fr-FR">
-      <locale xml:lang="en">
-        <style-options punctuation-in-quote="true">
-      </locale>
-    </style>
-
-(TODO: why is the "en" locale code so often used, and not the full
-"en-US"? Does citeproc-js accept both?)
-
-Formatting
-----------
 
 Pages
 ~~~~~
@@ -912,7 +765,7 @@ account:
           <key macro="author" names-min="1" names-use-first="1"/>
         </sort>
         <layout>
-        </layout
+        </layout>
       </bibliography>
     </style>
 
@@ -932,32 +785,22 @@ XXXXX
    note-number of the note that is the first to mention the current
    reference)
 
-Terms and Term-foolery
-----------------------
+Variables
+---------
 
-XXXXX
+CSL 1.0 introduces a number of new variables:
 
+ * number-of-pages (see also `Pages`_)
 
--  new term: reference item (ADDED) --> RZ: shouldn't "reference
-   item" be renamed to "source" (which is the contents of the singular
-   term)?
--  new term: editortranslator (ADDED) --> RZ: I think this belongs
-   in the names-section
--  new terms: ordinals and long ordinals (ADDED) --> RZ: this would
-   be formatting
--  added long-ordinal' value option of cs:number --> RZ: idem
+Terms
+-----
 
-Looking back - CSL 0.8
-----------------------
+CSL 1.0 introduces a number of new terms:
 
-Perhaps you just discovered that your custom CSL style is invalid
-and won't upgrade to CSL 1.0. Or you might want to see how CSL has
-changed over time. Or maybe you just like to reminisce. Whatever
-your reasons, you can still access the previous version of the CSL
-schema:
-
-`CSL 0.8 <http://sourceforge.net/apps/trac/xbiblio/browser/csl/schema/tags/0.8/>`_
-(released on 2009/03/21)
+ * ``reference``. The ``references`` term from CSL 0.8 has been rename ``reference``.
+ * ``editortranslator``. TODO: discuss in names-section
+ * ordinals and long ordinals --> RZ: this should be discussed under formatting as well
+ * added long-ordinal' value option of cs:number --> RZ: idem
 
 Feedback
 --------
@@ -975,15 +818,8 @@ Anything below this point is not meant for inclusion in the final version
 Unfinished Business
 ~~~~~~~~~~~~~~~~~~~
 
-
--  get a proper CSL website
--  finalize spec
 -  clean up (i.e. remove) some of the comments/annotations in the
    schema
--  complete this document (link to related unit tests:
-   http://bitbucket.org/fbennett/citeproc-js/src/tip/std/humans/)
--  test conversion of old styles to new format (check if the
-   converted styles all validate).
 -  still have to describe some variables in spec (year-suffix,
    first-reference-note-number)
 
@@ -1154,5 +990,3 @@ http://sourceforge.net/apps/trac/xbiblio/log/csl/schema/trunk/csl-categories.rnc
    A hat tip to user ```komrade`` <http://www.zotero.org/komrade>`_ of
    the Zotero forums, whose review of the major style guides led to
    this array of rule-sets.
-
-
