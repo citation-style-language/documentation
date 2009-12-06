@@ -13,7 +13,7 @@ __ `Table of Contents`_
 
 .. class:: info-date
 
-   December 5, 2009
+   December 6, 2009
 
 .. class:: contributors
 
@@ -119,7 +119,7 @@ Starting with CSL 1.0, a style must indicate for which CSL version the style was
 
 .. sourcecode:: xml
 
-    <style version="1.0" class="in-text">
+    <style version="1.0" class="in-text"/>
 
 Options as Attributes
 ---------------------
@@ -223,7 +223,7 @@ options is set for each locale in the "locales-xx-XX.xml" files, but these value
 
     <style>
       <locale xml:lang="en">
-        <style-options punctuation-in-quote="true">
+        <style-options punctuation-in-quote="true"/>
       </locale>
     </style>
 
@@ -234,7 +234,7 @@ To prevent localization of styles (which might be desirable for journal-specific
 
 .. sourcecode:: xml
 
-    <style default-locale="fr-FR" />
+    <style default-locale="fr-FR"/>
 
 N.B. With CSL 0.8 there was some confusion about the use of ``default-locale``, and some style authors included the ``xml:lang`` attribute instead. In CSL 1.0 ``xml:lang`` is no longer allowed as an attribute on ``cs:style``.
 
@@ -263,94 +263,52 @@ and
 Pages
 ~~~~~
 
-CSL 1.0 offers a number of new ways to handle page data. First, two
-new variables have been added to CSL: "page-first" and
-"number-of-pages". The roles of the different page variables are:
+CSL 1.0 introduces two new page variables: "page-first" and "number-of-pages". The existing variable "pages" is still used for page ranges (e.g. of journal articles and book chapters). The variable "page-first" holds the first page of the page range. The variable "number-of-pages" is used to indicate the total number of pages of an item (e.g. a book or thesis).
 
-
--  page: page ranges (e.g. of journal articles and book chapters)
--  page-first: the first page of a page range
--  number-of-pages: the total number of pages of an item (e.g. of
-   books)
-
-(TODO: has number-of-pages already been mapped to numPages in
-Zotero? --> https://www.zotero.org/trac/changeset/4477) - new
-variable: page-first
-
-Secondly, it is now possible to set the format of page ranges via
-the global (non-localized) option ``page-range-format`` (set as an
-attribute on ``cs:style``). The possible values are: "expanded"
-(e.g. "321-328"), "minimal" ("321-8"), and "chicago" ("321-28").
-When the option is not set, the content of the page-variable is
-left unchanged. An example:
+In addition, a new global (non-localized) option, ``page-range-format``, has been added to control the collapsing of page ranges. This attribute, set on ``cs:style``, can have the values "expanded" (e.g. "321-328"), "minimal" ("321-8"), and "chicago" ("321-28", which follows the collapsing rules of the Chicago Manual of Style). When the attribute isn't present, the content of the "page"-variable is shown as is. An example:
 
 .. sourcecode:: xml
 
     <style page-range-format="chicago">
       <bibliography>
-        <text variable="page">
+        <layout>
+          <text variable="page"/>
+        </layout>
       </bibliography>
     </style>
 
 Rich Text Markup within Fields
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Although not part of CSL 1.0, the new CSL processor in Zotero
-supports an exciting new feature that deserves some notice: the
-ability to apply rich text markup to (parts of) fields. This
-feature relies on the use of HTML-like tags. E.g. if a Zotero item
-has the title "Ca<sup>2+</sup> levels in <i>Homo sapiens</i>", this
-will automatically be converted to "Ca2+ levels in Homo sapiens"
-when bibliographies are generated. Zotero does not (yet) include an
-interface to quickly apply these tags, so for now users will have
-to put them in manually. The supported tags are:
+Although not part of CSL 1.0, the new citeproc-js_ CSL processor used by Zotero supports a new feature that deserves some notice: the ability to use rich text markup within fields.
 
+Rich text markup can be applied with a small set of HTML(-like) tags:
 
--  ``<i>`` - italics
 -  ``<b>`` - bold
+-  ``<i>`` - italics
+-  ``<sc>`` - small-caps
 -  ``<sub>`` - subscript
 -  ``<sup>`` - superscript
--  ``<sc>`` - small-caps
 
-Delimiters and Collapsing
-~~~~~~~~~~~~~~~~~~~~~~~~~
+E.g. if a Zotero item has the title "Ca<sup>2+</sup> levels in <i>Homo sapiens</i>", this will automatically be converted to "Ca\ :sup:`2+`\  levels in *Homo sapiens*" when a citation is rendered.
 
-With CSL 1.0, the options to format collapsed citations have been
-significantly expanded. First, there are two new options that can
-be specified as attributes for ``cs:citation``:
-``year-suffix-delimiter``, which can be used to set a custom
-delimiter for subsequent year suffixes (e.g. the slash in "Doe
-2000a/b, Smith 1999"), and ``after-collapse-delimiter``, which
-defines a custom delimiter between collapsed citations and the
-subsequent citation (e.g. the semicolon in "Doe 2000a, b; Smith
-1999, Williams 2002"). By default the delimiter specified in the
-``cs:layout`` element of ``cs:citation`` is used for either
-delimiter. The second addition is an extra value for the
-``collapse`` attribute of ``cs:citation``. If ``collapse`` is set
-to "year-suffix-ranged", citations are collapsed as with
-"year-suffix", but now ranges of year-suffixes are collapsed (e.g.
-"Doe 2000a,b,c,e" would become "Doe 2000a-c,e"). An example of how
-these options are set:
+Citation Collapsing
+~~~~~~~~~~~~~~~~~~~
+
+CSL 1.0 offers finer control of citation collapsing. First, two new options have been introduced, both of which are set as attributes on ``cs:citation``: ``year-suffix-delimiter``, which defines the delimiter for subsequent year suffixes (e.g. the comma in "Doe 2000a,b, Smith 1999"), and ``after-collapse-delimiter``, which defines the delimiter between a group of collapsed citations and the subsequent citation (e.g. the semicolon in "Doe 2000a, b; Smith 1999, Williams 2002"). Both attributes default to the delimiter set on the ``cs:layout`` element within ``cs:citation``. Secondly, "year-suffix-ranged" has been added as a possible value of the ``collapse`` attribute of ``cs:citation``. If ``collapse`` is set this value, citations are collapsed as with "year-suffix", but ranges of year-suffixes are collapsed as well (e.g. "Doe 2000a,b,c,e" would become "Doe 2000a-c,e"). An example of how these attributes are set:
 
 .. sourcecode:: xml
 
     <style>
       <citation collapse="year-suffix-ranged" year-suffix-delimiter="," after-collapse-delimiter=";">
-        <layout delimiter=", ">
-        </layout>
+        <layout delimiter=", " />
       </citation>
     </style>
 
 Year Suffix
-~~~~~~~~~~~
+^^^^^^^^^^^
 
-CSL 1.0 now contains the ``year-suffix`` variable, which can be
-displayed with ``cs:text``. This allows for formatting of
-year-suffixes (e.g. "2000*a*, *b*"). The variable will only result
-in a year-suffix if ``disambiguate-add-year-suffix`` is set to
-"true". If the variable is not included in a style, but
-``disambiguate-add-year-suffix`` is set to "true", the year-suffix
-will be appended to the end of the cite. An example:
+Year-suffixes are included automatically when the ``disambiguate-add-year-suffix`` attribute is set to "true". However, some styles desire special markup of year-suffixes, such as italics (e.g. "``2000``\ *a*, *b*"). For this CSL 1.0 introduces the ``year-suffix`` variable, which can be used to explicitly specify the location and formatting of year-suffixes. An example:
 
 .. sourcecode:: xml
 
@@ -364,12 +322,6 @@ will be appended to the end of the cite. An example:
         </layout>
       </citation>
     </style>
-
-Related unit tests:
-
-
--  `collapse\_YearSuffixCollapse.txt <http://bitbucket.org/fbennett/citeproc-js/src/tip/std/humans/collapse_YearSuffixCollapse.txt>`_
--  `date\_YearSuffixDelimiter.txt <http://bitbucket.org/fbennett/citeproc-js/src/tip/std/humans/date_YearSuffixDelimiter.txt>`_
 
 Names
 ~~~~~
@@ -790,7 +742,9 @@ Variables
 
 CSL 1.0 introduces a number of new variables:
 
- * number-of-pages (see also `Pages`_)
+ * number-of-pages (see `Pages`_)
+ * page-first (see `Pages`_)
+ * year-suffix (see `Year Suffix`_)
 
 Terms
 -----
