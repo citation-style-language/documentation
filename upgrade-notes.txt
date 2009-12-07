@@ -306,9 +306,9 @@ CSL 1.0 offers finer control of citation collapsing. First, two new options have
     </style>
 
 Year Suffix
-^^^^^^^^^^^
+~~~~~~~~~~~
 
-Year-suffixes are included automatically when the ``disambiguate-add-year-suffix`` attribute is set to "true". However, some styles desire special markup of year-suffixes, such as italics (e.g. "``2000``\ *a*, *b*"). For this CSL 1.0 introduces the ``year-suffix`` variable, which can be used to explicitly specify the location and formatting of year-suffixes. An example:
+Year-suffixes are included automatically when the ``disambiguate-add-year-suffix`` attribute on ``cs:citation`` is set to "true". However, some styles desire special markup of year-suffixes, such as italics (e.g. "``2000``\ *a*, *b*"). For this CSL 1.0 introduces the ``year-suffix`` variable, which can be used to explicitly specify the location and formatting of year-suffixes. An example:
 
 .. sourcecode:: xml
 
@@ -329,26 +329,12 @@ Names
 delimiter-precedes-last
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-A very small change: previously, the ``delimiter-precedes-last``
-attribute of ``cs:names`` could only be set to ``always`` or
-``never``. To prevent the delimiter to show up for dual
-contributors ("Doe and Smith"), but to force the delimiter to show
-for lists of three or more contributors ("Doe, Smith, and
-Williams"), you would have to leave out the attribute. Now, the
-last behavior can be set explicitly by using the value
-"contextual".
+The ``delimiter-precedes-last`` attribute on ``cs:names`` controls the use of the name delimiter between the last and next-to-last name in name lists. In CSL 0.8, this attribute could be set to either ``always`` or ``never``. To include the delimiter for lists of three or more names ("Doe, Smith, and Williams") and to exclude it for lists of only two names ("Doe and Smith"), you would have to leave out the attribute. Now, in CSL 1.0, it is also possible to explicitly set the last behavior by using the value "contextual".
 
 Formatting Name Parts
 ^^^^^^^^^^^^^^^^^^^^^
 
-In CSL 1.0, it is now possible to separately apply formatting (such
-as boldface or all-caps) to the given and family name. To do this,
-include the new ``cs:name-part`` element within the ``cs:name``
-element (the value of the ``name`` attribute may be set to either
-"family" or "given"). Note that the order in which the family and
-given name are shown is not influenced by use of ``name-part``
-elements. An example, which would result in names like "John
-SMITH":
+CSL 1.0 introduces the ability to separately format given and family names. Formatting is specified via the new ``cs:name-part`` element, a child of ``cs:name``. The ``name`` attribute of this element should be set to either "family" or "given". Note that the order of ``name-part`` elements does not affect the order in which the name parts are shown. An example, resulting in names like "John SMITH":
 
 .. sourcecode:: xml
 
@@ -361,20 +347,16 @@ SMITH":
 Et al.
 ^^^^^^
 
-The ``cs:et-al`` element may now be explicitly called inside the
-``cs:names`` element, which adds two important features to the way
-*et al.* can be used. First, formatting can now be set
-independently for the ``et-al`` term. For example,
+A new element, ``cs:et-al``, can now be included within ``cs:names``. This adds two important features. First, formatting can now be set independently for the ``et-al`` term. For example,
 
 .. sourcecode:: xml
 
-   <et-al font-style="italics" prefix=" "/>
+    <names variable="author">
+      <name/>
+      <et-al font-style="italics" prefix=" "/>
+    </names>
 
-
-would result in "Doe *et al.*". Secondly, it is now possible to
-have different ``et-al`` terms for in-text citations and the
-bibliography. The two terms are "et-al" (the default) and "and
-others". For example:
+results in "Doe *et al.*". Secondly, it is now possible to use two different ``et-al`` terms within a single style (e.g. one for in-text citations and one for the bibliography). The desired term, "et-al" (the default) or "and others", is set with the ``name`` attribute on the ``cs:et-al`` element. For example,
 
 .. sourcecode:: xml
 
@@ -383,37 +365,20 @@ others". For example:
       <et-al term="and others" prefix=" "/>
     </names>
 
-would yield "Doe and others" (the "and others" is localized like
-any other CSL term).
-
-Related unit tests:
-
-
--  `name\_MixedFormatsWithDecorationsPlusEtAlDecorations.txt <http://bitbucket.org/fbennett/citeproc-js/src/tip/std/humans/name_MixedFormatsWithDecorationsPlusEtAlDecorations.txt>`_
--  `name\_MixedFormatsWithDecorationsPlusAlternateEtAlDecorations.txt <http://bitbucket.org/fbennett/citeproc-js/src/tip/std/humans/name_MixedFormatsWithDecorationsPlusAlternateEtAlDecorations.txt>`_
+would yield "Doe and others" (note that both terms are localized).
 
 Stripping Periods
 ~~~~~~~~~~~~~~~~~
 
-A new attribute for text elements, strip-periods (a boolean that
-defaults to "false"), allows styles to strip periods from
-month-``cs:date-part``'s and the ``cs:term``, ``cs:text`` and
-``cs:label`` elements. One of its main uses is to strip the periods
-from journal abbreviations. Until more intelligent support for
-journal abbreviations is included in Zotero (e.g. via a lookup
-service to retrieve missing journal metadata), it is recommended
-that users include periods for journal abbreviations in their
-Zotero database. Styles can then either use these journal
-abbrevations as is, or use strip-periods to obtain the version
-without periods. An example:
+A new attribute, ``strip-periods``, can now be set on ``cs:date-part`` (only for name="month"), ``cs:label`` and ``cs:text``. The attribute is inactive when set to "false" (the default value), but if set to "true", any periods are stripped from the variable contents.
+
+``strip-periods`` is especially useful for journal abbreviations. There are plans to further improve support for journal abbreviations in future versions of CSL (e.g. by using lookup lists to find the correct journal abbreviation given a certain journal title), but for now it is recommended that users include periods for journal abbreviations in their (Zotero) libraries. With the help of ``strip-periods``, styles can then either use the journal abbrevation as is, or use a version without periods. An example:
 
 .. sourcecode:: xml
 
     <text variable="container-title" form="short" strip-periods="true"/>
 
-would result in "Appl Environ Microbiol" if the journal
-abbreviation for the Zotero item would be "Appl. Environ.
-Microbiol.".
+would output "Appl Environ Microbiol" if the journal abbreviation for the Zotero item is "Appl. Environ. Microbiol.".
 
 Pluralization
 ~~~~~~~~~~~~~
