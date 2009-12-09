@@ -126,8 +126,37 @@ Options as Attributes
 
 In CSL 0.8, citation- and bibliography-specific style options were set with ``cs:option`` elements. In CSL 1.0 this element is no longer used. Instead, options are set using attributes. CSL 1.0 includes global options, which affect the output of both the ``citation`` and ``bibliography`` sections, and which are set as attributes on the ``cs:style`` element. Options that are citation-specific are now set on the ``cs:citation`` element, while bibliography-specific options are set on the ``cs:bibliography`` element.
 
+Style Metadata
+--------------
+
+Links
+~~~~~
+
+The role of the ``cs:link`` element is to store URLs (using the ``href`` attribute) while indicating how these URLs are related to the style (using the ``rel`` attribute). The use of ``rel`` has been slightly modified in CSL 1.0 to increase clarity. First, every ``cs:link`` element should carry the ``rel`` attribute. Secondly, the available values of ``rel`` have changed to:
+
+ * "self". The URI of the CSL style itself (only for independent styles). In CSL 0.8 "self" was implicit when ``ref`` wasn't used.
+ * "independent-parent". Renamed from "source", this indicates the URI of the independent parent style (only for dependent styles).
+ * "template". Can be used to link to the style from which the current style is derived.
+ * "documentation". Links to documentation, e.g. the style guide. Note that "documentation" has replaced "homepage".
+
+Formats and Fields
+~~~~~~~~~~~~~~~~~~
+
+The ``cs:category`` element has two purposes: to indicate for which field(s) of study a style is relevant (e.g. "biology") and to indicate the format of the style (e.g. "author-date"). In CSL 0.8 the ``term`` attribute was used for both cases. With CSL 1.0, ``term`` has been replaced with two attributes: ``citation-format``, to indicate the citation format, and ``field``, to indicate the field of study. An example:
+
+.. sourcecode:: xml
+
+    <style>
+      <info>
+        <category citation-format="author-date"/>
+        <category field="biology"/>
+      </info>
+    </style>
+
+In CSL 0.8 the possible citation formats were: "author-date", "label", "note", "numeric" and "in-text". In CSL 1.0 "in-text" has been replaced with "author" (a format that only shows author names in in-text citations, like the MLA style).
+
 ISSN and ISSN-L
----------------
+~~~~~~~~~~~~~~~
 
 ISSN-identifiers unambiguously identify journals. While CSL 0.8 allowed only a single ISSN identifier to be included in the style metadata section, CSL 1.0 now supports multiple ISSNs (e.g. the ISSNs of the print and online editions of a journal), as well as the relatively new `ISSN-L <http://www.issn.org/2-22637-What-is-an-ISSN-L.php>`_ identifier. For example:
 
@@ -370,9 +399,9 @@ would yield "Doe and others" (note that both terms are localized).
 Stripping Periods
 ~~~~~~~~~~~~~~~~~
 
-A new attribute, ``strip-periods``, can now be set on ``cs:date-part`` (only for name="month"), ``cs:label`` and ``cs:text``. The attribute is inactive when set to "false" (the default value), but if set to "true", any periods are stripped from the variable contents.
+A new attribute, ``strip-periods``, can now be set on ``cs:date-part`` (only for name="month"), ``cs:label`` and ``cs:text``. The attribute is inactive when set to "false" (the default value), but if set to "true", any periods are stripped from the variable contents. ``strip-periods`` replaces the ``include-period`` attribute that was part of CSL 0.8.
 
-``strip-periods`` is especially useful for journal abbreviations. There are plans to further improve support for journal abbreviations in future versions of CSL (e.g. by using lookup lists to find the correct journal abbreviation given a certain journal title), but for now it is recommended that users include periods for journal abbreviations in their (Zotero) libraries. With the help of ``strip-periods``, styles can then either use the journal abbrevation as is, or use a version without periods. An example:
+``strip-periods`` is especially useful for journal abbreviations. There are plans to improve support for journal abbreviations in future versions of CSL (e.g. by using lookup lists to find the correct journal abbreviation given a certain journal title), but for now it is recommended that users include periods for journal abbreviations in their (Zotero) libraries. With the help of ``strip-periods``, styles can then either use the journal abbrevation as is, or use a version without periods. An example:
 
 .. sourcecode:: xml
 
@@ -383,31 +412,26 @@ would output "Appl Environ Microbiol" if the journal abbreviation for the Zotero
 Pluralization
 ~~~~~~~~~~~~~
 
-Pluralization has been a bit of an odd duck, as the implementation
-in Zotero differed somewhat from the official CSL schema. In CSL
-1.0 and the new Zotero citeproc-js CSL processor, pluralization
-options have been aligned: the attribute ``plural`` is now
-available for ``cs:text`` and ``cs:label``. For ``cs:text`` the
-value of ``plural`` can be either ``false`` (default), to use the
-singular variant of a term, or ``true``, to use the plural variant.
-For ``cs:label`` the default value is ``contextual`` (default, e.g.
-"p. 43" and "pp. 3-5"). With the values ``never`` and ``always`` it
-is possible to force ``cs:label`` to always use respectively the
-singular form or the plural form of the specified term. An
-example:
+In CSL 1.0 small changes have been made to the use of ``plural``. As with CSL 0.8, this attribute can be set on ``cs:text`` and ``cs:label``. When used on ``cs:text``, ``plural`` can still be set to "false" to use the singular form of a term (the default), or to "true" to use the plural form. But when used on ``cs:label``, different values are now available. With "contextual" (the default value), the plurality of the variable determines whether the singular or plural form of the term is used (e.g. "page 43" and "pages 3-5"). With "never" and "always" respectively the singular or plural form of the term is used, regardless of the plurality of the variable. An example:
 
 .. sourcecode:: xml
 
     <number variable="edition" form="ordinal"/>
-    <text term="edition" plural="true"/>
+    <text term="edition" plural="false"/>
     <group>
       <label variable="page" plural="always"/>
       <text variable="page"/>
     </group>
 
+N.B. The ``plural`` attribute was one of the few cases where the implementation in Zotero did not follow the CSL 0.8 schema.
+
+second-field-align
+~~~~~~~~~~~~~~~~~~
+
+The ``second-field-align`` attribute can be used to align any subsequent lines of a bibliography entry with the beginning of the second field. In CSL 0.8 the value of this attribute could be set to "true" or "margin" to place the first field respectively in the margin, or flush against it. In CSL 1.0 "true" has been renamed to "flush".
+
 Layout Control with the Display Attribute
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 
 -  Display attributes for positioning blocks comprising a cite.
 
@@ -652,44 +676,44 @@ achieved by the following:
 
 If you get stuck, you should be able to get advice on the forums.
 
-Advanced Sorting
-----------------
+Sorting
+-------
 
-CSL 1.0 features a number of extensions to support more complex
-sorting rules. First, if the ``form`` attribute of ``cs:name`` is
-now set to "count", the length of the name list will be returned.
-For example, for an item with three authors (e.g. Jones, Smith and
-Doe), a value of "3" would be obtained. This allows CSL styles to
-sort according to the number of authors (or other types of
-contributors). The second addition consists of two new attributes
-for the ``cs:key`` element, ``names-min`` and ``names-use-first``.
-The integer values set for these attributes override the values of
-``et-al-min`` and ``et-al-min-first``, respectively. The following
-example shows how these attributes can be used to sort a
-bibliography alphabetically, taking only the first author into
-account:
+CSL 1.0 includes several new features to allow for more complex reference sorting. The first change is that the ``form`` attribute on ``cs:name`` can now be set to "count". With this value, the enclosing ``cs:names`` returns the number of names in the name variable instead of the names themselves. When used for a sort key, this makes it possible to sort according to the number of authors (or any other kind of contributor). An example:
 
 .. sourcecode:: xml
 
     <style>
       <macro name="author">
         <names variable="author">
-          <name name-as-sort-order="all" />
+          <name form="count"/>
+        </names>
+      </macro>
+      <bibliography>
+        <sort>
+          <key macro="author"/>
+        </sort>
+        <layout/>
+      </bibliography>
+    </style>
+
+The second change consists of two new attributes for the ``cs:key`` element, ``names-min`` and ``names-use-first``. These attributes, when set, override the values of ``et-al-min`` and ``et-al-min-first``, respectively. The following example shows how with these attributes a bibliography can be sorted alphabetically, while only taking the first author into account:
+
+.. sourcecode:: xml
+
+    <style>
+      <macro name="author">
+        <names variable="author">
+          <name/>
         </names>
       </macro>
       <bibliography>
         <sort>
           <key macro="author" names-min="1" names-use-first="1"/>
         </sort>
-        <layout>
-        </layout>
+        <layout/>
       </bibliography>
     </style>
-
-A more elaborate example can be found in the following unit test:
-
-Related unit tests: \*
-`sort\_AguStyle <http://bitbucket.org/fbennett/citeproc-js/src/tip/std/humans/sort_AguStyle.txt>`_
 
 Back-References in Note Styles
 ------------------------------
@@ -721,16 +745,6 @@ CSL 1.0 introduces a number of new terms:
  * ordinals and long ordinals --> RZ: this should be discussed under formatting as well
  * added long-ordinal' value option of cs:number --> RZ: idem
 
-Feedback
---------
-
-Do you still miss a feature in CSL 1.0? Do you think the
-documentation is incomplete, unclear or incorrect? We welcome
-feedback on the ... --> do we want feedback on the Zotero forums
-(Citation Styles forum category, http://forums.zotero.org/11/), or
-on the xbiblio mailing list? Or will the new CSL website include a
-dedicated forum for all things CSL?
-
 Anything below this point is not meant for inclusion in the final version
 -------------------------------------------------------------------------
 
@@ -752,26 +766,72 @@ Errata
 
 Post 1.0rc1 changesets (rc1 was tagged 08/15/09), until November 24th:
 
+Worked into upgrade notes:
+
+http://sourceforge.net/apps/trac/xbiblio/changeset/1192 Changed
+"true" value of second-field-align to "flush"
+
+http://sourceforge.net/apps/trac/xbiblio/changeset/1188 applying
+info patch from Rintze, moving categor terms to separate file,
+contributor roles to csl-variables.rnc
+(removed cs:source --> doesn't need action, changed values ``rel`` on ``cs:link`` (plus other cleanup), ``citation-format``/``field`` instead of ``term`` on ``cs:category``)
+
+No action required:
+
 http://sourceforge.net/apps/trac/xbiblio/changeset/1157 Removing
 class attribute from cs:group and start/end-attributes from
 cs:names.
+(start/end attributes were added after 0.8; class didn't do anything in CSL 0.8 styles)
 
 http://sourceforge.net/apps/trac/xbiblio/changeset/1163 Removed
 orphaned cs:translator element
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1168 Require
-xml:lang on cs:locale in CSL styles.
+(don't think anybody used this)
 
 http://sourceforge.net/apps/trac/xbiblio/changeset/1171 Removed
 strip-periods from cs:term
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1173 Add
-particle-in-name-sort option attribute to bibliography element.
-(this one has to go again probably)
+(strip-periods wasn't present in CSL 0.8)
 
 http://sourceforge.net/apps/trac/xbiblio/changeset/1174 Removed
 point-locator attribute from cs:text (use locator variable instead)
 Removed form attribute from cs:text when used for macros.
+(shouldn't give any problems)
+
+http://sourceforge.net/apps/trac/xbiblio/changeset/1207
+adding 'linguistics' (csl-categories.rnc)
+(this has found its way into CSL 0.8 via time travel, so the category isn't new in CSL 1.0)
+
+http://sourceforge.net/apps/trac/xbiblio/changeset/1201
+Removed the "other" date-part. (csl.rnc)
+(nobody used this anyway)
+
+http://sourceforge.net/apps/trac/xbiblio/changeset/1191 adding
+csl-categories.rnc
+(doesn't affect usage CSL)
+
+http://sourceforge.net/apps/trac/xbiblio/changeset/1189 removed
+text-case attribute from 'formatting' pattern, added it to cs:text (only)
+http://sourceforge.net/apps/trac/xbiblio/changeset/1190 adding
+text-case to label, number, date-part, name-part
+(text-case can't be used on group anymore, doesn't seem to occur in repository though)
+
+
+Still to do:
+
+http://sourceforge.net/apps/trac/xbiblio/changeset/1168 Require
+xml:lang on cs:locale in CSL styles.
+(this is related to an open issue on the BitBucket tracker)
+
+
+Name articles:
+http://sourceforge.net/apps/trac/xbiblio/changeset/1173 Add
+particle-in-name-sort option attribute to bibliography element.
+(this one has to go again probably)
+http://sourceforge.net/apps/trac/xbiblio/changeset/1210
+Changed name-particle-option to reflect current proposal.
+(csl.rnc)
+http://sourceforge.net/apps/trac/xbiblio/changeset/1212
+Changed demote-particles option into a global option, renamed it to demote-non-dropping-particle.
+(csl.rnc)
 
 http://sourceforge.net/apps/trac/xbiblio/changeset/1177 Removed
 delimiter as an option from cs:layout when used in cs:bibliography
@@ -792,47 +852,7 @@ http://sourceforge.net/apps/trac/xbiblio/changeset/1184 Removed
 delimiter as a possible attribute of cs:text (part II of the
 http://sourceforge.net/apps/trac/xbiblio/changeset/1177 patch)
 
-http://sourceforge.net/apps/trac/xbiblio/changeset/1188 applying
-info patch from Rintze, moving categor terms to separate file,
-contributor roles to csl-variables.rnc
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1189 removed
-text-case attribute from 'formatting' pattern, added it to cs:text
-(only)
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1190 adding
-text-case to label, number, date-part, name-part
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1191 adding
-csl-categories.rnc
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1192 Changed
-"true" value of second-field-align to "flush"
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1201
-Removed the "other" date-part.
-(csl.rnc)
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1207
-adding 'linguistics'
-(csl-categories.rnc)
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1210
-Changed name-particle-option to reflect current proposal.
-(csl.rnc)
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1212
-Changed demote-particles option into a global option, renamed it to demote-non-dropping-particle.
-(csl.rnc)
-
-Locales files:
-
-http://bitbucket.org/bdarcus/csl-locales/overview/
-(all changes here should be reflected in the schema, so we should be able to skip this one)
-
-Schema files:
-
-http://bitbucket.org/bdarcus/csl-schema/overview/
+Bitbucket:
 
 http://bitbucket.org/bdarcus/csl-schema/changeset/528360192454/
 adding 'jurisdiction', fixes #2
@@ -886,7 +906,7 @@ schema started with csl.rnc in trunk. The schema was split in the
 split branch into csl.rnc, csl-core.rnc, csl-variables.rnc,
 csl-types.rnc and csl-terms.rnc. csl-core.rnc was then folded into
 csl-rnc. Once CSL 1.0RC1 was tagged, the split branch was merged
-back to the trunk.
+back to the trunk. The switch to Bitbucket was made after the merge.
 
 pre-split:
 http://sourceforge.net/apps/trac/xbiblio/log/csl/schema/trunk/csl.rnc
@@ -904,6 +924,11 @@ http://sourceforge.net/apps/trac/xbiblio/log/csl/schema/trunk/csl-variables.rnc
 http://sourceforge.net/apps/trac/xbiblio/log/csl/schema/trunk/csl-types.rnc
 http://sourceforge.net/apps/trac/xbiblio/log/csl/schema/trunk/csl-terms.rnc
 http://sourceforge.net/apps/trac/xbiblio/log/csl/schema/trunk/csl-categories.rnc
+
+http://bitbucket.org/bdarcus/csl-schema/overview/
+
+http://bitbucket.org/bdarcus/csl-locales/overview/
+(all changes here should be reflected in the schema, so we should be able to skip this one)
 
 .. [1]
    A hat tip to user ```komrade`` <http://www.zotero.org/komrade>`_ of
