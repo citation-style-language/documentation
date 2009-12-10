@@ -233,14 +233,32 @@ The format of localized dates (i.e. punctuation and the order of the date-parts)
           <date form="text" date-parts="year-month"/>
           <!-- localized date in numeric format with leading zeros and affixes for month and day -->
           <date form="numeric">
-            <date-part name="month" form="numeric-leading-zeros" prefix="/"/>
+            <date-part name="month" form="numeric-leading-zeros" prefix="/" font-style="italic"/>
             <date-part name="day" form="numeric-leading-zeros" prefix="/"/>
           </date>
         </layout>
       </bibliography>
     </style>
 
-Note that it is not allowed to apply affixes (prefixes and suffixes) to ``cs:date`` when used within ``cs:locale`` (either in styles or in the "locales-xx-XX.xml" files). Instead, all punctuation should be applied to the ``cs:date-part`` elements. This separates locale-independent affixes (e.g. parentheses around the date, as in "(2000)") from locale-dependent punctuation, a requirement for robust date localization.
+In developing CSL 1.0 it was recognized that robust date localization requires a clear distinction between style-specific and locale-dependent formatting of dates. As a result, some limitations have been placed on the use of ``cs:date`` when used for localized dates. First, affixes (prefixes and suffixes) on ``cs:date`` are considered style-specific formatting (e.g. parentheses around the date: "(2000)"). It is therefore not allowed to apply affixes to ``cs:date`` when this element is used within ``cs:locale`` (in both styles and "locales-xx-XX.xml" files). Instead, all locale-specific affixes should be applied to the ``cs:date-part`` elements. Conversely, it is not allowed to apply affixes to ``cs:date-part`` elements when the parent ``cs:date`` calls a localized date. Secondly, ``cs:date`` may not carry the ``delimiter`` attribute when used in a style to call a localized date. In CSL 1.0 this attribute can be used to specify a delimiter for the date-parts, which is considered locale-specific formatting.
+
+N.B. When creating a localized date format, consider graceful scaling of dates when applying affixes to the ``cs:date-part`` elements. As an example, consider the date format "May 1, 2008". By using the following arrangement of affixes, correct dates are obtained for any value of the ``date-parts`` attribute:
+
+.. sourcecode:: xml
+
+    <date form="text">
+      <date-part name="month" suffix=" "/>
+      <date-part name="day" suffix=", "/>
+      <date-part name="year"/>
+    </date>
+
+====================  =============
+``date-parts`` value  date
+====================  =============
+"year-month-day"      "May 1, 2008"
+"year-month"          "May 2008"
+"year"                "2008"
+====================  =============
 
 Localized Options
 ~~~~~~~~~~~~~~~~~
@@ -776,6 +794,25 @@ info patch from Rintze, moving categor terms to separate file,
 contributor roles to csl-variables.rnc
 (removed cs:source --> doesn't need action, changed values ``rel`` on ``cs:link`` (plus other cleanup), ``citation-format``/``field`` instead of ``term`` on ``cs:category``)
 
+http://sourceforge.net/apps/trac/xbiblio/changeset/1177 Removed
+delimiter as an option from cs:layout when used in cs:bibliography
+Clarified conditional behavior (as OR operator) Removed ability to
+specify multiple variables in cs:date and cs:text. This means that
+the delimiter on cs:date should now act to delimite the
+date-parts.
+http://sourceforge.net/apps/trac/xbiblio/changeset/1184 Removed
+delimiter as a possible attribute of cs:text (part II of the
+http://sourceforge.net/apps/trac/xbiblio/changeset/1177 patch)
+(the ability to specify multiple variables doesn't seem to have caught on, better to leave this out)
+
+http://sourceforge.net/apps/trac/xbiblio/changeset/1178 Removed the
+delimiter as a possible attribute from cs:date when used to call
+localized dates.
+
+http://sourceforge.net/apps/trac/xbiblio/changeset/1183 Allow
+(overriding) formatting attributes on cs:date-part when used
+in-style in a call for a localized date.
+
 No action required:
 
 http://sourceforge.net/apps/trac/xbiblio/changeset/1157 Removing
@@ -819,8 +856,9 @@ Still to do:
 
 http://sourceforge.net/apps/trac/xbiblio/changeset/1168 Require
 xml:lang on cs:locale in CSL styles.
-(this is related to an open issue on the BitBucket tracker)
-
+(this is related to an open issue on the BitBucket tracker:
+http://bitbucket.org/bdarcus/csl-schema/issue/11/allow-locale-element-in-style-with-no-xml-lang
+)
 
 Name articles:
 http://sourceforge.net/apps/trac/xbiblio/changeset/1173 Add
@@ -833,24 +871,6 @@ http://sourceforge.net/apps/trac/xbiblio/changeset/1212
 Changed demote-particles option into a global option, renamed it to demote-non-dropping-particle.
 (csl.rnc)
 
-http://sourceforge.net/apps/trac/xbiblio/changeset/1177 Removed
-delimiter as an option from cs:layout when used in cs:bibliography
-Clarified conditional behavior (as OR operator) Removed ability to
-specify multiple variables in cs:date and cs:text. This means that
-the delimiter on cs:date should now act to delimite the
-date-parts.
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1178 Removed the
-delimiter as a possible attribute from cs:date when used to call
-localized dates.
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1183 Allow
-(overriding) formatting attributes on cs:date-part when used
-in-style in a call for a localized date.
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1184 Removed
-delimiter as a possible attribute of cs:text (part II of the
-http://sourceforge.net/apps/trac/xbiblio/changeset/1177 patch)
 
 Bitbucket:
 
