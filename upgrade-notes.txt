@@ -115,11 +115,13 @@ Finally, after the conversion, it is recommended to validate the converted style
 Version Number
 --------------
 
-Starting with CSL 1.0, a style must indicate for which CSL version the style was written. All CSL 1.0 styles should carry the value "1.0" on the ``version``-attribute on the cs:style element, e.g.:
+Starting with CSL 1.0, styles (and locales files) must indicate the CSL version with which they are compatible. All CSL 1.0 styles should include the ``version`` attribute with the value "1.0" on the cs:style element, e.g.:
 
 .. sourcecode:: xml
 
     <style version="1.0" class="in-text"/>
+
+For "locale-xx-XX.xml" files this attribute should be set on the root ``cs:locale`` element.
 
 Options as Attributes
 ---------------------
@@ -288,57 +290,6 @@ N.B. With CSL 0.8 there was some confusion about the use of ``default-locale``, 
 Formatting
 ----------
 
-Quotes
-~~~~~~
-
-CSL 1.0 introduces new terms for inner ("open-inner-quote" and "close-inner-quote", e.g. ‘ and ’) and outer quotes ("open-quote" and "close-quote", e.g. “ and ”). Together with the new ``punctuation-in-quote``-option (see `Punctuation around Quotes`_), quotes can now be fully localized (as long as they are specified via the ``quotes`` attribute). In addition, quotes can now be properly nested (using alternating quotation marks), e.g.:
-
- * title: My “Nested” Title
- * title with quotes: “My ‘Nested’ Title”
-
-Punctuation around Quotes
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The localized option ``punctuation-in-quote`` is used to specify whether punctuation (commas and periods) should appear within ("true", e.g. for American English) or outside quotation marks that have been applied by the style ("false" (default value), e.g. for British English). As such, it can toggle the style output between
-
-    Douglas Adams, "The Hitchhiker's Guide to the Galaxy," 1979.
-
-and
-
-    Douglas Adams, "The Hitchhiker's Guide to the Galaxy", 1979.
-
-Pages
-~~~~~
-
-CSL 1.0 introduces two new page variables: "page-first" and "number-of-pages". The existing variable "pages" is still used for page ranges (e.g. of journal articles and book chapters). The variable "page-first" holds the first page of the page range. The variable "number-of-pages" is used to indicate the total number of pages of an item (e.g. a book or thesis).
-
-In addition, a new global (non-localized) option, ``page-range-format``, has been added to control the collapsing of page ranges. This attribute, set on ``cs:style``, can have the values "expanded" (e.g. "321-328"), "minimal" ("321-8"), and "chicago" ("321-28", which follows the collapsing rules of the Chicago Manual of Style). When the attribute isn't present, the content of the "page"-variable is shown as is. An example:
-
-.. sourcecode:: xml
-
-    <style page-range-format="chicago">
-      <bibliography>
-        <layout>
-          <text variable="page"/>
-        </layout>
-      </bibliography>
-    </style>
-
-Rich Text Markup within Fields
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Although not part of CSL 1.0, the new citeproc-js_ CSL processor used by Zotero supports a new feature that deserves some notice: the ability to use rich text markup within fields.
-
-Rich text markup can be applied with a small set of HTML(-like) tags:
-
--  ``<b>`` - bold
--  ``<i>`` - italics
--  ``<sc>`` - small-caps
--  ``<sub>`` - subscript
--  ``<sup>`` - superscript
-
-E.g. if a Zotero item has the title "Ca<sup>2+</sup> levels in <i>Homo sapiens</i>", this will automatically be converted to "Ca\ :sup:`2+`\  levels in *Homo sapiens*" when a citation is rendered.
-
 Citation Collapsing
 ~~~~~~~~~~~~~~~~~~~
 
@@ -352,24 +303,6 @@ CSL 1.0 offers finer control of citation collapsing. First, two new options have
       </citation>
     </style>
 
-Year Suffix
-~~~~~~~~~~~
-
-Year-suffixes are included automatically when the ``disambiguate-add-year-suffix`` attribute on ``cs:citation`` is set to "true". However, some styles desire special markup of year-suffixes, such as italics (e.g. "``2000``\ *a*, *b*"). For this CSL 1.0 introduces the ``year-suffix`` variable, which can be used to explicitly specify the location and formatting of year-suffixes. An example:
-
-.. sourcecode:: xml
-
-    <style>
-      <citation>
-        <layout delimiter=", ">
-          <date variable="issued">
-            <date-part name="year"/>
-          </date>
-          <text variable="year-suffix" font-style="italic"/>
-        </layout>
-      </citation>
-    </style>
-
 Names
 ~~~~~
 
@@ -377,19 +310,6 @@ delimiter-precedes-last
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 The ``delimiter-precedes-last`` attribute on ``cs:names`` controls the use of the name delimiter between the last and next-to-last name in name lists. In CSL 0.8, this attribute could be set to either ``always`` or ``never``. To include the delimiter for lists of three or more names ("Doe, Smith, and Williams") and to exclude it for lists of only two names ("Doe and Smith"), you would have to leave out the attribute. Now, in CSL 1.0, it is also possible to explicitly set the last behavior by using the value "contextual".
-
-Formatting Name Parts
-^^^^^^^^^^^^^^^^^^^^^
-
-CSL 1.0 introduces the ability to separately format given and family names. Formatting is specified via the new ``cs:name-part`` element, a child of ``cs:name``. The ``name`` attribute of this element should be set to either "family" or "given". Note that the order of ``name-part`` elements does not affect the order in which the name parts are shown. An example, resulting in names like "John SMITH":
-
-.. sourcecode:: xml
-
-    <names variable="author">
-      <name form="long">
-        <name-part name="family" font-variant="capitalize-all"/>
-      </name>
-    </names>
 
 Et al.
 ^^^^^^
@@ -414,18 +334,102 @@ results in "Doe *et al.*". Secondly, it is now possible to use two different ``e
 
 would yield "Doe and others" (note that both terms are localized).
 
-Stripping Periods
-~~~~~~~~~~~~~~~~~
+Formatting Name Parts
+^^^^^^^^^^^^^^^^^^^^^
 
-A new attribute, ``strip-periods``, can now be set on ``cs:date-part`` (only for name="month"), ``cs:label`` and ``cs:text``. The attribute is inactive when set to "false" (the default value), but if set to "true", any periods are stripped from the variable contents. ``strip-periods`` replaces the ``include-period`` attribute that was part of CSL 0.8.
-
-``strip-periods`` is especially useful for journal abbreviations. There are plans to improve support for journal abbreviations in future versions of CSL (e.g. by using lookup lists to find the correct journal abbreviation given a certain journal title), but for now it is recommended that users include periods for journal abbreviations in their (Zotero) libraries. With the help of ``strip-periods``, styles can then either use the journal abbrevation as is, or use a version without periods. An example:
+CSL 1.0 introduces the ability to separately format given and family names. Formatting is specified via the new ``cs:name-part`` element, a child of ``cs:name``. The ``name`` attribute of this element should be set to either "family" or "given". Note that the order of ``name-part`` elements does not affect the order in which the name parts are shown. An example, resulting in names like "John SMITH":
 
 .. sourcecode:: xml
 
-    <text variable="container-title" form="short" strip-periods="true"/>
+    <names variable="author">
+      <name form="long">
+        <name-part name="family" font-variant="capitalize-all"/>
+      </name>
+    </names>
 
-would output "Appl Environ Microbiol" if the journal abbreviation for the Zotero item is "Appl. Environ. Microbiol.".
+Hierarchical Name Options
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In CSL 0.8, any attribute used for name formatting had to be included for each occurance of the ``cs:names`` element, even if names were identically formatted for all these elements. To reduce the need for duplication, CSL 1.0 introduces hierarchical options: the attributes ``and``, ``delimiter-precedes-last``, ``initialize-with``, ``name-as-sort-order`` and ``sort-separator`` can now also be set on ``cs:style``, ``cs:citation`` and ``cs:bibliography``. The attributes ``form`` and ``delimiter`` have been made available as ``name-form`` and ``name-delimiter``, respectively, as the original attribute names have different uses when set on ``cs:style``, ``cs:citation`` and ``cs:bibliography``. Similarly, the ``names-delimiter`` attribute has been introduced as a companion of the ``delimiter`` attribute on ``cs:names``.
+
+When a name attribute is set on ``cs:style``, ``cs:citation`` or ``cs:bibliography``, its value is used for all ``cs:names`` elements within the element carrying the attribute. However, when an element lower in the hierarchy carries the same attribute with a different value, this value will override the value(s) specified higher in the hierarchy. 
+
+In addition to these changes, CSL 1.0 also includes more fine-grained control for et-al settings. The attributes ``et-al-min``, ``et-al-use-first``, ``et-al-subsequent-min``, ``et-al-subsequent-use-first`` now behave like any other ``cs:name`` attribute, and thus can be set on ``cs:style``, ``cs:citation``, ``cs:bibliography`` and ``cs:name``.
+
+Hyphenation of Compound Given Names
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A new attribute, ``initialize-with-hyphen``, can be set set on ``cs:style`` to control hyphenation of compound given names (e.g. "Jean-Luc Picard"). When set to "true" (the default), a hyphen is added when the given name is initialized ("J.-L. Picard"). With "false" the hyphen is left out ("J.L. Picard").
+
+Name Collapsing
+^^^^^^^^^^^^^^^
+
+If a ``cs:names`` element has its ``name`` attribute set to "editor translator" (or "translator editor"), CSL 1.0 collapses both name lists when their contents is identical. If a label is specified, and collapsing occurs, the newly added ``editortranslator`` term is used. For example,
+
+.. sourcecode:: xml
+
+      <names variable="editor translator">
+        <name />
+        <label form="short" prefix=" (" suffix=")" />
+      </names>
+
+could result in "John Doe (ed. & trans.)".
+
+Name Particles
+^^^^^^^^^^^^^^
+
+Many Western names consist not only of a given and a family name, but also of one or more name particles. To control how these particles are handled, CSL 1.0 introduces a new option, ``demote-non-dropping-particle``, which can be set as an attribute on ``cs:style``. To understand how this option works, it is important to recognize that not all particles are equal: name particles can be either kept or dropped when only the surname is shown (from now on we will refer to these two types as non-dropping-particle and dropping-particle, respectively). A single name can contain particles of both types (with the non-dropping-particle always following the dropping-particle). For example, the French name "Gérard de la Martinière" can be deconstructed into:
+
+============ =====================
+"Gérard"     given name
+"de"         dropping-particle
+"la"         non-dropping-particle
+"Martinière" family name
+============ =====================
+
+When only the surname is shown, only the non-dropping-particle is kept: "La Martinière". However, when names are inverted (with the family name preceding the given name), styles often differ in name particle handling. First, the non-dropping-particle can be either prepended to the family name (e.g. "de Koning, W.") or appended (after initials or given names, e.g. "Koning, W. de"). Note that the dropping-particle is always appended in inverted names. Secondly, if the non-dropping-particle is prepended to the family name, names can be sorted in two ways: the non-dropping-particle can remain part of the family name (as part of the primary sort key; example A), or it may be separated from the family name and become (part of) a secondary sort key, joining the dropping-particle, if available (example B). The different sort orders are illustrated below:
+
+**Sort order A: non-dropping-particle not demoted**
+
+-  primary sort key: "la Martinière"
+-  secondary sort key: "de"
+-  tertiary sort key: "Gérard"
+
+**Sort order B: non-dropping-particle demoted**
+
+-  primary sort key: "Martinière"
+-  secondary sort key: "de la"
+-  tertiary sort key: "Gérard"
+
+The ``demote-non-dropping-particle`` attribute can be set to the following values:
+
+-  "never": the non-dropping-particle is treated as part of the family name, whereas the dropping-particle is appended (e.g. "de Koning, W.", "la Martinière, Gérard de"). The non-dropping-particle is part of the primary sort key (example A, e.g. "de Koning, W." appears under "D").
+-  "sort-only": as "never", with the exception that non-dropping-particle is demoted to a secondary sort key (see example B, e.g. "de Koning, W." appears under "K").
+-  "display-and-sort" (default): the dropping and non-dropping-particle are appended to the rest of the name (e.g. "Koning, W. de" and "Martinière, Gérard de la"). When names are sorted, both particles are part of the secondary sort key (see example B, e.g. "Koning, W. de" appears under "K").
+
+Ordinal Numbers
+~~~~~~~~~~~~~~~
+
+To allow for localization of ordinal numbers, CSL 1.0 includes the new terms ``ordinal-01`` to ``ordinal-04``. For the en-US locale, these terms have the values "st", "nd", "rd" and "th" (resulting in ordinal numbers of "1st", "2nd", "3rd", "4th", etc.). In addition, support for long ordinals has been introduced with the terms ``long-ordinal-01`` to ``long-ordinal-10`` ("first", "second", ..., "tenth"). Long ordinals can be selected by using ``cs:number`` and setting the ``form`` attribute to "long-ordinal".
+
+TODO: questions: are ordinal numbers like 12th supported? When ``form`` is set to ``long-ordinal``, and the number is "12", is the number shown as a (short) ordinal ("12th")?
+
+Pages
+~~~~~
+
+CSL 1.0 introduces two new page variables: "page-first" and "number-of-pages". The existing variable "pages" is still used for page ranges (e.g. of journal articles and book chapters). The variable "page-first" holds the first page of the page range. The variable "number-of-pages" is used to indicate the total number of pages of an item (e.g. a book or thesis).
+
+In addition, a new global (non-localized) option, ``page-range-format``, has been added to control the collapsing of page ranges. This attribute, set on ``cs:style``, can have the values "expanded" (e.g. "321-328"), "minimal" ("321-8"), and "chicago" ("321-28", which follows the collapsing rules of the Chicago Manual of Style). When the attribute isn't present, the content of the "page"-variable is shown as is. An example:
+
+.. sourcecode:: xml
+
+    <style page-range-format="chicago">
+      <bibliography>
+        <layout>
+          <text variable="page"/>
+        </layout>
+      </bibliography>
+    </style>
 
 Pluralization
 ~~~~~~~~~~~~~
@@ -443,15 +447,85 @@ In CSL 1.0 small changes have been made to the use of ``plural``. As with CSL 0.
 
 N.B. The ``plural`` attribute was one of the few cases where the implementation in Zotero did not follow the CSL 0.8 schema.
 
+Quotes
+~~~~~~
+
+CSL 1.0 introduces new terms for inner ("open-inner-quote" and "close-inner-quote", e.g. ‘ and ’) and outer quotes ("open-quote" and "close-quote", e.g. “ and ”). Together with the new ``punctuation-in-quote``-option (see `Punctuation around Quotes`_), quotes can now be fully localized (as long as they are specified via the ``quotes`` attribute). In addition, quotes can now be properly nested (using alternating quotation marks), e.g.:
+
+ * title: My “Nested” Title
+ * title with quotes: “My ‘Nested’ Title”
+
+Punctuation around Quotes
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The localized option ``punctuation-in-quote`` is used to specify whether punctuation (commas and periods) should appear within ("true", e.g. for American English) or outside quotation marks that have been applied by the style ("false" (default value), e.g. for British English). As such, it can toggle the style output between
+
+    Douglas Adams, "The Hitchhiker's Guide to the Galaxy," 1979.
+
+and
+
+    Douglas Adams, "The Hitchhiker's Guide to the Galaxy", 1979.
+
+Rich Text Markup within Fields
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Although not part of CSL 1.0, the new citeproc-js_ CSL processor used by Zotero supports a new feature that deserves some notice: the ability to use rich text markup within fields.
+
+Rich text markup can be applied with a small set of HTML(-like) tags:
+
+-  ``<b>`` - bold
+-  ``<i>`` - italics
+-  ``<sc>`` - small-caps
+-  ``<sub>`` - subscript
+-  ``<sup>`` - superscript
+
+E.g. if a Zotero item has the title "Ca<sup>2+</sup> levels in <i>Homo sapiens</i>", this will automatically be converted to "Ca\ :sup:`2+`\  levels in *Homo sapiens*" when a citation is rendered.
+
+Seasons
+~~~~~~~
+
+Describe the new season terms, their usage with cs:date (TODO)
+
 second-field-align
 ~~~~~~~~~~~~~~~~~~
 
 The ``second-field-align`` attribute can be used to align any subsequent lines of a bibliography entry with the beginning of the second field. In CSL 0.8 the value of this attribute could be set to "true" or "margin" to place the first field respectively in the margin, or flush against it. In CSL 1.0 "true" has been renamed to "flush".
 
+Stripping Periods
+~~~~~~~~~~~~~~~~~
+
+A new attribute, ``strip-periods``, can now be set on ``cs:date-part`` (only for name="month"), ``cs:label`` and ``cs:text``. The attribute is inactive when set to "false" (the default value), but if set to "true", any periods are stripped from the variable contents. ``strip-periods`` replaces the ``include-period`` attribute that was part of CSL 0.8.
+
+``strip-periods`` is especially useful for journal abbreviations. There are plans to improve support for journal abbreviations in future versions of CSL (e.g. by using lookup lists to find the correct journal abbreviation given a certain journal title), but for now it is recommended that users include periods for journal abbreviations in their (Zotero) libraries. With the help of ``strip-periods``, styles can then either use the journal abbrevation as is, or use a version without periods. An example:
+
+.. sourcecode:: xml
+
+    <text variable="container-title" form="short" strip-periods="true"/>
+
+would output "Appl Environ Microbiol" if the journal abbreviation for the Zotero item is "Appl. Environ. Microbiol.".
+
+Year Suffix
+~~~~~~~~~~~
+
+Year-suffixes are included automatically when the ``disambiguate-add-year-suffix`` attribute on ``cs:citation`` is set to "true". However, some styles desire special markup of year-suffixes, such as italics (e.g. "``2000``\ *a*, *b*"). For this CSL 1.0 introduces the ``year-suffix`` variable, which can be used to explicitly specify the location and formatting of year-suffixes. An example:
+
+.. sourcecode:: xml
+
+    <style>
+      <citation>
+        <layout delimiter=", ">
+          <date variable="issued">
+            <date-part name="year"/>
+          </date>
+          <text variable="year-suffix" font-style="italic"/>
+        </layout>
+      </citation>
+    </style>
+
 Layout Control with the Display Attribute
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  Display attributes for positioning blocks comprising a cite.
+-  Display attributes for positioning blocks comprising a cite. (TODO)
 
 Disambiguation
 --------------
@@ -749,33 +823,28 @@ Variables
 
 CSL 1.0 introduces a number of new variables:
 
- * number-of-pages (see `Pages`_)
- * page-first (see `Pages`_)
- * year-suffix (see `Year Suffix`_)
+ * jurisdiction. The geographic unit for which a resource (such as legislation) is relevant.
+ * number-of-pages. See `Pages`_.
+ * page-first. See `Pages`_.
+ * year-suffix. See `Year Suffix`_.
 
 Terms
 -----
 
-CSL 1.0 introduces a number of new terms:
+CSL 1.0 also introduces a number of new terms:
 
- * ``reference``. The ``references`` term from CSL 0.8 has been rename ``reference``.
- * ``editortranslator``. TODO: discuss in names-section
- * ordinals and long ordinals --> RZ: this should be discussed under formatting as well
- * added long-ordinal' value option of cs:number --> RZ: idem
+ * ``ad`` and ``bc`` (Anno Domini and Before Christ). These terms are implicitly appended to years: ``bc`` to negative years, ``ad`` to positive years of less than four digits.
+ * ``author``. This term can be applied as a label to author names. For most styles, this term will consist of an empty string ("").
+ * ``editortranslator``. See `Name Collapsing`_.
+ * ``reference``. This term replace the ``references`` term from CSL 0.8.
+ * ``season-01`` to ``season-04``. These terms map to respectively spring, summer, fall and winter. See `Seasons`_.
+ * ``ordinal-01`` to ``ordinal-04`` and ``ordinal-01`` to ``ordinal-10``. See `Ordinal Numbers`_. TODO: this should be discussed under formatting > ordinal numbers (added long-ordinal' value option of cs:number), see http://sourceforge.net/apps/trac/xbiblio/changeset/1120
 
 Anything below this point is not meant for inclusion in the final version
 -------------------------------------------------------------------------
 
-Unfinished Business
-~~~~~~~~~~~~~~~~~~~
-
--  clean up (i.e. remove) some of the comments/annotations in the
-   schema
--  still have to describe some variables in spec (year-suffix,
-   first-reference-note-number)
-
-Errata
-~~~~~~
+Things not discussed
+~~~~~~~~~~~~~~~~~~~~
 
 -  no more group-by (maybe we won't have to mention this, as none
    of the current styles seem to use it)
@@ -812,6 +881,33 @@ localized dates.
 http://sourceforge.net/apps/trac/xbiblio/changeset/1183 Allow
 (overriding) formatting attributes on cs:date-part when used
 in-style in a call for a localized date.
+
+Name articles:
+http://sourceforge.net/apps/trac/xbiblio/changeset/1173 Add
+particle-in-name-sort option attribute to bibliography element.
+(this one has to go again probably)
+http://sourceforge.net/apps/trac/xbiblio/changeset/1210
+Changed name-particle-option to reflect current proposal.
+(csl.rnc)
+http://sourceforge.net/apps/trac/xbiblio/changeset/1212
+Changed demote-particles option into a global option, renamed it to demote-non-dropping-particle.
+(csl.rnc)
+
+http://bitbucket.org/bdarcus/csl-schema/changeset/528360192454/
+adding 'jurisdiction', fixes #2
+(csl-variables.rnc)
+
+http://bitbucket.org/bdarcus/csl-schema/changeset/520dc1d2d993/
+added global initialize-with-hyphen option, introduced hierarchical name and et-al options.
+(csl.rnc)
+
+http://bitbucket.org/bdarcus/csl-schema/changeset/f5b5f3c3a661/
+Allow et-al-* attributes on cs:name
+(csl.rnc)
+
+http://bitbucket.org/bdarcus/csl-schema/changeset/26c675c1c603/
+Added required version attribute (with value "1.0") to cs:locale when occurring in standalone locale files 
+(csl.rnc)
 
 No action required:
 
@@ -851,40 +947,9 @@ http://sourceforge.net/apps/trac/xbiblio/changeset/1190 adding
 text-case to label, number, date-part, name-part
 (text-case can't be used on group anymore, doesn't seem to occur in repository though)
 
-
-Still to do:
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1168 Require
-xml:lang on cs:locale in CSL styles.
-(this is related to an open issue on the BitBucket tracker:
-http://bitbucket.org/bdarcus/csl-schema/issue/11/allow-locale-element-in-style-with-no-xml-lang
-)
-
-Name articles:
-http://sourceforge.net/apps/trac/xbiblio/changeset/1173 Add
-particle-in-name-sort option attribute to bibliography element.
-(this one has to go again probably)
-http://sourceforge.net/apps/trac/xbiblio/changeset/1210
-Changed name-particle-option to reflect current proposal.
-(csl.rnc)
-http://sourceforge.net/apps/trac/xbiblio/changeset/1212
-Changed demote-particles option into a global option, renamed it to demote-non-dropping-particle.
-(csl.rnc)
-
-
-Bitbucket:
-
-http://bitbucket.org/bdarcus/csl-schema/changeset/528360192454/
-adding 'jurisdiction', fixes #2
-(csl-variables.rnc)
-
 http://bitbucket.org/bdarcus/csl-schema/changeset/1d4f814940d3/
 cleaned up pattern names on variable, moved dates to csl-variables.rnc file
 (csl.rnc, csl-variables.rnc)
-
-http://bitbucket.org/bdarcus/csl-schema/changeset/520dc1d2d993/
-added global initialize-with-hyphen option, introduced hierarchical name and et-al options.
-(csl.rnc)
 
 http://bitbucket.org/bdarcus/csl-schema/changeset/836ed337fc1e/
 adding csl data schema
@@ -902,17 +967,17 @@ http://bitbucket.org/bdarcus/csl-schema/changeset/510b59327812/
 making attribute optional
 (csl-data.rnc)
 
-http://bitbucket.org/bdarcus/csl-schema/changeset/f5b5f3c3a661/
-Allow et-al-* attributes on cs:name
-(csl.rnc)
-
 http://bitbucket.org/bdarcus/csl-schema/changeset/bda1f0ab3f7e/
 Correct regular expression pattern for ISSN(-L)s, which can have a roman "X" or "x" as check digit
 (csl.rnc)
 
-http://bitbucket.org/bdarcus/csl-schema/changeset/26c675c1c603/
-Added required version attribute (with value "1.0") to cs:locale when occurring in standalone locale files 
-(csl.rnc)
+Still to do:
+
+http://sourceforge.net/apps/trac/xbiblio/changeset/1168 Require
+xml:lang on cs:locale in CSL styles.
+(this is related to an open issue on the BitBucket tracker:
+http://bitbucket.org/bdarcus/csl-schema/issue/11/allow-locale-element-in-style-with-no-xml-lang
+)
 
 http://bitbucket.org/bdarcus/csl-schema/changeset/2aed27e6c033/
 Renamed "references" to "reference", removed "reference item", added season-terms ("season-01", etc), added "ad"/"bc", put some existing terms in alphabetical order
