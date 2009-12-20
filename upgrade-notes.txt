@@ -13,7 +13,7 @@ __ `Table of Contents`_
 
 .. class:: info-date
 
-   December 6, 2009
+   December 20, 2009
 
 .. class:: contributors
 
@@ -34,26 +34,55 @@ __ `Table of Contents`_
 Citation Style Language 1.0 - What's New?
 =========================================
 
-`Citation Style Language 1.0 <http://citationstyles.org/citation-style-language/schema-and-specification/#CSL1.0>`_ represents a significant update of the Citation Style Language (CSL), an open XML-based standard to describe citation styles. This document describes the changes that have been made since the previous release (`CSL 0.8 <http://citationstyles.org/citation-style-language/schema-and-specification/#CSL0.8>`_, released in March 2009), and thus is primarily aimed at those with prior CSL experience.
+`Citation Style Language 1.0
+<http://citationstyles.org/citation-style-language/schema-and-specification/#CSL1.0>`_
+represents a significant update of the Citation Style Language (CSL), an open
+XML-based standard to describe citation styles. This document describes the
+changes that have been made since the previous release (`CSL 0.8
+<http://citationstyles.org/citation-style-language/schema-and-specification/#CSL0.8>`_,
+released in March 2009), and thus is primarily aimed at those with prior CSL
+experience.
 
-**Nota Bene** These notes include many XML examples to demonstrate new CSL features. Please note that these examples are reduced to a minimum, and often don't constitute valid CSL styles. In addition, when references are made to the XML elements of CSL, the CSL namespace ("cs") is always attached as a prefix (e.g. ``cs:citation`` for the ``citation`` element). However, for CSL styles it is customary to declare the default CSL namespace in the root ``cs:style`` element (<style xmlns="http://purl.org/net/xbiblio/csl" />), which eliminates the need to include this namespace for each element.
+**Nota Bene** These notes include many XML examples to demonstrate new CSL
+features. Please note that these examples are reduced to a minimum, and often
+don't constitute valid CSL styles. In addition, when references are made to the
+XML elements of CSL, the CSL namespace ("cs") is always attached as a prefix
+(e.g. ``cs:citation`` for the ``citation`` element). However, for CSL styles it
+is customary to declare the default CSL namespace in the root ``cs:style``
+element (<style xmlns="http://purl.org/net/xbiblio/csl" />), which eliminates
+the need to include this namespace for each element.
 
 Project Home(s)
 +++++++++++++++
 
-The first change is that the CSL project has been moved to a new home at `CitationStyles.org <http://citationstyles.org/>`_ (the old project home was located at `<http://xbiblio.sourceforge.net/csl/>`_). This website will be the central location to find CSL schemas, CSL documentation and CSL styles.
+The first change is that the CSL project has been moved to a new home at
+`CitationStyles.org <http://citationstyles.org/>`_ (the old project home was
+located at `<http://xbiblio.sourceforge.net/csl/>`_). This website will be the
+central location to find CSL schemas, CSL documentation and CSL styles.
 
-For development the `SourceForge CSL mailing list <http://sourceforge.net/mailarchive/forum.php?forum_name=xbiblio-devel>`_ will be kept in use, but a switch has been made from SourceForge.net to `Bitbucket.org <http://bitbucket.org/>`_ for hosting the project code. The current code repositories are:
+For development the `SourceForge CSL mailing list
+<http://sourceforge.net/mailarchive/forum.php?forum_name=xbiblio-devel>`_ will
+be kept in use, but a switch has been made from SourceForge.net to
+`Bitbucket.org <http://bitbucket.org/>`_ for hosting the project code. The
+current code repositories are:
 
- * `<http://bitbucket.org/bdarcus/csl-schema/>`_ - CSL schema
- * `<http://bitbucket.org/bdarcus/csl-locales/>`_ - CSL locale files
- * `<http://bitbucket.org/bdarcus/csl-docs/>`_ - CSL documentation
- * `<http://bitbucket.org/bdarcus/csl-utils/>`_ - CSL utilities (mostly scripts)
+* `CSL Schema <http://bitbucket.org/bdarcus/csl-schema/>`_
+* `CSL Locale Files <http://bitbucket.org/bdarcus/csl-locales/>`_
+* `CSL Documentation <http://bitbucket.org/bdarcus/csl-docs/>`_
+* `CSL Utilities <http://bitbucket.org/bdarcus/csl-utils/>`_ (mostly scripts)
 
 Documentation
 +++++++++++++
 
-Prior to the release of CSL 1.0, CSL documentation was rather scarce. Most of what was available was hosted on the `Zotero wiki <http://www.zotero.org/support/dev/csl_syntax_summary>`_. With CSL 1.0, we hope to improve on this situation. In addition to these upgrade notes, a full specification_ has been made available. As before, the `schema <http://citationstyles.org/citation-style-language/schema-and-specification/#CSL1.0>`_ itself is also a source of information, although reading the schema requires some understanding of `RELAX NG Compact <http://www.relaxng.org/>`_, the XML schema language in which the CSL schema is written.
+Prior to the release of CSL 1.0, CSL documentation was rather scarce. Most of
+what was available was hosted on the `Zotero wiki
+<http://www.zotero.org/support/dev/csl_syntax_summary>`_. With CSL 1.0, we hope
+to improve on this situation. In addition to these upgrade notes, a full
+specification_ has been made available. As before, the `schema
+<http://citationstyles.org/citation-style-language/schema-and-specification/#CSL1.0>`_
+itself is also a source of information, although reading the schema requires
+some understanding of `RELAX NG Compact <http://www.relaxng.org/>`_, the XML
+schema language in which the CSL schema is written.
 
 .. _specification: http://citationstyles.org/citation-style-language/schema-and-specification/#CSL1.0
 
@@ -63,27 +92,43 @@ Schema
 Split Schema
 ------------
 
-The schema of `CSL 0.8 <http://citationstyles.org/citation-style-language/schema-and-specification/#CSL0.8>`_ consists of a single file. With CSL 1.0, the schema has been split into multiple files:
+The schema of `CSL 0.8
+<http://citationstyles.org/citation-style-language/schema-and-specification/#CSL0.8>`_
+consists of a single file. With CSL 1.0, the schema has been split into multiple
+files:
 
- * csl.rnc - The core of the CSL schema. This file contains most of the schema logic and calls the other schema files
- * csl-categories.rnc
- * csl-terms.rnc
- * csl-types.rnc
- * csl-variables.rnc
+* csl.rnc - The core of the CSL schema. This file contains most of the schema
+  logic and calls the other schema files
+* csl-categories.rnc
+* csl-terms.rnc
+* csl-types.rnc
+* csl-variables.rnc
 
-The main advantage of splitting up the schema is that the schema will be easier to maintain. If you wish to validate styles against the CSL schema, make sure all the files are located in the same directory, and validate against csl.rnc.
+The main advantage of splitting up the schema is that the schema will be easier
+to maintain. If you wish to validate styles against the CSL schema, make sure
+all the files are located in the same directory, and validate against csl.rnc.
 
 csl-data
 ~~~~~~~~
 
-Although hosted in the same code repository as the rest of the schema, csl-data.rnc is not used for style validation. Instead, it describes how data can (and should) be presented to CSL processors, such as citeproc-js_. Note that the structured input data doesn't need to consist of XML (e.g. citeproc-js_ accepts JSON).
+Although hosted in the same code repository as the rest of the schema,
+csl-data.rnc is not used for style validation. Instead, it describes how data
+can (and should) be presented to CSL processors, such as citeproc-js_. Note that
+the structured input data doesn't need to consist of XML (e.g. citeproc-js_
+accepts JSON).
 
 .. _citeproc-js: http://bitbucket.org/fbennett/citeproc-js/
 
 Validation
 ----------
 
-The CSL 1.0 schema has been extended with two Schematron rules to make sure styles don't use ``cs:text`` and ``cs:key`` elements that call non-existing ``cs:macro`` elements. Note that not all validators support embedded Schematron code (e.g. `Jing <http://www.thaiopensource.com/relaxng/jing.html>`_ just ignores the rules). In addition, the CSL 1.0 schema can now be used to validate the `locales files`_ (e.g. "locales-en-US.xml"), which contain localizations of terms, date formats and style options.
+The CSL 1.0 schema has been extended with two Schematron rules to make sure
+styles don't use ``cs:text`` and ``cs:key`` elements that call non-existing
+``cs:macro`` elements. Note that not all validators support embedded Schematron
+code (e.g. `Jing <http://www.thaiopensource.com/relaxng/jing.html>`_ just
+ignores the rules). In addition, the CSL 1.0 schema can now be used to validate
+the `locales files`_ (e.g. "locales-en-US.xml"), which contain localizations of
+terms, date formats and style options.
 
 .. _locales files: http://bitbucket.org/bdarcus/csl-locales/src/
 
@@ -93,40 +138,66 @@ Styles
 Updating CSL 0.8 Styles
 -----------------------
 
-CSL 1.0 is backward incompatible with CSL 0.8, which means that 'old' styles written for CSL 0.8 won't work with CSL 1.0 processors. Fortunately, it is possible to (automatically) update CSL 0.8 styles to the CSL 1.0 format using the `upgrade.xsl <http://bitbucket.org/bdarcus/csl-utils/src/tip/update.xsl>`_ XSLT stylesheet. The developers of Zotero will perform this conversion for all the styles in the `Zotero Style Repository <http://www.zotero.org/styles>`_. However, if you use (custom) CSL styles that aren't included in this style repository, you might need to do this yourself.
+CSL 1.0 is backward incompatible with CSL 0.8, which means that 'old' styles
+written for CSL 0.8 won't work with CSL 1.0 processors. Fortunately, it is
+possible to (automatically) update CSL 0.8 styles to the CSL 1.0 format using
+the `upgrade.xsl <http://bitbucket.org/bdarcus/csl-utils/src/tip/update.xsl>`_
+XSLT stylesheet. The developers of Zotero will perform this conversion for all
+the styles in the `Zotero Style Repository <http://www.zotero.org/styles>`_.
+However, if you use (custom) CSL styles that aren't included in this style
+repository, you might need to do this yourself.
 
 Using upgrade.xsl
 ~~~~~~~~~~~~~~~~~
 
-First, check whether the styles that you wish to update validate against the `CSL 0.8 schema <http://citationstyles.org/citation-style-language/schema-and-specification/#CSL0.8>`_.
+First, check whether the styles that you wish to update validate against the
+`CSL 0.8 schema
+<http://citationstyles.org/citation-style-language/schema-and-specification/#CSL0.8>`_.
 
-Then use an XSLT processor to update the styles. Available options are the command-line tools `Saxon <http://saxon.sourceforge.net/>`_ and `xsltproc <http://xmlsoft.org/XSLT/xsltproc2.html>`_. Alternatively, one of the (more user-friendly) online converters, such as the one offered by `www.shell-tools.net <http://www.shell-tools.net/index.php?op=xslt>`_ can be used. For the latter tool, the instructions are:
+Then use an XSLT processor to update the styles. Available options are the
+command-line tools `Saxon <http://saxon.sourceforge.net/>`_ and `xsltproc
+<http://xmlsoft.org/XSLT/xsltproc2.html>`_. Alternatively, one of the (more
+user-friendly) online converters, such as the one offered by
+`www.shell-tools.net <http://www.shell-tools.net/index.php?op=xslt>`_ can be
+used. For the latter tool, the instructions are:
 
-1. Paste the contents of `upgrade.xsl <http://bitbucket.org/bdarcus/csl-utils/src/tip/update.xsl>`_  into the "xslt" text box at `<http://www.shell-tools.net/index.php?op=xslt>`_
+1. Paste the contents of `upgrade.xsl
+   <http://bitbucket.org/bdarcus/csl-utils/src/tip/update.xsl>`_ into the "xslt"
+   text box at `<http://www.shell-tools.net/index.php?op=xslt>`_
 2. Paste the contents of the CSL 0.8 style into the "xml" text box
 3. Click the "Submit Query"-button
 4. Copy the text from the "output" text box to a suitable text editor (e.g.
    Notepad on Windows) and save the file with a .csl-extension.
 
-Finally, after the conversion, it is recommended to validate the converted style, this time against the `CSL 1.0 schema`_.
+Finally, after the conversion, it is recommended to validate the converted
+style, this time against the `CSL 1.0 schema`_.
 
 .. _CSL 1.0 schema: http://citationstyles.org/citation-style-language/schema-and-specification/#CSL1.0
 
 Version Number
 --------------
 
-Starting with CSL 1.0, styles (and locales files) must indicate the CSL version with which they are compatible. All CSL 1.0 styles should include the ``version`` attribute with the value "1.0" on the cs:style element, e.g.:
+Starting with CSL 1.0, styles (and locales files) must indicate the CSL version
+with which they are compatible. All CSL 1.0 styles should include the
+``version`` attribute with the value "1.0" on the cs:style element, e.g.:
 
 .. sourcecode:: xml
 
     <style version="1.0" class="in-text"/>
 
-For "locale-xx-XX.xml" files this attribute should be set on the root ``cs:locale`` element.
+For "locale-xx-XX.xml" files this attribute should be set on the root
+``cs:locale`` element.
 
 Options as Attributes
 ---------------------
 
-In CSL 0.8, citation- and bibliography-specific style options were set with ``cs:option`` elements. In CSL 1.0 this element is no longer used. Instead, options are set using attributes. CSL 1.0 includes global options, which affect the output of both the ``citation`` and ``bibliography`` sections, and which are set as attributes on the ``cs:style`` element. Options that are citation-specific are now set on the ``cs:citation`` element, while bibliography-specific options are set on the ``cs:bibliography`` element.
+In CSL 0.8, citation- and bibliography-specific style options were set with
+``cs:option`` elements. In CSL 1.0 this element is no longer used. Instead,
+options are set using attributes. CSL 1.0 includes global options, which affect
+the output of both the ``citation`` and ``bibliography`` sections, and which are
+set as attributes on the ``cs:style`` element. Options that are
+citation-specific are now set on the ``cs:citation`` element, while
+bibliography-specific options are set on the ``cs:bibliography`` element.
 
 Style Metadata
 --------------
@@ -134,17 +205,30 @@ Style Metadata
 Links
 ~~~~~
 
-The role of the ``cs:link`` element is to store URLs (using the ``href`` attribute) while indicating how these URLs are related to the style (using the ``rel`` attribute). The use of ``rel`` has been slightly modified in CSL 1.0 to increase clarity. First, every ``cs:link`` element should carry the ``rel`` attribute. Secondly, the available values of ``rel`` have changed to:
+The role of the ``cs:link`` element is to store URLs (using the ``href``
+attribute) while indicating how these URLs are related to the style (using the
+``rel`` attribute). The use of ``rel`` has been slightly modified in CSL 1.0 to
+increase clarity. First, every ``cs:link`` element should carry the ``rel``
+attribute. Secondly, the available values of ``rel`` have changed to:
 
- * "self". The URI of the CSL style itself (only for independent styles). In CSL 0.8 "self" was implicit when ``ref`` wasn't used.
- * "independent-parent". Renamed from "source", this indicates the URI of the independent parent style (only for dependent styles).
- * "template". Can be used to link to the style from which the current style is derived.
- * "documentation". Links to documentation, e.g. the style guide. Note that "documentation" has replaced "homepage".
-
+* "self". The URI of the CSL style itself (only for independent styles). In CSL
+  0.8 "self" was implicit when ``ref`` wasn't used.
+* "independent-parent". Renamed from "source", this indicates the URI of the
+  independent parent style (only for dependent styles).
+* "template". Can be used to link to the style from which the current style is
+  derived.
+* "documentation". Links to documentation, e.g. the style guide. Note that
+  "documentation" has replaced "homepage".
+ 
 Formats and Fields
 ~~~~~~~~~~~~~~~~~~
 
-The ``cs:category`` element has two purposes: to indicate for which field(s) of study a style is relevant (e.g. "biology") and to indicate the format of the style (e.g. "author-date"). In CSL 0.8 the ``term`` attribute was used for both cases. With CSL 1.0, ``term`` has been replaced with two attributes: ``citation-format``, to indicate the citation format, and ``field``, to indicate the field of study. An example:
+The ``cs:category`` element has two purposes: to indicate for which field(s) of
+study a style is relevant (e.g. "biology") and to indicate the format of the
+style (e.g. "author-date"). In CSL 0.8 the ``term`` attribute was used for both
+cases. With CSL 1.0, ``term`` has been replaced with two attributes:
+``citation-format``, to indicate the citation format, and ``field``, to indicate
+the field of study. An example:
 
 .. sourcecode:: xml
 
@@ -155,12 +239,18 @@ The ``cs:category`` element has two purposes: to indicate for which field(s) of 
       </info>
     </style>
 
-In CSL 0.8 the possible citation formats were: "author-date", "label", "note", "numeric" and "in-text". In CSL 1.0 "in-text" has been replaced with "author" (a format that only shows author names in in-text citations, like the MLA style).
+In CSL 0.8 the possible citation formats were: "author-date", "label", "note",
+"numeric" and "in-text". In CSL 1.0 "in-text" has been replaced with "author" (a
+format that only shows author names in in-text citations, like the MLA style).
 
 ISSN and ISSN-L
 ~~~~~~~~~~~~~~~
 
-ISSN-identifiers unambiguously identify journals. While CSL 0.8 allowed only a single ISSN identifier to be included in the style metadata section, CSL 1.0 now supports multiple ISSNs (e.g. the ISSNs of the print and online editions of a journal), as well as the relatively new `ISSN-L <http://www.issn.org/2-22637-What-is-an-ISSN-L.php>`_ identifier. For example:
+ISSN-identifiers unambiguously identify journals. While CSL 0.8 allowed only a
+single ISSN identifier to be included in the style metadata section, CSL 1.0 now
+supports multiple ISSNs (e.g. the ISSNs of the print and online editions of a
+journal), as well as the relatively new `ISSN-L
+<http://www.issn.org/2-22637-What-is-an-ISSN-L.php>`_ identifier. For example:
 
 .. sourcecode:: xml
 
@@ -175,7 +265,18 @@ ISSN-identifiers unambiguously identify journals. While CSL 0.8 allowed only a s
 Localization
 ------------
 
-The "locales-xx-XX.xml" files (with "xx-XX" indicating the locale, e.g. "en-US" for "English - United States") that are part of CSL previously had only the role of supplying localized terms (translations are made via `BabelZilla <http://www.babelzilla.org/>`_). With CSL 1.0, these locale files also contain localized style options and localized date formats. Because of this, some changes have been made to the XML format of these files: ``cs:locale`` has replaced ``terms`` as the root element, both the ``xml:lang`` and ``xmlns`` attributes are applied to the ``cs:locales`` element, and new elements have been introduced to localize dates and options (``cs:date``, ``cs:date-part`` and ``cs:style-options``). As before, any content of the "locales-xx-XX.xml" files can be overridden in a CSL style (using the ``xml:lang`` attribute on ``cs:locale`` to select the correct locale to override), e.g.:
+The "locales-xx-XX.xml" files (with "xx-XX" indicating the locale, e.g. "en-US"
+for "English - United States") that are part of CSL previously had only the role
+of supplying localized terms (translations are made via `BabelZilla
+<http://www.babelzilla.org/>`_). With CSL 1.0, these locale files also contain
+localized style options and localized date formats. Because of this, some
+changes have been made to the XML format of these files: ``cs:locale`` has
+replaced ``terms`` as the root element, both the ``xml:lang`` and ``xmlns``
+attributes are applied to the ``cs:locales`` element, and new elements have been
+introduced to localize dates and options (``cs:date``, ``cs:date-part`` and
+``cs:style-options``). As before, any content of the "locales-xx-XX.xml" files
+can be overridden in a CSL style (using the ``xml:lang`` attribute on
+``cs:locale`` to select the correct locale to override), e.g.:
 
 .. sourcecode:: xml
 
@@ -196,8 +297,12 @@ The "locales-xx-XX.xml" files (with "xx-XX" indicating the locale, e.g. "en-US" 
 Localized Dates
 ~~~~~~~~~~~~~~~
 
-CSL 1.0 introduces support for date localization. This feature is optional: styles can still define dates in the usual non-localized format. To use a localized date, all you need to do is use ``cs:date`` with the ``form`` attribute set to either ``text`` (for dates like 'April 21, 2008') or ``numeric`` (e.g. '4/21/08'). As demonstrated in the example below, it is not necessary
-to specify any ``cs:date-part`` elements for localized dates:
+CSL 1.0 introduces support for date localization. This feature is optional:
+styles can still define dates in the usual non-localized format. To use a
+localized date, all you need to do is use ``cs:date`` with the ``form``
+attribute set to either ``text`` (for dates like 'April 21, 2008') or
+``numeric`` (e.g. '4/21/08'). As demonstrated in the example below, it is not
+necessary to specify any ``cs:date-part`` elements for localized dates:
 
 .. sourcecode:: xml
 
@@ -216,7 +321,24 @@ to specify any ``cs:date-part`` elements for localized dates:
       </bibliography>
     </style>
 
-The format of localized dates (i.e. punctuation and the order of the date-parts) is specified in the "locales-xx-XX.xml". As with terms, localized date formats can be overridden within styles. In addition, localized dates can be customized within a style via two options. First, the ``date-parts`` attribute can be added to ``cs:date`` to control which date-parts are shown. With the default value of ``year-month-day`` the whole date is shown. With ``year-month`` and ``year`` only the year/month and year date-parts are shown, respectively. The second option is the ability to redefine how one or more ``cs:date-part`` element are formatted. Note that the order of ``cs:date-part`` elements for a localized date within ``cs:layout`` doesn't affect the rendering order of the date-parts (this in contrast with non-localized dates or dates specified within ``cs:locale``, where the order of the ``cs:date-part`` elements does control the rendering order). Neither does the presence or absence of ``cs:date-part`` elements affect which date-parts are shown (this is controlled via the ``date-parts`` attribute described above). Instead, ``cs:date-part`` elements allow you to override specific properties of the localized date-parts (e.g. the `form` of the month-date-part can be set to "short"). Note that changes made in this way affect all locales. An example illustrating the different options:
+The format of localized dates (i.e. punctuation and the order of the date-parts)
+is specified in the "locales-xx-XX.xml". As with terms, localized date formats
+can be overridden within styles. In addition, localized dates can be customized
+within a style via two options. First, the ``date-parts`` attribute can be added
+to ``cs:date`` to control which date-parts are shown. With the default value of
+``year-month-day`` the whole date is shown. With ``year-month`` and ``year``
+only the year/month and year date-parts are shown, respectively. The second
+option is the ability to redefine how one or more ``cs:date-part`` element are
+formatted. Note that the order of ``cs:date-part`` elements for a localized date
+within ``cs:layout`` doesn't affect the rendering order of the date-parts (this
+in contrast with non-localized dates or dates specified within ``cs:locale``,
+where the order of the ``cs:date-part`` elements does control the rendering
+order). Neither does the presence or absence of ``cs:date-part`` elements affect
+which date-parts are shown (this is controlled via the ``date-parts`` attribute
+described above). Instead, ``cs:date-part`` elements allow you to override
+specific properties of the localized date-parts (e.g. the `form` of the
+month-date-part can be set to "short"). Note that changes made in this way
+affect all locales. An example illustrating the different options:
 
 .. sourcecode:: xml
 
@@ -242,9 +364,25 @@ The format of localized dates (i.e. punctuation and the order of the date-parts)
       </bibliography>
     </style>
 
-In developing CSL 1.0 it was recognized that robust date localization requires a clear distinction between style-specific and locale-dependent formatting of dates. As a result, some limitations have been placed on the use of ``cs:date`` when used for localized dates. First, affixes (prefixes and suffixes) on ``cs:date`` are considered style-specific formatting (e.g. parentheses around the date: "(2000)"). It is therefore not allowed to apply affixes to ``cs:date`` when this element is used within ``cs:locale`` (in both styles and "locales-xx-XX.xml" files). Instead, all locale-specific affixes should be applied to the ``cs:date-part`` elements. Conversely, it is not allowed to apply affixes to ``cs:date-part`` elements when the parent ``cs:date`` calls a localized date. Secondly, ``cs:date`` may not carry the ``delimiter`` attribute when used in a style to call a localized date. In CSL 1.0 this attribute can be used to specify a delimiter for the date-parts, which is considered locale-specific formatting.
+In developing CSL 1.0 it was recognized that robust date localization requires a
+clear distinction between style-specific and locale-dependent formatting of
+dates. As a result, some limitations have been placed on the use of ``cs:date``
+when used for localized dates. First, affixes (prefixes and suffixes) on
+``cs:date`` are considered style-specific formatting (e.g. parentheses around
+the date: "(2000)"). It is therefore not allowed to apply affixes to ``cs:date``
+when this element is used within ``cs:locale`` (in both styles and
+"locales-xx-XX.xml" files). Instead, all locale-specific affixes should be
+applied to the ``cs:date-part`` elements. Conversely, it is not allowed to apply
+affixes to ``cs:date-part`` elements when the parent ``cs:date`` calls a
+localized date. Secondly, ``cs:date`` may not carry the ``delimiter`` attribute
+when used in a style to call a localized date. In CSL 1.0 this attribute can be
+used to specify a delimiter for the date-parts, which is considered
+locale-specific formatting.
 
-N.B. When creating a localized date format, consider graceful scaling of dates when applying affixes to the ``cs:date-part`` elements. As an example, consider the date format "May 1, 2008". By using the following arrangement of affixes, correct dates are obtained for any value of the ``date-parts`` attribute:
+N.B. When creating a localized date format, consider graceful scaling of dates
+when applying affixes to the ``cs:date-part`` elements. As an example, consider
+the date format "May 1, 2008". By using the following arrangement of affixes,
+correct dates are obtained for any value of the ``date-parts`` attribute:
 
 .. sourcecode:: xml
 
@@ -265,8 +403,12 @@ N.B. When creating a localized date format, consider graceful scaling of dates w
 Localized Options
 ~~~~~~~~~~~~~~~~~
 
-In addition to localized dates and terms, CSL 1.0 now also supports localized options (although for now, there is only one such an option, ``punctuation-in-quote``). The default value of localized
-options is set for each locale in the "locales-xx-XX.xml" files, but these values can be overridden using the ``cs:style-options`` element within ``cs:locale`` in a CSL style. An example:
+In addition to localized dates and terms, CSL 1.0 now also supports localized
+options (although for now, there is only one such an option,
+``punctuation-in-quote``). The default value of localized options is set for
+each locale in the "locales-xx-XX.xml" files, but these values can be overridden
+using the ``cs:style-options`` element within ``cs:locale`` in a CSL style. An
+example:
 
 .. sourcecode:: xml
 
@@ -279,13 +421,21 @@ options is set for each locale in the "locales-xx-XX.xml" files, but these value
 Default Locale
 ~~~~~~~~~~~~~~
 
-To prevent localization of styles (which might be desirable for journal-specific styles) the ``default-locale`` attribute can be included on the ``cs:style`` element (this attribute already existed in CSL 0.8, but was not supported by Zotero). The possible values of this attribute are the locale codes (e.g. "fr-FR" for French). A full list of locale codes can be found in `Zotero's chrome manifest <https://www.zotero.org/svn/extension/trunk/chrome.manifest>`_. An example:
+To prevent localization of styles (which might be desirable for journal-specific
+styles) the ``default-locale`` attribute can be included on the ``cs:style``
+element (this attribute already existed in CSL 0.8, but was not supported by
+Zotero). The possible values of this attribute are the locale codes (e.g.
+"fr-FR" for French). A full list of locale codes can be found in `Zotero's
+chrome manifest <https://www.zotero.org/svn/extension/trunk/chrome.manifest>`_.
+An example:
 
 .. sourcecode:: xml
 
     <style default-locale="fr-FR"/>
 
-N.B. With CSL 0.8 there was some confusion about the use of ``default-locale``, and some style authors included the ``xml:lang`` attribute instead. In CSL 1.0 ``xml:lang`` is no longer allowed as an attribute on ``cs:style``.
+N.B. With CSL 0.8 there was some confusion about the use of ``default-locale``,
+and some style authors included the ``xml:lang`` attribute instead. In CSL 1.0
+``xml:lang`` is no longer allowed as an attribute on ``cs:style``.
 
 Formatting
 ----------
@@ -293,7 +443,19 @@ Formatting
 Citation Collapsing
 ~~~~~~~~~~~~~~~~~~~
 
-CSL 1.0 offers finer control of citation collapsing. First, two new options have been introduced, both of which are set as attributes on ``cs:citation``: ``year-suffix-delimiter``, which defines the delimiter for subsequent year suffixes (e.g. the comma in "Doe 2000a,b, Smith 1999"), and ``after-collapse-delimiter``, which defines the delimiter between a group of collapsed citations and the subsequent citation (e.g. the semicolon in "Doe 2000a, b; Smith 1999, Williams 2002"). Both attributes default to the delimiter set on the ``cs:layout`` element within ``cs:citation``. Secondly, "year-suffix-ranged" has been added as a possible value of the ``collapse`` attribute of ``cs:citation``. If ``collapse`` is set this value, citations are collapsed as with "year-suffix", but ranges of year-suffixes are collapsed as well (e.g. "Doe 2000a,b,c,e" would become "Doe 2000a-c,e"). An example of how these attributes are set:
+CSL 1.0 offers finer control of citation collapsing. First, two new options have
+been introduced, both of which are set as attributes on ``cs:citation``:
+``year-suffix-delimiter``, which defines the delimiter for subsequent year
+suffixes (e.g. the comma in "Doe 2000a,b, Smith 1999"), and
+``after-collapse-delimiter``, which defines the delimiter between a group of
+collapsed citations and the subsequent citation (e.g. the semicolon in "Doe
+2000a, b; Smith 1999, Williams 2002"). Both attributes default to the delimiter
+set on the ``cs:layout`` element within ``cs:citation``. Secondly,
+"year-suffix-ranged" has been added as a possible value of the ``collapse``
+attribute of ``cs:citation``. If ``collapse`` is set this value, citations are
+collapsed as with "year-suffix", but ranges of year-suffixes are collapsed as
+well (e.g. "Doe 2000a,b,c,e" would become "Doe 2000a-c,e"). An example of how
+these attributes are set:
 
 .. sourcecode:: xml
 
@@ -309,12 +471,20 @@ Names
 delimiter-precedes-last
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-The ``delimiter-precedes-last`` attribute on ``cs:names`` controls the use of the name delimiter between the last and next-to-last name in name lists. In CSL 0.8, this attribute could be set to either ``always`` or ``never``. To include the delimiter for lists of three or more names ("Doe, Smith, and Williams") and to exclude it for lists of only two names ("Doe and Smith"), you would have to leave out the attribute. Now, in CSL 1.0, it is also possible to explicitly set the last behavior by using the value "contextual".
+The ``delimiter-precedes-last`` attribute on ``cs:names`` controls the use of
+the name delimiter between the last and next-to-last name in name lists. In CSL
+0.8, this attribute could be set to either ``always`` or ``never``. To include
+the delimiter for lists of three or more names ("Doe, Smith, and Williams") and
+to exclude it for lists of only two names ("Doe and Smith"), you would have to
+leave out the attribute. Now, in CSL 1.0, it is also possible to explicitly set
+the last behavior by using the value "contextual".
 
 Et al.
 ^^^^^^
 
-A new element, ``cs:et-al``, can now be included within ``cs:names``. This adds two important features. First, formatting can now be set independently for the ``et-al`` term. For example,
+A new element, ``cs:et-al``, can now be included within ``cs:names``. This adds
+two important features. First, formatting can now be set independently for the
+``et-al`` term. For example,
 
 .. sourcecode:: xml
 
@@ -323,7 +493,10 @@ A new element, ``cs:et-al``, can now be included within ``cs:names``. This adds 
       <et-al font-style="italics" prefix=" "/>
     </names>
 
-results in "Doe *et al.*". Secondly, it is now possible to use two different ``et-al`` terms within a single style (e.g. one for in-text citations and one for the bibliography). The desired term, "et-al" (the default) or "and others", is set with the ``name`` attribute on the ``cs:et-al`` element. For example,
+results in "Doe *et al.*". Secondly, it is now possible to use two different
+``et-al`` terms within a single style (e.g. one for in-text citations and one
+for the bibliography). The desired term, "et-al" (the default) or "and others",
+is set with the ``name`` attribute on the ``cs:et-al`` element. For example,
 
 .. sourcecode:: xml
 
@@ -337,7 +510,12 @@ would yield "Doe and others" (note that both terms are localized).
 Formatting Name Parts
 ^^^^^^^^^^^^^^^^^^^^^
 
-CSL 1.0 introduces the ability to separately format given and family names. Formatting is specified via the new ``cs:name-part`` element, a child of ``cs:name``. The ``name`` attribute of this element should be set to either "family" or "given". Note that the order of ``name-part`` elements does not affect the order in which the name parts are shown. An example, resulting in names like "John SMITH":
+CSL 1.0 introduces the ability to separately format given and family names.
+Formatting is specified via the new ``cs:name-part`` element, a child of
+``cs:name``. The ``name`` attribute of this element should be set to either
+"family" or "given". Note that the order of ``name-part`` elements does not
+affect the order in which the name parts are shown. An example, resulting in
+names like "John SMITH":
 
 .. sourcecode:: xml
 
@@ -350,21 +528,45 @@ CSL 1.0 introduces the ability to separately format given and family names. Form
 Hierarchical Name Options
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In CSL 0.8, any attribute used for name formatting had to be included for each occurance of the ``cs:names`` element, even if names were identically formatted for all these elements. To reduce the need for duplication, CSL 1.0 introduces hierarchical options: the attributes ``and``, ``delimiter-precedes-last``, ``initialize-with``, ``name-as-sort-order`` and ``sort-separator`` can now also be set on ``cs:style``, ``cs:citation`` and ``cs:bibliography``. The attributes ``form`` and ``delimiter`` have been made available as ``name-form`` and ``name-delimiter``, respectively, as the original attribute names have different uses when set on ``cs:style``, ``cs:citation`` and ``cs:bibliography``. Similarly, the ``names-delimiter`` attribute has been introduced as a companion of the ``delimiter`` attribute on ``cs:names``.
+In CSL 0.8, any attribute used for name formatting had to be included for each
+occurance of the ``cs:names`` element, even if names were identically formatted
+for all these elements. To reduce the need for duplication, CSL 1.0 introduces
+hierarchical options: the attributes ``and``, ``delimiter-precedes-last``,
+``initialize-with``, ``name-as-sort-order`` and ``sort-separator`` can now also
+be set on ``cs:style``, ``cs:citation`` and ``cs:bibliography``. The attributes
+``form`` and ``delimiter`` have been made available as ``name-form`` and
+``name-delimiter``, respectively, as the original attribute names have different
+uses when set on ``cs:style``, ``cs:citation`` and ``cs:bibliography``.
+Similarly, the ``names-delimiter`` attribute has been introduced as a companion
+of the ``delimiter`` attribute on ``cs:names``.
 
-When a name attribute is set on ``cs:style``, ``cs:citation`` or ``cs:bibliography``, its value is used for all ``cs:names`` elements within the element carrying the attribute. However, when an element lower in the hierarchy carries the same attribute with a different value, this value will override the value(s) specified higher in the hierarchy. 
+When a name attribute is set on ``cs:style``, ``cs:citation`` or
+``cs:bibliography``, its value is used for all ``cs:names`` elements within the
+element carrying the attribute. However, when an element lower in the hierarchy
+carries the same attribute with a different value, this value will override the
+value(s) specified higher in the hierarchy.
 
-In addition to these changes, CSL 1.0 also includes more fine-grained control for et-al settings. The attributes ``et-al-min``, ``et-al-use-first``, ``et-al-subsequent-min``, ``et-al-subsequent-use-first`` now behave like any other ``cs:name`` attribute, and thus can be set on ``cs:style``, ``cs:citation``, ``cs:bibliography`` and ``cs:name``.
+In addition to these changes, CSL 1.0 also includes more fine-grained control
+for et-al settings. The attributes ``et-al-min``, ``et-al-use-first``,
+``et-al-subsequent-min``, ``et-al-subsequent-use-first`` now behave like any
+other ``cs:name`` attribute, and thus can be set on ``cs:style``,
+``cs:citation``, ``cs:bibliography`` and ``cs:name``.
 
 Hyphenation of Compound Given Names
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A new attribute, ``initialize-with-hyphen``, can be set set on ``cs:style`` to control hyphenation of compound given names (e.g. "Jean-Luc Picard"). When set to "true" (the default), a hyphen is added when the given name is initialized ("J.-L. Picard"). With "false" the hyphen is left out ("J.L. Picard").
+A new attribute, ``initialize-with-hyphen``, can be set set on ``cs:style`` to
+control hyphenation of compound given names (e.g. "Jean-Luc Picard"). When set
+to "true" (the default), a hyphen is added when the given name is initialized
+("J.-L. Picard"). With "false" the hyphen is left out ("J.L. Picard").
 
 Name Collapsing
 ^^^^^^^^^^^^^^^
 
-If a ``cs:names`` element has its ``name`` attribute set to "editor translator" (or "translator editor"), CSL 1.0 collapses both name lists when their contents is identical. If a label is specified, and collapsing occurs, the newly added ``editortranslator`` term is used. For example,
+If a ``cs:names`` element has its ``name`` attribute set to "editor translator"
+(or "translator editor"), CSL 1.0 collapses both name lists when their contents
+is identical. If a label is specified, and collapsing occurs, the newly added
+``editortranslator`` term is used. For example,
 
 .. sourcecode:: xml
 
@@ -378,7 +580,16 @@ could result in "John Doe (ed. & trans.)".
 Name Particles
 ^^^^^^^^^^^^^^
 
-Many Western names consist not only of a given and a family name, but also of one or more name particles. To control how these particles are handled, CSL 1.0 introduces a new option, ``demote-non-dropping-particle``, which can be set as an attribute on ``cs:style``. To understand how this option works, it is important to recognize that not all particles are equal: name particles can be either kept or dropped when only the surname is shown (from now on we will refer to these two types as non-dropping-particle and dropping-particle, respectively). A single name can contain particles of both types (with the non-dropping-particle always following the dropping-particle). For example, the French name "Gérard de la Martinière" can be deconstructed into:
+Many Western names consist not only of a given and a family name, but also of
+one or more name particles. To control how these particles are handled, CSL 1.0
+introduces a new option, ``demote-non-dropping-particle``, which can be set as
+an attribute on ``cs:style``. To understand how this option works, it is
+important to recognize that not all particles are equal: name particles can be
+either kept or dropped when only the surname is shown (from now on we will refer
+to these two types as non-dropping-particle and dropping-particle,
+respectively). A single name can contain particles of both types (with the
+non-dropping-particle always following the dropping-particle). For example, the
+French name "Gérard de la Martinière" can be deconstructed into:
 
 ============ =====================
 "Gérard"     given name
@@ -387,7 +598,18 @@ Many Western names consist not only of a given and a family name, but also of on
 "Martinière" family name
 ============ =====================
 
-When only the surname is shown, only the non-dropping-particle is kept: "La Martinière". However, when names are inverted (with the family name preceding the given name), styles often differ in name particle handling. First, the non-dropping-particle can be either prepended to the family name (e.g. "de Koning, W.") or appended (after initials or given names, e.g. "Koning, W. de"). Note that the dropping-particle is always appended in inverted names. Secondly, if the non-dropping-particle is prepended to the family name, names can be sorted in two ways: the non-dropping-particle can remain part of the family name (as part of the primary sort key; example A), or it may be separated from the family name and become (part of) a secondary sort key, joining the dropping-particle, if available (example B). The different sort orders are illustrated below:
+When only the surname is shown, only the non-dropping-particle is kept: "La
+Martinière". However, when names are inverted (with the family name preceding
+the given name), styles often differ in name particle handling. First, the
+non-dropping-particle can be either prepended to the family name (e.g. "de
+Koning, W.") or appended (after initials or given names, e.g. "Koning, W. de").
+Note that the dropping-particle is always appended in inverted names. Secondly,
+if the non-dropping-particle is prepended to the family name, names can be
+sorted in two ways: the non-dropping-particle can remain part of the family name
+(as part of the primary sort key; example A), or it may be separated from the
+family name and become (part of) a secondary sort key, joining the
+dropping-particle, if available (example B). The different sort orders are
+illustrated below:
 
 **Sort order A: non-dropping-particle not demoted**
 
@@ -401,25 +623,51 @@ When only the surname is shown, only the non-dropping-particle is kept: "La Mart
 -  secondary sort key: "de la"
 -  tertiary sort key: "Gérard"
 
-The ``demote-non-dropping-particle`` attribute can be set to the following values:
+The ``demote-non-dropping-particle`` attribute can be set to the following
+values:
 
--  "never": the non-dropping-particle is treated as part of the family name, whereas the dropping-particle is appended (e.g. "de Koning, W.", "la Martinière, Gérard de"). The non-dropping-particle is part of the primary sort key (example A, e.g. "de Koning, W." appears under "D").
--  "sort-only": as "never", with the exception that non-dropping-particle is demoted to a secondary sort key (see example B, e.g. "de Koning, W." appears under "K").
--  "display-and-sort" (default): the dropping and non-dropping-particle are appended to the rest of the name (e.g. "Koning, W. de" and "Martinière, Gérard de la"). When names are sorted, both particles are part of the secondary sort key (see example B, e.g. "Koning, W. de" appears under "K").
+- "never": the non-dropping-particle is treated as part of the family name,
+  whereas the dropping-particle is appended (e.g. "de Koning, W.", "la Martinière,
+  Gérard de"). The non-dropping-particle is part of the primary sort key (example
+  A, e.g. "de Koning, W." appears under "D").
+- "sort-only": as "never", with the exception that non-dropping-particle is
+  demoted to a secondary sort key (see example B, e.g. "de Koning, W." appears
+  under "K").
+- "display-and-sort" (default): the dropping and non-dropping-particle are
+  appended to the rest of the name (e.g. "Koning, W. de" and "Martinière, Gérard
+  de la"). When names are sorted, both particles are part of the secondary sort
+  key (see example B, e.g. "Koning, W. de" appears under "K").
 
 Ordinal Numbers
 ~~~~~~~~~~~~~~~
 
-To allow for localization of ordinal numbers, CSL 1.0 includes the new terms ``ordinal-01`` to ``ordinal-04``. For the en-US locale, these terms have the values "st", "nd", "rd" and "th" (resulting in ordinal numbers of "1st", "2nd", "3rd", "4th", etc.). In addition, support for long ordinals has been introduced with the terms ``long-ordinal-01`` to ``long-ordinal-10`` ("first", "second", ..., "tenth"). Long ordinals can be selected by using ``cs:number`` and setting the ``form`` attribute to "long-ordinal".
+To allow for localization of ordinal numbers, CSL 1.0 includes the new terms
+``ordinal-01`` to ``ordinal-04``. For the en-US locale, these terms have the
+values "st", "nd", "rd" and "th" (resulting in ordinal numbers of "1st", "2nd",
+"3rd", "4th", etc.). In addition, support for long ordinals has been introduced
+with the terms ``long-ordinal-01`` to ``long-ordinal-10`` ("first", "second",
+..., "tenth"). Long ordinals can be selected by using ``cs:number`` and setting
+the ``form`` attribute to "long-ordinal".
 
-TODO: questions: are ordinal numbers like 12th supported? When ``form`` is set to ``long-ordinal``, and the number is "12", is the number shown as a (short) ordinal ("12th")?
+TODO: questions: are ordinal numbers like 12th supported? When ``form`` is set
+to ``long-ordinal``, and the number is "12", is the number shown as a (short)
+ordinal ("12th")?
 
 Pages
 ~~~~~
 
-CSL 1.0 introduces two new page variables: "page-first" and "number-of-pages". The existing variable "pages" is still used for page ranges (e.g. of journal articles and book chapters). The variable "page-first" holds the first page of the page range. The variable "number-of-pages" is used to indicate the total number of pages of an item (e.g. a book or thesis).
+CSL 1.0 introduces two new page variables: "page-first" and "number-of-pages".
+The existing variable "pages" is still used for page ranges (e.g. of journal
+articles and book chapters). The variable "page-first" holds the first page of
+the page range. The variable "number-of-pages" is used to indicate the total
+number of pages of an item (e.g. a book or thesis).
 
-In addition, a new global (non-localized) option, ``page-range-format``, has been added to control the collapsing of page ranges. This attribute, set on ``cs:style``, can have the values "expanded" (e.g. "321-328"), "minimal" ("321-8"), and "chicago" ("321-28", which follows the collapsing rules of the Chicago Manual of Style). When the attribute isn't present, the content of the "page"-variable is shown as is. An example:
+In addition, a new global (non-localized) option, ``page-range-format``, has
+been added to control the collapsing of page ranges. This attribute, set on
+``cs:style``, can have the values "expanded" (e.g. "321-328"), "minimal"
+("321-8"), and "chicago" ("321-28", which follows the collapsing rules of the
+Chicago Manual of Style). When the attribute isn't present, the content of the
+"page"-variable is shown as is. An example:
 
 .. sourcecode:: xml
 
@@ -434,7 +682,15 @@ In addition, a new global (non-localized) option, ``page-range-format``, has bee
 Pluralization
 ~~~~~~~~~~~~~
 
-In CSL 1.0 small changes have been made to the use of ``plural``. As with CSL 0.8, this attribute can be set on ``cs:text`` and ``cs:label``. When used on ``cs:text``, ``plural`` can still be set to "false" to use the singular form of a term (the default), or to "true" to use the plural form. But when used on ``cs:label``, different values are now available. With "contextual" (the default value), the plurality of the variable determines whether the singular or plural form of the term is used (e.g. "page 43" and "pages 3-5"). With "never" and "always" respectively the singular or plural form of the term is used, regardless of the plurality of the variable. An example:
+In CSL 1.0 small changes have been made to the use of ``plural``. As with CSL
+0.8, this attribute can be set on ``cs:text`` and ``cs:label``. When used on
+``cs:text``, ``plural`` can still be set to "false" to use the singular form of
+a term (the default), or to "true" to use the plural form. But when used on
+``cs:label``, different values are now available. With "contextual" (the default
+value), the plurality of the variable determines whether the singular or plural
+form of the term is used (e.g. "page 43" and "pages 3-5"). With "never" and
+"always" respectively the singular or plural form of the term is used,
+regardless of the plurality of the variable. An example:
 
 .. sourcecode:: xml
 
@@ -445,20 +701,31 @@ In CSL 1.0 small changes have been made to the use of ``plural``. As with CSL 0.
       <text variable="page"/>
     </group>
 
-N.B. The ``plural`` attribute was one of the few cases where the implementation in Zotero did not follow the CSL 0.8 schema.
+N.B. The ``plural`` attribute was one of the few cases where the implementation
+in Zotero did not follow the CSL 0.8 schema.
 
 Quotes
 ~~~~~~
 
-CSL 1.0 introduces new terms for inner ("open-inner-quote" and "close-inner-quote", e.g. ‘ and ’) and outer quotes ("open-quote" and "close-quote", e.g. “ and ”). Together with the new ``punctuation-in-quote``-option (see `Punctuation around Quotes`_), quotes can now be fully localized (as long as they are specified via the ``quotes`` attribute). In addition, quotes can now be properly nested (using alternating quotation marks), e.g.:
+CSL 1.0 introduces new terms for inner ("open-inner-quote" and
+"close-inner-quote", e.g. ‘ and ’) and outer quotes ("open-quote" and
+"close-quote", e.g. “ and ”). Together with the new
+``punctuation-in-quote``-option (see `Punctuation around Quotes`_), quotes can
+now be fully localized (as long as they are specified via the ``quotes``
+attribute). In addition, quotes can now be properly nested (using alternating
+quotation marks), e.g.:
 
- * title: My “Nested” Title
- * title with quotes: “My ‘Nested’ Title”
+* title: My “Nested” Title
+* title with quotes: “My ‘Nested’ Title”
 
 Punctuation around Quotes
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The localized option ``punctuation-in-quote`` is used to specify whether punctuation (commas and periods) should appear within ("true", e.g. for American English) or outside quotation marks that have been applied by the style ("false" (default value), e.g. for British English). As such, it can toggle the style output between
+The localized option ``punctuation-in-quote`` is used to specify whether
+punctuation (commas and periods) should appear within ("true", e.g. for American
+English) or outside quotation marks that have been applied by the style ("false"
+(default value), e.g. for British English). As such, it can toggle the style
+output between
 
     Douglas Adams, "The Hitchhiker's Guide to the Galaxy," 1979.
 
@@ -469,7 +736,9 @@ and
 Rich Text Markup within Fields
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Although not part of CSL 1.0, the new citeproc-js_ CSL processor used by Zotero supports a new feature that deserves some notice: the ability to use rich text markup within fields.
+Although not part of CSL 1.0, the new citeproc-js_ CSL processor used by Zotero
+supports a new feature that deserves some notice: the ability to use rich text
+markup within fields.
 
 Rich text markup can be applied with a small set of HTML(-like) tags:
 
@@ -479,7 +748,9 @@ Rich text markup can be applied with a small set of HTML(-like) tags:
 -  ``<sub>`` - subscript
 -  ``<sup>`` - superscript
 
-E.g. if a Zotero item has the title "Ca<sup>2+</sup> levels in <i>Homo sapiens</i>", this will automatically be converted to "Ca\ :sup:`2+`\  levels in *Homo sapiens*" when a citation is rendered.
+E.g. if a Zotero item has the title "Ca<sup>2+</sup> levels in <i>Homo
+sapiens</i>", this will automatically be converted to "Ca\ :sup:`2+`\ levels in
+*Homo sapiens*" when a citation is rendered.
 
 Seasons
 ~~~~~~~
@@ -489,25 +760,45 @@ Describe the new season terms, their usage with cs:date (TODO)
 second-field-align
 ~~~~~~~~~~~~~~~~~~
 
-The ``second-field-align`` attribute can be used to align any subsequent lines of a bibliography entry with the beginning of the second field. In CSL 0.8 the value of this attribute could be set to "true" or "margin" to place the first field respectively in the margin, or flush against it. In CSL 1.0 "true" has been renamed to "flush".
+The ``second-field-align`` attribute can be used to align any subsequent lines
+of a bibliography entry with the beginning of the second field. In CSL 0.8 the
+value of this attribute could be set to "true" or "margin" to place the first
+field respectively in the margin, or flush against it. In CSL 1.0 "true" has
+been renamed to "flush".
 
 Stripping Periods
 ~~~~~~~~~~~~~~~~~
 
-A new attribute, ``strip-periods``, can now be set on ``cs:date-part`` (only for name="month"), ``cs:label`` and ``cs:text``. The attribute is inactive when set to "false" (the default value), but if set to "true", any periods are stripped from the variable contents. ``strip-periods`` replaces the ``include-period`` attribute that was part of CSL 0.8.
+A new attribute, ``strip-periods``, can now be set on ``cs:date-part`` (only for
+name="month"), ``cs:label`` and ``cs:text``. The attribute is inactive when set
+to "false" (the default value), but if set to "true", any periods are stripped
+from the variable contents. ``strip-periods`` replaces the ``include-period``
+attribute that was part of CSL 0.8.
 
-``strip-periods`` is especially useful for journal abbreviations. There are plans to improve support for journal abbreviations in future versions of CSL (e.g. by using lookup lists to find the correct journal abbreviation given a certain journal title), but for now it is recommended that users include periods for journal abbreviations in their (Zotero) libraries. With the help of ``strip-periods``, styles can then either use the journal abbrevation as is, or use a version without periods. An example:
+``strip-periods`` is especially useful for journal abbreviations. There are
+plans to improve support for journal abbreviations in future versions of CSL
+(e.g. by using lookup lists to find the correct journal abbreviation given a
+certain journal title), but for now it is recommended that users include periods
+for journal abbreviations in their (Zotero) libraries. With the help of
+``strip-periods``, styles can then either use the journal abbrevation as is, or
+use a version without periods. An example:
 
 .. sourcecode:: xml
 
     <text variable="container-title" form="short" strip-periods="true"/>
 
-would output "Appl Environ Microbiol" if the journal abbreviation for the Zotero item is "Appl. Environ. Microbiol.".
+would output "Appl Environ Microbiol" if the journal abbreviation for the Zotero
+item is "Appl. Environ. Microbiol.".
 
 Year Suffix
 ~~~~~~~~~~~
 
-Year-suffixes are included automatically when the ``disambiguate-add-year-suffix`` attribute on ``cs:citation`` is set to "true". However, some styles desire special markup of year-suffixes, such as italics (e.g. "``2000``\ *a*, *b*"). For this CSL 1.0 introduces the ``year-suffix`` variable, which can be used to explicitly specify the location and formatting of year-suffixes. An example:
+Year-suffixes are included automatically when the
+``disambiguate-add-year-suffix`` attribute on ``cs:citation`` is set to "true".
+However, some styles desire special markup of year-suffixes, such as italics
+(e.g. "``2000``\ *a*, *b*"). For this CSL 1.0 introduces the ``year-suffix``
+variable, which can be used to explicitly specify the location and formatting of
+year-suffixes. An example:
 
 .. sourcecode:: xml
 
@@ -771,7 +1062,12 @@ If you get stuck, you should be able to get advice on the forums.
 Sorting
 -------
 
-CSL 1.0 includes several new features to allow for more complex reference sorting. The first change is that the ``form`` attribute on ``cs:name`` can now be set to "count". With this value, the enclosing ``cs:names`` returns the number of names in the name variable instead of the names themselves. When used for a sort key, this makes it possible to sort according to the number of authors (or any other kind of contributor). An example:
+CSL 1.0 includes several new features to allow for more complex reference
+sorting. The first change is that the ``form`` attribute on ``cs:name`` can now
+be set to "count". With this value, the enclosing ``cs:names`` returns the
+number of names in the name variable instead of the names themselves. When used
+for a sort key, this makes it possible to sort according to the number of
+authors (or any other kind of contributor). An example:
 
 .. sourcecode:: xml
 
@@ -789,7 +1085,11 @@ CSL 1.0 includes several new features to allow for more complex reference sortin
       </bibliography>
     </style>
 
-The second change consists of two new attributes for the ``cs:key`` element, ``names-min`` and ``names-use-first``. These attributes, when set, override the values of ``et-al-min`` and ``et-al-min-first``, respectively. The following example shows how with these attributes a bibliography can be sorted alphabetically, while only taking the first author into account:
+The second change consists of two new attributes for the ``cs:key`` element,
+``names-min`` and ``names-use-first``. These attributes, when set, override the
+values of ``et-al-min`` and ``et-al-min-first``, respectively. The following
+example shows how with these attributes a bibliography can be sorted
+alphabetically, while only taking the first author into account:
 
 .. sourcecode:: xml
 
@@ -823,23 +1123,31 @@ Variables
 
 CSL 1.0 introduces a number of new variables:
 
- * jurisdiction. The geographic unit for which a resource (such as legislation) is relevant.
- * number-of-pages. See `Pages`_.
- * page-first. See `Pages`_.
- * year-suffix. See `Year Suffix`_.
+* jurisdiction. The geographic unit for which a resource (such as legislation)
+  is relevant.
+* number-of-pages. See `Pages`_.
+* page-first. See `Pages`_.
+* year-suffix. See `Year Suffix`_.
 
 Terms
 -----
 
 CSL 1.0 also introduces a number of new terms:
 
- * ``ad`` and ``bc`` (Anno Domini and Before Christ). These terms are implicitly appended to years: ``bc`` to negative years, ``ad`` to positive years of less than four digits.
- * ``author``. This term can be applied as a label to author names. For most styles, this term will consist of an empty string ("").
- * ``editortranslator``. See `Name Collapsing`_.
- * ``reference``. This term replace the ``references`` term from CSL 0.8.
- * ``season-01`` to ``season-04``. These terms map to respectively spring, summer, fall and winter. See `Seasons`_.
- * ``ordinal-01`` to ``ordinal-04`` and ``ordinal-01`` to ``ordinal-10``. See `Ordinal Numbers`_. TODO: this should be discussed under formatting > ordinal numbers (added long-ordinal' value option of cs:number), see http://sourceforge.net/apps/trac/xbiblio/changeset/1120
-
+* ``ad`` and ``bc`` (Anno Domini and Before Christ). These terms are implicitly
+  appended to years: ``bc`` to negative years, ``ad`` to positive years of less
+  than four digits.
+* ``author``. This term can be applied as a label to author names. For most
+  styles, this term will consist of an empty string ("").
+* ``editortranslator``. See `Name Collapsing`_.
+* ``reference``. This term replace the ``references`` term from CSL 0.8.
+* ``season-01`` to ``season-04``. These terms map to respectively spring,
+  summer, fall and winter. See `Seasons`_.
+* ``ordinal-01`` to ``ordinal-04`` and ``ordinal-01`` to ``ordinal-10``. See
+  `Ordinal Numbers`_. TODO: this should be discussed under formatting > ordinal
+  numbers (added long-ordinal' value option of cs:number), see
+  http://sourceforge.net/apps/trac/xbiblio/changeset/1120
+ 
 Anything below this point is not meant for inclusion in the final version
 -------------------------------------------------------------------------
 
