@@ -1110,19 +1110,43 @@ alphabetically, while only taking the first author into account:
 Back-References in Note Styles
 ------------------------------
 
-XXXXX
+CSL 1.0 adds two features related to back-referencing in note styles. First, the
+`position` conditional supports a new value, "near-note". It tests true when an
+item has been previously cited, and the distance between the current and most
+recent use (measured in number of footnotes or endnotes) does not exceed the
+value of the new `near-note-distance` attribute. This attribute, which has a
+default value of 5, may be set on `cs:citation`. An example:
 
+.. sourcecode:: xml
 
--  near-note position and near-note-distance option
--  added first-reference-note-number variable (refers to the
-   note-number of the note that is the first to mention the current
-   reference)
+    <style class="note">
+      <citation near-note-distance="3">
+        <layout>
+          <choose>
+            <if position="near-note">
+              ...
+            </if>
+            <else>
+              ...
+            </else>
+          </choose>
+        </layout>
+      </citation>
+    </style>
+
+N.B. The value of "near-note" is *always* false for references that are not in a
+footnote/endnote.
+
+The second feature is the new `first-reference-note-number` variable. When an
+item has been previously cited, this variable holds the number of the first note
+to cite the item.
 
 Variables
 ---------
 
 CSL 1.0 introduces a number of new variables:
 
+* first-reference-note-number. See `Back-References in Note Styles`_
 * jurisdiction. The geographic unit for which a resource (such as legislation)
   is relevant.
 * number-of-pages. See `Pages`_.
