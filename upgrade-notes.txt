@@ -465,6 +465,91 @@ these attributes are set:
       </citation>
     </style>
 
+Dates
+~~~~~
+
+AD and BC
+^^^^^^^^^
+
+CSL 1.0 includes two new terms, ``ad`` and ``bc`` (Anno Domini and Before
+Christ). These terms are automatically appended to years: ``bc`` is added to
+negative years (e.g. 2500BC), while ``ad`` is added to positive years of less
+than four digits (79AD).
+
+Date Ranges
+^^^^^^^^^^^
+
+CSL 1.0 adds support for date ranges. By default, date ranges are delimited by
+an en-dash (e.g. May–July 2008). Custom delimiters can be set on the
+``cs:date-part`` elements with the new ``range-delimiter`` attribute. The
+attribute value set on the largest date-part ("day", "month" or "year") that
+differs between the two dates of the date range will then be used instead of the
+en-dash. For example,
+
+.. sourcecode:: xml
+    
+    <style>
+      <citation>
+        <layout>
+          <date variable="issued">
+            <date-part name="month" suffix=" "/>
+            <date-part name="year" range-delimiter="/"/>
+          </date>
+        </layout>
+      </citation>
+    </style>
+
+would result in "May–July 2008" and "May 2008/June 2009".
+
+Seasons
+^^^^^^^
+
+CSL 1.0 includes four new season terms, ``season-01`` to ``season-04``
+(respectively Spring, Summer, Autumn and Winter). If a date includes a season
+instead of a month, the season term will substituted the month date-part. E.g.,
+
+.. sourcecode:: xml
+    
+    <style>
+      <citation>
+        <layout>
+          <date variable="issued">
+            <date-part name="month" suffix=" "/>
+            <date-part name="year"/>
+          </date>
+        </layout>
+      </citation>
+    </style>
+
+would result in "May 2008" and "Winter 2009".
+
+Uncertain Dates
+^^^^^^^^^^^^^^^
+
+Two new features of CSL 1.0 allow for special formatting of uncertain dates.
+First, CSL 1.0 introduces the ``is-uncertain-date`` conditional. This
+conditional tests true when a date is flagged as uncertain. The second addition
+is the new ``circa`` term. For example,
+
+.. sourcecode:: xml
+
+    <style>
+      <citation>
+        <layout delimiter="; ">
+          <choose>
+            <if is-uncertain-date="issued">
+              <text value="circa" form="short" suffix=" "/>
+            </if>
+          </choose>
+          <date variable="issued">
+            <date-part name="year"/>
+          </date>
+        </layout>
+      </citation>
+    </style>
+
+would result in "2005" (certain date) and "ca. 2003" (uncertain date).
+
 Names
 ~~~~~
 
@@ -751,11 +836,6 @@ Rich text markup can be applied with a small set of HTML(-like) tags:
 E.g. if a Zotero item has the title "Ca<sup>2+</sup> levels in <i>Homo
 sapiens</i>", this will automatically be converted to "Ca\ :sup:`2+`\ levels in
 *Homo sapiens*" when a citation is rendered.
-
-Seasons
-~~~~~~~
-
-Describe the new season terms, their usage with cs:date (TODO)
 
 second-field-align
 ~~~~~~~~~~~~~~~~~~
@@ -1183,7 +1263,7 @@ Things not discussed
 -  is-date is no more (maybe we won't have to mention this, as none
    of the current styles seem to use it)
 
-Post 1.0rc1 changesets (rc1 was tagged 08/15/09), until November 24th:
+Changesets between 1.0rc1 and rc2  (rc1 was tagged on 08/15/09, rc2 on 01/16/10):
 
 Worked into upgrade notes:
 
@@ -1239,6 +1319,28 @@ Allow et-al-* attributes on cs:name
 
 http://bitbucket.org/bdarcus/csl-schema/changeset/26c675c1c603/
 Added required version attribute (with value "1.0") to cs:locale when occurring in standalone locale files 
+(csl.rnc)
+
+http://bitbucket.org/bdarcus/csl-schema/changeset/2aed27e6c033/
+Renamed "references" to "reference", removed "reference item", added season-terms ("season-01", etc), added "ad"/"bc", put some existing terms in alphabetical order
+(csl-terms.rnc)
+
+http://bitbucket.org/bdarcus/csl-schema/changeset/8e7b5cfd7414/
+Addition of date-range-delimiter attribute
+http://bitbucket.org/bdarcus/csl-schema/changeset/2e6186e6a169/
+Renaming range-delimiter attribute to date-range-delimiter
+http://bitbucket.org/bdarcus/csl-schema/changeset/cfbc646ff914/
+Reverting previous change (which was renaming range-delimiter to date-range-delimiter)
+(csl.rnc)
+
+http://bitbucket.org/bdarcus/csl-schema/changeset/fa42453d2dfa/
+Adding "circa"-term
+(csl-terms.rnc)
+
+http://bitbucket.org/bdarcus/csl-schema/changeset/7cb303fca42b/
+Adding uncertain-date conditional
+http://bitbucket.org/bdarcus/csl-schema/changeset/bfe2a5cd62d8/
+Renaming uncertain-date to is-uncertain-date for consistency with is-numeric
 (csl.rnc)
 
 No action required:
@@ -1305,15 +1407,19 @@ Correct regular expression pattern for ISSN(-L)s, which can have a roman "X" or 
 
 Still to do:
 
-http://sourceforge.net/apps/trac/xbiblio/changeset/1168 Require
-xml:lang on cs:locale in CSL styles.
-(this is related to an open issue on the BitBucket tracker:
-http://bitbucket.org/bdarcus/csl-schema/issue/11/allow-locale-element-in-style-with-no-xml-lang
-)
+http://sourceforge.net/apps/trac/xbiblio/changeset/1168
+Require xml:lang on cs:locale in CSL styles.
+http://bitbucket.org/bdarcus/csl-schema/changeset/b4e2c45b794d/
+Allowing styles to use cs:locale without the xml:lang attribute
+(csl.rnc)
 
-http://bitbucket.org/bdarcus/csl-schema/changeset/2aed27e6c033/
-Renamed "references" to "reference", removed "reference item", added season-terms ("season-01", etc), added "ad"/"bc", put some existing terms in alphabetical order
-(csl-terms.rnc)
+http://bitbucket.org/bdarcus/csl-schema/changeset/acd80d84a2b2/
+Removed "publisher" from cs-names, moved "original-publisher" from cs-names to cs-variables and added "original-publisher-place" variable to cs-variables.
+(csl-variables.rnc)
+
+http://bitbucket.org/bdarcus/csl-schema/changeset/2f41485c1210/
+Add a new name variable, editorial-director
+(csl-variables.rnc)
 
 Links - Revision histories of schema files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
