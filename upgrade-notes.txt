@@ -271,20 +271,32 @@ of supplying localized terms (translations are made via `BabelZilla
 <http://www.babelzilla.org/>`_). With CSL 1.0, these locale files also contain
 localized style options and localized date formats. Because of this, some
 changes have been made to the XML format of these files: ``cs:locale`` has
-replaced ``terms`` as the root element, both the ``xml:lang`` and ``xmlns``
-attributes are applied to the ``cs:locales`` element, and new elements have been
-introduced to localize dates and options (``cs:date``, ``cs:date-part`` and
-``cs:style-options``). As before, any content of the "locales-xx-XX.xml" files
-can be overridden in a CSL style (using the ``xml:lang`` attribute on
-``cs:locale`` to select the correct locale to override), e.g.:
+replaced ``terms`` as the root element, the ``xml:lang`` and ``xmlns``
+attributes are now applied to the ``cs:locales`` element, and several new
+elements have been introduced for the localization of dates and options
+(``cs:date``, ``cs:date-part`` and ``cs:style-options``).
+
+As before, it is possible to use the ``cs:locale`` element in styles to override
+any content of the "locales-xx-XX.xml" files. The ``cs:locale`` element can be
+used with or without the ``xml:lang`` attribute. If ``xml:lang`` is not set, the
+contents of the ``cs:locale`` element will be used for all locales. If
+``xml:lang`` is set to a locale code, the content of the ``cs:locale`` element
+will override the content of the specified locale. N.B. a ``cs:locale`` element
+with the ``xml:lang`` attribute takes priority over a ``cs:locale`` element
+without the attribute. For example,
 
 .. sourcecode:: xml
 
     <style>
+      <locale>
+        <terms>
+          <term name="et-al">et alii</term>
+        </terms>
+      </locale>
       <locale xml:lang="en">
         <style-options punctuation-in-quote="true" />
         <terms>
-          <term name="et-al">et alii</term>
+          <term name="et-al">and others</term>
         </terms>
         <date form="text">
           <date-part name="month" suffix=" " form="short"/>
@@ -293,6 +305,9 @@ can be overridden in a CSL style (using the ``xml:lang`` attribute on
         </date>
       </locale>
     </style>
+
+with regard to the "et-al" term, this will result in the use of "and others" for
+the English locales, and of "et alii" for all other locales.
 
 Localized Dates
 ~~~~~~~~~~~~~~~
@@ -564,6 +579,30 @@ to exclude it for lists of only two names ("Doe and Smith"), you would have to
 leave out the attribute. Now, in CSL 1.0, it is also possible to explicitly set
 the last behavior by using the value "contextual".
 
+Editorial Director
+^^^^^^^^^^^^^^^^^^
+
+CSL 1.0 includes a new name variable, ``editorial-director``. This addition is
+mostly specific to French, where the "Directeur de la publication" role is
+common.
+
+Editor/Translator Name Collapsing
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If a ``cs:names`` element has its ``name`` attribute set to "editor translator"
+(or "translator editor"), CSL 1.0 collapses both name lists when their contents
+is identical. If a label is specified, and collapsing occurs, the newly added
+``editortranslator`` term is used. For example,
+
+.. sourcecode:: xml
+
+      <names variable="editor translator">
+        <name />
+        <label form="short" prefix=" (" suffix=")" />
+      </names>
+
+could result in "John Doe (ed. & trans.)".
+
 Et al.
 ^^^^^^
 
@@ -645,23 +684,6 @@ control hyphenation of compound given names (e.g. "Jean-Luc Picard"). When set
 to "true" (the default), a hyphen is added when the given name is initialized
 ("J.-L. Picard"). With "false" the hyphen is left out ("J.L. Picard").
 
-Name Collapsing
-^^^^^^^^^^^^^^^
-
-If a ``cs:names`` element has its ``name`` attribute set to "editor translator"
-(or "translator editor"), CSL 1.0 collapses both name lists when their contents
-is identical. If a label is specified, and collapsing occurs, the newly added
-``editortranslator`` term is used. For example,
-
-.. sourcecode:: xml
-
-      <names variable="editor translator">
-        <name />
-        <label form="short" prefix=" (" suffix=")" />
-      </names>
-
-could result in "John Doe (ed. & trans.)".
-
 Name Particles
 ^^^^^^^^^^^^^^
 
@@ -734,9 +756,16 @@ with the terms ``long-ordinal-01`` to ``long-ordinal-10`` ("first", "second",
 ..., "tenth"). Long ordinals can be selected by using ``cs:number`` and setting
 the ``form`` attribute to "long-ordinal".
 
-TODO: questions: are ordinal numbers like 12th supported? When ``form`` is set
-to ``long-ordinal``, and the number is "12", is the number shown as a (short)
-ordinal ("12th")?
+Original Publisher
+~~~~~~~~~~~~~~~~~~
+
+Sometimes (older) books are republished by a different publisher. To indicate
+the original publisher, and the location of the original publisher, CSL 1.0 adds
+two new variables, ``original-publisher`` and ``original-publisher-place``. Note
+that CSL 0.8 already included the name variable ``original-publisher``, which
+could only be used with ``cs:names``. The variables ``original-publisher`` and
+``original-publisher-place`` in CSL 1.0 are 'normal' variables, and can be used
+with ``cs:text``.
 
 Pages
 ~~~~~
@@ -1238,19 +1267,16 @@ Terms
 
 CSL 1.0 also introduces a number of new terms:
 
-* ``ad`` and ``bc`` (Anno Domini and Before Christ). These terms are implicitly
-  appended to years: ``bc`` to negative years, ``ad`` to positive years of less
-  than four digits.
+* ``ad`` and ``bc``. See `AD and BC`_.
 * ``author``. This term can be applied as a label to author names. For most
   styles, this term will consist of an empty string ("").
-* ``editortranslator``. See `Name Collapsing`_.
+* ``editortranslator``. See `Editor/Translator Name Collapsing`_.
+* ``ordinal-01`` to ``ordinal-04`` and ``ordinal-01`` to ``ordinal-10``. See
+  `Ordinal Numbers`_.
+* ``original-publisher`` and ``original-publisher-place``. See `Original Publisher`_.
 * ``reference``. This term replace the ``references`` term from CSL 0.8.
 * ``season-01`` to ``season-04``. These terms map to respectively spring,
   summer, fall and winter. See `Seasons`_.
-* ``ordinal-01`` to ``ordinal-04`` and ``ordinal-01`` to ``ordinal-10``. See
-  `Ordinal Numbers`_. TODO: this should be discussed under formatting > ordinal
-  numbers (added long-ordinal' value option of cs:number), see
-  http://sourceforge.net/apps/trac/xbiblio/changeset/1120
  
 Anything below this point is not meant for inclusion in the final version
 -------------------------------------------------------------------------
@@ -1343,6 +1369,20 @@ http://bitbucket.org/bdarcus/csl-schema/changeset/bfe2a5cd62d8/
 Renaming uncertain-date to is-uncertain-date for consistency with is-numeric
 (csl.rnc)
 
+http://sourceforge.net/apps/trac/xbiblio/changeset/1168
+Require xml:lang on cs:locale in CSL styles.
+http://bitbucket.org/bdarcus/csl-schema/changeset/b4e2c45b794d/
+Allowing styles to use cs:locale without the xml:lang attribute
+(csl.rnc)
+
+http://bitbucket.org/bdarcus/csl-schema/changeset/acd80d84a2b2/
+Removed "publisher" from cs-names, moved "original-publisher" from cs-names to cs-variables and added "original-publisher-place" variable to cs-variables.
+(csl-variables.rnc)
+
+http://bitbucket.org/bdarcus/csl-schema/changeset/2f41485c1210/
+Add a new name variable, editorial-director
+(csl-variables.rnc)
+
 No action required:
 
 http://sourceforge.net/apps/trac/xbiblio/changeset/1157 Removing
@@ -1406,20 +1446,6 @@ Correct regular expression pattern for ISSN(-L)s, which can have a roman "X" or 
 (csl.rnc)
 
 Still to do:
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1168
-Require xml:lang on cs:locale in CSL styles.
-http://bitbucket.org/bdarcus/csl-schema/changeset/b4e2c45b794d/
-Allowing styles to use cs:locale without the xml:lang attribute
-(csl.rnc)
-
-http://bitbucket.org/bdarcus/csl-schema/changeset/acd80d84a2b2/
-Removed "publisher" from cs-names, moved "original-publisher" from cs-names to cs-variables and added "original-publisher-place" variable to cs-variables.
-(csl-variables.rnc)
-
-http://bitbucket.org/bdarcus/csl-schema/changeset/2f41485c1210/
-Add a new name variable, editorial-director
-(csl-variables.rnc)
 
 Links - Revision histories of schema files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
