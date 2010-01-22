@@ -53,7 +53,7 @@ This document is meant as a complete and accurate specification of
 CSL 1.0. Additional documentation, such as the CSL schema, CSL
 styles, and information on how to add support for CSL to
 applications, can be found at the official home of CSL,
-`www.citationstyles.org <http://www.citationstyles.org>`_.
+`citationstyles.org <http://citationstyles.org>`_.
 
 CSL Styles - Basic Structure
 ----------------------------
@@ -74,7 +74,7 @@ The CSL namespace
 XML Declaration
 ~~~~~~~~~~~~~~~
 
-It is highly recommended to initalize each CSL style with an XML
+It is highly recommended to initialize each CSL style with an XML
 declaration, specifying the version of XML used as well as the
 character encoding. In most cases, the declaration will be:
 
@@ -88,7 +88,7 @@ The Root Element - ``cs:style``
 The root element of CSL styles is ``cs:style``. This element
 carries the following arguments:
 
-``xmlns``
+``xmlns`` (optional)
     The namespace declaration that binds the elements in the style to
     the given namespace URI. CSL elements in the style don't need
     individual namespace declarations if this attribute is set to
@@ -103,7 +103,7 @@ carries the following arguments:
     in-text citations ("in-text").
 
 ``default-locale`` (optional)
-    Implementations of CSL can automatically localize styles based on
+    CSL processors can automatically localize style output based on
     the user's locale. This can be prevented by setting the value of
     ``default-locale`` to a
     `locale code <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_,
@@ -111,14 +111,14 @@ carries the following arguments:
     is generally desired for journal-specific styles.
 
 ``page-range-format`` (optional)
-    This global formatting option sets the abbreviation format of page
+    This global formatting option sets the format of page
     ranges. A full description of this option is given in the
-    `Global Options <#global-options>`_ section.
+    `Page Ranges`_ section.
 
 ``demote-non-dropping-particle`` (optional)
     This global formatting option determines how name particles are
     handled. A full description of this option is given in the
-    `Global Options <#global-options>`_ section.
+    `Name Particles`_ section.
 
 
 An example of a style preamble:
@@ -331,11 +331,10 @@ author-date descriptors [Doe 1999]) or notes. The required
 data should be included in the citations (see the chapter on the
 `Layout element <#layout>`_). Additional citation-specific
 formatting options may be set as attributes on ``cs:citation`` (see
-the `Citation-specific Options <#citation-specific-options>`_
-section). Finally, the optional ``cs:sort`` element, which should
+the `Citation-specific Options`_ section). Finally, the optional ``cs:sort`` element, which should
 precede the ``cs:layout`` element, specifies how citations
 consisting of multiple references should be sorted (see the chapter
-on `Sorting <#sorting>`_. Thus, the basic structure of the
+on `Sorting`_. Thus, the basic structure of the
 ``cs:citation`` element is:
 
 .. sourcecode:: xml
@@ -367,8 +366,7 @@ should be formatted in the bibliography, the optional ``cs:sort``
 element specifies the sorting order of all the references in the
 bibliography, and bibliography-specific formatting options may be
 set as attributes on ``cs:bibliography`` (see the
-`Bibliography-specific Options <#bibliography-specific-options>`_
-section).
+`Bibliography-specific Options`_ section).
 
 .. sourcecode:: xml
 
@@ -396,7 +394,7 @@ macro calls.
 By convention the (optional) ``cs:macro`` elements are included
 directly before the ``cs:citation`` element. Macros are identified
 by the value of the (required) ``name`` attribute, and contain one
-or more `rendering elements <#rendering-elements>`_. The following
+or more `rendering elements`_. The following
 example macro displays the "title" variable, and applies italics
 when the resource type is "book":
 
@@ -464,7 +462,7 @@ namespace declaration (which is usually already set on
 styles, these elements are all optional. It is sufficient to
 include only those elements for which overriding localization data
 is provided. For further details on ``cs:locale``, see the
-paragraph on `locale files <#locale-files---basic-structure>`_.
+paragraph `Locale Files - Basic Structure`_.
 
 An example of ``cs:locale`` used in a CSL style:
 
@@ -511,13 +509,13 @@ CSL ships with "locales-xx-XX.xml" files (the "xx-XX" is the locale
 code, e.g. "en-US" for US English) that contain preset localization
 data of terms, dates and formatting options. The collection of
 available locale files can be found
-`here <http://xbiblio.svn.sourceforge.net/viewvc/xbiblio/csl/locales>`_.
+`here <http://bitbucket.org/bdarcus/csl-locales/>`_.
 For details on in-style overriding of localization data, see the
-`Locale <#locale>`_ section.
+`Locale`_ section.
 
 Each "locales-xx-XX.xml" file contains the localization data for a
 single locale. Like CSL styles, these files are written in XML, and
-contain an `XML declaration <#xml-declaration>`_. The ``cs:locale``
+contain an `XML declaration`_. The ``cs:locale``
 root element requires the ``xml:lang`` attribute to specify the
 locale of the data, and typically carries a ``xmlns`` namespace
 declaration. There are three (required) child elements,
@@ -575,10 +573,10 @@ the ``form`` attribute on ``cs:term``). The different forms are:
 -  "symbol" - e.g. "§" for the term "section"
 
 Examples of how terms are defined have been given above in
-`Locale Files - Basic Structure <#locale-files---basic-structure>`_.
+`Locale Files - Basic Structure`_.
 
 The complete list of supported terms can be found in
-`appendix III <#appendix-iii---terms>`_.
+`Appendix III - Terms`_.
 
 TODO: explain role of cs-terms.extension (in csl-terms.rnc).
 
@@ -594,10 +592,10 @@ by the value of the ``form`` attribute on ``cs:date``: "numeric"
 "December 15, 2005"). The date format is derived from the order of
 the ``cs:date-part`` elements (with ``name``-values of ``day``,
 ``month``, ``year`` and ``other``), which are child elements of
-``cs:date`` and from any `formatting attributes <#formatting>`_ on
+``cs:date`` and from any `formatting`_ attributes on
 the ``cs:date`` and ``cs:date-part`` elements. In addition, a
-`delimiter <#delimiter>`_ may be set on ``cs:date`` (delimiting the
-``cs:date-part`` elements), and `affixes <#affixes>`_ may be
+`delimiter`_ may be set on ``cs:date`` (delimiting the
+``cs:date-part`` elements), and `affixes`_ may be
 applied to the ``cs:date-part`` elements.
 
 N.B. The reason affixes are not allowed on ``cs:date`` when used as
@@ -630,15 +628,15 @@ decorated.
 Layout
 ~~~~~~
 
-As discussed in the `citation <#citation>`_ and
-`bibliography <#bibliography>`_ sections, ``cs:layout`` is a
+As discussed in the `citation`_ and
+`bibliography`_ sections, ``cs:layout`` is a
 required child element of both ``cs:citation`` and
 ``cs:bibliography``. All the rendering elements (with the exception
 of ``cs:layout`` itself) that should appear in the citations and
 bibliography should be nested inside the ``cs:layout`` element. The
-``cs:layout`` element accepts both `affixes <#affixes>`_ and
-`formatting <#formatting>`_ attributes. When used in the
-``cs:citation`` element, a `delimiter <#delimiter>`_ can be set to
+``cs:layout`` element accepts both `affixes`_ and
+`formatting`_ attributes. When used in the
+``cs:citation`` element, a `delimiter`_ can be set to
 separate multiple items in a single citation. For example,
 
 .. sourcecode:: xml
@@ -675,7 +673,7 @@ italics). The different sources are:
    of the desired ``cs:macro`` element.
 -  ``term`` - the text of a (localized) term. The complete list of
    supported terms can be found in
-   `appendix III <#appendix-iii---terms>`_. The ``plural`` attribute
+   `Appendix III - Terms`_. The ``plural`` attribute
    can be set for ``cs:text`` to choose either the singular (value
    "false", the default) or plural variant (value "true") of a term.
    In addition, the ``form`` attribute can be set for those terms for
@@ -690,15 +688,14 @@ italics). The different sources are:
 -  ``value`` - used to output verbatim text, which is set via the
    value of ``value`` (e.g. value="some text")
 
-In all cases the `affix <#affixes>`_, `formatting <#formatting>`_,
-`text-case <#text-case>`_ and `strip-periods <#strip-periods>`_
-attributes may be applied to ``cs:text``.
+In all cases the attributes for `affixes`_, `formatting`_,
+`text-case`_ and `strip-periods`_ may be applied to ``cs:text``.
 
 Date
 ~~~~
 
-The ``cs:date`` element is used to output the dates of a
-`date variable <#date-variables>`_ (set with the ``variable``
+The ``cs:date`` element is used to output the dates of one or more
+`date variables`_ (set with the ``variable``
 attribute), in either a localized or a non-localized format.
 
 To use a localized date format, use ``cs:date`` with the ``form``
@@ -714,29 +711,29 @@ which ``cs:date-part`` elements are shown. The possible values:
 -  "year-month" - displays year and month
 -  "year" - displays year only
 
-Secondly, any of the ```cs:date-part`` <#date-part>`_ elements may
-be included as child elements of ``cs:date``. The included elements
+Secondly, any of the ``cs:date-part`` elements may
+be included as child elements of ``cs:date`` (See `Date-part`_). The included elements
 do not affect which, and in which order, the ``cs:date-part``
 elements are included in the rendered date. Instead, overriding
 values can be set for any of the attributes of the individual
 ``cs:date-part`` elements, with the exception of
-`affixes <#affixes>`_. For example, the ``form`` attribute of the
+`affixes`_. For example, the ``form`` attribute of the
 month-``cs:date-part`` element can be set to "short" to get
 abbreviated month names in all locales.
 
 For non-localized date formats, the ``form`` attribute on
 ``cs:date`` is not set (the ``date-parts`` attribute is unavailable
 as well). Instead, the date format is entirely controlled by
-``cs:date`` and its (one or more) ```cs:date-part`` <#date-part>`_
+``cs:date`` and its (one or more) ``cs:date-part``
 children. In contrast to localized dates, only the included
 ``cs:date-part`` elements will be rendered, in the order in which
 they are specified. The ``cs:date-part`` elements may carry any of
-the `affix <#affixes>`_ and `formatting <#formatting>`_ attributes,
-while ``cs:date`` may carry a `delimiter <#delimiter>`_ (delimiting
+the attributes for `affixes`_ and `formatting`_ attributes,
+while ``cs:date`` may carry a `delimiter`_ (delimiting
 the various ``cs:date-part`` elements).
 
-For both localized and non-localized dates, `affixes <#affixes>`_
-and `formatting attributes <#formatting>`_ may be specified for the
+For both localized and non-localized dates, `affixes`_
+and `formatting`_ attributes may be specified for the
 ``cs:date`` element.
 
 Date-part
@@ -757,12 +754,12 @@ attribute, with possible values:
     -  "ordinal" - e.g. "1st"
 
 ``month``
-    For ``month`` the ```strip-periods`` <#strip-periods>`_ and
+    For ``month`` the `strip-periods`_ and
     ``form`` attributes may be set on ``cs:date-part``. The abbreviated
     ("short"-form) month names are
-    `localized terms <#localized-terms>`_, which by default include
+    `localized terms`_, which by default include
     periods. These periods can be stripped by setting the value of
-    ```strip-periods`` <#strip-periods>`_ to "true" ("false" is the
+    `strip-periods`_ to "true" ("false" is the
     default). The possible values of ``form``:
 
     
@@ -781,9 +778,9 @@ attribute, with possible values:
 
 
 All ``cs:date-part`` elements may carry any of the
-`formatting <#formatting>`_ attributes, the
-`text-case <#text-case>`_ attribute, and, for non-localized dates,
-also `affixes <#affixes>`_.
+`formatting`_ attributes, the
+`text-case`_ attribute, and, for non-localized dates,
+also `affixes`_.
 
 An example (which would yield dates like "(May 4, 2004)"):
 
@@ -821,21 +818,20 @@ formatting via the ``form`` attribute, with values:
 When variables are displayed with ``cs:number``, only the numeric
 content in used in the rendering (e.g. "12" when the entire string
 is "12th edition"). Fields can be tested for non-numeric content
-with the ``is-numeric`` `conditional <#conditionals>`_ (returning
-"false" for e.g. "12th edition", and "true" for "35").
+with the ``is-numeric`` (see `Conditionals`_), e.g. "12th edition"
+would test false while "35" would test true.
 
 (TODO: what happens if the field contents is "Volume 3, part 2".
 Will only the "3" be extracted? What about "Volume 2.5"?)
 
-The ``cs:number`` element may carry any of the `affix <#affixes>`_
-and `formatting <#formatting>`_ attributes, as well as the
-`text-case <#text-case>`_ attribute.
+The ``cs:number`` element may carry any of the attributes for `affixes`_
+and `formatting`_, as well as the `text-case`_ attribute.
 
 Names
 ~~~~~
 
 The ``cs:names`` element can be used to display the contents of one
-or more `name variables <#name-variables>`_, each of which can
+or more `name variables`_, each of which can
 contain multiple contributors (e.g. the "author" variable will
 contain all the cited item's authors). The variables to be
 displayed are set with the ``variable`` attribute. If multiple
@@ -848,7 +844,7 @@ name variables is rendered. In addition, the
 "editor-translator"-term is used if the ``cs:names`` element
 contains a ``cs:label`` element, replacing the default "editor" and
 "translator"-terms (e.g., this might result in "J. Doe, et al.
-(eds. & trans.)". Furthermore, the ```delimiter`` <#delimiter>`_
+(eds. & trans.)". Furthermore, the `delimiter`_
 attribute may be set on ``cs:names`` to delimite the names of the
 different name variables (e.g. the semicolon in "Doe & Stevens
 (editors); Johnson et al. (translators)").
@@ -863,8 +859,8 @@ different name variables (e.g. the semicolon in "Doe & Stevens
 There are four child elements associated with the ``cs:names``
 element: ``cs:name``, ``cs:et-al``, ``cs:substitute`` and
 ``cs:label`` (all discussed below). In addition, the ``cs:names``
-element may carry any of the `affix <#affixes>`_ and
-`formatting <#formatting>`_ attributes.
+element may carry any of the attributes for `affixes`_ and
+`formatting`_.
 
 Name
 ^^^^
@@ -937,7 +933,7 @@ name-parts. The exact role of each of these name-parts is:
     returns the total number of names that would be otherwise displayed
     by the use of the ``cs:names`` element (taking into account the
     effects of et-al abbreviation), and may be used for advanced
-    `sorting <#sorting>`_.
+    `sorting`_.
 
 ``name-as-sort-order``
     Specifies that the name should be displayed with the given name
@@ -982,8 +978,7 @@ dependent on many factors: the attributes ``form``,
 value of the global ``demote-particles``-option, and the alphabet
 of the individual name. The different orders are:
 
-Display
-       
+**Display**
 
 ``form`` set to "long", latin/Cyrillic name
 
@@ -1029,13 +1024,11 @@ name
 4) dropping-particle
 5) non-dropping-particle
 
-Sorting
-       
+**Sorting**
 
 N.B. Sort keys are given in descending order of importance.
 
 ``demote-particles`` set to "never"
-
 
 1) non-dropping-particle + family
 2) dropping-particle
@@ -1043,7 +1036,6 @@ N.B. Sort keys are given in descending order of importance.
 4) suffix
 
 ``demote-particles`` set to "sort-only" or "display-and-sort"
-
 
 1) family
 2) dropping-particle + non-dropping-particle
@@ -1483,6 +1475,9 @@ Reference Grouping
 Global Options
 ^^^^^^^^^^^^^^
 
+Page Ranges
+'''''''''''
+
 ``page-range-format``
     The value of this attribute determines how page ranges are
     formatted. Available values: "expanded" (e.g. "321-328"), "minimal"
@@ -1491,7 +1486,7 @@ Global Options
     elaboration on the page abbreviation rules). If the attribute is
     not specified, the content of the page-field is left unchanged.
 
-Name particles
+Name Particles
 ''''''''''''''
 
 Many Western names consist not only of a given and a family name,
@@ -2163,5 +2158,3 @@ the ``page-range-format`` attribute on ``cs:style`` are:
 +------------------------+--------------------------+----------------+
 
 Table: **Chicago Manual of Style page range abbreviation rules**
-
-
