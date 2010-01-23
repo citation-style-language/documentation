@@ -876,8 +876,7 @@ used on ``cs:name`` are:
     second last and the last name of the names in the name variable (if
     multiple name variable are specified in ``cs:names``, the delimiter
     is applied for each variable). The value of the attribute may be
-    either "text", which selects the localized "and"
-    `term <#appendix-iii---terms>`_, or "symbol", which selects the
+    either "text", which selects the "and" term, or "symbol", which selects the
     ampersand.
 
 ``delimiter-precedes-last``
@@ -966,8 +965,8 @@ name-parts. The exact role of each of these name-parts is:
     becomes "B-M" or "BM" [this toggle might require a new option])).
 
 
-The ``cs:name`` element may also carry any of the
-`affix <#affixes>`_ and `formatting <#formatting>`_ attributes.
+The ``cs:name`` element may also carry any of the attributes for
+`affixes`_ and `formatting`_.
 
 Name-part order
 '''''''''''''''
@@ -1051,8 +1050,8 @@ Name-part formatting
 
 The ``cs:name`` element may also include one or more
 ``cs:name-part`` child elements. These child elements accept any of
-the `formatting <#formatting>`_ attributes as well as the
-`text-case <#text-case>`_ attribute, which allows for separate
+the `formatting`_ attributes as well as the
+`text-case`_ attribute, which allows for separate
 formatting of the different name parts (e.g. "Jane DOE"). The
 name-part for which formatting instructions are specified is set
 with the required ``name`` attribute on ``cs:name-part``, with
@@ -1075,12 +1074,12 @@ Et-al
 
 The ``cs:et-al`` element can be used to customize the "et al."-type
 name list abbreviation (note that this abbreviation is controlled
-via the et-al `options <#options>`_). First, the 'term' attribute
+via the et-al `options`_). First, the 'term' attribute
 of the element can be set to either "et-al" (default) or "and
-others" to use either `term <#appendix-iii---terms>`_, so that
+others" to use either term, so that
 different et-al terms can be used in citations and the
-bibliography. Secondly, any of the `affix <#affixes>`_ and
-`formatting <#formatting>`_ attributes can be applied to
+bibliography. Secondly, any of the attributes for `affixes`_ and
+`formatting`_ attributes can be applied to
 ``cs:et-al``, e.g. to italicize the "et-al" term.
 
 An example:
@@ -1096,11 +1095,11 @@ Substitute
 ^^^^^^^^^^
 
 The ``cs:substitute`` element can be used to specify one of more
-substitutions in case the `name variable(s) <#name-variables>`_
+substitutions in case the `name variables`_
 specified in the parent ``cs:names`` element is/are empty. The
 substitutions are specified as child elements of ``cs:substitute``,
 and can consist of any of the standard
-`rendering elements <#rendering-elements>`_ (with the exception of
+`rendering elements`_ (with the exception of
 ``cs:layout``), or of a short-hand version of ``cs:names`` without
 any child elements (in the latter case formatting instructions are
 inherited from the ``cs:name`` and ``cs:et-al`` elements in the
@@ -1136,7 +1135,7 @@ Label in ``cs:names``
 The ``cs:label`` element, used to output text terms whose
 pluralization depends on the contents of another variable (e.g.
 "(editors)" in "Doe and Smith (editors)"), is discussed in detail
-in the `label <#label>`_ section. When used within ``cs:names``,
+in the `label`_ section. When used within ``cs:names``,
 the ``variable`` attribute should be omitted, as this is inherited
 from the parent ``cs:names`` element.
 
@@ -1165,9 +1164,9 @@ variable(s) from the ``cs:names`` element. The value of the
 respectively), and uses the variable content to determine the
 pluralization of the text term.
 
-The ``cs:label`` element may carry any of the `affix <#affixes>`_
-and `formatting <#formatting>`_ attributes, as well as the
-`text-case <#text-case>`_ attribute. In addition, the following
+The ``cs:label`` element may carry any of the attributes for `affixes`_
+and `formatting`_ attributes, as well as the
+`text-case`_ attribute. In addition, the following
 attributes are applicable for ``cs:label``:
 
 ``form`` (required)
@@ -1203,11 +1202,11 @@ Group
 ~~~~~
 
 The ``cs:group`` element must contain one or more
-`rendering elements <#rendering-elements>`_ (not ``cs:layout``). It
+`rendering elements`_ (not ``cs:layout``). It
 has multiple uses: ``cs:group`` can carry a
-`delimiter <#delimiter>`_, which is used to separate the enclosed
-elements. It can provide `affixes <#affixes>`_ for the entire group
-of elements, and may carry `formatting <#formatting>`_ attributes
+`delimiter`_, which is used to separate the enclosed
+elements. It can provide `affixes`_ for the entire group
+of elements, and may carry `formatting`_ attributes
 (any except for "text-case"), which are transmitted to the enclosed
 elements. In addition, ``cs:group`` acts as an conditional: if none
 of the enclosed elements reference a non-empty variable or macro,
@@ -1238,7 +1237,7 @@ on ``cs:bibliography``. Global options, affecting both citations
 and the bibliography, are set as attributes on ``cs:style``.
 Finally, options that have locale-specific values are specified in
 the "locales-xx-XX.xml" files. The default values can be overridden
-using ```cs:locale`` <#locale>`_.
+using ``cs:locale`` (see `Locale`_).
 
 Citation-specific Options
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1367,8 +1366,8 @@ Collapsing
     -  "citation-number": collapses numeric citation ranges (e.g. from
        "[1, 2, 3]" to "[1-3]"). Note that only increasing ranges are
        collapsed, e.g. "[3, 2, 1]" will not collapse, so that it is often
-       desirable to `sort <#sorting>`_ by the ``citation-number``
-       variable.
+       desirable to sort by the ``citation-number``
+       variable (see `Sorting`_).
     -  "year": collapses subsequent cites with the same author(s), e.g.
        from "(Doe 2000, Doe 2001)" to "(Doe 2000, 2001)"
     -  "year-suffix": collapses as "year", but also collapses identical
@@ -1405,7 +1404,7 @@ Positioning
 '''''''''''
 
 ``near-note-distance``
-    The "near-note" `position <#conditionals>`_ is true when the
+    The "near-note" position (see `Conditionals`_) is true when the
     distance (measured in number of footnotes or endnotes) between the
     current cite and the most recent preceding cite to the same source
     is no more than the value of ``near-note-distance``. If this
@@ -1481,9 +1480,8 @@ Page Ranges
 ``page-range-format``
     The value of this attribute determines how page ranges are
     formatted. Available values: "expanded" (e.g. "321-328"), "minimal"
-    ("321-8"), and "chicago" ("321-28", see
-    `appendix IV <#appendix-iv---page-abbreviation-rules>`_ for an
-    elaboration on the page abbreviation rules). If the attribute is
+    ("321-8"), and "chicago" ("321-28"). See also
+    `Appendix IV - Page Abbreviation Rules`_. If the attribute is
     not specified, the content of the page-field is left unchanged.
 
 Name Particles
@@ -1580,8 +1578,8 @@ set with the ``demote-non-dropping-particle`` option:
        example B, e.g. "Koning, W. de" appears under "K").
 
 
-Localized Options
-^^^^^^^^^^^^^^^^^
+Locale Options
+^^^^^^^^^^^^^^
 
 ``punctuation-in-quote``
     Determines whether punctuation (commas and periods) is placed
@@ -1599,9 +1597,8 @@ listed in the order cited.
 The ``cs:sort`` which must contain one or more ``cs:key`` child
 elements. The sort key, set as an attribute on ``cs:key``, can be a
 ``variable`` (with possible values of any of the
-`name variables <#name-variables>`_,
-`date variables <#date-variables>`_ or
-`source variables <#source-variables>`_ or a ``macro``. The
+`name variables`_, `date variables`_ or
+`source variables`_ or a ``macro``. The
 ``cs:key`` element may carry the ``sort`` attribute, with possible
 values of "ascending" (default) or "descending", to indicate the
 sort order. The ``names-min`` and ``names-use-first`` attributes
@@ -1636,7 +1633,7 @@ When ordinary variables are referenced in ``cs:key`` via the
 formatting decorations. Name, date and numeric variables are
 returned in a default format, as follows:
 
-**names:** `Name variables <#name-variables>`_ can be set directly
+**names:** `Name variables`_ can be set directly
 on ``cs:key`` using the ``variable`` attribute (e.g.
 ``<key variable="author"/>``). In this case, the name-list from the
 variable will be returned as a string in the "long" ``form`` of
@@ -1649,7 +1646,7 @@ the sort applies. One of the benefits of using macros is that
 substitution logic becomes available (e.g. in the ``editor``
 variable might substitutes for an empty ``author`` variable).
 
-**dates:** `Date variables <#date-variables>`_ are returned to
+**dates:** `Date variables`_ are returned to
 ``cs:key`` in the format YYYY-MM-DD, with zeros substituted for
 missing elements. If a style should sort by the complete date, it
 is often more reliable to set sort keys for dates with the
@@ -1689,7 +1686,7 @@ child element. In addition, any number of ``cs:else-if`` child
 elements may be included, as well as a closing ``cs:else`` element.
 The contents of the ``cs:if`` and ``cs:else-if`` elements may
 consist of any number of
-`rendering elements <#rendering-elements>`_ (with the exception of
+`rendering elements`_ (with the exception of
 ``cs:layout``). For ``cs:else``, at least one rendering element
 must be specified. An example of a conditional:
 
@@ -1713,14 +1710,14 @@ attributes, are:
 
 ``type``
     Tests true if the item is of the given
-    `type <#appendix-ii---types>`_.
+    type (`Appendix II - Types`_).
 
 ``variable``
-    Tests true if the `variable <#appendix-i---variables>`_ has a
+    Tests true if the variable (`Appendix I - Variables`_) has a
     non-empty value.
 
 ``is-numeric``
-    Tests true if the `variable <#appendix-i---variables>`_ contains
+    Tests true if the variable (`Appendix I - Variables`_) contains
     numeric data.
 
 ``locator``
@@ -1744,7 +1741,7 @@ attributes, are:
        measured in number of foot or endnotes) from a previous cite (TODO:
        does the previous cite has to be a full cite?) to the same item.
        The maximal distance is set with the
-       ```near-note-distance``-option <#positioning>`_. Cites that are not
+       ``near-note-distance``-option (see `positioning`_). Cites that are not
        located in a foot or endnote will never be in the "near-note"
        position.
 
@@ -1761,7 +1758,7 @@ position="subsequent" is also true.
     citations. If the citations remain identical after its addition, it
     will not be added. Note that disambiguation via the
     ``disambiguate`` conditional has the lowest priority of the
-    different `disambiguation <#disambiguation>`_ options. (TODO:
+    different `disambiguation`_ options. (TODO:
     should we make a note here that ``disambiguate`` should only be
     used within ``cs:citation``? What is the expected behavior when
     this attribute is test against "false"? Would the content only be
@@ -1834,8 +1831,8 @@ The following formatting attributes may be set on ``cs:date``,
     in quotes. The quote-symbols are defined as terms in the
     "locales-xx-XX.xml" files, and thus are localized. Whether
     punctuation appears inside or outside the quotes depends on the
-    setting of the global
-    ```punctuation-in-quote`` <#localized-options-1>`_ option.
+    setting of the global ``punctuation-in-quote`` option
+    (see `Locale Options`_)
 
 ``display``
     By default, the text of each individual cite is formatted as a
@@ -1879,7 +1876,7 @@ Delimiter
 The ``delimiter`` attribute can be used to specify a delimiting
 string for ``cs:date`` (delimiting the ``cs:date-part`` elements),
 ``cs:names`` (delimiting multiple
-`name variables <#name-variables>`_), ``cs:name`` (delimiting names
+`name variables`_), ``cs:name`` (delimiting names
 in name lists), and ``cs:group`` & ``cs:layout`` (both delimiting
 the direct child elements).
 
@@ -2133,6 +2130,7 @@ the ``page-range-format`` attribute on ``cs:style`` are:
     Page ranges are abbreviated according to the
     `Chicago Manual of Style-rules <http://www.aahn.org/guidelines.html>`_:
 
+Table: **Chicago Manual of Style page range abbreviation rules**
 
 +------------------------+--------------------------+----------------+
 | First number           | Second number            | Examples       |
@@ -2156,5 +2154,3 @@ the ``page-range-format`` attribute on ``cs:style`` are:
 |                        | digits change, use all   |                |
 |                        | digits                   |                |
 +------------------------+--------------------------+----------------+
-
-Table: **Chicago Manual of Style page range abbreviation rules**
