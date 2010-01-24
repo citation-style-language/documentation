@@ -13,7 +13,7 @@ __ `Table of Contents`_
 
 .. class:: info-date
 
-   23 November 2009
+   24 January 2010
 
 .. class:: contributors
 
@@ -32,28 +32,24 @@ __ `Table of Contents`_
 ========
 
 
-
 Introduction
 ------------
 
-The Citation Style Language (CSL) is an
-`XML <http://en.wikipedia.org/wiki/XML>`_ format for describing the
-formatting of in-text citations, notes and bibliographies. CSL
-offers:
-
+The Citation Style Language (CSL) is an `XML
+<http://en.wikipedia.org/wiki/XML>`_ format for describing the formatting of
+in-text citations, notes and bibliographies. CSL offers:
 
 -  An open format that may be used by any application
 -  The ability to write compact and robust styles
 -  Extensive support for style requirements
--  (Automated) localization of styles
+-  Automatic style localization
 -  Easy distribution and updating of styles
--  A large and fast growing library of freely available styles
+-  A fast growing library with thousands of freely available styles
 
-This document is meant as a complete and accurate specification of
-CSL 1.0. Additional documentation, such as the CSL schema, CSL
-styles, and information on how to add support for CSL to
-applications, can be found at the official home of CSL,
-`citationstyles.org <http://citationstyles.org>`_.
+This document is meant as a complete and accurate specification of CSL 1.0.
+Additional documentation, such as the CSL schema, CSL styles, and information on
+how to add CSL support to applications, can be found at the official home of
+CSL, `citationstyles.org <http://citationstyles.org>`_.
 
 CSL Styles - Basic Structure
 ----------------------------
@@ -61,11 +57,10 @@ CSL Styles - Basic Structure
 Namespacing
 ~~~~~~~~~~~
 
-All the elements in CSL are
-`namespaced <http://en.wikipedia.org/wiki/XML_Namespace>`_. The
-recommended prefix ``cs`` is attached to element names throughout
-this specification, but is usually omitted from CSL styles and
-locale files when the default namespace is declared in the root
+All elements in CSL are `namespaced
+<http://en.wikipedia.org/wiki/XML_Namespace>`_. The recommended prefix ``cs`` is
+attached to element names throughout this specification, but is usually omitted
+from CSL styles when the default namespace is declared in the root ``cs:style``
 element.
 
 The CSL namespace
@@ -74,9 +69,9 @@ The CSL namespace
 XML Declaration
 ~~~~~~~~~~~~~~~
 
-It is highly recommended to initialize each CSL style with an XML
-declaration, specifying the version of XML used as well as the
-character encoding. In most cases, the declaration will be:
+It is highly recommended to initialize each CSL style with an XML declaration,
+specifying the version of XML used as well as the character encoding. In most
+cases, the declaration will be:
 
 .. sourcecode:: xml
 
@@ -85,41 +80,29 @@ character encoding. In most cases, the declaration will be:
 The Root Element - ``cs:style``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The root element of CSL styles is ``cs:style``. This element
-carries the following arguments:
-
-``xmlns`` (optional)
-    The namespace declaration that binds the elements in the style to
-    the given namespace URI. CSL elements in the style don't need
-    individual namespace declarations if this attribute is set to
-    "http://purl.org/net/xbiblio/csl".
-
-``version``
-    The version of the CSL schema. Should have a value of "1.0" for CSL
-    1.0-compatible styles.
+The root element of a CSL style is ``cs:style``. This element carries the
+following arguments:
 
 ``class``
-    Specifies whether the style is note-based (value "note") or uses
-    in-text citations ("in-text").
+    Specifies whether the style uses notes (value "note") or in-text citations
+    ("in-text").
 
 ``default-locale`` (optional)
-    CSL processors can automatically localize style output based on
-    the user's locale. This can be prevented by setting the value of
-    ``default-locale`` to a
-    `locale code <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_,
-    which fixes the style localization to that particular locale. This
-    is generally desired for journal-specific styles.
+    Fixes style localization to the `locale
+    <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_ specified. This is
+    desirable for most journal styles.
 
-``page-range-format`` (optional)
-    This global formatting option sets the format of page
-    ranges. A full description of this option is given in the
-    `Page Ranges`_ section.
+``version``
+    Indicates with which version of the CSL schema the style is compatible.
+    Should have a value of "1.0" for CSL 1.0-compatible styles.
 
-``demote-non-dropping-particle`` (optional)
-    This global formatting option determines how name particles are
-    handled. A full description of this option is given in the
-    `Name Particles`_ section.
+``xmlns`` (optional)
+    The namespace declaration that binds the elements in the style to the given
+    namespace URI. CSL elements in the style don't need individual namespace
+    declarations if this attribute is set to "http://purl.org/net/xbiblio/csl".
 
+In addition, ``cs:style`` may carry any of the `global options`_, as well as the
+`hierarchical name options`_.
 
 An example of a style preamble:
 
@@ -1230,14 +1213,14 @@ Style Behavior
 Options
 ~~~~~~~
 
-Styles can be extensively configured with options. Options specific
-to the formatting of citations or notes are set as attributes on
-``cs:citation``, while those specific to the bibliography are set
-on ``cs:bibliography``. Global options, affecting both citations
-and the bibliography, are set as attributes on ``cs:style``.
-Finally, options that have locale-specific values are specified in
-the "locales-xx-XX.xml" files. The default values can be overridden
-using ``cs:locale`` (see `Locale`_).
+Styles can be extensively configured with options, which are set as attributes
+(all of which are optional). `Citation-specific options`_ are set on
+``cs:citation``, while `bibliography-specific options`_ are set on
+``cs:bibliography``. `Global options`_, which affect both citations and the
+bibliography, are set ``cs:style``. `Hierarchical name options`_ may be set on
+``cs:style``, ``cs:citation`` and ``cs:bibliography``. Finally, `locale options`
+may be set on ``cs:locale`` to override the default values specified in the
+`locale files <#Locale Files - Basic Structure>`_.
 
 Citation-specific Options
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1474,6 +1457,14 @@ Reference Grouping
 Global Options
 ^^^^^^^^^^^^^^
 
+Compound name initialization
+''''''''''''''''''''''''''''
+
+``initialize-with-hyphen``
+    Specifies whether compound given names (e.g. "Jean-Luc") should be
+    initialized with a hyphen ("J.-L.", value "true") or without ("J.L.", value
+    "false"). Defaults to "true".
+
 Page Ranges
 '''''''''''
 
@@ -1577,6 +1568,28 @@ set with the ``demote-non-dropping-particle`` option:
        sorted, all particles are part of the secondary sort key (see
        example B, e.g. "Koning, W. de" appears under "K").
 
+Hierarchical Name Options
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Attributes for the ``cs:names`` and ``cs:name`` elements may also be set on
+``cs:style``, ``cs:citation`` and ``cs:bibliography``. This eliminates the need
+to repeat the same attributes and attribute values for every occurance of the
+``cs:names`` and ``cs:name`` elements.
+
+The available hierarchical attributes for ``cs:name`` are ``and``,
+``delimiter-precedes-last``, ``et-al-min``, ``et-al-use-first``,
+``et-al-subsequent-min``, ``et-al-subsequent-use-first``, ``initialize-with``,
+``name-as-sort-order`` and ``sort-separator`` attributes. The attributes
+``name-form`` and ``name-delimiter`` accompany the ``form`` and ``delimiter``
+attributes on ``cs:name``. Similarly, ``names-delimiter``, the only hierarchical
+attribute available for ``cs:names``, accompanies the ``delimiter`` attribute on
+``cs:names``.
+
+When a hierarchical name attribute is set on ``cs:style``, ``cs:citation`` or
+``cs:bibliography``, its value is used for all ``cs:names`` elements within the
+element carrying the attribute. When an element lower in the hierarchy includes
+the same attribute with a different value, this latter value will override the
+value(s) specified higher in the hierarchy.
 
 Locale Options
 ^^^^^^^^^^^^^^
