@@ -13,7 +13,7 @@ __ `Table of Contents`_
 
 .. class:: info-date
 
-   24 January 2010
+   30 January 2010
 
 .. class:: contributors
 
@@ -114,62 +114,56 @@ An example of a style preamble:
 Child Elements of ``cs:style``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-All (independent) CSL styles share the same basic structure, with
-five possible types of child elements in the ``cs:style`` root
-element. The roles of each of these elements (which will be
-described in more detail later) are:
+All independent CSL styles share the same basic structure, with five possible
+types of child elements in the ``cs:style`` root element. The roles of each of
+these elements (which will be described in more detail later) are:
 
 ``cs:info``
-    The ``cs:info`` element must be included as the first child element
-    of ``cs:style``. It contains the metadata that describes the style,
-    e.g. the name of the style, an unique style identifier, the style
-    authors, etc.
+    The ``cs:info`` element must be included as the first child element of
+    ``cs:style``. It contains the metadata that describes the style (the name of
+    the style, a unique style identifier, the style authors, etc.).
 
 ``cs:citation``
-    This required element describes the formatting instructions of
-    in-text citations.
+    This required element describes the formatting instructions of in-text
+    citations or notes.
 
-``cs:bibliography``
-    This optional element describes the formatting instructions of
-    bibliographies, or, for note-type styles, the notes.
+``cs:bibliography`` (optional)
+    This optional element describes the formatting instructions of the
+    bibliography.
 
-``cs:macro``
-    Styles may include one or more ``cs:macro`` elements. The role of
-    macros is to allow for easy reuse of formatting instructions, which
-    helps keeping styles compact and maintainable.
+``cs:macro`` (optional)
+    Styles may include one or more ``cs:macro`` elements. Macros allow for reuse
+    of formatting instructions, which helps keeping styles compact and
+    maintainable.
 
-``cs:locale``
-    Styles may include one or more ``cs:locale`` elements. These
-    elements allow styles to override the default localization data
-    (term-strings, date formats and formatting options) on a per-locale
-    basis.
-
+``cs:locale`` (optional)
+    Styles may include one or more ``cs:locale`` elements. These elements allow
+    styles to override the default localization data (terms, date formats and
+    formatting options) on a per-locale basis.
 
 Info
 ^^^^
 
-The ``cs:info`` element contains all the style's metadata, many
-elements of which are borrowed from the
-`Atom Syndication Format <http://tools.ietf.org/html/rfc4287>`_.
-Although it has no influence on how citations are formatted,
-complete and correct metadata is especially important if styles are
-shared in style repositories and should be automatically pushed to
-CSL-capable applications (such as Zotero) when updated. Below is an
-example of a filled-in ``cs:info`` element, followed by a
-description of all possible elements.
+The ``cs:info`` element contains all the style's metadata, many elements of
+which are borrowed from the `Atom Syndication Format
+<http://tools.ietf.org/html/rfc4287>`_. Although it has no influence on how
+citations are formatted, complete and correct metadata is important if styles
+are made publicly available. Below is an example of a ``cs:info`` element,
+followed by a description of all possible elements.
 
 .. sourcecode:: xml
 
     <info>
      <title>Style Title</title>
      <id>http://www.zotero.org/styles/style-title</id>
+     <link href="http://www.zotero.org/styles/style-title" rel="self"/>
      <author>
       <name>Author Name</name>
       <email>name@domain.com</email>
-      <uri>http://www.domain.com/</uri>
+      <uri>http://www.domain.com/name</uri>
      </author>
-     <category term="author-date"/>
-     <category term="zoology"/>
+     <category citation-format="author-date"/>
+     <category field="zoology"/>
      <updated>2008-10-29T21:01:24+00:00</updated>
      <summary>Style for Some Journal</summary>
      <rights>This work is licensed under a Creative Commons
@@ -177,35 +171,30 @@ description of all possible elements.
              http://creativecommons.org/licenses/by-sa/3.0/</rights>
     </info>
 
-``cs:author``/``cs:contributor``
-    These optional elements may be used for acknowledgment of style
-    authors and contributors. Each element may occur multiple times.
-    Authorship is generally limited to those who have written a new
-    style, or have made significant changes to existing styles, while
-    contributorship can be assigned to those who have made smaller
-    changes. Both elements require one child element, cs:name, and
-    allow for two others, cs:email, and cs:uri, indicating respectively
-    the name, email address and URI of the author or contributor in
-    question.
+``cs:author`` and ``cs:contributor`` (optional)
+    One or more of these elements may be used to acknowledge style authors and
+    contributors. Authorship is generally limited to those who have written a
+    new style, or have made significant changes to existing styles, while
+    contributorship can be assigned to those who have made small changes. Both
+    elements require one child element, cs:name, and allow for two others,
+    cs:email, and cs:uri, indicating respectively the name, email address and
+    URI of the author or contributor in question.
 
-``cs:category``
-    Styles may be assigned one or more categories. This information can
-    be used to facilitate browsing of large style repositories and
-    could allow users to subscribe to styles within particular content
-    areas. Two types of categories (set as attributes on
-    ``cs:category``) exist. The first, ``citation-format``, describes
-    how in-text citations are rendered, with values:
-
+``cs:category`` (optional)
+    Styles may be assigned one or more categories. This information can be used
+    to organize style repositories. Two types of categories exist. The first
+    category type describes how in-text citations are rendered. For this type
+    the ``citation-format`` attribute is set to one of the following values:
     
     -  "author-date": e.g. "... (Doe, 1999)"
     -  "author": e.g. "... (Doe)"
     -  "numeric": e.g. "... [1]"
     -  "label": e.g. "... [doe99]"
     -  "note": the citation appears as a footnote or endnote
-
-    The second category type, ``field``, can be used to specify the
-    field(s) the style applies to. Allowed values are:
-
+    
+    The second category type indicates the fields or disciplines for which the
+    style is relevant. For this category type the ``field`` attribute is set to
+    one of the following values:
     
     -  "anthropology"
     -  "astronomy"
@@ -220,6 +209,7 @@ description of all possible elements.
     -  "history"
     -  "humanities"
     -  "law"
+    -  "linguistics"
     -  "literature"
     -  "math"
     -  "medicine"
@@ -234,95 +224,81 @@ description of all possible elements.
     -  "zoology"
 
 ``cs:id``
-    This required element should contain a URI. A valid, stable, and
-    unique URL to resolves to the style is desired if the style is made
-    publicly available. This identifier establishes the identity of the
-    style, on which applications may rely for features such as
-    automatic style updating.
+    This required element should contain a URI. This identifier establishes the
+    identity of the style. A valid, stable, and unique URL that resolves to the
+    style is desired if the style is made publicly available. Keeping the same
+    URI is crucial for applications that support automatic style updating.
 
-``cs:issn``/``cs:issnl``
-    Journal-specific styles may include one or more ``cs:issn``
-    elements, containing the journal's ISSN identifiers (multiple ISSNs
-    can be assigned to a single journal, e.g. for the print and online
-    editions). In addition, the ``cs:issnl`` element may be used for
-    the newly established
-    `ISSN-L identifier <http://www.issn.org/2-22637-What-is-an-ISSN-L.php>`_.
+``cs:issn``/``cs:issnl`` (optional)
+    Journal-specific styles may include one or more ``cs:issn`` elements,
+    containing the journal's ISSN identifiers (multiple ISSNs can be assigned to
+    a single journal, e.g. for the print and online editions). In addition, the
+    ``cs:issnl`` element may be used for the newly established `ISSN-L
+    identifier <http://www.issn.org/2-22637-What-is-an-ISSN-L.php>`_.
 
-``cs:link``
-    The ``cs:link`` element is used to specify a URI/URL, which is set
-    on the ``href`` attribute. The accompanying ``rel`` attribute must
-    be set to indicate the relation of the URI/URL to the style. The
-    possible values of ``rel``:
-
+``cs:link`` (optional)
+    The ``cs:link`` element is used to specify a URI (usually a URL), which is
+    set on the ``href`` attribute. The accompanying ``rel`` attribute must be
+    set to indicate the relation of the URI to the style. The possible values of
+    ``rel``:
     
-    -  "self": if the URI is that of the CSL style itself. Needed for
-       (automatic) style updating.
-    -  "independent-parent": if the URI is that of the parent CSL
-       style, the content of which should be used for the citation
-       formatting. Needed for dependent styles.
-    -  "template": if the URI is that of the CSL style from which the
-       current style is derived. May be used to indicate style parentage.
-    -  "documentation: if the URI/URL point to the online style
-       documentation.
+    -  "self": if the URI is that of the CSL style itself. Needed for automatic
+       style updating.
+    -  "independent-parent": if the URI is that of the parent CSL style, the
+       content of which should be used for the citation formatting. Needed for
+       `dependent styles`_.
+    -  "template": if the URI is that of the CSL style from which the current
+       independent style is derived. May be used to indicate style parentage.
+    -  "documentation: if the URI points to the online style documentation.
 
+``cs:published`` (optional)
+    The contents of this element must be a `timestamp
+    <http://books.xmlschemata.org/relaxng/ch19-77049.html>`_. This timestamp
+    indicates when the style was initially created or made available.
 
-(TODO: still have to figure out what "string" does in ``cs:link``.
+``cs:rights`` (optional)
+    This element specifies the license under which the style file is released.
+    See, e.g. the `Creative Commons <http://creativecommons.org/license/>`_. The
+    element may include a ``xml:lang`` attribute to specify the language of the
+    content (the value should be an `xsd:language locale code
+    <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
 
-``cs:published``
-    The contents of this optional element must be a
-    `timestamp <http://books.xmlschemata.org/relaxng/ch19-77049.html>`_.
-    The element can be used to indicate when the style was initially
-    created or made available.
-
-``cs:rights``
-    This optional element can be included to specify the license under
-    which the the style file is released. See, e.g. the
-    `Creative Commons <http://creativecommons.org/license/>`_. The
-    element may include the ``xml:lang`` attribute to specify the
-    language of the content (the value should be a
-    `xsd:language locale code <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
-
-``cs:summary``
-    This optional element can be used to give a summary of the
-    style.The element may include the ``xml:lang`` attribute to specify
-    the language of the content (the value should be a
-    `xsd:language locale code <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
+``cs:summary`` (optional)
+    This element gives a summary of the style.The element may include a
+    ``xml:lang`` attribute to specify the language of the content (the value
+    should be an `xsd:language locale code
+    <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
 
 ``cs:title``
-    The contents of this required element should be the name of the
-    style as it should be shown to users. The element may include the
-    ``xml:lang`` attribute to specify the language of the content (the
-    value should be a
-    `xsd:language locale code <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
+    The contents of this required element should be the name of the style as it
+    should be shown to users. The element may include a ``xml:lang`` attribute
+    to specify the language of the content (the value should be an `xsd:language
+    locale code <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
 
 ``cs:updated``
-    The contents of this required element must be a
-    `timestamp <http://books.xmlschemata.org/relaxng/ch19-77049.html>`_,
-    so it is possible to assess whether the style has changed since the
-    last time it has been accessed or cached.
-
+    The contents of this required element must be a `timestamp
+    <http://books.xmlschemata.org/relaxng/ch19-77049.html>`_. This timestamp is
+    used for automatic updating of styles.
 
 Citation
 ^^^^^^^^
 
-The ``cs:citation`` element describes the formatting of citations,
-which can consist of one or multiple references to bibliographic
-sources, and may appear in the form of either in-text citations
-(generally formatted as label [doe99], number [1], author [Doe] or
-author-date descriptors [Doe 1999]) or notes. The required
-``cs:layout`` child element describe what, and how, bibliographic
-data should be included in the citations (see the chapter on the
-`Layout element <#layout>`_). Additional citation-specific
-formatting options may be set as attributes on ``cs:citation`` (see
-the `Citation-specific Options`_ section). Finally, the optional ``cs:sort`` element, which should
-precede the ``cs:layout`` element, specifies how citations
-consisting of multiple references should be sorted (see the chapter
-on `Sorting`_. Thus, the basic structure of the
-``cs:citation`` element is:
+The ``cs:citation`` element describes the formatting of citations, which can
+consist of one or multiple references to bibliographic sources, and may appear
+in the form of either in-text citations (generally formatted as label [doe99],
+number [1], author [Doe] or author-date descriptors [Doe 1999]) or notes. The
+required ``cs:layout`` child element describes what, and how, bibliographic data
+should be included in the citations (see the chapter on the `Layout element
+<#layout>`_). Additional citation-specific formatting options may be set as
+attributes on ``cs:citation`` (see the `Citation-specific Options`_ section).
+Finally, the optional ``cs:sort`` element, which should precede the
+``cs:layout`` element, specifies how citations consisting of multiple references
+should be sorted (see the chapter on `Sorting`_). An example of a
+``cs:citation`` element:
 
 .. sourcecode:: xml
 
-    <citation option="value">
+    <citation option="option-value">
       <sort>
         <!-- sort keys -->
       </sort>
@@ -331,29 +307,27 @@ on `Sorting`_. Thus, the basic structure of the
       </layout>
     </citation>
 
-**A note to CSL implementers** Note-based styles are unique in that
-citations may effectively become full sentences. This requires
-consideration during the formatting of citations. For example, if a
-citation is footnoted without any additional text, the first
-character of the output should be uppercased. By contrast, if the
-citation occurs within a pre-existing footnote, and preceded by
-non-citation text, then it should be printed as is.
+**A note to developers of CSL processors** Note styles are unique in that
+citations may effectively become full sentences. Because of this, the first
+character of the output should be uppercased when a citation is footnoted
+without any additional text. By contrast, if the citation occurs within a
+pre-existing footnote, and is preceded by non-citation text, then it should be
+printed as is.
 
 Bibliography
 ^^^^^^^^^^^^
 
-The ``cs:bibliography`` element describes the formatting of
-bibliographies, and highly analogous to ``cs:citation``: the
-required ``cs:layout`` child element describes how each reference
-should be formatted in the bibliography, the optional ``cs:sort``
-element specifies the sorting order of all the references in the
-bibliography, and bibliography-specific formatting options may be
-set as attributes on ``cs:bibliography`` (see the
-`Bibliography-specific Options`_ section).
+The ``cs:bibliography`` element describes the formatting of bibliographies, and
+is used in a similar way as ``cs:citation``: the required ``cs:layout`` child
+element describes how each reference should be formatted in the bibliography,
+the optional ``cs:sort`` element specifies the sorting order of all the
+references in the bibliography, and bibliography-specific formatting options may
+be set as attributes on ``cs:bibliography`` (see the `Bibliography-specific
+Options`_ section).
 
 .. sourcecode:: xml
 
-    <bibliography option="value">
+    <bibliography option="option-value">
       <sort>
         <!-- sort keys -->
       </sort>
