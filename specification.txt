@@ -250,6 +250,12 @@ followed by a description of all possible elements.
     -  "template": if the URI is that of the CSL style from which the current
        independent style is derived. May be used to indicate style parentage.
     -  "documentation: if the URI points to the online style documentation.
+    
+    The ``cs:link`` element may contain textual content to describe the link,
+    and may carry the ``xml:lang`` attribute to specify the language of either
+    the link description or of the link target (the value should be a
+    `xsd:language locale code
+    <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
 
 ``cs:published`` (optional)
     The contents of this element must be a `timestamp
@@ -289,8 +295,9 @@ in the form of either in-text citations (generally formatted as label [doe99],
 number [1], author [Doe] or author-date descriptors [Doe 1999]) or notes. The
 required ``cs:layout`` child element describes what, and how, bibliographic data
 should be included in the citations (see the chapter on the `Layout element
-<#layout>`_). Additional citation-specific formatting options may be set as
-attributes on ``cs:citation`` (see the `Citation-specific Options`_ section).
+<#layout>`_). The ``cs:citation`` element may carry attributes for
+citation-specific formatting options and hierarchical name options (see the
+`Citation-specific Options`_ and `Hierarchical Name Options`_ sections).
 Finally, the optional ``cs:sort`` element, which should precede the
 ``cs:layout`` element, specifies how citations consisting of multiple references
 should be sorted (see the chapter on `Sorting`_). An example of a
@@ -320,10 +327,11 @@ Bibliography
 The ``cs:bibliography`` element describes the formatting of bibliographies, and
 is used in a similar way as ``cs:citation``: the required ``cs:layout`` child
 element describes how each reference should be formatted in the bibliography,
-the optional ``cs:sort`` element specifies the sorting order of all the
-references in the bibliography, and bibliography-specific formatting options may
-be set as attributes on ``cs:bibliography`` (see the `Bibliography-specific
-Options`_ section).
+while the optional ``cs:sort`` element (which should precede the ``cs:layout
+element) specifies the sorting order of the references in the bibliography. In
+addition, the ``cs:bibliography`` element may carry attributes for
+bibliography-specific formatting options and hierarchical name options (see the
+`Bibliography-specific Options`_ and `Hierarchical Name Options`_ sections).
 
 .. sourcecode:: xml
 
@@ -339,24 +347,31 @@ Options`_ section).
 Macro
 ^^^^^
 
-Macros, containing (reusable) formatting instructions, can be
-called from within ``cs:citation``, ``cs:bibliography`` and other
-``cs:macro`` elements. The use of macros can greatly improve the
-quality of styles by increasing their readability, compactness and
-maintainability. Ideally, the contents of ``cs:citation`` and
-``cs:bibliography`` should be kept compact and agnostic of resource
-types (i.e. books, journal articles, etc.), depending mainly on
-macro calls.
+Macros, which are defined using ``cs:macro`` elements, can contain the same set
+of `rendering elements`_ that are available within ``cs:layout`` inside
+``cs:citation`` or ``cs:bibliography``. Macros allow formatting instructions to
+be reused, both within the same style (e.g. the same macro could be used in both
+``cs:citation`` and ``cs:bibliography``) as well as between styles. It is
+therefore recommended to use common macro names as much as possible. Correct use
+of macros can greatly improve the readability, compactness and maintainability
+of styles. Ideally, the contents of ``cs:citation`` and ``cs:bibliography``
+should be kept compact and agnostic of resource types (i.e. books, journal
+articles, etc.), depending mainly on macro calls.
 
-By convention the (optional) ``cs:macro`` elements are included
-directly before the ``cs:citation`` element. Macros are identified
-by the value of the (required) ``name`` attribute, and contain one
-or more `rendering elements`_. The following
-example macro displays the "title" variable, and applies italics
-when the resource type is "book":
+By convention, macros are placed after any ``cs:locale`` elements and before the
+``cs:citation`` element. The ``cs:macro`` element must carry the ``name``
+attribute (the value of which is used to identify the macro), and contain one or
+more `rendering elements`_. Once defined, macros can be called by `rendering
+elements`_ in ``cs:citation`` or ``cs:bibliography`` (from within
+``cs:layout``), or by the `rendering elements`_ in other macros.
+
+The following example shows a style that call the "title" macro. This macro
+outputs the contents of the title variable, applying italics when the resource
+type is "book":
 
 .. sourcecode:: xml
 
+    <style>
       <macro name="title">
         <choose>
           <if type="book">
@@ -367,32 +382,12 @@ when the resource type is "book":
           </else>
         </choose>
       </macro>
-
-Macros can, in potential, also be reused in other styles (whether
-authored by hand or generated by software tools). Therefore, it is
-recommended to use common macro names as much as possible. The
-macro names that are most abundant in the Zotero Style Repository
-at the time of writing:
-
-
--  title
--  author
--  author-short (used to format author names in citations)
--  editor-translator
--  publisher (publisher and publisher-place)
--  access (for URLs and archival locations)
--  event (for conference, hearings, etc.)
--  issued (date of issue)
--  issued-year (year of issue)
--  pages
--  citation-locator (for cited pages and such)
--  locators (volume and issue, for example)
--  container-prefix (for the "In" and such that often preceded
-   container info)
--  edition (edition or version)
-
-(TODO: cleanup the list above to only include the preferred
-macros?)
+      <citation>
+        <layout>
+          <text macro="title"/>
+        </layout>
+      </citation>
+    </style>
 
 Locale
 ^^^^^^

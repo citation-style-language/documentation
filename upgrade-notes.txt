@@ -13,7 +13,7 @@ __ `Table of Contents`_
 
 .. class:: info-date
 
-   December 20, 2009
+   January 31, 2010
 
 .. class:: contributors
 
@@ -331,7 +331,7 @@ necessary to specify any ``cs:date-part`` elements for localized dates:
             <date-part name="day" prefix="-"/>
           </date>
           <!-- default localized date -->
-          <date form="numeric"/>
+          <date variable="accessed" form="numeric"/>
         </layout>
       </bibliography>
     </style>
@@ -351,8 +351,8 @@ where the order of the ``cs:date-part`` elements does control the rendering
 order). Neither does the presence or absence of ``cs:date-part`` elements affect
 which date-parts are shown (this is controlled via the ``date-parts`` attribute
 described above). Instead, ``cs:date-part`` elements allow you to override
-specific properties of the localized date-parts (e.g. the `form` of the
-month-date-part can be set to "short"). Note that changes made in this way
+specific properties of the localized date-parts (e.g. the ``form`` attribute of
+the month-date-part can be set to "short"). Note that changes made in this way
 affect all locales. An example illustrating the different options:
 
 .. sourcecode:: xml
