@@ -392,31 +392,22 @@ type is "book":
 Locale
 ^^^^^^
 
-CSL supports localization of terms (text strings such as "edited
-by"), date formats and formatting options (e.g. the way punctuation
-is applied around quotes). CSL ships with a large number of
-"locales-xx-XX.xml" files that contain preset localization data
-(the "xx-XX" is the locale code, e.g. "en-US" for US English).
-However, any content of these "locales-xx-XX.xml" files can be
-overridden in-style by using one or more (optional) ``cs:locale``
-elements (these are generally included directly following the
-``cs:info`` element).
+CSL supports localization of terms, date formats and formatting options. Default
+localization data for several tens of locales is provided through
+"locales-xx-XX.xml" files ("xx-XX" represents the locale code, e.g. "en-US" for
+US English). Localization data can also be included in styles, using one or more
+of the optional ``cs:locale`` elements, which by convention are included
+directly after the ``cs:info`` element. For each ``cs:locale`` element, the
+relevant locale can be indicated with the ``xml:lang`` attribute (set to an
+`xsd:language locale code
+<http://books.xmlschemata.org/relaxng/ch19-77191.html>`_). If the attribute is
+absent, the ``cs:locale`` element's localization data will apply to all locales.
 
-The use of ``cs:locale`` in CSL styles and in the
-"locales-xx-XX.xml" files is very similar. There are however three
-differences. First, in CSL styles, ``cs:locale`` is a child element
-of ``cs:style``, and as such typically doesn't carry the CSL
-namespace declaration (which is usually already set on
-``cs:style``). Secondly, CSL styles may contain more than one
-``cs:locale`` element (each specific to one locale). Finally,
-``cs:locale`` in "locales-xx-XX.xml" files must contain the
-``cs:terms``, ``cs:date`` and ``cs:style-options`` elements. In CSL
-styles, these elements are all optional. It is sufficient to
-include only those elements for which overriding localization data
-is provided. For further details on ``cs:locale``, see the
-paragraph `Locale Files - Basic Structure`_.
+See `Localized Terms`_, `Localized Dates`_ and `Localized Options_ in the
+`Locale Files - Basic Structure`_ section for more details on the use of
+``cs:locale``.
 
-An example of ``cs:locale`` used in a CSL style:
+An example illustrating the use of ``cs:locale`` in a CSL style:
 
 .. sourcecode:: xml
 
@@ -430,6 +421,45 @@ An example of ``cs:locale`` used in a CSL style:
         </terms>
       </locale>
     </style>
+
+Locale prioritization
+'''''''''''''''''''''
+
+Locale codes can indicate either the language (e.g. "en" for English) or the
+language dialect (e.g. "en-US" for American English and "en-GB" for British
+English). While the "locales-xx-XX.xml" files are only maintained for language
+dialects, the (optional) ``xml:lang`` attribute on ``cs:locale`` in styles may
+be set to languages as well as language dialects. The "locales-xx-XX.xml" files
+must contain the full set of localization data. The ``cs:locale`` elements are
+typically only used in styles to redefine the localization data provided via the
+"locales-xx-XX.xml" files, and these may include only the localization data that
+should be redefined. The existence of two types of locale codes (languages and
+language dialects), and the ability to define localization both in
+"locales-xx-XX.xml" files and in styles, requires prioritization of localization
+data. This prioritization can best be illustrated with an example. If a CSL
+processor is asked to localize the style output to "de-AT" (Austrian German),
+the priority of the locale data is as follows:
+
+Localization data specified in styles using ``cs:locale``
+
+1. ``xml:lang`` set to "de-AT" (Austrian German)
+2. ``xml:lang`` set to "de" (German)
+3. ``xml:lang`` not set (all locales)
+
+Localization data stored in "locales-xx-XX.xml" files
+
+4. ``xml:lang`` set to "de-AT" (Austrian German)
+5. ``xml:lang`` set to "de-DE" (Standard German)
+6. ``xml:lang`` set to "en-US" (American English)
+
+Thus, when a style does not include a ``cs:locale`` element for the "de-AT"
+locale, or when it exists but is incomplete, the missing localization data is
+retrieved from the ``cs:locale`` set to "de" (if present). If the set of
+localization data is still incomplete, the ``cs:locale`` element without a
+``xml:lang`` element is used (if present). The localization data is completed
+with the data stored in the "locales-xx-XX.xml" files. If the file for "de-AT"
+does not exist, fallback locales consist of "de-DE" and, as a last resort,
+"en-US".
 
 Dependent Styles
 ~~~~~~~~~~~~~~~~
