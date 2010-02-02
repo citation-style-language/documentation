@@ -464,25 +464,26 @@ does not exist, fallback locales consist of "de-DE" and, as a last resort,
 Dependent Styles
 ~~~~~~~~~~~~~~~~
 
-In addition to independent styles, which are self-contained, CSL
-also supports dependent styles, which function similar to aliases
-or shortcuts. Dependent styles are generally used when multiple
-journals share the same style format. In such a case, there would
-be a single independent master style to describe the format (e.g.
-"Nature Journals"). Then, dependent styles could be created for all
-journals that use this format (e.g. "Nature Biotechnology", "Nature
-Nanotechnology", etc.). These styles only contain the ``cs:info``
-element (containing a ``cs:link`` element to link to the
-independent master style) to provide the journal's metadata. In
-this way, style repositories can show entries for the individual
-journals, without the need to duplicate formatting instructions.
-And if the common format has to be modified, it is sufficient to
-change just the independent master style.
+In addition to independent styles, which are self-contained, CSL also supports
+dependent styles, which function like aliases or shortcuts. Dependent styles can
+be used when multiple journals share the same style format. In such a case, it
+is sufficient to create a single independent master style for the format (e.g.
+"Nature Journals"). Dependent styles, which only contain a ``cs:info`` element,
+can then be added for all journals that use this format (e.g. "Nature
+Biotechnology", "Nature Nanotechnology", etc.). With this approach, style
+repositories can show entries for the individual journals, without the need to
+duplicate formatting instructions. If the common format has to be modified, it
+is sufficient to change the independent master style, which makes style
+maintainance simpler and faster.
 
-Note that dependent styles cannot be used to indicate changes
-compared to the independent master style. If there is any
-difference in formatting between two styles, however small, two
-separate CSL styles have to be created.
+The ``cs:info`` element of dependent styles should provide the metadata of the
+individual journals. A ``cs:link`` element which points to the independent
+master style must be included (for this the ``rel`` attribute on the relevant
+``cs:link`` element should be set to "independent-parent", see also `Info`_).
+
+N.B. Dependent styles cannot be used to indicate changes compared to the
+independent master style. If there is any difference in formatting between two
+styles, however small, separate independent styles have to be created.
 
 Locale Files - Basic Structure
 ------------------------------
