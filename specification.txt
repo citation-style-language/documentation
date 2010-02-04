@@ -403,7 +403,7 @@ relevant locale can be indicated with the ``xml:lang`` attribute (set to an
 <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_). If the attribute is
 absent, the ``cs:locale`` element's localization data will apply to all locales.
 
-See `Localized Terms`_, `Localized Dates`_ and `Localized Options_ in the
+See `Localized Terms`_, `Localized Dates`_ and `Localized Options`_ in the
 `Locale Files - Basic Structure`_ section for more details on the use of
 ``cs:locale``.
 
@@ -488,27 +488,27 @@ styles, however small, separate independent styles have to be created.
 Locale Files - Basic Structure
 ------------------------------
 
-CSL ships with "locales-xx-XX.xml" files (the "xx-XX" is the locale
-code, e.g. "en-US" for US English) that contain preset localization
-data of terms, dates and formatting options. The collection of
-available locale files can be found
-`here <http://bitbucket.org/bdarcus/csl-locales/>`_.
-For details on in-style overriding of localization data, see the
-`Locale`_ section.
+CSL ships with a number of "locales-xx-XX.xml" files (the "xx-XX" is the locale
+code, e.g. "en-US" for US English). While localization data can also be
+specified in styles (see `Locale`_), locale files conveniently provide complete
+sets of default localization data (terms, dates and formatting options).
 
-Each "locales-xx-XX.xml" file contains the localization data for a
-single locale. Like CSL styles, these files are written in XML, and
-contain an `XML declaration`_. The ``cs:locale``
-root element requires the ``xml:lang`` attribute to specify the
-locale of the data, and typically carries a ``xmlns`` namespace
-declaration. There are three (required) child elements,
-``cs:terms``, ``cs:date`` and ``cs:style-options``. An example of
-the (strongly reduced) contents of a locale file:
+The locale files, which like styles are written in XML, each contain the
+localization data for a single locale. The ``cs:locale`` root element require
+two attributes: ``xml:lang``, to specify the locale of the data, and
+``version``, to indicates with which version of the CSL schema the locale file
+is compatible (this attribute should have a value of "1.0" for CSL
+1.0-compatible styles). The root element also typically carries a ``xmlns``
+namespace declaration, set to the CSL namespace
+("http://purl.org/net/xbiblio/csl"). The ``cs:locale`` element has three
+required child elements, which are described in the sections below:
+``cs:terms``, ``cs:date`` and ``cs:style-options``. An example of the
+(incomplete) contents of a locale file:
 
 .. sourcecode:: xml
 
     <?xml version="1.0" encoding="UTF-8"?>
-    <locale xml:lang="en" xmlns="http://purl.org/net/xbiblio/csl">
+    <locale xml:lang="en-US" version="1.0" xmlns="http://purl.org/net/xbiblio/csl">
       <terms>
         <term name="no date">n.d.</term>
         <term name="et-al">et al.</term>
@@ -521,10 +521,15 @@ the (strongly reduced) contents of a locale file:
           <multiple>pp.</multiple>
         </term>
       </terms>
-      <date form="numeric">
-        <date-part name="month" form="numeric" suffix="-"/>
-        <date-part name="day" suffix="-"/>
+      <date form="text">
+        <date-part name="month" suffix=" "/>
+        <date-part name="day" suffix=", "/>
         <date-part name="year"/>
+      </date>
+      <date form="numeric">
+        <date-part name="year"/>
+        <date-part name="month" form="numeric" prefix="-" range-delimiter="/"/>
+        <date-part name="day" prefix="-" range-delimiter="/"/>
       </date>
       <style-options punctuation-in-quote="true"/>
     </locale>
@@ -532,58 +537,51 @@ the (strongly reduced) contents of a locale file:
 Localized Terms
 ~~~~~~~~~~~~~~~
 
-Terms are localized strings. For example, a style could specify
-that the term "and" should be used. The exact string that appears
-in the style output then depends on the locale, e.g. "and" for
-English, or "und" for German. The terms in "locales-xx-XX.xml"
-files are defined using ``cs:term`` elements, child elements of
-``cs:terms``, itself a child element of ``cs:locale``. Terms are
-identified by the value of the ``name`` attribute of ``cs:term``.
-In addition to the so called 'simple terms', for which the element
-contents consists only of the translated string, there are also
-'compound terms', which contain both singular and plural variants
-of a term (e.g. "page" and "pages") using the child elements
-``cs:single`` and ``cs:multiple``, respectively. For some terms,
-multiple forms are available (the form is indicated by the value of
-the ``form`` attribute on ``cs:term``). The different forms are:
+Terms are localized strings. For example, if a style specifies that the term
+"and" should be used, the string that appears in the style output depends on the
+locale: "and" for English, "und" for German. Terms are defined using ``cs:term``
+elements, child elements of ``cs:terms``, itself a child element of
+``cs:locale``. Terms are identified by the value of the ``name`` attribute of
+``cs:term``. Two types of terms exist: simple terms, where the content of the
+``cs:term`` is the localized string, and compound terms, where ``cs:term``
+includes the two child elements ``cs:single`` and ``cs:multiple``, which
+respectively contain the singular and plural variant of the term (e.g. "page"
+and "pages"). Some terms are defined for multiple forms. In these cases,
+multiple ``cs:term`` element share the same value of ``name``, but differ in the
+value of the optional ``form`` attribute. The different forms are:
 
-
--  "long" - the default, e.g. "editor"/"editors" for the term
+-  "long" - the default, e.g. "editor" and "editors" for the term
    "editor"
+-  "short" - e.g. "ed" and "eds" for the term "editor"
 -  "verb" - e.g. "edited by" for the term "editor"
--  "short" - e.g. "ed"/"eds" for the term "editor"
 -  "verb-short" - e.g. "ed" for the term "editor"
--  "symbol" - e.g. "ยง" for the term "section"
+-  "symbol" - e.g. "ง" for the term "section"
 
-Examples of how terms are defined have been given above in
-`Locale Files - Basic Structure`_.
-
-The complete list of supported terms can be found in
-`Appendix III - Terms`_.
-
-TODO: explain role of cs-terms.extension (in csl-terms.rnc).
+Examples of how terms are defined have been given above (`Locale Files - Basic
+Structure`_). The complete list of terms can be found in `Appendix III -
+Terms`_.
 
 Localized Dates
 ~~~~~~~~~~~~~~~
 
-Dates can be either localized or non-localized. The default
-localized date formats are defined in the "locales-xx-XX.xml" files
-using the ``cs:date`` element as child element of ``cs:locale``.
-Each locale file contains two date formats, which are distinguished
-by the value of the ``form`` attribute on ``cs:date``: "numeric"
-(e.g. "12-15-2005" for the English locale), and "text" (e.g.
-"December 15, 2005"). The date format is derived from the order of
-the ``cs:date-part`` elements (with ``name``-values of ``day``,
-``month``, ``year`` and ``other``), which are child elements of
-``cs:date`` and from any `formatting`_ attributes on
-the ``cs:date`` and ``cs:date-part`` elements. In addition, a
-`delimiter`_ may be set on ``cs:date`` (delimiting the
-``cs:date-part`` elements), and `affixes`_ may be
+Styles can use either localized or non-localized date formats. Localized date
+formats are defined with the ``cs:date`` element as child element of
+``cs:locale``. The required ``form`` attribute on ``cs:date`` must be set to
+either "numeric" (for numeric date formats, e.g. "12-15-2005") or to "text"
+(e.g. "December 15, 2005"). A date format is then defined by the child elements
+of ``cs:date``, the ``cs:date-part`` elements. These must carry the ``name``
+attribute, set to ``day``, ``month`` or ``year``. The order of the
+``cs:date-part`` elements is also the display order. Additional formatting can
+be achieved by setting `formatting`_ attributes on the ``cs:date`` and
+``cs:date-part`` elements, as well as a number of attributes that are specific
+to ``cs:date-part`` (see `Date-part`_). In addition, a `delimiter`_ may be set
+on ``cs:date`` to delimit the ``cs:date-part`` elements, and `affixes`_ may be
 applied to the ``cs:date-part`` elements.
 
-N.B. The reason affixes are not allowed on ``cs:date`` when used as
-a child element of ``cs:locale`` is to allow localized dates to be
-used in combination with custom affixes such as parentheses. E.g. a
+N.B. Affixes are not allowed on ``cs:date`` when used as a child element of
+``cs:locale``. This helps in separating locale-specific affixes (which should be
+set on the ``cs:date-part`` elements) from any style-specific affixes (such as
+parentheses, which should be set on the ``cs:date`` rendering element). E.g. a
 macro could specify:
 
 .. sourcecode:: xml
@@ -595,10 +593,10 @@ macro could specify:
 Localized Options
 ~~~~~~~~~~~~~~~~~
 
-CSL currently includes a single localized global option (affecting
-both citations and the bibliography), ``punctuation-in-quote``.
-This option is set in the "locales-xx-XX.xml" files as an attribute
-on ``cs:style-options``, a child element of ``cs:locale``.
+CSL 1.0 includes a single localized global option (affecting both citation and
+bibliography output), ``punctuation-in-quote`` (see `Locale Options`_). This
+option is set as an attribute on ``cs:style-options``, a child element of
+``cs:locale``.
 
 Rendering Elements
 ------------------
