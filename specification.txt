@@ -661,7 +661,7 @@ Date
 
 The ``cs:date`` element is used to output dates, in either a localized or a
 non-localized format. The desired date variable (see `Date Variables`_) is
-selected with the ``variable`` attribute. .
+selected with the ``variable`` attribute.
 
 Localized date formats are selected with the ``form`` attribute. This attribute
 can be set to "numeric" (for numeric date formats, e.g. "12-15-2005"), or to
@@ -730,12 +730,16 @@ date parts are identified by the value of the ``name`` attribute, which can be:
 All ``cs:date-part`` elements may carry the `formatting`_ and `text-case`_
 attributes. Attributes for `affixes`_ are also allowed, except when ``cs:date``
 is used to call a localized date format. Finally, the ``cs:date-part`` elements
-may carry the ``range-delimiter`` attribute. By default, date ranges are
-delimited by an en-dash (e.g. "May–July 2008"). The ``range-delimiter``
-attribute can be used to specify custom date range delimiters. The attribute
-value set on the largest date-part ("day", "month" or "year") that differs
-between the two dates of the date range will then be used instead of the
-en-dash. For example,
+may carry the ``range-delimiter`` attribute (see `Date Ranges`_).
+
+Date Ranges
+^^^^^^^^^^^
+
+By default, date ranges are delimited by an en-dash (e.g. "May–July 2008"). The
+``range-delimiter`` attribute can be used to specify custom date range
+delimiters. The attribute value set on the largest date-part ("day", "month" or
+"year") that differs between the two dates of the date range will then be used
+instead of the en-dash. For example,
 
 .. sourcecode:: xml
     
@@ -751,6 +755,61 @@ en-dash. For example,
     </style>
 
 would result in "May–July 2008" and "May 2008/June 2009".
+
+AD and BC
+^^^^^^^^^
+
+The terms ``ad`` and ``bc`` (Anno Domini and Before Christ) are automatically
+appended to years: ``bc`` is added to negative years (e.g. 2500BC), while ``ad``
+is added to positive years of less than four digits (79AD).
+
+Seasons
+^^^^^^^
+
+If a date includes a season instead of a month, a season term (``season-01`` to
+``season-04``, respectively Spring, Summer, Autumn and Winter) will substituted
+the month date-part. E.g.,
+
+.. sourcecode:: xml
+    
+    <style>
+      <citation>
+        <layout>
+          <date variable="issued">
+            <date-part name="month" suffix=" "/>
+            <date-part name="year"/>
+          </date>
+        </layout>
+      </citation>
+    </style>
+
+would result in "May 2008" and "Winter 2009".
+
+Uncertain Dates
+^^^^^^^^^^^^^^^
+
+Uncertain dates can receive special formatting by using the
+``is-uncertain-date`` conditional (see `Conditionals`_) and the "circa" term.
+The conditional tests "true" when a date is flagged as uncertain. For example,
+
+.. sourcecode:: xml
+
+    <style>
+      <citation>
+        <layout delimiter="; ">
+          <choose>
+            <if is-uncertain-date="issued">
+              <text term="circa" form="short" suffix=" "/>
+            </if>
+          </choose>
+          <date variable="issued">
+            <date-part name="year"/>
+          </date>
+        </layout>
+      </citation>
+    </style>
+
+would result in "2005" (normal certain date) and "ca. 2003" (uncertain date).
 
 Number
 ~~~~~~
@@ -1583,7 +1642,7 @@ The ``cs:sort`` which must contain one or more ``cs:key`` child
 elements. The sort key, set as an attribute on ``cs:key``, can be a
 ``variable`` (with possible values of any of the
 `name variables`_, `date variables`_ or
-`source variables`_ or a ``macro``. The
+`standard variables`_ or a ``macro``. The
 ``cs:key`` element may carry the ``sort`` attribute, with possible
 values of "ascending" (default) or "descending", to indicate the
 sort order. The ``names-min`` and ``names-use-first`` attributes

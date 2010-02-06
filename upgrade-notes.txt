@@ -370,10 +370,10 @@ affect all locales. An example illustrating the different options:
         <layout>
           <!-- localized date that only shows the year and month -->
           <date form="text" date-parts="year-month"/>
-          <!-- localized date in numeric format with leading zeros and affixes for month and day -->
+          <!-- localized date in numeric format with leading zeros -->
           <date form="numeric">
-            <date-part name="month" form="numeric-leading-zeros" prefix="/" font-style="italic"/>
-            <date-part name="day" form="numeric-leading-zeros" prefix="/"/>
+            <date-part name="month" form="numeric-leading-zeros"/>
+            <date-part name="day" form="numeric-leading-zeros"/>
           </date>
         </layout>
       </bibliography>
@@ -543,8 +543,8 @@ Uncertain Dates
 
 Two new features of CSL 1.0 allow for special formatting of uncertain dates.
 First, CSL 1.0 introduces the ``is-uncertain-date`` conditional. This
-conditional tests true when a date is flagged as uncertain. The second addition
-is the new ``circa`` term. For example,
+conditional tests "true" when a date is flagged as uncertain. The second addition
+is the new "circa" term. For example,
 
 .. sourcecode:: xml
 
@@ -553,7 +553,7 @@ is the new ``circa`` term. For example,
         <layout delimiter="; ">
           <choose>
             <if is-uncertain-date="issued">
-              <text value="circa" form="short" suffix=" "/>
+              <text term="circa" form="short" suffix=" "/>
             </if>
           </choose>
           <date variable="issued">
