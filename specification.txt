@@ -844,143 +844,137 @@ and `formatting`_, as well as the `text-case`_ attribute.
 Names
 ~~~~~
 
-The ``cs:names`` element can be used to display the contents of one
-or more `name variables`_, each of which can
-contain multiple contributors (e.g. the "author" variable will
-contain all the cited item's authors). The variables to be
-displayed are set with the ``variable`` attribute. If multiple
-variables are listed (separated by single spaces, see example),
-each variable is independently rendered in the order specified,
-with one exception: if the value of ``variable`` consists of
-"editor" and "translator" (in either order), and if the contents of
-the two name variables is identical, then the contents of only one
-name variables is rendered. In addition, the
-"editor-translator"-term is used if the ``cs:names`` element
-contains a ``cs:label`` element, replacing the default "editor" and
-"translator"-terms (e.g., this might result in "J. Doe, et al.
-(eds. & trans.)". Furthermore, the `delimiter`_
-attribute may be set on ``cs:names`` to delimite the names of the
-different name variables (e.g. the semicolon in "Doe & Stevens
-(editors); Johnson et al. (translators)").
+The ``cs:names`` element can be used to display the contents of one or more
+`name variables`_, each of which can contain multiple names (e.g. the "author"
+variable will contain all the cited item's author names). The variables to be
+displayed are set with the ``variable`` attribute. If multiple variables are
+selected (separated by single spaces, see example below), each variable is
+independently rendered in the order specified, with one exception: if the value
+of ``variable`` consists of "editor" and "translator" (in either order), and if
+the contents of the two name variables is identical, then the contents of only
+one name variable is rendered. In addition, the "editor-translator" term is used
+if the ``cs:names`` element contains a ``cs:label`` element, replacing the
+default "editor" and "translator" terms (e.g., this might result in "Doe (editor
+& translator)". The `delimiter`_ attribute may be set on ``cs:names`` to delimit
+the names of the different name variables (e.g. the semicolon in "Doe (editor);
+Johnson (translator)").
 
 .. sourcecode:: xml
 
     <names variable="editor translator" delimiter="; ">
-      <name and="symbol" initialize-with=". " delimiter=", "/>
-      <label prefix=" (" text-case="capitalize-first" suffix=")"/>
+      <name/>
+      <label prefix=" (" suffix=")"/>
     </names>
 
-There are four child elements associated with the ``cs:names``
-element: ``cs:name``, ``cs:et-al``, ``cs:substitute`` and
-``cs:label`` (all discussed below). In addition, the ``cs:names``
-element may carry any of the attributes for `affixes`_ and
-`formatting`_.
+There are four child elements associated with the ``cs:names`` element:
+``cs:name``, ``cs:et-al``, ``cs:substitute`` and ``cs:label`` (all discussed
+below). In addition, the ``cs:names`` element may carry the attributes for
+`affixes`_ and `formatting`_.
 
 Name
 ^^^^
 
-The ``cs:name`` element is a required child element of
-``cs:names``, and describes both how individual names are
-formatted, and how names within a name variable are separated from
-each other. The attributes (all of which are optional) that may be
-used on ``cs:name`` are:
+The ``cs:name`` element is a required child element of ``cs:names``, and
+describes both how individual names are formatted, and how names within a name
+variable are separated from each other. The attributes that may be used on
+``cs:name`` are:
 
 ``and``
-    This attribute may be used to specify a delimiter between the
-    second last and the last name of the names in the name variable (if
-    multiple name variable are specified in ``cs:names``, the delimiter
-    is applied for each variable). The value of the attribute may be
+    This attribute specifies the delimiter between the second to last and the
+    last name of the names in a name variable. The value of the attribute may be
     either "text", which selects the "and" term, or "symbol", which selects the
-    ampersand.
-
-``delimiter-precedes-last``
-    Determines whether the delimiter is used to separate the second
-    from last and the last contributor in name lists. The possible
-    values are:
-
-    
-    -  "contextual" (default): the delimiter is only included for name
-       lists of length three or more
-       2 authors: "J. Doe and T. Williams,"
-       3 authors: "J. Doe**,** S. Smith**,** and T. Williams" (note comma
-       preceding 'and').
-    -  "always": the delimiter is always included
-       2 authors: "J. Doe**,** and T. Williams"
-       3 authors: "J. Doe**,** S. Smith**,** and T. Williams" (note comma
-       preceding 'and').
-    -  "never": the delimiter is never included
-       2 authors: "J. Doe and T. Williams,"
-       3 authors: "J. Doe**,** S. Smith and T. Williams"
+    ampersand (&).
 
 ``delimiter``
-    Can be used to set a text string to separate names of a name
-    variable (e.g. ", " to yield "J. Doe, S. Smith.")
+    Specifies the text string to separate names of a name variable (e.g. ", "
+    for "J. Doe, S. Smith.")
 
+``delimiter-precedes-last``
+    Determines in which cases the delimiter used to delimit names is also used
+    to separate the second to last and the last name in name lists. The possible
+    values are:
+    
+    -  "contextual" (default): the delimiter is only included for name lists
+       with three or more names
+       
+       - 2 names: "J. Doe and T. Williams,"
+       - 3 names: "J. Doe, S. Smith, and T. Williams"
+    
+    -  "always": the delimiter is always included
+       
+       - 2 names: "J. Doe, and T. Williams"
+       - 3 names: "J. Doe, S. Smith, and T. Williams"
+    
+    -  "never": the delimiter is never included
+       
+       - 2 names: "J. Doe and T. Williams,"
+       - 3 names: "J. Doe, S. Smith and T. Williams"
 
-The remaining ``cs:name``-specific attributes, discussed below,
-only affect structured names. Unstructured names, mainly used for
-non-personal names, like those of organizations (e.g. "United
-Nations"), consist of a single indivisible name. Structured names,
-on the other hand, are used for personal names. In addition to the
-required "family" name-part, these names may also contain "given",
-"suffix", "non-dropping-particle" and "dropping-particle"
-name-parts. The exact role of each of these name-parts is:
+``et-al-min`` / ``et-al-use-first``
+    Together, these two attributes control et-al abbreviation. When the number
+    of names in a name variable matches or exceeds the number set on
+    ``et-al-min``, the rendered name list is truncated at the number of names
+    set on ``et-al-use-first``. If truncation occurs, the "et-al" term is
+    appended to the names rendered, preceded by a space (e.g. "Doe et al.").
 
+``et-al-subsequent-min`` / ``et-al-subsequent-use-first``
+    Similar to ``et-al-min`` and ``et-al-use-first``, these attributes control
+    et-al abbreviation, but now for subsequent cites (see `Positioning`_). If
+    these attributes are not set, the values of ``et-al-min`` /
+    ``et-al-use-first`` are used instead.
+
+The remaining attributes, discussed below, only affect personal names. Personal
+names require a "family" name-part, and may also contain "given", "suffix",
+"non-dropping-particle" and "dropping-particle" name-parts. The roles of
+these name-parts, which are delimited by single spaces in rendered names, are:
 
 -  "family": the surname minus any particles and suffixes
--  "given": the given names, which may be either written out full
-   ("John Edward") or as initials ("J. E.")
--  "suffix": used for name suffixes (e.g. "Jr." in "John Smith Jr."
-   and "III" in "Bill Gates III")
--  "non-dropping-particle": name particles that are not dropped
-   when only the last name is shown ("de Koning") but which may be
-   treated as a separate object from the family name
--  "dropping-particle": name particles that are dropped when only
-   the last name is shown ("van" in "Ludwig van Beethoven", which
-   becomes "Beethoven")
+-  "given": the given names, which may be either full ("John Edward") or
+   initialized ("J. E.")
+-  "suffix": name suffix, e.g. "Jr." in "John Smith Jr." and "III" in "Bill
+   Gates III"
+-  "non-dropping-particle": name particles that are not dropped when only the
+   last name is shown ("de" in the Dutch surname "de Koning") but which may be
+   treated as a separate object from the family name (e.g. for sorting)
+-  "dropping-particle": name particles that are dropped when only the surname
+   is shown ("van" in "Ludwig van Beethoven", which becomes "Beethoven")
 
 ``form``
-    Specifies whether all the name-parts of structured names should be
-    displayed (value "long"), or only the family name and the
-    non-dropping-particle (value "short"). A third value, "count",
-    returns the total number of names that would be otherwise displayed
-    by the use of the ``cs:names`` element (taking into account the
-    effects of et-al abbreviation), and may be used for advanced
-    `sorting`_.
-
-``name-as-sort-order``
-    Specifies that the name should be displayed with the given name
-    following the family name (e.g. "John Doe" becomes "Doe, John").
-    The attribute may have one of the two values:
-
-    
-    -  "first": name-as-sort-order applies to the first name in each
-       name variable
-    -  "all": name-as-sort-order applies to all names
-
-    Note that the sort order of names may differ from the display order
-    for names containing particles and suffixes (TODO: link to relevant
-    section). Also, this attribute only affects names written in the
-    latin or Cyrillic alphabet. Names written in other alphabets (e.g.
-    Asian scripts) are always shown with the family name preceding the
-    given name, separated by a space.
-
-``sort-separator``
-    Sets the delimiter for personal name parts affected by
-    ``name-as-sort-order``. E.g. the ", " in "Doe, John". As is the
-    case for ``name-as-sort-order``, this attribute only affects names
-    written in the latin or Cyrillic alphabet.
+    Specifies whether all the name-parts of personal names should be displayed
+    (value "long"), or only the family name and the non-dropping-particle (value
+    "short"). A third value, "count", returns the total number of names that
+    would be otherwise displayed by the use of the ``cs:names`` element (taking
+    into account the effects of et-al abbreviation and editor/translator
+    collapsing), and may be used for advanced `sorting`_.
 
 ``initialize-with``
-    If this attribute is set, given names are converted to initials.
-    The attribute value specifies the suffix that is included after
-    each initial (the ". " in "J. Doe"). (TODO: initialization routines
-    should include support for hyphenated names as well ("Britt-Marie"
-    becomes "B-M" or "BM" [this toggle might require a new option])).
+    If this attribute is set, given names are converted to initials. The
+    attribute value specifies the suffix that is included after each initial
+    ("." results in "J.J. Doe").
 
+``name-as-sort-order``
+    Specifies that names should be displayed with the given name following the
+    family name (e.g. "John Doe" becomes "Doe, John"). The attribute may have
+    one of the two values:
+    
+    - "first": name-as-sort-order applies to the first name in each name
+      variable
+    - "all": name-as-sort-order applies to all names
+    
+    Note that the sort order of names may differ from the display order for
+    names containing particles and suffixes (see `Name-part order`_). Also, this
+    attribute only affects names written in the latin or Cyrillic alphabet.
+    Names written in other alphabets (e.g. Asian scripts) are always shown with
+    the family name preceding the given name.
 
-The ``cs:name`` element may also carry any of the attributes for
-`affixes`_ and `formatting`_.
+``sort-separator``
+    Sets the delimiter for name-parts that have switched positions as a result
+    of ``name-as-sort-order`` (defaults to a space). E.g. a value of ", " gives
+    "Doe, John". As is the case for ``name-as-sort-order``, this attribute only
+    affects names written in the latin or Cyrillic alphabet.
+
+The ``cs:name`` element may also carry any of the attributes for `affixes`_ and
+`formatting`_.
 
 Name-part order
 '''''''''''''''
@@ -1255,28 +1249,6 @@ may be set on ``cs:locale`` to override the default values specified in the
 
 Citation-specific Options
 ^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Et al. Abbrevation
-''''''''''''''''''
-
-``et-al-min``
-    Specifies the minimum number of contributors (e.g. authors,
-    editors, etc.) in a name list for activation of et-al
-    abbreviation.
-
-``et-al-use-first``
-    The number of contributor names to display when et-al abbreviation
-    is used. ``et-al-subsequent-min``
-
-``et-al-subsequent-min``
-    Similar to et-al-min, this allows subsequent references to use a
-    different contributor limit for activation of et-al abbreviation.
-
-``et-al-subsequent-use-first``
-    Similar to et-al-use-first, this allows subsequent references to
-    display a different number of contributors when et-al abbreviation
-    is used.
-
 
 Disambiguation
 ''''''''''''''
