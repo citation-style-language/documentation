@@ -976,82 +976,122 @@ these name-parts, which are delimited by single spaces in rendered names, are:
 The ``cs:name`` element may also carry any of the attributes for `affixes`_ and
 `formatting`_.
 
-Name-part order
+Name-part Order
 '''''''''''''''
 
-The order of names, when displayed or when used for sorting, is
-dependent on many factors: the attributes ``form``,
-``name-as-sort-order``, ``demote-particles`` on ``cs:name``, the
-value of the global ``demote-particles``-option, and the alphabet
-of the individual name. The different orders are:
+The order of name-parts depends on the values of the ``form`` and
+``name-as-sort-order`` attributes on ``cs:name``, the value of the
+``demote-non-dropping-particle`` attribute on ``cs:style``, and the alphabet of
+the individual name. Finally, differences can exist between the name that is
+displayed and the name that is used for sorting. An overview of the different
+orders:
 
-**Display**
+**Display order of latin/Cyrillic names**
 
-``form`` set to "long", latin/Cyrillic name
+----
 
+:Conditions: ``form`` set to "long", 
+:Order:
+    1) given
+    2) dropping-particle
+    3) non-dropping-particle
+    4) family
+    5) suffix
 
-1) given
-2) dropping-particle
-3) non-dropping-particle
-4) family
-5) suffix
+:Example: [Gérard] [de] [la] [Martinière] [III]
 
-``form`` set to "long", non-latin/Cyrillic name
+----
 
+:Conditions: ``form`` set to "long", name-as-sort-order active,
+             ``demote-non-dropping-particle`` set to "never"
+             or "sort-only"
+:Order:
+    1) non-dropping-particle
+    2) family
+    3) suffix
+    4) given
+    5) dropping-particle
 
-1) family
-2) given (separated from family by a space)
-3) suffix (separated from given by a space)
+:Example: [la] [Martinière] [III], [Gérard] [de] 
 
-``form`` set to "short"
+----
 
+:Conditions: ``form`` set to "long", name-as-sort-order active,
+             ``demote-non-dropping-particle`` set to 
+             "display-and-sort"
+:Order:
+    1) family
+    2) suffix
+    3) given
+    4) dropping-particle
+    5) non-dropping-particle 
 
-1) non-dropping-particles (for latin/Cyrillic names)
-2) family
+:Example: [Martinière] [III], [Gérard] [de] [la]
 
-``form`` set to "long", name-as-sort-order active,
-``demote-particles`` set to "never" or "sort-only", latin/Cyrillic
-name
+----
 
+:Conditions: ``form`` set to "short"
+:Order:
+    1) non-dropping-particles
+    2) family
+    3) suffix
 
-1) non-dropping-particle
-2) family
-3) suffix
-4) given
-5) dropping-particle
+:Example: [la] [Martinière] [III]
 
-``form`` set to "long", name-as-sort-order active,
-``demote-particles`` set to "display-and-sort", latin/Cyrillic
-name
+----
 
+**Sorting order of latin/Cyrillic names**
 
-1) family
-2) suffix
-3) given
-4) dropping-particle
-5) non-dropping-particle
+N.B. The sort keys are listed in descending order of importance.
 
-**Sorting**
+----
 
-N.B. Sort keys are given in descending order of importance.
+:Conditions: ``demote-non-dropping-particle`` set to "never"
 
-``demote-particles`` set to "never"
+    1) non-dropping-particle + family
+    2) dropping-particle
+    3) given
+    4) suffix
 
-1) non-dropping-particle + family
-2) dropping-particle
-3) given
-4) suffix
+:Example: [la Martinière] [de] [Gérard] [III]
 
-``demote-particles`` set to "sort-only" or "display-and-sort"
+----
 
-1) family
-2) dropping-particle + non-dropping-particle
-3) given
-4) suffix
+:Conditions: ``demote-non-dropping-particle`` set to "sort-only" or "display-and-sort"
 
-Unstructured names are sorted as is after leading localized "stop"
-words are stripped (TODO: how are these defined, exactly?). For
-example, "The New York Times" would sort as "New York Times."
+    1) family
+    2) dropping-particle + non-dropping-particle
+    3) given
+    4) suffix
+
+:Example: [Martinière] [de la] [Gérard] [III]
+
+----
+
+**Display and sorting order of non-latin/Cyrillic names**
+
+----
+
+:Conditions: ``form`` set to "long"
+:Order:
+    1) family
+    2) given
+
+:Example:  [Mao Zedong]
+
+----
+
+:Conditions: ``form`` set to "short"
+:Order:
+    1) family
+
+:Example:  [Mao]
+
+----
+
+Non-personal names lack name-parts and are sorted as is, although English
+articles ("a", "an" and "the") at the start of the name are stripped. For
+example, "The New York Times" sorts as "New York Times".
 
 Name-part formatting
 ''''''''''''''''''''
