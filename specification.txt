@@ -981,10 +981,10 @@ Name-part Order
 
 The order of name-parts depends on the values of the ``form`` and
 ``name-as-sort-order`` attributes on ``cs:name``, the value of the
-``demote-non-dropping-particle`` attribute on ``cs:style``, and the alphabet of
-the individual name. Finally, differences can exist between the name that is
-displayed and the name that is used for sorting. An overview of the different
-orders:
+``demote-non-dropping-particle`` attribute on ``cs:style`` (one of the `global
+options`_), and the alphabet of the individual name. Finally, differences can
+exist between the name that is displayed and the name that is used for sorting.
+An overview of the different orders:
 
 **Display order of latin/Cyrillic names**
 
@@ -1096,23 +1096,19 @@ example, "The New York Times" sorts as "New York Times".
 Name-part formatting
 ''''''''''''''''''''
 
-The ``cs:name`` element may also include one or more
-``cs:name-part`` child elements. These child elements accept any of
-the `formatting`_ attributes as well as the
-`text-case`_ attribute, which allows for separate
-formatting of the different name parts (e.g. "Jane DOE"). The
-name-part for which formatting instructions are specified is set
-with the required ``name`` attribute on ``cs:name-part``, with
-values "family" (family name) or "given" (given name). The order of
-the ``cs:name-part`` elements has no effect on how names are
-displayed.
-
-An example:
+The ``cs:name`` element may include one or more ``cs:name-part`` child elements.
+These child elements accept `formatting`_ attributes and the `text-case`_
+attribute, which allows for separate formatting of the different name parts
+(e.g. "Jane DOE", see example below). The name-part for which formatting
+instructions are specified is set with the required ``name`` attribute on
+``cs:name-part``, with values "family" (family name) or "given" (given name).
+The order of the ``cs:name-part`` elements does not affect which, and in what
+order, the name-parts are rendered.
 
 .. sourcecode:: xml
 
     <names variable="author">
-      <name form="short" and="symbol" delimiter=", " initialize-with=". ">
+      <name>
         <name-part name="family" text-case="uppercase">
       </name>
     </names>
@@ -1120,17 +1116,12 @@ An example:
 Et-al
 ^^^^^
 
-The ``cs:et-al`` element can be used to customize the "et al."-type
-name list abbreviation (note that this abbreviation is controlled
-via the et-al `options`_). First, the 'term' attribute
-of the element can be set to either "et-al" (default) or "and
-others" to use either term, so that
-different et-al terms can be used in citations and the
-bibliography. Secondly, any of the attributes for `affixes`_ and
-`formatting`_ attributes can be applied to
-``cs:et-al``, e.g. to italicize the "et-al" term.
-
-An example:
+Et-al abbreviation, controlled via the et-al attributes on ``cs:name`` (see
+`Name`_), can be further customized with the optional ``cs:et-al`` element. The
+``term`` attribute of this element can be set to either "et-al" (default) or to
+"and others" to use either term (with this different et-al terms can be used for
+citations and the bibliography). In addition, attributes for `affixes`_ and
+`formatting`_ can be used, for example to italicize the et-al term:
 
 .. sourcecode:: xml
 
@@ -1142,36 +1133,27 @@ An example:
 Substitute
 ^^^^^^^^^^
 
-The ``cs:substitute`` element can be used to specify one of more
-substitutions in case the `name variables`_
-specified in the parent ``cs:names`` element is/are empty. The
-substitutions are specified as child elements of ``cs:substitute``,
-and can consist of any of the standard
-`rendering elements`_ (with the exception of
-``cs:layout``), or of a short-hand version of ``cs:names`` without
-any child elements (in the latter case formatting instructions are
-inherited from the ``cs:name`` and ``cs:et-al`` elements in the
-same ``cs:names`` element (TODO: verify that this is what's
-supposed to happen)). The specified elements are tested in order
-until an element returns a non-empty result.
-
-An example (which substitutes the editor, translator or the title,
-in that order):
+The optional ``cs:substitute`` element can be used to control substitution in
+case the `name variables`_ specified in the parent ``cs:names`` element are
+empty. The substitutions are specified as child elements of ``cs:substitute``,
+and can consist of any of the standard `rendering elements`_ (with the exception
+of ``cs:layout``). It is also possible to use a shorthand version of
+``cs:names``, which doesn't allow for any child elements, and uses the
+attributes values set on the ``cs:name`` and ``cs:et-al`` child elements of the
+original ``cs:names`` element. If ``cs:substitute`` contains multiple child
+elements, the first element to return a non-empty result is used for
+substitution. Substituted variables are repressed in the rest of the output to
+prevent duplication. An example, where an empty "author" name variable is
+substituted by the "editor" name variable, or, when no editors exist, by the
+"title" macro:
 
 .. sourcecode:: xml
 
     <macro name="author">
       <names variable="author">
-        <name name-as-sort-order="all" 
-              and="symbol" 
-              sort-separator=", " 
-              initialize-with=". "
-              delimiter=", " 
-              delimiter-precedes-last="always"/>
-        <label form="short" prefix=" (" suffix=".)" text-transform="capitalize"/>
+        <name/>
         <substitute>
           <names variable="editor"/>
-          <names variable="translator"/>
           <text macro="title"/>
         </substitute>
       </names>
@@ -1180,12 +1162,11 @@ in that order):
 Label in ``cs:names``
 ^^^^^^^^^^^^^^^^^^^^^
 
-The ``cs:label`` element, used to output text terms whose
-pluralization depends on the contents of another variable (e.g.
-"(editors)" in "Doe and Smith (editors)"), is discussed in detail
-in the `label`_ section. When used within ``cs:names``,
-the ``variable`` attribute should be omitted, as this is inherited
-from the parent ``cs:names`` element.
+The ``cs:label`` element, used to output text terms whose pluralization depends
+on the contents of another variable (e.g. "(editors)" in "Doe and Smith
+(editors)"), is discussed in detail in the `label`_ section. When used within
+``cs:names``, the ``variable`` attribute should be omitted, as the value set on
+the parent ``cs:names`` element is used.
 
 Label
 ~~~~~
@@ -1249,28 +1230,27 @@ cs:number.)
 Group
 ~~~~~
 
-The ``cs:group`` element must contain one or more
-`rendering elements`_ (not ``cs:layout``). It
-has multiple uses: ``cs:group`` can carry a
-`delimiter`_, which is used to separate the enclosed
-elements. It can provide `affixes`_ for the entire group
-of elements, and may carry `formatting`_ attributes
-(any except for "text-case"), which are transmitted to the enclosed
-elements. In addition, ``cs:group`` acts as an conditional: if none
-of the enclosed elements reference a non-empty variable or macro,
-'decorating' ``cs:text`` elements that output verbatim text or
-terms (e.g. ``<text value="some text">`` and
-``<text term="editor">``) are ignored.
-
-(TODO: Are only text-terms ignored if they are the sole output, or
-would be ignored as well?)
+The ``cs:group`` element may contain one or more `rendering elements`_ (not
+``cs:layout``). ``cs:group`` itself may carry the `delimiter`_ attribute (to
+delimit the enclosed elements) and the attributes for `affixes`_ (which are
+applied to the group output) and for `formatting`_ (their values are transmitted
+to the enclosed elements). Note that ``cs:group`` implicitly acts as a
+conditional: the ``cs:group`` element and its child elements are only processed
+if at least one of the rendering elements included in the ``cs:group`` element
+call a non-empty variable (either directly or via a macro). For example,
 
 .. sourcecode:: xml
 
-    <group delimiter=": " font-weight="bold">
-      <text variable="publisher-place"/>
-      <text variable="publisher"/>
-    </group>
+    <layout>
+      <group prefix="(" suffix=")">
+        <text value="Published by: "/>
+        <text variable="publisher"/>
+      </group>
+    </layout>
+
+would result in "(Published by: Company A)" when the publisher variable is set
+to "Company A", but wouldn't generate any output when the publisher variable is
+empty.
 
 Style Behavior
 --------------
