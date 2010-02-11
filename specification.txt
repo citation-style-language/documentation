@@ -1117,9 +1117,10 @@ Et-al
 ^^^^^
 
 Et-al abbreviation, controlled via the et-al attributes on ``cs:name`` (see
-`Name`_), can be further customized with the optional ``cs:et-al`` element. The
-``term`` attribute of this element can be set to either "et-al" (default) or to
-"and others" to use either term (with this different et-al terms can be used for
+`Name`_), can be further customized with the optional ``cs:et-al`` element,
+which should be included directly after the ``cs:name`` element. The ``term``
+attribute of this element can be set to either "et-al" (default) or to "and
+others" to use either term (with this different et-al terms can be used for
 citations and the bibliography). In addition, attributes for `affixes`_ and
 `formatting`_ can be used, for example to italicize the et-al term:
 
@@ -1133,19 +1134,19 @@ citations and the bibliography). In addition, attributes for `affixes`_ and
 Substitute
 ^^^^^^^^^^
 
-The optional ``cs:substitute`` element can be used to control substitution in
-case the `name variables`_ specified in the parent ``cs:names`` element are
-empty. The substitutions are specified as child elements of ``cs:substitute``,
-and can consist of any of the standard `rendering elements`_ (with the exception
-of ``cs:layout``). It is also possible to use a shorthand version of
-``cs:names``, which doesn't allow for any child elements, and uses the
-attributes values set on the ``cs:name`` and ``cs:et-al`` child elements of the
-original ``cs:names`` element. If ``cs:substitute`` contains multiple child
-elements, the first element to return a non-empty result is used for
-substitution. Substituted variables are repressed in the rest of the output to
-prevent duplication. An example, where an empty "author" name variable is
-substituted by the "editor" name variable, or, when no editors exist, by the
-"title" macro:
+The optional ``cs:substitute`` element, which should be included as the last
+child element of ``cs:names``, controls substitution in case the `name
+variables`_ specified in the parent ``cs:names`` element are empty. The
+substitutions are specified as child elements of ``cs:substitute``, and can
+consist of any of the standard `rendering elements`_ (with the exception of
+``cs:layout``). It is also possible to use a shorthand version of ``cs:names``,
+which doesn't allow for any child elements, and uses the attributes values set
+on the ``cs:name`` and ``cs:et-al`` child elements of the original ``cs:names``
+element. If ``cs:substitute`` contains multiple child elements, the first
+element to return a non-empty result is used for substitution. Substituted
+variables are repressed in the rest of the output to prevent duplication. An
+example, where an empty "author" name variable is substituted by the "editor"
+name variable, or, when no editors exist, by the "title" macro:
 
 .. sourcecode:: xml
 
@@ -1164,18 +1165,24 @@ Label in ``cs:names``
 
 The ``cs:label`` element, used to output text terms whose pluralization depends
 on the contents of another variable (e.g. "(editors)" in "Doe and Smith
-(editors)"), is discussed in detail in the `label`_ section. When used within
-``cs:names``, the ``variable`` attribute should be omitted, as the value set on
-the parent ``cs:names`` element is used.
+(editors)"), is discussed in detail in the `label`_ section. It should be
+included after the ``cs:name`` and ``cs:et-al`` elements, but before the
+``cs:substitute`` element. When used within ``cs:names``, the ``variable``
+attribute should be omitted, as the value set on the parent ``cs:names`` element
+is used.
 
 Label
 ~~~~~
 
-The ``cs:label`` element is used to output text terms whose
-pluralization depends on the contents of another variable. An
-example is the label for pages, which can be either singular ("page
-5") or plural ("pages 5-7"). This output could be written in CSL
-as:
+The Citation Style Language includes several variables that have matching terms.
+The ``cs:label`` element can be used to render one of these terms, while
+matching the term plurality with that of the corresponding variable. The
+variable/term combination is selected with the ``variable`` attribute, which can
+be set to either "page" or "locator". When ``cs:label`` is used as a child
+element of ``cs:names``, the value of the ``variable`` attribute is
+automatically inherited from the parent ``cs:names`` element. The example below
+displays the "page" variable, using the singular form of the "page" term for a
+single page ("page 5"), or the plural form for a page range ("pages 5-7").
 
 .. sourcecode:: xml
 
@@ -1184,48 +1191,25 @@ as:
       <text variable="page"/>
     </group>
 
-The ``variable`` attribute of ``cs:label`` must be set (possible
-values are "page" and "locator"), unless ``cs:label`` is used
-within ``cs:names``, in which case ``cs:label`` inherits the
-variable(s) from the ``cs:names`` element. The value of the
-``variable`` attribute both selects the accompanying text term (the
-"page" and "locator" terms for the "page" and "locator" variables,
-respectively), and uses the variable content to determine the
-pluralization of the text term.
+The ``cs:label`` element may carry attributes for `affixes`_, `formatting`_,
+`text-case`_ and `strip-periods`_, as well as:
 
-The ``cs:label`` element may carry any of the attributes for `affixes`_
-and `formatting`_ attributes, as well as the
-`text-case`_ attribute. In addition, the following
-attributes are applicable for ``cs:label``:
-
-``form`` (required)
-    The form of the label-term, with values:
-
+``form``
+    Selects the form of the term, with possible values:
     
-    -  "long": e.g. "editor"/"editors" for the term editor
-    -  "verb": e.g. "edited by" for the term editor
-    -  "short": e.g. "ed"/"eds" for the term editor
-    -  "verb-short": e.g. "ed" for the term editor
-    -  "symbol": e.g. "ยง" for the term section
+    -  "long": the default, e.g. "editor"/"editors" for the "editor" term
+    -  "verb": e.g. "edited by" for the "editor" term
+    -  "short": e.g. "ed"/"eds" for the "editor" term
+    -  "verb-short": e.g. "ed" for the "editor" term
+    -  "symbol": e.g. "ง" for the singular "section" term
 
-``strip-periods`` (optional)
-    If set to "true" (default is "false), periods are stripped from the
-    term used by ``cs:label``
-
-``plural`` (optional)
+``plural``
     Sets pluralization of the term, with values:
-
     
-    -  "contextual": default, pluralization is dependent on the
-       variable contents, e.g. "p. 1", "pp. 1-3"
-    -  "always": - always use the plural form, e.g. "pp. 1", "pp. 1-3"
-    -  "never": - always use the singular form, e.g. "p. 1", "p. 1-3"
-
-
-(TODO: ``form`` seems required for ``cs:label``. Can't it just
-default to "long"? That seems more consistent as ``form`` is
-generally optional, e.g. for cs:name, cs:date-part, cs:text and
-cs:number.)
+    -  "contextual": the default, pluralization is dependent on the
+       variable contents, e.g. "page 1" and "pages 1-3"
+    -  "always": always use the plural form, e.g. "pages 1" and "pages 1-3"
+    -  "never": always use the singular form, e.g. "page 1" and "page 1-3"
 
 Group
 ~~~~~
@@ -1939,7 +1923,7 @@ Strip-periods
 ~~~~~~~~~~~~~
 
 The ``strip-periods`` attribute may be set on ``cs:date-part`` (but
-only is ``name`` is set to "month"), ``cs:text`` and ``cs:label``.
+only if ``name`` is set to "month"), ``cs:text`` and ``cs:label``.
 When set to "true" ("false" is the default), any periods in the
 rendered text are removed.
 
