@@ -919,7 +919,7 @@ variable are separated from each other. The attributes that may be used on
 
 ``et-al-subsequent-min`` / ``et-al-subsequent-use-first``
     Similar to ``et-al-min`` and ``et-al-use-first``, these attributes control
-    et-al abbreviation, but now for subsequent cites (see `Positioning`_). If
+    et-al abbreviation, but now for subsequent cites (see `Note Distance`_). If
     these attributes are not set, the values of ``et-al-min`` /
     ``et-al-use-first`` are used instead.
 
@@ -950,7 +950,9 @@ these name-parts, which are delimited by single spaces in rendered names, are:
 ``initialize-with``
     If this attribute is set, given names are converted to initials. The
     attribute value specifies the suffix that is included after each initial
-    ("." results in "J.J. Doe").
+    ("." results in "J.J. Doe"). Note that the global ``initialize-with-hyphen``
+    option controls how compound given names (e.g. "Jean-Luc") are hyphenated
+    when initialized (see `Hyphenation of Initialized Names`_).
 
 ``name-as-sort-order``
     Specifies that names should be displayed with the given name following the
@@ -1096,14 +1098,16 @@ example, "The New York Times" sorts as "New York Times".
 Name-part formatting
 ''''''''''''''''''''
 
-The ``cs:name`` element may include one or more ``cs:name-part`` child elements.
-These child elements accept `formatting`_ attributes and the `text-case`_
-attribute, which allows for separate formatting of the different name parts
-(e.g. "Jane DOE", see example below). The name-part for which formatting
-instructions are specified is set with the required ``name`` attribute on
-``cs:name-part``, with values "family" (family name) or "given" (given name).
-The order of the ``cs:name-part`` elements does not affect which, and in what
-order, the name-parts are rendered.
+The ``cs:name`` element may include one or two ``cs:name-part`` child elements.
+These child elements accept the `formatting`_ and `text-case`_ attributes, which
+allows for separate formatting of the different name parts (e.g. "Jane DOE", see
+example below). The required ``name`` attribute on ``cs:name-part`` specifies
+which name-parts are affected: when set to "given", the formatting only acts on
+the "given" name-part. When set to "family", the formatting acts on the
+"family", "dropping-particle" and "non-dropping-particle" name-parts (the
+"suffix" name-part is not subject to any name-part formatting). The order of the
+``cs:name-part`` elements does not affect which, and in what order, the
+name-parts are rendered.
 
 .. sourcecode:: xml
 
@@ -1242,14 +1246,13 @@ Style Behavior
 Options
 ~~~~~~~
 
-Styles can be extensively configured with options, which are set as attributes
-(all of which are optional). `Citation-specific options`_ are set on
-``cs:citation``, while `bibliography-specific options`_ are set on
-``cs:bibliography``. `Global options`_, which affect both citations and the
-bibliography, are set ``cs:style``. `Hierarchical name options`_ may be set on
-``cs:style``, ``cs:citation`` and ``cs:bibliography``. Finally, `locale options`
-may be set on ``cs:locale`` to override the default values specified in the
-`locale files <#Locale Files - Basic Structure>`_.
+Styles can be extensively configured with (optional) options, which are set as
+attributes. `Citation-specific options`_ are set on ``cs:citation``, while
+`bibliography-specific options`_ are set on ``cs:bibliography``. `Global
+options`_, which affect both citations and the bibliography, are set on
+``cs:style``. `Hierarchical name options`_ may be set on ``cs:style``,
+``cs:citation`` and ``cs:bibliography``. Finally, `locale options <#Locale Files
+- Basic Structure>`_ may be set on ``cs:locale`` elements.
 
 Citation-specific Options
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1345,127 +1348,102 @@ described in this section, and are always performed in this order.
        appearance of the name in other references will not be affected.
 
 
-Collapsing
-''''''''''
+Citation Collapsing
+'''''''''''''''''''
 
 ``collapse``
-    The collapse option provides several ways for the collapsing of
-    citations. The possible values are:
-
+    The collapse option activates citation collapsing. Note that "year-suffix"
+    and "year-suffix-ranged" both fall back to "year" when the
+    ``disambiguate-add-year-suffix`` attribute is not set to "true" (see
+    `Disambiguation`_). Its possible values are:
     
-    -  "citation-number": collapses numeric citation ranges (e.g. from
-       "[1, 2, 3]" to "[1-3]"). Note that only increasing ranges are
-       collapsed, e.g. "[3, 2, 1]" will not collapse, so that it is often
-       desirable to sort by the ``citation-number``
-       variable (see `Sorting`_).
-    -  "year": collapses subsequent cites with the same author(s), e.g.
-       from "(Doe 2000, Doe 2001)" to "(Doe 2000, 2001)"
-    -  "year-suffix": collapses as "year", but also collapses identical
-       years, e.g. from "(Doe 2000a, Doe 2000b)" to "(Doe 2000a, b)". Note
-       that the "year-suffix" option falls back to "year" if the
-       ``disambiguate-add-year-suffix`` attribute is not set to "true".
+    -  "citation-number": collapses numeric citation ranges (e.g. from "[1, 2,
+       3, 5]" to "[1-3, 5]"). Note that only increasing ranges are collapsed,
+       e.g. "[3, 2, 1]" will not collapse (to see how numeric styles can sort
+       citations by the ``citation-number`` variable, see `Sorting`_).
+    -  "year": a cite that, except for the year, is identical to the preceding
+       cite is collapsed to only the year, e.g. from "(Doe 2000, Doe 2001)" to
+       "(Doe 2000, 2001)".
+    -  "year-suffix": collapses as "year", but also collapses identical years,
+       e.g. "(Doe 2000a, b)" instead of "(Doe 2000a, 2000b)".
     -  "year-suffix-ranged": collapses as "year-suffix", but also
-       collapses ranges of year-suffix markers, giving "(Doe 2000a-c)"
-       instead of "(Doe 2000a, b, c)". Note that the "year-suffix-ranged"
-       option falls back to "year" if the ``disambiguate-add-year-suffix``
-       attribute is not set to "true".
+       collapses ranges of year-suffix markers, e.g. "(Doe 2000a-c,e)"
+       instead of "(Doe 2000a, b, c, e)". 
 
 ``year-suffix-delimiter``
-    Specifies the delimiter between subsequent year-suffix elements.
-    E.g., if the ``collapse`` option is set to "year-suffix", the
-    ``delimiter`` on ``cs:layout`` in ``cs:citation`` is set to "; ",
-    and if the value of ``year-suffix-delimiter`` is ",", cites to
-    "Smith 1999a", "Smith 1999b", "Smith 2000" and "Jones 2001" would
-    be collapsed to "(Smith 1999a,b; 2000; Jones 2001)". If this
-    attribute is not set, the delimiter defaults to the one specified
-    for the citation ``cs:layout`` element.
+    Specifies the delimiter for year-suffix elements. For example, citations
+    like "(Smith 1999a,b; 2000; Jones 2001)" are obtained when the ``collapse``
+    attribute is set to "year-suffix", the ``delimiter`` on ``cs:layout`` in
+    ``cs:citation`` is set to "; ", and the ``year-suffix-delimiter`` is set to
+    ",". When the ``year-suffix-delimiter`` attribute is not set, year-suffixes
+    are delimited with the delimiter set on ``cs:layout`` in ``cs:citation``.
 
 ``after-collapse-delimiter``
-    Specifies the delimiter that should *follow* a group of collapsed
-    cites, when the next cite in the citation is not collapsed. For
-    example, with the ``collapse`` attribute set to "year-suffix", the
-    ``delimiter`` on ``cs:layout`` in ``cs:citation`` set to ", " and
-    ``after-collapse-delimiter`` set to "; ", cites to "Smith 1999a",
-    "Smith 1999b", "Smith 2000", "Jones 2001" and "Brown 2007" would
-    collapse to: "(Smith 1999a, b, 2000; Jones 2001, Brown 2007)".
+    Specifies the cite delimiter that should be used *after* a group of
+    collapsed cites. For example, citations like "(Smith 1999a, b, 2000; Jones
+    2001, Brown 2007)" are obtained when the ``collapse`` attribute is set to
+    "year-suffix", the ``delimiter`` on ``cs:layout`` in ``cs:citation`` is set
+    to ", " and ``after-collapse-delimiter`` is set to "; ".
 
 
-Positioning
-'''''''''''
+Note Distance
+'''''''''''''
 
 ``near-note-distance``
-    The "near-note" position (see `Conditionals`_) is true when the
-    distance (measured in number of footnotes or endnotes) between the
-    current cite and the most recent preceding cite to the same source
-    is no more than the value of ``near-note-distance``. If this
-    attribute is not set, a default value of "5" is used.
+    The "near-note" position (see `Conditionals`_) tests "true" if a preceding
+    note exists that: a) refers to the same item and b) has a distance (measured
+    in footnotes or endnotes) to the current item that does not exceed the value
+    of ``near-note-distance``. This attribute defaults to 5.
 
 Bibliography-specific Options
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Et al. Abbrevation
-''''''''''''''''''
-
-``et-al-min``
-    Specifies the minimum number of contributors (e.g. authors,
-    editors, etc.) in a name list for activation of et-al
-    abbreviation.
-
-``et-al-use-first``
-    The number of contributor names to display when et-al abbreviation
-    is used.
-
-
-White-spacing
-'''''''''''''
-
-(TODO: I would have called this section "Layout", if it wasn't for
-the cs:layout element, which might cause confusion)
+Whitespace
+''''''''''
 
 ``hanging-indent``
-    If set to "true" ("false" is the default), bibliographic entries
-    are rendered with hanging-indents
+    If set to "true" ("false" is the default), bibliographic entries are
+    rendered with hanging-indents.
 
 ``second-field-align``
-    If set to "flush", subsequent lines of each bibliography entry are
-    aligned with the beginning of the second field. If set to "margin",
-    the first field is put in the margin and all subsequent lines of
-    text are aligned with the margin (as in the IEEE style). An example
-    showing the alignment, if the first field is
-    ``<text   variable="citation-number" suffix=". "/>``:
-
-
-.. sourcecode:: xml
-
-    1. Adams, D. (2002). The Ultimate Hitchhiker's Guide to the
-       Galaxy (1st ed.).
+    If set to "flush", subsequent lines of each bibliography entry are aligned
+    with the beginning of the second field. If set to "margin", the first field
+    is put in the margin and all subsequent lines of text are aligned with the
+    margin (as in the IEEE style). An example showing the alignment, if the
+    first field is ``<text variable="citation-number" suffix=". "/>``:
+    
+    ::
+    
+        1. Adams, D. (2002). The Ultimate Hitchhiker's Guide to the
+           Galaxy (1st ed.).
 
 ``line-spacing``
     Sets the spacing of lines (in units of lines, default is "1")
 
 ``entry-spacing``
-    Sets the spacing of lines (in units of line-spacing, default is
-    "1")
-
+    Sets the spacing of lines (in units of line-spacing, default is "1")
 
 Reference Grouping
 ''''''''''''''''''
 
 ``subsequent-author-substitute``
-    Substitutes subsequent recurrences of an author with the attribute
-    value (which can be any string), e.g.:
-
-.. sourcecode:: xml
-
-    Asimov. Foundation, 1951.
-    ---. Foundation and Empire, 1952.
-    ---. Second Foundation, 1953.
+    The value of the ``subsequent-author-substitute`` attribute (which may be
+    any string) is used to replace the names in a bibliographic entry, when it
+    shares these names with the preceding bibliographic entry. Note that only
+    the first ``cs:names`` element rendered is affected. E.g., with
+    ``subsequent-author-substitute`` set to "---":
+    
+    ::
+    
+        Asimov. Foundation, 1951.
+        ---. Foundation and Empire, 1952.
+        ---. Second Foundation, 1953.
 
 Global Options
 ^^^^^^^^^^^^^^
 
-Compound name initialization
-''''''''''''''''''''''''''''
+Hyphenation of Initialized Names
+''''''''''''''''''''''''''''''''
 
 ``initialize-with-hyphen``
     Specifies whether compound given names (e.g. "Jean-Luc") should be
@@ -1476,10 +1454,10 @@ Page Ranges
 '''''''''''
 
 ``page-range-format``
-    The value of this attribute determines how page ranges are
-    formatted. Available values: "expanded" (e.g. "321-328"), "minimal"
-    ("321-8"), and "chicago" ("321-28"). See also
-    `Appendix IV - Page Abbreviation Rules`_. If the attribute is
+    The value of this attribute determines how page ranges are formatted.
+    Available values: "expanded" (e.g. "321-328"), "minimal" ("321-8"), and
+    "chicago" ("321-28") (see `Appendix IV - Page Abbreviation Rules`_ for the
+    Chicago Manual of Style page range collapsing rules). If the attribute is
     not specified, the content of the page-field is left unchanged.
 
 Name Particles
@@ -1761,7 +1739,7 @@ attributes, are:
        measured in number of foot or endnotes) from a previous cite (TODO:
        does the previous cite has to be a full cite?) to the same item.
        The maximal distance is set with the
-       ``near-note-distance``-option (see `positioning`_). Cites that are not
+       ``near-note-distance``-option (see `Note Distance`_). Cites that are not
        located in a foot or endnote will never be in the "near-note"
        position.
 
