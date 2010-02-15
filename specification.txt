@@ -661,7 +661,8 @@ Date
 
 The ``cs:date`` element is used to output dates, in either a localized or a
 non-localized format. The desired date variable (see `Date Variables`_) is
-selected with the ``variable`` attribute.
+selected with the ``variable`` attribute. If the selected variable is empty,
+``cs:date`` renders the "no date" term.
 
 Localized date formats are selected with the ``form`` attribute. This attribute
 can be set to "numeric" (for numeric date formats, e.g. "12-15-2005"), or to
@@ -1361,9 +1362,9 @@ Citation Collapsing
        3, 5]" to "[1-3, 5]"). Note that only increasing ranges are collapsed,
        e.g. "[3, 2, 1]" will not collapse (to see how numeric styles can sort
        citations by the ``citation-number`` variable, see `Sorting`_).
-    -  "year": a cite that, except for the year, is identical to the preceding
-       cite is collapsed to only the year, e.g. from "(Doe 2000, Doe 2001)" to
-       "(Doe 2000, 2001)".
+    -  "year": when the names stored in the rendered name variables are the same
+       for two subsequent cites, the latter cite is collapsed to only the year,
+       e.g. from "(Doe 2000, Doe 2001)" to "(Doe 2000, 2001)".
     -  "year-suffix": collapses as "year", but also collapses identical years,
        e.g. "(Doe 2000a, b)" instead of "(Doe 2000a, 2000b)".
     -  "year-suffix-ranged": collapses as "year-suffix", but also
@@ -1463,95 +1464,89 @@ Page Ranges
 Name Particles
 ''''''''''''''
 
-Many Western names consist not only of a given and a family name,
-but also of one or more name particles. However, not all particles
-are equal: name particles can be either maintained or dropped when
-only the surname is shown (from now on we will refer to these two
-types as non-dropping-particle and dropping-particle,
-respectively). A single name can contain particles of both types
-(with the non-dropping-particle always following the
-dropping-particle). For example, the French name "Gï¿½rard de la
-Martiniï¿½re" can be deconstructed into:
+Many Western names include one or more name particles (e.g. "de" in the Dutch
+name "W. de Koning"). However, not all particles are equal: name particles can
+be either maintained or dropped when only the surname is shown (from now on we
+will refer to these two types as non-dropping-particle and dropping-particle,
+respectively). A single name can contain particles of both types (with the
+non-dropping-particle always following the dropping-particle). For example, the
+French name "Gérard de la Martinière" can be deconstructed into:
+    
+    ::
+    
+        {
+            "author": {
+                "given": "Gérard",
+                "dropping-particle": "de",
+                "non-dropping-particle": "la",
+                "family": "Martinière"
+            },
+            {
+                "given": "W.",
+                "non-dropping-particle": "de",
+                "family": "Koning"
+            }
+        }
 
-.. sourcecode:: xml
+When just the surname is shown, only the non-dropping-particle is kept: "La
+Martinière".
 
-    {
-        "author": {
-            "family": "Martiniï¿½re",
-            "given": "Gï¿½rard",
-            "dropping-particle": "de",
-            "non-dropping-particle": "la" 
-        } 
-    }
-
-When just the surname is shown, only the non-dropping-particle is
-kept: "La Martiniï¿½re".
-
-Whereas the dropping-particle are always treated the same, there is
-some variation between styles in how the non-dropping-particle is
-handled in case of inverted names, where the family name precedes
-the given name. First, the non-dropping-particle can be either
-prepended to the family name (e.g. "de Koning, W.") or appended
-(after initials or given names, e.g. "Koning, W. de"). Note that
-the dropping-particle is always appended in inverted names.
-Secondly, if the choice has been made to prepend the
-non-dropping-particle to the family name for inverted names, the
-author sort order can differ. Either the non-dropping-particle
-remains part of the family name (as part of the primary sort key;
-example A), or it may be separated from the family name and become
-(part of) a secondary sort key, joining the dropping-particle, if
-available (example B).
+Whereas the dropping-particle is always treated the same, styles vary in how the
+non-dropping-particle is handled in case of inverted names, where the family
+name precedes the given name. First, the non-dropping-particle can be either
+prepended to the family name (e.g. "de Koning, W.") or appended (after initials
+or given names, e.g. "Koning, W. de"). Note that the dropping-particle is always
+appended in inverted names. Secondly, if the choice has been made to prepend the
+non-dropping-particle to the family name for inverted names, the author sort
+order can differ. Either the non-dropping-particle remains part of the family
+name (as part of the primary sort key; sort order A), or it may be separated
+from the family name and become (part of) a secondary sort key, joining the
+dropping-particle, if available (sort order B).
 
 **Sort order A: non-dropping-particle not demoted**
 
-
--  primary sort key: "la Martiniï¿½re"
+-  primary sort key: "la Martinière"
 -  secondary sort key: "de"
--  tertiary sort key: "Gï¿½rard"
+-  tertiary sort key: "Gérard"
 
 **Sort order B: non-dropping-particle demoted**
 
-
--  primary sort key: "Martiniï¿½re"
+-  primary sort key: "Martinière"
 -  secondary sort key: "de la"
--  tertiary sort key: "Gï¿½rard"
+-  tertiary sort key: "Gérard"
 
-For some names the particles should not follow the general
-non-dropping-particle handling. This can however be easily
-circumvented by, for these cases, including the particles in the
-family name field, for example for the French general Charles de
-Gaulle:
+Some names include a particle that should never be demoted. For these cases the
+particle should just be included in the family name field, for example for the
+French general Charles de Gaulle:
 
-.. sourcecode:: xml
+    ::
+    
+        {
+            "author": {
+                "family": "de Gaulle",
+                "given": "Charles"
+            } 
+        }
 
-    {
-        "author": {
-            "family": "de Gaulle",
-            "given": "Charles",
-        } 
-    }
-
-The option of how particles should be handled for inverted names is
-set with the ``demote-non-dropping-particle`` option:
+The handling of particles for inverted names is set with the
+``demote-non-dropping-particle`` option:
 
 ``demote-non-dropping-particle``
-    Sets the display and sorting behavior of non-dropped particles in
+    Sets the display and sorting behavior of the non-dropping-particle in
     inverted names (e.g. "Koning, W. de"). The possible values are:
-
     
-    -  "never": the non-dropping-particle is treated as part of the
-       family name, whereas the dropping-particle is appended (e.g. "de
-       Koning, W.", "la Martiniï¿½re, Gï¿½rard de"). The non-dropping-particle
-       is part of the primary sort key (example A, e.g. "de Koning, W."
-       appears under "D").
-    -  "sort-only": as "never", with the exception that
-       non-dropping-particle is demoted to a secondary sort key (see
-       example B, e.g. "de Koning, W." appears under "K").
-    -  "display-and-sort" (default): the dropping and
-       non-dropping-particle are appended to the rest of the name (e.g.
-       "Koning, W. de" and "Martiniï¿½re, Gï¿½rard de la"). When names are
-       sorted, all particles are part of the secondary sort key (see
-       example B, e.g. "Koning, W. de" appears under "K").
+    -  "never": the non-dropping-particle is treated as part of the family name,
+       whereas the dropping-particle is appended (e.g. "de Koning, W.", "la
+       Martinière, Gérard de"). The non-dropping-particle is part of the primary
+       sort key (sort order A, e.g. "de Koning, W." appears under "D").
+    -  "sort-only": same display behavior as "never", but the
+       non-dropping-particle is demoted to a secondary sort key (see sort order
+       B, e.g. "de Koning, W." appears under "K").
+    -  "display-and-sort" (default): the dropping and non-dropping-particle are
+       appended to the rest of the name (e.g. "Koning, W. de" and "Martinière,
+       Gérard de la"). When names are sorted, all particles are part of the
+       secondary sort key (see sort order B, e.g. "Koning, W. de" appears under
+       "K").
 
 Hierarchical Name Options
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1564,10 +1559,10 @@ to repeat the same attributes and attribute values for every occurance of the
 The available hierarchical attributes for ``cs:name`` are ``and``,
 ``delimiter-precedes-last``, ``et-al-min``, ``et-al-use-first``,
 ``et-al-subsequent-min``, ``et-al-subsequent-use-first``, ``initialize-with``,
-``name-as-sort-order`` and ``sort-separator`` attributes. The attributes
-``name-form`` and ``name-delimiter`` accompany the ``form`` and ``delimiter``
-attributes on ``cs:name``. Similarly, ``names-delimiter``, the only hierarchical
-attribute available for ``cs:names``, accompanies the ``delimiter`` attribute on
+``name-as-sort-order`` and ``sort-separator``. The attributes ``name-form`` and
+``name-delimiter`` accompany the ``form`` and ``delimiter`` attributes on
+``cs:name``. Similarly, ``names-delimiter``, the only hierarchical attribute
+available for ``cs:names``, accompanies the ``delimiter`` attribute on
 ``cs:names``.
 
 When a hierarchical name attribute is set on ``cs:style``, ``cs:citation`` or
@@ -1580,35 +1575,30 @@ Locale Options
 ^^^^^^^^^^^^^^
 
 ``punctuation-in-quote``
-    Determines whether punctuation (commas and periods) is placed
-    within (value "true") or outside (default, value "false") quotation
-    marks added with the ``quotes`` attribute.
+    Determines whether punctuation (commas and periods) is placed inside (value
+    "true") or outside (default, value "false") quotation marks added with the
+    ``quotes`` attribute (see `Formatting`_).
 
 Sorting
 ~~~~~~~
 
-The sort order for citations and the bibliography can be set with
-the ``cs:sort`` element in ``cs:citation`` and ``cs:bibliography``.
-If a style does not include sorting instructions, references are
-listed in the order cited.
+The sort order for citations and the bibliography can be set with the
+``cs:sort`` element in ``cs:citation`` and ``cs:bibliography``. If a style does
+not include sorting instructions, references are listed in the order cited.
 
-The ``cs:sort`` which must contain one or more ``cs:key`` child
-elements. The sort key, set as an attribute on ``cs:key``, can be a
-``variable`` (with possible values of any of the
-`name variables`_, `date variables`_ or
-`standard variables`_ or a ``macro``. The
-``cs:key`` element may carry the ``sort`` attribute, with possible
-values of "ascending" (default) or "descending", to indicate the
-sort order. The ``names-min`` and ``names-use-first`` attributes
-(which affect all names generated by macros called by ``cs:key``)
-can be used to (further) constrain the number of names used in the
-sort, overriding the values of the corresponding ``et-al-min`` and
-``et-al-use-first`` options.
+The ``cs:sort`` element must contain one or more ``cs:key`` child elements. The
+sort key, set as an attribute on ``cs:key``, can be a ``variable`` (see
+`Appendix I - Variables`_) or a ``macro``. The ``cs:key`` element may carry the
+``sort`` attribute, with possible values of "ascending" (default) or
+"descending", to indicate the sort order. The ``names-min`` and
+``names-use-first`` attributes (which affect all names generated by macros
+called by ``cs:key``) can be used to (further) constrain the number of names
+used in the sort, overriding the values of the corresponding ``et-al-min`` and
+``et-al-use-first`` and et-al-subsequent options.
 
-An example, where citations are first sorted by the output of the
-author macro with overriding values of ``et-al-min`` and
-``et-al-use-first``. Entries that share the same author macro
-output are further sorted in reverse order by date of issue.
+An example, where citations are first sorted by the output of the author macro
+with overriding settings for et-al abbreviation. Entries that share the same
+author macro output are further sorted in reverse order by date of issue.
 
 .. sourcecode:: xml
 
@@ -1617,63 +1607,58 @@ output are further sorted in reverse order by date of issue.
         <key macro="author" names-min="3" names-use-first="3"/>
         <key variable="issued" sort="descending"/>
       </sort>
+      <layout>
+        <!-- rendering elements -->
+      </layout>
     </citation>
 
-The values returned for variables and macros called in ``cs:sort``
-may differ from the "ordinary" rendered values. These differences
-are detailed below:
+The values returned for variables and macros called in ``cs:sort`` may differ
+from the "ordinary" rendered values. These differences are detailed below.
 
 Sorting Variables
 ^^^^^^^^^^^^^^^^^
 
-When ordinary variables are referenced in ``cs:key`` via the
-``variable`` attribute, the string value is returned, without
-formatting decorations. Name, date and numeric variables are
-returned in a default format, as follows:
+When variables are referenced in ``cs:key`` via the ``variable`` attribute, the
+string value is returned, without formatting decorations. Exceptions are name,
+date and numeric variables, which are returned as follows:
 
-**names:** `Name variables`_ can be set directly
-on ``cs:key`` using the ``variable`` attribute (e.g.
-``<key variable="author"/>``). In this case, the name-list from the
-variable will be returned as a string in the "long" ``form`` of
-``cs:name``, formatted with ``name-as-sort-order`` set to "all".
-However, using the ``variable`` attribute for calling name
-variables is often undesirable; it is usually more robust to use a
-``macro`` call to the same macro used to render contributor names
-in the context (``cs:citation`` or ``cs:bibliography``) to which
-the sort applies. One of the benefits of using macros is that
-substitution logic becomes available (e.g. in the ``editor``
-variable might substitutes for an empty ``author`` variable).
+**names:** `Name variables`_ can be set directly on ``cs:key`` using the
+``variable`` attribute (e.g. ``<key variable="author"/>``). In this case, the
+name-list from the variable will be returned as a string in the "long" ``form``
+of ``cs:name``, formatted with ``name-as-sort-order`` set to "all". However, it
+is usually handier to call the same macro used to render the names in the
+context (``cs:citation`` or ``cs:bibliography``) to which the sort applies. One
+of the benefits of using macros is that substitution logic becomes available
+(e.g. the ``editor`` variable might substitute for an empty ``author``
+variable).
 
-**dates:** `Date variables`_ are returned to
-``cs:key`` in the format YYYY-MM-DD, with zeros substituted for
-missing elements. If a style should sort by the complete date, it
-is often more reliable to set sort keys for dates with the
-``variable`` attribute, rather than calling a macro. Macros should
-however be used if the sort key should consist of incomplete dates
-(e.g. only the year).
+**dates:** `Date variables`_ are returned to ``cs:key`` in the format
+YYYY-MM-DD, with zeros substituted for missing elements (years of negative dates
+are sorted inversely). Date variables can be used directly if a style should
+sort by the complete date. For incomplete dates (e.g. sorting by year only)
+macros should be used. Seasons are ignored for sorting, as the chronological
+order of the seasons differs between the northern and southern hemispheres. Date
+ranges are sorted only by the start of the date-range ("2001" for "2001-2003").
 
-**numbers:** Variables that carry numeric values are returned as
-integer values. As a form transformation (i.e. to roman,
-year-suffix or ordinal) is usually undesired for sorting, numeric
-variables should ordinarily be referenced via the ``variable``
-attribute, rather than via ``macro``.
+**numbers:** If the ``variable`` attribute is used, numeric values are returned
+as integer values (``form`` is "numeric"). This is generally more robust than
+using a macro, which might return numbers in forms unsuitable for sorting
+("roman", "year-suffix", "ordinal" or "long-ordinal").
 
 Sorting Macros
 ^^^^^^^^^^^^^^
 
-When a macro is called via ``cs:key``, it returns whatever string
-value the macro would ordinarily generate, but stripped of any
-formatting decorations. As indicated above, it is generally
-preferable to use ``macro`` to sort by name. There are two special
-considerations for name variables: first, keys for sorting a list
-of names may be obtained from any macro that generates names of
-form "short" or "long". The only exception to ordinary rendering is
-that "et al." is not appended to names used in sort keys. Secondly,
-it is possible to sort by the number of names in a names-list (i.e.
-the number of authors of a source), by calling a macro in which the
-``form`` attribute of ``cs:name`` is set to "count". In this case a
-count value of "3" would be obtained for a name variable that would
-otherwise return "Jones, Smith, Doe".
+When a macro is called via ``cs:key``, it returns whatever string value the
+macro would ordinarily generate, but stripped of any formatting decorations. As
+indicated above, it is generally preferable to use ``macro`` to sort by name.
+There are two special considerations for name variables: first, keys for sorting
+a list of names may be obtained from any macro that generates names of form
+"short" or "long". The only exception to ordinary rendering is that "et al." is
+not appended to names used in sort keys. Secondly, it is possible to sort by the
+number of names in a names-list (i.e. the number of authors of a source), by
+calling a macro in which the ``form`` attribute of ``cs:name`` is set to
+"count". In this case a count value of "3" would be obtained for a name variable
+that would otherwise return "Jones, Smith, Doe".
 
 Conditionals
 ~~~~~~~~~~~~
