@@ -1596,6 +1596,14 @@ called by ``cs:key``) can be used to (further) constrain the number of names
 used in the sort, overriding the values of the corresponding ``et-al-min`` and
 ``et-al-use-first`` and et-al-subsequent options.
 
+Sort keys are evaluated one by one. The primary sort is performed using the
+first sort key. A secondary sort (using the second sort key) is performed on
+those items which share the first sort key. A tertiary sort (using the third
+sort key) is performed on those items which share the first and second sort key.
+This process continues until either the order of all items is fixed, or until
+the sort keys are exhausted. Items for which a sort key is empty are placed at
+the end of the sort (both for ascending and descending sorts).
+
 An example, where citations are first sorted by the output of the author macro
 with overriding settings for et-al abbreviation. Entries that share the same
 author macro output are further sorted in reverse order by date of issue.
@@ -1632,13 +1640,21 @@ of the benefits of using macros is that substitution logic becomes available
 (e.g. the ``editor`` variable might substitute for an empty ``author``
 variable).
 
-**dates:** `Date variables`_ are returned to ``cs:key`` in the format
-YYYY-MM-DD, with zeros substituted for missing elements (years of negative dates
-are sorted inversely). Date variables can be used directly if a style should
-sort by the complete date. For incomplete dates (e.g. sorting by year only)
-macros should be used. Seasons are ignored for sorting, as the chronological
-order of the seasons differs between the northern and southern hemispheres. Date
-ranges are sorted only by the start of the date-range ("2001" for "2001-2003").
+**dates:** `Date variables`_ that are set directly on ``cs:key`` using the
+``variable`` attribute are returned to ``cs:key`` in the YYYYMMDD format, with
+zeros substituted for any missing date-parts (e.g. 20001200 for December 2000).
+As a result, dates with more date-parts will come after those with fewer
+date-parts, e.g. (2000, May 2000, May 1st 2000). Note that negative years are
+sorted inversely, e.g. (100BC, 50BC, 50AD, 100AD). If date variables are called
+by the ``variable`` attribute, the complete date is returned. If a sort should
+use an incomplete date (e.g. to sort by year only), macros should be used.
+Seasons are ignored for sorting, as the chronological order of the seasons
+differs between the northern and southern hemispheres. Date ranges consist of a
+start date and an end date. The start date is used for comparison with single
+dates. However, for items with the same (start) date, the items with date ranges
+are placed after those with single dates, e.g. (1999, 2000, 2000-2002, 2001,
+2001-2003). In addition, date ranges are subjected to a secondary sort based on
+the end date, e.g. (2000, 2000-2001, 2000-2004, 2000-2005, 2001).
 
 **numbers:** If the ``variable`` attribute is used, numeric values are returned
 as integer values (``form`` is "numeric"). This is generally more robust than
