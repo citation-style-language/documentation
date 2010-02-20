@@ -790,7 +790,7 @@ Uncertain Dates
 ^^^^^^^^^^^^^^^
 
 Uncertain dates can receive special formatting by using the
-``is-uncertain-date`` conditional (see `Conditionals`_) and the "circa" term.
+``is-uncertain-date`` conditional (see `Choose`_) and the "circa" term.
 The conditional tests "true" when a date is flagged as uncertain. For example,
 
 .. sourcecode:: xml
@@ -837,7 +837,7 @@ When variables are displayed with ``cs:number``, only the first number that is
 encountered is used for rendering (e.g. "12" when the entire string is "12th
 edition"). Fields can be tested for numeric content with the ``is-numeric``
 conditional, e.g. "12th edition" would test "true" while "third edition" would
-test "false" (see `Conditionals`_).
+test "false" (see `Choose`_).
 
 The ``cs:number`` element may carry any of the attributes for `affixes`_
 and `formatting`_, as well as the `text-case`_ attribute.
@@ -1241,6 +1241,131 @@ would result in "(Published by: Company A)" when the publisher variable is set
 to "Company A", but wouldn't generate any output when the publisher variable is
 empty.
 
+Choose
+~~~~~~
+
+The ``cs:choose`` element allows for the expression of conditional statements.
+The first child element of ``cs:choose`` is always a ``cs:if`` child element. In
+addition, any number of ``cs:else-if`` child elements may be included, as well
+as a closing ``cs:else`` element. The ``cs:if`` and ``cs:else-if`` elements may
+contain any number of `rendering elements`_ (with the exception of
+``cs:layout``). The ``cs:else`` element should contain at least one rendering
+element. An example of a conditional:
+
+.. sourcecode:: xml
+
+    <choose>
+      <if type="book thesis" match="any">
+        <text variable="title" font-style="italic">
+      </if>
+      <else-if type="chapter">
+        <text variable="title" quotes="true">
+      </else-if>
+      <else>
+        <text variable="title">
+      </else>
+    </choose>
+
+Every ``cs:if`` and ``cs:else-if`` element must include at least one condition.
+The different types of conditions, expressed as attributes, are:
+
+``disambiguate``
+    The contents of an <if disambiguate="true"> block is only rendered if it
+    disambiguates two otherwise identical citations. This attempt at
+    disambiguation will only be made when all other disambiguation methods have
+    failed to uniquely identify the target source.
+
+``is-numeric``
+    Tests whether the given variables (`Appendix I - Variables`_) contain
+    numeric data.
+    
+``is-uncertain-date``
+    Tests whether the given `date variables`_ contain `uncertain dates`_.
+    
+``locator``
+    Tests whether the locator matches the given locator variables
+    (`Appendix V - Locators`_).
+
+``position``
+    Tests whether the position of the item cite matches the given positions.
+    The different positions are:
+
++    // if one source is the same as the last, use ibid
++    //
++    // Case 1: source in previous citation
++    // (1) Threshold conditions
++    //     (a) there must be a previous citation with one item
++    //     (b) this item must be the first in this citation
++    //     (c) the previous citation must contain a reference to the same item ...
++    // Case 2: immediately preceding source in this citation
++    // (1) Threshold conditions
++    //     (a) there must be an imediately preceding reference to  the
++    //         same item in this citation
++    // Evaluation
++    //     (a) if the previous citation had no locator and this citation
++    //         has one, use ibid+pages
++    //     (b) if the previous citation had no locator and this citation
++    //         also has none, use ibid
++    //     (c) if the previous citation had a locator (page number, etc.) 
++    //         and this citation has a locator that is identical, use ibid
++    //     (d) if the previous citation had a locator, and this citation
++    //         has one that differs, use ibid+pages
++    //     (e) if the previous citation had a locator and this citation
++    //         has none, use subsequent
++    //     (f) if the current and previous citations are not the same,
++    //         set as FIRST or SUBSEQUENT, as appropriate.
+
+TODO: explain jargon (cite, citation)
+    
+    -  "first": the position of a cite that is the first to reference an item
+    -  "ibid"/"ibid-with-locator"/"subsequent": a cite that references an earlier cited item always has the "subsequent" position. In special cases
+       cites may have additional positions: "ibid" and "ibid-with-locator". The rules
+       for the assignment of these conditions are:
+       "ibid" and "ibid-with-locator":
+       a) the current cite is immediately preceded, within the same citation, by a cite to the same item
+       or
+       b) the current cite is the first cite in the citation, and the previous citation includes a single cite to the same item
+       ibid:
+       ibid-with-locator:
+       
+       the position of a cite directly following another cite
+       referencing the same item
+    -  : as ibid. As an additional requirement, the
+       cite has to display the locator variable.
+    -  : the position of a cite that references an earlier
+       referenced item.
+    -  "near-note": the position of a cite that is not too far away (as
+       measured in number of foot or endnotes) from a previous cite (TODO:
+       does the previous cite has to be a full cite?) to the same item.
+       The maximal distance is set with the
+       ``near-note-distance``-option (see `Note Distance`_). Cites that are not
+       located in a foot or endnote will never be in the "near-note"
+       position.
+       
+Note that each cite can have multiple position values. Whenever
+position="ibid-with-locator" is true, position="ibid" is also true.
+And whenever position="ibid" or position="near-note" is true,
+position="subsequent" is also true.
+
+``type``
+    Tests whether the item matches the given types (`Appendix II - Types`_).
+
+``variable``
+    Tests whether the given variables (`Appendix I - Variables`_) contain
+    non-empty values.
+
+With the exception of ``disambiguate``, all the conditions may specify more than
+one test value (variables, types, etc.), separated with spaces (e.g. "book
+chapter"). In such cases the ``match`` attribute can be used as a logical
+operator. The attribute can have the following values:
+
+-  "all" (default): a condition tests "true" when it tests "true" for all of the
+   given condition values
+-  "any": a condition tests "true" when it tests "true" for any of the
+   given condition values
+-  "none": a condition tests "true" when it tests "true" for none of the
+   given condition values
+
 Style Behavior
 --------------
 
@@ -1391,7 +1516,7 @@ Note Distance
 '''''''''''''
 
 ``near-note-distance``
-    The "near-note" position (see `Conditionals`_) tests "true" if a preceding
+    The "near-note" position (see `Choose`_) tests "true" if a preceding
     note exists that: a) refers to the same item and b) has a distance (measured
     in footnotes or endnotes) to the current item that does not exceed the value
     of ``near-note-distance``. This attribute defaults to 5.
@@ -1676,109 +1801,6 @@ calling a macro in which the ``form`` attribute of ``cs:name`` is set to
 "count". In this case a count value of "3" would be obtained for a name variable
 that would otherwise return "Jones, Smith, Doe".
 
-Conditionals
-~~~~~~~~~~~~
-
-The ``cs:choose`` element allows for the expression of conditional
-statements. The element should always contain a single ``cs:if``
-child element. In addition, any number of ``cs:else-if`` child
-elements may be included, as well as a closing ``cs:else`` element.
-The contents of the ``cs:if`` and ``cs:else-if`` elements may
-consist of any number of
-`rendering elements`_ (with the exception of
-``cs:layout``). For ``cs:else``, at least one rendering element
-must be specified. An example of a conditional:
-
-.. sourcecode:: xml
-
-    <choose>
-      <if type="book thesis" match="any">
-        <text variable="title" font-style="italic">
-      </if>
-      <else-if type="chapter">
-        <text variable="title" quotes="true">
-      </else-if>
-      <else>
-        <text variable="title">
-      </else>
-    </choose>
-
-Every ``cs:if`` and ``cs:else-if`` element must contain a
-condition. The different types of conditions, expressed as
-attributes, are:
-
-``type``
-    Tests true if the item is of the given
-    type (`Appendix II - Types`_).
-
-``variable``
-    Tests true if the variable (`Appendix I - Variables`_) has a
-    non-empty value.
-
-``is-numeric``
-    Tests true if the variable (`Appendix I - Variables`_) contains
-    numeric data.
-
-``locator``
-    Tests true if the locator type of the item (``page``, ``chapter``,
-    ``verse``, etc.) is equal to the condition value.
-
-``position``
-    Tests true if the relative position of the item cite in a document
-    is equal to the condition value. The different positions are:
-
-    
-    -  "first": the position of a cite that is the first to reference
-       an item
-    -  "ibid": the position of a cite directly following another cite
-       referencing the same item
-    -  "ibid-with-locator": as ibid. As an additional requirement, the
-       cite has to display the locator variable.
-    -  "subsequent": the position of a cite that references an earlier
-       referenced item.
-    -  "near-note": the position of a cite that is not too far away (as
-       measured in number of foot or endnotes) from a previous cite (TODO:
-       does the previous cite has to be a full cite?) to the same item.
-       The maximal distance is set with the
-       ``near-note-distance``-option (see `Note Distance`_). Cites that are not
-       located in a foot or endnote will never be in the "near-note"
-       position.
-
-
-Note that each cite can have multiple position values. Whenever
-position="ibid-with-locator" is true, position="ibid" is also true.
-And whenever position="ibid" or position="near-note" is true,
-position="subsequent" is also true.
-
-``disambiguate``
-    Can be tested against "true" or "false". If disambiguate is tested
-    against "true", the rendering elements inside the conditional will
-    be displayed if they will differentiate two otherwise identical
-    citations. If the citations remain identical after its addition, it
-    will not be added. Note that disambiguation via the
-    ``disambiguate`` conditional has the lowest priority of the
-    different `disambiguation`_ options. (TODO:
-    should we make a note here that ``disambiguate`` should only be
-    used within ``cs:citation``? What is the expected behavior when
-    this attribute is test against "false"? Would the content only be
-    included when it does *not* disambiguate ambiguous cites?)
-
-With the exception of ``disambiguate``, all the conditions may
-specify more than one test value (variables, types, etc.),
-separated with spaces (e.g. "book chapter"). In such cases the
-``match`` attribute can be used as a logical operator. The
-attribute can have the following values:
-
-
--  "all" (default): the condition only tests true if all test
-   values test true (TODO: the schema should indicate the default
-   value. I gathered this should be "all", see Andrea Rossato's mail
-   from April 18th)
--  "any": the condition only tests true if any of test values tests
-   true
--  "none": the condition only tests true if none of test values
-   test true
-
 Formatting
 ~~~~~~~~~~
 
@@ -1959,7 +1981,7 @@ Standard Variables
 -  year-suffix
 -  jurisdiction
 
-Date variables
+Date Variables
 ^^^^^^^^^^^^^^
 
 -  issued
@@ -1968,7 +1990,7 @@ Date variables
 -  container
 -  original-date
 
-Name variables
+Name Variables
 ^^^^^^^^^^^^^^
 
 -  author
@@ -1989,7 +2011,6 @@ Appendix II - Types
 ~~~~~~~~~~~~~~~~~~~
 
 These are the different item types available within CSL:
-
 
 -  article
 -  article-magazine
@@ -2145,3 +2166,23 @@ Table: **Chicago Manual of Style page range abbreviation rules**
 |                        | digits change, use all   |                |
 |                        | digits                   |                |
 +------------------------+--------------------------+----------------+
+
+Appendix V - Locators
+~~~~~~~~~~~~~~~~~~~~~
+
+-  book
+-  chapter
+-  column
+-  figure
+-  folio
+-  issue
+-  line
+-  note
+-  opus
+-  page
+-  paragraph
+-  part
+-  section
+-  sub verbo
+-  verse
+-  volume
