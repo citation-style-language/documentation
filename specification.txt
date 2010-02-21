@@ -1,6 +1,6 @@
-===========================
-`Citation Style Language`__
-===========================
+===============================
+`Citation Style Language 1.0`__
+===============================
 ~~~~~~~~~~~~~~~~~~~~~~
 Language Specification
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -13,14 +13,16 @@ __ `Table of Contents`_
 
 .. class:: info-date
 
-   30 January 2010
+   21 Februari 2010
 
 .. class:: contributors
 
-   Authors
-       * Frank Bennett
-       * Bruce D'Arcus
+   Author
        * Rintze Zelle
+       
+   Contributors
+       * Frank G. Bennett, Jr.
+       * Bruce D'Arcus
 
 .. |link| image:: link.png
 
@@ -1757,56 +1759,49 @@ that would otherwise return "Jones, Smith, Doe".
 Formatting
 ~~~~~~~~~~
 
-The following formatting attributes may be set on ``cs:date``,
-``cs:date-part``, ``cs:names``, ``cs:name``, ``cs:name-part``,
-``cs:et-al``, ``cs:text``, ``cs:number``, ``cs:label``,
-``cs:group`` and ``cs:layout``:
+The following formatting attributes may be set on ``cs:date``, ``cs:date-part``,
+``cs:et-al``, ``cs:group``, ``cs:label``, ``cs:layout``, ``cs:name``,
+``cs:name-part``, ``cs:names``, ``cs:number`` and ``cs:text``:
 
 ``font-style``
     Sets the font style, with values:
-
     
     -  "normal" (default)
-    -  "italic"
+    -  "italic" (flipflops, see `Flipflopping`_)
     -  "oblique" (i.e. slanted)
 
 ``font-variant``
     Allows for the use of small capitals, with values:
-
     
     -  "normal" (default)
     -  "small-caps"
 
 ``font-weight``
     Sets the font weight, with values:
-
     
     -  "normal" (default)
-    -  "bold"
+    -  "bold" (flipflops, see `Flipflopping`_)
     -  "light"
 
 ``text-decoration``
     Allows for the use of underlining, with values:
-
     
     -  "none" (default)
     -  "underline"
 
 ``vertical-align``
     Sets the vertical alignment, with values:
-
     
     -  "baseline" (default)
     -  "sup" (superscript)
     -  "sup" (subscript)
 
 ``quotes``
-    When set "true" ("false" is default), the rendered text is wrapped
-    in quotes. The quote-symbols are defined as terms in the
-    "locales-xx-XX.xml" files, and thus are localized. Whether
-    punctuation appears inside or outside the quotes depends on the
-    setting of the global ``punctuation-in-quote`` option
-    (see `Locale Options`_)
+    When set "true" ("false" is default), the rendered text is wrapped in
+    quotes. The quote-symbols are defined as (localized) terms. The localized
+    ``punctuation-in-quote`` option controls whether punctuation appears inside
+    or outside the quotes (see `Locale Options`_). Quotes flipflop, see
+    `Flipflopping`_.
 
 ``display``
     By default, the text of each individual cite is formatted as a
@@ -1814,7 +1809,6 @@ The following formatting attributes may be set on ``cs:date``,
     special positioning of portions of the cite text, which can be
     desirable for notes and bibliography entries. The attribute can
     carry the following values:
-
     
     -  "block": Places the content in a block stretching from margin to
        margin.
@@ -1828,58 +1822,68 @@ The following formatting attributes may be set on ``cs:date``,
     -  "indent": Block-indents the content to the right by a standard
        amount.
 
+Flipflopping
+^^^^^^^^^^^^
+
+Rendering elements that are set to display italicized or boldfaced text, or to
+carry quotes, flipflop. Flipflopping can be best explained with an example:
+
+.. sourcecode:: xml
+
+    <layout prefix="Speak, " suffix=", and enter." font-weight="bold">
+      <text value="friend" font-weight="bold">
+    </layout>
+
+This renders as "**Speak** friend **and enter.**". Nested italics switch between
+italics and normal text, nested boldface between boldface and normal text, and
+quotes switch between inner and outer quotes.
 
 Affixes
 ~~~~~~~
 
-The affixes attributes ``prefix`` and ``suffix`` may be set on
-``cs:date-part``, ``cs:names``, ``cs:name``, ``cs:et-al``,
-``cs:date`` (except when ``cs:date`` is used within ``cs:locale``),
-``cs:text``, ``cs:number``, ``cs:label``, ``cs:group`` and
-``cs:layout``. The string value will be included either before
-(``prefix``) or after (``suffix``) the displayed text. Affixes are
-generally insensitive to the formatting attributes acting on the
-calling element: the only exception to this rule are affixes set on
-``cs:layout``. In cases where formatting of affixes is desired,
-separate ``cs:text`` elements can be used instead, with a ``value``
-attribute to output verbatim text.
+The affixes attributes ``prefix`` and ``suffix`` may be set on ``cs:date``
+(except when ``cs:date`` is used within ``cs:locale``), ``cs:date-part`` (except
+when the parent ``cs:date`` element calls a localized date format),
+``cs:et-al``, ``cs:group``, ``cs:label``, ``cs:layout``, ``cs:name``,
+``cs:names``, ``cs:number`` and ``cs:text``. The attribute value is included
+either before (``prefix``) or after (``suffix``) the displayed text. Affixes are
+generally insensitive to the formatting attributes acting on the calling
+element: the only exception to this rule are affixes set on ``cs:layout``. In
+cases where formatting of affixes is desired, separate ``cs:text`` elements can
+be used instead, with a ``value`` attribute to output verbatim text.
 
 Delimiter
 ~~~~~~~~~
 
-The ``delimiter`` attribute can be used to specify a delimiting
-string for ``cs:date`` (delimiting the ``cs:date-part`` elements),
-``cs:names`` (delimiting multiple
-`name variables`_), ``cs:name`` (delimiting names
-in name lists), and ``cs:group`` & ``cs:layout`` (both delimiting
-the direct child elements).
+The ``delimiter`` attribute can be used to specify a delimiting string for
+``cs:date`` (delimiting the date-parts; not allowed when ``cs:date`` calls a
+localized date format), ``cs:names`` (delimiting multiple `name variables`_),
+``cs:name`` (delimiting names in name lists), ``cs:group`` and ``cs:layout``
+(both delimiting the direct child elements).
 
 Text-case
 ~~~~~~~~~
 
-The ``text-case`` attribute may be set on ``cs:text``,
-``cs:number``, ``cs:label``, ``cs:name-part`` and ``cs:date-part``,
-and can be used to control the text case of the rendered text. The
-possible values are:
-
+The ``text-case`` attribute may be set on ``cs:date-part``, ``cs:label``,
+``cs:name-part``, ``cs:number`` and ``cs:text`` and can be used to control the
+text case of the rendered text. The possible values are:
 
 -  "lowercase": displays all text in lowercase
 -  "uppercase": displays all text in uppercase
--  "capitalize-first": capitalizes the first character; the case of
-   other characters is not affected
--  "capitalize-all": capitalizes the first character of every word;
-   other characters are displayed lowercase
--  "title": displays text in title case (the
-   *Chicago Manual of Style* calls this "headline style")
+-  "capitalize-first": capitalizes the first character; the case of other
+   characters is not affected
+-  "capitalize-all": capitalizes the first character of every word; other
+   characters are displayed lowercase
+-  "title": displays text in title case (the *Chicago Manual of Style* calls
+   this "headline style")
 -  "sentence": displays text in sentence case ("sentence style")
 
 Strip-periods
 ~~~~~~~~~~~~~
 
-The ``strip-periods`` attribute may be set on ``cs:date-part`` (but
-only if ``name`` is set to "month"), ``cs:text`` and ``cs:label``.
-When set to "true" ("false" is the default), any periods in the
-rendered text are removed.
+The ``strip-periods`` attribute may be set on ``cs:date-part`` (but only if
+``name`` is set to "month"), ``cs:label`` and ``cs:text``. When set to "true"
+("false" is the default), any periods in the rendered text are removed.
 
 Appendices
 ----------
@@ -2143,16 +2147,15 @@ Miscellaneous
 Appendix IV - Page Abbreviation Rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The exact page abbreviation rules behind the different values of
-the ``page-range-format`` attribute on ``cs:style`` are:
+The page abbreviation rules for the different values of the
+``page-range-format`` attribute on ``cs:style`` are:
 
 "minimum"
-    All digits repeated in the second number are left out: 42-5, 321-8,
-    2787-816
+    All digits repeated in the second number are left out: 42-5, 321-8, 2787-816
 
 "expanded"
-    Abbreviated page ranges are expanded to their non-abbreviated form:
-    42-45, 321-328, 2787-2816
+    Abbreviated page ranges are expanded to their non-abbreviated form: 42-45,
+    321-328, 2787-2816
 
 "chicago"
     Page ranges are abbreviated according to the
@@ -2173,7 +2176,7 @@ Table: **Chicago Manual of Style page range abbreviation rules**
 | multiples of 100)      | omitting unneeded zeros  | 1002-6         |
 +------------------------+--------------------------+----------------+
 | 110 through 199 (in    | Use two digits, or more  | 321-25;        |
-| multiples of 100)      | as needed.               | 415-532;       |
+| multiples of 100)      | as needed                | 415-532;       |
 |                        |                          | 11564-68;      |
 |                        |                          | 13792-803      |
 +------------------------+--------------------------+----------------+

@@ -13,14 +13,16 @@ __ `Table of Contents`_
 
 .. class:: info-date
 
-   January 31, 2010
+   21 Februari 2010
 
 .. class:: contributors
 
-   Authors
-       * Frank Bennett
-       * Bruce D'Arcus
+   Author
        * Rintze Zelle
+       
+   Contributors
+       * Frank G. Bennett, Jr.
+       * Bruce D'Arcus
 
 .. |link| image:: link.png
 
