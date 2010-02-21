@@ -194,34 +194,7 @@ followed by a description of all possible elements.
     
     The second category type indicates the fields or disciplines for which the
     style is relevant. For this category type the ``field`` attribute is set to
-    one of the following values:
-    
-    -  "anthropology"
-    -  "astronomy"
-    -  "biology"
-    -  "botany"
-    -  "chemistry"
-    -  "communications"
-    -  "engineering"
-    -  "generic-base" (used for generic styles like Harvard and APA)
-    -  "geography"
-    -  "geology"
-    -  "history"
-    -  "humanities"
-    -  "law"
-    -  "linguistics"
-    -  "literature"
-    -  "math"
-    -  "medicine"
-    -  "philosophy"
-    -  "physics"
-    -  "psychology"
-    -  "sociology"
-    -  "science"
-    -  "political\_science"
-    -  "social\_science"
-    -  "theology"
-    -  "zoology"
+    one of the discipline `categories`_.
 
 ``cs:id``
     This required element should contain a URI. This identifier establishes the
@@ -1283,69 +1256,49 @@ The different types of conditions, expressed as attributes, are:
     Tests whether the given `date variables`_ contain `uncertain dates`_.
     
 ``locator``
-    Tests whether the locator matches the given locator variables
-    (`Appendix V - Locators`_).
+    Tests whether the locator matches the given locator variable subtype
+    (see `Locators`_).
 
 ``position``
-    Tests whether the position of the item cite matches the given positions.
-    The different positions are:
-
-+    // if one source is the same as the last, use ibid
-+    //
-+    // Case 1: source in previous citation
-+    // (1) Threshold conditions
-+    //     (a) there must be a previous citation with one item
-+    //     (b) this item must be the first in this citation
-+    //     (c) the previous citation must contain a reference to the same item ...
-+    // Case 2: immediately preceding source in this citation
-+    // (1) Threshold conditions
-+    //     (a) there must be an imediately preceding reference to  the
-+    //         same item in this citation
-+    // Evaluation
-+    //     (a) if the previous citation had no locator and this citation
-+    //         has one, use ibid+pages
-+    //     (b) if the previous citation had no locator and this citation
-+    //         also has none, use ibid
-+    //     (c) if the previous citation had a locator (page number, etc.) 
-+    //         and this citation has a locator that is identical, use ibid
-+    //     (d) if the previous citation had a locator, and this citation
-+    //         has one that differs, use ibid+pages
-+    //     (e) if the previous citation had a locator and this citation
-+    //         has none, use subsequent
-+    //     (f) if the current and previous citations are not the same,
-+    //         set as FIRST or SUBSEQUENT, as appropriate.
-
-TODO: explain jargon (cite, citation)
+    Tests whether the position of the item cite matches the given positions. The
+    different positions are (note on terminology: a *citation* refers to a
+    citation group, which contains one or more *cites* to individual items):
     
     -  "first": the position of a cite that is the first to reference an item
-    -  "ibid"/"ibid-with-locator"/"subsequent": a cite that references an earlier cited item always has the "subsequent" position. In special cases
-       cites may have additional positions: "ibid" and "ibid-with-locator". The rules
-       for the assignment of these conditions are:
-       "ibid" and "ibid-with-locator":
-       a) the current cite is immediately preceded, within the same citation, by a cite to the same item
+    -  "ibid"/"ibid-with-locator"/"subsequent": a cite that references an
+       earlier cited item always has the "subsequent" position. In special cases
+       cites may have the "ibid" or "ibid-with-locator" position. These
+       positions are only assigned when:
+       
+       a) the current cite immediately follows on another cite, within the
+          same citation, that references the same item
+            
        or
-       b) the current cite is the first cite in the citation, and the previous citation includes a single cite to the same item
-       ibid:
-       ibid-with-locator:
        
-       the position of a cite directly following another cite
-       referencing the same item
-    -  : as ibid. As an additional requirement, the
-       cite has to display the locator variable.
-    -  : the position of a cite that references an earlier
-       referenced item.
-    -  "near-note": the position of a cite that is not too far away (as
-       measured in number of foot or endnotes) from a previous cite (TODO:
-       does the previous cite has to be a full cite?) to the same item.
-       The maximal distance is set with the
-       ``near-note-distance``-option (see `Note Distance`_). Cites that are not
-       located in a foot or endnote will never be in the "near-note"
-       position.
-       
-Note that each cite can have multiple position values. Whenever
-position="ibid-with-locator" is true, position="ibid" is also true.
-And whenever position="ibid" or position="near-note" is true,
-position="subsequent" is also true.
+       b) the current cite is the first cite in the citation, and the previous
+          citation includes a single cite that references the same item
+            
+       If either requirement is met, the presence of locators determines which
+       position is assigned:
+
+       - **Preceding cite does not have a locator**: if the current cite has a
+         locator, the position of the current cite is "ibid-with-locator".
+         Otherwise the position is "ibid".
+       - **Preceding cite does have a locator**: if the current cite has the
+         same locator, the position of the current cite is "ibid". If the
+         locator differs the position is "ibid-with-locator". If the current
+         cite lacks a locator the position is "subsequent".
+         
+    - "near-note": the position of a cite following another cite that references
+      the same item. Both cites have to be located in foot or endnotes, and the
+      distance between both cites may not exceed the maximum distance (measured
+      in number of foot or endnotes) set with the ``near-note-distance`` option
+      (see `Note Distance`_).
+      
+    Note that each cite can have multiple position values. Also, whenever
+    position="ibid-with-locator" is true, position="ibid" is also true. And
+    whenever position="ibid" or position="near-note" is true,
+    position="subsequent" is also true.
 
 ``type``
     Tests whether the item matches the given types (`Appendix II - Types`_).
@@ -2050,79 +2003,142 @@ These are the different item types available within CSL:
 Appendix III - Terms
 ~~~~~~~~~~~~~~~~~~~~
 
-These are the different terms available within CSL:
+Categories
+^^^^^^^^^^
 
+-  anthropology
+-  astronomy
+-  biology
+-  botany
+-  chemistry
+-  communications
+-  engineering
+-  generic-base - used for generic styles like Harvard and APA
+-  geography
+-  geology
+-  history
+-  humanities
+-  law
+-  linguistics
+-  literature
+-  math
+-  medicine
+-  philosophy
+-  physics
+-  political\_science
+-  psychology
+-  science
+-  social\_science
+-  sociology
+-  theology
+-  zoology
 
--  Miscellaneous Terms
-   
-   -  accessed
-   -  anonymous
-   -  and
-   -  and others
-   -  at
-   -  et-al
-   -  forthcoming
-   -  from
-   -  in press
-   -  ibid
-   -  in
-   -  no date
-   -  references
-   -  retrieved
-   -  letter
-   -  interview
-   -  online
-   -  cited
-   -  edition
-   -  internet
-   -  presented at
+Locators
+^^^^^^^^
 
--  Roles
-   
-   -  editor
-   -  translator
-   -  interviewer
-   -  recipient
+-  book
+-  chapter
+-  column
+-  figure
+-  folio
+-  issue
+-  line
+-  note
+-  opus
+-  page
+-  paragraph
+-  part
+-  section
+-  sub verbo
+-  verse
+-  volume
 
--  Months
-   
-   -  month-01
-   -  month-02
-   -  month-03
-   -  month-04
-   -  month-05
-   -  month-06
-   -  month-07
-   -  month-08
-   -  month-09
-   -  month-10
-   -  month-11
-   -  month-12
+Months
+^^^^^^
 
--  Other
-   
-   -  cs-terms.locator (locators)
-   -  book
-   -  chapter
-   -  column
-   -  figure
-   -  folio
-   -  issue
-   -  line
-   -  note
-   -  opus
-   -  page
-   -  page-range (a synonym for "page", to be deprecated)
-   -  page-first
-   -  paragraph
-   -  part
-   -  section
-   -  sub verbo
-   -  volume
-   -  verse
-   -  cs-terms.extension
-   -  info-fields
+-  month-01
+-  month-02
+-  month-03
+-  month-04
+-  month-05
+-  month-06
+-  month-07
+-  month-08
+-  month-09
+-  month-10
+-  month-11
+-  month-12
 
+Ordinals
+^^^^^^^^
+
+-  ordinal-01
+-  ordinal-02
+-  ordinal-03
+-  ordinal-04
+-  long-ordinal-01
+-  long-ordinal-02
+-  long-ordinal-03
+-  long-ordinal-04
+-  long-ordinal-05
+-  long-ordinal-06
+-  long-ordinal-07
+-  long-ordinal-08
+-  long-ordinal-09
+-  long-ordinal-10
+
+Quotes
+^^^^^^
+
+-  open-quote
+-  close-quote
+-  open-inner-quote
+-  close-inner-quote
+
+Roles
+^^^^^
+
+-  editor
+-  editorial-director
+-  editortranslator
+-  interviewer
+-  recipient
+-  translator
+
+Seasons
+^^^^^^^
+
+-  season-01
+-  season-02
+-  season-03
+-  season-04
+
+Miscellaneous
+^^^^^^^^^^^^^
+
+-  accessed
+-  ad
+-  and
+-  and others
+-  anonymous
+-  at
+-  bc
+-  circa
+-  cited
+-  et-al
+-  forthcoming
+-  from
+-  ibid
+-  in
+-  internet
+-  interview
+-  in press
+-  letter
+-  no date
+-  online
+-  presented at
+-  reference
+-  retrieved
 
 Appendix IV - Page Abbreviation Rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2166,23 +2182,3 @@ Table: **Chicago Manual of Style page range abbreviation rules**
 |                        | digits change, use all   |                |
 |                        | digits                   |                |
 +------------------------+--------------------------+----------------+
-
-Appendix V - Locators
-~~~~~~~~~~~~~~~~~~~~~
-
--  book
--  chapter
--  column
--  figure
--  folio
--  issue
--  line
--  note
--  opus
--  page
--  paragraph
--  part
--  section
--  sub verbo
--  verse
--  volume
