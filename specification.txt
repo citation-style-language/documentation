@@ -864,8 +864,8 @@ variable are separated from each other. The attributes that may be used on
     ampersand (&).
 
 ``delimiter``
-    Specifies the text string to separate names of a name variable (e.g. ", "
-    for "J. Doe, S. Smith.")
+    Specifies the text string to separate names of a name variable. The default 
+    value is ", " ("J. Doe, S. Smith").
 
 ``delimiter-precedes-last``
     Determines in which cases the delimiter used to delimit names is also used
@@ -949,9 +949,9 @@ these name-parts, which are delimited by single spaces in rendered names, are:
 
 ``sort-separator``
     Sets the delimiter for name-parts that have switched positions as a result
-    of ``name-as-sort-order`` (defaults to a space). E.g. a value of ", " gives
-    "Doe, John". As is the case for ``name-as-sort-order``, this attribute only
-    affects names written in the latin or Cyrillic alphabet.
+    of ``name-as-sort-order``. The default value is ", " ("Doe, John"). As is
+    the case for ``name-as-sort-order``, this attribute only affects names
+    written in the latin or Cyrillic alphabet.
 
 The ``cs:name`` element may also carry any of the attributes for `affixes`_ and
 `formatting`_.
