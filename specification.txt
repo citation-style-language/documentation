@@ -1343,93 +1343,116 @@ Citation-specific Options
 Disambiguation
 ''''''''''''''
 
-Disambiguation of short-form cites (TODO: when is a cite a
-short-form cite?) can be achieved in four ways:
-
+Disambiguation can be achieved in five ways:
 
 1. The number of names shown can be increased.
-2. The names can be expanded.
-3. A year-suffix can be included
-4. The cite can be rendered with the ``disambiguate`` attribute of
+2. A given name can be added.
+3. Initialized given names can be expanded.
+4. A year-suffix can be included
+5. The cite can be rendered with the ``disambiguate`` attribute of
    ``cs:condition`` testing "true"
 
-These different approaches are activated with the attributes
-described in this section, and are always performed in this order.
+One of the troublesome ironies lurking in this description is that the
+term "disambiguation" itself is ambiguous.  Steps (1), (4) and (5) aim
+solely to disambiguate cites that are exactly identical.  Steps (2)
+and (3), however, are different.  In addition to the strict purpose of
+disambiguating *cites*\ , the adding or expansion of given names may
+be used for the broader purpose of disambiguating *names* throughout
+the document.  In the description below, this difference is referred
+to as "the scope of names transformation".
 
-``disambiguate-add-names``
+The five potential steps to disambiguation are activated with the
+attributes described in this section, and are always performed, if at
+all, in the order listed below.
+
+``disambiguate-add-names`` [Step (1)]
     If set to "true" ("false" is the default), names that would
-    otherwise be hidden as a result of et-al abbreviation are added if
-    this uniquely identifies the target source, incrementally relaxing
-    the constraints imposed by ``et-al-subsequent-min`` and
-    ``et-al-subsequent-use-first`` (if a source has been cited multiple
-    times) or by ``et-al-min`` and ``et-al-use-first`` (if a source is
-    cited only once, or if the et-al-subsequent attributes aren't set).
-    The exact rendering of added names is determined by applying, in
-    order: the ``form`` attribute ("long" or "short") on ``cs:name``;
-    the ``initialize-with`` attribute on ``cs:name`` (if present); the
-    value of ``givenname-disambiguation-rule``, if
-    ``disambiguate-add-givenname`` is set to "true".
+    otherwise be hidden as a result of et-al abbreviation are added,
+    until either the target reference is uniquely identified, or names
+    are exhausted.
 
-``disambiguate-add-givenname``
-    If set to "true" ("false" is the default), names are expanded (e.g.
-    changing "Doe, 2005; Doe 2005" to "John Doe, 2005; Mary Doe,
-    2005"). The precise method of name expansion is specified by
+``disambiguate-add-givenname`` [Steps (2) & (3)]
+    If set to "true" ("false" is the default), given names are added or
+    expanded.  For example:
+
+
+    =============================  ===================================
+    Original form                  Expanded form
+    =============================  ===================================
+    (Simpson 2005; Simpson 2005)   (H. Simpson 2005; B. Simpson 2005)
+    (Doe 1950; Doe 1950)           (John Doe 1950; Jane Doe 1950)
+    =============================  ===================================
+
+    The precise method of name expansion is controlled by
     ``givenname-disambiguation-rule`` (if this attribute is not set,
-    the default "all-names" value is used). Note that except for the
-    "by-cite" value of ``givenname-disambiguation-rule``, name
-    expansion will affect the way the name is rendered in all the
-    references with that name in the document, even when the expansion
-    is not required to uniquely identify the target resource. This is
-    because the purpose of the given name disambiguation rules
-    (excepting the "by-cite" rule) is global disambiguation of *names*,
-    not cites.
+    the default "all-names" value is used).  Whether adding or expansion
+    of names affects other cites that are not themselves ambiguous
+    depends upon the value of ``givenname-disambiguation-rule``.
+
+``givenname-disambiguation-rule`` [Steps (2) & (3) supplemental]
+    This option accepts one of five possible values, which vary in
+    three respects: the scope of names transformation within the
+    document; the steps included in the disambiguation attempt; and
+    the names within a cite that are affected.
+
+    The scope of names transformation
+        With the values "all-names", "all-names-with-initials",
+        "primary-name", and "primary-name-with-initials", the relevant
+        names are transformed throughout the document.
+
+        With the value "by-cite", only the names within ambiguous cites
+        are transformed, as required to discriminate between references.
+
+    Transformation steps
+          All five types of given name disambiguation are controlled by the
+          same general transformation rules (the specific steps applied
+          depend on the value of ``givenname-disambiguation-rule``).
+
+          1. If ``initialize-with`` is set in the style, then:
+
+             \(a) A ``form`` value of "short" can be incremented to "long"
+             (e.g. "Doe" becomes "J. Doe").
+             
+             \(b) ``initialize-with`` can be discarded (e.g. "J. Doe"
+             becomes "John Doe".
+
+          2. If ``initialize-with`` is *not* set in the style, then:
+
+             A ``form`` value of "short" can be immediately incremented
+             to "long" (e.g. "Doe" becomes "John Doe").
+    
+    Given name disambiguation rules
+        The values themselves take effect as follows:    
+
+        "all-names"
+            The default value.  If the base form of any name is shared
+            by any other name, it is progressively transformed until
+            it can be distinguished from the others, or the transformation
+            steps are exhausted.
+
+        "all-names-with-initials"
+            Same as the "all-names" rule above, but omitting steps 2 and 3 of
+            that rule.
+
+        "primary-name"
+            Same as the "all-names" rule above, but ambiguity is only checked
+            for the first-listed name source, and only first-listed names are
+            affected by the transformation.
+
+        "primary-name-with-initials"
+            Same as the "primary-name" rule above, but omitting steps 2 and 3
+            of that rule.
+
+        "by-cite"          
+            Applies the transformation described under the "all-names" rule
+            above, but limits the transformation to the current source. The
+            appearance of the name in other references will not be affected.
 
 ``disambiguate-add-year-suffix``
     If set to "true" ("false" is the default), a suffix is added to the
     year when multiple works by the same author(s) published in the
     same year are included in one bibliography (e.g. "Doe 2007a,
     2007b").
-
-``givenname-disambiguation-rule``
-    This option can have the following values:
-
-    
-    -  "all-names"
-       The default value. A given name is first formatted as specified by
-       the attributes set on ``cs:name`` (``form``, ``initialize-with``).
-       If the resulting name does not uniquely identify the full name of
-       the individual, it is progressively transformed in the following
-       progression, until disambiguation succeeds:
-       
-       1. "short" becomes "long" + ``initialize-with`` if the latter is
-          defined (e.g. "Doe" becomes "J. Doe") (TODO: what does "if the
-          latter is defined" mean?)
-       2. "long" + ``initialize-with`` becomes "long" if the former is
-          defined (e.g. "J. Doe" becomes "John Doe") (TODO: what does "if the
-          former is defined" mean?)
-       3. "short" becomes "long" (e.g. "Doe" becomes "John Doe") (TODO:
-          don't get this step, how does this add anything to steps 1 and 2?)
-          Note that if the name begins in "long" ``form`` with the given name
-          as initials, step 1 in this list will be skipped. Likewise, if the
-          name begins in "short" ``form`` and the ``initialize-with``
-          attribute is not set, steps 1 and 2 will be skipped. If the name
-          begins in "long" ``form``, this option will have no effect.
-
-    -  "all-names-with-initials"
-       Same as the "all-names" rule above, but omitting steps 2 and 3 of
-       that rule.
-    -  "primary-name"
-       Same as the "all-names" rule above, but ambiguity is only checked
-       for the first-listed name source, and only first-listed names are
-       affected by the transformation.
-    -  "primary-name-with-initials"
-       Same as the "primary-name" rule above, but omitting steps 2 and 3
-       of that rule.
-    -  "by-cite"
-       Applies the transformation described under the "all-names" rule
-       above, but limits the transformation to the current source. The
-       appearance of the name in other references will not be affected.
-
 
 Citation Collapsing
 '''''''''''''''''''
