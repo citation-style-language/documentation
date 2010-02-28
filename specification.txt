@@ -2215,6 +2215,7 @@ Miscellaneous
 -  anonymous
 -  at
 -  bc
+-  by
 -  circa
 -  cited
 -  et-al
@@ -2222,9 +2223,9 @@ Miscellaneous
 -  from
 -  ibid
 -  in
+-  in press
 -  internet
 -  interview
--  in press
 -  letter
 -  no date
 -  online

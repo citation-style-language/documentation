@@ -1307,6 +1307,7 @@ CSL 1.0 also introduces a number of new terms:
 * ``ad`` and ``bc``. See `AD and BC`_.
 * ``author``. This term can be applied as a label to author names. For most
   styles, this term will consist of an empty string ("").
+* ``by``.
 * ``editortranslator``. See `Editor/Translator Name Collapsing`_.
 * ``ordinal-01`` to ``ordinal-04`` and ``ordinal-01`` to ``ordinal-10``. See
   `Ordinal Numbers`_.
