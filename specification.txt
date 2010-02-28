@@ -808,11 +808,13 @@ attribute, with values:
 -  "long-ordinal" - e.g. "first", "second", "third"
 -  "roman" - e.g. "i", "ii", "iii"
 
-When variables are displayed with ``cs:number``, only the first number that is
-encountered is used for rendering (e.g. "12" when the entire string is "12th
-edition"). Fields can be tested for numeric content with the ``is-numeric``
-conditional, e.g. "12th edition" would test "true" while "third edition" would
-test "false" (see `Choose`_).
+If a variable displayed with ``cs:number`` contains a mixture of numeric and
+non-numeric text, only the first number encountered is used for rendering (e.g.
+"12" when the entire string is "12th edition"). If a variable only contains
+non-numeric text (e.g. "special edition"), the entire string is rendered, as if
+`cs:text` were used instead. Fields can be tested for containing numeric content
+with the ``is-numeric`` conditional, e.g. "12th edition" would test "true" while
+"third edition" would test "false" (see `Choose`_).
 
 The ``cs:number`` element may carry any of the attributes for `affixes`_
 and `formatting`_, as well as the `text-case`_ attribute.
@@ -1681,8 +1683,9 @@ first sort key. A secondary sort (using the second sort key) is performed on
 those items which share the first sort key. A tertiary sort (using the third
 sort key) is performed on those items which share the first and second sort key.
 This process continues until either the order of all items is fixed, or until
-the sort keys are exhausted. Items for which a sort key is empty are placed at
-the end of the sort (both for ascending and descending sorts).
+the sort keys are exhausted. Items for which a sort key is empty (including
+empty date variables, where the "no date" term is substituted for rendering) are
+placed at the end of the sort (both for ascending and descending sorts).
 
 An example, where citations are first sorted by the output of the author macro
 with overriding settings for et-al abbreviation. Entries that share the same
@@ -1713,48 +1716,56 @@ date and numeric variables, which are returned as follows:
 **names:** `Name variables`_ can be set directly on ``cs:key`` using the
 ``variable`` attribute (e.g. ``<key variable="author"/>``). In this case, the
 name-list from the variable will be returned as a string in the "long" ``form``
-of ``cs:name``, formatted with ``name-as-sort-order`` set to "all". However, it
-is usually handier to call the same macro used to render the names in the
-context (``cs:citation`` or ``cs:bibliography``) to which the sort applies. One
-of the benefits of using macros is that substitution logic becomes available
-(e.g. the ``editor`` variable might substitute for an empty ``author``
-variable).
+of ``cs:name``, formatted with ``name-as-sort-order`` set to "all".
 
 **dates:** `Date variables`_ that are set directly on ``cs:key`` using the
 ``variable`` attribute are returned to ``cs:key`` in the YYYYMMDD format, with
 zeros substituted for any missing date-parts (e.g. 20001200 for December 2000).
 As a result, dates with more date-parts will come after those with fewer
 date-parts, e.g. (2000, May 2000, May 1st 2000). Note that negative years are
-sorted inversely, e.g. (100BC, 50BC, 50AD, 100AD). If date variables are called
-by the ``variable`` attribute, the complete date is returned. If a sort should
-use an incomplete date (e.g. to sort by year only), macros should be used.
-Seasons are ignored for sorting, as the chronological order of the seasons
-differs between the northern and southern hemispheres. Date ranges consist of a
-start date and an end date. The start date is used for comparison with single
-dates. However, for items with the same (start) date, the items with date ranges
-are placed after those with single dates, e.g. (1999, 2000, 2000-2002, 2001,
-2001-2003). In addition, date ranges are subjected to a secondary sort based on
-the end date, e.g. (2000, 2000-2001, 2000-2004, 2000-2005, 2001).
+sorted inversely, e.g. (100BC, 50BC, 50AD, 100AD). Seasons are ignored for
+sorting, as the chronological order of the seasons differs between the northern
+and southern hemispheres. Date ranges consist of a start date and an end date.
+The start date is used for comparison with single dates. However, for items with
+the same (start) date, the items with date ranges are placed after those with
+single dates, e.g. (1999, 2000, 2000-2002, 2001, 2001-2003). In addition, date
+ranges are subjected to a secondary sort based on the end date, e.g. (2000,
+2000-2001, 2000-2004, 2000-2005, 2001).
 
 **numbers:** If the ``variable`` attribute is used, numeric values are returned
-as integer values (``form`` is "numeric"). This is generally more robust than
-using a macro, which might return numbers in forms unsuitable for sorting
-("roman", "year-suffix", "ordinal" or "long-ordinal").
+as integers (``form`` is "numeric"). If the original variable value only
+consists of non-numeric text, the value is returned as a text string.
 
 Sorting Macros
 ^^^^^^^^^^^^^^
 
-When a macro is called via ``cs:key``, it returns whatever string value the
-macro would ordinarily generate, but stripped of any formatting decorations. As
-indicated above, it is generally preferable to use ``macro`` to sort by name.
-There are two special considerations for name variables: first, keys for sorting
-a list of names may be obtained from any macro that generates names of form
-"short" or "long". The only exception to ordinary rendering is that "et al." is
-not appended to names used in sort keys. Secondly, it is possible to sort by the
-number of names in a names-list (i.e. the number of authors of a source), by
-calling a macro in which the ``form`` attribute of ``cs:name`` is set to
-"count". In this case a count value of "3" would be obtained for a name variable
-that would otherwise return "Jones, Smith, Doe".
+A macro called via ``cs:key`` returns whatever string value the macro would
+ordinarily generate, with a few exceptions. In all cases, rich text markup is
+removed from the sort key.
+
+For name sorting, it is generally preferable to use the same macro that is used
+to render the names in the context (``cs:citation`` or ``cs:bibliography``) to
+which the sort applies. The first benefit of using macros is that substitution
+logic becomes available (e.g. the ``editor`` variable might substitute for an
+empty ``author`` variable). Secondly, et-al abbreviation can be used (using
+either the ``et-al-min`` and ``et-al-use-first`` or et-al-subsequent options
+defined within the macro, or the overriding ``names-min`` and
+``names-use-first`` attributes set on ``cs:key``). Note that the "et-al" and
+"and others" terms are not included in the sort key when et-al abbreviation
+occurs. The third benefit is that names can be sorted by just the family name
+and name particles, using a macro for which the ``form`` attribute on cs:name is
+set to "short". Finally, it is possible to sort by the number of names in a
+names-list, by calling a macro in which the ``form`` attribute of ``cs:name`` is
+set to "count". In this case a count value of "3" would be obtained for a name
+variable that would otherwise return "Jones, Smith, Doe". For name sorting, the
+``name-as-sort-order`` attribute on ``cs:name`` elements is set to "all".
+
+Number variables (rendered with ``cs:number``) and date variables are treated
+the same as when they were called via ``variable``. The only exception is that
+if a date variable is called by the ``variable`` attribute, the complete date is
+returned. In contrast, macros return only those date-parts that would otherwise
+be rendered (respecting the value of the ``date-parts`` attribute for localized
+dates, or the listing of ``cs:date-part`` elements for non-localized dates).
 
 Formatting
 ~~~~~~~~~~
