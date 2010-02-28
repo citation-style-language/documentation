@@ -1767,7 +1767,7 @@ The following formatting attributes may be set on ``cs:date``, ``cs:date-part``,
     Sets the font style, with values:
     
     -  "normal" (default)
-    -  "italic" (flipflops, see `Flipflopping`_)
+    -  "italic"
     -  "oblique" (i.e. slanted)
 
 ``font-variant``
@@ -1780,7 +1780,7 @@ The following formatting attributes may be set on ``cs:date``, ``cs:date-part``,
     Sets the font weight, with values:
     
     -  "normal" (default)
-    -  "bold" (flipflops, see `Flipflopping`_)
+    -  "bold"
     -  "light"
 
 ``text-decoration``
@@ -1800,8 +1800,7 @@ The following formatting attributes may be set on ``cs:date``, ``cs:date-part``,
     When set "true" ("false" is default), the rendered text is wrapped in
     quotes. The quote-symbols are defined as (localized) terms. The localized
     ``punctuation-in-quote`` option controls whether punctuation appears inside
-    or outside the quotes (see `Locale Options`_). Quotes flipflop, see
-    `Flipflopping`_.
+    or outside the quotes (see `Locale Options`_).
 
 ``display``
     By default, the text of each individual cite is formatted as a
@@ -1821,22 +1820,6 @@ The following formatting attributes may be set on ``cs:date``, ``cs:date-part``,
        extending to the right margin.
     -  "indent": Block-indents the content to the right by a standard
        amount.
-
-Flipflopping
-^^^^^^^^^^^^
-
-Rendering elements that are set to display italicized or boldfaced text, or to
-carry quotes, flipflop. Flipflopping can be best explained with an example:
-
-.. sourcecode:: xml
-
-    <layout prefix="Speak, " suffix=", and enter." font-weight="bold">
-      <text value="friend" font-weight="bold">
-    </layout>
-
-This renders as "**Speak** friend **and enter.**". Nested italics switch between
-italics and normal text, nested boldface between boldface and normal text, and
-quotes switch between inner and outer quotes.
 
 Affixes
 ~~~~~~~

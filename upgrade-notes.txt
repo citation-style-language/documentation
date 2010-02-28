@@ -826,13 +826,40 @@ Quotes
 CSL 1.0 introduces new terms for inner ("open-inner-quote" and
 "close-inner-quote", e.g. ‘ and ’) and outer quotes ("open-quote" and
 "close-quote", e.g. “ and ”). Together with the new
-``punctuation-in-quote``-option (see `Punctuation around Quotes`_), quotes can
-now be fully localized (as long as they are specified via the ``quotes``
-attribute). In addition, quotes can now be properly nested (using alternating
-quotation marks), e.g.:
+``punctuation-in-quote``-option (see `Punctuation around Quotes`_), quotes
+applied with the ``quotes`` attribute are now fully localized.
 
-* title: My “Nested” Title
-* title with quotes: “My ‘Nested’ Title”
+Quote Substitution
+^^^^^^^^^^^^^^^^^^
+
+If a field (e.g. a variable) contains a matching set of quotation marks (", ',
+or the quotation marks defined by the ``open-inner-quote`` and
+``close-inner-quote`` terms), then these quotation marks are replaced by those
+defined by the ``open-quote`` and ``close-quote`` terms. For example:
+
+.. sourcecode:: xml
+
+    <text value="Voyage of 'The Beagle'"/>
+
+will render as: Voyage of “The Beagle”
+
+Flipflopping
+^^^^^^^^^^^^
+
+Flipflopping occurs when a field (e.g. a variable) contains a matching set of
+quotation marks (", ', or the quotation marks defined by the ``open-quote``,
+``close-quote``, ``open-inner-quote`` and ``close-inner-quote`` terms), or when
+it contains markup for italics or boldfacing (see `Rich Text Markup within
+Fields`_). For example:
+
+.. sourcecode:: xml
+
+    <text prefix="Speak, " value="'friend'"  suffix=", and enter" quotes="true"/>
+
+will render as “Speak ‘friend’, and enter”. Quotes flipflop between inner
+(``open-inner-quote`` and ``close-inner-quote``) and outer (``open-quote`` and
+``close-quote``) quotes. Italics flipflop between italics and the normal
+font-style, and boldface between bold and the normal font-weight.
 
 Punctuation around Quotes
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -852,11 +879,10 @@ and
 Rich Text Markup within Fields
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Although not part of CSL 1.0, the new citeproc-js_ CSL processor used by Zotero
-supports a new feature that deserves some notice: the ability to use rich text
-markup within fields.
-
-Rich text markup can be applied with a small set of HTML(-like) tags:
+Although not part of the CSL 1.0 specification, the new citeproc-js_ CSL
+processor used by Zotero supports an exciting new feature: the ability to use
+rich text markup within item fields. This markup is applied with a small set of
+HTML(-like) tags:
 
 -  ``<b>`` - bold
 -  ``<i>`` - italics
@@ -865,8 +891,17 @@ Rich text markup can be applied with a small set of HTML(-like) tags:
 -  ``<sup>`` - superscript
 
 E.g. if a Zotero item has the title "Ca<sup>2+</sup> levels in <i>Homo
-sapiens</i>", this will automatically be converted to "Ca\ :sup:`2+`\ levels in
-*Homo sapiens*" when a citation is rendered.
+sapiens</i>", this will render as "Ca\ :sup:`2+`\ levels in *Homo sapiens*".
+Rich text markup can also be used with the ``value`` attribute of ``cs:text``,
+but here special XML characters ("<", ">") have to be escaped, e.g.:
+
+.. sourcecode:: xml
+
+    <text value="&lt;b&gt;some bold text&lt;/b&gt;"/>
+
+In contrast, markup used with the ``prefix`` and ``suffix`` attributes is not
+recognized. Finally, note that bold and italics markup are subject to
+`flipflopping`_.().
 
 second-field-align
 ~~~~~~~~~~~~~~~~~~
@@ -1279,207 +1314,6 @@ CSL 1.0 also introduces a number of new terms:
 * ``reference``. This term replace the ``references`` term from CSL 0.8.
 * ``season-01`` to ``season-04``. These terms map to respectively spring,
   summer, fall and winter. See `Seasons`_.
- 
-Anything below this point is not meant for inclusion in the final version
--------------------------------------------------------------------------
-
-Things not discussed
-~~~~~~~~~~~~~~~~~~~~
-
--  no more group-by (maybe we won't have to mention this, as none
-   of the current styles seem to use it)
--  is-date is no more (maybe we won't have to mention this, as none
-   of the current styles seem to use it)
-
-Changesets between 1.0rc1 and rc2  (rc1 was tagged on 08/15/09, rc2 on 01/16/10):
-
-Worked into upgrade notes:
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1192 Changed
-"true" value of second-field-align to "flush"
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1188 applying
-info patch from Rintze, moving categor terms to separate file,
-contributor roles to csl-variables.rnc
-(removed cs:source --> doesn't need action, changed values ``rel`` on ``cs:link`` (plus other cleanup), ``citation-format``/``field`` instead of ``term`` on ``cs:category``)
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1177 Removed
-delimiter as an option from cs:layout when used in cs:bibliography
-Clarified conditional behavior (as OR operator) Removed ability to
-specify multiple variables in cs:date and cs:text. This means that
-the delimiter on cs:date should now act to delimite the
-date-parts.
-http://sourceforge.net/apps/trac/xbiblio/changeset/1184 Removed
-delimiter as a possible attribute of cs:text (part II of the
-http://sourceforge.net/apps/trac/xbiblio/changeset/1177 patch)
-(the ability to specify multiple variables doesn't seem to have caught on, better to leave this out)
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1178 Removed the
-delimiter as a possible attribute from cs:date when used to call
-localized dates.
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1183 Allow
-(overriding) formatting attributes on cs:date-part when used
-in-style in a call for a localized date.
-
-Name articles:
-http://sourceforge.net/apps/trac/xbiblio/changeset/1173 Add
-particle-in-name-sort option attribute to bibliography element.
-(this one has to go again probably)
-http://sourceforge.net/apps/trac/xbiblio/changeset/1210
-Changed name-particle-option to reflect current proposal.
-(csl.rnc)
-http://sourceforge.net/apps/trac/xbiblio/changeset/1212
-Changed demote-particles option into a global option, renamed it to demote-non-dropping-particle.
-(csl.rnc)
-
-http://bitbucket.org/bdarcus/csl-schema/changeset/528360192454/
-adding 'jurisdiction', fixes #2
-(csl-variables.rnc)
-
-http://bitbucket.org/bdarcus/csl-schema/changeset/520dc1d2d993/
-added global initialize-with-hyphen option, introduced hierarchical name and et-al options.
-(csl.rnc)
-
-http://bitbucket.org/bdarcus/csl-schema/changeset/f5b5f3c3a661/
-Allow et-al-* attributes on cs:name
-(csl.rnc)
-
-http://bitbucket.org/bdarcus/csl-schema/changeset/26c675c1c603/
-Added required version attribute (with value "1.0") to cs:locale when occurring in standalone locale files 
-(csl.rnc)
-
-http://bitbucket.org/bdarcus/csl-schema/changeset/2aed27e6c033/
-Renamed "references" to "reference", removed "reference item", added season-terms ("season-01", etc), added "ad"/"bc", put some existing terms in alphabetical order
-(csl-terms.rnc)
-
-http://bitbucket.org/bdarcus/csl-schema/changeset/8e7b5cfd7414/
-Addition of date-range-delimiter attribute
-http://bitbucket.org/bdarcus/csl-schema/changeset/2e6186e6a169/
-Renaming range-delimiter attribute to date-range-delimiter
-http://bitbucket.org/bdarcus/csl-schema/changeset/cfbc646ff914/
-Reverting previous change (which was renaming range-delimiter to date-range-delimiter)
-(csl.rnc)
-
-http://bitbucket.org/bdarcus/csl-schema/changeset/fa42453d2dfa/
-Adding "circa"-term
-(csl-terms.rnc)
-
-http://bitbucket.org/bdarcus/csl-schema/changeset/7cb303fca42b/
-Adding uncertain-date conditional
-http://bitbucket.org/bdarcus/csl-schema/changeset/bfe2a5cd62d8/
-Renaming uncertain-date to is-uncertain-date for consistency with is-numeric
-(csl.rnc)
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1168
-Require xml:lang on cs:locale in CSL styles.
-http://bitbucket.org/bdarcus/csl-schema/changeset/b4e2c45b794d/
-Allowing styles to use cs:locale without the xml:lang attribute
-(csl.rnc)
-
-http://bitbucket.org/bdarcus/csl-schema/changeset/acd80d84a2b2/
-Removed "publisher" from cs-names, moved "original-publisher" from cs-names to cs-variables and added "original-publisher-place" variable to cs-variables.
-(csl-variables.rnc)
-
-http://bitbucket.org/bdarcus/csl-schema/changeset/2f41485c1210/
-Add a new name variable, editorial-director
-(csl-variables.rnc)
-
-No action required:
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1157 Removing
-class attribute from cs:group and start/end-attributes from
-cs:names.
-(start/end attributes were added after 0.8; class didn't do anything in CSL 0.8 styles)
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1163 Removed
-orphaned cs:translator element
-(don't think anybody used this)
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1171 Removed
-strip-periods from cs:term
-(strip-periods wasn't present in CSL 0.8)
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1174 Removed
-point-locator attribute from cs:text (use locator variable instead)
-Removed form attribute from cs:text when used for macros.
-(shouldn't give any problems)
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1207
-adding 'linguistics' (csl-categories.rnc)
-(this has found its way into CSL 0.8 via time travel, so the category isn't new in CSL 1.0)
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1201
-Removed the "other" date-part. (csl.rnc)
-(nobody used this anyway)
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1191 adding
-csl-categories.rnc
-(doesn't affect usage CSL)
-
-http://sourceforge.net/apps/trac/xbiblio/changeset/1189 removed
-text-case attribute from 'formatting' pattern, added it to cs:text (only)
-http://sourceforge.net/apps/trac/xbiblio/changeset/1190 adding
-text-case to label, number, date-part, name-part
-(text-case can't be used on group anymore, doesn't seem to occur in repository though)
-
-http://bitbucket.org/bdarcus/csl-schema/changeset/1d4f814940d3/
-cleaned up pattern names on variable, moved dates to csl-variables.rnc file
-(csl.rnc, csl-variables.rnc)
-
-http://bitbucket.org/bdarcus/csl-schema/changeset/836ed337fc1e/
-adding csl data schema
-(csl-data.rnc)
-
-http://bitbucket.org/bdarcus/csl-schema/changeset/a14f0ded2c85/
-minor tweaks, adding metadata
-(csl-data.rnc)
-
-http://bitbucket.org/bdarcus/csl-schema/changeset/52373cf45c98/
-filling out rich-variable-pattern
-(csl-data.rnc)
-
-http://bitbucket.org/bdarcus/csl-schema/changeset/510b59327812/
-making attribute optional
-(csl-data.rnc)
-
-http://bitbucket.org/bdarcus/csl-schema/changeset/bda1f0ab3f7e/
-Correct regular expression pattern for ISSN(-L)s, which can have a roman "X" or "x" as check digit
-(csl.rnc)
-
-Still to do:
-
-Links - Revision histories of schema files
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-A short history on the path from CSL 0.8 to 1.0: development of the
-schema started with csl.rnc in trunk. The schema was split in the
-split branch into csl.rnc, csl-core.rnc, csl-variables.rnc,
-csl-types.rnc and csl-terms.rnc. csl-core.rnc was then folded into
-csl-rnc. Once CSL 1.0RC1 was tagged, the split branch was merged
-back to the trunk. The switch to Bitbucket was made after the merge.
-
-pre-split:
-http://sourceforge.net/apps/trac/xbiblio/log/csl/schema/trunk/csl.rnc
-
-split:
-http://sourceforge.net/apps/trac/xbiblio/log/csl/schema/branches/split/csl-core.rnc?rev=1087
-https://sourceforge.net/apps/trac/xbiblio/log/csl/schema/branches/split/csl.rnc?rev=1125
-http://sourceforge.net/apps/trac/xbiblio/log/csl/schema/branches/split/csl-variables.rnc?rev=1125
-http://sourceforge.net/apps/trac/xbiblio/log/csl/schema/branches/split/csl-types.rnc?rev=1125
-http://sourceforge.net/apps/trac/xbiblio/log/csl/schema/branches/split/csl-terms.rnc?rev=1125
-
-merge:
-http://sourceforge.net/apps/trac/xbiblio/log/csl/schema/trunk/csl.rnc
-http://sourceforge.net/apps/trac/xbiblio/log/csl/schema/trunk/csl-variables.rnc
-http://sourceforge.net/apps/trac/xbiblio/log/csl/schema/trunk/csl-types.rnc
-http://sourceforge.net/apps/trac/xbiblio/log/csl/schema/trunk/csl-terms.rnc
-http://sourceforge.net/apps/trac/xbiblio/log/csl/schema/trunk/csl-categories.rnc
-
-http://bitbucket.org/bdarcus/csl-schema/overview/
-
-http://bitbucket.org/bdarcus/csl-locales/overview/
-(all changes here should be reflected in the schema, so we should be able to skip this one)
 
 .. [1]
    A hat tip to user ```komrade`` <http://www.zotero.org/komrade>`_ of
