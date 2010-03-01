@@ -711,8 +711,8 @@ may carry the ``range-delimiter`` attribute (see `Date Ranges`_).
 Date Ranges
 ^^^^^^^^^^^
 
-By default, date ranges are delimited by an en-dash (e.g. "May–July 2008"). The
-``range-delimiter`` attribute can be used to specify custom date range
+By default, date ranges are delimited by an en-dash (e.g. "May |--| July 2008").
+The ``range-delimiter`` attribute can be used to specify custom date range
 delimiters. The attribute value set on the largest date-part ("day", "month" or
 "year") that differs between the two dates of the date range will then be used
 instead of the en-dash. For example,
@@ -730,7 +730,10 @@ instead of the en-dash. For example,
       </citation>
     </style>
 
-would result in "May–July 2008" and "May 2008/June 2009".
+would result in "May |--| July 2008" and "May 2008/June 2009".
+
+.. |--| unicode:: U+2013
+   :trim:
 
 AD and BC
 ^^^^^^^^^
@@ -1057,7 +1060,9 @@ N.B. The sort keys are listed in descending order of importance.
     1) family
     2) given
 
-:Example:  [Mao Zedong]
+:Example: |Mao Zedong| [Mao Zedong]
+
+.. |Mao Zedong| unicode:: U+6bdb U+6cfd U+4e1c
 
 ----
 
@@ -1065,7 +1070,9 @@ N.B. The sort keys are listed in descending order of importance.
 :Order:
     1) family
 
-:Example:  [Mao]
+:Example: |Mao| [Mao]
+
+.. |Mao| unicode:: U+6bdb
 
 ----
 
