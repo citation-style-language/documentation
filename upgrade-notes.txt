@@ -962,248 +962,47 @@ year-suffixes. An example:
 Layout Control with the Display Attribute
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  Display attributes for positioning blocks comprising a cite. (TODO)
+CSL 0.8 included a ``display`` attribute, with possible values of
+"block" or "inline-block", intended to provide some control over the
+layout of bibliography entries.  However, it remained unimplemented by
+any known processor, and was not used in any known styles.  In CSL
+1.0, the ``display`` attribute is been refined and extended: it is now
+restricted to rendering-element children of ``cs:layout`` under
+``cs:bibliography``, and has possible values of "block",
+"left-margin", "right-inline", and "indent".
+
+By leveraging the styling features of the target rendering platform
+(HTML, a word processor, a document processing system), the
+enhancements to ``display`` permit the implementation of sophisticated
+formatting effects, such as publication listings headed by the name of
+each author.  See the CSL 1.0 Specification for further details on
+achieving special formatting effects with this attribute.
 
 Disambiguation
 --------------
 
-Disambiguation is the automated transformation of in-text
-references and corresponding bibliography entries, such that the
-former uniquely identify the latter. Although an indispensable
-feature of CSL, this feature has been a source of occasional
-confusion among users, for three independent reasons: (1) unwanted
-transformations can be triggered by small differences in the form
-of an author's name in Zotero database entries; (2) there were
-sometimes subtle discrepancies between the Zotero disambiguation
-algorithms and the rules required by a given style; and (3) little
-documentation has been available on what disambiguation actually
-*does*.
+The disambiguation algorithm of CSL 0.8 is aimed at styles that
+channel the Chicago Manual of Style.  The innovative world of
+publishing, however, has devised a number of other methods, each
+differing in subtle ways from the others.  CSL 1.0 addresses this
+complexity through the addition of a new
+``givenname-disambiguation-rule`` option.  Used together with the
+existing options ``disambiguate-add-names`` and
+``disambiguate-add-givenname``, the new option permits refined control
+over the precise method of disambiguation, tuned to the specific
+requirements of a particular style guide.
 
-Building on user feedback and experience with the first deployment
-of disambiguation support, CSL 1.0 is now able to offer a rich set
-of disambiguation algorithms. The options described below should
-allow you to precisely address the requirements of a target style.
-Once your style is known to apply the correct rules for
-disambiguation, Zotero forum support can focus on the need for
-proper curation of author names, and some of the fog should begin
-to lift over this corner of bibliography management.
-
-Disambiguation Concepts
-~~~~~~~~~~~~~~~~~~~~~~~
-
-For clarity, the discussion below will draw upon several special
-concepts and distinctions.
-
-Cites versus Names
-    Previous documentation did not distinguish between the
-    disambiguation of cites themselves, and the disambiguation of
-    creator names. In the discussion below, the former will be referred
-    to as "cite-based disambiguation", and the latter as "names-based
-    disambiguation". In cite-based disambiguation, changes are limited
-    to the actual cites that must be distinguished. In names-based
-    disambiguation, changes to the form of a name are global, and may
-    affect cites that were unique to begin with.
-
-Name transformation level
-    As in previous versions of CSL, a name may be cast at three
-    transformation levels: ``short`` form, which is the family name
-    alone ("short form"); ``long`` form with given name initialized
-    ("initialized form"); or the full name ("long form"). Depending on
-    the attributes set on the ``names`` node, and the disambiguation
-    attributes set on the ``citation`` node, one or more of the three
-    levels may be unavailable. The available form closest to the first
-    of the three forms at any point in processing is "the lowest
-    available transformation level", and that nearest to the last is
-    "the highest available transformation level".
-
-Cite Pools
-    When performing cite-based disambiguation, the cites to be
-    compared, transformed and distinguished are those which have the
-    same base ``citation`` form when the ``position="subsequent"``
-    condition is true. Such a group of cites will be referred to below
-    as a "cite pool". Members of a cite pool are compared with one
-    another under a progressive series of transformations. A cite exits
-    the pool when it can be distinguished from the others.
-
-Unique Creator Names
-    In names-based disambiguation, the full form of the name is assumed
-    to uniquely identify a creator (author, editor, etc.) within the
-    document. This full form of the name is the "unique creator name".
-
-Name Pools
-    In names-based disambiguation, if a name form at a given
-    transformation level applies to more than one unique creator, the
-    unique creator names associated with it form a "name pool".
-
-
-Processing Flow
-~~~~~~~~~~~~~~~
-
-Processing begins with the identification of cite pools for
-cite-based disambiguation. If the ``disambiguate-add-names``
-attribute is set to ``true``, the first stage of processing in each
-cite pool adds names to each cite incrementally, using the lowest
-available transformation level for each name added.
-
-When names are added to a cite during the add-names phase, the act
-of adding the name may give rise to a *name pool* for purposes of
-names-based disambiguation. Accordingly, if required by the style
-options, names-based disambiguation is performed on the name before
-it is added to the cites in a cite pool during cite-based
-disambiguation.
-
-Names-based disambiguation will be performed in this way if and
-only if the ``disambiguate-add-givenname`` attribute is set to
-``true`` *and* the ``givenname-disambiguation-rule`` attribute is
-set to one of the following values, or is absent (and hence carries
-the default value of ``all-names``):
-
-
--  ``all-names``
--  ``all-names-with-initials``
--  ``primary-name``
--  ``primary-name-with-initials``
-
-As described below, the latter two rules in this list will touch
-only names that appear in the first position in a list of creator
-names; with these two rules, all other names will always use the
-lowest transformation level available in the ``names`` node
-concerned, without regard to disambiguation considerations.
-
-If the ``disambiguate-add-givenname`` attribute is set to ``true``
-and the value of ``givenname-disambiguation-rule`` is set to
-``by-cite``, name pools will be ignored, and no names-based
-disambiguation will be performed. This may result in lingering
-ambiguity between cites. For example, consider the following
-bibliographic information:
-
-
-=========  ==================================  ======  ====
-Item       Authors                             Title   Year
-=========  ==================================  ======  ====
-[entry-1]  Jane Noakes, John Doe, Jane Roe     Book A  1999
-[entry-2]  Jane Noakes, Richard Doe, Jane Roe  Book B  1999
-=========  ==================================  ======  ====
-   
-In a style that has the form of the creator name set to ``short``,
-``et-al-min`` set to ``3`` and ``et-al-use-first`` set to ``1``,
-the lowest available transformation level for the first name of
-both ``[entry-1]`` and ``[entry-2]`` will be the short form, "Doe".
-If ``disambiguate-add-names`` is set to ``true``, and
-``disambiguate-add-givenname`` is *not* set, names will be added
-without names-based disambiguation. The value of
-``et-al-use-first`` will be incrementally relaxed, until the names
-for both cites has expanded to "Doe, Roe, Noakes".
-
-To help dispell such lurking ambiguity without resorting to
-names-based disambiguation, ``disambiguate-add-givenname`` can be
-set to ``true`` and ``givenname-disambiguation-rule`` to
-``by-cite``. This will cause the given names in cites that have
-expanded to include all available names without exiting their cite
-pool to be retried with one (and only one) increment to their
-transformation level. Only increments that reduce the number of
-ambiguous cites in the pool will be retained. If a cite is
-successfully disambiguated by incrementing the name transformation
-level in this phase, any trailing names not essential to
-disambiguation will be dropped. In the case described above, the
-processor would return the names "Noakes, J. Doe, et al." and
-"Noakes, R. Doe, et al.", which is sufficient to disambiguate the
-cites.
-
-Once the adding of names and given names has been completed for a
-cite pool, a final disambiguation phase may be invoked, if the
-appropriate attributes are set and a cite pool still exists. If the
-attribute ``disambiguate-year-suffix`` is set to ``true``, the
-cites in the pool will each receive a letter or letters as a year
-suffix. This option always results in a successful final
-disambiguation of the cite.
-
-If ``disambiguate-year-suffix`` is not used, a style may attempt to
-disambiguate the ``position="subsequent"`` form of references by
-testing for ``disambiguate="true"``. This boolean value will
-evaluate true *only* for cites that are members of a cite pool in
-this final phase of processing. In the example above, a style that
-includes the title in the subsequent form of the cite only when
-``disambiguate`` is ``true`` would be able to successfully
-disambiguate the two references. When this type of disambiguation
-fails, the added information is dropped from the cite.
-
-Controlling Given Name Disambiguation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-As mentioned above, CSL 1.0 introduces a new
-``givenname-disambiguation-rule`` attribute to select the algorithm
-to be used during names-based disambiguation. With a value of
-``by-cite``, no names-based disambiguation will be performed, and
-any addition or expansion of given names in one citation will not
-affect other occurences of that creator's name elsewhere in the
-bibliography.
-
-Four Given Name Disambiguation Rules
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Four values available on the ``givenname-disambiguation-rule``
-attribute can be used to implement a large number of precisely
-defined disambiguation schemes, greatly extending the scope of
-disambiguation support. [1]_ The options are:
-
-``all-names``
-    Names-based disambiguation will be performed on all names that
-    appear in the document. No ambiguous short names or initialized
-    names will remain if this option is set, regardless of what the
-    lowest available transformation level may be.
-    If names begin at the lowest transformation level (short name), the
-    transformation level of a name will be incremented to second level
-    (initialized name), and then to the highest level (full name),
-    stopping when the unique creator name has been unambiguously
-    identified. This may result in a mixture of initialized names and
-    full names within the bibiliography. (this is the default value)
-
-``all-names-with-initials``
-    Names-based disambiguation will be performed on all names that
-    appear in the document, but no name will be raised above the second
-    transformation level (initialized name). Names added with this
-    option in force may be ambiguous, and therefore a resort to the
-    final phase of disambiguation (``disambiguate-year-suffix`` or the
-    ``disambiguate="true"`` conditional) is more likely to be needed to
-    uniquely identify references.
-
-``primary-name``
-    This performs the same disambiguation operations as the
-    ``all-names`` value, but names-based disambiguation is only
-    performed on the first name in the list of creators used in a cite,
-    and any increment in the name transformation level is applied only
-    to first-listed names. Names appearing in the second and later
-    positions in any cite will always use the lowest available name
-    transformation level, without regard to disambiguation.
-
-``primary-name-with-initials``
-    Like the ``primary-name`` value, this performs the same operations
-    as its ``all-names-with-initials`` corollary, but is limited to
-    first-listed names only.
-
-
-Short Name or Full Name Binary Selection
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-If a style requires short names, with full names to be used for
-disambiguation (and never initialized names), this effect can be
-achieved by the following:
-
-
--  On the ``citation`` node:
-   
-   -  Set ``disambiguate-add-givennames`` to ``true``; and
-   -  Set ``givenname-disambiguation-rule`` to ``all-names`` or
-      ``primary-name`` as appropriate;
-
--  On the ``name`` node:
-   
-   -  Set the form attribute to ``short``; and
-   -  Do *not* set the ``initialize-with`` attribute.
-
-
-If you get stuck, you should be able to get advice on the forums.
+The ``givenname-disambiguate-rule`` option accepts values of
+"all-names", "all-names-with-initials", "primary-name",
+"primary-name-with-initials", and "by-cite".  The first rule is
+equivalent to the Chicago Manual of Style method, which assures that
+all names included in citations uniquely identify the relevant author.
+The second does the same, but will not expand initialized names.  The
+third and fourth rules limit the transformation of names to the
+first-listed author.  The last option transforms names only as
+necessary to uniquely identify references listed in the bibliography.
+A more detailed discussion of the disambiguation options can be found
+in the CSL 1.0 Specification.
 
 Sorting
 -------
