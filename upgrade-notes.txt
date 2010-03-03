@@ -651,13 +651,13 @@ names like "John SMITH":
       </name>
     </names>
 
-Hierarchical Name Options
-^^^^^^^^^^^^^^^^^^^^^^^^^
+Inheritable Name Options
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 In CSL 0.8, any attribute used for name formatting had to be included for each
 occurance of the ``cs:names`` element, even if names were identically formatted
 for all these elements. To reduce the need for duplication, CSL 1.0 introduces
-hierarchical options: the attributes ``and``, ``delimiter-precedes-last``,
+inheritable options: the attributes ``and``, ``delimiter-precedes-last``,
 ``initialize-with``, ``name-as-sort-order`` and ``sort-separator`` can now also
 be set on ``cs:style``, ``cs:citation`` and ``cs:bibliography``. The attributes
 ``form`` and ``delimiter`` have been made available as ``name-form`` and

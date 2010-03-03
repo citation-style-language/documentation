@@ -104,7 +104,7 @@ following arguments:
     declarations if this attribute is set to "http://purl.org/net/xbiblio/csl".
 
 In addition, ``cs:style`` may carry any of the `global options`_, as well as the
-`hierarchical name options`_.
+`inheritable name options`_.
 
 An example of a style preamble:
 
@@ -271,8 +271,8 @@ number [1], author [Doe] or author-date descriptors [Doe 1999]) or notes. The
 required ``cs:layout`` child element describes what, and how, bibliographic data
 should be included in the citations (see the chapter on the `Layout element
 <#layout>`_). The ``cs:citation`` element may carry attributes for
-citation-specific formatting options and hierarchical name options (see the
-`Citation-specific Options`_ and `Hierarchical Name Options`_ sections).
+citation-specific formatting options and inheritable name options (see the
+`Citation-specific Options`_ and `Inheritable Name Options`_ sections).
 Finally, the optional ``cs:sort`` element, which should precede the
 ``cs:layout`` element, specifies how citations consisting of multiple references
 should be sorted (see the chapter on `Sorting`_). An example of a
@@ -305,8 +305,8 @@ element describes how each reference should be formatted in the bibliography,
 while the optional ``cs:sort`` element (which should precede the ``cs:layout
 element) specifies the sorting order of the references in the bibliography. In
 addition, the ``cs:bibliography`` element may carry attributes for
-bibliography-specific formatting options and hierarchical name options (see the
-`Bibliography-specific Options`_ and `Hierarchical Name Options`_ sections).
+bibliography-specific formatting options and inheritable name options (see the
+`Bibliography-specific Options`_ and `Inheritable Name Options`_ sections).
 
 .. sourcecode:: xml
 
@@ -1340,7 +1340,7 @@ Styles can be extensively configured with (optional) options, which are set as
 attributes. `Citation-specific options`_ are set on ``cs:citation``, while
 `bibliography-specific options`_ are set on ``cs:bibliography``. `Global
 options`_, which affect both citations and the bibliography, are set on
-``cs:style``. `Hierarchical name options`_ may be set on ``cs:style``,
+``cs:style``. `Inheritable name options`_ may be set on ``cs:style``,
 ``cs:citation`` and ``cs:bibliography``. Finally, `locale options <#Locale Files
 - Basic Structure>`_ may be set on ``cs:locale`` elements.
 
@@ -1676,24 +1676,24 @@ The handling of particles for inverted names is set with the
        secondary sort key (see sort order B, e.g. "Koning, W. de" appears under
        "K").
 
-Hierarchical Name Options
-^^^^^^^^^^^^^^^^^^^^^^^^^
+Inheritable Name Options
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Attributes for the ``cs:names`` and ``cs:name`` elements may also be set on
 ``cs:style``, ``cs:citation`` and ``cs:bibliography``. This eliminates the need
 to repeat the same attributes and attribute values for every occurance of the
 ``cs:names`` and ``cs:name`` elements.
 
-The available hierarchical attributes for ``cs:name`` are ``and``,
+The available inheritable attributes for ``cs:name`` are ``and``,
 ``delimiter-precedes-last``, ``et-al-min``, ``et-al-use-first``,
 ``et-al-subsequent-min``, ``et-al-subsequent-use-first``, ``initialize-with``,
 ``name-as-sort-order`` and ``sort-separator``. The attributes ``name-form`` and
 ``name-delimiter`` accompany the ``form`` and ``delimiter`` attributes on
-``cs:name``. Similarly, ``names-delimiter``, the only hierarchical attribute
+``cs:name``. Similarly, ``names-delimiter``, the only inheritable attribute
 available for ``cs:names``, accompanies the ``delimiter`` attribute on
 ``cs:names``.
 
-When a hierarchical name attribute is set on ``cs:style``, ``cs:citation`` or
+When an inheritable name attribute is set on ``cs:style``, ``cs:citation`` or
 ``cs:bibliography``, its value is used for all ``cs:names`` elements within the
 element carrying the attribute. When an element lower in the hierarchy includes
 the same attribute with a different value, this latter value will override the
