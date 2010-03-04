@@ -2218,10 +2218,15 @@ Quotes
 Roles
 ^^^^^
 
+-  author
+-  collection-editor
+-  composer
+-  container-author
 -  editor
 -  editorial-director
 -  editortranslator
 -  interviewer
+-  original-author
 -  recipient
 -  translator
 
@@ -2246,6 +2251,7 @@ Miscellaneous
 -  by
 -  circa
 -  cited
+-  edition
 -  et-al
 -  forthcoming
 -  from
