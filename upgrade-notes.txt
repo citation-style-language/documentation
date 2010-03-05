@@ -962,47 +962,39 @@ year-suffixes. An example:
 Layout Control with the Display Attribute
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-CSL 0.8 included a ``display`` attribute, with possible values of
-"block" or "inline-block", intended to provide some control over the
-layout of bibliography entries.  However, it remained unimplemented by
-any known processor, and was not used in any known styles.  In CSL
-1.0, the ``display`` attribute is been refined and extended: it is now
-restricted to rendering-element children of ``cs:layout`` under
-``cs:bibliography``, and has possible values of "block",
+CSL 0.8 included a ``display`` attribute, with possible values of "block" or
+"inline-block", intended to provide some control over the layout of bibliography
+entries. However, it remained unimplemented by any known processor, and was not
+used in any known styles. In CSL 1.0, the ``display`` attribute is been refined
+and extended: it is now restricted to rendering-element children of
+``cs:layout`` under ``cs:bibliography``, and has possible values of "block",
 "left-margin", "right-inline", and "indent".
 
-By leveraging the styling features of the target rendering platform
-(HTML, a word processor, a document processing system), the
-enhancements to ``display`` permit the implementation of sophisticated
-formatting effects, such as publication listings headed by the name of
-each author.  See the CSL 1.0 Specification for further details on
-achieving special formatting effects with this attribute.
+By leveraging the styling features of the target rendering platform (HTML, a
+word processor, a document processing system), the enhancements to ``display``
+permit the implementation of sophisticated formatting effects, such as
+publication listings headed by the name of each author. See the CSL 1.0
+Specification for further details on the use of this attribute.
 
 Disambiguation
 --------------
 
-The disambiguation algorithm of CSL 0.8 is aimed at styles that
-channel the Chicago Manual of Style.  The innovative world of
-publishing, however, has devised a number of other methods, each
-differing in subtle ways from the others.  CSL 1.0 addresses this
-complexity through the addition of a new
-``givenname-disambiguation-rule`` option.  Used together with the
-existing options ``disambiguate-add-names`` and
-``disambiguate-add-givenname``, the new option permits refined control
-over the precise method of disambiguation, tuned to the specific
-requirements of a particular style guide.
+The disambiguation algorithm specified in CSL 0.8 followed the Chicago Manual of
+Style. CSL 1.0 supports additional disambiguation methods through the addition
+of a new ``givenname-disambiguation-rule`` attribute, which can be used in
+combination with the existing ``disambiguate-add-names`` and
+``disambiguate-add-givenname`` attributes.
 
-The ``givenname-disambiguate-rule`` option accepts values of
-"all-names", "all-names-with-initials", "primary-name",
-"primary-name-with-initials", and "by-cite".  The first rule is
-equivalent to the Chicago Manual of Style method, which assures that
-all names included in citations uniquely identify the relevant author.
-The second does the same, but will not expand initialized names.  The
-third and fourth rules limit the transformation of names to the
-first-listed author.  The last option transforms names only as
-necessary to uniquely identify references listed in the bibliography.
-A more detailed discussion of the disambiguation options can be found
-in the CSL 1.0 Specification.
+The ``givenname-disambiguate-rule`` option accepts values of "all-names",
+"all-names-with-initials", "primary-name", "primary-name-with-initials", and
+"by-cite". The first value specifies the Chicago Manual of Style method, which
+assures that all names included in citations uniquely identify the relevant
+author. The second does the same, but will not expand initialized names. The
+third and fourth values specify analogous methods, but here the transformation
+of names is limited to the first-listed name. The last option transforms names
+only as necessary to uniquely identify references listed in the bibliography. A
+more detailed discussion of the disambiguation options can be found in the CSL
+1.0 Specification.
 
 Sorting
 -------
