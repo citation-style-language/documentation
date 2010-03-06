@@ -1865,94 +1865,93 @@ The following formatting attributes may be set on ``cs:date``, ``cs:date-part``,
     or outside the quotes (see `Locale Options`_).
 
 ``display``
-    The anticipated output formats for CSL 1.0 (RTF, LaTeX, XML
-    dialects such as XHTML) share a capability for controlling the
-    appearance and position of individual blocks of text through a
-    styling mechanism.  Styling may be set on ``cs:group``,
-    ``cs:text``, ``cs:number``, ``cs:names`` or ``cs:date`` elements
-    using this attribute. [#]_  It accepts one of the following values:
+    Many of the anticipated output formats for CSL 1.0 (RTF, LaTeX, XML dialects
+    such as XHTML) allow styling to be applied to individual blocks of text in
+    order to control their appearance and position. The ``display`` attribute
+    can be used in ``cs:bibliography`` to allocate styling to particular text
+    blocks for this purpose [#]_. The attribute may be set on ``cs:date``,
+    ``cs:group``, ``cs:names``, ``cs:number`` and ``cs:text`` elements, and
+    accepts one of the following values:
 
-    - "block" A block stretching from margin to margin.
-    - "left-margin" A block of fixed width starting at the left
-      margin (all "left-margin" blocks in a bibliography share the
-      same width, set according to the maximum number of characters
-      appearing in any one such block).
-    - "right-inline" A block directly to the right of any immediately
-      preceding "left-margin" block, and extending to the right
-      margin.
-    - "indent" Block indented to the right by a standard amount.
+    - "block": A block stretching from margin to margin.
+    - "left-margin": A block of fixed width starting at the left margin (all
+      "left-margin" blocks in a bibliography share the same width, set according
+      to the maximum number of characters appearing in any one such block).
+    - "right-inline": A block directly to the right of any immediately preceding
+      "left-margin" block, and extending to the right margin.
+    - "indent": Block indented to the right by a standard amount.
 
-    .. [#] Note that, as a matter of best practice, if the ``display``
-           attribute is used to control the layout of bibliography
-           entries, *all* elements in an entry should be within the
-           scope of a group or element bearing a display attribute.
-
+    .. [#] N.B. if ``display`` attributes are used, make sure all rendering
+           elements are under the control of exactly one display attribute.
 
     **Examples** 
 
-    The same effect as ``second-field-align`` can be achieved using
-    the following CSL: [#]_
+    (A) A similar effect as with ``second-field-align`` can be achieved with
+        [#]_:
+        
+        .. sourcecode:: xml
+        
+            <bibliography>
+              <layout>
+                <text display="left-margin" variable="citation-number"
+                    prefix="[" suffix="]"/>
+                <group display="right-inline">
+                  <!-- citation rendering elements -->
+                </group>
+              </layout>
+            </bibliography>
+    
+    .. [#] The styling definitions in the target application (CSS for HTML,
+           styles for Word etc.) can be adjusted to achieve special effects,
+           such as floating the labels into the margin.
 
-    .. sourcecode:: xml
+----
 
-       <bibliography>
-         <layout>
-           <text display="left-margin" variable="citation-number" 
-                   prefix="[" suffix="]"/>
-           <group display="right-inline">
-             <!-- citation rendering elements -->
-           </group>
-         <layout>
-       </bibliography>
+    (B) A per-author publication listing can be formatted as follows [#]_: 
+        
+        .. sourcecode:: xml
+        
+            <bibliography subsequent-author-substitute="">
+              <sort>
+                <key variable="author"/>
+                <key variable="issued"/>
+              </sort>
+              <layout>
+                <group display="block" text-decoration="underline">
+                  <names variable="author">
+                    <name and="text" />
+                  </names>
+                </group>
+                <group display="left-margin">
+                  <date variable="issued">
+                    <date-part name="year" />
+                  </date>
+                </group>
+                <group display="right-inline">
+                  <!-- citation rendering elements -->
+                </group>
+              </layout>
+            </bibliography>
     
-    .. [#] The styling definitions in the target application (CSS for
-           HTML, styles for Word etc.) can be adjusted to achieve
-           special effects, such as floating the labels into the
-           margin.
-    
-    A per-author publication listing can be formatted as follows: [#]_
-    
-    .. sourcecode:: xml
-    
-       <bibliography subsequent-author-substitute="">
-         <sort>
-           <key variable="author"/>
-           <key variable="issued"/>
-         </sort>
-         <layout>
-           <group display="block" text-decoration="underline">
-             <names variable="author">
-               <name and="text" />
-             </names>
-           </group>
-           <group display="left-margin">
-             <date variable="issued">
-               <date-part name="year" />
-             </date>
-           </group>
-           <group display="right-inline">
-             <!-- citation rendering elements -->
-           </group>
-         </layout>
-       </bibliography>
-    
-    .. [#] The effect of the empty ``subsequent-author-substitute`` attribute
-           is to render the author name only once, at the top of the
-           list of each author's publications.
-    
-    An annotated bibliography with the annotation block-indented
-    below the reference can be formatted as follows:
-    
-    .. sourcecode:: xml
-    
-       <bibliography>
-         <layout>
-           <group display="block">
-             <!-- citation rendering elements -->
-           </group>
-           <text display="indent" variable="abstract" />
-         </layout>
-       </bibliography>
+    .. [#] The effect of the empty ``subsequent-author-substitute`` attribute is
+           to render the author name only once, at the top of the list of each
+           author's publications.
+
+----
+
+    (C) An annotated bibliography with the annotation block-indented below the
+        reference can be formatted as follows:
+        
+        .. sourcecode:: xml
+        
+            <bibliography>
+              <layout>
+                <group display="block">
+                  <!-- citation rendering elements -->
+                </group>
+                <text display="indent" variable="abstract" />
+              </layout>
+            </bibliography>
 
 Affixes
 ~~~~~~~
