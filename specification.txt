@@ -1360,127 +1360,121 @@ Disambiguation can be achieved in five ways:
 1. The number of names shown can be increased.
 2. A given name can be added.
 3. Initialized given names can be expanded.
-4. A year-suffix can be included
-5. The cite can be rendered with the ``disambiguate`` attribute of
-   ``cs:choose`` conditions testing "true"
+4. A year-suffix can be included.
+5. The cite can be rendered with the ``disambiguate`` attribute of ``cs:choose``
+   conditions testing "true".
 
-One of the troublesome ironies lurking in this description is that the
-term "disambiguation" itself is ambiguous.  Steps (1), (4) and (5) aim
-solely to disambiguate cites that are exactly identical.  Steps (2)
-and (3), however, are different.  In addition to the strict purpose of
-disambiguating *cites*\ , the adding or expansion of given names may
-be used for the broader purpose of disambiguating *names* throughout
-the document.  In the description below, this difference is referred
-to as "the scope of names transformation".
+Ironically, the term "disambiguation" in the statement above is itself
+ambiguous. Steps (1), (4) and (5) aim solely to disambiguate cites that are
+exactly identical. Steps (2) and (3), however, are different. In addition to the
+strict purpose of disambiguating *cites*\ , the adding or expansion of given
+names may be used for the broader purpose of disambiguating *names* throughout
+the document. In the description below, this difference is referred to as "the
+scope of names transformation".
 
-The five potential steps to disambiguation are activated with the
-attributes described in this section, and are always performed, if at
-all, in the order listed below.
+The five potential steps to disambiguation are activated with the attributes
+described in this section, and are always performed, if at all, in the order
+listed below.
 
 ``disambiguate-add-names`` [Step (1)]
-    If set to "true" ("false" is the default), names that would
-    otherwise be hidden as a result of et-al abbreviation are added,
-    until either the target reference is uniquely identified, or names
-    are exhausted.
+    If set to "true" ("false" is the default), names that would otherwise be
+    hidden as a result of et-al abbreviation are added one by one, until either
+    the target reference is uniquely identified, or all names are shown.
 
 ``disambiguate-add-givenname`` [Steps (2) & (3)]
     If set to "true" ("false" is the default), given names are added or
-    expanded.  For example:
+    expanded. For example:
 
+    ================================  ===================================
+    Original form                     Disambiguated form
+    ================================  ===================================
+    (Simpson 2005; Simpson 2005)      (H. Simpson 2005; B. Simpson 2005)
+    (Doe 1950; Doe 1950)              (John Doe 1950; Jane Doe 1950)
+    ================================  ===================================
 
-    =============================  ===================================
-    Original form                  Expanded form
-    =============================  ===================================
-    (Simpson 2005; Simpson 2005)   (H. Simpson 2005; B. Simpson 2005)
-    (Doe 1950; Doe 1950)           (John Doe 1950; Jane Doe 1950)
-    =============================  ===================================
-
-    The precise method of name expansion is controlled by
-    ``givenname-disambiguation-rule`` (if this attribute is not set,
-    the default "all-names" value is used).  Whether adding or expansion
-    of names affects other cites that are not themselves ambiguous
-    depends upon the value of ``givenname-disambiguation-rule``.
+    Note that the value of the ``givenname-disambiguation-rule`` attribute (the
+    default is "all-names") determines a) the precise method of name expansion,
+    and b) whether or not cites that are not themselves ambiguous but do contain
+    the ambiguous name(s) are affected by this type of disambiguation.
 
 ``givenname-disambiguation-rule`` [Steps (2) & (3) supplemental]
-    This option accepts one of five possible values, which vary in
-    three respects: the scope of names transformation within the
-    document; the steps included in the disambiguation attempt; and
-    the names within a cite that are affected.
+    This attribute accepts one of five possible values, which vary in three
+    respects: the scope of names transformation within the document; the steps
+    included in the disambiguation attempt; and the names within a cite that are
+    affected.
 
-    The scope of names transformation
-        With a value of "all-names", "all-names-with-initials",
-        "primary-name", or "primary-name-with-initials",
-        disambiguation is performed for all relevant names,
-        without regard to ambiguity in individual cites.
-        Transformations governed by these rules apply to all cites
-        throughout the document.  Disambiguation of cites is in
-        this case incidental to the disambiguation of author names.
+    **The scope of names transformation**
+        With a value of "all-names", "all-names-with-initials", "primary-name",
+        or "primary-name-with-initials", disambiguation is performed for all
+        relevant names, without regard to ambiguity in individual cites.
+        Transformations governed by these rules apply to all cites throughout
+        the document. Disambiguation of cites is in this case incidental to the
+        disambiguation of names.
 
-        With a value of "by-cite", only the names within ambiguous cites
-        are transformed, as required to discriminate between references.
-        Cites that are not ambiguous are not affected.
+        With a value of "by-cite", only the names within ambiguous cites are
+        transformed, as required to discriminate between references. Cites that
+        are not ambiguous are not affected.
 
-    Transformation steps
-          All five types of given name disambiguation follow the
-          same general transformation steps (the specific steps applied
-          depend on the value of ``givenname-disambiguation-rule``).
+    **Transformation steps**
+          All five types of given name disambiguation follow the same general
+          transformation steps (the specific steps applied depend on the value
+          of ``givenname-disambiguation-rule``).
 
-          1. If ``initialize-with`` is set in the style, then:
+          1. If ``initialize-with`` is set, then:
 
-             \(a) A ``form`` value of "short" can be incremented to "long"
-             (e.g. "Doe" becomes "J. Doe").
+             \(a) A ``form`` value of "short" can be incremented to "long" (e.g.
+             "Doe" becomes "J. Doe").
              
-             \(b) ``initialize-with`` can be discarded (e.g. "J. Doe"
-             becomes "John Doe".
+             \(b) ``initialize-with`` can be ignored (e.g. "J. Doe" becomes
+             "John Doe").
 
-          2. If ``initialize-with`` is *not* set in the style, then:
-
-             A ``form`` value of "short" can be immediately incremented
-             to "long" (e.g. "Doe" becomes "John Doe").
+          2. If ``initialize-with`` is *not* set, then the ``form`` value of
+             "short" can be immediately incremented to "long" (e.g. "Doe"
+             becomes "John Doe").
     
-    Given name disambiguation rules
-        The effect of each given name disambiguation rule is described
-        below.  In all cases, transformations that do not contribute
-        to disambiguation are omitted, and any names added by
-        ``disambiguate-add-names`` that follow the name that results
-        in success are discarded.
+    **Given name disambiguation rules**
+        The effect of each given name disambiguation rule is described below. In
+        all cases, transformations that do not contribute to disambiguation are
+        omitted, and any names added by ``disambiguate-add-names`` that follow
+        the name that results in success are discarded.
 
         "all-names"
-            The default value.  If the base form of any name is shared
-            by any other name, it is progressively transformed until
-            it can be distinguished from the others, or until the 
-            transformation steps are exhausted.
+            The default value. If a name is rendered the same in different cites
+            (e.g. "Doe 2000" and "Doe 2001"), the name is progressively
+            transformed until it can be distinguished from the others (e.g. "A.
+            Doe 2000" and "B. Doe 2001"), or until the transformation steps are
+            exhausted.
 
         "all-names-with-initials"
-            Same as the "all-names" rule above, but only step
-            1(a) is performed.
+            Same as "all-names", but limited to step 1(a). If
+            ``initialize-with`` is not set, no disambiguation attempt is made.
 
         "primary-name"
-            Same as the "all-names" rule above, but ambiguity is only checked
-            for the first-listed author name, and only first-listed names are
-            affected by the transformation.
+            Same as "all-names", but ambiguity is only checked for the
+            first-listed name, and only first-listed names are affected by the
+            transformation.
 
         "primary-name-with-initials"
-            Same as the "primary-name" rule above, but only step 1(a)
-            is performed.
+            Same as "primary-name", but limited to step 1(a). If
+            ``initialize-with`` is not set, no disambiguation attempt is made.
 
-        "by-cite"          
-            Applies the transformation described under the "all-names" rule
-            above, but limits the transformation to cites that require
-            disambiguation.  The appearance of the names transformed
-            will not be affected in other cites.
+        "by-cite"
+            Same as "all-names", but the transformation is limited to ambiguous
+            cites. The appearance of the names transformed will not be affected
+            in other cites.
 
-``disambiguate-add-year-suffix``
-    If set to "true" ("false" is the default), a suffix is added to the
-    year when multiple works by the same author(s) published in the
-    same year are included in the bibliography (e.g. "Doe 2007, Doe 2007"
-    becomes "Doe 2007a, Doe 2007b").
+``disambiguate-add-year-suffix`` [Step (4)]
+    If set to "true" ("false" is the default), a year-suffix is added to cites
+    that are otherwise identical (e.g. "Doe 2007, Doe 2007" becomes "Doe 2007a,
+    Doe 2007b"). The placement of the year-suffix, which by default is appended
+    to each cite, can be controlled by explictly rendering the "year-suffix"
+    variable using ``cs:text``.
 
-If ambiguous cites remain after the above steps have been exhausted,
-a final attempt at disambiguation is performed with the ``disambiguate``
-test value on any ``cs:choose`` conditions testing "true".  If this
-results in successful disambiguation of cites, any names added by
-``disambiguate-add-names`` are discarded.
+If ambiguous cites remain after the above steps have been exhausted, a final
+attempt at disambiguation is performed with the ``disambiguate`` test value on
+any ``cs:choose`` conditions testing "true" [Step (5)]. If this results in
+successful disambiguation, any names added by ``disambiguate-add-names`` are
+discarded.
 
 Citation Collapsing
 '''''''''''''''''''
