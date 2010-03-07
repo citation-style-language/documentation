@@ -1364,13 +1364,13 @@ Disambiguation can be achieved in five ways:
 5. The cite can be rendered with the ``disambiguate`` attribute of ``cs:choose``
    conditions testing "true".
 
-Ironically, the term "disambiguation" in the statement above is itself
-ambiguous. Steps (1), (4) and (5) aim solely to disambiguate cites that are
-exactly identical. Steps (2) and (3), however, are different. In addition to the
-strict purpose of disambiguating *cites*\ , the adding or expansion of given
-names may be used for the broader purpose of disambiguating *names* throughout
-the document. In the description below, this difference is referred to as "the
-scope of names transformation".
+Note that the term "disambiguation" in the statement above is itself ambiguous.
+Steps (1), (4) and (5) aim solely to disambiguate cites that are exactly
+identical. Steps (2) and (3), however, are different. In addition to the strict
+purpose of disambiguating *cites*\ , the adding or expansion of given names may
+be used for the broader purpose of disambiguating *names* throughout the
+document. In the description below, this difference is referred to as "the scope
+of names transformation".
 
 The five potential steps to disambiguation are activated with the attributes
 described in this section, and are always performed, if at all, in the order
@@ -1911,10 +1911,8 @@ The following formatting attributes may be set on ``cs:date``, ``cs:date-part``,
                 <key variable="issued"/>
               </sort>
               <layout>
-                <group display="block" text-decoration="underline">
-                  <names variable="author">
-                    <name and="text" />
-                  </names>
+                <group display="block">
+                  <names variable="author"/>
                 </group>
                 <group display="left-margin">
                   <date variable="issued">
@@ -1922,11 +1920,27 @@ The following formatting attributes may be set on ``cs:date``, ``cs:date-part``,
                   </date>
                 </group>
                 <group display="right-inline">
-                  <!-- citation rendering elements -->
+                  <text variable="title"/>
                 </group>
               </layout>
             </bibliography>
-    
+        
+        which would result in
+        
+        +-------------------+-----------------------+
+        | Author1                                   |
+        +-------------------+-----------------------+
+        | year-publication1 | title-publication1    |
+        +-------------------+-----------------------+
+        | year-publication2 | title-publication2    |
+        +-------------------+-----------------------+
+        | Author2                                   |
+        +-------------------+-----------------------+
+        | year-publication3 | title-publication3    |
+        +-------------------+-----------------------+
+        | year-publication4 | title-publication4    |
+        +-------------------+-----------------------+
+
     .. [#] The effect of the empty ``subsequent-author-substitute`` attribute is
            to render the author name only once, at the top of the list of each
            author's publications.
