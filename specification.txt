@@ -1346,8 +1346,8 @@ attributes. `Citation-specific options`_ are set on ``cs:citation``, while
 `bibliography-specific options`_ are set on ``cs:bibliography``. `Global
 options`_, which affect both citations and the bibliography, are set on
 ``cs:style``. `Inheritable name options`_ may be set on ``cs:style``,
-``cs:citation`` and ``cs:bibliography``. Finally, `locale options <#Locale Files
-- Basic Structure>`_ may be set on ``cs:locale`` elements.
+``cs:citation`` and ``cs:bibliography``. Finally, `Locale Options`_ may be set
+on ``cs:locale`` elements.
 
 Citation-specific Options
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -2218,8 +2218,8 @@ Ordinals
 -  long-ordinal-09
 -  long-ordinal-10
 
-Quotes
-^^^^^^
+Quotation marks
+^^^^^^^^^^^^^^^
 
 -  open-quote
 -  close-quote
