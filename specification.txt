@@ -1213,9 +1213,10 @@ The ``cs:group`` element may contain one or more `rendering elements`_ (not
 delimit the enclosed elements) and the attributes for `affixes`_ (which are
 applied to the group output) and for `formatting`_ (their values are transmitted
 to the enclosed elements). Note that ``cs:group`` implicitly acts as a
-conditional: the ``cs:group`` element and its child elements are only processed
-if at least one of the rendering elements included in the ``cs:group`` element
-call a non-empty variable (either directly or via a macro). For example,
+conditional: cs:group and its child elements are suppressed if a) at least one
+rendering element in cs:group calls a variable (either directly or via a macro),
+and b) all variables that are called are empty. This behavior exists to
+accommodate descriptive cs:text elements. For example,
 
 .. sourcecode:: xml
 
@@ -1226,9 +1227,8 @@ call a non-empty variable (either directly or via a macro). For example,
       </group>
     </layout>
 
-would result in "(Published by: Company A)" when the publisher variable is set
-to "Company A", but wouldn't generate any output when the publisher variable is
-empty.
+results in "(Published by: Company A)" when the "publisher" variable is set to
+"Company A", but doesn't generate output when the "publisher" variable is empty.
 
 Choose
 ~~~~~~
@@ -2066,7 +2066,7 @@ Date Variables
 
 -  accessed
 -  container
--  event
+-  event-date
 -  issued
 -  original-date
 

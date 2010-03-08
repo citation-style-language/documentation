@@ -1083,28 +1083,29 @@ Variables
 
 CSL 1.0 introduces a number of new variables:
 
-* first-reference-note-number. See `Back-References in Note Styles`_
-* jurisdiction. The geographic unit for which a resource (such as legislation)
+* "event-date". Replaces "event" date variable.
+* "first-reference-note-number". See `Back-References in Note Styles`_
+* "jurisdiction". The geographic unit for which a resource (such as legislation)
   is relevant.
-* number-of-pages. See `Pages`_.
-* page-first. See `Pages`_.
-* year-suffix. See `Year Suffix`_.
+* "number-of-pages". See `Pages`_.
+* "page-first". See `Pages`_.
+* "year-suffix". See `Year Suffix`_.
 
 Terms
 -----
 
 CSL 1.0 also introduces a number of new terms:
 
-* ``ad`` and ``bc``. See `AD and BC`_.
-* ``author``. This term can be applied as a label to author names. For most
+* "ad" and "bc". See `AD and BC`_.
+* "author". This term can be applied as a label to author names. For most
   styles, this term will consist of an empty string ("").
-* ``by``.
-* ``editortranslator``. See `Editor/Translator Name Collapsing`_.
-* ``ordinal-01`` to ``ordinal-04`` and ``ordinal-01`` to ``ordinal-10``. See
+* "by".
+* "editortranslator". See `Editor/Translator Name Collapsing`_.
+* "ordinal-01`` to "ordinal-04" and "ordinal-01" to "ordinal-10". See
   `Ordinal Numbers`_.
-* ``original-publisher`` and ``original-publisher-place``. See `Original Publisher`_.
-* ``reference``. This term replace the ``references`` term from CSL 0.8.
-* ``season-01`` to ``season-04``. These terms map to respectively spring,
+* "original-publisher" and "original-publisher-place". See `Original Publisher`_.
+* "reference". This term replace the "references" term from CSL 0.8.
+* "season-01" to "season-04". These terms map to respectively spring,
   summer, fall and winter. See `Seasons`_.
 
 .. [1]
