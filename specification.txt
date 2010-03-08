@@ -633,8 +633,8 @@ are:
 -  ``value`` - used to output verbatim text, which is set via the
    value of ``value`` (e.g. value="some text")
 
-In all cases the attributes for `affixes`_, `formatting`_, `text-case`_ and
-`strip-periods`_ may be applied to ``cs:text``.
+In all cases the attributes for `affixes`_, `display`_, `formatting`_,
+`quotes`_, `strip-periods`_ and `text-case`_ may be applied to ``cs:text``.
 
 Date
 ~~~~
@@ -673,8 +673,8 @@ order in which they are specified. The ``cs:date-part`` elements may carry
 attributes for both `affixes`_ and `formatting`_, while ``cs:date`` may carry a
 `delimiter`_ (delimiting the various ``cs:date-part`` elements).
 
-For both localized and non-localized dates, `affixes`_ and `formatting`_
-attributes may be specified for the ``cs:date`` element.
+For both localized and non-localized dates, `affixes`_, `display`_ and
+`formatting`_ attributes may be specified for the ``cs:date`` element.
 
 Date-part
 ^^^^^^^^^
@@ -824,8 +824,8 @@ non-numeric text (e.g. "special edition"), the entire string is rendered, as if
 with the ``is-numeric`` conditional, e.g. "12th edition" would test "true" while
 "third edition" would test "false" (see `Choose`_).
 
-The ``cs:number`` element may carry any of the attributes for `affixes`_
-and `formatting`_, as well as the `text-case`_ attribute.
+The ``cs:number`` element may carry any of the `affixes`_, `display`_,
+`formatting`_ and `text-case`_ attributes.
 
 Names
 ~~~~~
@@ -855,7 +855,7 @@ Johnson (translator)").
 There are four child elements associated with the ``cs:names`` element:
 ``cs:name``, ``cs:et-al``, ``cs:substitute`` and ``cs:label`` (all discussed
 below). In addition, the ``cs:names`` element may carry the attributes for
-`affixes`_ and `formatting`_.
+`affixes`_, `display`_ and `formatting`_.
 
 Name
 ^^^^
@@ -1210,10 +1210,10 @@ Group
 
 The ``cs:group`` element may contain one or more `rendering elements`_ (not
 ``cs:layout``). ``cs:group`` itself may carry the `delimiter`_ attribute (to
-delimit the enclosed elements) and the attributes for `affixes`_ (which are
-applied to the group output) and for `formatting`_ (their values are transmitted
-to the enclosed elements). Note that ``cs:group`` implicitly acts as a
-conditional: cs:group and its child elements are suppressed if a) at least one
+delimit the enclosed elements) and the attributes for `affixes`_ (applied to the
+group output as a whole), `display`_ and `formatting`_ (formatting settings are
+transmitted to the enclosed elements). Note that ``cs:group`` implicitly acts as
+a conditional: cs:group and its child elements are suppressed if a) at least one
 rendering element in cs:group calls a variable (either directly or via a macro),
 and b) all variables that are called are empty. This behavior exists to
 accommodate descriptive cs:text elements. For example,
@@ -1852,115 +1852,6 @@ The following formatting attributes may be set on ``cs:date``, ``cs:date-part``,
     -  "sup" (superscript)
     -  "sup" (subscript)
 
-``quotes``
-    When set "true" ("false" is default), the rendered text is wrapped in
-    quotes. The quote-symbols are defined as (localized) terms. The localized
-    ``punctuation-in-quote`` option controls whether punctuation appears inside
-    or outside the quotes (see `Locale Options`_).
-
-``display``
-    Many of the anticipated output formats for CSL 1.0 (RTF, LaTeX, XML dialects
-    such as XHTML) allow styling to be applied to individual blocks of text in
-    order to control their appearance and position. The ``display`` attribute
-    can be used in ``cs:bibliography`` to allocate styling to particular text
-    blocks for this purpose [#]_. The attribute may be set on ``cs:date``,
-    ``cs:group``, ``cs:names``, ``cs:number`` and ``cs:text`` elements, and
-    accepts one of the following values:
-
-    - "block": A block stretching from margin to margin.
-    - "left-margin": A block of fixed width starting at the left margin (all
-      "left-margin" blocks in a bibliography share the same width, set according
-      to the maximum number of characters appearing in any one such block).
-    - "right-inline": A block directly to the right of any immediately preceding
-      "left-margin" block, and extending to the right margin.
-    - "indent": Block indented to the right by a standard amount.
-
-    .. [#] N.B. if ``display`` attributes are used, make sure all rendering
-           elements are under the control of exactly one display attribute.
-
-    **Examples** 
-
-    (A) A similar effect as with ``second-field-align`` can be achieved with
-        [#]_:
-        
-        .. sourcecode:: xml
-        
-            <bibliography>
-              <layout>
-                <text display="left-margin" variable="citation-number"
-                    prefix="[" suffix="]"/>
-                <group display="right-inline">
-                  <!-- citation rendering elements -->
-                </group>
-              </layout>
-            </bibliography>
-    
-    .. [#] The styling definitions in the target application (CSS for HTML,
-           styles for Word etc.) can be adjusted to achieve special effects,
-           such as floating the labels into the margin.
-
-----
-
-    (B) A per-author publication listing can be formatted as follows [#]_: 
-        
-        .. sourcecode:: xml
-        
-            <bibliography subsequent-author-substitute="">
-              <sort>
-                <key variable="author"/>
-                <key variable="issued"/>
-              </sort>
-              <layout>
-                <group display="block">
-                  <names variable="author"/>
-                </group>
-                <group display="left-margin">
-                  <date variable="issued">
-                    <date-part name="year" />
-                  </date>
-                </group>
-                <group display="right-inline">
-                  <text variable="title"/>
-                </group>
-              </layout>
-            </bibliography>
-        
-        which would result in
-        
-        +-------------------+-----------------------+
-        | Author1                                   |
-        +-------------------+-----------------------+
-        | year-publication1 | title-publication1    |
-        +-------------------+-----------------------+
-        | year-publication2 | title-publication2    |
-        +-------------------+-----------------------+
-        | Author2                                   |
-        +-------------------+-----------------------+
-        | year-publication3 | title-publication3    |
-        +-------------------+-----------------------+
-        | year-publication4 | title-publication4    |
-        +-------------------+-----------------------+
-
-    .. [#] The effect of the empty ``subsequent-author-substitute`` attribute is
-           to render the author name only once, at the top of the list of each
-           author's publications.
-
-----
-
-    (C) An annotated bibliography with the annotation block-indented below the
-        reference can be formatted as follows:
-        
-        .. sourcecode:: xml
-        
-            <bibliography>
-              <layout>
-                <group display="block">
-                  <!-- citation rendering elements -->
-                </group>
-                <text display="indent" variable="abstract" />
-              </layout>
-            </bibliography>
-
 Affixes
 ~~~~~~~
 
@@ -1984,6 +1875,126 @@ localized date format), ``cs:names`` (delimiting multiple `name variables`_),
 ``cs:name`` (delimiting names in name lists), ``cs:group`` and ``cs:layout``
 (both delimiting the direct child elements).
 
+Display
+~~~~~~~
+
+Many of the anticipated output formats for CSL 1.0 (RTF, LaTeX, XML dialects
+such as XHTML) allow styling to be applied to individual blocks of text in order
+to control their appearance and position. The ``display`` attribute can be used
+in ``cs:bibliography`` to allocate styling to particular text blocks for this
+purpose [#]_. The attribute may be set on ``cs:date``, ``cs:group``,
+``cs:names``, ``cs:number`` and ``cs:text`` elements, and accepts one of the
+following values:
+
+- "block": A block stretching from margin to margin.
+- "left-margin": A block of fixed width starting at the left margin (all
+  "left-margin" blocks in a bibliography share the same width, set according
+  to the maximum number of characters appearing in any one such block).
+- "right-inline": A block directly to the right of any immediately preceding
+  "left-margin" block, and extending to the right margin.
+- "indent": Block indented to the right by a standard amount.
+
+.. [#] N.B. if ``display`` attributes are used, make sure all rendering
+       elements are under the control of exactly one display attribute.
+
+**Examples** 
+
+(A) A similar effect as with ``second-field-align`` can be achieved with
+    [#]_:
+    
+    .. sourcecode:: xml
+    
+        <bibliography>
+          <layout>
+            <text display="left-margin" variable="citation-number"
+                prefix="[" suffix="]"/>
+            <group display="right-inline">
+              <!-- citation rendering elements -->
+            </group>
+          </layout>
+        </bibliography>
+
+.. [#] The styling definitions in the target application (CSS for HTML,
+       styles for Word etc.) can be adjusted to achieve special effects,
+       such as floating the labels into the margin.
+
+----
+
+(B) A per-author publication listing can be formatted as follows [#]_: 
+    
+    .. sourcecode:: xml
+    
+        <bibliography subsequent-author-substitute="">
+          <sort>
+            <key variable="author"/>
+            <key variable="issued"/>
+          </sort>
+          <layout>
+            <group display="block">
+              <names variable="author"/>
+            </group>
+            <group display="left-margin">
+              <date variable="issued">
+                <date-part name="year" />
+              </date>
+            </group>
+            <group display="right-inline">
+              <text variable="title"/>
+            </group>
+          </layout>
+        </bibliography>
+    
+    which would result in
+    
+    +-------------------+-----------------------+
+    | Author1                                   |
+    +-------------------+-----------------------+
+    | year-publication1 | title-publication1    |
+    +-------------------+-----------------------+
+    | year-publication2 | title-publication2    |
+    +-------------------+-----------------------+
+    | Author2                                   |
+    +-------------------+-----------------------+
+    | year-publication3 | title-publication3    |
+    +-------------------+-----------------------+
+    | year-publication4 | title-publication4    |
+    +-------------------+-----------------------+
+
+.. [#] The effect of the empty ``subsequent-author-substitute`` attribute is
+       to render the author name only once, at the top of the list of each
+       author's publications.
+
+----
+
+(C) An annotated bibliography with the annotation block-indented below the
+    reference can be formatted as follows:
+    
+    .. sourcecode:: xml
+    
+        <bibliography>
+          <layout>
+            <group display="block">
+              <!-- citation rendering elements -->
+            </group>
+            <text display="indent" variable="abstract" />
+          </layout>
+        </bibliography>
+
+Quotes
+~~~~~~
+
+When ``quotes`` is set to "true" ("false" is default), the rendered text is
+wrapped in quotes. The quote-symbols are defined as (localized) terms. The
+localized ``punctuation-in-quote`` option controls whether punctuation appears
+inside or outside the quotes (see `Locale Options`_).
+
+Strip-periods
+~~~~~~~~~~~~~
+
+The ``strip-periods`` attribute may be set on ``cs:date-part`` (but only if
+``name`` is set to "month"), ``cs:label`` and ``cs:text``. When set to "true"
+("false" is the default), any periods in the rendered text are removed.
+
 Text-case
 ~~~~~~~~~
 
@@ -2000,13 +2011,6 @@ text case of the rendered text. The possible values are:
 -  "title": displays text in title case (the *Chicago Manual of Style* calls
    this "headline style")
 -  "sentence": displays text in sentence case ("sentence style")
-
-Strip-periods
-~~~~~~~~~~~~~
-
-The ``strip-periods`` attribute may be set on ``cs:date-part`` (but only if
-``name`` is set to "month"), ``cs:label`` and ``cs:text``. When set to "true"
-("false" is the default), any periods in the rendered text are removed.
 
 Appendices
 ----------
