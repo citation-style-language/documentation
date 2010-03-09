@@ -1983,10 +1983,11 @@ following values:
 Quotes
 ~~~~~~
 
-When ``quotes`` is set to "true" ("false" is default), the rendered text is
-wrapped in quotes. The quote-symbols are defined as (localized) terms. The
-localized ``punctuation-in-quote`` option controls whether punctuation appears
-inside or outside the quotes (see `Locale Options`_).
+The ``quotes`` attribute may set on ``cs:text``. When set to "true" ("false" is
+default), the rendered text is wrapped in quotes. The quote-symbols are defined
+as (localized) terms. The localized ``punctuation-in-quote`` option controls
+whether punctuation appears inside or outside the quotes (see `Locale
+Options`_).
 
 Strip-periods
 ~~~~~~~~~~~~~
