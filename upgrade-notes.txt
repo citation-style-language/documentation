@@ -9,11 +9,7 @@ __ `Table of Contents`_
 
 .. class:: info-version
 
-   version x.x
-
-.. class:: info-date
-
-   21 Februari 2010
+   version 2010-03-13
 
 .. class:: contributors
 
@@ -37,13 +33,10 @@ Citation Style Language 1.0 - What's New?
 =========================================
 
 `Citation Style Language 1.0
-<http://citationstyles.org/citation-style-language/schema-and-specification/#CSL1.0>`_
-represents a significant update of the Citation Style Language (CSL), an open
-XML-based standard to describe citation styles. This document describes the
-changes that have been made since the previous release (`CSL 0.8
-<http://citationstyles.org/citation-style-language/schema-and-specification/#CSL0.8>`_,
-released in March 2009), and thus is primarily aimed at those with prior CSL
-experience.
+<http://citationstyles.org/citation-style-language/schema/>`_ represents a
+significant update of the Citation Style Language (CSL), an open XML language to
+describe citation styles. This document describes the changes compared to CSL
+0.8 (released in March 2009).
 
 **Nota Bene** These notes include many XML examples to demonstrate new CSL
 features. Please note that these examples are reduced to a minimum, and often
@@ -71,7 +64,7 @@ current code repositories are:
 * `CSL Schema <http://bitbucket.org/bdarcus/csl-schema/>`_
 * `CSL Locale Files <http://bitbucket.org/bdarcus/csl-locales/>`_
 * `CSL Documentation <http://bitbucket.org/bdarcus/csl-docs/>`_
-* `CSL Utilities <http://bitbucket.org/bdarcus/csl-utils/>`_ (mostly scripts)
+* `CSL Utilities <http://bitbucket.org/bdarcus/csl-utils/>`_
 
 Documentation
 +++++++++++++
@@ -81,12 +74,12 @@ what was available was hosted on the `Zotero wiki
 <http://www.zotero.org/support/dev/csl_syntax_summary>`_. With CSL 1.0, we hope
 to improve on this situation. In addition to these upgrade notes, a full
 specification_ has been made available. As before, the `schema
-<http://citationstyles.org/citation-style-language/schema-and-specification/#CSL1.0>`_
-itself is also a source of information, although reading the schema requires
-some understanding of `RELAX NG Compact <http://www.relaxng.org/>`_, the XML
-schema language in which the CSL schema is written.
+<http://citationstyles.org/citation-style-language/schema/>`_ itself is also a
+source of information, although reading the schema requires some understanding
+of `RELAX NG Compact <http://www.relaxng.org/>`_, the XML schema language in
+which the CSL schema is written.
 
-.. _specification: http://citationstyles.org/citation-style-language/schema-and-specification/#CSL1.0
+.. _specification: http://citationstyles.org/downloads/specification.html
 
 Schema
 ++++++
@@ -94,10 +87,8 @@ Schema
 Split Schema
 ------------
 
-The schema of `CSL 0.8
-<http://citationstyles.org/citation-style-language/schema-and-specification/#CSL0.8>`_
-consists of a single file. With CSL 1.0, the schema has been split into multiple
-files:
+Whereas the CSL 0.8 schema consists of a single file, the CSL 1.0 schema has
+been split into the following files:
 
 * csl.rnc - The core of the CSL schema. This file contains most of the schema
   logic and calls the other schema files
@@ -114,10 +105,10 @@ csl-data
 ~~~~~~~~
 
 Although hosted in the same code repository as the rest of the schema,
-csl-data.rnc is not used for style validation. Instead, it describes how data
-can (and should) be presented to CSL processors, such as citeproc-js_. Note that
-the structured input data doesn't need to consist of XML (e.g. citeproc-js_
-accepts JSON).
+csl-data.rnc is not used for style validation. Instead, it aims to describe how
+data can (and should) be presented to CSL processors, such as citeproc-js_. Note
+that csl-data.rnc is not complete, and that input data doesn't need to consist
+of XML (e.g. citeproc-js_ accepts JSON).
 
 .. _citeproc-js: http://bitbucket.org/fbennett/citeproc-js/
 
@@ -153,8 +144,8 @@ Using upgrade.xsl
 ~~~~~~~~~~~~~~~~~
 
 First, check whether the styles that you wish to update validate against the
-`CSL 0.8 schema
-<http://citationstyles.org/citation-style-language/schema-and-specification/#CSL0.8>`_.
+CSL 0.8 schema
+<http://citationstyles.org/citation-style-language/schema/>`_.
 
 Then use an XSLT processor to update the styles. Available options are the
 command-line tools `Saxon <http://saxon.sourceforge.net/>`_ and `xsltproc
@@ -164,7 +155,7 @@ user-friendly) online converters, such as the one offered by
 used. For the latter tool, the instructions are:
 
 1. Paste the contents of `upgrade.xsl
-   <http://bitbucket.org/bdarcus/csl-utils/src/tip/update.xsl>`_ into the "xslt"
+   <http://bitbucket.org/bdarcus/csl-utils/raw/tip/update.xsl>`_ into the "xslt"
    text box at `<http://www.shell-tools.net/index.php?op=xslt>`_
 2. Paste the contents of the CSL 0.8 style into the "xml" text box
 3. Click the "Submit Query"-button
@@ -174,7 +165,7 @@ used. For the latter tool, the instructions are:
 Finally, after the conversion, it is recommended to validate the converted
 style, this time against the `CSL 1.0 schema`_.
 
-.. _CSL 1.0 schema: http://citationstyles.org/citation-style-language/schema-and-specification/#CSL1.0
+.. _CSL 1.0 schema: http://citationstyles.org/citation-style-language/schema/
 
 Version Number
 --------------
@@ -901,7 +892,7 @@ but here special XML characters ("<", ">") have to be escaped, e.g.:
 
 In contrast, markup used with the ``prefix`` and ``suffix`` attributes is not
 recognized. Finally, note that bold and italics markup are subject to
-`flipflopping`_.().
+`flipflopping`_.
 
 second-field-align
 ~~~~~~~~~~~~~~~~~~
@@ -1109,6 +1100,6 @@ CSL 1.0 also introduces a number of new terms:
   summer, fall and winter. See `Seasons`_.
 
 .. [1]
-   A hat tip to user ```komrade`` <http://www.zotero.org/komrade>`_ of
+   A hat tip to user `komrade <http://www.zotero.org/komrade>`_ of
    the Zotero forums, whose review of the major style guides led to
    this array of rule-sets.

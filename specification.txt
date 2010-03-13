@@ -9,11 +9,7 @@ __ `Table of Contents`_
 
 .. class:: info-version
 
-   version x.x
-
-.. class:: info-date
-
-   21 Februari 2010
+   version 2010-03-13
 
 .. class:: contributors
 
@@ -90,7 +86,7 @@ following arguments:
     ("in-text").
 
 ``default-locale`` (optional)
-    Fixes style localization to the `locale
+    Fixes style localization to the `locale code
     <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_ specified. This is
     desirable for most journal styles.
 
