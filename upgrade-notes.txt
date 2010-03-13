@@ -134,7 +134,7 @@ Updating CSL 0.8 Styles
 CSL 1.0 is backward incompatible with CSL 0.8, which means that 'old' styles
 written for CSL 0.8 won't work with CSL 1.0 processors. Fortunately, it is
 possible to (automatically) update CSL 0.8 styles to the CSL 1.0 format using
-the `upgrade.xsl <http://bitbucket.org/bdarcus/csl-utils/src/tip/update.xsl>`_
+the `upgrade.xsl <http://bitbucket.org/bdarcus/csl-utils/raw/tip/update.xsl>`_
 XSLT stylesheet. The developers of Zotero will perform this conversion for all
 the styles in the `Zotero Style Repository <http://www.zotero.org/styles>`_.
 However, if you use (custom) CSL styles that aren't included in this style
