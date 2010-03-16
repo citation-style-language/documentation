@@ -1,0 +1,187 @@
+===============================
+`Citation Style Language 1.0`__
+===============================
+~~~~~~
+Primer
+~~~~~~
+
+__ `Table of Contents`_
+
+.. class:: info-version
+
+   version 2010-03-16
+
+.. class:: contributors
+
+   Author
+       * Rintze Zelle
+
+.. |link| image:: link.png
+
+
+========
+
+.. contents:: Table of Contents
+
+========
+
+
+Introduction
+------------
+
+Scope of this Primer
+~~~~~~~~~~~~~~~~~~~~
+
+This document is meant as a first introduction to the Citation Style Language
+(CSL) and is primarily aimed at those who wish to create or modify CSL styles.
+Some prior knowledge of XML or HTML will come in handy. If these terms are
+unfamiliar to you, check out one of the many online introductions to XML, e.g.
+the one at http://www.w3schools.com/xml/default.asp.
+
+What is CSL?
+~~~~~~~~~~~~
+
+The Citation Style Language (CSL) is an open and free [#]_ XML based language
+for writing CSL styles, which describe how citations and bibliographies should
+be formatted. Citing plays an important role in academic literature: it can be
+used for attribution (which is important to avoid plagiarism), to give context
+to your research, and to eliminate the need to repeat previously published
+results.
+
+Unfortunately, correctly citing is often far from trivial. Style guides like the
+*American Psychological Association (APA) Style*, *The Chicago Manual of Style*
+or the *MLA Style* dedicate many pages to citation formatting. To complicate
+things further, many academic journals use proprietary styles that deviate from
+these 'generic' citation styles.
+
+The Citation Style Language was designed to make citing easier. When CSL styles
+are used in combination with CSL compatible reference management software (such
+as Zotero or Mendeley), citations and bibliographies can be automatically
+generated according to the style of preference [#]_. You can quickly switch
+between styles (e.g. if a manuscript has to be submitted to a different
+scientific journal). Finally, terms, date formats, and punctuation rules used
+for citations and bibliographies can be changed at a whim to follow one of 38
+different locales (ranging from Afrikaans to Hebrew to Vietnamese).
+
+.. [#] If you use CSL styles, you don't have to worry about `getting sued
+       <http://arstechnica.com/web/news/2009/06/thomson-reuters-suit-against-zotero-software-dismissed.ars>`_!
+       We promise!
+.. [#] There are already over a thousand CSL styles available at
+       http://www.zotero.org/styles
+
+Different Classes of Citation Styles
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Before we leap into the world of CSL, let's take a look at the different types
+of citation styles that are in use. Citation styles can be divided in two
+groups:
+
+A) **"in-text"** styles: when a work is cited, a *citation* is added to the
+   sentence. The citation points directly to a corresponding bibliographic entry
+   in the bibliography.
+   
+   Various types of "in-text" styles exist. The main types are:
+
+   - **"author-date"** and **"author"** styles
+     
+     *Sentence* [#]_
+     
+     Yeast cells were grown at 25°C in batch cultures on 0.5% methanol for 36
+     hours (Gidijala et al. 2008) or in carbon-limited chemostat cultures (van
+     der Klei et al. 1991; Zwart et al. 1983). (author-date)
+     
+     Yeast cells were grown at 25°C in batch cultures on 0.5% methanol for 36
+     hours (Gidijala et al.) or in carbon-limited chemostat cultures (van der
+     Klei et al.; Zwart et al.). (author)
+     
+     *Bibliography*
+     
+     Gidijala L, Bovenberg RA, Klaassen P, van der Klei IJ, Veenhuis M, et al.
+     (2008) Production of functionally active Penicillium chrysogenum
+     isopenicillin N synthase in the yeast Hansenula polymorpha. BMC Biotechnol
+     8: 29.
+     
+     van der Klei IJ, Harder W, Veenhuis M (1991) Methanol metabolism in a
+     peroxisome-deficient mutant of Hansenula polymorpha: a physiological study.
+     Arch Microbiol 156: 15-23.
+     
+     Zwart KB, Veenhuis M, Harder W (1983) Significance of yeast peroxisomes in
+     the metabolism of choline and ethanolamine. Antonie Van Leeuwenhoek 49:
+     369-385.
+   
+   - **"numeric"** styles
+     
+     *Sentence*
+     
+     Yeast cells were grown at 25°C in batch cultures on 0.5% methanol for 36
+     hours [6] or in carbon-limited chemostat cultures [21, 22].
+     
+     *Bibliography*
+     
+     6. Gidijala L, Bovenberg RA, Klaassen P, van der Klei IJ, Veenhuis M, et
+     al. (2008) Production of functionally active Penicillium chrysogenum
+     isopenicillin N synthase in the yeast Hansenula polymorpha. BMC Biotechnol
+     8: 29.
+     
+     21. Zwart KB, Veenhuis M, Harder W (1983) Significance of yeast peroxisomes
+     in the metabolism of choline and ethanolamine. Antonie Van Leeuwenhoek 49:
+     369-385.
+     
+     22. van der Klei IJ, Harder W, Veenhuis M (1991) Methanol metabolism in a
+     peroxisome-deficient mutant of Hansenula polymorpha: a physiological study.
+     Arch Microbiol 156: 15-23.
+   
+   - **"label"** styles
+   
+     *Sentence*
+     
+     Yeast cells were grown at 25°C in batch cultures on 0.5% methanol for 36
+     hours [GBKv2008] or in carbon-limited chemostat cultures [ZwVH1983;
+     vaHV1991].
+     
+     *Bibliography*
+     
+     [GBKv2008] Gidijala L, Bovenberg RA, Klaassen P, van der Klei IJ, Veenhuis
+     M, et al. (2008) Production of functionally active Penicillium chrysogenum
+     isopenicillin N synthase in the yeast Hansenula polymorpha. BMC Biotechnol
+     8: 29.
+     
+     [ZwVH1983] Zwart KB, Veenhuis M, Harder W (1983) Significance of yeast
+     peroxisomes in the metabolism of choline and ethanolamine. Antonie Van
+     Leeuwenhoek 49: 369-385.
+     
+     [vaHV1991] van der Klei IJ, Harder W, Veenhuis M (1991) Methanol metabolism
+     in a peroxisome-deficient mutant of Hansenula polymorpha: a physiological
+     study. Arch Microbiol 156: 15-23.
+   
+   .. [#] The illustrating sentence is from Gidijala L, Kiel JAKW, Douma RD,
+          Seifar RM, van Gulik WM, et al. 2009 An Engineered Yeast Efficiently
+          Secreting Penicillin. PLoS ONE 4(12): e8317.
+          `doi:10.1371/journal.pone.0008317
+          <http://dx.doi.org/10.1371/journal.pone.0008317>`_
+
+B) **"note"** styles: when a work is cited, a *marker* is added to the sentence.
+   The marker, which can be a number or a symbol, points to a foot or endnote.
+   In contrast to in-text citations, foot or endnotes typically contain all
+   information required to locate the cited work(s). Optionally, the cited works
+   can also be included in a bibliography. An example of a note style [#]_:
+   
+    "In the Island of St. Kilda, according to Martin, [*]_ the men do not
+    acquire beards until the age of thirty or upwards, and even then the beards
+    are very thin. On the Europæo-Asiatic continent, beards prevail until we
+    pass beyond India; though with the natives of Ceylon they are often absent,
+    as was noticed in ancient times by Diodorus. [*]_"
+    
+    .. [*] 'Voyage to St. Kilda' (3rd edit. 1753), p. 37.
+    .. [*] Sir J. E. Tennent, 'Ceylon,' vol. ii. 1859, p. 107.
+   
+   .. [#] Example taken from Darwin 1882 The descent of man, and selection in 
+          relation to sex. London: John Murray. 2d ed., 15th thousand, available
+          `online
+          <http://darwin-online.org.uk/content/frameset?itemID=F955&viewtype=image&pageseq=1>`_.
+
+It is not uncommon for in-text citations or foot and endnotes to include
+references to multiple works. In CSL jargon, the entire in-text citation or note
+is called the "citation". A "citation" that references multiple works contains
+multiple "cites", with each "cite" referencing a single work. Similarly, the
+"bibliography" consists of "bibliographic entries", one for each cited work.
