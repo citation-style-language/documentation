@@ -646,7 +646,7 @@ Inheritable Name Options
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 In CSL 0.8, any attribute used for name formatting had to be included for each
-occurance of the ``cs:names`` element, even if names were identically formatted
+occurrence of the ``cs:names`` element, even if names were identically formatted
 for all these elements. To reduce the need for duplication, CSL 1.0 introduces
 inheritable options: the attributes ``and``, ``delimiter-precedes-last``,
 ``initialize-with``, ``name-as-sort-order`` and ``sort-separator`` can now also
@@ -672,7 +672,7 @@ other ``cs:name`` attribute, and thus can be set on ``cs:style``,
 Hyphenation of Compound Given Names
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A new attribute, ``initialize-with-hyphen``, can be set set on ``cs:style`` to
+A new attribute, ``initialize-with-hyphen``, can be set on ``cs:style`` to
 control hyphenation of compound given names (e.g. "Jean-Luc Picard"). When set
 to "true" (the default), a hyphen is added when the given name is initialized
 ("J.-L. Picard"). With "false" the hyphen is left out ("J.L. Picard").
@@ -687,8 +687,8 @@ an attribute on ``cs:style``. To understand how this option works, it is
 important to recognize that not all particles are equal: name particles can be
 either kept or dropped when only the surname is shown (from now on we will refer
 to these two types as non-dropping-particle and dropping-particle,
-respectively). A single name can contain particles of both types (with the
-non-dropping-particle always following the dropping-particle). For example, the
+respectively). A single name can contain particles of both types (in this case the
+non-dropping-particle always comes after the dropping-particle). For example, the
 French name "Gérard de la Martinière" can be deconstructed into:
 
 ============ =====================
@@ -956,7 +956,7 @@ Layout Control with the Display Attribute
 CSL 0.8 included a ``display`` attribute, with possible values of "block" or
 "inline-block", intended to provide some control over the layout of bibliography
 entries. However, it remained unimplemented by any known processor, and was not
-used in any known styles. In CSL 1.0, the ``display`` attribute is been refined
+used in any known styles. In CSL 1.0, the ``display`` attribute has been refined
 and extended: it is now restricted to rendering-element children of
 ``cs:layout`` under ``cs:bibliography``, and has possible values of "block",
 "left-margin", "right-inline", and "indent".

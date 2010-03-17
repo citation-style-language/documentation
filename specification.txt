@@ -1361,8 +1361,8 @@ Disambiguation can be achieved in five ways:
    conditions testing "true".
 
 Note that the term "disambiguation" in the statement above is itself ambiguous.
-Steps (1), (4) and (5) aim solely to disambiguate cites that are exactly
-identical. Steps (2) and (3), however, are different. In addition to the strict
+Steps (1), (4) and (5) aim solely to disambiguate cites that otherwise would be
+the same. Steps (2) and (3), however, are different. In addition to the strict
 purpose of disambiguating *cites*\ , the adding or expansion of given names may
 be used for the broader purpose of disambiguating *names* throughout the
 document. In the description below, this difference is referred to as "the scope
@@ -1676,7 +1676,7 @@ Inheritable Name Options
 
 Attributes for the ``cs:names`` and ``cs:name`` elements may also be set on
 ``cs:style``, ``cs:citation`` and ``cs:bibliography``. This eliminates the need
-to repeat the same attributes and attribute values for every occurance of the
+to repeat the same attributes and attribute values for every occurrence of the
 ``cs:names`` and ``cs:name`` elements.
 
 The available inheritable attributes for ``cs:name`` are ``and``,
