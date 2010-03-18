@@ -185,3 +185,237 @@ references to multiple works. In CSL jargon, the entire in-text citation or note
 is called the "citation". A "citation" that references multiple works contains
 multiple "cites", with each "cite" referencing a single work. Similarly, the
 "bibliography" consists of "bibliographic entries", one for each cited work.
+
+Getting Started - A Basic CSL Style
+-----------------------------------
+
+Now that we've examined the different types of citation styles, it's time to
+take a look how these styles can be coded in CSL. We'll start with dissecting a
+simple CSL style in the "author-date" format that describes the formatting of
+journal articles:
+
+.. sourcecode:: xml
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text">
+      <info>
+        <title>My First Style</title>
+        <id>my-first-style</id>
+        <updated>2008-10-29T21:01:24+00:00</updated>
+      </info>
+      <macro name="author-short">
+        <names variable="author">
+          <name form="short"/>
+        </names>
+      </macro>
+      <macro name="author">
+        <names variable="author">
+          <name name-as-sort-order="all" initialize-with=". "/>
+        </names>
+      </macro>
+      <macro name="issued">
+        <date variable="issued">
+          <date-part name="year"/>
+        </date>
+      </macro>
+      <citation>
+        <sort>
+          <key macro="issued"/>
+          <key macro="author-short"/>
+        </sort>
+        <layout prefix="(" suffix=")"delimiter="; ">
+          <text macro="author-short"/>
+          <text macro="issued" prefix=" "/>
+        </layout>
+      </citation>
+      <bibliography>
+        <sort>
+          <key macro="author"/>
+          <key macro="issued"/>
+        </sort>
+        <layout suffix=".">
+          <text macro="author"/>
+          <group delimiter=" ">
+            <text macro="issued" prefix="(" suffix=")"/>
+            <text variable="title" suffix="."/>
+            <text variable="container-title" font-style="italic"/>
+          </group>
+          <group prefix=", ">
+            <text variable="volume" suffix=":"/>
+            <text variable="pages"/>
+          </group>
+        </layout>
+      </bibliography>
+    </style>
+
+So, what do we've got here? We can divide this style in the following parts:
+
+XML Declaration
+~~~~~~~~~~~~~~~
+
+.. sourcecode:: xml
+
+    <?xml version="1.0" encoding="UTF-8"?>
+
+The first line of the style is the *XML declaration*, and tells you that the
+style is written according to the XML specification (remember that CSL is an XML
+based language).
+
+Style
+~~~~~
+
+.. sourcecode:: xml
+
+    <style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text">
+      ...
+    </style>
+
+``Style`` is the *root element* of the CSL style. The *attributes* on this
+*element* specify that a) all the elements in the style are part of the CSL
+schema (``xmlns="http://purl.org/net/xbiblio/csl"``), b) that the style is
+compatible with CSL 1.0 (``version="1.0"``) and c) that the CSL style describe
+an "in-text" type of citation style (``class="in-text"``).
+
+Info
+~~~~
+
+.. sourcecode:: xml
+
+      <info>
+        <title>My First Style</title>
+        <id>my-first-style</id>
+        <updated>2008-10-29T21:01:24+00:00</updated>
+      </info>
+
+The first *child element* of the ``style`` root element is ``info``. The
+``info`` element contains information about the style. In this case the *child
+elements* of ``info`` give the style title, an ID to identify the style and the
+date and time the style was last updated.
+
+Citation
+~~~~~~~~
+
+.. sourcecode:: xml
+
+      <citation>
+        <sort>
+          <key macro="issued"/>
+          <key macro="author-short"/>
+        </sort>
+        <layout prefix="(" suffix=")"delimiter="; ">
+          <text macro="author-short"/>
+          <text macro="issued" prefix=" "/>
+        </layout>
+      </citation>
+
+Skipping the ``macro`` elements for now, we reach the ``citation`` element. This
+element describes how the "in-text" citations should be formatted. The
+``layout`` element specifies that each *citation* should be wrapped in
+parentheses (``prefix="(" suffix=")"``), and that *cites* in a citation should
+be delimited by "; ". Each *cite* consists of the output of two macros: the
+"author-short" macro (``<text macro="author-short"/>``), which renders the
+author surnames, and the "issued" macro (``<text macro="issued"/>``), which
+renders the year of issue. The output of the "issued" macro is preceded by a
+space (``prefix=" "``). This *layout* element could result in "in-text"
+citations like:
+
+(Doe 1999)
+
+and
+
+(Hayden, Scott, Muffley 1980; Strangelove 1964; Mandrake 1964)
+
+The ``sort`` element specifies how cites within a citation should be sorted. In
+our case, cites are first sorted by the year of issue, and then by the author
+surnames. This changes the second example citation to:
+
+(Mandrake 1964; Strangelove 1964; Hayden, Scott, Muffley 1980)
+
+Bibliography
+~~~~~~~~~~~~
+
+.. sourcecode:: xml
+
+      <bibliography>
+        <sort>
+          <key macro="author"/>
+          <key macro="issued"/>
+        </sort>
+        <layout suffix=".">
+          <text macro="author"/>
+          <group delimiter=" ">
+            <text macro="issued" prefix="(" suffix=")"/>
+            <text variable="title" suffix="."/>
+            <text variable="container-title" font-style="italic"/>
+          </group>
+          <group prefix=", ">
+            <text variable="volume" suffix=":"/>
+            <text variable="pages"/>
+          </group>
+        </layout>
+      </bibliography>
+
+The ``bibliography`` element describes how bibliographic entries should be
+formatted, and functions very similar to the ``citation`` element. In the
+bibliography, more information is provided for the cited works. The "author"
+macro shows the given and surnames of the authors. The next three ``text``
+elements output respectively the year of issue, the article title and, in
+italics, the title of the journal. They are wrapped in a ``group`` element,
+which specifies that the output of the different ``text`` elements should be
+delimited by single spaces. Then, preceded by ", ", the journal volume and the
+pages of the article are rendered. The ``sort`` element at the beginning of the
+``bibliography`` element specifies that bibliographic entries should first be
+sorted by the author names, and then by the year of issue. This code could
+results in bibliographic entries like:
+
+Hayden, S., Scott, G. C., Muffley, M. (1980) How to Stop Worrying and Love the
+Bomb. *Nuclear Journal*, 15:548-553.
+
+Mandrake, L. (1964) Improving the Management of Recall Codes. *Journal of
+International Strategics*, 8:2790-795.
+
+Strangelove (1964) Nuclear War and How to Prevent It. *War Games*,
+2:23-25.
+
+Macros
+~~~~~~
+
+.. sourcecode:: xml
+
+      <macro name="author-short">
+        <names variable="author">
+          <name form="short"/>
+        </names>
+      </macro>
+      <macro name="author">
+        <names variable="author">
+          <name name-as-sort-order="all" initialize-with=". "/>
+        </names>
+      </macro>
+      <macro name="issued">
+        <date variable="issued">
+          <date-part name="year"/>
+        </date>
+      </macro>
+
+So what exactly happens in these macros? Macros are a device to reuse formatting
+instructions. E.g. in our style, the "author-short" macro is used both for
+rendering (``<text macro="author-short"/>``) and for sorting (``<key
+macro="author-short"/>``). By using macros, the styles is made more compact and
+easier to maintain. The three macros have the following output:
+
+* the "author-short" macro lists a ``names`` element, which renders all the
+  names stored in the "author" variable. The ``name`` child element of ``names``
+  specifies that each name should be shown in its "short" form, i.e. only the
+  surname should be shown).
+
+* the "author" macro is very similar to the "author-short" macro. However, here
+  the author names are shown in their default "long" form, i.e. with both the
+  given and surname. All names are inverted (``name-as-sort-order="all"``), with
+  the surname preceding the given name (e.g. "Doe, John"). Given names are
+  initialized (``initialize-with=". "``), with initials being separated by ". "
+  (e.g. "Doe, J. R.")
+
+* the "issued" macro lists a ``date`` element, which renders the date stored in
+  the "issued" variable. As only a ``date-part`` child element is included for
+  "year", only the year of issue is shown.
