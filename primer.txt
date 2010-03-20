@@ -9,7 +9,7 @@ __ `Table of Contents`_
 
 .. class:: info-version
 
-   version 2010-03-16
+   version 2010-03-20
 
 .. class:: contributors
 
@@ -319,17 +319,23 @@ renders the year of issue. The output of the "issued" macro is preceded by a
 space (``prefix=" "``). This *layout* element could result in "in-text"
 citations like:
 
-(Doe 1999)
+::
+
+    (Doe 1999)
 
 and
 
-(Hayden, Scott, Muffley 1980; Strangelove 1964; Mandrake 1964)
+::
+
+    (Hayden, Scott, Muffley 1980; Strangelove 1964; Mandrake 1964)
 
 The ``sort`` element specifies how cites within a citation should be sorted. In
 our case, cites are first sorted by the year of issue, and then by the author
 surnames. This changes the second example citation to:
 
-(Mandrake 1964; Strangelove 1964; Hayden, Scott, Muffley 1980)
+::
+
+    (Mandrake 1964; Strangelove 1964; Hayden, Scott, Muffley 1980)
 
 Bibliography
 ~~~~~~~~~~~~
@@ -368,14 +374,17 @@ pages of the article are rendered. The ``sort`` element at the beginning of the
 sorted by the author names, and then by the year of issue. This code could
 results in bibliographic entries like:
 
-Hayden, S., Scott, G. C., Muffley, M. (1980) How to Stop Worrying and Love the
-Bomb. *Nuclear Journal*, 15:548-553.
+::
 
-Mandrake, L. (1964) Improving the Management of Recall Codes. *Journal of
-International Strategics*, 8:2790-795.
+    Hayden, S., Scott, G. C., Muffley, M. (1980) How to Stop Worrying and Love the Bomb. *Nuclear Journal*, 15:548-553.
 
-Strangelove (1964) Nuclear War and How to Prevent It. *War Games*,
-2:23-25.
+::
+
+    Mandrake, L. (1964) Improving the Management of Recall Codes. *Journal of International Strategics*, 8:2790-795.
+
+::
+
+    Strangelove (1964) Nuclear War and How to Prevent It. *War Games*, 2:23-25.
 
 Macros
 ~~~~~~
@@ -419,3 +428,87 @@ easier to maintain. The three macros have the following output:
 * the "issued" macro lists a ``date`` element, which renders the date stored in
   the "issued" variable. As only a ``date-part`` child element is included for
   "year", only the year of issue is shown.
+
+Editing Styles
+--------------
+
+After using the above CSL style for a while, you notice you've been missing something. Wouldn't it be nice to include the DOI (digital object identifier) to the bibliographic entries? Although dedicated tools for editing CSL 1.0 styles have yet to be released, you can already edit styles using a simple text editor.
+
+In CSL, the DOI is stored in the "DOI" variable. So, to append the DOI to each bibliographic entry, we can use the following ``layout`` section for the bibliography:
+
+.. sourcecode:: xml
+
+      <bibliography>
+        <sort>
+          <key macro="author"/>
+          <key macro="issued"/>
+        </sort>
+        <layout suffix=".">
+          <group delimiter=" ">
+            <text macro="author"/>
+            <text macro="issued" prefix="(" suffix=")"/>
+            <text variable="title" suffix="."/>
+            <text variable="container-title" font-style="italic"/>
+          </group>
+          <group prefix=", ">
+            <text variable="volume" suffix=":"/>
+            <text variable="page"/>
+          </group>
+          <text variable="doi" prefix=" "/>
+        </layout>
+      </bibliography>
+
+This should now result in entries like:
+
+::
+
+    Strangelove (1964) Nuclear War and How to Prevent It. *War Games*, 2:23-25. 10.1234/WG.002-23
+
+Validation
+~~~~~~~~~~
+
+After making changes to a CSL style, it is always a good idea to check whether
+the style still *validates*. Correct processing of CSL styles requires that CSL
+styles are both written in correct XML and conform to the CSL schema. Both these
+checks can be performed with an XML validator. In this case, we will use the
+online validator at http://validator.nu/:
+
+1. Select the style. Select the "Text Field" option in the first dropdown menu,
+   and paste the modified style into the text box.
+   
+2. Paste the html link to the CSL schema into the “Schemas” text field
+   (http://bitbucket.org/bdarcus/csl-schema/raw/tip/csl.rnc)
+
+3. In the "Parser" drop-down menu, select "XML; don't load external entities"
+   
+4. Check the option “Be lax about HTTP Content-Type”.
+
+5. Click the "Validate" button.
+
+When we perform these steps, we get a few harmless warnings, but also an error:
+
+    | Error: Bad value doi for attribute variable on element text from namespace http://purl.org/net/xbiblio/csl.
+    | From line 49, column 6; to line 49, column 39
+    | oup>\ |return| <text variable="doi" prefix=" "/>\ |return| <
+
+.. |return| unicode:: U+21a9
+
+Oops! It seems that "doi" is an invalid variable name. After checking the CSL
+specification, we discover that the variable name should be capitalized ("DOI").
+When we make this correction (``<text variable="DOI" prefix=" "/>``), and run
+the validation again, we get the message:
+
+    | The document validates according to the specified schema(s).
+
+As you see, validation is a powerful tool to help you find and eliminate typing
+errors and other mistakes in CSL styles.
+
+Learning more
+-------------
+
+Having read this primer, you now know the purpose of CSL, and the basics of
+writing a CSL style. To learn more about CSL and CSL styles, make sure to browse
+the documentation offered on http://CitationStyles.org. In addition to reading
+the CSL 1.0 specification, it can be very useful to take a look at other CSL 1.0
+styles. Finally, hardcore CSL fans can study the CSL schema itself, although
+this might require some knowledge of the RELAX NG Compact syntax.
