@@ -223,7 +223,7 @@ journal articles:
           <key macro="issued"/>
           <key macro="author-short"/>
         </sort>
-        <layout prefix="(" suffix=")"delimiter="; ">
+        <layout prefix="(" suffix=")" delimiter="; ">
           <text macro="author-short"/>
           <text macro="issued" prefix=" "/>
         </layout>
@@ -234,15 +234,15 @@ journal articles:
           <key macro="issued"/>
         </sort>
         <layout suffix=".">
-          <text macro="author"/>
           <group delimiter=" ">
+            <text macro="author"/>
             <text macro="issued" prefix="(" suffix=")"/>
             <text variable="title" suffix="."/>
             <text variable="container-title" font-style="italic"/>
           </group>
           <group prefix=", ">
             <text variable="volume" suffix=":"/>
-            <text variable="pages"/>
+            <text variable="page"/>
           </group>
         </layout>
       </bibliography>
@@ -302,7 +302,7 @@ Citation
           <key macro="issued"/>
           <key macro="author-short"/>
         </sort>
-        <layout prefix="(" suffix=")"delimiter="; ">
+        <layout prefix="(" suffix=")" delimiter="; ">
           <text macro="author-short"/>
           <text macro="issued" prefix=" "/>
         </layout>
@@ -342,15 +342,15 @@ Bibliography
           <key macro="issued"/>
         </sort>
         <layout suffix=".">
-          <text macro="author"/>
           <group delimiter=" ">
+            <text macro="author"/>
             <text macro="issued" prefix="(" suffix=")"/>
             <text variable="title" suffix="."/>
             <text variable="container-title" font-style="italic"/>
           </group>
           <group prefix=", ">
             <text variable="volume" suffix=":"/>
-            <text variable="pages"/>
+            <text variable="page"/>
           </group>
         </layout>
       </bibliography>
