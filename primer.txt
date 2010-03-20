@@ -319,21 +319,15 @@ renders the year of issue. The output of the "issued" macro is preceded by a
 space (``prefix=" "``). This *layout* element could result in "in-text"
 citations like:
 
-::
-
     (Doe 1999)
 
 and
-
-::
 
     (Hayden, Scott, Muffley 1980; Strangelove 1964; Mandrake 1964)
 
 The ``sort`` element specifies how cites within a citation should be sorted. In
 our case, cites are first sorted by the year of issue, and then by the author
 surnames. This changes the second example citation to:
-
-::
 
     (Mandrake 1964; Strangelove 1964; Hayden, Scott, Muffley 1980)
 
@@ -374,15 +368,9 @@ pages of the article are rendered. The ``sort`` element at the beginning of the
 sorted by the author names, and then by the year of issue. This code could
 results in bibliographic entries like:
 
-::
-
     Hayden, S., Scott, G. C., Muffley, M. (1980) How to Stop Worrying and Love the Bomb. *Nuclear Journal*, 15:548-553.
 
-::
-
     Mandrake, L. (1964) Improving the Management of Recall Codes. *Journal of International Strategics*, 8:2790-795.
-
-::
 
     Strangelove (1964) Nuclear War and How to Prevent It. *War Games*, 2:23-25.
 
@@ -459,8 +447,6 @@ In CSL, the DOI is stored in the "DOI" variable. So, to append the DOI to each b
       </bibliography>
 
 This should now result in entries like:
-
-::
 
     Strangelove (1964) Nuclear War and How to Prevent It. *War Games*, 2:23-25. 10.1234/WG.002-23
 
