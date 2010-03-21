@@ -7,6 +7,12 @@ Language Specification
 
 __ `Table of Contents`_
 
+.. class:: fixed
+
+   `citationstyles.org`__
+
+__ http://citationstyles.org/
+
 .. class:: info-version
 
    version 2010-03-21

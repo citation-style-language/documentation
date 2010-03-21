@@ -5,14 +5,13 @@
 Primer
 ~~~~~~
 
+__ `Table of Contents`_
+
 .. class:: fixed
 
    `citationstyles.org`__
 
 __ http://citationstyles.org/
-
-
-__ `Table of Contents`_
 
 .. class:: info-version
 
