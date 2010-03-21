@@ -1,3 +1,18 @@
+p.fixed {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+  margin-right: 0.5em;
+  border: solid black 1px;
+  background: white;
+}
+
+p.fixed a {
+  border-bottom: none 0px #999;
+}
+
 body { 
     width: 750px; 
     margin: auto; 
