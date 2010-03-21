@@ -9,7 +9,7 @@ __ `Table of Contents`_
 
 .. class:: info-version
 
-   version 2010-03-20
+   version 2010-03-21
 
 .. class:: contributors
 
@@ -17,7 +17,6 @@ __ `Table of Contents`_
        * Rintze Zelle
 
 .. |link| image:: link.png
-
 
 ========
 
@@ -36,7 +35,7 @@ This document is meant as a first introduction to the Citation Style Language
 (CSL) and is primarily aimed at those who wish to create or modify CSL styles.
 Some prior knowledge of XML or HTML will come in handy. If these terms are
 unfamiliar to you, check out one of the many online introductions to XML, e.g.
-the one at http://www.w3schools.com/xml/default.asp.
+the one at |link| http://www.w3schools.com/xml/.
 
 What is CSL?
 ~~~~~~~~~~~~
@@ -63,11 +62,11 @@ scientific journal). Finally, terms, date formats, and punctuation rules used
 for citations and bibliographies can be changed at a whim to follow one of 38
 different locales (ranging from Afrikaans to Hebrew to Vietnamese).
 
-.. [#] If you use CSL styles, you don't have to worry about `getting sued
+.. [#] If you use CSL styles, you don't have to worry about |link| `getting sued
        <http://arstechnica.com/web/news/2009/06/thomson-reuters-suit-against-zotero-software-dismissed.ars>`_!
        We promise!
 .. [#] There are already over a thousand CSL styles available at
-       http://www.zotero.org/styles
+       |link| http://www.zotero.org/styles
 
 Different Classes of Citation Styles
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -156,7 +155,7 @@ A) **"in-text"** styles: when a work is cited, a *citation* is added to the
    
    .. [#] The illustrating sentence is from Gidijala L, Kiel JAKW, Douma RD,
           Seifar RM, van Gulik WM, et al. 2009 An Engineered Yeast Efficiently
-          Secreting Penicillin. PLoS ONE 4(12): e8317.
+          Secreting Penicillin. PLoS ONE 4(12): e8317. |link|
           `doi:10.1371/journal.pone.0008317
           <http://dx.doi.org/10.1371/journal.pone.0008317>`_
 
@@ -177,7 +176,7 @@ B) **"note"** styles: when a work is cited, a *marker* is added to the sentence.
    
    .. [#] Example taken from Darwin 1882 The descent of man, and selection in 
           relation to sex. London: John Murray. 2d ed., 15th thousand, available
-          `online
+          |link| `online
           <http://darwin-online.org.uk/content/frameset?itemID=F955&viewtype=image&pageseq=1>`_.
 
 It is not uncommon for in-text citations or foot and endnotes to include
@@ -420,9 +419,14 @@ easier to maintain. The three macros have the following output:
 Editing Styles
 --------------
 
-After using the above CSL style for a while, you notice you've been missing something. Wouldn't it be nice to include the DOI (digital object identifier) to the bibliographic entries? Although dedicated tools for editing CSL 1.0 styles have yet to be released, you can already edit styles using a simple text editor.
+After using the above CSL style for a while, you notice you've been missing
+something. Wouldn't it be nice to include the DOI (digital object identifier) to
+the bibliographic entries? Although dedicated tools for editing CSL 1.0 styles
+have yet to be released, you can already edit styles using a simple text editor.
 
-In CSL, the DOI is stored in the "DOI" variable. So, to append the DOI to each bibliographic entry, we can use the following ``layout`` section for the bibliography:
+In CSL, the DOI is stored in the "DOI" variable. So, to append the DOI to each
+bibliographic entry, we can use the following ``layout`` section for the
+bibliography:
 
 .. sourcecode:: xml
 
@@ -457,17 +461,17 @@ After making changes to a CSL style, it is always a good idea to check whether
 the style still *validates*. Correct processing of CSL styles requires that CSL
 styles are both written in correct XML and conform to the CSL schema. Both these
 checks can be performed with an XML validator. In this case, we will use the
-online validator at http://validator.nu/:
+online validator at |link| http://validator.nu/:
 
 1. Select the style. Select the "Text Field" option in the first dropdown menu,
    and paste the modified style into the text box.
    
-2. Paste the html link to the CSL schema into the “Schemas” text field
-   (http://bitbucket.org/bdarcus/csl-schema/raw/tip/csl.rnc)
+2. Paste the html link to the CSL schema into the "Schemas" text field
+   ("\http://bitbucket.org/bdarcus/csl-schema/raw/tip/csl.rnc")
 
 3. In the "Parser" drop-down menu, select "XML; don't load external entities"
    
-4. Check the option “Be lax about HTTP Content-Type”.
+4. Check the option "Be lax about HTTP Content-Type".
 
 5. Click the "Validate" button.
 
@@ -494,7 +498,7 @@ Learning more
 
 Having read this primer, you now know the purpose of CSL, and the basics of
 writing a CSL style. To learn more about CSL and CSL styles, make sure to browse
-the documentation offered on http://CitationStyles.org. In addition to reading
-the CSL 1.0 specification, it can be very useful to take a look at other CSL 1.0
-styles. Finally, hardcore CSL fans can study the CSL schema itself, although
-this might require some knowledge of the RELAX NG Compact syntax.
+the documentation offered on |link| http://citationstyles.org. In addition to
+reading the CSL 1.0 specification, it can be very useful to take a look at other
+CSL 1.0 styles. Finally, hardcore CSL fans can study the CSL schema itself,
+although this might require some knowledge of the RELAX NG Compact syntax.

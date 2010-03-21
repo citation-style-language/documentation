@@ -9,7 +9,7 @@ __ `Table of Contents`_
 
 .. class:: info-version
 
-   version 2010-03-17
+   version 2010-03-21
 
 .. class:: contributors
 
@@ -32,7 +32,7 @@ __ `Table of Contents`_
 Citation Style Language 1.0 - What's New?
 =========================================
 
-`Citation Style Language 1.0
+The release of |link| `Citation Style Language 1.0
 <http://citationstyles.org/citation-style-language/schema/>`_ represents a
 significant update of the Citation Style Language (CSL), an open XML language to
 describe citation styles. This document describes the changes compared to CSL
@@ -50,34 +50,34 @@ the need to include this namespace for each element.
 Project Home(s)
 +++++++++++++++
 
-The first change is that the CSL project has been moved to a new home at
+The first change is that the CSL project has been moved to a new home at |link|
 `CitationStyles.org <http://citationstyles.org/>`_ (the old project home was
-located at `<http://xbiblio.sourceforge.net/csl/>`_). This website will be the
-central location to find CSL schemas, CSL documentation and CSL styles.
+located at |link| `<http://xbiblio.sourceforge.net/csl/>`_). This website will
+be the central location to find CSL schemas, CSL documentation and CSL styles.
 
-For development the `SourceForge CSL mailing list
+For development the |link| `SourceForge CSL mailing list
 <http://sourceforge.net/mailarchive/forum.php?forum_name=xbiblio-devel>`_ will
-be kept in use, but a switch has been made from SourceForge.net to
+be kept in use, but a switch has been made from SourceForge.net to |link|
 `Bitbucket.org <http://bitbucket.org/>`_ for hosting the project code. The
 current code repositories are:
 
-* `CSL Schema <http://bitbucket.org/bdarcus/csl-schema/>`_
-* `CSL Locale Files <http://bitbucket.org/bdarcus/csl-locales/>`_
-* `CSL Documentation <http://bitbucket.org/bdarcus/csl-docs/>`_
-* `CSL Utilities <http://bitbucket.org/bdarcus/csl-utils/>`_
+* |link| `CSL Schema <http://bitbucket.org/bdarcus/csl-schema/>`_
+* |link| `CSL Locale Files <http://bitbucket.org/bdarcus/csl-locales/>`_
+* |link| `CSL Documentation <http://bitbucket.org/bdarcus/csl-docs/>`_
+* |link| `CSL Utilities <http://bitbucket.org/bdarcus/csl-utils/>`_
 
 Documentation
 +++++++++++++
 
 Prior to the release of CSL 1.0, CSL documentation was rather scarce. Most of
-what was available was hosted on the `Zotero wiki
+what was available was hosted on the |link| `Zotero wiki
 <http://www.zotero.org/support/dev/csl_syntax_summary>`_. With CSL 1.0, we hope
-to improve on this situation. In addition to these upgrade notes, a full
-specification_ has been made available. As before, the `schema
+to improve on this situation. In addition to these upgrade notes, a full |link|
+specification_ has been made available. As before, the |link| `schema
 <http://citationstyles.org/citation-style-language/schema/>`_ itself is also a
 source of information, although reading the schema requires some understanding
-of `RELAX NG Compact <http://www.relaxng.org/>`_, the XML schema language in
-which the CSL schema is written.
+of |link| `RELAX NG Compact <http://www.relaxng.org/>`_, the XML schema language
+in which the CSL schema is written.
 
 .. _specification: http://citationstyles.org/downloads/specification.html
 
@@ -106,9 +106,9 @@ csl-data
 
 Although hosted in the same code repository as the rest of the schema,
 csl-data.rnc is not used for style validation. Instead, it aims to describe how
-data can (and should) be presented to CSL processors, such as citeproc-js_. Note
-that csl-data.rnc is not complete, and that input data doesn't need to consist
-of XML (e.g. citeproc-js_ accepts JSON).
+data can (and should) be presented to CSL processors, such as |link|
+citeproc-js_. Note that csl-data.rnc is not complete, and that input data
+doesn't need to consist of XML (e.g. |link| citeproc-js_ accepts JSON).
 
 .. _citeproc-js: http://bitbucket.org/fbennett/citeproc-js/
 
@@ -118,10 +118,10 @@ Validation
 The CSL 1.0 schema has been extended with two Schematron rules to make sure
 styles don't use ``cs:text`` and ``cs:key`` elements that call non-existing
 ``cs:macro`` elements. Note that not all validators support embedded Schematron
-code (e.g. `Jing <http://www.thaiopensource.com/relaxng/jing.html>`_ just
+code (e.g. |link| `Jing <http://www.thaiopensource.com/relaxng/jing.html>`_ just
 ignores the rules). In addition, the CSL 1.0 schema can now be used to validate
-the `locales files`_ (e.g. "locales-en-US.xml"), which contain localizations of
-terms, date formats and style options.
+the |link| `locales files`_ (e.g. "locales-en-US.xml"), which contain
+localizations of terms, date formats and style options.
 
 .. _locales files: http://bitbucket.org/bdarcus/csl-locales/src/
 
@@ -134,36 +134,37 @@ Updating CSL 0.8 Styles
 CSL 1.0 is backward incompatible with CSL 0.8, which means that 'old' styles
 written for CSL 0.8 won't work with CSL 1.0 processors. Fortunately, it is
 possible to (automatically) update CSL 0.8 styles to the CSL 1.0 format using
-the `upgrade.xsl <http://bitbucket.org/bdarcus/csl-utils/raw/tip/update.xsl>`_
-XSLT stylesheet. The developers of Zotero will perform this conversion for all
-the styles in the `Zotero Style Repository <http://www.zotero.org/styles>`_.
-However, if you use (custom) CSL styles that aren't included in this style
-repository, you might need to do this yourself.
+the |link| `upgrade.xsl
+<http://bitbucket.org/bdarcus/csl-utils/raw/tip/update.xsl>`_ XSLT stylesheet.
+The developers of Zotero will perform this conversion for all the styles in the
+|link| `Zotero Style Repository <http://www.zotero.org/styles>`_. However, if
+you use (custom) CSL styles that aren't included in this style repository, you
+might need to do this yourself.
 
 Using upgrade.xsl
 ~~~~~~~~~~~~~~~~~
 
 First, check whether the styles that you wish to update validate against the
-CSL 0.8 schema
+|link| `CSL 0.8 schema
 <http://citationstyles.org/citation-style-language/schema/>`_.
 
 Then use an XSLT processor to update the styles. Available options are the
-command-line tools `Saxon <http://saxon.sourceforge.net/>`_ and `xsltproc
-<http://xmlsoft.org/XSLT/xsltproc2.html>`_. Alternatively, one of the (more
-user-friendly) online converters, such as the one offered by
+command-line tools |link| `Saxon <http://saxon.sourceforge.net/>`_ and |link|
+`xsltproc <http://xmlsoft.org/XSLT/xsltproc2.html>`_. Alternatively, one of the
+(more user-friendly) online converters, such as the one offered by |link|
 `www.shell-tools.net <http://www.shell-tools.net/index.php?op=xslt>`_ can be
 used. For the latter tool, the instructions are:
 
-1. Paste the contents of `upgrade.xsl
+1. Paste the contents of |link| `upgrade.xsl
    <http://bitbucket.org/bdarcus/csl-utils/raw/tip/update.xsl>`_ into the "xslt"
-   text box at `<http://www.shell-tools.net/index.php?op=xslt>`_
+   text box at |link| `<http://www.shell-tools.net/index.php?op=xslt>`_
 2. Paste the contents of the CSL 0.8 style into the "xml" text box
 3. Click the "Submit Query"-button
 4. Copy the text from the "output" text box to a suitable text editor (e.g.
    Notepad on Windows) and save the file with a .csl-extension.
 
 Finally, after the conversion, it is recommended to validate the converted
-style, this time against the `CSL 1.0 schema`_.
+style, this time against the |link| `CSL 1.0 schema`_.
 
 .. _CSL 1.0 schema: http://citationstyles.org/citation-style-language/schema/
 
@@ -242,7 +243,7 @@ ISSN and ISSN-L
 ISSN-identifiers unambiguously identify journals. While CSL 0.8 allowed only a
 single ISSN identifier to be included in the style metadata section, CSL 1.0 now
 supports multiple ISSNs (e.g. the ISSNs of the print and online editions of a
-journal), as well as the relatively new `ISSN-L
+journal), as well as the relatively new |link| `ISSN-L
 <http://www.issn.org/2-22637-What-is-an-ISSN-L.php>`_ identifier. For example:
 
 .. sourcecode:: xml
@@ -260,7 +261,7 @@ Localization
 
 The "locales-xx-XX.xml" files (with "xx-XX" indicating the locale, e.g. "en-US"
 for "English - United States") that are part of CSL previously had only the role
-of supplying localized terms (translations are made via `BabelZilla
+of supplying localized terms (translations are made via |link| `BabelZilla
 <http://www.babelzilla.org/>`_). With CSL 1.0, these locale files also contain
 localized style options and localized date formats. Because of this, some
 changes have been made to the XML format of these files: ``cs:locale`` has
@@ -433,9 +434,9 @@ To prevent localization of styles (which might be desirable for journal-specific
 styles) the ``default-locale`` attribute can be included on the ``cs:style``
 element (this attribute already existed in CSL 0.8, but was not supported by
 Zotero). The possible values of this attribute are the locale codes (e.g.
-"fr-FR" for French). A full list of locale codes can be found in `Zotero's
-chrome manifest <https://www.zotero.org/svn/extension/trunk/chrome.manifest>`_.
-An example:
+"fr-FR" for French). A full list of locale codes can be found in |link|
+`Zotero's chrome manifest
+<https://www.zotero.org/svn/extension/trunk/chrome.manifest>`_. An example:
 
 .. sourcecode:: xml
 
@@ -1100,6 +1101,6 @@ CSL 1.0 also introduces a number of new terms:
   summer, fall and winter. See `Seasons`_.
 
 .. [1]
-   A hat tip to user `komrade <http://www.zotero.org/komrade>`_ of
+   A hat tip to user |link| `komrade <http://www.zotero.org/komrade>`_ of
    the Zotero forums, whose review of the major style guides led to
    this array of rule-sets.
