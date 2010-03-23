@@ -30,8 +30,6 @@ __ http://citationstyles.org/
 
 ========
 
-   
-
 
 Introduction
 ------------
@@ -474,13 +472,13 @@ online validator at |link| http://validator.nu/:
 1. Select the style. Select the "Text Field" option in the first dropdown menu,
    and paste the modified style into the text box.
    
-2. Paste the html link to the CSL schema into the "Schemas" text field
-   ("\http://bitbucket.org/bdarcus/csl-schema/raw/tip/csl.rnc")
-
+2. Paste the html link to the CSL schema into the "Schemas" text field. For CSL
+   1.0: http://bitbucket.org/bdarcus/csl-schema/raw/855dcc00cba7/csl.rnc
+   
 3. In the "Parser" drop-down menu, select "XML; don't load external entities"
    
 4. Check the option "Be lax about HTTP Content-Type".
-
+   
 5. Click the "Validate" button.
 
 When we perform these steps, we get a few harmless warnings, but also an error:
