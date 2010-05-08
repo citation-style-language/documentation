@@ -1550,10 +1550,15 @@ Whitespace
            Galaxy (1st ed.).
 
 ``line-spacing``
-    Sets the spacing of lines (in units of lines, default is "1")
+    Specifies a formatting hint for vertical line distance. Defaults to "1"
+    (single-spacing), and can be set to any non-negative integer to specify a
+    multiple of the standard unit of line height (e.g. "2" for double-spacing).
 
 ``entry-spacing``
-    Sets the spacing of lines (in units of line-spacing, default is "1")
+    Specifies a formatting hint for vertical distance between bibliographic
+    entries. By default (with a value of "1"), entries are separated by a single
+    additional line-height (as set by the line-spacing attribute). Can be set to
+    any non-negative integer to specify a multiple of this amount.
 
 Reference Grouping
 ''''''''''''''''''
