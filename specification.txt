@@ -1280,9 +1280,11 @@ The different types of conditions, expressed as attributes, are:
     (see `Locators`_).
 
 ``position``
-    Tests whether the position of the item cite matches the given positions. The
-    different positions are (note on terminology: a *citation* refers to a
-    citation group, which contains one or more *cites* to individual items):
+    Tests whether the position of the item cite matches the given positions
+    (when called within cs:bibliography, this condition will always test
+    "false"). The different positions are (note on terminology: a *citation*
+    refers to a citation group, which contains one or more *cites* to individual
+    items):
     
     -  "first": the position of a cite that is the first to reference an item
     -  "ibid"/"ibid-with-locator"/"subsequent": a cite that references an
@@ -1315,7 +1317,7 @@ The different types of conditions, expressed as attributes, are:
       in number of foot or endnotes) set with the ``near-note-distance`` option
       (see `Note Distance`_).
       
-    Note that each cite can have multiple position values. Also, whenever
+    Note that each cite can have multiple position values. Whenever
     position="ibid-with-locator" is true, position="ibid" is also true. And
     whenever position="ibid" or position="near-note" is true,
     position="subsequent" is also true.
