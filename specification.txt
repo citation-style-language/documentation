@@ -901,12 +901,15 @@ variable are separated from each other. The attributes that may be used on
        - 3 names: "J. Doe, S. Smith and T. Williams"
 
 ``et-al-min`` / ``et-al-use-first``
-    Together, these two attributes control et-al abbreviation. When the number
-    of names in a name variable matches or exceeds the number set on
-    ``et-al-min``, the rendered name list is truncated at the number of names
-    set on ``et-al-use-first``. If truncation occurs, the "et-al" term is
-    appended to the names rendered, preceded by a space (e.g. "Doe et al.").
-
+    Together, these attributes control et-al abbreviation. When the number of
+    names in a name variable matches or exceeds the number set on ``et-al-min``,
+    the rendered name list is truncated at the number of names set on
+    ``et-al-use-first``. If truncation occurs, the "et-al" term is appended to
+    the names rendered (see also `Et-al`_). With a single name
+    (et-al-use-first="1"), the "et-al" term is preceded by a space (e.g. "Doe et
+    al."). With multiple names, the "et-al" term is preceded by the name
+    delimiter (e.g. "Doe, Smith, et al.").
+    
 ``et-al-subsequent-min`` / ``et-al-subsequent-use-first``
     The (optional) ``et-al-min`` and ``et-al-use-first`` attributes take effect
     for all cites and bibliographic entries. With the ``et-al-subsequent-min``
