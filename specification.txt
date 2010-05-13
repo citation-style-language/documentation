@@ -908,10 +908,11 @@ variable are separated from each other. The attributes that may be used on
     appended to the names rendered, preceded by a space (e.g. "Doe et al.").
 
 ``et-al-subsequent-min`` / ``et-al-subsequent-use-first``
-    Similar to ``et-al-min`` and ``et-al-use-first``, these attributes control
-    et-al abbreviation, but now for subsequent cites (see `Note Distance`_). If
-    these attributes are not set, the values of ``et-al-min`` /
-    ``et-al-use-first`` are used instead.
+    The (optional) ``et-al-min`` and ``et-al-use-first`` attributes take effect
+    for all cites and bibliographic entries. With the ``et-al-subsequent-min``
+    and ``et-al-subsequent-use-first`` attributes divergent et-al abbreviation
+    rules can be specified for subsequent cites (cites referencing earlier cited
+    items).
 
 The remaining attributes, discussed below, only affect personal names. Personal
 names require a "family" name-part, and may also contain "given", "suffix",
