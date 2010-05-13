@@ -401,7 +401,7 @@ An example illustrating the use of ``cs:locale`` in a CSL style:
       </locale>
     </style>
 
-Locale prioritization
+Locale Prioritization
 '''''''''''''''''''''
 
 Locale codes can indicate either the language (e.g. "en" for English) or the
@@ -975,15 +975,14 @@ Name-part Order
 The order of name-parts depends on the values of the ``form`` and
 ``name-as-sort-order`` attributes on ``cs:name``, the value of the
 ``demote-non-dropping-particle`` attribute on ``cs:style`` (one of the `global
-options`_), and the alphabet of the individual name. Finally, differences can
-exist between the name that is displayed and the name that is used for sorting.
-An overview of the different orders:
+options`_), and the alphabet of the individual name. Note that the display and
+sorting order of name-parts often differs. An overview of the different orders:
 
 **Display order of latin/Cyrillic names**
 
 ----
 
-:Conditions: ``form`` set to "long", 
+:Conditions: ``form`` set to "long"
 :Order:
     1) given
     2) dropping-particle
@@ -1001,11 +1000,11 @@ An overview of the different orders:
 :Order:
     1) non-dropping-particle
     2) family
-    3) suffix
-    4) given
-    5) dropping-particle
+    3) given
+    4) dropping-particle
+    5) suffix
 
-:Example: [la] [Martinière] [III], [Gérard] [de] 
+:Example: [la] [Martinière], [Gérard] [de], [III]
 
 ----
 
@@ -1014,12 +1013,12 @@ An overview of the different orders:
              "display-and-sort"
 :Order:
     1) family
-    2) suffix
-    3) given
-    4) dropping-particle
-    5) non-dropping-particle 
+    2) given
+    3) dropping-particle
+    4) non-dropping-particle
+    5) suffix
 
-:Example: [Martinière] [III], [Gérard] [de] [la]
+:Example: [Martinière], [Gérard] [de] [la], [III]
 
 ----
 
@@ -1027,9 +1026,8 @@ An overview of the different orders:
 :Order:
     1) non-dropping-particles
     2) family
-    3) suffix
 
-:Example: [la] [Martinière] [III]
+:Example: [la] [Martinière]
 
 ----
 
@@ -1090,7 +1088,7 @@ Non-personal names lack name-parts and are sorted as is, although English
 articles ("a", "an" and "the") at the start of the name are stripped. For
 example, "The New York Times" sorts as "New York Times".
 
-Name-part formatting
+Name-part Formatting
 ''''''''''''''''''''
 
 The ``cs:name`` element may include one or two ``cs:name-part`` child elements.
