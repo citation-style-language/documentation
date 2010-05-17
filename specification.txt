@@ -1239,13 +1239,9 @@ results in "(Published by: Company A)" when the "publisher" variable is set to
 Choose
 ~~~~~~
 
-The ``cs:choose`` element allows for the expression of conditional statements.
-The first child element of ``cs:choose`` is always a ``cs:if`` child element. In
-addition, any number of ``cs:else-if`` child elements may be included, as well
-as a closing ``cs:else`` element. The ``cs:if`` and ``cs:else-if`` elements may
-contain any number of `rendering elements`_ (with the exception of
-``cs:layout``). The ``cs:else`` element should contain at least one rendering
-element. An example of a conditional:
+Similarly to the conditional statements encountered in programming languages,
+the ``cs:choose`` element allows for the conditional rendering of `rendering
+elements`_. An example is shown below:
 
 .. sourcecode:: xml
 
@@ -1261,8 +1257,14 @@ element. An example of a conditional:
       </else>
     </choose>
 
-Every ``cs:if`` and ``cs:else-if`` element must include at least one condition.
-The different types of conditions, expressed as attributes, are:
+``cs:choose`` requires a ``cs:if`` child element, which may be followed by one
+or more ``cs:else-if`` child elements, and an optional closing ``cs:else`` child
+element. The ``cs:if`` and ``cs:else-if`` elements may contain any number of
+`rendering elements`_ (except for ``cs:layout``). As an empty cs:else element
+would be superfluous, ``cs:else`` must contain at least one rendering element.
+``cs:if`` and ``cs:else-if`` elements must each hold at least one condition,
+which are expressed as attributes. The different types of conditions available
+are:
 
 ``disambiguate``
     The contents of an <if disambiguate="true"> block is only rendered if it
@@ -1331,17 +1333,18 @@ The different types of conditions, expressed as attributes, are:
     Tests whether the given variables (`Appendix I - Variables`_) contain
     non-empty values.
 
-With the exception of ``disambiguate``, all the conditions may specify more than
-one test value (variables, types, etc.), separated with spaces (e.g. "book
-chapter"). In such cases the ``match`` attribute can be used as a logical
-operator. The attribute can have the following values:
+With the exception of ``disambiguate``, all conditions allow for multiple test
+values (separated with spaces, e.g. "book thesis").
 
--  "all" (default): a condition tests "true" when it tests "true" for all of the
-   given condition values
--  "any": a condition tests "true" when it tests "true" for any of the
-   given condition values
--  "none": a condition tests "true" when it tests "true" for none of the
-   given condition values
+The ``cs:if`` and ``cs:else-if`` elements may include the ``match`` attribute to
+control the testing logic, with possible values:
+
+-  "all" (default): the element only tests "true" when all conditions test "true"
+   for all given test values
+-  "any": the element tests "true" when any condition tests "true" for any given
+   test value
+-  "none": the element only tests "true" when none of the conditions test "true"
+   for any given test value
 
 Style Behavior
 --------------
