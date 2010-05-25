@@ -645,8 +645,7 @@ Date
 
 The ``cs:date`` element is used to output dates, in either a localized or a
 non-localized format. The desired date variable (see `Date Variables`_) is
-selected with the ``variable`` attribute. If the selected variable is empty,
-``cs:date`` renders the "no date" term.
+selected with the ``variable`` attribute.
 
 Localized date formats are selected with the ``form`` attribute. This attribute
 can be set to "numeric" (for numeric date formats, e.g. "12-15-2005"), or to
@@ -1744,9 +1743,8 @@ first sort key. A secondary sort (using the second sort key) is performed on
 those items which share the first sort key. A tertiary sort (using the third
 sort key) is performed on those items which share the first and second sort key.
 This process continues until either the order of all items is fixed, or until
-the sort keys are exhausted. Items for which a sort key is empty (including
-empty date variables, where the "no date" term is substituted for rendering) are
-placed at the end of the sort (both for ascending and descending sorts).
+the sort keys are exhausted. Items for which a sort key is empty are placed at
+the end of the sort (both for ascending and descending sorts).
 
 An example, where citations are first sorted by the output of the author macro
 with overriding settings for et-al abbreviation. Entries that share the same
