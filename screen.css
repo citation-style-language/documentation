@@ -53,8 +53,22 @@ dt { font-weight: bold; margin-top: 0.5em; }
 .topic-title { font-weight: bold; font-size: 130%; }
 .contents { margin-bottom: 1em; }
 
-.contributors { margin-left: 250px; margin-top: 2em; margin-bottom: 2em; }
-dl.contributors { background: white; border: none; }
+dl.version-links { background: white; border: none; }
+
+dl.version-links dt {
+  font-weight: bold;
+}
+
+dl.version-links dd ul {
+  padding-left: 0px;
+}
+
+dl.version-links dd ul li {
+  list-style: none;
+}
+
+.contributors { margin-left: 250px; margin-top: 1em; margin-bottom: 2em; }
+dl.contributors { background: white; padding:0em; border: none; }
 .contributors dt { margin: 1em; }
 
 span.sc {
