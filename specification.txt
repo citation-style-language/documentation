@@ -1334,8 +1334,8 @@ are:
     Tests whether the item matches the given types (`Appendix II - Types`_).
 
 ``variable``
-    Tests whether the given variables (`Appendix I - Variables`_) contain
-    non-empty values.
+    Tests whether the default (long) forms of the given variables (`Appendix I -
+    Variables`_) contain non-empty values.
 
 With the exception of ``disambiguate``, all conditions allow for multiple test
 values (separated with spaces, e.g. "book thesis").
