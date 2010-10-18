@@ -614,7 +614,7 @@ two important features. First, formatting can now be set independently for the
 
     <names variable="author">
       <name/>
-      <et-al font-style="italics" prefix=" "/>
+      <et-al font-style="italic" prefix=" "/>
     </names>
 
 results in "Doe *et al.*". Secondly, it is now possible to use two different
