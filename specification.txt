@@ -16,11 +16,12 @@ __ http://citationstyles.org/
 .. class:: version-links
 
     This version:
-        http://citationstyles.org/downloads/specification-csl10-20100530.html
+        http://citationstyles.org/downloads/specification-csl10-20101114.html
     Latest version:
         http://citationstyles.org/downloads/specification.html
     Previous versions: 
         - http://citationstyles.org/downloads/specification-csl10-20100321.html
+        - http://citationstyles.org/downloads/specification-csl10-20100530.html
 
 .. class:: contributors
 
@@ -2099,6 +2100,7 @@ Name Variables
 
 -  author
 -  editor
+-  editorial-director
 -  translator
 -  recipient
 -  interviewer
