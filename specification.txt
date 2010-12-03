@@ -16,7 +16,7 @@ __ http://citationstyles.org/
 .. class:: version-links
 
     This version:
-        http://citationstyles.org/downloads/specification-csl10-20101114.html
+        http://citationstyles.org/downloads/specification-csl10-20101202.html
     Latest version:
         http://citationstyles.org/downloads/specification.html
     Previous versions: 
@@ -254,7 +254,7 @@ followed by a description of all possible elements.
     <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
 
 ``cs:summary`` (optional)
-    This element gives a summary of the style.The element may include a
+    This element gives a summary of the style. The element may include a
     ``xml:lang`` attribute to specify the language of the content (the value
     should be an |link| `xsd:language locale code
     <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
@@ -264,6 +264,12 @@ followed by a description of all possible elements.
     should be shown to users. The element may include a ``xml:lang`` attribute
     to specify the language of the content (the value should be an |link|
     `xsd:language locale code
+    <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
+
+``cs:title-short`` (optional)
+    This element gives a shortened version of the style name (e.g. "APA"). The
+    element may include a ``xml:lang`` attribute to specify the language of the
+    content (the value should be an |link| `xsd:language locale code
     <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
 
 ``cs:updated``
