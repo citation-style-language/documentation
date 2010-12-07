@@ -23,7 +23,7 @@ __ http://citationstyles.org/
 .. class:: contributors
 
    Author
-       * Rintze Zelle
+       * Rintze M. Zelle
        
    Contributors
        * Frank G. Bennett, Jr.

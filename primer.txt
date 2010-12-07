@@ -15,12 +15,12 @@ __ http://citationstyles.org/
 
 .. class:: info-version
 
-   version 2010-03-23
+   version 2010-12-07
 
 .. class:: contributors
 
    Author
-       * Rintze Zelle
+       * Rintze M. Zelle
 
 .. |link| image:: link.png
 
