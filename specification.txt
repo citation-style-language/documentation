@@ -920,7 +920,7 @@ variable are separated from each other. The attributes that may be used on
     -  "contextual" (default): the delimiter is only included for name lists
        with three or more names
        
-       - 2 names: "J. Doe and T. Williams,"
+       - 2 names: "J. Doe and T. Williams"
        - 3 names: "J. Doe, S. Smith, and T. Williams"
     
     -  "always": the delimiter is always included
@@ -930,7 +930,7 @@ variable are separated from each other. The attributes that may be used on
     
     -  "never": the delimiter is never included
        
-       - 2 names: "J. Doe and T. Williams,"
+       - 2 names: "J. Doe and T. Williams"
        - 3 names: "J. Doe, S. Smith and T. Williams"
 
 ``et-al-min`` / ``et-al-use-first``
