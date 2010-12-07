@@ -16,7 +16,7 @@ __ http://citationstyles.org/
 .. class:: version-links
 
     This version:
-        http://citationstyles.org/downloads/specification-csl10-20101202.html
+        http://citationstyles.org/downloads/specification-csl10-20101207.html
     Latest version:
         http://citationstyles.org/downloads/specification.html
     Previous versions: 

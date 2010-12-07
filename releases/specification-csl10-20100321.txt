@@ -13,9 +13,12 @@ __ `Table of Contents`_
 
 __ http://citationstyles.org/
 
-.. class:: info-version
+.. class:: version-links
 
-   version 2010-03-21
+    This version:
+        http://citationstyles.org/downloads/specification-csl10-20100321.html
+    Latest version:
+        http://citationstyles.org/downloads/specification.html
 
 .. class:: contributors
 
