@@ -15,7 +15,7 @@ __ http://citationstyles.org/
 
 .. class:: info-version
 
-   version 2010-12-07
+   version 2011-01-12
 
 .. class:: contributors
 
@@ -37,41 +37,37 @@ Introduction
 Scope of this Primer
 ~~~~~~~~~~~~~~~~~~~~
 
-This document is meant as a first introduction to the Citation Style Language
-(CSL) and is primarily aimed at those who wish to create or modify CSL styles.
-Some prior knowledge of XML or HTML will come in handy. If these terms are
-unfamiliar to you, check out one of the many online introductions to XML, e.g.
-the one at |link| http://www.w3schools.com/xml/.
+This primer is meant as a first introduction to the Citation Style Language
+(CSL), and is primarily aimed towards those wishing to create or modify CSL
+styles. Some knowledge about the structure of XML or HTML will come in handy. If
+you are completely unfamiliar with either markup language, check out one of the
+many online introductions to XML, e.g. W3Schools' |link| `XML Tutorial
+<http://www.w3schools.com/xml/>`_.
 
 What is CSL?
 ~~~~~~~~~~~~
 
-The Citation Style Language (CSL) is an open and free [#]_ XML based language
-for writing CSL styles, which describe how citations and bibliographies should
-be formatted. Citing plays an important role in academic literature: it can be
-used for attribution (which is important to avoid plagiarism), to give context
-to your research, and to eliminate the need to repeat previously published
-results.
+The Citation Style Language (CSL) is an open and free XML-based language for
+writing CSL styles, which describe how citations and bibliographies should be
+formatted. Citing plays an important role in academic literature: it can be used
+for attribution (which is important to avoid plagiarism), to give context to
+your research, and to eliminate the need to repeat previously published results.
 
-Unfortunately, correctly citing is often far from trivial. Style guides like the
-*American Psychological Association (APA) Style*, *The Chicago Manual of Style*
-or the *MLA Style* dedicate many pages to citation formatting. To complicate
-things further, many academic journals use proprietary styles that deviate from
-these 'generic' citation styles.
+However, correctly citing sources is often far from trivial: the more popular
+styles (e.g. *American Psychological Association (APA)*, *Chicago Manual of
+Style* or *Modern Language Association (MLA)*) have extensive formatting
+requirements, whereas many academic journals use custom in-house styles.
 
-The Citation Style Language was designed to make citing easier. When CSL styles
-are used in combination with CSL compatible reference management software (such
-as Zotero or Mendeley), citations and bibliographies can be automatically
-generated according to the style of preference [#]_. You can quickly switch
-between styles (e.g. if a manuscript has to be submitted to a different
-scientific journal). Finally, terms, date formats, and punctuation rules used
-for citations and bibliographies can be changed at a whim to follow one of 38
-different locales (ranging from Afrikaans to Hebrew to Vietnamese).
+The Citation Style Language makes citing easier. With CSL styles and
+CSL-compatible reference management software (such as Zotero or Mendeley), you
+can automatically generate citations and bibliographies according to your style
+of preference [#]_. You can also easily switch styles, e.g. when you decide to
+submit your manuscript to a different journal. Finally, CSL offers advanced
+localization support: with a single CSL style, you can format citations and
+bibliographies in any of several dozen different languages, using localized
+terms, date formats, and punctuation.
 
-.. [#] If you use CSL styles, you don't have to worry about |link| `getting sued
-       <http://arstechnica.com/web/news/2009/06/thomson-reuters-suit-against-zotero-software-dismissed.ars>`_!
-       We promise!
-.. [#] There are already over a thousand CSL styles available at
+.. [#] Over a thousand CSL styles are available at
        |link| http://www.zotero.org/styles
 
 Different Classes of Citation Styles
@@ -79,25 +75,26 @@ Different Classes of Citation Styles
 
 Before we leap into the world of CSL, let's take a look at the different types
 of citation styles that are in use. Citation styles can be divided in two
-groups:
+main groups:
 
 A) **"in-text"** styles: when a work is cited, a *citation* is added to the
-   sentence. The citation points directly to a corresponding bibliographic entry
-   in the bibliography.
+   sentence. The citation points directly to an entry in the bibliography.
    
    Various types of "in-text" styles exist. The main types are:
 
    - **"author-date"** and **"author"** styles
      
-     *Sentence* [#]_
+     *Sentence* (author-date)
      
      Yeast cells were grown at 25°C in batch cultures on 0.5% methanol for 36
      hours (Gidijala et al. 2008) or in carbon-limited chemostat cultures (van
-     der Klei et al. 1991; Zwart et al. 1983). (author-date)
+     der Klei et al. 1991; Zwart et al. 1983). [#]_
+     
+     *Sentence* (author)
      
      Yeast cells were grown at 25°C in batch cultures on 0.5% methanol for 36
      hours (Gidijala et al.) or in carbon-limited chemostat cultures (van der
-     Klei et al.; Zwart et al.). (author)
+     Klei et al.; Zwart et al.).
      
      *Bibliography*
      
@@ -166,43 +163,43 @@ A) **"in-text"** styles: when a work is cited, a *citation* is added to the
           <http://dx.doi.org/10.1371/journal.pone.0008317>`_
 
 B) **"note"** styles: when a work is cited, a *marker* is added to the sentence.
-   The marker, which can be a number or a symbol, points to a foot or endnote.
-   In contrast to in-text citations, foot or endnotes typically contain all
-   information required to locate the cited work(s). Optionally, the cited works
-   can also be included in a bibliography. An example of a note style [#]_:
+   The marker, a number or symbol, points to a foot or endnote. In contrast to
+   in-text citations, foot or endnotes typically contain all information
+   required to locate the cited work(s). Some "note" styles include a
+   bibliography listing the cited works. An example of a note style:
    
     "In the Island of St. Kilda, according to Martin, [*]_ the men do not
     acquire beards until the age of thirty or upwards, and even then the beards
     are very thin. On the Europæo-Asiatic continent, beards prevail until we
     pass beyond India; though with the natives of Ceylon they are often absent,
-    as was noticed in ancient times by Diodorus. [*]_"
+    as was noticed in ancient times by Diodorus. [*]_" [#]_
     
     .. [*] 'Voyage to St. Kilda' (3rd edit. 1753), p. 37.
     .. [*] Sir J. E. Tennent, 'Ceylon,' vol. ii. 1859, p. 107.
    
    .. [#] Example taken from Darwin 1882 The descent of man, and selection in 
-          relation to sex. London: John Murray. 2d ed., 15th thousand, available
-          |link| `online
-          <http://darwin-online.org.uk/content/frameset?itemID=F955&viewtype=image&pageseq=1>`_.
+          relation to sex. London: John Murray. 2nd ed., 15th thousand, |link|
+          http://darwin-online.org.uk/content/frameset?itemID=F955&viewtype=image&pageseq=1.
 
-It is not uncommon for in-text citations or foot and endnotes to include
-references to multiple works. In CSL jargon, the entire in-text citation or note
-is called the "citation". A "citation" that references multiple works contains
-multiple "cites", with each "cite" referencing a single work. Similarly, the
-"bibliography" consists of "bibliographic entries", one for each cited work.
+In-text citations or foot and endnotes can reference multiple works. In CSL
+jargon, the entire in-text citation or note is called the "citation". A
+"citation" that references multiple works contains multiple "cites", with each
+"cite" referencing a single work. Similarly, the "bibliography" contains a
+"bibliographic entry" for each cited work.
 
 Getting Started - A Basic CSL Style
 -----------------------------------
 
 Now that we've examined the different types of citation styles, it's time to
-take a look how these styles can be coded in CSL. We'll start with dissecting a
-simple CSL style in the "author-date" format that describes the formatting of
+take a look at how these styles can be coded in CSL. We'll start with dissecting
+a simple CSL style in the "author-date" format that describes the formatting of
 journal articles:
 
 .. sourcecode:: xml
 
     <?xml version="1.0" encoding="UTF-8"?>
-    <style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text">
+    <style xmlns="http://purl.org/net/xbiblio/csl" version="1.0"
+    class="in-text">
       <info>
         <title>My First Style</title>
         <id>my-first-style</id>
@@ -263,23 +260,24 @@ XML Declaration
     <?xml version="1.0" encoding="UTF-8"?>
 
 The first line of the style is the *XML declaration*, and tells you that the
-style is written according to the XML specification (remember that CSL is an XML
-based language).
+style is written according to the XML specification (remember that CSL is an
+XML-based language).
 
 Style
 ~~~~~
 
 .. sourcecode:: xml
 
-    <style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text">
+    <style xmlns="http://purl.org/net/xbiblio/csl" version="1.0"
+    class="in-text">
       ...
     </style>
 
-``Style`` is the *root element* of the CSL style. The *attributes* on this
-*element* specify that a) all the elements in the style are part of the CSL
-schema (``xmlns="http://purl.org/net/xbiblio/csl"``), b) that the style is
-compatible with CSL 1.0 (``version="1.0"``) and c) that the CSL style describe
-an "in-text" type of citation style (``class="in-text"``).
+``style`` is the *root element* of the style. The *attributes* on this *element*
+specify that a) all the elements in the style are part of the CSL schema
+(``xmlns="http://purl.org/net/xbiblio/csl"``), b) that the style is compatible
+with CSL 1.0 (``version="1.0"``) and c) that the CSL style is of the "in-text"
+type (``class="in-text"``).
 
 Info
 ~~~~
@@ -314,15 +312,14 @@ Citation
       </citation>
 
 Skipping the ``macro`` elements for now, we reach the ``citation`` element. This
-element describes how the "in-text" citations should be formatted. The
-``layout`` element specifies that each *citation* should be wrapped in
-parentheses (``prefix="(" suffix=")"``), and that *cites* in a citation should
-be delimited by "; ". Each *cite* consists of the output of two macros: the
-"author-short" macro (``<text macro="author-short"/>``), which renders the
-author surnames, and the "issued" macro (``<text macro="issued"/>``), which
-renders the year of issue. The output of the "issued" macro is preceded by a
-space (``prefix=" "``). This *layout* element could result in "in-text"
-citations like:
+element describes how the in-text citations should be formatted. The ``layout``
+element specifies that each *citation* should be wrapped in parentheses
+(``prefix="(" suffix=")"``), and that *cites* in a citation should be delimited
+by "; ". Each *cite* shows of the output of two macros: "author-short" (``<text
+macro="author-short"/>``), which renders the author surnames, and "issued"
+(``<text macro="issued"/>``), which renders the year of issue. The output of the
+"issued" macro is preceded by a space (``prefix=" "``). This *layout* element
+could produce in-text citations like:
 
     (Doe 1999)
 
@@ -330,9 +327,9 @@ and
 
     (Hayden, Scott, Muffley 1980; Strangelove 1964; Mandrake 1964)
 
-The ``sort`` element specifies how cites within a citation should be sorted. In
+The ``sort`` element specifies how cites within a citation are sorted. In
 our case, cites are first sorted by the year of issue, and then by the author
-surnames. This changes the second example citation to:
+surnames. This changes the example citation above to:
 
     (Mandrake 1964; Strangelove 1964; Hayden, Scott, Muffley 1980)
 
@@ -360,17 +357,16 @@ Bibliography
         </layout>
       </bibliography>
 
-The ``bibliography`` element describes how bibliographic entries should be
-formatted, and functions very similar to the ``citation`` element. In the
-bibliography, more information is provided for the cited works. The "author"
-macro shows the given and surnames of the authors. The next three ``text``
-elements output respectively the year of issue, the article title and, in
-italics, the title of the journal. They are wrapped in a ``group`` element,
-which specifies that the output of the different ``text`` elements should be
-delimited by single spaces. Then, preceded by ", ", the journal volume and the
-pages of the article are rendered. The ``sort`` element at the beginning of the
-``bibliography`` element specifies that bibliographic entries should first be
-sorted by the author names, and then by the year of issue. This code could
+The ``bibliography`` element describes the formatting of bibliographic entries,
+and functions very similar to the ``citation`` element. The "author" macro shows
+the given and surnames of the authors. The next three ``text`` elements output
+respectively the year of issue, the article title and, in italics, the title of
+the journal. The four ``text`` elements are wrapped in a ``group`` element, and
+the output of the different elements is separated by a space. Then, preceded by
+", ", the journal volume and the pages of the article are rendered. Each
+bibliographic entry ends with a period. The ``sort`` element at the beginning of
+the ``bibliography`` element specifies that bibliographic entries should first
+be sorted by the author names, and then by the year of issue. This code could
 results in bibliographic entries like:
 
     Hayden, S., Scott, G. C., Muffley, M. (1980) How to Stop Worrying and Love the Bomb. *Nuclear Journal*, 15:548-553.
@@ -400,11 +396,11 @@ Macros
         </date>
       </macro>
 
-So what exactly happens in these macros? Macros are a device to reuse formatting
-instructions. E.g. in our style, the "author-short" macro is used both for
-rendering (``<text macro="author-short"/>``) and for sorting (``<key
-macro="author-short"/>``). By using macros, the styles is made more compact and
-easier to maintain. The three macros have the following output:
+So what exactly happens in these macros? The main purpose of macros is to reuse
+formatting instructions. E.g. in our style, the "author-short" macro is used
+both for rendering (``<text macro="author-short"/>``) and for sorting (``<key
+macro="author-short"/>``). By using macros, styles are more compact and easier
+to maintain. The three macros have the following output:
 
 * the "author-short" macro lists a ``names`` element, which renders all the
   names stored in the "author" variable. The ``name`` child element of ``names``
@@ -427,12 +423,11 @@ Editing Styles
 
 After using the above CSL style for a while, you notice you've been missing
 something. Wouldn't it be nice to include the DOI (digital object identifier) to
-the bibliographic entries? Although dedicated tools for editing CSL 1.0 styles
-have yet to be released, you can already edit styles using a simple text editor.
+the bibliographic entries? Although dedicated tools for editing CSL styles have
+yet to be released, you can already edit styles using a simple text editor.
 
 In CSL, the DOI is stored in the "DOI" variable. So, to append the DOI to each
-bibliographic entry, we can use the following ``layout`` section for the
-bibliography:
+bibliographic entry, we can use the following code for the bibliography:
 
 .. sourcecode:: xml
 
@@ -452,13 +447,14 @@ bibliography:
             <text variable="volume" suffix=":"/>
             <text variable="page"/>
           </group>
-          <text variable="doi" prefix=" "/>
+          <text variable="doi" prefix=", "/>
         </layout>
       </bibliography>
 
 This should now result in entries like:
 
-    Strangelove (1964) Nuclear War and How to Prevent It. *War Games*, 2:23-25. 10.1234/WG.002-23
+    Strangelove (1964) Nuclear War and How to Prevent It. *War Games*, 2:23-25,
+    10.1234/WG.002-23.
 
 Validation
 ~~~~~~~~~~
@@ -466,13 +462,13 @@ Validation
 After making changes to a CSL style, it is always a good idea to check whether
 the style still *validates*. Correct processing of CSL styles requires that CSL
 styles are both written in correct XML and conform to the CSL schema. Both these
-checks can be performed with an XML validator. In this case, we will use the
-online validator at |link| http://validator.nu/:
+checks can be performed with an XML validator. Here we will use the
+online validator |link| `Validator.nu <http://validator.nu/>`_:
 
 1. Select the style. Select the "Text Field" option in the first dropdown menu,
    and paste the modified style into the text box.
    
-2. Paste the html link to the CSL schema into the "Schemas" text field. For CSL
+2. Paste the URL to the CSL schema into the "Schemas" text field. For CSL
    1.0: http://bitbucket.org/bdarcus/csl-schema/raw/855dcc00cba7/csl.rnc
    
 3. In the "Parser" drop-down menu, select "XML; don't load external entities"
@@ -481,30 +477,31 @@ online validator at |link| http://validator.nu/:
    
 5. Click the "Validate" button.
 
-When we perform these steps, we get a few harmless warnings, but also an error:
+When we perform these steps, we get an error:
 
     | Error: Bad value doi for attribute variable on element text from namespace http://purl.org/net/xbiblio/csl.
-    | From line 49, column 6; to line 49, column 39
-    | oup>\ |return| <text variable="doi" prefix=" "/>\ |return| <
+    | From line 50, column 7; to line 50, column 40
+    | up>\ |return| <text variable="doi" prefix=", "/>\ |return| <
 
 .. |return| unicode:: U+21a9
 
-Oops! It seems that "doi" is an invalid variable name. After checking the CSL
-specification, we discover that the variable name should be capitalized ("DOI").
-When we make this correction (``<text variable="DOI" prefix=" "/>``), and run
-the validation again, we get the message:
+Oops! It seems that "doi" is an invalid variable name. After checking the |link|
+`CSL 1.0 specification`_, we discover that the variable name should be
+capitalized ("DOI"). When we make this correction (``<text variable="DOI"
+prefix=", "/>``) and run the validation again, we get the message:
 
     | The document validates according to the specified schema(s).
 
 As you see, validation is a powerful tool to help you find and eliminate typing
 errors and other mistakes in CSL styles.
 
-Learning more
+.. _CSL 1.0 specification: http://citationstyles.org/downloads/specification.html
+
+Learning More
 -------------
 
-Having read this primer, you now know the purpose of CSL, and the basics of
-writing a CSL style. To learn more about CSL and CSL styles, make sure to browse
-the documentation offered on |link| http://citationstyles.org. In addition to
-reading the CSL 1.0 specification, it can be very useful to take a look at other
-CSL 1.0 styles. Finally, hardcore CSL fans can study the CSL schema itself,
-although this might require some knowledge of the RELAX NG Compact syntax.
+You now know the purpose of the Citation Style Language and the basic structure
+of CSL 1.0 styles. To learn more, browse the documentation at |link|
+`CitationStyles.org <http://citationstyles.org>`_. In addition to reading the
+|link| `CSL 1.0 specification`_, it can be very useful to take a look at other
+CSL 1.0 styles.
