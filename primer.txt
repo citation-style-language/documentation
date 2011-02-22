@@ -86,13 +86,13 @@ A) **"in-text"** styles: when a work is cited, a *citation* is added to the
      
      *Sentence* (author-date)
      
-     Yeast cells were grown at 25°C in batch cultures on 0.5% methanol for 36
+     Yeast cells were grown at 25Â°C in batch cultures on 0.5% methanol for 36
      hours (Gidijala et al. 2008) or in carbon-limited chemostat cultures (van
      der Klei et al. 1991; Zwart et al. 1983). [#]_
      
      *Sentence* (author)
      
-     Yeast cells were grown at 25°C in batch cultures on 0.5% methanol for 36
+     Yeast cells were grown at 25Â°C in batch cultures on 0.5% methanol for 36
      hours (Gidijala et al.) or in carbon-limited chemostat cultures (van der
      Klei et al.; Zwart et al.).
      
@@ -115,7 +115,7 @@ A) **"in-text"** styles: when a work is cited, a *citation* is added to the
      
      *Sentence*
      
-     Yeast cells were grown at 25°C in batch cultures on 0.5% methanol for 36
+     Yeast cells were grown at 25Â°C in batch cultures on 0.5% methanol for 36
      hours [6] or in carbon-limited chemostat cultures [21, 22].
      
      *Bibliography*
@@ -137,7 +137,7 @@ A) **"in-text"** styles: when a work is cited, a *citation* is added to the
    
      *Sentence*
      
-     Yeast cells were grown at 25°C in batch cultures on 0.5% methanol for 36
+     Yeast cells were grown at 25Â°C in batch cultures on 0.5% methanol for 36
      hours [GBKv2008] or in carbon-limited chemostat cultures [ZwVH1983;
      vaHV1991].
      
@@ -170,7 +170,7 @@ B) **"note"** styles: when a work is cited, a *marker* is added to the sentence.
    
     "In the Island of St. Kilda, according to Martin, [*]_ the men do not
     acquire beards until the age of thirty or upwards, and even then the beards
-    are very thin. On the Europæo-Asiatic continent, beards prevail until we
+    are very thin. On the EuropÃ¦o-Asiatic continent, beards prevail until we
     pass beyond India; though with the natives of Ceylon they are often absent,
     as was noticed in ancient times by Diodorus. [*]_" [#]_
     

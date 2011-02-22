@@ -495,7 +495,7 @@ Date Ranges
 ^^^^^^^^^^^
 
 CSL 1.0 adds support for date ranges. By default, date ranges are delimited by
-an en-dash (e.g. May–July 2008). Custom delimiters can be set on the
+an en-dash (e.g. MayÂ–July 2008). Custom delimiters can be set on the
 ``cs:date-part`` elements with the new ``range-delimiter`` attribute. The
 attribute value set on the largest date-part ("day", "month" or "year") that
 differs between the two dates of the date range will then be used instead of the
@@ -514,7 +514,7 @@ en-dash. For example,
       </citation>
     </style>
 
-would result in "May–July 2008" and "May 2008/June 2009".
+would result in "MayÂ–July 2008" and "May 2008/June 2009".
 
 Seasons
 ^^^^^^^
@@ -696,17 +696,17 @@ either kept or dropped when only the surname is shown (from now on we will refer
 to these two types as non-dropping-particle and dropping-particle,
 respectively). A single name can contain particles of both types (in this case the
 non-dropping-particle always comes after the dropping-particle). For example, the
-French name "Gérard de la Martinière" can be deconstructed into:
+French name "GÃ©rard de la MartiniÃ¨re" can be deconstructed into:
 
 ============ =====================
-"Gérard"     given name
+"GÃ©rard"     given name
 "de"         dropping-particle
 "la"         non-dropping-particle
-"Martinière" family name
+"MartiniÃ¨re" family name
 ============ =====================
 
 When only the surname is shown, only the non-dropping-particle is kept: "La
-Martinière". However, when names are inverted (with the family name preceding
+MartiniÃ¨re". However, when names are inverted (with the family name preceding
 the given name), styles often differ in name particle handling. First, the
 non-dropping-particle can be either prepended to the family name (e.g. "de
 Koning, W.") or appended (after initials or given names, e.g. "Koning, W. de").
@@ -720,28 +720,28 @@ illustrated below:
 
 **Sort order A: non-dropping-particle not demoted**
 
--  primary sort key: "la Martinière"
+-  primary sort key: "la MartiniÃ¨re"
 -  secondary sort key: "de"
--  tertiary sort key: "Gérard"
+-  tertiary sort key: "GÃ©rard"
 
 **Sort order B: non-dropping-particle demoted**
 
--  primary sort key: "Martinière"
+-  primary sort key: "MartiniÃ¨re"
 -  secondary sort key: "de la"
--  tertiary sort key: "Gérard"
+-  tertiary sort key: "GÃ©rard"
 
 The ``demote-non-dropping-particle`` attribute can be set to the following
 values:
 
 - "never": the non-dropping-particle is treated as part of the family name,
-  whereas the dropping-particle is appended (e.g. "de Koning, W.", "la Martinière,
-  Gérard de"). The non-dropping-particle is part of the primary sort key (example
+  whereas the dropping-particle is appended (e.g. "de Koning, W.", "la MartiniÃ¨re,
+  GÃ©rard de"). The non-dropping-particle is part of the primary sort key (example
   A, e.g. "de Koning, W." appears under "D").
 - "sort-only": as "never", with the exception that non-dropping-particle is
   demoted to a secondary sort key (see example B, e.g. "de Koning, W." appears
   under "K").
 - "display-and-sort" (default): the dropping and non-dropping-particle are
-  appended to the rest of the name (e.g. "Koning, W. de" and "Martinière, Gérard
+  appended to the rest of the name (e.g. "Koning, W. de" and "MartiniÃ¨re, GÃ©rard
   de la"). When names are sorted, both particles are part of the secondary sort
   key (see example B, e.g. "Koning, W. de" appears under "K").
 
@@ -822,8 +822,8 @@ Quotes
 ~~~~~~
 
 CSL 1.0 introduces new terms for inner ("open-inner-quote" and
-"close-inner-quote", e.g. ‘ and ’) and outer quotes ("open-quote" and
-"close-quote", e.g. “ and ”). Together with the new
+"close-inner-quote", e.g. Â‘ and Â’) and outer quotes ("open-quote" and
+"close-quote", e.g. Â“ and Â”). Together with the new
 ``punctuation-in-quote``-option (see `Punctuation around Quotes`_), quotes
 applied with the ``quotes`` attribute are now fully localized.
 
@@ -839,7 +839,7 @@ defined by the ``open-quote`` and ``close-quote`` terms. For example:
 
     <text value="Voyage of 'The Beagle'"/>
 
-will render as: Voyage of “The Beagle”
+will render as: Voyage of Â“The BeagleÂ”
 
 Flipflopping
 ^^^^^^^^^^^^
@@ -854,7 +854,7 @@ Fields`_). For example:
 
     <text prefix="Speak, " value="'friend'"  suffix=", and enter" quotes="true"/>
 
-will render as “Speak ‘friend’, and enter”. Quotes flipflop between inner
+will render as Â“Speak Â‘friendÂ’, and enterÂ”. Quotes flipflop between inner
 (``open-inner-quote`` and ``close-inner-quote``) and outer (``open-quote`` and
 ``close-quote``) quotes. Italics flipflop between italics and the normal
 font-style, and boldface between bold and the normal font-weight.
