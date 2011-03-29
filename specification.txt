@@ -1158,7 +1158,7 @@ name-parts are rendered.
 
     <names variable="author">
       <name>
-        <name-part name="family" text-case="uppercase">
+        <name-part name="family" text-case="uppercase"/>
       </name>
     </names>
 
