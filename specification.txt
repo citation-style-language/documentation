@@ -16,7 +16,7 @@ __ http://citationstyles.org/
 .. class:: version-links
 
     This version:
-        http://citationstyles.org/downloads/specification-csl10-20101207.html
+        http://citationstyles.org/downloads/specification-csl10-20110418.html
     Latest version:
         http://citationstyles.org/downloads/specification.html
     Previous versions: 
@@ -45,21 +45,19 @@ __ http://citationstyles.org/
 Introduction
 ------------
 
-The Citation Style Language (CSL) is an |link| `XML
-<http://en.wikipedia.org/wiki/XML>`_ format for describing the formatting of
-in-text citations, notes and bibliographies. CSL offers:
+The Citation Style Language (CSL) is an XML-based format to describe the
+formatting of citations, notes and bibliographies, offering:
 
--  An open format that may be used by any application
--  The ability to write compact and robust styles
+-  An open format
+-  Compact and robust styles
 -  Extensive support for style requirements
 -  Automatic style localization
--  Easy distribution and updating of styles
--  A fast growing library with thousands of freely available styles
+-  Infrastructure for style distribution and updating
+-  Already over a thousand freely available styles (most are CC BY-SA licensed)
 
-This document is meant as a complete and accurate specification of CSL 1.0.
-Additional documentation, such as the CSL schema, CSL styles, and information on
-how to add CSL support to applications, can be found at the official home of
-CSL, |link| `citationstyles.org <http://citationstyles.org>`_.
+This specification, as well as additional documentation, schema, and styles, can
+be found at the CSL project home, |link| `citationstyles.org
+<http://citationstyles.org>`_.
 
 CSL Styles - Basic Structure
 ----------------------------
@@ -67,21 +65,17 @@ CSL Styles - Basic Structure
 Namespacing
 ~~~~~~~~~~~
 
-All elements in CSL are |link| `namespaced
-<http://en.wikipedia.org/wiki/XML_Namespace>`_. The recommended prefix ``cs`` is
-attached to element names throughout this specification, but is usually omitted
-from CSL styles when the default namespace is declared in the root ``cs:style``
-element.
-
-The CSL namespace
-    "http://purl.org/net/xbiblio/csl"
+The CSL |link| `namespace URI <http://en.wikipedia.org/wiki/XML_Namespace>`_ is
+"http://purl.org/net/xbiblio/csl". The namespace prefix ``cs`` is used
+throughout this specification when referring to CSL elements, but is generally
+omitted from CSL styles in favor of a default namespace declaration on the root
+``cs:style`` element.
 
 XML Declaration
 ~~~~~~~~~~~~~~~
 
-It is highly recommended to initialize each CSL style with an XML declaration,
-specifying the version of XML used as well as the character encoding. In most
-cases, the declaration will be:
+Each CSL style should begin with an XML declaration, specifying the XML version
+and character encoding. In most cases, the declaration will be:
 
 .. sourcecode:: xml
 
@@ -90,26 +84,25 @@ cases, the declaration will be:
 The Root Element - ``cs:style``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The root element of a CSL style is ``cs:style``. This element carries the
-following arguments:
+The root element of a CSL style is ``cs:style``. It carries the following
+attributes:
 
 ``class``
-    Specifies whether the style uses notes (value "note") or in-text citations
+    Determines whether the style uses notes (value "note") or in-text citations
     ("in-text").
 
 ``default-locale`` (optional)
-    Fixes style localization to the |link| `locale code
-    <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_ specified. This is
-    desirable for most journal styles.
+    Sets the default locale for style localization. Value must be a |link|
+    `locale code <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_.
 
 ``version``
-    Indicates with which version of the CSL schema the style is compatible.
-    Should have a value of "1.0" for CSL 1.0-compatible styles.
+    The CSL version of the style. Must be "1.0" for CSL 1.0-compatible
+    styles.
 
 ``xmlns`` (optional)
-    The namespace declaration that binds the elements in the style to the given
-    namespace URI. CSL elements in the style don't need individual namespace
-    declarations if this attribute is set to "http://purl.org/net/xbiblio/csl".
+    Default namespace declaration. Must be set to
+    "http://purl.org/net/xbiblio/csl". Technically ``xmlns`` is optional since
+    it is also possible to use prefixed namespace declarations.
 
 In addition, ``cs:style`` may carry any of the `global options`_, as well as the
 `inheritable name options`_.
