@@ -65,11 +65,11 @@ CSL Styles - Basic Structure
 Namespacing
 ~~~~~~~~~~~
 
-The CSL |link| `namespace URI <http://en.wikipedia.org/wiki/XML_Namespace>`_ is
-"http://purl.org/net/xbiblio/csl". The namespace prefix ``cs`` is used
+The CSL |link| `XML namespace URI <http://en.wikipedia.org/wiki/XML_Namespace>`_
+is "http://purl.org/net/xbiblio/csl". The namespace prefix ``cs:`` is used
 throughout this specification when referring to CSL elements, but is generally
-omitted from CSL styles in favor of a default namespace declaration on the root
-``cs:style`` element.
+omitted from CSL styles in favor of a default namespace declaration (set with
+the ``xmlns`` attribute) on the root ``cs:style`` element.
 
 XML Declaration
 ~~~~~~~~~~~~~~~
@@ -99,11 +99,6 @@ attributes:
     The CSL version of the style. Must be "1.0" for CSL 1.0-compatible
     styles.
 
-``xmlns`` (optional)
-    Default namespace declaration. Must be set to
-    "http://purl.org/net/xbiblio/csl". Technically ``xmlns`` is optional since
-    it is also possible to use prefixed namespace declarations.
-
 In addition, ``cs:style`` may carry any of the `global options`_, as well as the
 `inheritable name options`_.
 
@@ -117,77 +112,65 @@ An example of a style preamble:
 Child Elements of ``cs:style``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-All independent CSL styles share the same basic structure, with five possible
-types of child elements in the ``cs:style`` root element. The roles of each of
-these elements (which will be described in more detail later) are:
+The ``cs:style`` root element has the following child elements for independent
+styles (`dependent styles`_ only include a ``cs:info`` element):
 
 ``cs:info``
-    The ``cs:info`` element must be included as the first child element of
-    ``cs:style``. It contains the metadata that describes the style (the name of
-    the style, a unique style identifier, the style authors, etc.).
+    Must appear as the first child element of ``cs:style``. Contains the
+    metadata describing the style (style name, ID, authors, etc.).
 
 ``cs:citation``
-    This required element describes the formatting instructions of in-text
-    citations or notes.
+    Must appear once. Describes the formatting of in-text citations or notes.
 
 ``cs:bibliography`` (optional)
-    This optional element describes the formatting instructions of the
-    bibliography.
+    May appear once. Describes the formatting of the bibliography.
 
 ``cs:macro`` (optional)
-    Styles may include one or more ``cs:macro`` elements. Macros allow for reuse
-    of formatting instructions, which helps keeping styles compact and
-    maintainable.
+    May appear multiple times. Macros enable the reuse of formatting
+    instructions, keeping styles compact and maintainable.
 
 ``cs:locale`` (optional)
-    Styles may include one or more ``cs:locale`` elements. These elements allow
-    styles to override the default localization data (terms, date formats and
-    formatting options) on a per-locale basis.
+    May appear multiple times. Locale elements are used to override default
+    localization data.
 
 Info
 ^^^^
 
-The ``cs:info`` element contains all the style's metadata, many elements of
-which are borrowed from the |link| `Atom Syndication Format
-<http://tools.ietf.org/html/rfc4287>`_. Although it has no influence on how
-citations are formatted, complete and correct metadata is important if styles
-are made publicly available. Below is an example of a ``cs:info`` element,
-followed by a description of all possible elements.
+The ``cs:info`` element contains the style's metadata. Its structure is based on
+the |link| `Atom Syndication Format <http://tools.ietf.org/html/rfc4287>`_. An
+example, followed by a description of all child elements of ``cs:info``:
 
 .. sourcecode:: xml
 
     <info>
-     <title>Style Title</title>
-     <id>http://www.zotero.org/styles/style-title</id>
-     <link href="http://www.zotero.org/styles/style-title" rel="self"/>
-     <author>
-      <name>Author Name</name>
-      <email>name@domain.com</email>
-      <uri>http://www.domain.com/name</uri>
-     </author>
-     <category citation-format="author-date"/>
-     <category field="zoology"/>
-     <updated>2008-10-29T21:01:24+00:00</updated>
-     <summary>Style for Some Journal</summary>
-     <rights>This work is licensed under a Creative Commons
+      <title>Style Title</title>
+      <id>http://www.zotero.org/styles/style-title</id>
+      <link href="http://www.zotero.org/styles/style-title" rel="self"/>
+      <author>
+        <name>Author Name</name>
+        <email>name@domain.com</email>
+        <uri>http://www.domain.com/name</uri>
+      </author>
+      <category citation-format="author-date"/>
+      <category field="zoology"/>
+      <updated>2008-10-29T21:01:24+00:00</updated>
+      <summary>Style for Some Journal</summary>
+      <rights>This work is licensed under a Creative Commons
              Attribution-Share Alike 3.0 Unported License
              http://creativecommons.org/licenses/by-sa/3.0/</rights>
     </info>
 
 ``cs:author`` and ``cs:contributor`` (optional)
-    One or more of these elements may be used to acknowledge style authors and
-    contributors. Authorship is generally limited to those who have written a
-    new style, or have made significant changes to existing styles, while
-    contributorship can be assigned to those who have made small changes. Both
-    elements require one child element, cs:name, and allow for two others,
-    cs:email, and cs:uri, indicating respectively the name, email address and
-    URI of the author or contributor in question.
+    ``cs:author`` and ``cs:contributor``, used to respectively acknowledge style
+    authors and contributors, may each appear multiple times. Within these
+    elements, the child element ``cs:name`` must appear once, while ``cs:email``
+    and ``cs:uri`` each may appear once. These child elements should contain
+    respectively the name, email address and URI of the author or contributor.
 
 ``cs:category`` (optional)
-    Styles may be assigned one or more categories. This information can be used
-    to organize style repositories. Two types of categories exist. The first
-    category type describes how in-text citations are rendered. For this type
-    the ``citation-format`` attribute is set to one of the following values:
+    Styles may be assigned one or more categories. ``cs:category`` may be used
+    once with the ``citation-format`` attribute to describe how in-text
+    citations are rendered, set to one of the following values:
     
     -  "author-date": e.g. "... (Doe, 1999)"
     -  "author": e.g. "... (Doe)"
@@ -195,22 +178,20 @@ followed by a description of all possible elements.
     -  "label": e.g. "... [doe99]"
     -  "note": the citation appears as a footnote or endnote
     
-    The second category type indicates the fields or disciplines for which the
-    style is relevant. For this category type the ``field`` attribute is set to
-    one of the discipline `categories`_.
+    ``cs:category`` may be used multiple times with the ``field`` attribute, set
+    to one of the discipline `categories`_, to indicates the field(s) for which
+    the style is relevant.
 
 ``cs:id``
-    This required element should contain a URI. This identifier establishes the
-    identity of the style. A valid, stable, and unique URL that resolves to the
-    style is desired if the style is made publicly available. Keeping the same
-    URI is crucial for applications that support automatic style updating.
+    Must appear once. The element should contain a URI to establish the identity
+    of the style. A stable, unique and dereferenceable URI is desired for
+    publicly available styles.
 
 ``cs:issn``/``cs:issnl`` (optional)
-    Journal-specific styles may include one or more ``cs:issn`` elements,
-    containing the journal's ISSN identifiers (multiple ISSNs can be assigned to
-    a single journal, e.g. for the print and online editions). In addition, the
-    ``cs:issnl`` element may be used for the newly established |link| `ISSN-L
-    identifier <http://www.issn.org/2-22637-What-is-an-ISSN-L.php>`_.
+    The ``cs:issn`` element may be used multiple times to indicate the ISSN
+    identifier(s) of the journal for which the style was written. The
+    ``cs:issnl`` element may be used once for the |link| `ISSN-L identifier
+    <http://www.issn.org/2-22637-What-is-an-ISSN-L.php>`_.
 
 ``cs:link`` (optional)
     The ``cs:link`` element is used to specify a URI (usually a URL), which is
