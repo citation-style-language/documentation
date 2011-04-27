@@ -16,7 +16,7 @@ __ http://citationstyles.org/
 .. class:: version-links
 
     This version:
-        http://citationstyles.org/downloads/specification-csl10-20110418.html
+        http://citationstyles.org/downloads/specification-csl10-20110426.html
     Latest version:
         http://citationstyles.org/downloads/specification.html
     Previous versions: 
@@ -55,54 +55,85 @@ formatting of citations, notes and bibliographies, offering:
 -  Infrastructure for style distribution and updating
 -  Already over a thousand freely available styles (most are CC BY-SA licensed)
 
-This specification, as well as additional documentation, schema, and styles, can
-be found at the CSL project home, |link| `citationstyles.org
+This specification, as well as additional documentation, schema, styles, and
+locales, can be found at the CSL project home, |link| `citationstyles.org
 <http://citationstyles.org>`_.
 
-CSL Styles - Basic Structure
-----------------------------
-
 Namespacing
-~~~~~~~~~~~
+-----------
 
 The CSL |link| `XML namespace URI <http://en.wikipedia.org/wiki/XML_Namespace>`_
 is "http://purl.org/net/xbiblio/csl". The namespace prefix ``cs:`` is used
 throughout this specification when referring to CSL elements, but is generally
-omitted from CSL styles in favor of a default namespace declaration (set with
-the ``xmlns`` attribute) on the root ``cs:style`` element.
+omitted in favor of a default namespace declaration (set with
+the ``xmlns`` attribute) on the root ``cs:style`` or ``cs:locale`` element.
+
+File Types
+----------
+
+There are three different types of CSL files. Independent and dependent styles
+must have a ".csl" extension, whereas locale files follow the naming pattern
+"locales-xx-XX.xml" ("xx-XX" representing a locale code, e.g. "en-US" for US
+English).
+
+Independent Styles
+~~~~~~~~~~~~~~~~~~
+
+Independent styles contain formatting instructions for citations, notes and
+bibliographies. They are often not truly independent, as they will typically
+rely on locale files for their default localization data.
+
+Dependent Styles
+~~~~~~~~~~~~~~~~
+
+Dependent styles don't contain any formatting instructions, but function as
+aliases or shortcuts. They can be used when multiple journals share the same
+citation style. In such a case, a single independent style suffices (e.g.
+"Nature Journals"), and dependent styles can then be added for all journals
+using the same citation style (e.g. "Nature Biotechnology", "Nature
+Nanotechnology", etc.).
+
+Locale Files
+~~~~~~~~~~~~
+
+Locale files each contain a complete set of localization data (consisting of
+term translations as well as localized date formats and grammar options).
 
 XML Declaration
-~~~~~~~~~~~~~~~
+---------------
 
-Each CSL style should begin with an XML declaration, specifying the XML version
-and character encoding. In most cases, the declaration will be:
+Each style or locale should begin with an XML declaration, specifying the XML
+version and character encoding. In most cases, the declaration will be:
 
 .. sourcecode:: xml
 
     <?xml version="1.0" encoding="UTF-8"?>
 
+Styles - Structure
+------------------
+
 The Root Element - ``cs:style``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The root element of a CSL style is ``cs:style``. It carries the following
-attributes:
+The root element of styles is ``cs:style``. In independent styles, the element
+carries the following attributes:
 
 ``class``
     Determines whether the style uses notes (value "note") or in-text citations
     ("in-text").
 
 ``default-locale`` (optional)
-    Sets the default locale for style localization. Value must be a |link|
-    `locale code <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_.
+    Sets a default locale for style localization. Value must be a |link| `locale
+    code <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_.
 
 ``version``
-    The CSL version of the style. Must be "1.0" for CSL 1.0-compatible
-    styles.
+    The CSL version of the style. Must be "1.0" for CSL 1.0-compatible styles.
 
-In addition, ``cs:style`` may carry any of the `global options`_, as well as the
-`inheritable name options`_.
+In addition, ``cs:style`` may carry any of the `global options`_ and
+`inheritable name options`_. In dependent styles, ``cs:style`` only carries the
+``version`` attribute.
 
-An example of a style preamble:
+An example of ``cs:style``, preceded by the XML declaration:
 
 .. sourcecode:: xml
 
@@ -156,8 +187,8 @@ example, followed by a description of all child elements of ``cs:info``:
       <updated>2008-10-29T21:01:24+00:00</updated>
       <summary>Style for Some Journal</summary>
       <rights>This work is licensed under a Creative Commons
-             Attribution-Share Alike 3.0 Unported License
-             http://creativecommons.org/licenses/by-sa/3.0/</rights>
+              Attribution-Share Alike 3.0 Unported License
+              http://creativecommons.org/licenses/by-sa/3.0/</rights>
     </info>
 
 ``cs:author`` and ``cs:contributor`` (optional)
@@ -357,19 +388,16 @@ type is "book":
 Locale
 ^^^^^^
 
-CSL supports localization of terms, date formats and formatting options. Default
-localization data for several tens of locales is provided through
-"locales-xx-XX.xml" files ("xx-XX" represents the locale code, e.g. "en-US" for
-US English). Localization data can also be included in styles, using one or more
-of the optional ``cs:locale`` elements, which by convention are included
-directly after the ``cs:info`` element. For each ``cs:locale`` element, the
-relevant locale can be indicated with the ``xml:lang`` attribute (set to an
-|link| `xsd:language locale code
-<http://books.xmlschemata.org/relaxng/ch19-77191.html>`_). If the attribute is
-absent, the ``cs:locale`` element's localization data will apply to all locales.
+Localization data can be included in styles using one or more instances of the
+optional ``cs:locale`` elements (these are typically inserted directly after the
+``cs:info`` element). For each ``cs:locale`` element, the relevant locale can be
+indicated with the ``xml:lang`` attribute (set to an |link| `xsd:language locale
+code <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_). If the attribute
+is absent, the ``cs:locale`` element's localization data will apply to all
+locales.
 
 See `Localized Terms`_, `Localized Dates`_ and `Localized Options`_ in the
-`Locale Files - Basic Structure`_ section for more details on the use of
+`Locale Files - Structure`_ section for more details on the use of
 ``cs:locale``.
 
 An example illustrating the use of ``cs:locale`` in a CSL style:
@@ -428,32 +456,8 @@ does not exist, fallback locales consist of "de-DE" and, as a last resort,
 defined. It does not occur when a term is defined, but consists of an empty
 string (e.g. <term name="and"/> or <term name="and"></term>).
 
-Dependent Styles
-~~~~~~~~~~~~~~~~
-
-In addition to independent styles, which are self-contained, CSL also supports
-dependent styles, which function like aliases or shortcuts. Dependent styles can
-be used when multiple journals share the same style format. In such a case, it
-is sufficient to create a single independent master style for the format (e.g.
-"Nature Journals"). Dependent styles, which only contain a ``cs:info`` element,
-can then be added for all journals that use this format (e.g. "Nature
-Biotechnology", "Nature Nanotechnology", etc.). With this approach, style
-repositories can show entries for the individual journals, without the need to
-duplicate formatting instructions. If the common format has to be modified, it
-is sufficient to change the independent master style, which makes style
-maintainance simpler and faster.
-
-The ``cs:info`` element of dependent styles should provide the metadata of the
-individual journals. A ``cs:link`` element which points to the independent
-master style must be included (for this the ``rel`` attribute on the relevant
-``cs:link`` element should be set to "independent-parent", see also `Info`_).
-
-N.B. Dependent styles cannot be used to indicate changes compared to the
-independent master style. If there is any difference in formatting between two
-styles, however small, separate independent styles have to be created.
-
-Locale Files - Basic Structure
-------------------------------
+Locale Files - Structure
+------------------------
 
 CSL ships with a number of "locales-xx-XX.xml" files (the "xx-XX" is the locale
 code, e.g. "en-US" for US English). While localization data can also be
@@ -524,7 +528,7 @@ value of the optional ``form`` attribute. The different forms are:
 -  "verb-short" - e.g. "ed" for the term "editor"
 -  "symbol" - e.g. "§" for the term "section"
 
-Examples of how terms are defined have been given above (`Locale Files - Basic
+Examples of how terms are defined have been given above (`Locale Files -
 Structure`_). The complete list of terms can be found in `Appendix III -
 Terms`_.
 
