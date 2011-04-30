@@ -295,19 +295,18 @@ An example of ``cs:info`` for an independent style:
 Citation
 ^^^^^^^^
 
-The ``cs:citation`` element describes the formatting of citations, which can
-consist of one or multiple references to bibliographic sources, and may appear
-in the form of either in-text citations (generally formatted as label [doe99],
-number [1], author [Doe] or author-date descriptors [Doe 1999]) or notes. The
-required ``cs:layout`` child element describes what, and how, bibliographic data
-should be included in the citations (see the chapter on the `Layout element
-<#layout>`_). The ``cs:citation`` element may carry attributes for
-citation-specific formatting options and inheritable name options (see the
-`Citation-specific Options`_ and `Inheritable Name Options`_ sections).
-Finally, the optional ``cs:sort`` element, which should precede the
-``cs:layout`` element, specifies how citations consisting of multiple references
-should be sorted (see the chapter on `Sorting`_). An example of a
-``cs:citation`` element:
+The ``cs:citation`` element describes the formatting of citations, which consist
+of one or more references to bibliographic sources (these individual references
+are here referred to as "cites"). Citations appear in the form of either in-text
+citations (in the author (e.g. "[Doe]"), author-date ("[Doe 1999]"), label
+("[doe99]") or number ("[1]") format) or notes. The required ``cs:layout`` child
+element describes what, and how, bibliographic data should be included in the
+citations (see `Layout <#layout>`_). ``cs:layout`` may be preceded by a
+``cs:sort`` element, which can be used to specify how cites within a citation
+should be sorted (see `Sorting`_). The ``cs:citation`` element may carry
+attributes for the formatting of citations and names (see `Citation-specific
+Options`_ and `Inheritable Name Options`_). An example of a ``cs:citation``
+element:
 
 .. sourcecode:: xml
 
@@ -322,22 +321,21 @@ should be sorted (see the chapter on `Sorting`_). An example of a
 
 **A note to developers of CSL processors** Note styles are unique in that
 citations may effectively become full sentences. Because of this, the first
-character of the output should be uppercased when a citation is footnoted
-without any additional text. By contrast, if the citation occurs within a
-pre-existing footnote, and is preceded by non-citation text, then it should be
-printed as is.
+character of a citation should be uppercased when there is no preceding text in
+the footnote. In all other cases (e.g. when a citation is inserted into the
+middle of a pre-existing footnote), the citation should be printed as is.
 
 Bibliography
 ^^^^^^^^^^^^
 
-The ``cs:bibliography`` element describes the formatting of bibliographies, and
-is used in a similar way as ``cs:citation``: the required ``cs:layout`` child
-element describes how each reference should be formatted in the bibliography,
-while the optional ``cs:sort`` element (which should precede the ``cs:layout
-element) specifies the sorting order of the references in the bibliography. In
-addition, the ``cs:bibliography`` element may carry attributes for
-bibliography-specific formatting options and inheritable name options (see the
-`Bibliography-specific Options`_ and `Inheritable Name Options`_ sections).
+The ``cs:bibliography`` element describes the formatting of bibliographies,
+which list one or more bibliographic sources. The required ``cs:layout`` child
+element describes how each reference should be formatted. ``cs:layout`` may be
+preceded by a ``cs:sort`` element, which can be used to specify how references
+within the bibliography should be sorted (see `Sorting`_). The
+``cs:bibliography`` element may carry attributes for the formatting of
+bibliographies and names (see `Bibliography-specific Options`_ and `Inheritable
+Name Options`_). An example of a ``cs:bibliography`` element:
 
 .. sourcecode:: xml
 
