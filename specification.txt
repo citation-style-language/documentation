@@ -351,27 +351,25 @@ Name Options`_). An example of a ``cs:bibliography`` element:
 Macro
 ^^^^^
 
-Macros, which are defined using ``cs:macro`` elements, can contain the same set
-of `rendering elements`_ that are available within ``cs:layout`` inside
-``cs:citation`` or ``cs:bibliography``. Macros allow formatting instructions to
-be reused, both within the same style (e.g. the same macro could be used in both
-``cs:citation`` and ``cs:bibliography``) as well as between styles. It is
-therefore recommended to use common macro names as much as possible. Correct use
-of macros can greatly improve the readability, compactness and maintainability
-of styles. Ideally, the contents of ``cs:citation`` and ``cs:bibliography``
-should be kept compact and agnostic of resource types (i.e. books, journal
-articles, etc.), depending mainly on macro calls.
+Macros, defined with ``cs:macro`` elements, contain formatting instructions.
+Macros can be called with ``cs:text`` from within other macros and the
+``cs:layout`` element of ``cs:citation`` and ``cs:bibliography``, and with
+``cs:key`` from within ``cs:sort`` of ``cs:citation`` and ``cs:bibliography``.
+It is recommended to place macros after any ``cs:locale`` elements and before
+the ``cs:citation`` element.
 
-By convention, macros are placed after any ``cs:locale`` elements and before the
-``cs:citation`` element. The ``cs:macro`` element must carry the ``name``
-attribute (the value of which is used to identify the macro), and contain one or
-more `rendering elements`_. Once defined, macros can be called by `rendering
-elements`_ in ``cs:citation`` or ``cs:bibliography`` (from within
-``cs:layout``), or by the `rendering elements`_ in other macros.
+Macros are referenced by the value of the required ``name`` attribute on
+``cs:macro``. The ``cs:macro`` element must contain one or more `rendering
+elements`_.
 
-The following example shows a style that call the "title" macro. This macro
-outputs the contents of the title variable, applying italics when the resource
-type is "book":
+The use of macros can improve style readability, compactness and
+maintainability. It is recommended to keep the contents of ``cs:citation`` and
+``cs:bibliography`` compact and agnostic of item types (e.g. books, journal
+articles, etc.) by depending on macro calls. To allow for easy reuse of macros
+in other styles, it is recommended to use common macro names.
+
+In the example below, cites consist of the item title, rendered in italics when
+the item type is "book":
 
 .. sourcecode:: xml
 
