@@ -394,19 +394,18 @@ the item type is "book":
 Locale
 ^^^^^^
 
-Localization data can be included in styles using one or more instances of the
-optional ``cs:locale`` elements (these are typically inserted directly after the
-``cs:info`` element). For each ``cs:locale`` element, the relevant locale can be
-indicated with the ``xml:lang`` attribute (set to an |link| `xsd:language locale
-code <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_). If the attribute
-is absent, the ``cs:locale`` element's localization data will apply to all
-locales.
+Localization data can be (re)defined with ``cs:locale`` elements. It is
+recommended to place these after the ``cs:info`` element.
 
-See `Localized Terms`_, `Localized Dates`_ and `Localized Options`_ in the
-`Locale Files - Structure`_ section for more details on the use of
-``cs:locale``.
+The value of the optional ``xml:lang`` attribute on ``cs:locale``, which must be
+set to an |link| `xsd:language locale code
+<http://books.xmlschemata.org/relaxng/ch19-77191.html>`_, determines which
+languages or language dialects are affected (see also `Locale Prioritization`_).
 
-An example illustrating the use of ``cs:locale`` in a CSL style:
+See `Localized Terms`_, `Localized Dates`_ and `Localized Options`_ for
+additional details on the use of ``cs:locale``.
+
+An example of ``cs:locale`` in a style:
 
 .. sourcecode:: xml
 
