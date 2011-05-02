@@ -534,25 +534,25 @@ the same term with the optional ``form`` attribute set to:
 Localized Dates
 ~~~~~~~~~~~~~~~
 
-Styles can use either localized or non-localized date formats. Localized date
-formats are defined with the ``cs:date`` element as child element of
-``cs:locale``. The required ``form`` attribute on ``cs:date`` must be set to
-either "numeric" (for numeric date formats, e.g. "12-15-2005") or to "text"
-(e.g. "December 15, 2005"). A date format is then defined by the child elements
-of ``cs:date``, the ``cs:date-part`` elements. These must carry the ``name``
-attribute, set to ``day``, ``month`` or ``year``. The order of the
-``cs:date-part`` elements is also the display order. Additional formatting can
-be achieved by setting `formatting`_ attributes on the ``cs:date`` and
-``cs:date-part`` elements, as well as a number of attributes that are specific
-to ``cs:date-part`` (see `Date-part`_). In addition, a `delimiter`_ may be set
-on ``cs:date`` to delimit the ``cs:date-part`` elements, and `affixes`_ may be
-applied to the ``cs:date-part`` elements.
+Localized date formats are defined with ``cs:date`` elements, child elements of
+``cs:locale``. Two formats can be defined: a "numeric" format (e.g.
+"12-15-2005") and a "text" format (e.g. "December 15, 2005"). The format is set
+on ``cs:date`` with the required ``form`` attribute.
 
-N.B. Affixes are not allowed on ``cs:date`` when used as a child element of
-``cs:locale``. This helps in separating locale-specific affixes (which should be
-set on the ``cs:date-part`` elements) from any style-specific affixes (such as
-parentheses, which should be set on the ``cs:date`` rendering element). E.g. a
-macro could specify:
+A date format is defined using ``cs:date-part`` elements as child elements of
+``cs:date``. Each ``cs:date-part`` element must carry a ``name`` attribute, set
+to ``day``, ``month`` or ``year``. The element order is the display order.
+Additional formatting may be applied with `formatting`_ attributes on the
+``cs:date`` and ``cs:date-part`` elements, as well as several
+``cs:date-part``-specific attributes (see `Date-part`_). The `delimiter`_
+attribute may be set on ``cs:date`` to delimit the ``cs:date-part`` elements,
+and `affixes`_ may be applied to the ``cs:date-part`` elements.
+
+**Note** It is not allowed to use affixes on ``cs:date`` when defining localized
+date formats. This separates locale-specific affixes (set on the
+``cs:date-part`` elements) from any style-specific affixes (set on the calling
+``cs:date`` element), such as parentheses. An example of a macro using a
+localized date format:
 
 .. sourcecode:: xml
 
