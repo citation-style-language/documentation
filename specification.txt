@@ -563,10 +563,9 @@ localized date format:
 Localized Options
 ~~~~~~~~~~~~~~~~~
 
-CSL 1.0 includes a single localized global option (affecting both citation and
-bibliography output), ``punctuation-in-quote`` (see `Locale Options`_). This
-option is set as an attribute on ``cs:style-options``, a child element of
-``cs:locale``.
+There is one localized option, ``punctuation-in-quote`` (see `Locale Options`_).
+This global option (affecting both citation and bibliography output) is set as
+an attribute on ``cs:style-options``, a child element of ``cs:locale``.
 
 Rendering Elements
 ------------------
