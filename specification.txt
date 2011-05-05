@@ -1177,25 +1177,21 @@ substituted by the "editor" name variable, or, when no editors exist, by the
 Label in ``cs:names``
 ^^^^^^^^^^^^^^^^^^^^^
 
-The optional ``cs:label`` element, used to output terms whose pluralization
-depends on the contents of another variable (e.g. "(editors)" in "Doe and Smith
-(editors)"), is discussed in detail in the `label`_ section. It must be included
-after the ``cs:name`` and ``cs:et-al`` elements, but before the
-``cs:substitute`` element. When used as a child element of ``cs:names``,
-``cs:label`` may not carry the ``variable`` attribute (the label used is
-determined by the name variable(s) set on the ``cs:names`` element).
+The optional ``cs:label`` element (see `label`_) must be included after the
+``cs:name`` and ``cs:et-al`` elements, but before the ``cs:substitute`` element.
+When used as a child element of ``cs:names``, ``cs:label`` does not carry the
+``variable`` attribute; instead, it renders the term matching the rendered name
+variable (e.g. "editors" in "Doe and Smith (editors)").
 
 Label
 ~~~~~
 
-The Citation Style Language includes several variables that have matching terms.
-The ``cs:label`` rendering element can be used to render one of these terms, while
-matching the term plurality with that of the corresponding variable. The
-variable/term combination is selected with the ``variable`` attribute, which can
-be set to either "page" or "locator". When ``cs:label`` is used as a child
-element of ``cs:names``, the value of the ``variable`` attribute is
-automatically inherited from the parent ``cs:names`` element. The example below
-displays the "page" variable, using the singular form of the "page" term for a
+The ``cs:label`` rendering element outputs the term matching the variable
+selected with the required ``variable`` attribute, which must be set to either
+"page" or "locator" (in the case of "locator", the rendered term matches the
+`locator`_ type). Terms are only rendered for non-empty variables, and match the
+pluralization of the variable content. The example below renders the contents of
+the "page" variable, preceded by the singular form of the "page" term for a
 single page ("page 5"), or the plural form for a page range ("pages 5-7").
 
 .. sourcecode:: xml
@@ -1205,25 +1201,25 @@ single page ("page 5"), or the plural form for a page range ("pages 5-7").
       <text variable="page"/>
     </group>
 
-The ``cs:label`` element may carry attributes for `affixes`_, `formatting`_,
-`text-case`_ and `strip-periods`_, as well as:
+``cs:label`` may carry `affixes`_, `formatting`_, `text-case`_ and
+`strip-periods`_ attributes, as well as:
 
 ``form``
-    Selects the form of the term, with possible values:
+    Selects the form of the term, with allowed values:
     
-    -  "long": the default, e.g. "editor"/"editors" for the "editor" term
-    -  "verb": e.g. "edited by" for the "editor" term
-    -  "short": e.g. "ed"/"eds" for the "editor" term
-    -  "verb-short": e.g. "ed" for the "editor" term
-    -  "symbol": e.g. "§" for the singular "section" term
+    -  "long" - (default), e.g. "editor"/"editors" for the "editor" term
+    -  "verb" - e.g. "edited by" for the "editor" term
+    -  "short" - e.g. "ed"/"eds" for the "editor" term
+    -  "verb-short" - e.g. "ed" for the "editor" term
+    -  "symbol" - e.g. "§" for the singular "section" term
 
 ``plural``
-    Sets pluralization of the term, with values:
+    Sets pluralization of the term, with allowed values:
     
-    -  "contextual": the default, pluralization is dependent on the
-       variable contents, e.g. "page 1" and "pages 1-3"
-    -  "always": always use the plural form, e.g. "pages 1" and "pages 1-3"
-    -  "never": always use the singular form, e.g. "page 1" and "page 1-3"
+    -  "contextual" - (default), pluralization depends on the
+       variable content, e.g. "page 1" and "pages 1-3"
+    -  "always" - always use the plural form, e.g. "pages 1" and "pages 1-3"
+    -  "never" - always use the singular form, e.g. "page 1" and "page 1-3"
 
 Group
 ~~~~~
