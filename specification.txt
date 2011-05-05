@@ -930,7 +930,7 @@ variable are separated. ``cs:name`` may carry the following attributes:
     ::
     
         A. Goffeau, B. G. Barrell, H. Bussey, R. W. Davis, B. Dujon, H.
-        Feldmann,  S. G. Oliver
+        Feldmann, … S. G. Oliver
 
 The remaining attributes, discussed below, only affect personal names. Personal
 names require a "family" name-part, and may also contain "given", "suffix",
@@ -1049,12 +1049,12 @@ sorting order of name-parts often differs. An overview of the possible orders:
 
 **Sorting order of latin/Cyrillic names**
 
-N.B. The sort keys are listed in descending order of importance.
+N.B. The sort keys are listed in descending order of priority.
 
 ----
 
 :Conditions: ``demote-non-dropping-particle`` set to "never"
-
+:Order:
     1) non-dropping-particle + family
     2) dropping-particle
     3) given
@@ -1066,7 +1066,7 @@ N.B. The sort keys are listed in descending order of importance.
 
 :Conditions: ``demote-non-dropping-particle`` set to "sort-only" or
              "display-and-sort"
-
+:Order:
     1) family
     2) dropping-particle + non-dropping-particle
     3) given
