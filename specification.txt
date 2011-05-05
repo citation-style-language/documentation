@@ -1189,10 +1189,11 @@ Label
 The ``cs:label`` rendering element outputs the term matching the variable
 selected with the required ``variable`` attribute, which must be set to either
 "page" or "locator" (in the case of "locator", the rendered term matches the
-`locator`_ type). Terms are only rendered for non-empty variables, and match the
-pluralization of the variable content. The example below renders the contents of
-the "page" variable, preceded by the singular form of the "page" term for a
-single page ("page 5"), or the plural form for a page range ("pages 5-7").
+`locators`_ type). Terms are only rendered for non-empty variables, and match
+the pluralization of the variable content. The example below renders the
+contents of the "page" variable, preceded by the singular form of the "page"
+term for a single page ("page 5"), or the plural form for a page range ("pages
+5-7").
 
 .. sourcecode:: xml
 
