@@ -190,11 +190,11 @@ independent styles, ``cs:info`` has the following child elements:
     once to describe how in-text citations are rendered, using the
     ``citation-format`` attribute set to one of the following values:
     
-    -  "author-date": e.g. "... (Doe, 1999)"
-    -  "author": e.g. "... (Doe)"
-    -  "numeric": e.g. "... [1]"
-    -  "label": e.g. "... [doe99]"
-    -  "note": the citation appears as a footnote or endnote
+    -  "author-date" - e.g. "... (Doe, 1999)"
+    -  "author" - e.g. "... (Doe)"
+    -  "numeric" - e.g. "... [1]"
+    -  "label" - e.g. "... [doe99]"
+    -  "note" - the citation appears as a footnote or endnote
     
     ``cs:category`` may be used multiple times with the ``field`` attribute, set
     to one of the discipline `categories`_, to indicates the field(s) for which
@@ -216,9 +216,9 @@ independent styles, ``cs:info`` has the following child elements:
     set to a URI (usually a URL), and ``rel``, whose value indicates how the URI
     relates to the style. The possible values of ``rel``:
     
-    -  "self": the URI of the current style itself.
-    -  "template": the URI of the style from which the current style is derived.
-    -  "documentation: the URI of (online) style documentation.
+    -  "self" - URI of the current style itself
+    -  "template" - URI of the style from which the current style is derived
+    -  "documentation - URI of (online) style documentation
     
     The ``cs:link`` element may contain textual content to describe the link,
     and may carry the ``xml:lang`` attribute to specify the language of either
@@ -453,8 +453,8 @@ B. Locale files
 
    4. ``xml:lang`` set to chosen language dialect, "de-AT"
    5. ``xml:lang`` set to matching primary language dialect, "de-DE" (Standard
-   German) (only applicable when the chosen locale is a secondary language
-   dialect)
+      German) (only applicable when the chosen locale is a secondary language
+      dialect)
    6. ``xml:lang`` set to "en-US" (American English), the ultimate fallback
 
 Note that fallback stops whenever a term is defined, even if it consists of an
@@ -525,7 +525,7 @@ singular and plural variant of the term in question (e.g. "page" and "pages")).
 Terms may be defined for multiple forms, using multiple ``cs:term`` elements for
 the same term with the optional ``form`` attribute set to:
 
--  "long" - the default, e.g. "editor" and "editors" for the "editor" term
+-  "long" - (default), e.g. "editor" and "editors" for the "editor" term
 -  "short" - e.g. "ed." and "eds." for the term "editor"
 -  "verb" - e.g. "edited by" for the term "editor"
 -  "verb-short" - e.g. "ed." for the term "editor"
@@ -846,91 +846,86 @@ carry `affixes`_, `display`_ and `formatting`_ attributes.
 Name
 ^^^^
 
-The ``cs:name`` element is a required child element of ``cs:names``, and
-describes both how individual names are formatted, and how names within a name
-variable are separated from each other. The attributes that may be used on
-``cs:name`` are:
+The ``cs:name`` element is a required child element of ``cs:names``. It
+describes the formatting of individual names, and how names within a name
+variable are separated. ``cs:name`` may carry the following attributes:
 
 ``and``
-    This attribute specifies the delimiter between the second to last and the
-    last name of the names in a name variable. The value of the attribute may be
-    either "text", which selects the "and" term, or "symbol", which selects the
-    ampersand (&).
+    Specifies the delimiter between the second to last and last name of the
+    names in a name variable. Allowed values are "text" (selects the "and" term,
+    e.g. "Doe, Johnson and Smith") and "symbol" (selects the ampersand, e.g.
+    "Doe, Johnson & Smith").
 
 ``delimiter``
-    Specifies the text string to separate names of a name variable. The default 
-    value is ", " ("J. Doe, S. Smith").
+    Specifies the text string used to separate names in a name variable. Default
+    is ", " (e.g. "Doe, Smith").
 
 ``delimiter-precedes-et-al``
-
-    Determines whether a space or the name delimiter is used between the
-    truncated name list and the "et-al" term in case of et-al abbreviation. The
-    possible values are:
+    Determines when the name delimiter or a space is used between a truncated
+    name list and the "et-al" (or "and others") term in case of et-al
+    abbreviation. Allowed values:
     
-    -  "contextual" (default): the name delimiter is used for name lists
+    -  "contextual" - (default), name delimiter is only used for name lists
        truncated to two or more names
        
        - 1 name: "J. Doe et al."
        - 2 names: "J. Doe, S. Smith, et al."
     
-    -  "always": the name delimiter is always used
+    -  "always" - name delimiter is always used
        
        - 1 name: "J. Doe, et al."
        - 2 names: "J. Doe, S. Smith, et al."
     
-    -  "never": the name delimiter is never used
+    -  "never" - name delimiter is never used
        
        - 1 name: "J. Doe et al."
        - 2 names: "J. Doe, S. Smith et al."
 
 ``delimiter-precedes-last``
-    Determines in which cases the delimiter used to delimit names is also used
-    to separate the second to last and the last name in name lists. The possible
-    values are:
+    Determines when the name delimiter is used to separate the second to last
+    and the last name in name lists. Allowed values:
     
-    -  "contextual" (default): the delimiter is only included for name lists
+    -  "contextual" - (default), name delimiter is only used for name lists
        with three or more names
        
        - 2 names: "J. Doe and T. Williams"
        - 3 names: "J. Doe, S. Smith, and T. Williams"
     
-    -  "always": the delimiter is always included
+    -  "always" - name delimiter is always used
        
        - 2 names: "J. Doe, and T. Williams"
        - 3 names: "J. Doe, S. Smith, and T. Williams"
     
-    -  "never": the delimiter is never included
+    -  "never" - name delimiter is never used
        
        - 2 names: "J. Doe and T. Williams"
        - 3 names: "J. Doe, S. Smith and T. Williams"
 
 ``et-al-min`` / ``et-al-use-first``
-    Together, these attributes control et-al abbreviation. When the number of
+    Use of these two attributes enables et-al abbreviation. If the number of
     names in a name variable matches or exceeds the number set on ``et-al-min``,
-    the rendered name list is truncated at the number of names set on
-    ``et-al-use-first``. If truncation occurs, the "et-al" term is appended to
-    the names rendered (see also `Et-al`_). The ``delimiter-precedes-et-al``
-    attribute controls which delimiter is used between the last name rendered
-    and the "et-al" term. By default, the "et-al" term is preceded by a space
-    when the name list is truncated to a single name (e.g. "Doe et al."), and by
-    the name delimiter when it is truncated to two or more names (e.g. "Doe,
-    Smith, et al.").
+    the rendered name list is truncated after reaching the number of names set
+    on ``et-al-use-first``. The "et-al" (or "and others") term is appended to
+    truncated name lists (see also `Et-al`_). By default, when a name list is
+    truncated to a single name, the name and the "et-al" (or "and others") term
+    are separated by a space (e.g. "Doe et al."). When a name list is truncated
+    to two or more names, the name delimiter is used (e.g. "Doe, Smith, et
+    al."). This behavior can be changed with the ``delimiter-precedes-et-al``
+    attribute.
     
 ``et-al-subsequent-min`` / ``et-al-subsequent-use-first``
-    The (optional) ``et-al-min`` and ``et-al-use-first`` attributes take effect
-    for all cites and bibliographic entries. With the ``et-al-subsequent-min``
-    and ``et-al-subsequent-use-first`` attributes divergent et-al abbreviation
-    rules can be specified for subsequent cites (cites referencing earlier cited
-    items).
+    If used, the values of these attributes replace those of respectively
+    ``et-al-min`` and ``et-al-use-first`` for subsequent cites (cites
+    referencing earlier cited items).
 
 ``et-al-use-last``
-    When the ``et-al-use-last`` attribute is set to "true" (the default is
-    "false"), and et-al abbreviation is active, the truncated name list is
-    followed by the ellipsis character and the last name of the original name
-    list. This is only possible when the original name list is at least two
-    names longer than the truncated name list (this requires that the value of
-    ``et-al-use-first`` is at least 2 less than the value of ``et-al-min``). An
-    example:
+    When set to "true" (the default is "false"), name lists truncated by et-al
+    abbreviation are followed by the name delimiter, the ellipsis character, and
+    the last name of the original name list. This is only possible when the
+    original name list has at least two more names than the truncated name list
+    (for this the value of ``et-al-use-first``/``et-al-subsequent-min`` must be
+    at least 2 less than the value of
+    ``et-al-min``/``et-al-subsequent-use-first``). An example:
     
     ::
     
@@ -939,58 +934,58 @@ variable are separated from each other. The attributes that may be used on
 
 The remaining attributes, discussed below, only affect personal names. Personal
 names require a "family" name-part, and may also contain "given", "suffix",
-"non-dropping-particle" and "dropping-particle" name-parts. The roles of
-these name-parts, which are delimited by single spaces in rendered names, are:
+"non-dropping-particle" and "dropping-particle" name-parts. These name-parts are
+defined as:
 
--  "family": the surname minus any particles and suffixes
--  "given": the given names, which may be either full ("John Edward") or
-   initialized ("J. E.")
--  "suffix": name suffix, e.g. "Jr." in "John Smith Jr." and "III" in "Bill
+-  "family" - surname minus any particles and suffixes
+-  "given" - given names, either full ("John Edward") or initialized ("J. E.")
+-  "suffix" - name suffix, e.g. "Jr." in "John Smith Jr." and "III" in "Bill
    Gates III"
--  "non-dropping-particle": name particles that are not dropped when only the
-   last name is shown ("de" in the Dutch surname "de Koning") but which may be
-   treated as a separate object from the family name (e.g. for sorting)
--  "dropping-particle": name particles that are dropped when only the surname
+-  "non-dropping-particle" - name particles that are not dropped when only the
+   surname is shown ("de" in the Dutch surname "de Koning") but which may be
+   treated separately from the family name, e.g. for sorting
+-  "dropping-particle" - name particles that are dropped when only the surname
    is shown ("van" in "Ludwig van Beethoven", which becomes "Beethoven")
+
+The attributes affecting personal names:
 
 ``form``
     Specifies whether all the name-parts of personal names should be displayed
-    (value "long"), or only the family name and the non-dropping-particle (value
-    "short"). A third value, "count", returns the total number of names that
-    would be otherwise displayed by the use of the ``cs:names`` element (taking
-    into account the effects of et-al abbreviation and editor/translator
-    collapsing), and may be used for advanced `sorting`_.
+    (value "long", the default), or only the family name and the
+    non-dropping-particle (value "short"). A third value, "count", returns the
+    total number of names that would otherwise be rendered by the use of the
+    ``cs:names`` element (taking into account the effects of et-al abbreviation
+    and editor/translator collapsing), which allows for advanced `sorting`_.
 
 ``initialize-with``
-    If this attribute is set, given names are converted to initials. The
-    attribute value specifies the suffix that is included after each initial
-    ("." results in "J.J. Doe"). Note that the global ``initialize-with-hyphen``
-    option controls how compound given names (e.g. "Jean-Luc") are hyphenated
-    when initialized (see `Hyphenation of Initialized Names`_).
+    When set, given names are converted to initials. The attribute value is
+    added after each initial ("." results in "J.J. Doe"). For compound given
+    names (e.g. "Jean-Luc"), hyphenation of the initials can be controlled with
+    the global ``initialize-with-hyphen`` option (see `Hyphenation of
+    Initialized Names`_).
 
 ``name-as-sort-order``
     Specifies that names should be displayed with the given name following the
-    family name (e.g. "John Doe" becomes "Doe, John"). The attribute may have
-    one of the two values:
+    family name (e.g. "John Doe" becomes "Doe, John"). The attribute has two possible values:
     
-    - "first": name-as-sort-order applies to the first name in each name
-      variable
-    - "all": name-as-sort-order applies to all names
+    - "first" - attribute only has an effect on the first name of each name
+      variable 
+    - "all" - attribute has an effect on all names
     
-    Note that the sort order of names may differ from the display order for
-    names containing particles and suffixes (see `Name-part order`_). Also, this
-    attribute only affects names written in the latin or Cyrillic alphabet.
-    Names written in other alphabets (e.g. Asian scripts) are always shown with
-    the family name preceding the given name.
+    Note that even when ``name-as-sort-order`` changes the name-part order, the
+    display order is not necessarily the same as the sorting order for names
+    containing particles and suffixes (see `Name-part order`_). Also,
+    ``name-as-sort-order`` only affects names written in the latin or Cyrillic
+    alphabets. Names written in other alphabets (e.g. Asian scripts) are always
+    displayed with the family name preceding the given name.
 
 ``sort-separator``
     Sets the delimiter for name-parts that have switched positions as a result
     of ``name-as-sort-order``. The default value is ", " ("Doe, John"). As is
     the case for ``name-as-sort-order``, this attribute only affects names
-    written in the latin or Cyrillic alphabet.
+    written in the latin or Cyrillic alphabets.
 
-The ``cs:name`` element may also carry any of the attributes for `affixes`_ and
-`formatting`_.
+``cs:name`` may also carry `affixes`_ and `formatting`_ attributes.
 
 Name-part Order
 '''''''''''''''
@@ -999,7 +994,7 @@ The order of name-parts depends on the values of the ``form`` and
 ``name-as-sort-order`` attributes on ``cs:name``, the value of the
 ``demote-non-dropping-particle`` attribute on ``cs:style`` (one of the `global
 options`_), and the alphabet of the individual name. Note that the display and
-sorting order of name-parts often differs. An overview of the different orders:
+sorting order of name-parts often differs. An overview of the possible orders:
 
 **Display order of latin/Cyrillic names**
 
@@ -1018,8 +1013,7 @@ sorting order of name-parts often differs. An overview of the different orders:
 ----
 
 :Conditions: ``form`` set to "long", name-as-sort-order active,
-             ``demote-non-dropping-particle`` set to "never"
-             or "sort-only"
+             ``demote-non-dropping-particle`` set to "never" or "sort-only"
 :Order:
     1) non-dropping-particle
     2) family
@@ -1032,8 +1026,7 @@ sorting order of name-parts often differs. An overview of the different orders:
 ----
 
 :Conditions: ``form`` set to "long", name-as-sort-order active,
-             ``demote-non-dropping-particle`` set to 
-             "display-and-sort"
+             ``demote-non-dropping-particle`` set to "display-and-sort"
 :Order:
     1) family
     2) given
@@ -1071,7 +1064,8 @@ N.B. The sort keys are listed in descending order of importance.
 
 ----
 
-:Conditions: ``demote-non-dropping-particle`` set to "sort-only" or "display-and-sort"
+:Conditions: ``demote-non-dropping-particle`` set to "sort-only" or
+             "display-and-sort"
 
     1) family
     2) dropping-particle + non-dropping-particle
@@ -1114,16 +1108,17 @@ example, "The New York Times" sorts as "New York Times".
 Name-part Formatting
 ''''''''''''''''''''
 
-The ``cs:name`` element may include one or two ``cs:name-part`` child elements.
-These child elements accept the `formatting`_ and `text-case`_ attributes, which
-allows for separate formatting of the different name parts (e.g. "Jane DOE", see
-example below). The required ``name`` attribute on ``cs:name-part`` specifies
-which name-parts are affected: when set to "given", the formatting only acts on
-the "given" name-part. When set to "family", the formatting acts on the
-"family", "dropping-particle" and "non-dropping-particle" name-parts (the
-"suffix" name-part is not subject to any name-part formatting). The order of the
-``cs:name-part`` elements does not affect which, and in what order, the
-name-parts are rendered.
+The ``cs:name`` element may contain one or two ``cs:name-part`` child elements
+for name-part specific formatting.
+
+The value of the required ``name`` attribute on ``cs:name-part`` determines
+which name-parts are affected by the optional `formatting`_ and `text-case`_
+attributes: with "given", the formatting only acts on the "given" name-part.
+With "family", the formatting acts on the "family", "dropping-particle" and
+"non-dropping-particle" name-parts (the "suffix" name-part is not subject to
+name-part formatting). The use of ``cs:name-part`` elements does not influence
+which, or in what order, name-parts are rendered. An example, yielding names
+like "Jane DOE":
 
 .. sourcecode:: xml
 
@@ -1136,13 +1131,12 @@ name-parts are rendered.
 Et-al
 ^^^^^
 
-Et-al abbreviation, controlled via the et-al attributes on ``cs:name`` (see
-`Name`_), can be further customized with the optional ``cs:et-al`` element,
-which should be included directly after the ``cs:name`` element. The ``term``
-attribute of this element can be set to either "et-al" (default) or to "and
-others" to use either term (with this different et-al terms can be used for
-citations and the bibliography). In addition, attributes for `affixes`_ and
-`formatting`_ can be used, for example to italicize the et-al term:
+Et-al abbreviation, controlled via the ``et-al-...`` attributes (see `Name`_),
+can be further customized with the optional ``cs:et-al`` element, which must
+follow the ``cs:name`` element. The ``term`` attribute may be set to either
+"et-al" (the default) or to "and others" to use either term. The `affixes`_ and
+`formatting`_ attributes may also be used, for example to italicize the et-al
+term:
 
 .. sourcecode:: xml
 
@@ -1154,19 +1148,19 @@ citations and the bibliography). In addition, attributes for `affixes`_ and
 Substitute
 ^^^^^^^^^^
 
-The optional ``cs:substitute`` element, which should be included as the last
-child element of ``cs:names``, controls substitution in case the `name
-variables`_ specified in the parent ``cs:names`` element are empty. The
-substitutions are specified as child elements of ``cs:substitute``, and can
-consist of any of the standard `rendering elements`_ (with the exception of
-``cs:layout``). It is also possible to use a shorthand version of ``cs:names``,
-which doesn't allow for any child elements, and uses the attributes values set
-on the ``cs:name`` and ``cs:et-al`` child elements of the original ``cs:names``
-element. If ``cs:substitute`` contains multiple child elements, the first
-element to return a non-empty result is used for substitution. Substituted
-variables are repressed in the rest of the output to prevent duplication. An
-example, where an empty "author" name variable is substituted by the "editor"
-name variable, or, when no editors exist, by the "title" macro:
+The optional ``cs:substitute`` element, which must be included as the last child
+element of ``cs:names``, adds substitution in case the `name variables`_
+specified in the parent ``cs:names`` element are empty. The substitutions are
+specified as child elements of ``cs:substitute``, and must consist of one or
+more `rendering elements`_ (with the exception of ``cs:layout``). A shorthand
+version of ``cs:names`` without child elements, which inherits the attributes
+values set on the ``cs:name`` and ``cs:et-al`` child elements of the original
+``cs:names`` element, may also be used. If ``cs:substitute`` contains multiple
+child elements, the first element to return a non-empty result is used for
+substitution. Substituted variables are suppressed in the rest of the output to
+prevent duplication. An example, where an empty "author" name variable is
+substituted by the "editor" name variable, or, when no editors exist, by the
+"title" macro:
 
 .. sourcecode:: xml
 
@@ -1183,13 +1177,13 @@ name variable, or, when no editors exist, by the "title" macro:
 Label in ``cs:names``
 ^^^^^^^^^^^^^^^^^^^^^
 
-The ``cs:label`` element, used to output text terms whose pluralization depends
-on the contents of another variable (e.g. "(editors)" in "Doe and Smith
-(editors)"), is discussed in detail in the `label`_ section. It should be
-included after the ``cs:name`` and ``cs:et-al`` elements, but before the
-``cs:substitute`` element. When used within ``cs:names``, the ``variable``
-attribute should be omitted, as the value set on the parent ``cs:names`` element
-is used.
+The optional ``cs:label`` element, used to output terms whose pluralization
+depends on the contents of another variable (e.g. "(editors)" in "Doe and Smith
+(editors)"), is discussed in detail in the `label`_ section. It must be included
+after the ``cs:name`` and ``cs:et-al`` elements, but before the
+``cs:substitute`` element. When used as a child element of ``cs:names``,
+``cs:label`` may not carry the ``variable`` attribute (the label used is
+determined by the name variable(s) set on the ``cs:names`` element).
 
 Label
 ~~~~~
