@@ -1210,8 +1210,8 @@ term for a single page ("page 5"), or the plural form for a page range ("pages
     
     -  "long" - (default), e.g. "editor"/"editors" for the "editor" term
     -  "verb" - e.g. "edited by" for the "editor" term
-    -  "short" - e.g. "ed"/"eds" for the "editor" term
-    -  "verb-short" - e.g. "ed" for the "editor" term
+    -  "short" - e.g. "ed."/"eds." for the "editor" term
+    -  "verb-short" - e.g. "ed." for the "editor" term
     -  "symbol" - e.g. "§" for the singular "section" term
 
 ``plural``
@@ -1225,46 +1225,44 @@ term for a single page ("page 5"), or the plural form for a page range ("pages
 Group
 ~~~~~
 
-The ``cs:group`` rendering element may contain one or more `rendering elements`_ (not
-``cs:layout``). ``cs:group`` itself may carry the `delimiter`_ attribute (to
-delimit the enclosed elements) and the attributes for `affixes`_ (applied to the
-group output as a whole), `display`_ and `formatting`_ (formatting settings are
-transmitted to the enclosed elements). Note that ``cs:group`` implicitly acts as
-a conditional: cs:group and its child elements are suppressed if a) at least one
-rendering element in cs:group calls a variable (either directly or via a macro),
-and b) all variables that are called are empty. This behavior exists to
-accommodate descriptive cs:text elements. For example,
+The ``cs:group`` rendering element must contain one or more `rendering
+elements`_ (with the exception of ``cs:layout``). ``cs:group`` may carry the
+`delimiter`_ attribute to separate its child elements, as well as `affixes`_ and
+`display`_ attributes (applied to the output of the group as a whole) and
+`formatting`_ attributes (transmitted to the enclosed elements). ``cs:group``
+implicitly acts as a conditional: ``cs:group`` and its child elements are
+suppressed if a) at least one rendering element in ``cs:group`` calls a variable
+(either directly or via a macro), and b) all variables that are called are
+empty. This accommodates descriptive ``cs:text`` elements. For example,
 
 .. sourcecode:: xml
 
     <layout>
-      <group prefix="(" suffix=")">
-        <text value="Published by: "/>
-        <text variable="publisher"/>
+      <group delimiter=" ">
+        <text term="retrieved"/>
+        <text term="from"/>
+        <text variable="URL"/>
       </group>
     </layout>
 
-results in "(Published by: Company A)" when the "publisher" variable is set to
-"Company A", but doesn't generate output when the "publisher" variable is empty.
+can result in "retrieved from http://dx.doi.org/10.1128/AEM.02591-07", but
+doesn't generate output when the "URL" variable is empty.
 
 Choose
 ~~~~~~
 
-Similarly to the conditional statements encountered in programming languages,
-the ``cs:choose`` rendering element allows for the conditional rendering of `rendering
-elements`_. An example is shown below:
+The ``cs:choose`` rendering element allows for conditional rendering of
+`rendering elements`_. An example that renders the "issued" date variable when
+it exists, and the "no date" term when it doesn't:
 
 .. sourcecode:: xml
 
     <choose>
-      <if type="book thesis" match="any">
-        <text variable="title" font-style="italic">
+      <if variable="issued">
+        <date variable="issued" form="numeric"/>
       </if>
-      <else-if type="chapter">
-        <text variable="title" quotes="true">
-      </else-if>
       <else>
-        <text variable="title">
+        <text term="no date"/>
       </else>
     </choose>
 
@@ -1273,69 +1271,64 @@ or more ``cs:else-if`` child elements, and an optional closing ``cs:else`` child
 element. The ``cs:if`` and ``cs:else-if`` elements may contain any number of
 `rendering elements`_ (except for ``cs:layout``). As an empty cs:else element
 would be superfluous, ``cs:else`` must contain at least one rendering element.
-``cs:if`` and ``cs:else-if`` elements must each hold at least one condition,
-which are expressed as attributes. The different types of conditions available
-are:
+``cs:if`` and ``cs:else-if`` elements must carry one or more conditions, which
+are set with the attributes:
 
 ``disambiguate``
-    The contents of an <if disambiguate="true"> block is only rendered if it
-    disambiguates two otherwise identical citations. This attempt at
-    disambiguation will only be made when all other disambiguation methods have
+    When set to "true" (the only allowed value), the content of element is
+    rendered if it disambiguates two otherwise identical citations. This attempt
+    at `disambiguation`_ is only made when all other disambiguation methods have
     failed to uniquely identify the target source.
 
 ``is-numeric``
     Tests whether the given variables (`Appendix I - Variables`_) contain
-    numeric data.
+    numeric text.
     
 ``is-uncertain-date``
     Tests whether the given `date variables`_ contain `uncertain dates`_.
     
 ``locator``
-    Tests whether the locator matches the given locator variable subtype
-    (see `Locators`_).
+    Tests whether the locator matches the given locator types (see `Locators`_).
 
 ``position``
-    Tests whether the position of the item cite matches the given positions
-    (when called within cs:bibliography, this condition will always test
-    "false"). The different positions are (note on terminology: a *citation*
-    refers to a citation group, which contains one or more *cites* to individual
-    items):
-    
-    -  "first": the position of a cite that is the first to reference an item
-    -  "ibid"/"ibid-with-locator"/"subsequent": a cite that references an
-       earlier cited item always has the "subsequent" position. In special cases
-       cites may have the "ibid" or "ibid-with-locator" position. These
-       positions are only assigned when:
-       
-       a) the current cite immediately follows on another cite, within the
-          same citation, that references the same item
-            
-       or
-       
-       b) the current cite is the first cite in the citation, and the previous
-          citation includes a single cite that references the same item
-            
-       If either requirement is met, the presence of locators determines which
-       position is assigned:
+    Tests whether the cite position matches the given positions (terminology:
+    citations consist of one or more cites to individual items) When called
+    within the scope of cs:bibliography, ``position`` tests "false". The
+    positions that can be tested are:
+   
+    - "first": position of cites that are the first to reference an item
+    - "ibid"/"ibid-with-locator"/"subsequent": cites referencing previously
+      cited items have the "subsequent" position. Such cites may also have the
+      "ibid" or "ibid-with-locator" position when:
+      
+      a) the current cite immediately follows on another cite, within the same
+         citation, that references the same item
+           
+      or
+      
+      b) the current cite is the first cite in the citation, and the previous
+         citation consists of a single cite referencing the same item
+           
+      If either requirement is met, the presence of locators determines which
+      position is assigned:
 
-       - **Preceding cite does not have a locator**: if the current cite has a
-         locator, the position of the current cite is "ibid-with-locator".
-         Otherwise the position is "ibid".
-       - **Preceding cite does have a locator**: if the current cite has the
-         same locator, the position of the current cite is "ibid". If the
-         locator differs the position is "ibid-with-locator". If the current
-         cite lacks a locator the position is "subsequent".
+      - **Preceding cite does not have a locator**: if the current cite has a
+        locator, the position of the current cite is "ibid-with-locator".
+        Otherwise the position is "ibid".
+      - **Preceding cite does have a locator**: if the current cite has the same
+        locator, the position of the current cite is "ibid". If the locator
+        differs the position is "ibid-with-locator". If the current cite lacks a
+        locator its only position is "subsequent".
          
-    - "near-note": the position of a cite following another cite that references
-      the same item. Both cites have to be located in foot or endnotes, and the
+    - "near-note": position of a cite following another cite referencing the
+      same item. Both cites have to be located in foot or endnotes, and the
       distance between both cites may not exceed the maximum distance (measured
       in number of foot or endnotes) set with the ``near-note-distance`` option
       (see `Note Distance`_).
       
-    Note that each cite can have multiple position values. Whenever
-    position="ibid-with-locator" is true, position="ibid" is also true. And
-    whenever position="ibid" or position="near-note" is true,
-    position="subsequent" is also true.
+    Whenever position="ibid-with-locator" tests true, position="ibid" also tests
+    true. And whenever position="ibid" or position="near-note" test true,
+    position="subsequent" also tests true.
 
 ``type``
     Tests whether the item matches the given types (`Appendix II - Types`_).
@@ -1347,14 +1340,14 @@ are:
 With the exception of ``disambiguate``, all conditions allow for multiple test
 values (separated with spaces, e.g. "book thesis").
 
-The ``cs:if`` and ``cs:else-if`` elements may include the ``match`` attribute to
-control the testing logic, with possible values:
+The ``cs:if`` and ``cs:else-if`` elements may carry the ``match`` attribute to
+control the testing logic, with allowed values:
 
--  "all" (default): the element only tests "true" when all conditions test "true"
+-  "all" - (default), element only tests "true" when all conditions test "true"
    for all given test values
--  "any": the element tests "true" when any condition tests "true" for any given
+-  "any" - element tests "true" when any condition tests "true" for any given
    test value
--  "none": the element only tests "true" when none of the conditions test "true"
+-  "none" - element only tests "true" when none of the conditions test "true"
    for any given test value
 
 Style Behavior
