@@ -1485,48 +1485,44 @@ Citation Collapsing
 '''''''''''''''''''
 
 ``collapse``
-    The collapse option activates citation collapsing. Note that "year-suffix"
-    and "year-suffix-ranged" both fall back to "year" when the
-    ``disambiguate-add-year-suffix`` attribute is not set to "true" (see
-    `Disambiguation`_). Its possible values are:
+    Activates citation collapsing. Allowed values:
     
-    -  "citation-number": collapses numeric citation ranges (e.g. from "[1, 2,
-       3, 5]" to "[1-3, 5]"). Note that only increasing ranges are collapsed,
-       e.g. "[3, 2, 1]" will not collapse (to see how numeric styles can sort
-       citations by the ``citation-number`` variable, see `Sorting`_).
-    -  "year": when the names stored in the rendered name variables are the same
-       for two subsequent cites, the latter cite is collapsed to only the year,
-       e.g. from "(Doe 2000, Doe 2001)" to "(Doe 2000, 2001)".
-    -  "year-suffix": collapses as "year", but also collapses identical years,
-       e.g. "(Doe 2000a, b)" instead of "(Doe 2000a, 2000b)".
-    -  "year-suffix-ranged": collapses as "year-suffix", but also
-       collapses ranges of year-suffix markers, e.g. "(Doe 2000a-c,e)"
-       instead of "(Doe 2000a, b, c, e)". 
+    -  "citation-number" - collapses numeric citation ranges (e.g. from "[1, 2,
+       3, 5]" to "[1-3, 5]"). Only increasing ranges are collapsed, e.g. "[3, 2,
+       1]" will not collapse (to see how to sort cites by their
+       ``citation-number`` variable, see `Sorting`_).
+    -  "year" - when consecutive cites share the same names in the rendered name
+       variables, subsequent cites are collapsed to only a year, e.g. from "(Doe
+       2000, Doe 2001)" to "(Doe 2000, 2001)".
+    -  "year-suffix" - collapses as "year", but also collapses repeating years
+       to only the year-suffix, e.g. "(Doe 2000a, b)" instead of "(Doe 2000a,
+       2000b)".
+    -  "year-suffix-ranged" - collapses as "year-suffix", but also collapses
+       ranges of year-suffix markers, e.g. "(Doe 2000a-c,e)" instead of "(Doe
+       2000a, b, c, e)".
 
 ``year-suffix-delimiter``
-    Specifies the delimiter for year-suffix elements. For example, citations
-    like "(Smith 1999a,b; 2000; Jones 2001)" are obtained when the ``collapse``
-    attribute is set to "year-suffix", the ``delimiter`` on ``cs:layout`` in
-    ``cs:citation`` is set to "; ", and the ``year-suffix-delimiter`` is set to
-    ",". When the ``year-suffix-delimiter`` attribute is not set, year-suffixes
-    are delimited with the delimiter set on ``cs:layout`` in ``cs:citation``.
+    Specifies the delimiter for year-suffix elements (defaults to the delimiter
+    set on ``cs:layout`` in ``cs:citation``). E.g. with ``collapse`` set to
+    "year-suffix", the ``delimiter`` on ``cs:layout`` in ``cs:citation`` set to
+    "; ", and the ``year-suffix-delimiter`` set to ",", citations look like
+    "(Smith 1999a,b; 2000; Jones 2001)".
 
 ``after-collapse-delimiter``
-    Specifies the cite delimiter that should be used *after* a group of
-    collapsed cites. For example, citations like "(Smith 1999a, b, 2000; Jones
-    2001, Brown 2007)" are obtained when the ``collapse`` attribute is set to
-    "year-suffix", the ``delimiter`` on ``cs:layout`` in ``cs:citation`` is set
-    to ", " and ``after-collapse-delimiter`` is set to "; ".
-
+    Specifies the cite delimiter to be used *after* a group of collapsed cites.
+    E.g. with ``collapse`` set to "year-suffix", the ``delimiter`` on
+    ``cs:layout`` in ``cs:citation`` set to ", ", and
+    ``after-collapse-delimiter`` set to "; ", citations look like "(Smith 1999a,
+    b, 2000; Jones 2001, Brown 2007)".
 
 Note Distance
 '''''''''''''
 
 ``near-note-distance``
-    The "near-note" position (see `Choose`_) tests "true" if a preceding
-    note exists that: a) refers to the same item and b) has a distance (measured
-    in footnotes or endnotes) to the current item that does not exceed the value
-    of ``near-note-distance``. This attribute defaults to 5.
+    A cite tests true for the "near-note" position (see `Choose`_) when a
+    preceding note exists that a) refers to the same item and b) does not
+    precede the current note by more footnotes or endnotes than the value of
+    ``near-note-distance`` (default value is "5").
 
 Bibliography-specific Options
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
