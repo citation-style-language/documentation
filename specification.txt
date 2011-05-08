@@ -1535,36 +1535,37 @@ Whitespace
     rendered with hanging-indents.
 
 ``second-field-align``
-    If set to "flush", subsequent lines of each bibliography entry are aligned
-    with the beginning of the second field. If set to "margin", the first field
-    is put in the margin and all subsequent lines of text are aligned with the
-    margin (as in the IEEE style). An example showing the alignment, if the
-    first field is ``<text variable="citation-number" suffix=". "/>``:
+    If set, subsequent lines of bibliographic entries are aligned along the
+    second field. With "flush", the first field is flush with the margin. With
+    "margin", the first field is put in the margin, and subsequent lines are
+    aligned with the margin. An example, where the first field is ``<text
+    variable="citation-number" suffix=". "/>``:
     
     ::
     
-        1. Adams, D. (2002). The Ultimate Hitchhiker's Guide to the
-           Galaxy (1st ed.).
+        9.  Adams, D. (2002). The Ultimate Hitchhiker's Guide to the
+            Galaxy (1st ed.).
+        10. Asimov, I. (1951). Foundation.
 
 ``line-spacing``
-    Specifies a formatting hint for vertical line distance. Defaults to "1"
-    (single-spacing), and can be set to any non-negative integer to specify a
-    multiple of the standard unit of line height (e.g. "2" for double-spacing).
+    Specifies vertical line distance. Defaults to "1" (single-spacing), and can
+    be set to any non-negative integer to specify a multiple of the standard
+    unit of line height (e.g. "2" for double-spacing).
 
 ``entry-spacing``
-    Specifies a formatting hint for vertical distance between bibliographic
-    entries. By default (with a value of "1"), entries are separated by a single
-    additional line-height (as set by the line-spacing attribute). Can be set to
-    any non-negative integer to specify a multiple of this amount.
+    Specifies vertical distance between bibliographic entries. By default (with
+    a value of "1"), entries are separated by a single additional line-height
+    (as set by the line-spacing attribute). Can be set to any non-negative
+    integer to specify a multiple of this amount.
 
 Reference Grouping
 ''''''''''''''''''
 
 ``subsequent-author-substitute``
-    The value of the ``subsequent-author-substitute`` attribute (which may be
-    any string) is used to replace the names in a bibliographic entry, when it
-    shares these names with the preceding bibliographic entry. Note that only
-    the first ``cs:names`` element rendered is affected. E.g., with
+    If set, the text string value of this attribute replaces the names in a
+    bibliographic entry, when these names are identical to those in the
+    preceding bibliographic entry. Substitution is limited to the first
+    ``cs:names`` element rendered. An example, with
     ``subsequent-author-substitute`` set to "---":
     
     ::
@@ -1581,60 +1582,59 @@ Hyphenation of Initialized Names
 
 ``initialize-with-hyphen``
     Specifies whether compound given names (e.g. "Jean-Luc") should be
-    initialized with a hyphen ("J.-L.", value "true") or without ("J.L.", value
-    "false"). Defaults to "true".
+    initialized with a hyphen ("J.-L.", value "true", default) or without
+    ("J.L.", value "false").
 
 Page Ranges
 '''''''''''
 
 ``page-range-format``
-    The value of this attribute determines how page ranges are formatted.
-    Available values: "expanded" (e.g. "321-328"), "minimal" ("321-8"), and
-    "chicago" ("321-28") (see `Appendix IV - Page Abbreviation Rules`_ for the
-    Chicago Manual of Style page range collapsing rules). If the attribute is
-    not specified, the content of the page-field is left unchanged.
+    Specifies the format of page ranges: "expanded" (e.g. "321-328"), "minimal"
+    ("321-8"), or "chicago" ("321-28") (for detailed format descriptions, see
+    `Appendix IV - Page Range Formats`_). If the attribute is not set, page
+    ranges are rendered without reformatting.
 
 Name Particles
 ''''''''''''''
 
-Many Western names include one or more name particles (e.g. "de" in the Dutch
-name "W. de Koning"). However, not all particles are equal: name particles can
-be either maintained or dropped when only the surname is shown (from now on we
-will refer to these two types as non-dropping-particle and dropping-particle,
-respectively). A single name can contain particles of both types (with the
-non-dropping-particle always following the dropping-particle). For example, the
-French name "Gérard de la Martinière" can be deconstructed into:
+Western names frequently contain one or more name particles (e.g. "de" in the
+Dutch name "W. de Koning"). These name particles can be either kept or dropped
+when only the surname is shown: these two types are referred to as non-dropping
+and dropping particles, respectively. A single name can contain particles of
+both types (with non-dropping particles always following dropping particles).
+For example, "W. de Koning" and the French name "Gérard de la Martinière" can be
+deconstructed into:
     
     ::
     
         {
-            "author": {
-                "given": "Gérard",
-                "dropping-particle": "de",
-                "non-dropping-particle": "la",
-                "family": "Martinière"
-            },
-            {
-                "given": "W.",
-                "non-dropping-particle": "de",
-                "family": "Koning"
-            }
+            "author": [
+                {
+                    "given": "W.",
+                    "non-dropping-particle": "de",
+                    "family": "Koning"
+                },
+                {
+                    "given": "Gérard",
+                    "dropping-particle": "de",
+                    "non-dropping-particle": "la",
+                    "family": "Martinière"
+                } 
+            ]
         }
 
-When just the surname is shown, only the non-dropping-particle is kept: "La
-Martinière".
+When just the surname is shown, only the non-dropping-particle is kept: "De
+Koning" and "La Martinière".
 
-Whereas the dropping-particle is always treated the same, styles vary in how the
-non-dropping-particle is handled in case of inverted names, where the family
-name precedes the given name. First, the non-dropping-particle can be either
-prepended to the family name (e.g. "de Koning, W.") or appended (after initials
-or given names, e.g. "Koning, W. de"). Note that the dropping-particle is always
-appended in inverted names. Secondly, if the choice has been made to prepend the
-non-dropping-particle to the family name for inverted names, the author sort
-order can differ. Either the non-dropping-particle remains part of the family
-name (as part of the primary sort key; sort order A), or it may be separated
-from the family name and become (part of) a secondary sort key, joining the
-dropping-particle, if available (sort order B).
+In the case of inverted names, where the family name precedes the given name,
+the dropping-particle is always appended to the family name, but the
+non-dropping-particle can be either prepended (e.g. "de Koning, W.") or appended
+(after initials or given names, e.g. "Koning, W. de"). For inverted names where
+the non-dropping-particle is prepended, names can either be sorted by keeping
+the non-dropping-particle together with the family name as part of the primary
+sort key (sort order A), or by separating the non-dropping-particle from the
+family name and have it become (part of) a secondary sort key, joining the
+dropping-particle, if available (sort order B):
 
 **Sort order A: non-dropping-particle not demoted**
 
@@ -1648,6 +1648,25 @@ dropping-particle, if available (sort order B).
 -  secondary sort key: "de la"
 -  tertiary sort key: "Gérard"
 
+The handling of the non-dropping-particle can be customized with the
+``demote-non-dropping-particle`` option:
+
+``demote-non-dropping-particle``
+    Sets the display and sorting behavior of the non-dropping-particle in
+    inverted names (e.g. "Koning, W. de"). Allowed values:
+    
+    -  "never": the non-dropping-particle is treated as part of the family name,
+       whereas the dropping-particle is appended (e.g. "de Koning, W.", "la
+       Martinière, Gérard de"). The non-dropping-particle is part of the primary
+       sort key (sort order A, e.g. "de Koning, W." appears under "D").
+    -  "sort-only": same display behavior as "never", but the
+       non-dropping-particle is demoted to a secondary sort key (sort order B,
+       e.g. "de Koning, W." appears under "K").
+    -  "display-and-sort" (default): the dropping and non-dropping-particle are
+       appended (e.g. "Koning, W. de" and "Martinière, Gérard de la"). For name
+       sorting, all particles are part of the secondary sort key (sort order B,
+       e.g. "Koning, W. de" appears under "K").
+
 Some names include a particle that should never be demoted. For these cases the
 particle should just be included in the family name field, for example for the
 French general Charles de Gaulle:
@@ -1660,26 +1679,6 @@ French general Charles de Gaulle:
                 "given": "Charles"
             } 
         }
-
-The handling of particles for inverted names is set with the
-``demote-non-dropping-particle`` option:
-
-``demote-non-dropping-particle``
-    Sets the display and sorting behavior of the non-dropping-particle in
-    inverted names (e.g. "Koning, W. de"). The possible values are:
-    
-    -  "never": the non-dropping-particle is treated as part of the family name,
-       whereas the dropping-particle is appended (e.g. "de Koning, W.", "la
-       Martinière, Gérard de"). The non-dropping-particle is part of the primary
-       sort key (sort order A, e.g. "de Koning, W." appears under "D").
-    -  "sort-only": same display behavior as "never", but the
-       non-dropping-particle is demoted to a secondary sort key (see sort order
-       B, e.g. "de Koning, W." appears under "K").
-    -  "display-and-sort" (default): the dropping and non-dropping-particle are
-       appended to the rest of the name (e.g. "Koning, W. de" and "Martinière,
-       Gérard de la"). When names are sorted, all particles are part of the
-       secondary sort key (see sort order B, e.g. "Koning, W. de" appears under
-       "K").
 
 Inheritable Name Options
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -2287,8 +2286,8 @@ Miscellaneous
 -  reference
 -  retrieved
 
-Appendix IV - Page Abbreviation Rules
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Appendix IV - Page Range Formats
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The page abbreviation rules for the different values of the
 ``page-range-format`` attribute on ``cs:style`` are:
