@@ -1674,10 +1674,12 @@ French general Charles de Gaulle:
     ::
     
         {
-            "author": {
-                "family": "de Gaulle",
-                "given": "Charles"
-            } 
+            "author": [
+                {
+                    "family": "de Gaulle",
+                    "given": "Charles"
+                }   
+            ]
         }
 
 Inheritable Name Options
@@ -1693,24 +1695,25 @@ The available inheritable attributes for ``cs:name`` are ``and``,
 ``et-al-use-first``, ``et-al-use-last``, ``et-al-subsequent-min``,
 ``et-al-subsequent-use-first``, ``initialize-with``, ``name-as-sort-order`` and
 ``sort-separator``. The attributes ``name-form`` and ``name-delimiter``
-accompany the ``form`` and ``delimiter`` attributes on ``cs:name``. Similarly,
-``names-delimiter``, the only inheritable attribute available for ``cs:names``,
-accompanies the ``delimiter`` attribute on ``cs:names``.
+correspond to the ``form`` and ``delimiter`` attributes on ``cs:name``.
+Similarly, ``names-delimiter`` corresponds to the ``delimiter`` attribute on
+``cs:names``.
 
 When an inheritable name attribute is set on ``cs:style``, ``cs:citation`` or
 ``cs:bibliography``, its value is used for all ``cs:names`` elements within the
-element carrying the attribute. When an element lower in the hierarchy includes
-the same attribute with a different value, this latter value will override the
-value(s) specified higher in the hierarchy.
+scope of the element carrying the attribute. If an attribute is set on multiple
+hierarchical levels, the value set at the lowest level is used.
 
 Locale Options
 ^^^^^^^^^^^^^^
 
 ``punctuation-in-quote``
-    Determines whether punctuation (commas and periods) is placed inside (value
-    "true") or outside (default, value "false") quotation marks added with the
-    ``quotes`` attribute (see `Formatting`_).
-
+    For ``cs:text`` elements rendered with the ``quotes`` attribute set to
+    "true" (see `Formatting`_), and for which the output is followed by a comma
+    or period, ``punctuation-in-quote`` specifies whether this punctuation is
+    placed outside (value "false", default) or inside (value "true") the closing
+    quotation mark.
+    
 Sorting
 ~~~~~~~
 
