@@ -1000,7 +1000,7 @@ sorting order of name-parts often differs. An overview of the possible orders:
     4) family
     5) suffix
 
-:Example: [Gérard] [de] [la] [Martinière] [III]
+:Example: [Jean] [de] [La] [Fontaine] [III]
 
 ----
 
@@ -1013,7 +1013,7 @@ sorting order of name-parts often differs. An overview of the possible orders:
     4) dropping-particle
     5) suffix
 
-:Example: [la] [Martinière], [Gérard] [de], [III]
+:Example: [La] [Fontaine], [Jean] [de], [III]
 
 ----
 
@@ -1026,7 +1026,7 @@ sorting order of name-parts often differs. An overview of the possible orders:
     4) non-dropping-particle
     5) suffix
 
-:Example: [Martinière], [Gérard] [de] [la], [III]
+:Example: [Fontaine], [Jean] [de] [La], [III]
 
 ----
 
@@ -1035,7 +1035,7 @@ sorting order of name-parts often differs. An overview of the possible orders:
     1) non-dropping-particles
     2) family
 
-:Example: [la] [Martinière]
+:Example: [La] [Fontaine]
 
 ----
 
@@ -1052,7 +1052,7 @@ N.B. The sort keys are listed in descending order of priority.
     3) given
     4) suffix
 
-:Example: [la Martinière] [de] [Gérard] [III]
+:Example: [La Fontaine] [de] [Jean] [III]
 
 ----
 
@@ -1064,7 +1064,7 @@ N.B. The sort keys are listed in descending order of priority.
     3) given
     4) suffix
 
-:Example: [Martinière] [de la] [Gérard] [III]
+:Example: [Fontaine] [de La] [Jean] [III]
 
 ----
 
@@ -1101,16 +1101,15 @@ Name-part Formatting
 ''''''''''''''''''''
 
 The ``cs:name`` element may contain one or two ``cs:name-part`` child elements
-for name-part specific formatting.
+for name-part-specific formatting. ``cs:name-part`` must carry the ``name``
+attribute, set to either "given" or "family". If set to "given", `formatting`_
+and `text-case`_ attributes on ``cs:name-part`` affect the "given" and
+"dropping-particle" name-parts. If set to "family", they affect the "family" and
+"non-dropping-particle" name-parts.
 
-The value of the required ``name`` attribute on ``cs:name-part`` determines
-which name-parts are affected by the optional `formatting`_ and `text-case`_
-attributes: with "given", the formatting only acts on the "given" name-part.
-With "family", the formatting acts on the "family", "dropping-particle" and
-"non-dropping-particle" name-parts (the "suffix" name-part is not subject to
-name-part formatting). The use of ``cs:name-part`` elements does not influence
-which, or in what order, name-parts are rendered. An example, yielding names
-like "Jane DOE":
+The "suffix" name-part is not subject to name-part formatting. The use of
+``cs:name-part`` elements does not influence which, or in what order, name-parts
+are rendered. An example, yielding names like "Jane DOE":
 
 .. sourcecode:: xml
 
@@ -1594,7 +1593,7 @@ Dutch name "W. de Koning"). These name particles can be either kept or dropped
 when only the surname is shown: these two types are referred to as non-dropping
 and dropping particles, respectively. A single name can contain particles of
 both types (with non-dropping particles always following dropping particles).
-For example, "W. de Koning" and the French name "Gérard de la Martinière" can be
+For example, "W. de Koning" and the French name "Jean de La Fontaine" can be
 deconstructed into:
     
     ::
@@ -1607,16 +1606,16 @@ deconstructed into:
                     "family": "Koning"
                 },
                 {
-                    "given": "Gérard",
+                    "given": "Jean",
                     "dropping-particle": "de",
-                    "non-dropping-particle": "la",
-                    "family": "Martinière"
+                    "non-dropping-particle": "La",
+                    "family": "Fontaine"
                 } 
             ]
         }
 
 When just the surname is shown, only the non-dropping-particle is kept: "De
-Koning" and "La Martinière".
+Koning" and "La Fontaine".
 
 In the case of inverted names, where the family name precedes the given name,
 the dropping-particle is always appended to the family name, but the
@@ -1630,15 +1629,15 @@ dropping-particle, if available (sort order B):
 
 **Sort order A: non-dropping-particle not demoted**
 
--  primary sort key: "la Martinière"
+-  primary sort key: "La Fontaine"
 -  secondary sort key: "de"
--  tertiary sort key: "Gérard"
+-  tertiary sort key: "Jean"
 
 **Sort order B: non-dropping-particle demoted**
 
--  primary sort key: "Martinière"
--  secondary sort key: "de la"
--  tertiary sort key: "Gérard"
+-  primary sort key: "Fontaine"
+-  secondary sort key: "de La"
+-  tertiary sort key: "Jean"
 
 The handling of the non-dropping-particle can be customized with the
 ``demote-non-dropping-particle`` option:
@@ -1648,14 +1647,14 @@ The handling of the non-dropping-particle can be customized with the
     inverted names (e.g. "Koning, W. de"). Allowed values:
     
     -  "never": the non-dropping-particle is treated as part of the family name,
-       whereas the dropping-particle is appended (e.g. "de Koning, W.", "la
-       Martinière, Gérard de"). The non-dropping-particle is part of the primary
+       whereas the dropping-particle is appended (e.g. "de Koning, W.", "La
+       Fontaine, Jean de"). The non-dropping-particle is part of the primary
        sort key (sort order A, e.g. "de Koning, W." appears under "D").
     -  "sort-only": same display behavior as "never", but the
        non-dropping-particle is demoted to a secondary sort key (sort order B,
        e.g. "de Koning, W." appears under "K").
     -  "display-and-sort" (default): the dropping and non-dropping-particle are
-       appended (e.g. "Koning, W. de" and "Martinière, Gérard de la"). For name
+       appended (e.g. "Koning, W. de" and "Fontaine, Jean de La"). For name
        sorting, all particles are part of the secondary sort key (sort order B,
        e.g. "Koning, W. de" appears under "K").
 
@@ -1854,51 +1853,53 @@ Affixes
 ~~~~~~~
 
 The affixes attributes ``prefix`` and ``suffix`` may be set on ``cs:date``
-(except when ``cs:date`` is used within ``cs:locale``), ``cs:date-part`` (except
-when the parent ``cs:date`` element calls a localized date format),
+(except when ``cs:date`` defines a localized date format), ``cs:date-part``
+(except when the parent ``cs:date`` element calls a localized date format),
 ``cs:et-al``, ``cs:group``, ``cs:label``, ``cs:layout``, ``cs:name``,
-``cs:names``, ``cs:number`` and ``cs:text``. The attribute value is included
-either before (``prefix``) or after (``suffix``) the displayed text. Affixes are
-generally insensitive to the formatting attributes acting on the calling
-element: the only exception to this rule are affixes set on ``cs:layout``. In
-cases where formatting of affixes is desired, separate ``cs:text`` elements can
-be used instead, with a ``value`` attribute to output verbatim text.
+``cs:names``, ``cs:number`` and ``cs:text``. The attribute value is either added
+before (``prefix``) or after (``suffix``) the output of the element carrying the
+attribute, but affixes are only rendered if the element produces output. With
+the exception of affixes set on ``cs:layout``, affixes are outside the scope of
+`formatting`_, `quotes`_, `strip-periods`_ and `text-case`_ attributes set on
+the same element (a workaround, to have these attributes take effect on affixes,
+is to place the attribute on a parent ``cs:group`` element).
 
 Delimiter
 ~~~~~~~~~
 
-The ``delimiter`` attribute can be used to specify a delimiting string for
-``cs:date`` (delimiting the date-parts; not allowed when ``cs:date`` calls a
-localized date format), ``cs:names`` (delimiting multiple `name variables`_),
-``cs:name`` (delimiting names in name lists), ``cs:group`` and ``cs:layout``
-(both delimiting the direct child elements).
+The ``delimiter`` attribute, whose value delimits non-empty pieces of output,
+may be set on ``cs:date`` (delimiting the date-parts; ``delimiter`` is not
+allowed when ``cs:date`` calls a localized date format), ``cs:names``
+(delimiting name lists from different `name variables`_), ``cs:name``
+(delimiting names within name lists), ``cs:group`` and ``cs:layout`` (delimiting
+the output of the child elements).
 
 Display
 ~~~~~~~
 
-Many of the anticipated output formats for CSL 1.0 (RTF, LaTeX, XML dialects
-such as XHTML) allow styling to be applied to individual blocks of text in order
-to control their appearance and position. The ``display`` attribute can be used
-in ``cs:bibliography`` to allocate styling to particular text blocks for this
-purpose [#]_. The attribute may be set on ``cs:date``, ``cs:group``,
-``cs:names``, ``cs:number`` and ``cs:text`` elements, and accepts one of the
-following values:
+The ``display`` attribute (similar the "display" property in CSS) may be used to
+structure individual bibliographic entries into one or more text blocks. If
+used, all rendering elements should be under the control of a display attribute.
+The allowed values:
 
-- "block": A block stretching from margin to margin.
-- "left-margin": A block of fixed width starting at the left margin (all
-  "left-margin" blocks in a bibliography share the same width, set according
-  to the maximum number of characters appearing in any one such block).
-- "right-inline": A block directly to the right of any immediately preceding
-  "left-margin" block, and extending to the right margin.
-- "indent": Block indented to the right by a standard amount.
-
-.. [#] N.B. if ``display`` attributes are used, make sure all rendering
-       elements are under the control of exactly one display attribute.
+- "block" - block stretching from margin to margin.
+- "left-margin" - block starting at the left margin. If followed by a
+  "right-inline" block, the "left-margin" blocks of all bibliographic entries
+  are set to a fixed width to accommodate the longest content string found among
+  these "left-margin" blocks. In the absence of a "right-inline" block the
+  "left-margin" block extends to the right margin.
+- "right-inline" - block starting to the right of a preceding "left-margin"
+  block (behaves as "block" in the absence of such a "left-margin" block).
+  Extends to the right margin.
+- "indent" - block indented to the right by a standard amount. Extends to the
+  right margin.
 
 **Examples** 
 
-(A) A similar effect as with ``second-field-align`` can be achieved with
-    [#]_:
+(A) Instead of using ``second-field-align`` (see `Whitespace`_), a similar
+    layout can be achieved with a "left-margin" and "right-inline" block. A
+    potential benefit is that the styling of blocks can be further controlled in
+    the final output (e.g. using CSS for HTML, styles for Word, etc.).
     
     .. sourcecode:: xml
     
@@ -1912,14 +1913,12 @@ following values:
           </layout>
         </bibliography>
 
-.. [#] The styling definitions in the target application (CSS for HTML,
-       styles for Word etc.) can be adjusted to achieve special effects,
-       such as floating the labels into the margin.
-
 ----
 
-(B) A per-author publication listing can be formatted as follows [#]_: 
-    
+(B) A per-author publication listing. With ``subsequent-author-substitute`` (see
+    `Reference Grouping`_) set to an empty string , the block with the author
+    names is only rendered once for items by the same authors.
+
     .. sourcecode:: xml
     
         <bibliography subsequent-author-substitute="">
@@ -1942,7 +1941,7 @@ following values:
           </layout>
         </bibliography>
     
-    which would result in
+    The output of this example would look like:
     
     +-------------------+-----------------------+
     | Author1                                   |
@@ -1958,14 +1957,10 @@ following values:
     | year-publication4 | title-publication4    |
     +-------------------+-----------------------+
 
-.. [#] The effect of the empty ``subsequent-author-substitute`` attribute is
-       to render the author name only once, at the top of the list of each
-       author's publications.
-
 ----
 
-(C) An annotated bibliography with the annotation block-indented below the
-    reference can be formatted as follows:
+(C) An annotated bibliography, where the annotation appears in an indented block
+    below the reference.
     
     .. sourcecode:: xml
     
@@ -1982,10 +1977,10 @@ Quotes
 ~~~~~~
 
 The ``quotes`` attribute may set on ``cs:text``. When set to "true" ("false" is
-default), the rendered text is wrapped in quotes. The quote-symbols are defined
-as (localized) terms. The localized ``punctuation-in-quote`` option controls
-whether punctuation appears inside or outside the quotes (see `Locale
-Options`_).
+default), the rendered text is wrapped in quotes (the quotation marks used are
+localized terms). The localized ``punctuation-in-quote`` option controls whether
+an adjoining comma or period appears outside (default) or inside the closing
+quotation mark (see `Locale Options`_).
 
 Strip-periods
 ~~~~~~~~~~~~~
@@ -1998,18 +1993,16 @@ Text-case
 ~~~~~~~~~
 
 The ``text-case`` attribute may be set on ``cs:date-part``, ``cs:label``,
-``cs:name-part``, ``cs:number`` and ``cs:text`` and can be used to control the
-text case of the rendered text. The possible values are:
+``cs:name-part``, ``cs:number`` and ``cs:text``. The allowed values:
 
--  "lowercase": displays all text in lowercase
--  "uppercase": displays all text in uppercase
--  "capitalize-first": capitalizes the first character; the case of other
-   characters is not affected
--  "capitalize-all": capitalizes the first character of every word; other
-   characters are displayed lowercase
--  "title": displays text in title case (the *Chicago Manual of Style* calls
-   this "headline style")
--  "sentence": displays text in sentence case ("sentence style")
+-  "lowercase": renders text in lower case
+-  "uppercase": renders text in upper case
+-  "capitalize-first": capitalizes the first character (other
+   characters remain in their original case)
+-  "capitalize-all": capitalizes the first character of every word (other
+   characters remain in their original case)
+-  "title": renders text in title case
+-  "sentence": renders text in sentence case
 
 Appendices
 ----------
