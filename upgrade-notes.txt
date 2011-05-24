@@ -15,7 +15,7 @@ __ http://citationstyles.org/
 
 .. class:: info-version
 
-   version 2010-12-07
+   version 2011-05-24
 
 .. class:: contributors
 
@@ -49,37 +49,33 @@ features. Please note that these examples are reduced to a minimum, and often
 don't constitute valid CSL styles. In addition, when references are made to the
 XML elements of CSL, the CSL namespace ("cs") is always attached as a prefix
 (e.g. ``cs:citation`` for the ``citation`` element). However, for CSL styles it
-is customary to declare the default CSL namespace in the root ``cs:style``
+is customary to declare the default CSL namespace on the root ``cs:style``
 element (<style xmlns="http://purl.org/net/xbiblio/csl" />), which eliminates
 the need to include this namespace for each element.
 
 Project Home(s)
 +++++++++++++++
 
-The first change is that the CSL project has been moved to a new home at |link|
-`CitationStyles.org <http://citationstyles.org/>`_ (the old project home was
-located at |link| `<http://xbiblio.sourceforge.net/csl/>`_). This website will
-be the central location to find CSL schemas, CSL documentation and CSL styles.
+The first change is that |link| `CitationStyles.org
+<http://citationstyles.org/>`_ is the new home of the CSL project (the old home
+was located at |link| `<http://xbiblio.sourceforge.net/csl/>`_). The new website
+will be the central location to find CSL schemas, documentation and styles.
 
-For development the |link| `SourceForge CSL mailing list
+For CSL development the |link| `SourceForge xbiblio mailing list
 <http://sourceforge.net/mailarchive/forum.php?forum_name=xbiblio-devel>`_ will
-be kept in use, but a switch has been made from SourceForge.net to |link|
-`Bitbucket.org <http://bitbucket.org/>`_ for hosting the project code. The
-current code repositories are:
-
-* |link| `CSL Schema <http://bitbucket.org/bdarcus/csl-schema/>`_
-* |link| `CSL Locale Files <http://bitbucket.org/bdarcus/csl-locales/>`_
-* |link| `CSL Documentation <http://bitbucket.org/bdarcus/csl-docs/>`_
-* |link| `CSL Utilities <http://bitbucket.org/bdarcus/csl-utils/>`_
+be kept in use. Code hosting has moved around a bit. A switch from
+SourceForge.net to |link| `Bitbucket <https://bitbucket.org/bdarcus/>`_ in 2010
+has been followed by a move to `GitHub
+<https://github.com/citation-style-language/>`_ in 2011.
 
 Documentation
 +++++++++++++
 
 Prior to the release of CSL 1.0, CSL documentation was rather scarce. Most of
 what was available was hosted on the |link| `Zotero wiki
-<http://www.zotero.org/support/dev/csl_syntax_summary>`_. With CSL 1.0, we hope
-to improve on this situation. In addition to these upgrade notes, a full |link|
-specification_ has been made available. As before, the |link| `schema
+<http://www.zotero.org/support/`_. With CSL 1.0, we improved on this situation.
+In addition to these upgrade notes, a full |link| specification_ has been made
+available. As before, the |link| `schema
 <http://citationstyles.org/citation-style-language/schema/>`_ itself is also a
 source of information, although reading the schema requires some understanding
 of |link| `RELAX NG Compact <http://www.relaxng.org/>`_, the XML schema language
@@ -107,17 +103,6 @@ The main advantage of splitting up the schema is that the schema will be easier
 to maintain. If you wish to validate styles against the CSL schema, make sure
 all the files are located in the same directory, and validate against csl.rnc.
 
-csl-data
-~~~~~~~~
-
-Although hosted in the same code repository as the rest of the schema,
-csl-data.rnc is not used for style validation. Instead, it aims to describe how
-data can (and should) be presented to CSL processors, such as |link|
-citeproc-js_. Note that csl-data.rnc is not complete, and that input data
-doesn't need to consist of XML (e.g. |link| citeproc-js_ accepts JSON).
-
-.. _citeproc-js: http://bitbucket.org/fbennett/citeproc-js/
-
 Validation
 ----------
 
@@ -129,7 +114,7 @@ ignores the rules). In addition, the CSL 1.0 schema can now be used to validate
 the |link| `locales files`_ (e.g. "locales-en-US.xml"), which contain
 localizations of terms, date formats and style options.
 
-.. _locales files: http://bitbucket.org/bdarcus/csl-locales/src/
+.. _locales files: https://github.com/citation-style-language/locales
 
 Styles
 ++++++
@@ -137,12 +122,12 @@ Styles
 Updating CSL 0.8 Styles
 -----------------------
 
-CSL 1.0 is backward incompatible with CSL 0.8, which means that 'old' styles
-written for CSL 0.8 won't work with CSL 1.0 processors. Fortunately, it is
-possible to (automatically) update CSL 0.8 styles to the CSL 1.0 format using
-the |link| `upgrade.xsl
-<http://bitbucket.org/bdarcus/csl-utils/raw/tip/update.xsl>`_ XSLT stylesheet.
-The developers of Zotero will perform this conversion for all the styles in the
+CSL 1.0 is backward incompatible with CSL 0.8, which means that CSL 0.8 styles
+don't work with CSL 1.0 processors. Fortunately, it is possible to
+(automatically) update CSL 0.8 styles to the CSL 1.0 format using the |link|
+`upgrade.xsl
+<https://github.com/citation-style-language/utilities/raw/master/update.xsl>`_
+XSLT stylesheet. This conversion has been performed for all the styles in the
 |link| `Zotero Style Repository <http://www.zotero.org/styles>`_. However, if
 you use (custom) CSL styles that aren't included in this style repository, you
 might need to do this yourself.
@@ -151,7 +136,7 @@ Using upgrade.xsl
 ~~~~~~~~~~~~~~~~~
 
 First, check whether the styles that you wish to update validate against the
-|link| `CSL 0.8 schema
+|link| `CSL 0.8.1 schema
 <http://citationstyles.org/citation-style-language/schema/>`_.
 
 Then use an XSLT processor to update the styles. Available options are the
@@ -162,8 +147,9 @@ command-line tools |link| `Saxon <http://saxon.sourceforge.net/>`_ and |link|
 used. For the latter tool, the instructions are:
 
 1. Paste the contents of |link| `upgrade.xsl
-   <http://bitbucket.org/bdarcus/csl-utils/raw/tip/update.xsl>`_ into the "xslt"
-   text box at |link| `<http://www.shell-tools.net/index.php?op=xslt>`_
+   <https://github.com/citation-style-language/utilities/raw/master/update.xsl>`_
+   into the "xslt" text box at |link|
+   `<http://www.shell-tools.net/index.php?op=xslt>`_
 2. Paste the contents of the CSL 0.8 style into the "xml" text box
 3. Click the "Submit Query"-button
 4. Copy the text from the "output" text box to a suitable text editor (e.g.
@@ -267,8 +253,7 @@ Localization
 
 The "locales-xx-XX.xml" files (with "xx-XX" indicating the locale, e.g. "en-US"
 for "English - United States") that are part of CSL previously had only the role
-of supplying localized terms (translations are made via |link| `BabelZilla
-<http://www.babelzilla.org/>`_). With CSL 1.0, these locale files also contain
+of supplying localized terms. With CSL 1.0, these locale files also contain
 localized style options and localized date formats. Because of this, some
 changes have been made to the XML format of these files: ``cs:locale`` has
 replaced ``terms`` as the root element, the ``xml:lang`` and ``xmlns``
@@ -439,10 +424,8 @@ Default Locale
 To prevent localization of styles (which might be desirable for journal-specific
 styles) the ``default-locale`` attribute can be included on the ``cs:style``
 element (this attribute already existed in CSL 0.8, but was not supported by
-Zotero). The possible values of this attribute are the locale codes (e.g.
-"fr-FR" for French). A full list of locale codes can be found in |link|
-`Zotero's chrome manifest
-<https://www.zotero.org/svn/extension/trunk/chrome.manifest>`_. An example:
+Zotero). Its value should be a locale code (e.g.
+"fr-FR" for French). An example:
 
 .. sourcecode:: xml
 
@@ -694,9 +677,9 @@ an attribute on ``cs:style``. To understand how this option works, it is
 important to recognize that not all particles are equal: name particles can be
 either kept or dropped when only the surname is shown (from now on we will refer
 to these two types as non-dropping-particle and dropping-particle,
-respectively). A single name can contain particles of both types (in this case the
-non-dropping-particle always comes after the dropping-particle). For example, the
-French name "Gérard de la Martinière" can be deconstructed into:
+respectively). A single name can contain particles of both types (in this case
+the non-dropping-particle always comes after the dropping-particle). For
+example, the French name "Gérard de la Martinière" can be deconstructed into:
 
 ============ =====================
 "Gérard"     given name
@@ -734,9 +717,9 @@ The ``demote-non-dropping-particle`` attribute can be set to the following
 values:
 
 - "never": the non-dropping-particle is treated as part of the family name,
-  whereas the dropping-particle is appended (e.g. "de Koning, W.", "la Martinière,
-  Gérard de"). The non-dropping-particle is part of the primary sort key (example
-  A, e.g. "de Koning, W." appears under "D").
+  whereas the dropping-particle is appended (e.g. "de Koning, W.", "la
+  Martinière, Gérard de"). The non-dropping-particle is part of the primary sort
+  key (example A, e.g. "de Koning, W." appears under "D").
 - "sort-only": as "never", with the exception that non-dropping-particle is
   demoted to a secondary sort key (see example B, e.g. "de Koning, W." appears
   under "K").
