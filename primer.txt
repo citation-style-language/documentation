@@ -15,7 +15,7 @@ __ http://citationstyles.org/
 
 .. class:: info-version
 
-   version 2011-01-12
+   version 2011-05-24
 
 .. class:: contributors
 
@@ -67,8 +67,7 @@ localization support: with a single CSL style, you can format citations and
 bibliographies in any of several dozen different languages, using localized
 terms, date formats, and punctuation.
 
-.. [#] Over a thousand CSL styles are available at
-       |link| http://www.zotero.org/styles
+.. [#] Over 1500 CSL styles are available at |link| http://www.zotero.org/styles
 
 Different Classes of Citation Styles
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -465,17 +464,16 @@ styles are both written in correct XML and conform to the CSL schema. Both these
 checks can be performed with an XML validator. Here we will use the
 online validator |link| `Validator.nu <http://validator.nu/>`_:
 
-1. Select the style. Select the "Text Field" option in the first dropdown menu,
-   and paste the modified style into the text box.
+1. Select the style you want to validate. When using "Address" option, provide
+   the URL to the style and check the "Be lax about HTTP Content-Type"
+   check-box. With "File Upload", select the style file on your computer. With
+   "Text Field", paste the style code into the text box and select the "XML;
+   don't load external entities" option for the "Parser" drop-down menu.
    
-2. Paste the URL to the CSL schema into the "Schemas" text field. For CSL
-   1.0: http://bitbucket.org/bdarcus/csl-schema/raw/855dcc00cba7/csl.rnc
+2. Paste the URL to the CSL 1.0 schema into the "Schemas" text field:
+   https://github.com/citation-style-language/schema/raw/v1.0/csl.rnc
    
-3. In the "Parser" drop-down menu, select "XML; don't load external entities"
-   
-4. Check the option "Be lax about HTTP Content-Type".
-   
-5. Click the "Validate" button.
+3. Click the "Validate" button.
 
 When we perform these steps, we get an error:
 
