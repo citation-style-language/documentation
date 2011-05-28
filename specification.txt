@@ -509,8 +509,8 @@ file:
       </terms>
     </locale>
 
-Localized Terms
-~~~~~~~~~~~~~~~
+Terms
+~~~~~
 
 Terms are localized strings (e.g. with English and German locales, the "and"
 term is rendered as "and" and "und", respectively). Terms are defined with
@@ -530,6 +530,12 @@ the same term with the optional ``form`` attribute set to:
 -  "verb" - e.g. "edited by" for the term "editor"
 -  "verb-short" - e.g. "ed." for the term "editor"
 -  "symbol" - e.g. "§" for the term "section"
+
+If a term is called in a form that is undefined, even after locale fallback (see
+`Locale Prioritization`_), there is fallback to other forms: "verb-short" first
+falls back to "verb", "symbol" first falls back to "short", and "verb" and
+"short" both fall back to "long". Terms for which no locale or form fallback is
+available are rendered as empty strings.
 
 Localized Dates
 ~~~~~~~~~~~~~~~
@@ -615,10 +621,7 @@ source identifier). The available source types are:
    Terms`_). The ``plural`` attribute may be set to either "false" (the default)
    or "true" to select the singular or plural variant of a term. The ``form``
    attribute may be set to select a form variant: "long" (the default), "short",
-   "verb", "verb-short" or "symbol". ``cs:text`` falls back to another form
-   if the specified form of the selected term is undefined: "verb-short" first
-   falls back to "verb", "symbol" first falls back to "short", and "verb" and
-   "short" both fall back to "long".
+   "verb", "verb-short" or "symbol".
 -  ``value`` - verbatim text. The attribute value is the text to appear in the
    output.
 
