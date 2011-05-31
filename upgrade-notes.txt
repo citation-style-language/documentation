@@ -73,7 +73,7 @@ Documentation
 
 Prior to the release of CSL 1.0, CSL documentation was rather scarce. Most of
 what was available was hosted on the |link| `Zotero wiki
-<http://www.zotero.org/support/`_. With CSL 1.0, we improved on this situation.
+<http://www.zotero.org/support/>`_. With CSL 1.0, we improved on this situation.
 In addition to these upgrade notes, a full |link| specification_ has been made
 available. As before, the |link| `schema
 <http://citationstyles.org/citation-style-language/schema/>`_ itself is also a
@@ -883,6 +883,8 @@ but here special XML characters ("<", ">") have to be escaped, e.g.:
 In contrast, markup used with the ``prefix`` and ``suffix`` attributes is not
 recognized. Finally, note that bold and italics markup are subject to
 `flipflopping`_.
+
+.. _citeproc-js: http://bitbucket.org/fbennett/citeproc-js/
 
 second-field-align
 ~~~~~~~~~~~~~~~~~~
