@@ -509,8 +509,8 @@ file:
       </terms>
     </locale>
 
-Terms
-~~~~~
+Localized Terms
+~~~~~~~~~~~~~~~
 
 Terms are localized strings (e.g. with English and German locales, the "and"
 term is rendered as "and" and "und", respectively). Terms are defined with
@@ -536,6 +536,13 @@ If a term is called in a form that is undefined, even after locale fallback (see
 falls back to "verb", "symbol" first falls back to "short", and "verb" and
 "short" both fall back to "long". Terms for which no locale or form fallback is
 available are rendered as empty strings.
+
+Note that when superscripted characters are required inside a locale term, these
+should be inserted as individual `superscripted Unicode characters`__. Platform-specific
+markup (such as LaTeX or HTML) should not be used in locale strings.
+
+__ http://unicode.org/reports/tr30/datafiles/SuperscriptFolding.txt
+
 
 Localized Dates
 ~~~~~~~~~~~~~~~
@@ -1981,7 +1988,7 @@ Quotes
 
 The ``quotes`` attribute may set on ``cs:text``. When set to "true" ("false" is
 default), the rendered text is wrapped in quotes (the quotation marks used are
-localized terms). The localized ``punctuation-in-quote`` option controls whether
+ms). The localized ``punctuation-in-quote`` option controls whether
 an adjoining comma or period appears outside (default) or inside the closing
 quotation mark (see `Locale Options`_).
 
