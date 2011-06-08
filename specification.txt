@@ -260,8 +260,8 @@ independent styles, ``cs:info`` has the following child elements:
     <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
 
 ``cs:updated``
-    Must appear once. The contents of ``cs:updated`` must be a |link| `timestamp
-    <http://books.xmlschemata.org/relaxng/ch19-77049.html>`_.
+    Must appear once. The optional contents of ``cs:updated`` must be a |link|
+    `timestamp <http://books.xmlschemata.org/relaxng/ch19-77049.html>`_.
     
 In `dependent styles`_, ``cs:author``, ``cs:contributor`` and ``cs:rights`` are
 not allowed. In addition, ``cs:link`` must be used with ``rel`` set to
