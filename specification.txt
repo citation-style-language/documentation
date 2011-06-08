@@ -235,9 +235,10 @@ independent styles, ``cs:info`` has the following child elements:
 ``cs:rights`` (optional)
     May appear once. The contents of ``cs:rights`` specifies the license under
     which the style file is released. See, e.g. the |link| `Creative Commons
-    <http://creativecommons.org/license/>`_. The element may carry a
-    ``xml:lang`` attribute to specify the language of the content (the value
-    must be an |link| `xsd:language locale code
+    <http://creativecommons.org/license/>`_. The element may carry a ``license``
+    attribute to specify the URI of the license, and an ``xml:lang`` attribute
+    to specify the language of the content (the value must be an |link|
+    `xsd:language locale code
     <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
 
 ``cs:summary`` (optional)
@@ -288,9 +289,9 @@ An example of ``cs:info`` for an independent style:
       <category field="zoology"/>
       <updated>2008-10-29T21:01:24+00:00</updated>
       <summary>Style for Some Journal</summary>
-      <rights>This work is licensed under a Creative Commons
-              Attribution-Share Alike 3.0 Unported License
-              http://creativecommons.org/licenses/by-sa/3.0/</rights>
+      <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work
+      is licensed under a Creative Commons Attribution-Share Alike 3.0 Unported
+      License</rights>
     </info>
 
 Citation
