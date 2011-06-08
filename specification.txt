@@ -205,11 +205,12 @@ independent styles, ``cs:info`` has the following child elements:
     of the style. A stable, unique and dereferenceable URI is desired for
     publicly available styles.
 
-``cs:issn``/``cs:issnl`` (optional)
+``cs:issn``/``cs:eissn``/``cs:issnl`` (optional)
     The ``cs:issn`` element may be used multiple times to indicate the ISSN
     identifier(s) of the journal for which the style was written. The
-    ``cs:issnl`` element may be used once for the |link| `ISSN-L identifier
-    <http://www.issn.org/2-22637-What-is-an-ISSN-L.php>`_.
+    ``cs:eissn`` and ``cs:issnl`` elements may each be used once for the eISSN
+    and |link| `ISSN-L <http://www.issn.org/2-22637-What-is-an-ISSN-L.php>`_
+    identifiers, respectively.
 
 ``cs:link`` (optional)
     May be used multiple times. ``cs:link`` must carry two attributes: ``href``,
