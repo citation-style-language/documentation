@@ -1110,10 +1110,15 @@ Name-part Formatting
 
 The ``cs:name`` element may contain one or two ``cs:name-part`` child elements
 for name-part-specific formatting. ``cs:name-part`` must carry the ``name``
-attribute, set to either "given" or "family". If set to "given", `formatting`_
-and `text-case`_ attributes on ``cs:name-part`` affect the "given" and
-"dropping-particle" name-parts. If set to "family", they affect the "family" and
-"non-dropping-particle" name-parts.
+attribute, set to either "given" or "family".
+
+If set to "given", `formatting`_ and `text-case`_ attributes on ``cs:name-part``
+affect the "given" and "dropping-particle" name-parts. `affixes`_ surround the
+"given" name-part, enclosing demoted name particles for inverted names.
+
+If set to "family", `formatting`_ and `text-case`_ attributes affect the
+"family" and "non-dropping-particle" name-parts. `affixes`_ surround the
+"family" name-part, enclosing preceding name particles.
 
 The "suffix" name-part is not subject to name-part formatting. The use of
 ``cs:name-part`` elements does not influence which, or in what order, name-parts
@@ -1864,13 +1869,13 @@ The affixes attributes ``prefix`` and ``suffix`` may be set on ``cs:date``
 (except when ``cs:date`` defines a localized date format), ``cs:date-part``
 (except when the parent ``cs:date`` element calls a localized date format),
 ``cs:et-al``, ``cs:group``, ``cs:label``, ``cs:layout``, ``cs:name``,
-``cs:names``, ``cs:number`` and ``cs:text``. The attribute value is either added
-before (``prefix``) or after (``suffix``) the output of the element carrying the
-attribute, but affixes are only rendered if the element produces output. With
-the exception of affixes set on ``cs:layout``, affixes are outside the scope of
-`formatting`_, `quotes`_, `strip-periods`_ and `text-case`_ attributes set on
-the same element (a workaround, to have these attributes take effect on affixes,
-is to place the attribute on a parent ``cs:group`` element).
+``cs:name-part``, ``cs:names``, ``cs:number`` and ``cs:text``. The attribute
+value is either added before (``prefix``) or after (``suffix``) the output of
+the element carrying the attribute, but affixes are only rendered if the element
+produces output. With the exception of affixes set on ``cs:layout``, affixes are
+outside the scope of `formatting`_, `quotes`_, `strip-periods`_ and `text-case`_
+attributes set on the same element (as a workaround, these attributes take
+effect on affixes when set on a parent ``cs:group`` element).
 
 Delimiter
 ~~~~~~~~~
