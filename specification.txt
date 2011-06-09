@@ -1116,11 +1116,12 @@ attribute, set to either "given" or "family".
 
 If set to "given", `formatting`_ and `text-case`_ attributes on ``cs:name-part``
 affect the "given" and "dropping-particle" name-parts. `affixes`_ surround the
-"given" name-part, enclosing demoted name particles for inverted names.
+"given" name-part, enclosing any demoted name particles for inverted names.
 
 If set to "family", `formatting`_ and `text-case`_ attributes affect the
 "family" and "non-dropping-particle" name-parts. `affixes`_ surround the
-"family" name-part, enclosing preceding name particles.
+"family" name-part, enclosing any preceding name particles, as well as the
+"suffix" name-part for non-inverted names.
 
 The "suffix" name-part is not subject to name-part formatting. The use of
 ``cs:name-part`` elements does not influence which, or in what order, name-parts
