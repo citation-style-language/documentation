@@ -885,7 +885,9 @@ variable are separated. ``cs:name`` may carry the following attributes:
 
 ``delimiter-precedes-last``
     Determines when the name delimiter is used to separate the second to last
-    and the last name in name lists. Allowed values:
+    and the last name in name lists (if ``and`` is not set, the name delimiter
+    is always used, regardless of the value of ``delimiter-precedes-last``).
+    Allowed values:
     
     -  "contextual" - (default), name delimiter is only used for name lists
        with three or more names
