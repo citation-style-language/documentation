@@ -262,7 +262,7 @@ independent styles, ``cs:info`` has the following child elements:
     <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
 
 ``cs:updated``
-    Must appear once. The optional contents of ``cs:updated`` must be a |link|
+    May appear once. The optional contents of ``cs:updated`` must be a |link|
     `timestamp <http://books.xmlschemata.org/relaxng/ch19-77049.html>`_.
     
 In `dependent styles`_, ``cs:author``, ``cs:contributor`` and ``cs:rights`` are
@@ -837,7 +837,6 @@ be set on ``cs:names`` to separate the names of the different name variables
 .. sourcecode:: xml
 
     <names variable="editor translator" delimiter="; ">
-      <name/>
       <label prefix=" (" suffix=")"/>
     </names>
 
@@ -848,9 +847,9 @@ carry `affixes`_, `display`_ and `formatting`_ attributes.
 Name
 ^^^^
 
-The ``cs:name`` element is a required child element of ``cs:names``. It
-describes the formatting of individual names, and how names within a name
-variable are separated. ``cs:name`` may carry the following attributes:
+The ``cs:name`` element, an optional child element of ``cs:names``, can be used
+to describe the formatting of individual names, and the separation of names
+within a name variable. ``cs:name`` may carry the following attributes:
 
 ``and``
     Specifies the delimiter between the second to last and last name of the
@@ -1142,15 +1141,14 @@ Et-al
 
 Et-al abbreviation, controlled via the ``et-al-...`` attributes (see `Name`_),
 can be further customized with the optional ``cs:et-al`` element, which must
-follow the ``cs:name`` element. The ``term`` attribute may be set to either
-"et-al" (the default) or to "and others" to use either term. The `affixes`_ and
-`formatting`_ attributes may also be used, for example to italicize the et-al
-term:
+follow the ``cs:name`` element (if present). The ``term`` attribute may be set
+to either "et-al" (the default) or to "and others" to use either term. The
+`affixes`_ and `formatting`_ attributes may also be used, for example to
+italicize the "et-al" term:
 
 .. sourcecode:: xml
 
     <names variable="author">
-      <name/>
       <et-al term="and others" font-style="italic"/>
     </names>
 
@@ -1175,7 +1173,6 @@ substituted by the "editor" name variable, or, when no editors exist, by the
 
     <macro name="author">
       <names variable="author">
-        <name/>
         <substitute>
           <names variable="editor"/>
           <text macro="title"/>
