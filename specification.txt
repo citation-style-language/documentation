@@ -2016,8 +2016,26 @@ The ``text-case`` attribute may be set on ``cs:date-part``, ``cs:label``,
    characters remain in their original case)
 -  "capitalize-all": capitalizes the first character of every word (other
    characters remain in their original case)
--  "title": renders text in title case
+-  "title": renders text in title case [#]_
 -  "sentence": renders text in sentence case
+
+Note that "title" has no effect when applied to non-English content. Specifically, this option has no effect in two situations, depending on the respective values of the optional ``default-locale`` attribute on the ``cs:style`` element (referred to below as "style locale"), [#]_ and of the optional ``language`` key on the input item (referred to below as "item locale"). [#]_
+
+       * Where the style locale is nil or is set to "en", the option is suppressed if the item locale
+         is set to a value other than "en". The option is applied if the item locale is nil.
+
+       * Where the style locale is set to a non-nil value other than "en", the option is suppressed
+         unless the item locale is set to "en".
+
+.. [#] In this specific instance, "style locale" refers to the first two-character element
+       of a locale code set on the ``cs:style`` element.
+
+.. [#] In this specific instance, "item locale" refers to the primary language subtag 
+       of a BCF 47 language tag (currently documented in `RFC 5646`__) appearing at the
+       start of the string value under the "language" key of the input item.
+
+__ http://tools.ietf.org/html/rfc5646
+
 
 Appendices
 ----------
