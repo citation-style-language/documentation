@@ -2019,6 +2019,24 @@ The ``text-case`` attribute may be set on ``cs:date-part``, ``cs:label``,
 -  "title": renders text in title case
 -  "sentence": renders text in sentence case
 
+Rules for conversion: ``title``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+When ``text-case`` is set to ``title``, the following rules are applied:
+
+1. If the full string contains only one word of three characters or less, it is left untouched.
+2. If the full string is all-uppercase, then
+
+   a. Capitalize the first letter of all words that do not follow a colon, and are not
+      the first word or the last word in the full string.
+   b. Force all other words to lowercase
+
+3. If the full string is in mixed-case, then
+
+   a. Do not touch words that are all-uppercase
+   b. For all other words, apply the rules under 2, above.
+
+
 Note that "title" has no effect when applied to non-English content. Specifically, this option has no effect in two situations, depending on the respective values of the optional ``default-locale`` attribute on the ``cs:style`` element (referred to below as "style locale"), [#]_ and of the optional ``language`` key on the input item (referred to below as "item locale"). [#]_
 
        * Where the style locale is nil or is set to "en", the option is suppressed if the item locale
