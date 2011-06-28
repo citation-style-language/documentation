@@ -2017,31 +2017,46 @@ The ``text-case`` attribute may be set on ``cs:date-part``, ``cs:label``,
 -  "capitalize-all": capitalizes the first character of every word (other
    characters remain in their original case)
 -  "sentence": renders text in sentence case
--  "title": renders text in title case. Has no effect for non-English items. If
-   the ``default-locale`` attribute on ``cs:style`` isn't set, or set to a
-   locale code with a primary language tag of "en" (English), an item is
-   considered non-English if its metadata contains a ``language`` field with a
-   value that doesn't start with a "en" primary language tag. If
-   ``default-locale`` is set to a locale code with a primary language tag other
-   than "en", an item is considered non-English unless its ``language`` field
-   starts with the "en" primary language tag.
+-  "title": renders text in title case
 
-Rules for conversion: ``title``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Title Case Conversion
+^^^^^^^^^^^^^^^^^^^^^
 
-When ``text-case`` is set to ``title``, the following rules are applied:
+Non-English Items
+'''''''''''''''''
 
-1. If the full string contains only one word of three characters or less, it is left untouched.
-2. If the full string is all-uppercase, then
+As many languages do not use title case, title case conversion (with
+``text-case`` set to "title") only affects English-language items.
 
-   a. Capitalize the first letter of all words that do not follow a colon, and are not
-      the first word or the last word in the full string.
-   b. Force all other words to lowercase
+If the ``default-locale`` attribute on ``cs:style`` isn't set, or set to a
+locale code with a primary language tag of "en" (English), items are assumed to
+be English. An item is only considered to be non-English if its metadata
+contains a ``language`` field with a non-nil value that doesn't start with the
+"en" primary language tag.
 
-3. If the full string is in mixed-case, then
+If ``default-locale`` is set to a locale code with a primary language tag other
+than "en", items are assumed to be non-English. An item is only considered to be
+English if the value of its ``language`` field starts with the "en" primary
+language tag.
 
-   a. Do not touch words that are all-uppercase
-   b. For all other words, apply the rules under 2, above.
+Title Case Algorithm
+''''''''''''''''''''
+
+Title case conversion (with ``text-case`` set to "title") for English items is
+performed by:
+
+1. If a string consists of only one word of three characters or less, it is left
+   untouched.
+2. If a string is in upper case, then
+
+   a. For words that do not follow a colon, and are neither the first or last
+      word in the full string, only the first letter is capitalized.
+   b. All other words are lowercased.
+
+3. If a string is in mixed or lower case, then
+
+   a. Words in upper case are left untouched.
+   b. All other words are subject to the rules under 2, above.
 
 Appendices
 ----------
