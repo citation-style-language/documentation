@@ -2042,21 +2042,19 @@ language tag.
 Title Case Algorithm
 ''''''''''''''''''''
 
-Title case conversion (with ``text-case`` set to "title") for English items is
-performed by:
+Title case conversion (with ``text-case`` set to "title") for English-language
+items is performed by:
 
-1. If a string consists of only one word of three characters or less, it is left
-   untouched.
-2. If a string is in upper case, then
+1. For upper case strings, only the first letter of each word is left
+   capitalized.
 
-   a. For words that do not follow a colon, and are neither the first or last
-      word in the full string, only the first letter is capitalized.
-   b. All other words are lowercased.
-
-3. If a string is in mixed or lower case, then
-
-   a. Words in upper case are left untouched.
-   b. All other words are subject to the rules under 2, above.
+2. For lower or mixed case strings, words in upper case are left untouched. For
+   words in lower or mixed case the first letter is capitalized.
+   
+In both cases, stop words are lowercased, unless they are the first or last word
+in the string, or follow a colon. The stop words are "a", "an", "and", "as",
+"at", "but", "by", "down", "for", "from", "in", "into", "nor", "of", "on",
+"onto", "or", "over", "so", "the", "till", "to", "up", "via", "with", and "yet".
 
 Appendices
 ----------
