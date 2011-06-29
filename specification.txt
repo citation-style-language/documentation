@@ -2044,8 +2044,8 @@ Text-case
 The ``text-case`` attribute may be set on ``cs:date-part``, ``cs:label``,
 ``cs:name-part``, ``cs:number`` and ``cs:text``. The allowed values:
 
--  "lowercase": renders text in lower case
--  "uppercase": renders text in upper case
+-  "lowercase": renders text in lowercase
+-  "uppercase": renders text in uppercase
 -  "capitalize-first": capitalizes the first character (other
    characters remain in their original case)
 -  "capitalize-all": capitalizes the first character of every word (other
@@ -2053,8 +2053,33 @@ The ``text-case`` attribute may be set on ``cs:date-part``, ``cs:label``,
 -  "sentence": renders text in sentence case
 -  "title": renders text in title case
 
+Sentence Case Conversion
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Sentence case conversion (with ``text-case`` set to "sentence") is performed by:
+
+1. For uppercase strings, the first letter of the string is uppercased. All
+   other letters are lowercased.
+
+2. For lower or mixed case strings, the first letter of the string is
+   uppercased. Words entirely in uppercase are left untouched.
+
 Title Case Conversion
 ^^^^^^^^^^^^^^^^^^^^^
+
+Title case conversion (with ``text-case`` set to "title") for English-language
+items is performed by:
+
+1. For uppercase strings, the first letter of each word remains in uppercase.
+   All other letters are lowercased.
+
+2. For lower or mixed case strings, the first letter of each word is uppercased.
+   Words entirely in uppercase are left untouched.
+   
+In both cases, stop words are lowercased, unless they are the first or last word
+in the string, or follow a colon. The stop words are "a", "an", "and", "as",
+"at", "but", "by", "down", "for", "from", "in", "into", "nor", "of", "on",
+"onto", "or", "over", "so", "the", "till", "to", "up", "via", "with", and "yet".
 
 Non-English Items
 '''''''''''''''''
@@ -2072,23 +2097,6 @@ If ``default-locale`` is set to a locale code with a primary language tag other
 than "en", items are assumed to be non-English. An item is only considered to be
 English if the value of its ``language`` field starts with the "en" primary
 language tag.
-
-Title Case Algorithm
-''''''''''''''''''''
-
-Title case conversion (with ``text-case`` set to "title") for English-language
-items is performed by:
-
-1. For upper case strings, only the first letter of each word is left
-   capitalized.
-
-2. For lower or mixed case strings, words in upper case are left untouched. For
-   words in lower or mixed case the first letter is capitalized.
-   
-In both cases, stop words are lowercased, unless they are the first or last word
-in the string, or follow a colon. The stop words are "a", "an", "and", "as",
-"at", "but", "by", "down", "for", "from", "in", "into", "nor", "of", "on",
-"onto", "or", "over", "so", "the", "till", "to", "up", "via", "with", and "yet".
 
 Appendices
 ----------
