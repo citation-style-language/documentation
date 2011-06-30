@@ -1494,8 +1494,8 @@ Citation Collapsing
     Activates citation collapsing. Allowed values:
     
     -  "citation-number" - collapses numeric citation ranges (e.g. from "[1, 2,
-       3, 5]" to "[1-3, 5]"). Only increasing ranges are collapsed, e.g. "[3, 2,
-       1]" will not collapse (to see how to sort cites by their
+       3, 5]" to "[1 |--| 3, 5]"). Only increasing ranges are collapsed, e.g.
+       "[3, 2, 1]" will not collapse (to see how to sort cites by their
        ``citation-number`` variable, see `Sorting`_).
     -  "year" - when consecutive cites share the same names in the rendered name
        variables, subsequent cites are collapsed to only a year, e.g. from "(Doe
@@ -1504,8 +1504,8 @@ Citation Collapsing
        to only the year-suffix, e.g. "(Doe 2000a, b)" instead of "(Doe 2000a,
        2000b)".
     -  "year-suffix-ranged" - collapses as "year-suffix", but also collapses
-       ranges of year-suffix markers, e.g. "(Doe 2000a-c,e)" instead of "(Doe
-       2000a, b, c, e)".
+       ranges of year-suffix markers, e.g. "(Doe 2000a |--| c,e)" instead of
+       "(Doe 2000a, b, c, e)".
 
 ``year-suffix-delimiter``
     Specifies the delimiter for year-suffix elements (defaults to the delimiter
@@ -1595,10 +1595,10 @@ Page Ranges
 '''''''''''
 
 ``page-range-format``
-    Specifies the format of page ranges: "expanded" (e.g. "321-328"), "minimal"
-    ("321-8"), or "chicago" ("321-28") (for detailed format descriptions, see
-    `Appendix IV - Page Range Formats`_). If the attribute is not set, page
-    ranges are rendered without reformatting.
+    Specifies the format of page ranges: "expanded" (e.g. "321 |--| 328"),
+    "minimal" ("321 |--| 8"), or "chicago" ("321 |--| 28") (for detailed format
+    descriptions, see `Appendix IV - Page Range Formats`_). If the attribute is
+    not set, page ranges are rendered without reformatting.
 
 Name Particles
 ''''''''''''''
@@ -1785,8 +1785,9 @@ years are sorted inversely, e.g. "100BC, 50BC, 50AD, 100AD". Seasons are ignored
 for sorting, as the chronological order of the seasons differs between the
 northern and southern hemispheres. In the case of date ranges, the start date is
 used for the primary sort, and the end date is used for a secondary sort, e.g.
-"2000-2001, 2000-2005, 2002-2003, 2002-2009". Date ranges are placed after
-single dates when they share the same (start) date, e.g. "2000, 2000-2002".
+"2000 |--| 2001, 2000 |--| 2005, 2002 |--| 2003, 2002 |--| 2009". Date ranges
+are placed after single dates when they share the same (start) date, e.g. "2000,
+2000 |--| 2002".
 
 **numbers:** `Number variables`_ called via the ``variable`` attribute are
 returned as integers (``form`` is "numeric"). If the original variable value
@@ -1823,6 +1824,15 @@ called via the ``variable`` attribute. In contrast, macros return only those
 date-parts that would otherwise be rendered (respecting the value of the
 ``date-parts`` attribute for localized dates, or the listing of ``cs:date-part``
 elements for non-localized dates).
+
+Range Delimiters
+~~~~~~~~~~~~~~~~
+
+Collapsed ranges for the "citation-number" and "year-suffix" variables are
+delimited by an en-dash (e.g. "(1 |--| 3, 5)" and "(Doe 2000a |--| c,e)").
+
+If the ``page-range-format`` attribute is used (see `Page Ranges`_), the "page"
+variable is rendered with an en-dash replacing any hyphens or em-dashes.
 
 Formatting
 ~~~~~~~~~~
@@ -2476,11 +2486,12 @@ The page abbreviation rules for the different values of the
 ``page-range-format`` attribute on ``cs:style`` are:
 
 "minimum"
-    All digits repeated in the second number are left out: 42-5, 321-8, 2787-816
+    All digits repeated in the second number are left out: 42 |--| 5, 321 |--|
+    8, 2787 |--| 816
 
 "expanded"
-    Abbreviated page ranges are expanded to their non-abbreviated form: 42-45,
-    321-328, 2787-2816
+    Abbreviated page ranges are expanded to their non-abbreviated form: 42 |--|
+    45, 321 |--| 328, 2787 |--| 2816
 
 "chicago"
     Page ranges are abbreviated according to the |link|
@@ -2488,25 +2499,25 @@ The page abbreviation rules for the different values of the
 
 Table: **Chicago Manual of Style page range abbreviation rules**
 
-+------------------------+--------------------------+----------------+
-| First number           | Second number            | Examples       |
-+========================+==========================+================+
-| Less than 100          | Use all digits           | 3-10; 71-72    |
-+------------------------+--------------------------+----------------+
-| 100 or multiple of 100 | Use all digits           | 100-104;       |
-|                        |                          | 600-613;       |
-|                        |                          | 1100-1123      |
-+------------------------+--------------------------+----------------+
-| 101 through 109 (in    | Use changed part only,   | 107-8; 505-17; |
-| multiples of 100)      | omitting unneeded zeros  | 1002-6         |
-+------------------------+--------------------------+----------------+
-| 110 through 199 (in    | Use two digits, or more  | 321-25;        |
-| multiples of 100)      | as needed                | 415-532;       |
-|                        |                          | 11564-68;      |
-|                        |                          | 13792-803      |
-+------------------------+--------------------------+----------------+
-| 4 digits               | If numbers are four      | 1496-1504;     |
-|                        | digits long and three    | 2787-2816      |
-|                        | digits change, use all   |                |
-|                        | digits                   |                |
-+------------------------+--------------------------+----------------+
++------------------------+--------------------------+--------------------------+
+| First number           | Second number            | Examples                 |
++========================+==========================+==========================+
+| Less than 100          | Use all digits           | 3 |--| 10; 71 |--| 72    |
++------------------------+--------------------------+--------------------------+
+| 100 or multiple of 100 | Use all digits           | 100 |--| 104;            |
+|                        |                          | 600 |--| 613;            |
+|                        |                          | 1100 |--| 1123           |
++------------------------+--------------------------+--------------------------+
+| 101 through 109 (in    | Use changed part only,   | 107 |--| 8; 505 |--| 17; |
+| multiples of 100)      | omitting unneeded zeros  | 1002 |--| 6              |
++------------------------+--------------------------+--------------------------+
+| 110 through 199 (in    | Use two digits, or more  | 321 |--| 25;             |
+| multiples of 100)      | as needed                | 415 |--| 532;            |
+|                        |                          | 11564 |--| 68;           |
+|                        |                          | 13792 |--| 803           |
++------------------------+--------------------------+--------------------------+
+| 4 digits               | If numbers are four      | 1496 |--| 1504;          |
+|                        | digits long and three    | 2787 |--| 2816           |
+|                        | digits change, use all   |                          |
+|                        | digits                   |                          |
++------------------------+--------------------------+--------------------------+
