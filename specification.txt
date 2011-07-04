@@ -1490,12 +1490,12 @@ condition testing "true" [Step (5)] (see `Choose`_).
 Citation Grouping
 '''''''''''''''''
 
-Cites in "author-date" styles (see ``cs:category`` in `Info`_) that start with
-the output of a ``cs:names`` element, followed by a year or "no date" term, and
-(optionally) end with other rendering elements (e.g. a "locator" or explicit
-"year-suffix" variable), are subject to cite grouping. Cite grouping is only
-active when ``cs:citation`` carries the ``collapse`` or ``cite-group-delimiter``
-attributes (see `Citation Collapsing`_).
+In-text cites in the author-date format that start with the output of a
+``cs:names`` element, followed by a year or "no date" term, and (optionally) end
+with other rendering elements (e.g. a "locator" or explicit "year-suffix"
+variable), can be subject to cite grouping. Cite grouping is only active when
+``cs:citation`` carries the ``collapse`` or ``cite-group-delimiter`` attributes
+(see `Citation Collapsing`_).
 
 After cite sorting and disambiguation, any of such cites that share the same
 output of the ``cs:names`` element (this includes any output rendered through
