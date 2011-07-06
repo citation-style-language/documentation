@@ -1510,9 +1510,8 @@ E.g. the citation "(Doe 2002, Smith 2004, Doe 1999)" becomes "(Doe 2002, Doe
 Cite Collapsing
 '''''''''''''''
 
-Cite groups in citations of "author-date" styles, and cite ranges in citations
-in "numeric" styles can be collapsed through the use of the ``collapse``
-attribute.
+Cite groups in citations of author-date styles, and cite ranges in citations in
+numeric styles can be collapsed through the use of the ``collapse`` attribute.
 
 ``collapse``
     Activates cite collapsing. Allowed values:
