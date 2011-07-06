@@ -1487,33 +1487,35 @@ For cites that could not be disambiguated by steps 1-4, a final attempt at
 disambiguation is performed by rendering the cite with the ``disambiguate``
 condition testing "true" [Step (5)] (see `Choose`_).
 
-Citation Grouping
-'''''''''''''''''
+Cite Grouping
+'''''''''''''
 
-In-text cites in the author-date format that start with the output of a
-``cs:names`` element, followed by a year or "no date" term, and (optionally) end
-with other rendering elements (e.g. a "locator" or explicit "year-suffix"
-variable), can be subject to cite grouping. Cite grouping is only active when
-``cs:citation`` carries the ``collapse`` or ``cite-group-delimiter`` attributes
-(see `Citation Collapsing`_).
+Within in-text citations in the author-date format, cites with the same
+author(s) are commonly grouped and collapsed, e.g. "(Doe 1999, 2006; Smith
+2002)" instead of "(Doe 1999; Smith 2002; Doe 2006)".
 
-After cite sorting and disambiguation, any of such cites that share the same
-output of the ``cs:names`` element (this includes any output rendered through
-``cs:substitute``) are grouped together into a cite group. Cites are grouped
-with the first cite of the group while maintaining their original order relative
-to the other cites in the group. E.g. the citation "(Doe 2002, Smith 2004, Doe
-1999)" becomes "(Doe 2002, Doe 1999, Smith 2004)", where the two references by
-Doe form a cite group.
+Cite grouping only occurs when ``cs:citation`` carries the ``collapse`` or
+``cite-group-delimiter`` attributes (see `Cite Collapsing`_). Grouping is
+limited to those cites that start with the output of a ``cs:names`` element,
+followed by a year or "no date" term. They may end with other rendering
+elements, e.g. to render the "locator" or explicit "year-suffix" variables.
 
-Citation Collapsing
-'''''''''''''''''''
+After cite sorting and disambiguation, qualifying cites with the same output of
+the ``cs:names`` element (this includes any output rendered through
+``cs:substitute``) are grouped into a cite group. Cites group with the first
+cite of the group while maintaining their original order relative to each other.
+E.g. the citation "(Doe 2002, Smith 2004, Doe 1999)" becomes "(Doe 2002, Doe
+1999, Smith 2004)", where the two references by Doe form a cite group.
+
+Cite Collapsing
+'''''''''''''''
 
 Cite groups in citations of "author-date" styles, and cite ranges in citations
 in "numeric" styles can be collapsed through the use of the ``collapse``
 attribute.
 
 ``collapse``
-    Activates citation collapsing. Allowed values:
+    Activates cite collapsing. Allowed values:
     
     -  "citation-number" - collapses ranges of cite numbers (rendered through
        the "citation-number" variable) in citations for "numeric" styles (e.g.
@@ -1537,21 +1539,24 @@ attribute.
 
 ``cite-group-delimiter``
     Specifies the delimiter for cites within a cite group. Defaults to the
-    delimiter set on ``cs:layout`` in ``cs:citation``.
+    delimiter set on ``cs:layout`` in ``cs:citation``. E.g. with ``collapse``
+    set to "year", ``delimiter`` on ``cs:layout`` in ``cs:citation`` set to ";
+    ", and ``cite-group-delimiter`` set to ", ", citations look like "(Doe 1999,
+    2001; Jones 2000)".
 
 ``year-suffix-delimiter``
     Specifies the delimiter for year-suffixes. Defaults to the delimiter set on
-    ``cs:layout`` in ``cs:citation``.
+    ``cs:layout`` in ``cs:citation``. E.g. with ``collapse`` set to
+    "year-suffix", ``delimiter`` on ``cs:layout`` in ``cs:citation`` set to ";
+    ", and ``year-suffix-delimiter`` set to ",", citations look like "(Doe
+    1999a,b; Jones 2000)".
 
 ``after-collapse-delimiter``
     Specifies the cite delimiter to be used *after* a collapsed cite group.
-    Defaults to the delimiter set on ``cs:layout`` in ``cs:citation``.
-
-An illustration of the use of these delimiters: with ``collapse`` set to
-"year-suffix", ``delimiter`` on ``cs:layout`` in ``cs:citation`` set to ", ",
-``cite-group-delimiter`` set to ",", ``year-suffix-delimiter`` set to "/", and
-``after-collapse-delimiter`` set to "; ", citations look like "(Smith
-1999a/b,2000; Jones 2001, Brown 2007)".
+    Defaults to the delimiter set on ``cs:layout`` in ``cs:citation``. E.g. with
+    ``collapse`` set to "year", ``delimiter`` on ``cs:layout`` in
+    ``cs:citation`` set to ", ", and ``after-collapse-delimiter`` set to "; ",
+    citations look like "(Doe 1999, 2001; Jones 2000, Brown 2001)".
 
 Note Distance
 '''''''''''''
