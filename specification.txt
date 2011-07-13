@@ -265,12 +265,10 @@ independent styles, ``cs:info`` has the following child elements:
     May appear once. The optional contents of ``cs:updated`` must be a |link|
     `timestamp <http://books.xmlschemata.org/relaxng/ch19-77049.html>`_.
     
-In `dependent styles`_, ``cs:author``, ``cs:contributor`` and ``cs:rights`` are
-not allowed. In addition, ``cs:link`` must be used with ``rel`` set to
+In `dependent styles`_, ``cs:link`` must be used with ``rel`` set to
 "independent-parent", with the URI of the independent parent style set on
-``href``. ``cs:link`` may not be used with ``rel`` set to "template" and
-"documentation", but "self" is allowed to indicate the URI of the dependent
-style itself.
+``href``. In addition, ``cs:link`` may not be used with ``rel`` set to
+"template".
 
 An example of ``cs:info`` for an independent style:
 
@@ -288,7 +286,6 @@ An example of ``cs:info`` for an independent style:
       <category citation-format="author-date"/>
       <category field="zoology"/>
       <updated>2008-10-29T21:01:24+00:00</updated>
-      <summary>Style for Some Journal</summary>
       <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work
       is licensed under a Creative Commons Attribution-Share Alike 3.0 Unported
       License</rights>
