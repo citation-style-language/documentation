@@ -43,7 +43,16 @@ CSL 1.0.1 is a backwards compatible release, meaning that any valid CSL 1.0
 style should validate against the CSL 1.0.1 schema and work with any CSL
 1.0.1-compatible CSL processor.
 
-Changes (schema, up to 2011/7/7; compare: https://github.com/citation-style-language/schema/compare/75240da3ee54184009f40982a485dc68e7a0fa5f...master ):
+Changes:
+https://github.com/citation-style-language/schema
+From
+75240da3ee54184009f40982a485dc68e7a0fa5f (March 21, 2010)
+up to
+06f663099afcd619cd5edbb743a533952ebd74d0 (June 29, 2011)
+
+https://github.com/citation-style-language/schema/compare/75240da3ee54184009f40982a485dc68e7a0fa5f...06f663099afcd619cd5edbb743a533952ebd74d0
+
+
 
 Style Metadata
 --------------
@@ -182,6 +191,14 @@ https://github.com/citation-style-language/schema/commit/48c9abe5d7c917114e96d5b
 The ``cs:name`` element is no longer a required child element of ``cs:names``.
 
 https://github.com/citation-style-language/schema/commit/cab0cc6fae60771bfe9638d471f4f1bc4c75b4bf
+
+Independent "name-min" and "names-use-first"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The CSL schema now allows the "name-min" and "names-use-first" attributes to be
+set independently on ``cs:key``.
+
+https://github.com/citation-style-language/schema/commit/f1407079ec0f53ae58cb70000139a38651366e87
 
 Input data model
 ----------------
