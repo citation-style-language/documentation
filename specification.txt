@@ -1,6 +1,6 @@
-===============================
-`Citation Style Language 1.0`__
-===============================
+=================================
+`Citation Style Language 1.0.1`__
+=================================
 ~~~~~~~~~~~~~~~~~~~~~~
 Language Specification
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -16,7 +16,7 @@ __ http://citationstyles.org/
 .. class:: version-links
 
     This version:
-        http://citationstyles.org/downloads/specification-csl10-20110426.html
+        http://citationstyles.org/downloads/specification-csl101-20110726.html
     Latest version:
         http://citationstyles.org/downloads/specification.html
     Previous versions: 
@@ -53,11 +53,10 @@ formatting of citations, notes and bibliographies, offering:
 -  Extensive support for style requirements
 -  Automatic style localization
 -  Infrastructure for style distribution and updating
--  Already over a thousand freely available styles (most are CC BY-SA licensed)
+-  Already over 1500 freely available styles (Creative Commons BY-SA licensed)
 
-This specification, as well as additional documentation, schema, styles, and
-locales, can be found at the CSL project home, |link| `citationstyles.org
-<http://citationstyles.org>`_.
+For additional documentation, the CSL schema, styles, and locales, visit the CSL
+project home, |link| `citationstyles.org <http://citationstyles.org>`_.
 
 Terminology
 ~~~~~~~~~~~
@@ -78,32 +77,32 @@ the ``xmlns`` attribute) on the root ``cs:style`` or ``cs:locale`` element.
 File Types
 ----------
 
-There are three different types of CSL files: independent and dependent styles
-(which must have a ".csl" extension), and locale files, which follow the naming
-pattern "locales-xx-XX.xml" ("xx-XX" representing a language dialect, e.g.
-"en-US" for US English).
+There are three types of CSL files: independent and dependent styles (both types
+use the ".csl" extension), and locale files (these follow the naming pattern
+"locales-xx-XX.xml", where "xx-XX" represents the language dialect, e.g. "en-US"
+for US English).
 
 Independent Styles
 ~~~~~~~~~~~~~~~~~~
 
 Independent styles contain formatting instructions for citations, notes and
-bibliographies (they are generally not truly independent, as most rely on locale
-files for (default) localization data).
+bibliographies. They typically still rely on locale files for (default)
+localization data.
 
 Dependent Styles
 ~~~~~~~~~~~~~~~~
 
-Dependent styles don't contain any formatting instructions, but function as
-aliases or shortcuts. For example, dependent styles for journals that share the
-same citation style (e.g. "Nature Biotechnology", "Nature Nanotechnology", etc.)
-can link to a single independent style (e.g. "Nature Journals").
+A dependent style is an alias for an independent style. Its contents is limited
+to style metadata, and doesn't include any formatting instructions. By linking
+dependent styles for journals that share the same citation style (e.g. "Nature
+Biotechnology", "Nature Nanotechnology", etc.) to a single independent style
+(e.g. "Nature Journals"), there is no need to duplicate formatting instructions.
 
 Locale Files
 ~~~~~~~~~~~~
 
-Locale files each contain a complete set of localization data (consisting of
-term translations as well as localized date formats and grammar options) for a
-particular language dialect.
+A locale file contains a set of localization data (term translations, as well as
+localized date formats and grammar options) for a particular language dialect.
 
 XML Declaration
 ---------------
@@ -125,8 +124,8 @@ The root element of styles is ``cs:style``. In independent styles, the element
 carries the following attributes:
 
 ``class``
-    Determines whether the style uses notes (value "note") or in-text citations
-    ("in-text").
+    Determines whether the style uses in-text citations (value "in-text") or
+    notes ("note").
 
 ``default-locale`` (optional)
     Sets a default locale for style localization. Value must be a |link| `locale
@@ -136,8 +135,9 @@ carries the following attributes:
     The CSL version of the style. Must be "1.0" for CSL 1.0-compatible styles.
 
 In addition, ``cs:style`` may carry any of the `global options`_ and
-`inheritable name options`_. In dependent styles, ``cs:style`` only carries the
-``version`` attribute.
+`inheritable name options`_. In dependent styles, attributes on ``cs:style`` are
+limited to ``version`` (required) and ``class`` (optional; this legacy attribute
+is scheduled for removal from dependent styles and has no effect).
 
 An example of ``cs:style`` for an independent style, preceded by the XML
 declaration:
@@ -145,7 +145,7 @@ declaration:
 .. sourcecode:: xml
 
     <?xml version="1.0" encoding="UTF-8"?>
-    <style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" default-locale="fr-FR">
+    <style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" default-locale="fr-FR"/>
 
 Child Elements of ``cs:style``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -169,7 +169,7 @@ In independent styles, ``cs:style`` root element has the following child element
 ``cs:locale`` (optional)
     May appear multiple times. Used to specify (overriding) localization data.
     
-In `dependent styles`_, ``cs:style`` only contains a ``cs:info`` element.
+In `dependent styles`_, ``cs:style`` has only one child element, ``cs:info``.
 
 Info
 ^^^^
@@ -217,15 +217,11 @@ independent styles, ``cs:info`` has the following child elements:
     set to a URI (usually a URL), and ``rel``, whose value indicates how the URI
     relates to the style. The possible values of ``rel``:
     
-    -  "self" - URI of the current style itself
+    -  "self" - style URI
     -  "template" - URI of the style from which the current style is derived
-    -  "documentation - URI of (online) style documentation
+    -  "documentation - URI of style documentation
     
-    The ``cs:link`` element may contain textual content to describe the link,
-    and may carry the ``xml:lang`` attribute to specify the language of either
-    the link description or of the link target (the value must be a |link|
-    `xsd:language locale code
-    <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
+    The ``cs:link`` element may contain content describing the link.
 
 ``cs:published`` (optional)
     May appear once. The contents of ``cs:published`` must be a |link|
@@ -234,37 +230,32 @@ independent styles, ``cs:info`` has the following child elements:
 
 ``cs:rights`` (optional)
     May appear once. The contents of ``cs:rights`` specifies the license under
-    which the style file is released. See, e.g. the |link| `Creative Commons
-    <http://creativecommons.org/license/>`_. The element may carry a ``license``
-    attribute to specify the URI of the license, and an ``xml:lang`` attribute
-    to specify the language of the content (the value must be an |link|
-    `xsd:language locale code
-    <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
+    which the style file is released. The element may carry a ``license``
+    attribute to specify the URI of the license.
 
 ``cs:summary`` (optional)
     May appear once. The contents of ``cs:summary`` gives a (short) description
-    of the style. The element may carry a ``xml:lang`` attribute to specify the
-    language of the content (the value must be an |link| `xsd:language locale
-    code <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
+    of the style.
 
 ``cs:title``
     Must appear once. The contents of ``cs:title`` should be the name of the
-    style as shown to users. The element may carry a ``xml:lang`` attribute to
-    specify the language of the content (the value must be an |link|
-    `xsd:language locale code
-    <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
+    style as shown to users.
 
 ``cs:title-short`` (optional)
     May appear once. The contents of ``cs:title-short`` should be a shortened
-    style name (e.g. "APA"). The element may carry a ``xml:lang`` attribute to
-    specify the language of the content (the value must be an |link|
-    `xsd:language locale code
-    <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
+    style name (e.g. "APA").
 
 ``cs:updated``
     May appear once. The optional contents of ``cs:updated`` must be a |link|
     `timestamp <http://books.xmlschemata.org/relaxng/ch19-77049.html>`_.
-    
+
+The ``cs:link``, ``cs:rights``, ``cs:summary``, ``cs:title`` and
+``cs:title-short`` elements may carry a ``xml:lang`` attribute to specify the
+language of the element's content (the value must be an |link| `xsd:language
+locale code <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_). For
+``cs:link``, the attribute can also be used to indicate the language of the link
+target.
+
 In `dependent styles`_, ``cs:link`` must be used with ``rel`` set to
 "independent-parent", with the URI of the independent parent style set on
 ``href``. In addition, ``cs:link`` may not be used with ``rel`` set to

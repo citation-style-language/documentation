@@ -52,7 +52,23 @@ up to
 
 https://github.com/citation-style-language/schema/compare/75240da3ee54184009f40982a485dc68e7a0fa5f...06f663099afcd619cd5edbb743a533952ebd74d0
 
+https://github.com/citation-style-language/documentation/blob/master/specification.txt
 
+From
+fc49f31c821a668492975757b903ad4ef6dec21f (March 21, 2010)
+up to
+065cacd0326d2235b66bd332d31b1317cbc6ebdf (July 26, 2011)
+
+https://github.com/citation-style-language/documentation/compare/fc49f31c821a668492975757b903ad4ef6dec21f...065cacd0326d2235b66bd332d31b1317cbc6ebdf
+
+Specification
+-------------
+
+The CSL specification has been largely rewritten for increased precision and
+clarity. New sections include |link| `Terminology
+<http://citationstyles.org/downloads/specification.html#terminology>`_, |link|
+`File Types
+<http://citationstyles.org/downloads/specification.html#file-types>`_, ...
 
 Style Metadata
 --------------
@@ -132,7 +148,10 @@ Attributes on ``cs:style``
 For dependent styles, ``cs:style`` may no longer carry the "default-locale"
 attribute or any of the global options (the "demote-non-dropping-particle",
 "initialize-with-hyphen", and "page-range-format" attributes) and inheritable
-name options, whereas the "class" attribute has become optional.
+name options, whereas the "class" attribute has become optional (while "class"
+has no function in dependent styles, it will only be disallowed in the next
+backward incompatible CSL release, as it's a required attribute for CSL 1.0
+styles).
 
 https://github.com/citation-style-language/schema/commit/36b2d4d0c34582dd49c3580d018ccd891277daac
 https://github.com/citation-style-language/schema/commit/957a32f4b2314fe972dc7edeb08cacac135758b9
