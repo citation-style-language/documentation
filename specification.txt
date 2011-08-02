@@ -1375,8 +1375,8 @@ Citation-specific Options
 Disambiguation
 ''''''''''''''
 
-A cite is ambiguous when it matches multiple bibliographic entries [#]_. Five
-methods exist to eliminate such ambiguity:
+A cite is ambiguous when it matches multiple bibliographic entries [#]_. There
+are five methods available to eliminate such ambiguity:
 
 1. Show more names
 2. Add initials or full given names
@@ -1491,10 +1491,10 @@ If ambiguous cites remain after applying the selected disambiguation methods
 described above, a final disambiguation attempt is made by rendering these cites
 with the ``disambiguate`` condition testing "true" [Step (5)] (see `Choose`_).
 
-.. [#] If uncited entries are added to the bibliography, cites in the document
-       can become ambiguous even though they are unique. To disambiguate such
-       cites, the CSL processor should create "hidden" cites for the uncited
-       bibliograhpic entries and take these along in the disambiguation process.
+.. [#] The presence of uncited entries in the bibliography can make cites in the
+       document ambiguous. To make sure such cites are disambiguated, the CSL
+       processor should create hidden "ghost" cites for all uncited
+       bibliographic entries and include them in the disambiguation process.
 
 Citation Collapsing
 '''''''''''''''''''
