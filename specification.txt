@@ -1375,28 +1375,27 @@ Citation-specific Options
 Disambiguation
 ''''''''''''''
 
-There are five methods to disambiguate cites that otherwise can not be
-unambiguously linked to their target bibliographic entries:
+A cite is ambiguous when it matches multiple bibliographic entries. Five methods
+exist to eliminate such ambiguity:
 
-1. Showing more names.
-2. Adding given names.
-3. Replacing initials with full given names.
-4. Adding a year-suffix.
-5. Rendering the cite with the ``disambiguate`` attribute of ``cs:choose``
-   conditions testing "true".
+1. Show more names
+2. Add initials or full given names
+3. Replace initials with full given names
+4. Add a year-suffix
+5. Render the cite with the ``disambiguate`` attribute of ``cs:choose``
+   conditions testing "true"
 
-Methods 2 and 3 can be used for the broader purpose of disambiguating *names*.
+Methods 2 and 3 can also be used to disambiguate *names* for all cites,
+ambiguous and unambiguous, throughout the document.
 
 Disambiguation methods are activated with the following optional attributes, and
 are always tried in the listed order:
 
 ``disambiguate-add-names`` [Step (1)]
     If set to "true" ("false" is the default), names that would otherwise be
-    hidden as a result of et-al abbreviation are added one by one until
-    disambiguation is achieved. If adding names does not lead to disambiguation,
-    no names are added, except when ``disambiguate-add-names`` is used in
-    combination with ``disambiguate-add-givenname``. In this case, all names are
-    added.
+    hidden as a result of et-al abbreviation are added one by one to all members
+    of a set of ambiguous cites, until no more cites in the set can be
+    disambiguated by adding names.
 
 ``disambiguate-add-givenname`` [Steps (2) & (3)]
     If set to "true" ("false" is the default), given names are added or
@@ -1434,23 +1433,23 @@ are always tried in the listed order:
 
         1. If ``initialize-with`` is set, then:
 
-           \(a) Initials can be shown by rendering the name with ``form`` set to
-           "long" instead of "short" (e.g. "Doe" becomes "J. Doe").
+           \(a) Initials can be shown by rendering the name with a ``form``
+           value of "long" instead of "short" (e.g. "Doe" becomes "J. Doe").
            
            \(b) Full given names can be shown instead of initials by ignoring
            ``initialize-with`` (e.g. "J. Doe" becomes "John Doe").
 
         2. If ``initialize-with`` is *not* set, full given names can be shown
-           by rendering the name with ``form`` set to "long" instead of "short"
-           (e.g. "Doe" becomes "John Doe").
+           by rendering the name with a ``form`` value of "long" instead of
+           "short" (e.g. "Doe" becomes "John Doe").
     
     **Given Name Disambiguation Rules**
         For all five given name disambiguation rules, described below, names are
-        only expanded if they lead to disambiguation. When name disambiguation
-        is successful, any names added by ``disambiguate-add-names`` following
-        the first disambiguating name are discarded. When name disambiguation is
-        unsuccessful, all names added by ``disambiguate-add-names`` are
-        discarded.
+        only expanded if they lead to disambiguation. Those names, which are
+        still hidden as result of et-al abbreviation after the disambiguation
+        attempt of ``disambiguate-add-names``, are added one by one to all
+        members of a set of ambiguous cites, until no more cites in the set can
+        be disambiguated by adding expanded names.
 
         "all-names"
             Default. Ambiguous names are progressively transformed until they
