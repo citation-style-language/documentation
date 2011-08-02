@@ -286,17 +286,16 @@ Citation
 ^^^^^^^^
 
 The ``cs:citation`` element describes the formatting of citations, which consist
-of one or more references to bibliographic sources (these individual references
-are here referred to as "cites"). Citations appear in the form of either in-text
-citations (in the author (e.g. "[Doe]"), author-date ("[Doe 1999]"), label
-("[doe99]") or number ("[1]") format) or notes. The required ``cs:layout`` child
-element describes what, and how, bibliographic data should be included in the
-citations (see `Layout <#layout>`_). ``cs:layout`` may be preceded by a
-``cs:sort`` element, which can be used to specify how cites within a citation
-should be sorted (see `Sorting`_). The ``cs:citation`` element may carry
-attributes for the formatting of citations and names (see `Citation-specific
-Options`_ and `Inheritable Name Options`_). An example of a ``cs:citation``
-element:
+of one or more references ("cites") to bibliographic sources. Citations appear
+in the form of either in-text citations (in the author (e.g. "[Doe]"),
+author-date ("[Doe 1999]"), label ("[doe99]") or number ("[1]") format) or
+notes. The required ``cs:layout`` child element describes what, and how,
+bibliographic data should be included in the citations (see `Layout
+<#layout>`_). ``cs:layout`` may be preceded by a ``cs:sort`` element, which can
+be used to specify how cites within a citation should be sorted (see
+`Sorting`_). The ``cs:citation`` element may carry attributes for
+`Citation-specific Options`_ and `Inheritable Name Options`_. An example of a
+``cs:citation`` element:
 
 .. sourcecode:: xml
 
@@ -309,23 +308,23 @@ element:
       </layout>
     </citation>
 
-**A note to developers of CSL processors** Note styles are unique in that
-citations may effectively become full sentences. Because of this, the first
-character of a citation should be uppercased when there is no preceding text in
-the footnote. In all other cases (e.g. when a citation is inserted into the
-middle of a pre-existing footnote), the citation should be printed as is.
+**A note to CSL processor developers** In note styles, a citation is often a
+sentence by itself. Therefore, the first character of a citation should
+preferably be uppercased when there is no preceding text in the note. In all
+other cases (e.g. when a citation is inserted into the middle of a pre-existing
+footnote), the citation should be printed as is.
 
 Bibliography
 ^^^^^^^^^^^^
 
 The ``cs:bibliography`` element describes the formatting of bibliographies,
 which list one or more bibliographic sources. The required ``cs:layout`` child
-element describes how each reference should be formatted. ``cs:layout`` may be
-preceded by a ``cs:sort`` element, which can be used to specify how references
-within the bibliography should be sorted (see `Sorting`_). The
-``cs:bibliography`` element may carry attributes for the formatting of
-bibliographies and names (see `Bibliography-specific Options`_ and `Inheritable
-Name Options`_). An example of a ``cs:bibliography`` element:
+element describes how each bibliographic entry should be formatted.
+``cs:layout`` may be preceded by a ``cs:sort`` element, which can be used to
+specify how references within the bibliography should be sorted (see
+`Sorting`_). The ``cs:bibliography`` element may carry attributes for
+`Bibliography-specific Options`_ and `Inheritable Name Options`_. An example of
+a ``cs:bibliography`` element:
 
 .. sourcecode:: xml
 
@@ -385,16 +384,16 @@ Locale
 ^^^^^^
 
 Localization data, which by default is drawn from the locale files, can be
-(re)defined with ``cs:locale`` elements. It is recommended to place these after
-the ``cs:info`` element.
+(re)defined with ``cs:locale`` elements, which should be placed after the
+``cs:info`` element.
 
 The value of the optional ``xml:lang`` attribute on ``cs:locale``, which must be
 set to an |link| `xsd:language locale code
 <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_, determines which
-languages or language dialects are affected (see also `Locale Prioritization`_).
+languages or language dialects are affected (see `Locale Prioritization`_).
 
 See `Terms`_, `Localized Dates`_ and `Localized Options`_ for
-additional details on the use of ``cs:locale``.
+further details on the use of ``cs:locale``.
 
 An example of ``cs:locale`` in a style:
 
