@@ -1376,17 +1376,16 @@ Disambiguation
 ''''''''''''''
 
 A cite is ambiguous when it matches multiple bibliographic entries [#]_. There
-are five methods available to eliminate such ambiguity:
+are four methods available to eliminate such ambiguity:
 
 1. Show more names
-2. Add initials or full given names
-3. Replace initials with full given names
-4. Add a year-suffix
-5. Render the cite with the ``disambiguate`` attribute of ``cs:choose``
+2. Expand names (adding initials or full given names)
+3. Add a year-suffix
+4. Render the cite with the ``disambiguate`` attribute of ``cs:choose``
    conditions testing "true"
 
-Methods 2 and 3 can also be used to disambiguate *names* for all cites,
-ambiguous and unambiguous, throughout the document.
+Method 2 can also be used to disambiguate *names* for all cites, ambiguous and
+unambiguous, throughout the document.
 
 Disambiguation methods are activated with the following optional attributes, and
 are always tried in the listed order:
@@ -1397,9 +1396,9 @@ are always tried in the listed order:
     of a set of ambiguous cites, until no more cites in the set can be
     disambiguated by adding names.
 
-``disambiguate-add-givenname`` [Steps (2) & (3)]
-    If set to "true" ("false" is the default), given names are added or
-    expanded. For example:
+``disambiguate-add-givenname`` [Step (2)]
+    If set to "true" ("false" is the default), disambiguation is attempted by
+    expanding names. For example:
 
     ================================  ===================================
     Original ambiguous cites          Disambiguated cites
@@ -1473,7 +1472,7 @@ are always tried in the listed order:
             As "all-names", but name expansion is limited to ambiguous names in
             ambiguous cites.
 
-``disambiguate-add-year-suffix`` [Step (4)]
+``disambiguate-add-year-suffix`` [Step (3)]
     If set to "true" ("false" is the default), an alphabetic year-suffix is
     added to ambiguous cites (e.g. "Doe 2007, Doe 2007" becomes "Doe 2007a, Doe
     2007b") and to their corresponding bibliographic entries. The assignment of
@@ -1489,7 +1488,7 @@ are always tried in the listed order:
 
 If ambiguous cites remain after applying the selected disambiguation methods
 described above, a final disambiguation attempt is made by rendering these cites
-with the ``disambiguate`` condition testing "true" [Step (5)] (see `Choose`_).
+with the ``disambiguate`` condition testing "true" [Step (4)] (see `Choose`_).
 
 .. [#] The presence of uncited entries in the bibliography can make cites in the
        document ambiguous. To make sure such cites are disambiguated, the CSL
