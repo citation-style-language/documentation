@@ -1444,7 +1444,8 @@ are always tried in the listed order:
     
     **Given Name Disambiguation Rules**
         For all five given name disambiguation rules, described below, names are
-        only expanded if they lead to disambiguation. Those names, which are
+        only expanded if they lead to disambiguation. If
+        ``disambiguate-add-names`` is set to "true", those names, which are
         still hidden as result of et-al abbreviation after the disambiguation
         attempt of ``disambiguate-add-names``, are added one by one to all
         members of a set of ambiguous cites, until no more cites in the set can
