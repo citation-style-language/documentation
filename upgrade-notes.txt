@@ -628,7 +628,7 @@ names like "John SMITH":
 
     <names variable="author">
       <name form="long">
-        <name-part name="family" font-variant="capitalize-all"/>
+        <name-part name="family" text-case="uppercase"/>
       </name>
     </names>
 

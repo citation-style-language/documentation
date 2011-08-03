@@ -1,6 +1,6 @@
-===============================
-`Citation Style Language 1.0`__
-===============================
+=================================
+`Citation Style Language 1.0.1`__
+=================================
 ~~~~~~~~~~~~~~~~~~~~~~
 Language Specification
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -16,7 +16,7 @@ __ http://citationstyles.org/
 .. class:: version-links
 
     This version:
-        http://citationstyles.org/downloads/specification-csl10-20110426.html
+        http://citationstyles.org/downloads/specification-csl101-20110726.html
     Latest version:
         http://citationstyles.org/downloads/specification.html
     Previous versions: 
@@ -53,11 +53,10 @@ formatting of citations, notes and bibliographies, offering:
 -  Extensive support for style requirements
 -  Automatic style localization
 -  Infrastructure for style distribution and updating
--  Already over a thousand freely available styles (most are CC BY-SA licensed)
+-  Already over 1500 freely available styles (Creative Commons BY-SA licensed)
 
-This specification, as well as additional documentation, schema, styles, and
-locales, can be found at the CSL project home, |link| `citationstyles.org
-<http://citationstyles.org>`_.
+For additional documentation, the CSL schema, styles, and locales, visit the CSL
+project home, |link| `citationstyles.org <http://citationstyles.org>`_.
 
 Terminology
 ~~~~~~~~~~~
@@ -78,32 +77,32 @@ the ``xmlns`` attribute) on the root ``cs:style`` or ``cs:locale`` element.
 File Types
 ----------
 
-There are three different types of CSL files: independent and dependent styles
-(which must have a ".csl" extension), and locale files, which follow the naming
-pattern "locales-xx-XX.xml" ("xx-XX" representing a language dialect, e.g.
-"en-US" for US English).
+There are three types of CSL files: independent and dependent styles (both types
+use the ".csl" extension), and locale files (these follow the naming pattern
+"locales-xx-XX.xml", where "xx-XX" represents the language dialect, e.g. "en-US"
+for US English).
 
 Independent Styles
 ~~~~~~~~~~~~~~~~~~
 
 Independent styles contain formatting instructions for citations, notes and
-bibliographies (they are generally not truly independent, as most rely on locale
-files for (default) localization data).
+bibliographies. They typically still rely on locale files for (default)
+localization data.
 
 Dependent Styles
 ~~~~~~~~~~~~~~~~
 
-Dependent styles don't contain any formatting instructions, but function as
-aliases or shortcuts. For example, dependent styles for journals that share the
-same citation style (e.g. "Nature Biotechnology", "Nature Nanotechnology", etc.)
-can link to a single independent style (e.g. "Nature Journals").
+A dependent style is an alias for an independent style. Its contents is limited
+to style metadata, and doesn't include any formatting instructions. By linking
+dependent styles for journals that share the same citation style (e.g. "Nature
+Biotechnology", "Nature Nanotechnology", etc.) to a single independent style
+(e.g. "Nature Journals"), there is no need to duplicate formatting instructions.
 
 Locale Files
 ~~~~~~~~~~~~
 
-Locale files each contain a complete set of localization data (consisting of
-term translations as well as localized date formats and grammar options) for a
-particular language dialect.
+A locale file contains a set of localization data (term translations, as well as
+localized date formats and grammar options) for a particular language dialect.
 
 XML Declaration
 ---------------
@@ -125,8 +124,8 @@ The root element of styles is ``cs:style``. In independent styles, the element
 carries the following attributes:
 
 ``class``
-    Determines whether the style uses notes (value "note") or in-text citations
-    ("in-text").
+    Determines whether the style uses in-text citations (value "in-text") or
+    notes ("note").
 
 ``default-locale`` (optional)
     Sets a default locale for style localization. Value must be a |link| `locale
@@ -136,8 +135,9 @@ carries the following attributes:
     The CSL version of the style. Must be "1.0" for CSL 1.0-compatible styles.
 
 In addition, ``cs:style`` may carry any of the `global options`_ and
-`inheritable name options`_. In dependent styles, ``cs:style`` only carries the
-``version`` attribute.
+`inheritable name options`_. In dependent styles, attributes on ``cs:style`` are
+limited to ``version`` (required) and ``class`` (optional; this legacy attribute
+is scheduled for removal from dependent styles and has no effect).
 
 An example of ``cs:style`` for an independent style, preceded by the XML
 declaration:
@@ -145,7 +145,7 @@ declaration:
 .. sourcecode:: xml
 
     <?xml version="1.0" encoding="UTF-8"?>
-    <style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" default-locale="fr-FR">
+    <style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" default-locale="fr-FR"/>
 
 Child Elements of ``cs:style``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -169,7 +169,7 @@ In independent styles, ``cs:style`` root element has the following child element
 ``cs:locale`` (optional)
     May appear multiple times. Used to specify (overriding) localization data.
     
-In `dependent styles`_, ``cs:style`` only contains a ``cs:info`` element.
+In `dependent styles`_, ``cs:style`` has only one child element, ``cs:info``.
 
 Info
 ^^^^
@@ -217,15 +217,11 @@ independent styles, ``cs:info`` has the following child elements:
     set to a URI (usually a URL), and ``rel``, whose value indicates how the URI
     relates to the style. The possible values of ``rel``:
     
-    -  "self" - URI of the current style itself
+    -  "self" - style URI
     -  "template" - URI of the style from which the current style is derived
-    -  "documentation - URI of (online) style documentation
+    -  "documentation - URI of style documentation
     
-    The ``cs:link`` element may contain textual content to describe the link,
-    and may carry the ``xml:lang`` attribute to specify the language of either
-    the link description or of the link target (the value must be a |link|
-    `xsd:language locale code
-    <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
+    The ``cs:link`` element may contain content describing the link.
 
 ``cs:published`` (optional)
     May appear once. The contents of ``cs:published`` must be a |link|
@@ -234,43 +230,36 @@ independent styles, ``cs:info`` has the following child elements:
 
 ``cs:rights`` (optional)
     May appear once. The contents of ``cs:rights`` specifies the license under
-    which the style file is released. See, e.g. the |link| `Creative Commons
-    <http://creativecommons.org/license/>`_. The element may carry a ``license``
-    attribute to specify the URI of the license, and an ``xml:lang`` attribute
-    to specify the language of the content (the value must be an |link|
-    `xsd:language locale code
-    <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
+    which the style file is released. The element may carry a ``license``
+    attribute to specify the URI of the license.
 
 ``cs:summary`` (optional)
     May appear once. The contents of ``cs:summary`` gives a (short) description
-    of the style. The element may carry a ``xml:lang`` attribute to specify the
-    language of the content (the value must be an |link| `xsd:language locale
-    code <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
+    of the style.
 
 ``cs:title``
     Must appear once. The contents of ``cs:title`` should be the name of the
-    style as shown to users. The element may carry a ``xml:lang`` attribute to
-    specify the language of the content (the value must be an |link|
-    `xsd:language locale code
-    <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
+    style as shown to users.
 
 ``cs:title-short`` (optional)
     May appear once. The contents of ``cs:title-short`` should be a shortened
-    style name (e.g. "APA"). The element may carry a ``xml:lang`` attribute to
-    specify the language of the content (the value must be an |link|
-    `xsd:language locale code
-    <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
+    style name (e.g. "APA").
 
 ``cs:updated``
     May appear once. The optional contents of ``cs:updated`` must be a |link|
     `timestamp <http://books.xmlschemata.org/relaxng/ch19-77049.html>`_.
-    
-In `dependent styles`_, ``cs:author``, ``cs:contributor`` and ``cs:rights`` are
-not allowed. In addition, ``cs:link`` must be used with ``rel`` set to
+
+The ``cs:link``, ``cs:rights``, ``cs:summary``, ``cs:title`` and
+``cs:title-short`` elements may carry a ``xml:lang`` attribute to specify the
+language of the element's content (the value must be an |link| `xsd:language
+locale code <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_). For
+``cs:link``, the attribute can also be used to indicate the language of the link
+target.
+
+In `dependent styles`_, ``cs:link`` must be used with ``rel`` set to
 "independent-parent", with the URI of the independent parent style set on
-``href``. ``cs:link`` may not be used with ``rel`` set to "template" and
-"documentation", but "self" is allowed to indicate the URI of the dependent
-style itself.
+``href``. In addition, ``cs:link`` may not be used with ``rel`` set to
+"template".
 
 An example of ``cs:info`` for an independent style:
 
@@ -288,7 +277,6 @@ An example of ``cs:info`` for an independent style:
       <category citation-format="author-date"/>
       <category field="zoology"/>
       <updated>2008-10-29T21:01:24+00:00</updated>
-      <summary>Style for Some Journal</summary>
       <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work
       is licensed under a Creative Commons Attribution-Share Alike 3.0 Unported
       License</rights>
@@ -298,17 +286,16 @@ Citation
 ^^^^^^^^
 
 The ``cs:citation`` element describes the formatting of citations, which consist
-of one or more references to bibliographic sources (these individual references
-are here referred to as "cites"). Citations appear in the form of either in-text
-citations (in the author (e.g. "[Doe]"), author-date ("[Doe 1999]"), label
-("[doe99]") or number ("[1]") format) or notes. The required ``cs:layout`` child
-element describes what, and how, bibliographic data should be included in the
-citations (see `Layout <#layout>`_). ``cs:layout`` may be preceded by a
-``cs:sort`` element, which can be used to specify how cites within a citation
-should be sorted (see `Sorting`_). The ``cs:citation`` element may carry
-attributes for the formatting of citations and names (see `Citation-specific
-Options`_ and `Inheritable Name Options`_). An example of a ``cs:citation``
-element:
+of one or more references ("cites") to bibliographic sources. Citations appear
+in the form of either in-text citations (in the author (e.g. "[Doe]"),
+author-date ("[Doe 1999]"), label ("[doe99]") or number ("[1]") format) or
+notes. The required ``cs:layout`` child element describes what, and how,
+bibliographic data should be included in the citations (see `Layout
+<#layout>`_). ``cs:layout`` may be preceded by a ``cs:sort`` element, which can
+be used to specify how cites within a citation should be sorted (see
+`Sorting`_). The ``cs:citation`` element may carry attributes for
+`Citation-specific Options`_ and `Inheritable Name Options`_. An example of a
+``cs:citation`` element:
 
 .. sourcecode:: xml
 
@@ -321,23 +308,23 @@ element:
       </layout>
     </citation>
 
-**A note to developers of CSL processors** Note styles are unique in that
-citations may effectively become full sentences. Because of this, the first
-character of a citation should be uppercased when there is no preceding text in
-the footnote. In all other cases (e.g. when a citation is inserted into the
-middle of a pre-existing footnote), the citation should be printed as is.
+**A note to CSL processor developers** In note styles, a citation is often a
+sentence by itself. Therefore, the first character of a citation should
+preferably be uppercased when there is no preceding text in the note. In all
+other cases (e.g. when a citation is inserted into the middle of a pre-existing
+footnote), the citation should be printed as is.
 
 Bibliography
 ^^^^^^^^^^^^
 
 The ``cs:bibliography`` element describes the formatting of bibliographies,
 which list one or more bibliographic sources. The required ``cs:layout`` child
-element describes how each reference should be formatted. ``cs:layout`` may be
-preceded by a ``cs:sort`` element, which can be used to specify how references
-within the bibliography should be sorted (see `Sorting`_). The
-``cs:bibliography`` element may carry attributes for the formatting of
-bibliographies and names (see `Bibliography-specific Options`_ and `Inheritable
-Name Options`_). An example of a ``cs:bibliography`` element:
+element describes how each bibliographic entry should be formatted.
+``cs:layout`` may be preceded by a ``cs:sort`` element, which can be used to
+specify how references within the bibliography should be sorted (see
+`Sorting`_). The ``cs:bibliography`` element may carry attributes for
+`Bibliography-specific Options`_ and `Inheritable Name Options`_. An example of
+a ``cs:bibliography`` element:
 
 .. sourcecode:: xml
 
@@ -397,16 +384,16 @@ Locale
 ^^^^^^
 
 Localization data, which by default is drawn from the locale files, can be
-(re)defined with ``cs:locale`` elements. It is recommended to place these after
-the ``cs:info`` element.
+(re)defined with ``cs:locale`` elements, which should be placed after the
+``cs:info`` element.
 
 The value of the optional ``xml:lang`` attribute on ``cs:locale``, which must be
 set to an |link| `xsd:language locale code
 <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_, determines which
-languages or language dialects are affected (see also `Locale Prioritization`_).
+languages or language dialects are affected (see `Locale Prioritization`_).
 
 See `Terms`_, `Localized Dates`_ and `Localized Options`_ for
-additional details on the use of ``cs:locale``.
+further details on the use of ``cs:locale``.
 
 An example of ``cs:locale`` in a style:
 
@@ -1487,39 +1474,71 @@ For cites that could not be disambiguated by steps 1-4, a final attempt at
 disambiguation is performed by rendering the cite with the ``disambiguate``
 condition testing "true" [Step (5)] (see `Choose`_).
 
+Citation Grouping
+'''''''''''''''''
+
+Cites in "author-date" styles (see ``cs:category`` in `Info`_) that start with
+the output of a ``cs:names`` element, followed by a year or "no date" term, and
+(optionally) end with other rendering elements (e.g. a "locator" or explicit
+"year-suffix" variable), are subject to cite grouping. Cite grouping is only
+active when ``cs:citation`` carries the ``collapse`` or ``cite-group-delimiter``
+attributes (see `Citation Collapsing`_).
+
+After cite sorting and disambiguation, any of such cites that share the same
+output of the ``cs:names`` element (this includes any output rendered through
+``cs:substitute``) are grouped together into a cite group. Cites are grouped
+with the first cite of the group while maintaining their original order relative
+to the other cites in the group. E.g. the citation "(Doe 2002, Smith 2004, Doe
+1999)" becomes "(Doe 2002, Doe 1999, Smith 2004)", where the two references by
+Doe form a cite group.
+
 Citation Collapsing
 '''''''''''''''''''
+
+Cite groups in citations of "author-date" styles, and cite ranges in citations
+in "numeric" styles can be collapsed through the use of the ``collapse``
+attribute.
 
 ``collapse``
     Activates citation collapsing. Allowed values:
     
-    -  "citation-number" - collapses numeric citation ranges (e.g. from "[1, 2,
-       3, 5]" to "[1-3, 5]"). Only increasing ranges are collapsed, e.g. "[3, 2,
-       1]" will not collapse (to see how to sort cites by their
-       ``citation-number`` variable, see `Sorting`_).
-    -  "year" - when consecutive cites share the same names in the rendered name
-       variables, subsequent cites are collapsed to only a year, e.g. from "(Doe
-       2000, Doe 2001)" to "(Doe 2000, 2001)".
-    -  "year-suffix" - collapses as "year", but also collapses repeating years
-       to only the year-suffix, e.g. "(Doe 2000a, b)" instead of "(Doe 2000a,
+    -  "citation-number" - collapses ranges of cite numbers (rendered through
+       the "citation-number" variable) in citations for "numeric" styles (e.g.
+       from "[1, 2, 3, 5]" to "[1-3, 5]"). Only increasing ranges collapse, e.g.
+       "[3, 2, 1]" will not collapse (to see how to sort cites by
+       "citation-number", see `Sorting`_).
+    -  "year" - collapses cite groups by suppressing the output of the
+       ``cs:names`` element for subsequent cites in the group, e.g. "(Doe 2000,
+       Doe 2001)" becomes "(Doe 2000, 2001)".
+    -  "year-suffix" - collapses as "year", but also suppresses repeating years
+       within the cite group, e.g. "(Doe 2000a, b)" instead of "(Doe 2000a,
        2000b)".
     -  "year-suffix-ranged" - collapses as "year-suffix", but also collapses
-       ranges of year-suffix markers, e.g. "(Doe 2000a-c,e)" instead of "(Doe
-       2000a, b, c, e)".
+       ranges of year-suffixes, e.g. "(Doe 2000a-c,e)" instead of "(Doe 2000a,
+       b, c, e)".
+    
+    "year-suffix" and "year-suffix-ranged" fall back to "year" for cites with
+    any output after the year or "no date" term, such as a locator. E.g. "(Doe
+    2000a-c, 2000d, p. 5, 2000e,f)" (in this citation, the cite for "Doe 2000d"
+    has a locator, preventing the cite from further collapsing).
+
+``cite-group-delimiter``
+    Specifies the delimiter for cites within a cite group. Defaults to the
+    delimiter set on ``cs:layout`` in ``cs:citation``.
 
 ``year-suffix-delimiter``
-    Specifies the delimiter for year-suffix elements (defaults to the delimiter
-    set on ``cs:layout`` in ``cs:citation``). E.g. with ``collapse`` set to
-    "year-suffix", the ``delimiter`` on ``cs:layout`` in ``cs:citation`` set to
-    "; ", and the ``year-suffix-delimiter`` set to ",", citations look like
-    "(Smith 1999a,b; 2000; Jones 2001)".
+    Specifies the delimiter for year-suffixes. Defaults to the delimiter set on
+    ``cs:layout`` in ``cs:citation``.
 
 ``after-collapse-delimiter``
-    Specifies the cite delimiter to be used *after* a group of collapsed cites.
-    E.g. with ``collapse`` set to "year-suffix", the ``delimiter`` on
-    ``cs:layout`` in ``cs:citation`` set to ", ", and
-    ``after-collapse-delimiter`` set to "; ", citations look like "(Smith 1999a,
-    b, 2000; Jones 2001, Brown 2007)".
+    Specifies the cite delimiter to be used *after* a collapsed cite group.
+    Defaults to the delimiter set on ``cs:layout`` in ``cs:citation``.
+
+An illustration of the use of these delimiters: with ``collapse`` set to
+"year-suffix", ``delimiter`` on ``cs:layout`` in ``cs:citation`` set to ", ",
+``cite-group-delimiter`` set to ",", ``year-suffix-delimiter`` set to "/", and
+``after-collapse-delimiter`` set to "; ", citations look like "(Smith
+1999a/b,2000; Jones 2001, Brown 2007)".
 
 Note Distance
 '''''''''''''

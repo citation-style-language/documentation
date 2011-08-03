@@ -1,0 +1,233 @@
+=================================================
+`Release Notes - Citation Style Language 1.0.1`__
+=================================================
+
+__ `Table of Contents`_
+
+.. class:: fixed
+
+   `citationstyles.org`__
+
+__ http://citationstyles.org/
+
+.. class:: info-version
+
+   version 2011-07-13
+
+.. class:: contributors
+
+   Author
+       * Rintze M. Zelle
+
+.. |link| image:: link.png
+
+
+========
+
+.. contents:: Table of Contents
+
+========
+
+
+Introduction
+------------
+
+**Note: the changes listed below are still in flux, and only will become
+definite with the actual release of CSL 1.0.1.**
+
+This document describes the changes introduced with version 1.0.1 of the
+Citation Style Language (CSL), as compared to version 1.0. For full details on
+how to use new features, see the CSL 1.0.1 specification.
+
+CSL 1.0.1 is a backwards compatible release, meaning that any valid CSL 1.0
+style should validate against the CSL 1.0.1 schema and work with any CSL
+1.0.1-compatible CSL processor.
+
+Changes:
+https://github.com/citation-style-language/schema
+From
+75240da3ee54184009f40982a485dc68e7a0fa5f (March 21, 2010)
+up to
+06f663099afcd619cd5edbb743a533952ebd74d0 (June 29, 2011)
+
+https://github.com/citation-style-language/schema/compare/75240da3ee54184009f40982a485dc68e7a0fa5f...06f663099afcd619cd5edbb743a533952ebd74d0
+
+https://github.com/citation-style-language/documentation/blob/master/specification.txt
+
+From
+fc49f31c821a668492975757b903ad4ef6dec21f (March 21, 2010)
+up to
+065cacd0326d2235b66bd332d31b1317cbc6ebdf (July 26, 2011)
+
+https://github.com/citation-style-language/documentation/compare/fc49f31c821a668492975757b903ad4ef6dec21f...065cacd0326d2235b66bd332d31b1317cbc6ebdf
+
+Specification
+-------------
+
+The CSL specification has been largely rewritten for increased precision and
+clarity. New sections include |link| `Terminology
+<http://citationstyles.org/downloads/specification.html#terminology>`_, |link|
+`File Types
+<http://citationstyles.org/downloads/specification.html#file-types>`_, ...
+
+Style Metadata
+--------------
+
+eISSN
+~~~~~
+
+Previously, the ``cs:issn`` and ``cs:issnl`` elements could already be used to
+indicate respectively the different ISSNs for journal-specific styles (e.g. of
+the print and online editions), and the journal's ISSN-L. The new optional
+``cs:eissn`` element allows the ISSN of the online edition (the eISSN) to be
+explictly specified, e.g.:
+
+.. sourcecode:: xml
+
+    <info>
+      <title>Applied and Environmental Microbiology</title>
+      <issn>0099-2240</issn>
+      <eissn>1098-5336</eissn>
+    </info>
+
+https://github.com/citation-style-language/schema/commit/74f6a4c75c0296a754d60aab0d127541d4c485a4
+
+License
+~~~~~~~
+
+The ``cs:rights`` element may now carry a "license" attribute to indicate the
+URI of the style license, e.g.:
+
+.. sourcecode:: xml
+
+    <info>
+      <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work
+      is licensed under a Creative Commons Attribution-Share Alike 3.0 Unported
+      License</rights>
+    </info>
+
+https://github.com/citation-style-language/schema/commit/912ec31e3572d2b4ba4693bb4d83af3811af7509
+
+Links
+~~~~~
+
+The CSL schema has become more strict about the use of the "rel" attribute on
+``cs:link``. The values "independent-parent" and "template" are now only allowed
+for dependent and independent styles, respectively.
+
+Short Title
+~~~~~~~~~~~
+
+The new optional ``cs:title-short`` element can be used to give a shortened
+style title, e.g.:
+
+.. sourcecode:: xml
+
+    <info>
+      <title>Proceedings of the National Academy of Sciences</title>
+      <title-short>PNAS</title-short>
+    </info>
+
+https://github.com/citation-style-language/schema/commit/5b1d9341183b73c88307614ffae5733cf7564135
+https://github.com/citation-style-language/schema/commit/4f1a318de1050100a400ca6dc4560d6fba4a6147
+https://github.com/citation-style-language/schema/commit/5a1b291961bd1ca49bc9d14cb58637350d81f9ef
+https://github.com/citation-style-language/schema/commit/66636d2bee489400d8eb375640f0a2336dfc0f95
+
+Updated
+~~~~~~~
+
+The ``cs:updated`` element has now become optional. The element may now also be
+used without content (i.e. ``<updated/>`` or ``<updated></updated>``).
+
+https://github.com/citation-style-language/schema/commit/7a6a5be7a206c6bff068584688a1cfa1f7c5a906
+https://github.com/citation-style-language/schema/commit/cab0cc6fae60771bfe9638d471f4f1bc4c75b4bf
+
+Attributes on ``cs:style``
+--------------------------
+
+For dependent styles, ``cs:style`` may no longer carry the "default-locale"
+attribute or any of the global options (the "demote-non-dropping-particle",
+"initialize-with-hyphen", and "page-range-format" attributes) and inheritable
+name options, whereas the "class" attribute has become optional (while "class"
+has no function in dependent styles, it will only be disallowed in the next
+backward incompatible CSL release, as it's a required attribute for CSL 1.0
+styles).
+
+https://github.com/citation-style-language/schema/commit/36b2d4d0c34582dd49c3580d018ccd891277daac
+https://github.com/citation-style-language/schema/commit/957a32f4b2314fe972dc7edeb08cacac135758b9
+https://github.com/citation-style-language/schema/commit/0a47df698d924aeba988416f8c52f9a91b4098ec
+https://github.com/citation-style-language/schema/commit/56cc0c97e86cf05bfb0aad98910af616e3ea38e7
+https://github.com/citation-style-language/schema/commit/874daedca7efe027ca11157dbc771e481d243a25
+
+Names
+-----
+
+Et-al Delimiter
+~~~~~~~~~~~~~~~
+
+Previously, the "et-al" and "and others" terms were preceded by a space when
+rendered as a result of et-al abbreviation. The new optional
+"delimiter-precedes-et-al" attribute for ``cs:name`` allows the name delimiter
+to be used instead (e.g. "Doe, et al. 2000" instead of "Doe et al. 2000"), with
+control options similar to "delimiter-precedes-last".
+
+See also http://citationstyles.org/downloads/specification.html#name.
+
+https://github.com/citation-style-language/schema/commit/45f934d446849c394c4b5dbf0f3c9188f176ab98
+
+Et-al Abbreviation with Last Name
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+By using the new "et-al-use-last" attribute for ``cs:name``, it is now possible
+to use et-al abbreviation and show the last author (as required by the 6th
+edition of the APA style). In this case an ellipsis, preceded by the name
+delimiter, replaces the "et-al" or "and others" term, e.g.:
+
+::
+
+    A. Goffeau, B. G. Barrell, H. Bussey, R. W. Davis, B. Dujon, H. Feldmann, …
+    S. G. Oliver
+
+The accompanying "names-use-last" attribute for ``cs:key`` can be used to
+override the value of "et-al-use-last" for sorting.
+
+See also http://citationstyles.org/downloads/specification.html#name.
+
+https://github.com/citation-style-language/schema/commit/275b1e31fdf92269e744c8c71dda76ed2b58c521
+https://github.com/citation-style-language/schema/commit/f1407079ec0f53ae58cb70000139a38651366e87
+
+Affixes on Name-parts
+~~~~~~~~~~~~~~~~~~~~~
+
+The "prefix" and "suffix" attributes are now also allowed on ``cs:name-part``,
+allowing for name formatting like "DOE (Jane)".
+
+https://github.com/citation-style-language/schema/commit/48c9abe5d7c917114e96d5b3068c803693e09841
+
+``cs:name`` Optional
+~~~~~~~~~~~~~~~~~~~~
+
+The ``cs:name`` element is no longer a required child element of ``cs:names``.
+
+https://github.com/citation-style-language/schema/commit/cab0cc6fae60771bfe9638d471f4f1bc4c75b4bf
+
+Independent "name-min" and "names-use-first"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The CSL schema now allows the "name-min" and "names-use-first" attributes to be
+set independently on ``cs:key``.
+
+https://github.com/citation-style-language/schema/commit/f1407079ec0f53ae58cb70000139a38651366e87
+
+Input data model
+----------------
+
+The `CSL schema <https://github.com/citation-style-language/schema>`_ GitHub
+repository now contains a JSON schema describing the CSL input data model
+(csl-data.json, and, to describe the citation objects that are embedded in word
+processor documents, csl-citation.json). At this point, it is modeled on the
+input model used by citeproc-js. The schemas are not necessarily incomplete and
+aren't normative.
+
+https://github.com/citation-style-language/schema/blob/master/csl-data.json
+https://github.com/citation-style-language/schema/blob/master/csl-citation.json
