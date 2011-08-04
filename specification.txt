@@ -1384,8 +1384,8 @@ are four methods available to eliminate such ambiguity:
 4. Render the cite with the ``disambiguate`` attribute of ``cs:choose``
    conditions testing "true"
 
-Method 2 can also be used to disambiguate *names* for all cites, ambiguous and
-unambiguous, throughout the document.
+Method 2 can also be used for global *name disambiguation*, covering all cites,
+ambiguous and unambiguous, throughout the document.
 
 Disambiguation methods are activated with the following optional attributes, and
 are always tried in the listed order:
@@ -1397,8 +1397,11 @@ are always tried in the listed order:
     disambiguated by adding names.
 
 ``disambiguate-add-givenname`` [Step (2)]
-    If set to "true" ("false" is the default), disambiguation is attempted by
-    expanding names. For example:
+    If set to "true" ("false" is the default), ambiguous names (names that are
+    identical in their "short" or initialized "long" form, but differ when
+    initials are added or the full given name is shown) are expanded. Name
+    expansion can be configured with ``givenname-disambiguation-rule``. An
+    example of cite disambiguation:
 
     ================================  ===================================
     Original ambiguous cites          Disambiguated cites
@@ -1407,28 +1410,23 @@ are always tried in the listed order:
     (Doe 1950; Doe 1950)              (John Doe 1950; Jane Doe 1950)
     ================================  ===================================
 
-    The value of ``givenname-disambiguation-rule`` determines a) how names are
-    expanded, and b) whether unambiguous cites that contain ambiguous names
-    (e.g. "(Doe 1950; Doe 2000)" referring to works by respectively Jane and
-    John Doe) are also subject to this type of disambiguation.
+    If cites cannot be (fully) disambiguated by expanding the rendered names,
+    and if ``disambiguate-add-names`` is set to "true", then the names still
+    hidden as result of et-al abbreviation after the disambiguation attempt of
+    ``disambiguate-add-names`` are added one by one to all members of a set of
+    ambiguous cites, until no more cites in the set can be disambiguated by
+    adding expanded names.
 
 ``givenname-disambiguation-rule``
-    Specifies whether ``disambiguate-add-givenname`` affects unambiguous cites,
-    how individual names are expanded, and which names within a cite are
-    affected.
-
-    **Ambiguous Names in Unambiguous Cites**
-        If ``givenname-disambiguation-rule`` is set to "all-names",
-        "all-names-with-initials", "primary-name", or
-        "primary-name-with-initials", disambiguation is attempted for all
-        ambiguous names, including those within unambiguous cites.
-
-        If set to "by-cite", disambiguation is limited to ambiguous names within
-        ambiguous cites.
+    Specifies a) whether the purpose of name expansion is limited to
+    disambiguating cites, or has the additional goal of disambiguation names
+    (e.g. the ambiguous names in the unambigous cites "(Doe 1950; Doe 2000)"
+    would only be expanded to "(Jane Doe 1950; John Doe 2000)" with name
+    disambiguation), b) whether name expansion targets all, or just the first
+    name of each cite, and c) the method by which each name is expanded.
 
     **Expansion of Individual Names**
-        The steps by which individual names can be disambiguated are (the value
-        of ``givenname-disambiguation-rule`` determines which steps are used):
+        The steps for expanding individual names are:
 
         1. If ``initialize-with`` is set, then:
 
@@ -1443,19 +1441,14 @@ are always tried in the listed order:
            "short" (e.g. "Doe" becomes "John Doe").
     
     **Given Name Disambiguation Rules**
-        For all five given name disambiguation rules, described below, names are
-        only expanded if they lead to disambiguation. If
-        ``disambiguate-add-names`` is set to "true", those names, which are
-        still hidden as result of et-al abbreviation after the disambiguation
-        attempt of ``disambiguate-add-names``, are added one by one to all
-        members of a set of ambiguous cites, until no more cites in the set can
-        be disambiguated by adding expanded names.
+        Allowed values of ``givenname-disambiguation-rule``:
 
         "all-names"
-            Default. Ambiguous names are progressively transformed until they
-            are disambiguated (e.g. "(A. Doe 2000; B. Doe 2001)" instead of
-            "(Doe 2000; Doe 2001)"). If disambiguation cannot be achieved, names
-            remain in their original form.
+            Default. Name expansion has the dual purpose of disambiguating cites
+            and names. All rendered ambiguous names, in both ambiguous and
+            umambiguous cites, are subject to disambiguation. Each name is
+            progressively transformed until it is disambiguated. Names that can
+            not be disambiguated remain in their original form.
 
         "all-names-with-initials"
             As "all-names", but name expansion is limited to step 1(a). If
@@ -1470,8 +1463,10 @@ are always tried in the listed order:
             ``initialize-with`` is not set, no disambiguation attempt is made.
 
         "by-cite"
-            As "all-names", but name expansion is limited to ambiguous names in
-            ambiguous cites.
+            As "all-names", but the goal of name expansion is limited to
+            disambiguating cites. Only ambiguous names in ambiguous cites are
+            affected, and disambiguation stops after the first name that
+            eliminates cite ambiguity.
 
 ``disambiguate-add-year-suffix`` [Step (3)]
     If set to "true" ("false" is the default), an alphabetic year-suffix is
