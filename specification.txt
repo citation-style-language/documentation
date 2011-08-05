@@ -78,9 +78,8 @@ File Types
 ----------
 
 There are three types of CSL files: independent and dependent styles (both types
-use the ".csl" extension), and locale files (these follow the naming pattern
-"locales-xx-XX.xml", where "xx-XX" represents the language dialect, e.g. "en-US"
-for US English).
+use the ".csl" extension), and locale files (named "locales-xx-XX.xml", where
+"xx-XX" is a language dialect, e.g. "en-US" for American English).
 
 Independent Styles
 ~~~~~~~~~~~~~~~~~~
@@ -383,14 +382,14 @@ the item type is "book":
 Locale
 ^^^^^^
 
-Localization data, which by default is drawn from the locale files, can be
-(re)defined with ``cs:locale`` elements, which should be placed after the
-``cs:info`` element.
+Localization data, by default drawn from the "locales-xx-XX.xml" locale files,
+may be redefined or supplemented with ``cs:locale`` elements, which should be
+placed directly after the ``cs:info`` element.
 
 The value of the optional ``xml:lang`` attribute on ``cs:locale``, which must be
 set to an |link| `xsd:language locale code
 <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_, determines which
-languages or language dialects are affected (see `Locale Prioritization`_).
+languages or language dialects are affected (see `Locale Fallback`_).
 
 See `Terms`_, `Localized Dates`_ and `Localized Options`_ for
 further details on the use of ``cs:locale``.
@@ -410,44 +409,56 @@ An example of ``cs:locale`` in a style:
       </locale>
     </style>
 
-Locale Prioritization
-'''''''''''''''''''''
+Locale Fallback
+'''''''''''''''
 
-Locale prioritization concerns the fallback behavior of localization data.
 Locale files provide localization data for language dialects (e.g. "en-US" for
-American English), whereas ``cs:locale`` elements in styles can either lack the
-``xml:lang`` attribute, or have it set to either a language (e.g. "en" for
-English) or language dialect. The ``cs:locale`` elements are typically used in
-styles to redefine the localization data provided via the "locales-xx-XX.xml"
-files, including only the localization data that should be redefined.
+American English), whereas the optional ``cs:locale`` elements in styles can
+either lack the ``xml:lang`` attribute, or have it set to either a language
+(e.g. "en" for English) or dialect. Locale fallback is the mechanism determining
+from which of these sources each localizable unit (a date format, localized
+option, or specific form of a term) is retrieved.
 
-Language dialects can share the same language code. In such cases, one language
-dialect is assigned the primary dialect. The locale files with matching language
-codes include: de-DE (primary) and de-AT, de-CH (secondary); en-US (primary) and
-en-GB (secondary); pt-PT (primary) and pt-BR (secondary); and zh-CN (primary)
-and zh-TW (secondary).
+For dialects of the same language, one is designated the primary dialect. All
+others are secondaries. At the moment of writing, the available locale files
+include:
 
-The fallback behavior can best be described with an example. If the chosen
-output locale is "de-AT" (Austrian German), localizable elements (a term, date
-format or formatting option) are individually drawn from the following sources,
-in decreasing order of priority:
++-----------------+----------------------+
+| Primary dialect | Secondary dialect(s) |
++=================+======================+
+| de-DE           | de-AT, de-CH         |
++-----------------+----------------------+
+| en-US           | en-GB                |
++-----------------+----------------------+
+| pt-PT           | pt-BR                |
++-----------------+----------------------+
+| zh-CN           | zh-TW                |
++-----------------+----------------------+
+
+Locale fallback is best described with an example. If the chosen output locale
+is "de-AT" (Austrian German), localizable units are individually drawn from the
+following sources, in decreasing order of priority:
 
 A. In-style ``cs:locale`` elements
 
-   1. ``xml:lang`` set to chosen language dialect, "de-AT"
+   1. ``xml:lang`` set to chosen dialect, "de-AT"
    2. ``xml:lang`` set to matching language, "de" (German)
    3. ``xml:lang`` not set
 
 B. Locale files
 
-   4. ``xml:lang`` set to chosen language dialect, "de-AT"
-   5. ``xml:lang`` set to matching primary language dialect, "de-DE" (Standard
-      German) (only applicable when the chosen locale is a secondary language
-      dialect)
-   6. ``xml:lang`` set to "en-US" (American English), the ultimate fallback
+   4. ``xml:lang`` set to chosen dialect, "de-AT"
+   5. ``xml:lang`` set to matching primary dialect, "de-DE" (Standard German)
+      (only applicable when the chosen locale is a secondary dialect)
+   6. ``xml:lang`` set to "en-US" (American English)
 
-Note that fallback stops whenever a term is defined, even if it consists of an
-empty string (e.g. <term name="and"/> or <term name="and"></term>).
+If the chosen output locale is a language (e.g. "de"), the (primary) dialect is
+used in step 1 (e.g. "de-DE").
+   
+Fallback stops once a localizable unit has been found. For terms, this even is
+the case when they are defined as empty strings (e.g. ``<term name="and"/>`` or
+``<term name="and"></term>``). Locale fallback takes precedence over fallback of
+term forms (see `Terms`_).
 
 Locale Files - Structure
 ------------------------
@@ -520,11 +531,11 @@ the same term with the optional ``form`` attribute set to:
 -  "verb-short" - e.g. "ed." for the term "editor"
 -  "symbol" - e.g. "§" for the term "section"
 
-If a term is called in a form that is undefined, even after locale fallback (see
-`Locale Prioritization`_), there is fallback to other forms: "verb-short" first
-falls back to "verb", "symbol" first falls back to "short", and "verb" and
-"short" both fall back to "long". Terms for which no locale or form fallback is
-available are rendered as empty strings.
+If a term is called in a form that is undefined, even after `Locale Fallback`_,
+there is fallback to other forms: "verb-short" first falls back to "verb",
+"symbol" first falls back to "short", and "verb" and "short" both fall back to
+"long". Terms for which no locale or form fallback is available are rendered as
+empty strings.
 
 Term content may not contain markup such as LaTeX or HTML. Characters that
 should be superscripted can be inserted as `superscripted Unicode characters`__.
