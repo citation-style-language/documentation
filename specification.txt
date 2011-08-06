@@ -2064,6 +2064,11 @@ Sentence case conversion (with ``text-case`` set to "sentence") is performed by:
 2. For lower or mixed case strings, the first letter of the string is
    uppercased. Words entirely in uppercase are left untouched.
 
+CSL processors don't recognize proper nouns. As a result, strings in sentence
+case can be accurately converted to title case, but not vice versa. For this
+reason, it is generally preferable to store strings such as titles in sentence
+case, and only use ``text-case`` if a style desires another case.
+
 Title Case Conversion
 ^^^^^^^^^^^^^^^^^^^^^
 
