@@ -1412,18 +1412,18 @@ are always tried in the listed order:
 
     If cites cannot be (fully) disambiguated by expanding the rendered names,
     and if ``disambiguate-add-names`` is set to "true", then the names still
-    hidden as result of et-al abbreviation after the disambiguation attempt of
+    hidden as a result of et-al abbreviation after the disambiguation attempt of
     ``disambiguate-add-names`` are added one by one to all members of a set of
     ambiguous cites, until no more cites in the set can be disambiguated by
     adding expanded names.
 
 ``givenname-disambiguation-rule``
     Specifies a) whether the purpose of name expansion is limited to
-    disambiguating cites, or has the additional goal of disambiguation names
-    (e.g. the ambiguous names in the unambigous cites "(Doe 1950; Doe 2000)"
-    would only be expanded to "(Jane Doe 1950; John Doe 2000)" with name
-    disambiguation), b) whether name expansion targets all, or just the first
-    name of each cite, and c) the method by which each name is expanded.
+    disambiguating cites, or has the additional goal of disambiguating names
+    (only in the latter case are ambiguous names in unambigous cites expanded,
+    e.g. from "(Doe 1950; Doe 2000)" to "(Jane Doe 1950; John Doe 2000)"), b)
+    whether name expansion targets all, or just the first name of each cite, and
+    c) the method by which each name is expanded.
 
     **Expansion of Individual Names**
         The steps for expanding individual names are:
