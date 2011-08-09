@@ -1490,11 +1490,11 @@ condition testing "true" [Step (5)] (see `Choose`_).
 Cite Grouping
 '''''''''''''
 
-Within in-text citations in the author-date format, cites with the same
-author(s) are commonly grouped and collapsed, e.g. "(Doe 1999, 2006; Smith
-2002)" instead of "(Doe 1999; Smith 2002; Doe 2006)".
-
-Cite grouping only occurs when ``cs:citation`` carries the ``collapse`` or
+With cite grouping, cites in a citation are grouped by name and optionally
+collapsed, e.g. "(Doe 1999, 2006; Smith 2002; Doe & Jones 2007)" instead of
+"(Doe 1999; Smith 2002; Doe 2006; Doe & Jones 2007)".
+ 
+Cites are only grouped if ``cs:citation`` carries the ``collapse`` or
 ``cite-group-delimiter`` attributes (see `Cite Collapsing`_). Grouping is
 limited to those cites that start with the output of a ``cs:names`` element,
 followed by a year or "no date" term. They may end with other rendering
