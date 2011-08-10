@@ -467,18 +467,16 @@ While localization data can be included in styles (see `Locale`_), locale files
 conveniently provide sets of default localization data, consisting of terms,
 date formats and grammar options.
 
-Each locale file contains the localization data for a single language dialect.
-The ``cs:locale`` root element must carry the ``xml:lang`` attribute. Its value,
-which should match the "xx-XX" `locale code
-<http://books.xmlschemata.org/relaxng/ch19-77191.html>`_ of the
-"locales-xx-XX.xml" file name, specifies the language dialect for which
-localization data is provided. Also required is the ``version`` attribute,
+Each locale file contains localization data for a single language dialect. This
+`locale code <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_ is set on
+the required ``xml:lang`` attribute on the ``cs:locale`` root element. The same
+locale code must also be used in the file name of the locale file (the "xx-XX"
+in "locales-xx-XX.xml"). The root element must carry the ``version`` attribute,
 indicating the CSL version of the locale file (must be "1.0" for CSL
 1.0-compatible locale files). Locale files have the same requirements for
 `namespacing`_ as styles. The ``cs:locale`` element has three required child
-elements, which are described in the sections below: ``cs:terms``, ``cs:date``
-and ``cs:style-options``. An example of the (incomplete) contents of a locale
-file:
+elements, described below: ``cs:terms``, ``cs:date`` and ``cs:style-options``.
+An example showing part of a locale file:
 
 .. sourcecode:: xml
 
@@ -512,18 +510,18 @@ file:
 Terms
 ~~~~~
 
-Terms are localized strings (e.g. with English and German locales, the "and"
-term is rendered as "and" and "und", respectively). Terms are defined with
-``cs:term`` elements, child elements of ``cs:terms``, itself a child element of
-``cs:locale``. Each ``cs:term`` element must carry a ``name`` attribute, set to
-a term (available terms are listed in `Appendix III - Terms`_).
+Terms are localized strings (e.g. by using the "and" term, "Doe and Smith"
+automatically becomes "Doe und Smith" when the style locale is switched from
+English to German). Terms are defined with ``cs:term`` elements, child elements
+of ``cs:terms``. Each ``cs:term`` element must carry a ``name`` attribute, set
+to one of the terms listed in `Appendix III - Terms`_.
 
-Terms are either simple, in which case the content of ``cs:term`` is the
-localized string, or compounded, in which case ``cs:term`` has ``cs:single`` and
-``cs:multiple`` child elements (their content consists respectively of the
-singular and plural variant of the term in question (e.g. "page" and "pages")).
-Terms may be defined for multiple forms, using multiple ``cs:term`` elements for
-the same term with the optional ``form`` attribute set to:
+Terms are either directly defined in the content of ``cs:term``, or, in cases
+where singular and plural variants are needed (e.g. "page" and "pages"), in the
+content of the child elements ``cs:single`` and ``cs:multiple``, respectively.
+
+Terms may be defined for specific forms by using ``cs:term`` with the optional
+``form`` attribute set to:
 
 -  "long" - (default), e.g. "editor" and "editors" for the "editor" term
 -  "short" - e.g. "ed." and "eds." for the term "editor"
@@ -531,39 +529,39 @@ the same term with the optional ``form`` attribute set to:
 -  "verb-short" - e.g. "ed." for the term "editor"
 -  "symbol" - e.g. "§" for the term "section"
 
-If a term is called in a form that is undefined, even after `Locale Fallback`_,
-there is fallback to other forms: "verb-short" first falls back to "verb",
-"symbol" first falls back to "short", and "verb" and "short" both fall back to
-"long". Terms for which no locale or form fallback is available are rendered as
-empty strings.
+If a style uses a term in a form that is undefined (even after `Locale
+Fallback`_), there is fallback to other forms: "verb-short" first falls back to
+"verb", "symbol" first falls back to "short", and "verb" and "short" both fall
+back to "long". If no locale or form fallback is available, the term is rendered
+as a empty string.
 
-Term content may not contain markup such as LaTeX or HTML. Characters that
-should be superscripted can be inserted as `superscripted Unicode characters`__.
+Term content should not contain markup such as LaTeX or HTML. `Superscripted
+Unicode characters`__ can be used for superscripting.
 
 __ http://unicode.org/reports/tr30/datafiles/SuperscriptFolding.txt
 
 Localized Dates
 ~~~~~~~~~~~~~~~
 
-Localized date formats are defined with ``cs:date`` elements, child elements of
-``cs:locale``. Two formats can be defined: a "numeric" format (e.g.
-"12-15-2005") and a "text" format (e.g. "December 15, 2005"). The format is set
-on ``cs:date`` with the required ``form`` attribute.
+Two localized date formats can be defined with ``cs:date`` elements: a "numeric"
+(e.g. "12-15-2005") and a "text" format (e.g. "December 15, 2005"). The format
+is set on ``cs:date`` with the required ``form`` attribute.
 
-A date format is defined using ``cs:date-part`` elements as child elements of
-``cs:date``. Each ``cs:date-part`` element must carry a ``name`` attribute, set
-to ``day``, ``month`` or ``year``. The element order is the display order.
-Additional formatting may be applied with `formatting`_ attributes on the
+A date format is constructed using ``cs:date-part`` child elements. With a
+required ``name`` attribute set to either ``day``, ``month`` or ``year``, the
+order of these elements reflects the display order of respectively the day,
+month, and year. The date can be formatted with `formatting`_ attributes on the
 ``cs:date`` and ``cs:date-part`` elements, as well as several
 ``cs:date-part``-specific attributes (see `Date-part`_). The `delimiter`_
-attribute may be set on ``cs:date`` to delimit the ``cs:date-part`` elements,
-and `affixes`_ may be applied to the ``cs:date-part`` elements.
+attribute may be set on ``cs:date`` to specify the delimiter for the
+``cs:date-part`` elements, and `affixes`_ may be applied to the ``cs:date-part``
+elements.
 
-**Note** It is not allowed to use affixes on ``cs:date`` when defining localized
-date formats. This separates locale-specific affixes (set on the
-``cs:date-part`` elements) from any style-specific affixes (set on the calling
-``cs:date`` element), such as parentheses. An example of a macro using a
-localized date format:
+**Note** Affixes are not allowed on ``cs:date`` when defining localized date
+formats. This restriction is in place to separate locale-specific affixes (set
+on the ``cs:date-part`` elements) from any style-specific affixes (set on the
+calling ``cs:date`` element), such as parentheses. An example of a macro calling
+a localized date format:
 
 .. sourcecode:: xml
 
@@ -575,15 +573,15 @@ Localized Options
 ~~~~~~~~~~~~~~~~~
 
 There is one localized option, ``punctuation-in-quote`` (see `Locale Options`_).
-This global option (affecting both citation and bibliography output) is set as
-an attribute on ``cs:style-options``, a child element of ``cs:locale``.
+This global option (affecting both citations and the bibliography) is set as an
+optional attribute on ``cs:style-options``.
 
 Rendering Elements
 ------------------
 
-Rendering elements specify which pieces of bibliographic data are included in
-citations and bibliographies, the order in which these appear, and, to an
-extent, their formatting.
+Rendering elements specify which, and in what order, pieces of bibliographic
+metadata are included in citations and bibliographies, and offer control over
+their formatting.
 
 Layout
 ~~~~~~
@@ -592,8 +590,8 @@ The ``cs:layout`` rendering element is a required child element of
 ``cs:citation`` and ``cs:bibliography``. It must contain one or more of the
 other rendering elements described below, and may carry `affixes`_ and
 `formatting`_ attributes. When used within ``cs:citation``, the `delimiter`_
-attribute may be used to separate multiple cites in a single citation. For
-example, citations like "(1, 2)" can be achieved with:
+attribute may be used to specify a delimiter for cites within a citation. For
+example, a citation like "(1, 2)" can be achieved with:
 
 .. sourcecode:: xml
 
@@ -606,29 +604,27 @@ example, citations like "(1, 2)" can be achieved with:
 Text
 ~~~~
 
-Each ``cs:text`` rendering element outputs text from a particular source. The
-element must carry an attribute specifying the source type (the attribute name)
-and source identifier (the attribute value). For example,
+The ``cs:text`` rendering element outputs text. It must carry one of the
+following attributes to select what should be rendered:
+
+-  ``variable`` - renders the text contents of a variable. Attribute value must
+   be one of the `standard variables`_. May be accompanied by the ``form``
+   attribute to select the "long" (default) or "short" form of a variable, e.g.
+   to select between the full or short title.
+-  ``macro`` - renders the text output of a macro. Attribute value must match
+   the value of the ``name`` attribute of a ``cs:macro`` element (see `Macro`_).
+-  ``term`` - renders a term. Attribute value must be one of the terms listed in
+   `Appendix III - Terms`_. May be accompanied by the ``plural`` attribute to
+   select the singular ("false", default) or plural ("true") variant of a term,
+   and by the ``form`` attribute to select the "long" (default), "short",
+   "verb", "verb-short" or "symbol" form variant (see also `Terms`_).
+-  ``value`` - renders the attribute value itself.
+
+An example of ``cs:text`` rendering the "title" variable:
 
 .. sourcecode:: xml
 
     <text variable="title"/>
-
-renders the title variable ("variable" is the source type, and "title" is the
-source identifier). The available source types are:
-
--  ``variable`` - the text contents of one of the `standard variables`_. The
-   ``form`` attribute may be set to either "long" (the default) or "short" to
-   select the long or short form of a variable (e.g. the full or short title).
--  ``macro`` - the text generated by a macro. The attribute value must match the
-   value of the ``name`` attribute of a ``cs:macro`` element.
--  ``term`` - the text of a term (see `Appendix III - Terms`_ and `Terms`_). The
-   ``plural`` attribute may be set to either "false" (the default) or "true" to
-   select the singular or plural variant of a term. The ``form`` attribute may
-   be set to select a form variant: "long" (the default), "short", "verb",
-   "verb-short" or "symbol".
--  ``value`` - verbatim text. The attribute value is the text to appear in the
-   output.
 
 ``cs:text`` may also carry `affixes`_, `display`_, `formatting`_, `quotes`_,
 `strip-periods`_ and `text-case`_ attributes.
