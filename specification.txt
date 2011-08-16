@@ -710,11 +710,11 @@ Date Ranges
 '''''''''''
 
 The default delimiter for dates in a date range is an en-dash (e.g. "May |--|
-July 2008"). Custom delimiters can be set on ``cs:date-part`` elements with the
-optional ``range-delimiter`` attribute. When a date range is rendered, only the
-value of ``range-delimiter`` on the ``cs:date-part`` element that corresponds to
-the largest date part ("year", "month", or "day") that differs between the two
-dates of the range is considered. For example,
+July 2008"). Custom range delimiters can be set on ``cs:date-part`` elements
+with the optional ``range-delimiter`` attribute. When a date range is rendered,
+the range delimiter is drawn from the ``cs:date-part`` element matching the
+largest date part ("year", "month", or "day") that differs between the two
+dates. For example,
 
 .. sourcecode:: xml
     
@@ -738,17 +738,16 @@ would result in "1-4 May 2008", "May |--| July 2008" and "May 2008/June 2009".
 AD and BC
 ^^^^^^^^^
 
-The terms "ad" and "bc" (Anno Domini and Before Christ) are automatically
-appended to years: "bc" is added to negative years (e.g. "-2500" becomes
-"2500BC"), while "ad" is added to positive years of less than four digits ("79"
-becomes "79AD").
+The "ad" term (Anno Domini) is automatically appended to positive years of less
+than four digits (e.g. "79" becomes "79AD"). The "bc" term (Before Christ) is
+automatically appended to negative years (e.g. "-2500" becomes "2500BC").
 
 Seasons
 ^^^^^^^
 
-If a date variable holds a season instead of a month, a season term ("season-01"
-to "season-04", respectively Spring, Summer, Autumn and Winter) is substituted
-for the month date-part. E.g.,
+If a date includes a season instead of a month, a season term ("season-01" to
+"season-04", respectively Spring, Summer, Autumn and Winter) take the place of
+the month term. E.g.,
 
 .. sourcecode:: xml
     
@@ -765,12 +764,11 @@ for the month date-part. E.g.,
 
 would result in "May 2008" and "Winter 2009".
 
-Uncertain Dates
+Approximate Dates
 ^^^^^^^^^^^^^^^
 
-Special formatting can be applied to uncertain dates by using the
-``is-uncertain-date`` conditional (see `Choose`_) and the "circa" term. The
-conditional tests "true" when a date is flagged as uncertain. For example,
+Approximate dates test "true" for the ``is-uncertain-date`` conditional (see
+`Choose`_). For example,
 
 .. sourcecode:: xml
 
@@ -789,7 +787,7 @@ conditional tests "true" when a date is flagged as uncertain. For example,
       </citation>
     </style>
 
-would result in "2005" (normal date) and "ca. 2003" (uncertain date).
+would result in "2005" (normal date) and "ca. 2003" (approximate date).
 
 Number
 ~~~~~~
