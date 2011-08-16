@@ -78,9 +78,8 @@ File Types
 ----------
 
 There are three types of CSL files: independent and dependent styles (both types
-use the ".csl" extension), and locale files (these follow the naming pattern
-"locales-xx-XX.xml", where "xx-XX" represents the language dialect, e.g. "en-US"
-for US English).
+use the ".csl" extension), and locale files (named "locales-xx-XX.xml", where
+"xx-XX" is a language dialect, e.g. "en-US" for American English).
 
 Independent Styles
 ~~~~~~~~~~~~~~~~~~
@@ -383,17 +382,17 @@ the item type is "book":
 Locale
 ^^^^^^
 
-Localization data, which by default is drawn from the locale files, can be
-(re)defined with ``cs:locale`` elements, which should be placed after the
-``cs:info`` element.
+Localization data, by default drawn from the "locales-xx-XX.xml" locale files,
+may be redefined or supplemented with ``cs:locale`` elements, which should be
+placed directly after the ``cs:info`` element.
 
 The value of the optional ``xml:lang`` attribute on ``cs:locale``, which must be
 set to an |link| `xsd:language locale code
 <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_, determines which
-languages or language dialects are affected (see `Locale Prioritization`_).
+languages or language dialects are affected (see `Locale Fallback`_).
 
-See `Terms`_, `Localized Dates`_ and `Localized Options`_ for
-further details on the use of ``cs:locale``.
+See `Terms`_, `Localized Date Formats`_ and `Localized Options`_ for further
+details on the use of ``cs:locale``.
 
 An example of ``cs:locale`` in a style:
 
@@ -410,44 +409,56 @@ An example of ``cs:locale`` in a style:
       </locale>
     </style>
 
-Locale Prioritization
-'''''''''''''''''''''
+Locale Fallback
+'''''''''''''''
 
-Locale prioritization concerns the fallback behavior of localization data.
 Locale files provide localization data for language dialects (e.g. "en-US" for
-American English), whereas ``cs:locale`` elements in styles can either lack the
-``xml:lang`` attribute, or have it set to either a language (e.g. "en" for
-English) or language dialect. The ``cs:locale`` elements are typically used in
-styles to redefine the localization data provided via the "locales-xx-XX.xml"
-files, including only the localization data that should be redefined.
+American English), whereas the optional ``cs:locale`` elements in styles can
+either lack the ``xml:lang`` attribute, or have it set to either a language
+(e.g. "en" for English) or dialect. Locale fallback is the mechanism determining
+from which of these sources each localizable unit (a date format, localized
+option, or specific form of a term) is retrieved.
 
-Language dialects can share the same language code. In such cases, one language
-dialect is assigned the primary dialect. The locale files with matching language
-codes include: de-DE (primary) and de-AT, de-CH (secondary); en-US (primary) and
-en-GB (secondary); pt-PT (primary) and pt-BR (secondary); and zh-CN (primary)
-and zh-TW (secondary).
+For dialects of the same language, one is designated the primary dialect. All
+others are secondaries. At the moment of writing, the available locale files
+include:
 
-The fallback behavior can best be described with an example. If the chosen
-output locale is "de-AT" (Austrian German), localizable elements (a term, date
-format or formatting option) are individually drawn from the following sources,
-in decreasing order of priority:
++-----------------+----------------------+
+| Primary dialect | Secondary dialect(s) |
++=================+======================+
+| de-DE           | de-AT, de-CH         |
++-----------------+----------------------+
+| en-US           | en-GB                |
++-----------------+----------------------+
+| pt-PT           | pt-BR                |
++-----------------+----------------------+
+| zh-CN           | zh-TW                |
++-----------------+----------------------+
+
+Locale fallback is best described with an example. If the chosen output locale
+is "de-AT" (Austrian German), localizable units are individually drawn from the
+following sources, in decreasing order of priority:
 
 A. In-style ``cs:locale`` elements
 
-   1. ``xml:lang`` set to chosen language dialect, "de-AT"
+   1. ``xml:lang`` set to chosen dialect, "de-AT"
    2. ``xml:lang`` set to matching language, "de" (German)
    3. ``xml:lang`` not set
 
 B. Locale files
 
-   4. ``xml:lang`` set to chosen language dialect, "de-AT"
-   5. ``xml:lang`` set to matching primary language dialect, "de-DE" (Standard
-      German) (only applicable when the chosen locale is a secondary language
-      dialect)
-   6. ``xml:lang`` set to "en-US" (American English), the ultimate fallback
+   4. ``xml:lang`` set to chosen dialect, "de-AT"
+   5. ``xml:lang`` set to matching primary dialect, "de-DE" (Standard German)
+      (only applicable when the chosen locale is a secondary dialect)
+   6. ``xml:lang`` set to "en-US" (American English)
 
-Note that fallback stops whenever a term is defined, even if it consists of an
-empty string (e.g. <term name="and"/> or <term name="and"></term>).
+If the chosen output locale is a language (e.g. "de"), the (primary) dialect is
+used in step 1 (e.g. "de-DE").
+   
+Fallback stops once a localizable unit has been found. For terms, this even is
+the case when they are defined as empty strings (e.g. ``<term name="and"/>`` or
+``<term name="and"></term>``). Locale fallback takes precedence over fallback of
+term forms (see `Terms`_).
 
 Locale Files - Structure
 ------------------------
@@ -456,18 +467,16 @@ While localization data can be included in styles (see `Locale`_), locale files
 conveniently provide sets of default localization data, consisting of terms,
 date formats and grammar options.
 
-Each locale file contains the localization data for a single language dialect.
-The ``cs:locale`` root element must carry the ``xml:lang`` attribute. Its value,
-which should match the "xx-XX" `locale code
-<http://books.xmlschemata.org/relaxng/ch19-77191.html>`_ of the
-"locales-xx-XX.xml" file name, specifies the language dialect for which
-localization data is provided. Also required is the ``version`` attribute,
+Each locale file contains localization data for a single language dialect. This
+`locale code <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_ is set on
+the required ``xml:lang`` attribute on the ``cs:locale`` root element. The same
+locale code must also be used in the file name of the locale file (the "xx-XX"
+in "locales-xx-XX.xml"). The root element must carry the ``version`` attribute,
 indicating the CSL version of the locale file (must be "1.0" for CSL
 1.0-compatible locale files). Locale files have the same requirements for
 `namespacing`_ as styles. The ``cs:locale`` element has three required child
-elements, which are described in the sections below: ``cs:terms``, ``cs:date``
-and ``cs:style-options``. An example of the (incomplete) contents of a locale
-file:
+elements, described below: ``cs:terms``, ``cs:date`` and ``cs:style-options``.
+An example showing part of a locale file:
 
 .. sourcecode:: xml
 
@@ -501,18 +510,18 @@ file:
 Terms
 ~~~~~
 
-Terms are localized strings (e.g. with English and German locales, the "and"
-term is rendered as "and" and "und", respectively). Terms are defined with
-``cs:term`` elements, child elements of ``cs:terms``, itself a child element of
-``cs:locale``. Each ``cs:term`` element must carry a ``name`` attribute, set to
-a term (available terms are listed in `Appendix III - Terms`_).
+Terms are localized strings (e.g. by using the "and" term, "Doe and Smith"
+automatically becomes "Doe und Smith" when the style locale is switched from
+English to German). Terms are defined with ``cs:term`` elements, child elements
+of ``cs:terms``. Each ``cs:term`` element must carry a ``name`` attribute, set
+to one of the terms listed in `Appendix III - Terms`_.
 
-Terms are either simple, in which case the content of ``cs:term`` is the
-localized string, or compounded, in which case ``cs:term`` has ``cs:single`` and
-``cs:multiple`` child elements (their content consists respectively of the
-singular and plural variant of the term in question (e.g. "page" and "pages")).
-Terms may be defined for multiple forms, using multiple ``cs:term`` elements for
-the same term with the optional ``form`` attribute set to:
+Terms are either directly defined in the content of ``cs:term``, or, in cases
+where singular and plural variants are needed (e.g. "page" and "pages"), in the
+content of the child elements ``cs:single`` and ``cs:multiple``, respectively.
+
+Terms may be defined for specific forms by using ``cs:term`` with the optional
+``form`` attribute set to:
 
 -  "long" - (default), e.g. "editor" and "editors" for the "editor" term
 -  "short" - e.g. "ed." and "eds." for the term "editor"
@@ -520,39 +529,39 @@ the same term with the optional ``form`` attribute set to:
 -  "verb-short" - e.g. "ed." for the term "editor"
 -  "symbol" - e.g. "§" for the term "section"
 
-If a term is called in a form that is undefined, even after locale fallback (see
-`Locale Prioritization`_), there is fallback to other forms: "verb-short" first
-falls back to "verb", "symbol" first falls back to "short", and "verb" and
-"short" both fall back to "long". Terms for which no locale or form fallback is
-available are rendered as empty strings.
+If a style uses a term in a form that is undefined (even after `Locale
+Fallback`_), there is fallback to other forms: "verb-short" first falls back to
+"verb", "symbol" first falls back to "short", and "verb" and "short" both fall
+back to "long". If no locale or form fallback is available, the term is rendered
+as a empty string.
 
-Term content may not contain markup such as LaTeX or HTML. Characters that
-should be superscripted can be inserted as `superscripted Unicode characters`__.
+Term content should not contain markup such as LaTeX or HTML. `Superscripted
+Unicode characters`__ can be used for superscripting.
 
 __ http://unicode.org/reports/tr30/datafiles/SuperscriptFolding.txt
 
-Localized Dates
-~~~~~~~~~~~~~~~
+Localized Date Formats
+~~~~~~~~~~~~~~~~~~~~~~
 
-Localized date formats are defined with ``cs:date`` elements, child elements of
-``cs:locale``. Two formats can be defined: a "numeric" format (e.g.
-"12-15-2005") and a "text" format (e.g. "December 15, 2005"). The format is set
-on ``cs:date`` with the required ``form`` attribute.
+Two localized date formats can be defined with ``cs:date`` elements: a "numeric"
+(e.g. "12-15-2005") and a "text" format (e.g. "December 15, 2005"). The format
+is set on ``cs:date`` with the required ``form`` attribute.
 
-A date format is defined using ``cs:date-part`` elements as child elements of
-``cs:date``. Each ``cs:date-part`` element must carry a ``name`` attribute, set
-to ``day``, ``month`` or ``year``. The element order is the display order.
-Additional formatting may be applied with `formatting`_ attributes on the
+A date format is constructed using ``cs:date-part`` child elements. With a
+required ``name`` attribute set to either ``day``, ``month`` or ``year``, the
+order of these elements reflects the display order of respectively the day,
+month, and year. The date can be formatted with `formatting`_ attributes on the
 ``cs:date`` and ``cs:date-part`` elements, as well as several
 ``cs:date-part``-specific attributes (see `Date-part`_). The `delimiter`_
-attribute may be set on ``cs:date`` to delimit the ``cs:date-part`` elements,
-and `affixes`_ may be applied to the ``cs:date-part`` elements.
+attribute may be set on ``cs:date`` to specify the delimiter for the
+``cs:date-part`` elements, and `affixes`_ may be applied to the ``cs:date-part``
+elements.
 
-**Note** It is not allowed to use affixes on ``cs:date`` when defining localized
-date formats. This separates locale-specific affixes (set on the
-``cs:date-part`` elements) from any style-specific affixes (set on the calling
-``cs:date`` element), such as parentheses. An example of a macro using a
-localized date format:
+**Note** Affixes are not allowed on ``cs:date`` when defining localized date
+formats. This restriction is in place to separate locale-specific affixes (set
+on the ``cs:date-part`` elements) from any style-specific affixes (set on the
+calling ``cs:date`` element), such as parentheses. An example of a macro calling
+a localized date format:
 
 .. sourcecode:: xml
 
@@ -564,15 +573,15 @@ Localized Options
 ~~~~~~~~~~~~~~~~~
 
 There is one localized option, ``punctuation-in-quote`` (see `Locale Options`_).
-This global option (affecting both citation and bibliography output) is set as
-an attribute on ``cs:style-options``, a child element of ``cs:locale``.
+This global option (affecting both citations and the bibliography) is set as an
+optional attribute on ``cs:style-options``.
 
 Rendering Elements
 ------------------
 
-Rendering elements specify which pieces of bibliographic data are included in
-citations and bibliographies, the order in which these appear, and, to an
-extent, their formatting.
+Rendering elements specify which, and in what order, pieces of bibliographic
+metadata are included in citations and bibliographies, and offer control over
+their formatting.
 
 Layout
 ~~~~~~
@@ -581,8 +590,8 @@ The ``cs:layout`` rendering element is a required child element of
 ``cs:citation`` and ``cs:bibliography``. It must contain one or more of the
 other rendering elements described below, and may carry `affixes`_ and
 `formatting`_ attributes. When used within ``cs:citation``, the `delimiter`_
-attribute may be used to separate multiple cites in a single citation. For
-example, citations like "(1, 2)" can be achieved with:
+attribute may be used to specify a delimiter for cites within a citation. For
+example, a citation like "(1, 2)" can be achieved with:
 
 .. sourcecode:: xml
 
@@ -595,29 +604,27 @@ example, citations like "(1, 2)" can be achieved with:
 Text
 ~~~~
 
-Each ``cs:text`` rendering element outputs text from a particular source. The
-element must carry an attribute specifying the source type (the attribute name)
-and source identifier (the attribute value). For example,
+The ``cs:text`` rendering element outputs text. It must carry one of the
+following attributes to select what should be rendered:
+
+-  ``variable`` - renders the text contents of a variable. Attribute value must
+   be one of the `standard variables`_. May be accompanied by the ``form``
+   attribute to select the "long" (default) or "short" form of a variable, e.g.
+   to select between the full or short title.
+-  ``macro`` - renders the text output of a macro. Attribute value must match
+   the value of the ``name`` attribute of a ``cs:macro`` element (see `Macro`_).
+-  ``term`` - renders a term. Attribute value must be one of the terms listed in
+   `Appendix III - Terms`_. May be accompanied by the ``plural`` attribute to
+   select the singular ("false", default) or plural ("true") variant of a term,
+   and by the ``form`` attribute to select the "long" (default), "short",
+   "verb", "verb-short" or "symbol" form variant (see also `Terms`_).
+-  ``value`` - renders the attribute value itself.
+
+An example of ``cs:text`` rendering the "title" variable:
 
 .. sourcecode:: xml
 
     <text variable="title"/>
-
-renders the title variable ("variable" is the source type, and "title" is the
-source identifier). The available source types are:
-
--  ``variable`` - the text contents of one of the `standard variables`_. The
-   ``form`` attribute may be set to either "long" (the default) or "short" to
-   select the long or short form of a variable (e.g. the full or short title).
--  ``macro`` - the text generated by a macro. The attribute value must match the
-   value of the ``name`` attribute of a ``cs:macro`` element.
--  ``term`` - the text of a term (see `Appendix III - Terms`_ and `Terms`_). The
-   ``plural`` attribute may be set to either "false" (the default) or "true" to
-   select the singular or plural variant of a term. The ``form`` attribute may
-   be set to select a form variant: "long" (the default), "short", "verb",
-   "verb-short" or "symbol".
--  ``value`` - verbatim text. The attribute value is the text to appear in the
-   output.
 
 ``cs:text`` may also carry `affixes`_, `display`_, `formatting`_, `quotes`_,
 `strip-periods`_ and `text-case`_ attributes.
@@ -625,48 +632,50 @@ source identifier). The available source types are:
 Date
 ~~~~
 
-The ``cs:date`` rendering element outputs dates, in a localized or non-localized
-format. The date variable (see `Date Variables`_) to be rendered is selected
-with the ``variable`` attribute.
+The ``cs:date`` rendering element renders the date selected from the list of
+`date variables`_ with the required ``variable`` attribute. A date can be
+rendered in either a localized or non-localized format.
 
-Localized date formats (see `Localized Dates`_) are selected with the ``form``
-attribute. This optional attribute must be set to either "numeric" (for numeric
-date formats, e.g. "12-15-2005"), or "text" (for date formats with a non-numeric
-month, e.g. "December 15, 2005"). Localized dates can be customized in two ways.
-First, the ``date-parts`` attribute may be used to specify which
-``cs:date-part`` elements are shown. The possible values are:
+`Localized date formats`_ are selected with the optional ``form`` attribute,
+which must set to either "numeric" (for fully numeric formats, e.g.
+"12-15-2005"), or "text" (for formats with a non-numeric month, e.g. "December
+15, 2005"). Localized date formats can be customized in two ways. First, the
+``date-parts`` attribute may be used to show fewer date parts. The possible
+values are:
 
--  "year-month-day" - (default), render year, month and day
--  "year-month" - render year and month
--  "year" - render only year
+-  "year-month-day" - (default), renders the year, month and day
+-  "year-month" - renders the year and month
+-  "year" - renders the year
 
-Secondly, ``cs:date`` may include one or more ``cs:date-part`` elements (see
+Secondly, ``cs:date`` may have one or more ``cs:date-part`` child elements (see
 `Date-part`_). The attributes set on these elements override those specified for
 the localized date formats (e.g. to get abbreviated months for all locales, the
-``form`` attribute of the month-``cs:date-part`` element can be set to "short").
-These ``cs:date-part`` elements do not affect which, or in what order,
-``cs:date-part`` elements are included in the rendered date. The
-``cs:date-part`` elements may not carry attributes for `affixes`_, as these are
-considered to be locale-specific.
+``form`` attribute on the month-``cs:date-part`` element can be set to "short").
+These ``cs:date-part`` elements do not affect which, or in what order, date
+parts are rendered. `Affixes`_, which are very locale-specific, are not allowed
+on these ``cs:date-part`` elements.
 
-Non-localized date formats are self-contained: only the included
-``cs:date-part`` elements are rendered, in the specified order. Here ``cs:date``
-lacks both the ``form`` and ``date-parts`` attributes. The ``cs:date-part``
-elements may carry attributes for `affixes`_ and `formatting`_, while
-``cs:date`` may carry a `delimiter`_ attribute to separate the ``cs:date-part``
-elements.
+In the absence of the ``form`` attribute, ``cs:date`` describes a self-contained
+non-localized date format. In this case, the date format is constructed using
+``cs:date-part`` child elements. With a required ``name`` attribute set to
+either ``day``, ``month`` or ``year``, the order of these elements reflects the
+display order of respectively the day, month, and year. The date can be
+formatted with `formatting`_ attributes on the ``cs:date-part`` elements, as
+well as several ``cs:date-part``-specific attributes (see `Date-part`_). The
+`delimiter`_ attribute may be set on ``cs:date`` to specify the delimiter for
+the ``cs:date-part`` elements, and `affixes`_ may be applied to the
+``cs:date-part`` elements.
 
-For both localized and non-localized dates, `affixes`_, `display`_ and
-`formatting`_ attributes may be specified for the ``cs:date`` element.
+For both localized and non-localized dates, ``cs:date`` may carry `affixes`_,
+`display`_ and `formatting`_ attributes.
 
 Date-part
 ^^^^^^^^^
 
 The ``cs:date-part`` elements control how date parts are rendered. Unless the
-parent ``cs:date`` element specifies the use of a localized date format, they
-also determine which, and in what order, date parts appear. Each
-``cs:date-part`` element describes a single date part, identified by the value
-of the required ``name`` attribute:
+parent ``cs:date`` element calls a localized date format, they also determine
+which, and in what order, date parts appear. A ``cs:date-part`` element
+describes the date part selected with the required ``name`` attribute:
 
 "day"
     For "day", ``cs:date-part`` may carry the ``form`` attribute, with values:
@@ -677,10 +686,10 @@ of the required ``name`` attribute:
 
 "month"
     For "month", ``cs:date-part`` may carry the `strip-periods`_ and ``form``
-    attributes. Abbreviated months (e.g. "Jan.", "Feb.") are `terms`_
-    and include periods by default (if applicable). These periods are removed
-    when `strip-periods`_ is set to "true" ("false" is the default). The
-    ``form`` attribute can be set to:
+    attributes. In locale files, month abbreviations (the "short" form of the
+    month `terms`_) should be defined with periods if applicable (e.g. "Jan.",
+    "Feb.", etc.). These periods can be removed by setting `strip-periods`_ to
+    "true" ("false" is the default). The ``form`` attribute can be set to:
     
     -  "long" - (default), e.g. "January"
     -  "short" - e.g. "Jan."
@@ -693,18 +702,19 @@ of the required ``name`` attribute:
     -  "long" - (default), e.g. "2005"
     -  "short" - e.g. "05"
 
-``cs:date-part`` may also carry the `formatting`_, `text-case`_ and
+``cs:date-part`` may also carry `formatting`_, `text-case`_ and
 ``range-delimiter`` (see `Date Ranges`_) attributes. Attributes for `affixes`_
-are allowed, except when ``cs:date`` calls a localized date format.
+are allowed, unless ``cs:date`` calls a localized date format.
 
 Date Ranges
-^^^^^^^^^^^
+'''''''''''
 
-By default, date ranges are delimited by en-dashes (e.g. "May |--| July 2008").
-The ``range-delimiter`` attribute may be used to specify custom date range
-delimiters. The attribute value set on the largest date-part ("day", "month" or
-"year") that differs between the two dates of the date range will then be used
-instead of the en-dash. For example,
+The default delimiter for dates in a date range is an en-dash (e.g. "May |--|
+July 2008"). Custom delimiters can be set on ``cs:date-part`` elements with the
+optional ``range-delimiter`` attribute. When a date range is rendered, only the
+value of ``range-delimiter`` on the ``cs:date-part`` element that corresponds to
+the largest date part ("year", "month", or "day") that differs between the two
+dates of the range is considered. For example,
 
 .. sourcecode:: xml
     
@@ -712,6 +722,7 @@ instead of the en-dash. For example,
       <citation>
         <layout>
           <date variable="issued">
+            <date-part name="day" suffix=" " range-delimiter="-"/>
             <date-part name="month" suffix=" "/>
             <date-part name="year" range-delimiter="/"/>
           </date>
@@ -719,7 +730,7 @@ instead of the en-dash. For example,
       </citation>
     </style>
 
-would result in "May |--| July 2008" and "May 2008/June 2009".
+would result in "1-4 May 2008", "May |--| July 2008" and "May 2008/June 2009".
 
 .. |--| unicode:: U+2013
    :trim:
@@ -784,7 +795,7 @@ Number
 ~~~~~~
 
 The ``cs:number`` rendering element outputs numeric content of one of the
-`Number variables`_ (selected with the required ``variable`` attribute). While
+`number variables`_ (selected with the required ``variable`` attribute). While
 all number variables can also be rendered with ``cs:text``, ``cs:number`` offers
 options to format (extracted) numbers via the optional ``form`` attribute, with
 values:
@@ -1362,117 +1373,121 @@ Citation-specific Options
 Disambiguation
 ''''''''''''''
 
-Cites can be disambiguated in five ways:
+A cite is ambiguous when it matches multiple bibliographic entries [#]_. There
+are four methods available to eliminate such ambiguity:
 
-1. The number of names shown can be increased.
-2. Given names can be added.
-3. Initials can be replaced with full given names.
-4. A year-suffix can be added.
-5. The cite can be rendered with the ``disambiguate`` attribute of ``cs:choose``
-   conditions testing "true".
+1. Show more names
+2. Expand names (adding initials or full given names)
+3. Add a year-suffix
+4. Render the cite with the ``disambiguate`` attribute of ``cs:choose``
+   conditions testing "true"
 
-In addition to disambiguating cites that otherwise would be the same, steps (2)
-and (3) may also be used for the broader purpose of disambiguating *names*
-throughout the document. This distinction is indicated below as "the scope of
-names transformation".
+Method 2 can also be used for global *name disambiguation*, covering all cites,
+ambiguous and unambiguous, throughout the document.
 
-The five disambiguation methods are activated with the following optional
-attributes (selected methods are always tried in the order listed below):
+Disambiguation methods are activated with the following optional attributes, and
+are always tried in the listed order:
 
 ``disambiguate-add-names`` [Step (1)]
     If set to "true" ("false" is the default), names that would otherwise be
-    hidden as a result of et-al abbreviation are added one by one, until either
-    disambiguation is achieved, or all names are shown.
+    hidden as a result of et-al abbreviation are added one by one to all members
+    of a set of ambiguous cites, until no more cites in the set can be
+    disambiguated by adding names.
 
-``disambiguate-add-givenname`` [Steps (2) & (3)]
-    If set to "true" ("false" is the default), given names are added or
-    expanded. For example:
+``disambiguate-add-givenname`` [Step (2)]
+    If set to "true" ("false" is the default), ambiguous names (names that are
+    identical in their "short" or initialized "long" form, but differ when
+    initials are added or the full given name is shown) are expanded. Name
+    expansion can be configured with ``givenname-disambiguation-rule``. An
+    example of cite disambiguation:
 
     ================================  ===================================
-    Original form                     Disambiguated form
+    Original ambiguous cites          Disambiguated cites
     ================================  ===================================
     (Simpson 2005; Simpson 2005)      (H. Simpson 2005; B. Simpson 2005)
     (Doe 1950; Doe 1950)              (John Doe 1950; Jane Doe 1950)
     ================================  ===================================
 
-    The value of the ``givenname-disambiguation-rule`` attribute determines a)
-    the precise method of name expansion, and b) whether unambiguous cites that
-    contain ambiguous names are targeted by this type of disambiguation.
+    If cites cannot be (fully) disambiguated by expanding the rendered names,
+    and if ``disambiguate-add-names`` is set to "true", then the names still
+    hidden as a result of et-al abbreviation after the disambiguation attempt of
+    ``disambiguate-add-names`` are added one by one to all members of a set of
+    ambiguous cites, until no more cites in the set can be disambiguated by
+    adding expanded names.
 
 ``givenname-disambiguation-rule``
-    This attribute specifies the scope of names transformation within the
-    document, how individual names are transformed, and the names within a cite
-    that are affected.
+    Specifies a) whether the purpose of name expansion is limited to
+    disambiguating cites, or has the additional goal of disambiguating names
+    (only in the latter case are ambiguous names in unambigous cites expanded,
+    e.g. from "(Doe 1950; Doe 2000)" to "(Jane Doe 1950; John Doe 2000)"), b)
+    whether name expansion targets all, or just the first name of each cite, and
+    c) the method by which each name is expanded.
 
-    **The scope of names transformation**
-        With a value of "all-names", "all-names-with-initials", "primary-name",
-        or "primary-name-with-initials", disambiguation is attempted for all
-        ambiguous names, even for unambiguous cites. Here, disambiguation of
-        cites is incidental to the disambiguation of names.
+    **Expansion of Individual Names**
+        The steps for expanding individual names are:
 
-        With a value of "by-cite", disambiguation is limited to names within
-        ambiguous cites.
+        1. If ``initialize-with`` is set, then:
 
-    **Transformation of individual names**
-          Individual names can be disambiguated through the following steps
-          (which steps are followed depends on the value of
-          ``givenname-disambiguation-rule``):
+           \(a) Initials can be shown by rendering the name with a ``form``
+           value of "long" instead of "short" (e.g. "Doe" becomes "J. Doe").
+           
+           \(b) Full given names can be shown instead of initials by ignoring
+           ``initialize-with`` (e.g. "J. Doe" becomes "John Doe").
 
-          1. If ``initialize-with`` is set, then:
-
-             \(a) A ``form`` value of "short" can first be incremented to "long"
-             (e.g. "Doe" becomes "J. Doe").
-             
-             \(b) ``initialize-with`` can be ignored (e.g. "J. Doe" becomes
-             "John Doe").
-
-          2. If ``initialize-with`` is *not* set, then the ``form`` value of
-             "short" can be immediately incremented to "long" (e.g. "Doe"
-             becomes "John Doe").
+        2. If ``initialize-with`` is *not* set, full given names can be shown
+           by rendering the name with a ``form`` value of "long" instead of
+           "short" (e.g. "Doe" becomes "John Doe").
     
-    **Given name disambiguation rules**
-        For all five given name disambiguation rules, described below, names are
-        only transformed if they lead to disambiguation. When name
-        transformation results in disambiguation, any names that were added by
-        ``disambiguate-add-names`` that follow the disambiguating name are
-        discarded. When name transformation does not result in disambiguation,
-        all names added by ``disambiguate-add-names`` are discarded.
+    **Given Name Disambiguation Rules**
+        Allowed values of ``givenname-disambiguation-rule``:
 
         "all-names"
-            Default value. Names that are rendered the same in multiple cites
-            (e.g. "Doe 2000" and "Doe 2001") are progressively transformed until
-            they are disambiguated (e.g. "A. Doe 2000" and "B. Doe 2001"). If
-            disambiguation cannot be achieved, the names return to their
-            original form.
+            Default. Name expansion has the dual purpose of disambiguating cites
+            and names. All rendered ambiguous names, in both ambiguous and
+            umambiguous cites, are subject to disambiguation. Each name is
+            progressively transformed until it is disambiguated. Names that can
+            not be disambiguated remain in their original form.
 
         "all-names-with-initials"
-            Same as "all-names", but limited to step 1(a). If
+            As "all-names", but name expansion is limited to step 1(a). If
             ``initialize-with`` is not set, no disambiguation attempt is made.
 
         "primary-name"
-            Same as "all-names", but ambiguity is only checked for the
-            first-listed name, and only first-listed names are subjected to
-            transformation.
+            As "all-names", but disambiguation is limited to the first name of
+            each cite.
 
         "primary-name-with-initials"
-            Same as "primary-name", but limited to step 1(a). If
+            As "primary-name", but name expansion is limited to step 1(a). If
             ``initialize-with`` is not set, no disambiguation attempt is made.
 
         "by-cite"
-            Same as "all-names", but name transformation is limited to ambiguous
-            cites. Ambiguous names in unambiguous cites are not subject to
-            transformation.
+            As "all-names", but the goal of name expansion is limited to
+            disambiguating cites. Only ambiguous names in ambiguous cites are
+            affected, and disambiguation stops after the first name that
+            eliminates cite ambiguity.
 
-``disambiguate-add-year-suffix`` [Step (4)]
-    If set to "true" ("false" is the default), a year-suffix is added to
-    ambiguous cites (e.g. "Doe 2007, Doe 2007" becomes "Doe 2007a, Doe 2007b").
-    The placement of the year-suffix, by default appended to each cite, can be
-    controlled by explictly rendering the "year-suffix" variable using
-    ``cs:text``.
+``disambiguate-add-year-suffix`` [Step (3)]
+    If set to "true" ("false" is the default), an alphabetic year-suffix is
+    added to ambiguous cites (e.g. "Doe 2007, Doe 2007" becomes "Doe 2007a, Doe
+    2007b") and to their corresponding bibliographic entries. The assignment of
+    the year-suffixes follows the order of the bibliographies entries, and
+    additional letters are used once "z" is reached ("z", "aa", "ab", ..., "az",
+    "ba", etc.). By default the year-suffix is appended to the cite, and to the
+    first year rendered through ``cs:date`` in the bibliographic entry, but its
+    location can be controlled by explicitly rendering the "year-suffix"
+    variable using ``cs:text``. If "year-suffix" is rendered through ``cs:text``
+    in the scope of ``cs:citation``, it is suppressed for ``cs:bibliography``,
+    unless it is also rendered through ``cs:text`` in the scope of
+    ``cs:bibliography``, and vice versa.
 
-For cites that could not be disambiguated by steps 1-4, a final attempt at
-disambiguation is performed by rendering the cite with the ``disambiguate``
-condition testing "true" [Step (5)] (see `Choose`_).
+If ambiguous cites remain after applying the selected disambiguation methods
+described above, a final disambiguation attempt is made by rendering these cites
+with the ``disambiguate`` condition testing "true" [Step (4)] (see `Choose`_).
+
+.. [#] The presence of uncited entries in the bibliography can make cites in the
+       document ambiguous. To make sure such cites are disambiguated, the CSL
+       processor should create hidden "ghost" cites for all uncited
+       bibliographic entries and include them in the disambiguation process.
 
 Citation Grouping
 '''''''''''''''''
@@ -1504,8 +1519,8 @@ attribute.
     
     -  "citation-number" - collapses ranges of cite numbers (rendered through
        the "citation-number" variable) in citations for "numeric" styles (e.g.
-       from "[1, 2, 3, 5]" to "[1-3, 5]"). Only increasing ranges collapse, e.g.
-       "[3, 2, 1]" will not collapse (to see how to sort cites by
+       from "[1, 2, 3, 5]" to "[1 |--| 3, 5]"). Only increasing ranges collapse,
+       e.g. "[3, 2, 1]" will not collapse (to see how to sort cites by
        "citation-number", see `Sorting`_).
     -  "year" - collapses cite groups by suppressing the output of the
        ``cs:names`` element for subsequent cites in the group, e.g. "(Doe 2000,
@@ -1514,8 +1529,8 @@ attribute.
        within the cite group, e.g. "(Doe 2000a, b)" instead of "(Doe 2000a,
        2000b)".
     -  "year-suffix-ranged" - collapses as "year-suffix", but also collapses
-       ranges of year-suffixes, e.g. "(Doe 2000a-c,e)" instead of "(Doe 2000a,
-       b, c, e)".
+       ranges of year-suffixes, e.g. "(Doe 2000a |--| c,e)" instead of "(Doe
+       2000a, b, c, e)".
     
     "year-suffix" and "year-suffix-ranged" fall back to "year" for cites with
     any output after the year or "no date" term, such as a locator. E.g. "(Doe
@@ -1614,10 +1629,10 @@ Page Ranges
 '''''''''''
 
 ``page-range-format``
-    Specifies the format of page ranges: "expanded" (e.g. "321-328"), "minimal"
-    ("321-8"), or "chicago" ("321-28") (for detailed format descriptions, see
-    `Appendix IV - Page Range Formats`_). If the attribute is not set, page
-    ranges are rendered without reformatting.
+    Specifies the format of page ranges: "expanded" (e.g. "321 |--| 328"),
+    "minimal" ("321 |--| 8"), or "chicago" ("321 |--| 28") (for detailed format
+    descriptions, see `Appendix IV - Page Range Formats`_). If the attribute is
+    not set, page ranges are rendered without reformatting.
 
 Name Particles
 ''''''''''''''
@@ -1804,8 +1819,9 @@ years are sorted inversely, e.g. "100BC, 50BC, 50AD, 100AD". Seasons are ignored
 for sorting, as the chronological order of the seasons differs between the
 northern and southern hemispheres. In the case of date ranges, the start date is
 used for the primary sort, and the end date is used for a secondary sort, e.g.
-"2000-2001, 2000-2005, 2002-2003, 2002-2009". Date ranges are placed after
-single dates when they share the same (start) date, e.g. "2000, 2000-2002".
+"2000 |--| 2001, 2000 |--| 2005, 2002 |--| 2003, 2002 |--| 2009". Date ranges
+are placed after single dates when they share the same (start) date, e.g. "2000,
+2000 |--| 2002".
 
 **numbers:** `Number variables`_ called via the ``variable`` attribute are
 returned as integers (``form`` is "numeric"). If the original variable value
@@ -1842,6 +1858,16 @@ called via the ``variable`` attribute. In contrast, macros return only those
 date-parts that would otherwise be rendered (respecting the value of the
 ``date-parts`` attribute for localized dates, or the listing of ``cs:date-part``
 elements for non-localized dates).
+
+Range Delimiters
+~~~~~~~~~~~~~~~~
+
+Collapsed ranges for the "citation-number" and "year-suffix" variables are
+delimited by an en-dash (e.g. "(1 |--| 3, 5)" and "(Doe 2000a |--| c,e)").
+
+The "locator" variable is always rendered with an en-dash replacing any hyphens.
+For the "page" variable, this replacement is only performed if the
+``page-range-format`` attribute is set on ``cs:style`` (see `Page Ranges`_).
 
 Formatting
 ~~~~~~~~~~
@@ -2048,6 +2074,11 @@ Sentence case conversion (with ``text-case`` set to "sentence") is performed by:
 
 2. For lower or mixed case strings, the first letter of the string is
    uppercased. Words entirely in uppercase are left untouched.
+
+CSL processors don't recognize proper nouns. As a result, strings in sentence
+case can be accurately converted to title case, but not vice versa. For this
+reason, it is generally preferable to store strings such as titles in sentence
+case, and only use ``text-case`` if a style desires another case.
 
 Title Case Conversion
 ^^^^^^^^^^^^^^^^^^^^^
@@ -2502,12 +2533,13 @@ Appendix IV - Page Range Formats
 The page abbreviation rules for the different values of the
 ``page-range-format`` attribute on ``cs:style`` are:
 
-"minimum"
-    All digits repeated in the second number are left out: 42-5, 321-8, 2787-816
+"minimal"
+    All digits repeated in the second number are left out: 42 |--| 5, 321 |--|
+    8, 2787 |--| 816
 
 "expanded"
-    Abbreviated page ranges are expanded to their non-abbreviated form: 42-45,
-    321-328, 2787-2816
+    Abbreviated page ranges are expanded to their non-abbreviated form: 42 |--|
+    45, 321 |--| 328, 2787 |--| 2816
 
 "chicago"
     Page ranges are abbreviated according to the |link|
@@ -2515,25 +2547,25 @@ The page abbreviation rules for the different values of the
 
 Table: **Chicago Manual of Style page range abbreviation rules**
 
-+------------------------+--------------------------+----------------+
-| First number           | Second number            | Examples       |
-+========================+==========================+================+
-| Less than 100          | Use all digits           | 3-10; 71-72    |
-+------------------------+--------------------------+----------------+
-| 100 or multiple of 100 | Use all digits           | 100-104;       |
-|                        |                          | 600-613;       |
-|                        |                          | 1100-1123      |
-+------------------------+--------------------------+----------------+
-| 101 through 109 (in    | Use changed part only,   | 107-8; 505-17; |
-| multiples of 100)      | omitting unneeded zeros  | 1002-6         |
-+------------------------+--------------------------+----------------+
-| 110 through 199 (in    | Use two digits, or more  | 321-25;        |
-| multiples of 100)      | as needed                | 415-532;       |
-|                        |                          | 11564-68;      |
-|                        |                          | 13792-803      |
-+------------------------+--------------------------+----------------+
-| 4 digits               | If numbers are four      | 1496-1504;     |
-|                        | digits long and three    | 2787-2816      |
-|                        | digits change, use all   |                |
-|                        | digits                   |                |
-+------------------------+--------------------------+----------------+
++------------------------+--------------------------+--------------------------+
+| First number           | Second number            | Examples                 |
++========================+==========================+==========================+
+| Less than 100          | Use all digits           | 3 |--| 10; 71 |--| 72    |
++------------------------+--------------------------+--------------------------+
+| 100 or multiple of 100 | Use all digits           | 100 |--| 104;            |
+|                        |                          | 600 |--| 613;            |
+|                        |                          | 1100 |--| 1123           |
++------------------------+--------------------------+--------------------------+
+| 101 through 109 (in    | Use changed part only,   | 107 |--| 8; 505 |--| 17; |
+| multiples of 100)      | omitting unneeded zeros  | 1002 |--| 6              |
++------------------------+--------------------------+--------------------------+
+| 110 through 199 (in    | Use two digits, or more  | 321 |--| 25;             |
+| multiples of 100)      | as needed                | 415 |--| 532;            |
+|                        |                          | 11564 |--| 68;           |
+|                        |                          | 13792 |--| 803           |
++------------------------+--------------------------+--------------------------+
+| 4 digits               | If numbers are four      | 1496 |--| 1504;          |
+|                        | digits long and three    | 2787 |--| 2816           |
+|                        | digits change, use all   |                          |
+|                        | digits                   |                          |
++------------------------+--------------------------+--------------------------+
