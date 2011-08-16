@@ -391,8 +391,8 @@ set to an |link| `xsd:language locale code
 <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_, determines which
 languages or language dialects are affected (see `Locale Fallback`_).
 
-See `Terms`_, `Localized Dates`_ and `Localized Options`_ for
-further details on the use of ``cs:locale``.
+See `Terms`_, `Localized Date Formats`_ and `Localized Options`_ for further
+details on the use of ``cs:locale``.
 
 An example of ``cs:locale`` in a style:
 
@@ -540,8 +540,8 @@ Unicode characters`__ can be used for superscripting.
 
 __ http://unicode.org/reports/tr30/datafiles/SuperscriptFolding.txt
 
-Localized Dates
-~~~~~~~~~~~~~~~
+Localized Date Formats
+~~~~~~~~~~~~~~~~~~~~~~
 
 Two localized date formats can be defined with ``cs:date`` elements: a "numeric"
 (e.g. "12-15-2005") and a "text" format (e.g. "December 15, 2005"). The format
@@ -632,48 +632,50 @@ An example of ``cs:text`` rendering the "title" variable:
 Date
 ~~~~
 
-The ``cs:date`` rendering element outputs dates, in a localized or non-localized
-format. The date variable (see `Date Variables`_) to be rendered is selected
-with the ``variable`` attribute.
+The ``cs:date`` rendering element renders the date selected from the list of
+`date variables`_ with the required ``variable`` attribute. A date can be
+rendered in either a localized or non-localized format.
 
-Localized date formats (see `Localized Dates`_) are selected with the ``form``
-attribute. This optional attribute must be set to either "numeric" (for numeric
-date formats, e.g. "12-15-2005"), or "text" (for date formats with a non-numeric
-month, e.g. "December 15, 2005"). Localized dates can be customized in two ways.
-First, the ``date-parts`` attribute may be used to specify which
-``cs:date-part`` elements are shown. The possible values are:
+`Localized date formats`_ are selected with the optional ``form`` attribute,
+which must set to either "numeric" (for fully numeric formats, e.g.
+"12-15-2005"), or "text" (for formats with a non-numeric month, e.g. "December
+15, 2005"). Localized date formats can be customized in two ways. First, the
+``date-parts`` attribute may be used to show fewer date parts. The possible
+values are:
 
--  "year-month-day" - (default), render year, month and day
--  "year-month" - render year and month
--  "year" - render only year
+-  "year-month-day" - (default), renders the year, month and day
+-  "year-month" - renders the year and month
+-  "year" - renders the year
 
-Secondly, ``cs:date`` may include one or more ``cs:date-part`` elements (see
+Secondly, ``cs:date`` may have one or more ``cs:date-part`` child elements (see
 `Date-part`_). The attributes set on these elements override those specified for
 the localized date formats (e.g. to get abbreviated months for all locales, the
-``form`` attribute of the month-``cs:date-part`` element can be set to "short").
-These ``cs:date-part`` elements do not affect which, or in what order,
-``cs:date-part`` elements are included in the rendered date. The
-``cs:date-part`` elements may not carry attributes for `affixes`_, as these are
-considered to be locale-specific.
+``form`` attribute on the month-``cs:date-part`` element can be set to "short").
+These ``cs:date-part`` elements do not affect which, or in what order, date
+parts are rendered. `Affixes`_, which are very locale-specific, are not allowed
+on these ``cs:date-part`` elements.
 
-Non-localized date formats are self-contained: only the included
-``cs:date-part`` elements are rendered, in the specified order. Here ``cs:date``
-lacks both the ``form`` and ``date-parts`` attributes. The ``cs:date-part``
-elements may carry attributes for `affixes`_ and `formatting`_, while
-``cs:date`` may carry a `delimiter`_ attribute to separate the ``cs:date-part``
-elements.
+In the absence of the ``form`` attribute, ``cs:date`` describes a self-contained
+non-localized date format. In this case, the date format is constructed using
+``cs:date-part`` child elements. With a required ``name`` attribute set to
+either ``day``, ``month`` or ``year``, the order of these elements reflects the
+display order of respectively the day, month, and year. The date can be
+formatted with `formatting`_ attributes on the ``cs:date-part`` elements, as
+well as several ``cs:date-part``-specific attributes (see `Date-part`_). The
+`delimiter`_ attribute may be set on ``cs:date`` to specify the delimiter for
+the ``cs:date-part`` elements, and `affixes`_ may be applied to the
+``cs:date-part`` elements.
 
-For both localized and non-localized dates, `affixes`_, `display`_ and
-`formatting`_ attributes may be specified for the ``cs:date`` element.
+For both localized and non-localized dates, ``cs:date`` may carry `affixes`_,
+`display`_ and `formatting`_ attributes.
 
 Date-part
 ^^^^^^^^^
 
 The ``cs:date-part`` elements control how date parts are rendered. Unless the
-parent ``cs:date`` element specifies the use of a localized date format, they
-also determine which, and in what order, date parts appear. Each
-``cs:date-part`` element describes a single date part, identified by the value
-of the required ``name`` attribute:
+parent ``cs:date`` element calls a localized date format, they also determine
+which, and in what order, date parts appear. A ``cs:date-part`` element
+describes the date part selected with the required ``name`` attribute:
 
 "day"
     For "day", ``cs:date-part`` may carry the ``form`` attribute, with values:
@@ -684,10 +686,10 @@ of the required ``name`` attribute:
 
 "month"
     For "month", ``cs:date-part`` may carry the `strip-periods`_ and ``form``
-    attributes. Abbreviated months (e.g. "Jan.", "Feb.") are `terms`_
-    and include periods by default (if applicable). These periods are removed
-    when `strip-periods`_ is set to "true" ("false" is the default). The
-    ``form`` attribute can be set to:
+    attributes. In locale files, month abbreviations (the "short" form of the
+    month `terms`_) should be defined with periods if applicable (e.g. "Jan.",
+    "Feb.", etc.). These periods can be removed by setting `strip-periods`_ to
+    "true" ("false" is the default). The ``form`` attribute can be set to:
     
     -  "long" - (default), e.g. "January"
     -  "short" - e.g. "Jan."
@@ -700,18 +702,19 @@ of the required ``name`` attribute:
     -  "long" - (default), e.g. "2005"
     -  "short" - e.g. "05"
 
-``cs:date-part`` may also carry the `formatting`_, `text-case`_ and
+``cs:date-part`` may also carry `formatting`_, `text-case`_ and
 ``range-delimiter`` (see `Date Ranges`_) attributes. Attributes for `affixes`_
-are allowed, except when ``cs:date`` calls a localized date format.
+are allowed, unless ``cs:date`` calls a localized date format.
 
 Date Ranges
-^^^^^^^^^^^
+'''''''''''
 
-By default, date ranges are delimited by en-dashes (e.g. "May |--| July 2008").
-The ``range-delimiter`` attribute may be used to specify custom date range
-delimiters. The attribute value set on the largest date-part ("day", "month" or
-"year") that differs between the two dates of the date range will then be used
-instead of the en-dash. For example,
+The default delimiter for dates in a date range is an en-dash (e.g. "May |--|
+July 2008"). Custom delimiters can be set on ``cs:date-part`` elements with the
+optional ``range-delimiter`` attribute. When a date range is rendered, only the
+value of ``range-delimiter`` on the ``cs:date-part`` element that corresponds to
+the largest date part ("year", "month", or "day") that differs between the two
+dates of the range is considered. For example,
 
 .. sourcecode:: xml
     
@@ -719,6 +722,7 @@ instead of the en-dash. For example,
       <citation>
         <layout>
           <date variable="issued">
+            <date-part name="day" suffix=" " range-delimiter="-"/>
             <date-part name="month" suffix=" "/>
             <date-part name="year" range-delimiter="/"/>
           </date>
@@ -726,7 +730,7 @@ instead of the en-dash. For example,
       </citation>
     </style>
 
-would result in "May |--| July 2008" and "May 2008/June 2009".
+would result in "1-4 May 2008", "May |--| July 2008" and "May 2008/June 2009".
 
 .. |--| unicode:: U+2013
    :trim:
@@ -791,7 +795,7 @@ Number
 ~~~~~~
 
 The ``cs:number`` rendering element outputs numeric content of one of the
-`Number variables`_ (selected with the required ``variable`` attribute). While
+`number variables`_ (selected with the required ``variable`` attribute). While
 all number variables can also be rendered with ``cs:text``, ``cs:number`` offers
 options to format (extracted) numbers via the optional ``form`` attribute, with
 values:

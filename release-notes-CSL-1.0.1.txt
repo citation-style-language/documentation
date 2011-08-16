@@ -36,8 +36,9 @@ Introduction
 definite with the actual release of CSL 1.0.1.**
 
 This document describes the changes introduced with version 1.0.1 of the
-Citation Style Language (CSL), as compared to version 1.0. For full details on
-how to use new features, see the CSL 1.0.1 specification.
+Citation Style Language (CSL), as compared to the CSL 1.0 schema and 2010-05-30
+update of the CSL 1.0 specification. For full details on how to use new
+features, see the CSL 1.0.1 specification.
 
 CSL 1.0.1 is a backwards compatible release, meaning that any valid CSL 1.0
 style should validate against the CSL 1.0.1 schema and work with any CSL
