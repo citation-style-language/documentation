@@ -632,7 +632,7 @@ An example of ``cs:text`` rendering the "title" variable:
 Date
 ~~~~
 
-The ``cs:date`` rendering element renders the date selected from the list of
+The ``cs:date`` rendering element outputs the date selected from the list of
 `date variables`_ with the required ``variable`` attribute. A date can be
 rendered in either a localized or non-localized format.
 
@@ -792,23 +792,31 @@ would result in "2005" (normal date) and "ca. 2003" (approximate date).
 Number
 ~~~~~~
 
-The ``cs:number`` rendering element outputs numeric content of one of the
-`number variables`_ (selected with the required ``variable`` attribute). While
-all number variables can also be rendered with ``cs:text``, ``cs:number`` offers
-options to format (extracted) numbers via the optional ``form`` attribute, with
-values:
+The ``cs:number`` rendering element outputs the number variable selected with
+the required ``variable`` attribute.
 
+`Number variables`_ are a subset of the list of `standard variables`_. When a
+variable is rendered with ``cs:number`` and contains both numeric and
+non-numeric text, only the first number is extracted and used for rendering
+(e.g. "6" when the variable content is "Volume 6"). Variables containing only
+non-numeric text (e.g. "Special edition") are rendered in full. (Extracted)
+numbers can be formatted via the optional ``form`` attribute, with values:
+   
 -  "numeric" - (default), e.g. "1", "2", "3"
--  "ordinal" - e.g. "1st", "2nd", "3rd"
--  "long-ordinal" - e.g. "first", "second", "third"
+-  "ordinal" - e.g. "1st", "2nd", "3rd". Ordinal suffixes are defined with the
+   `terms`_ "ordinal-01" to "ordinal-04". "ordinal-01" is used for numbers
+   ending on a 1 (except those ending on 11), "ordinal-02" for those ending on a
+   2 (except those ending on 12), "ordinal-03" for those ending on a 3 (except
+   those ending on 13) and "ordinal-04" for all other numbers.
+-  "long-ordinal" - e.g. "first", "second", "third". Long ordinals are defined
+   with the `terms`_ "long-ordinal-01" to "long-ordinal-10", which are used for
+   the numbers 1 through 10. For other numbers "long-ordinal" falls back to
+   "ordinal".
 -  "roman" - e.g. "i", "ii", "iii"
 
-If a variable rendered with ``cs:number`` contains both numeric and non-numeric
-text, only the first number is extracted and used for rendering (e.g. "6" when
-the variable content is "Volume 6"). Variables containing only non-numeric text
-(e.g. "Special edition"), are rendered in full. Variables can be tested for
-numeric content with the ``is-numeric`` conditional, e.g. "12th edition" tests
-"true" while "third edition" tests "false" (see `Choose`_).
+Variables can be tested for numeric content with the ``is-numeric`` conditional,
+e.g. "12th edition" tests "true" while "third edition" tests "false" (see
+`Choose`_).
 
 ``cs:number`` may carry `affixes`_, `display`_, `formatting`_ and `text-case`_
 attributes.
