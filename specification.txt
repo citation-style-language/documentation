@@ -609,8 +609,9 @@ following attributes to select what should be rendered:
 
 -  ``variable`` - renders the text contents of a variable. Attribute value must
    be one of the `standard variables`_. May be accompanied by the ``form``
-   attribute to select the "long" (default) or "short" form of a variable, e.g.
-   to select between the full or short title.
+   attribute to select the "long" (default) or "short" form of a variable (e.g.
+   the full or short title). If the "short" form is selected but unavailable,
+   the "long" form is rendered instead.
 -  ``macro`` - renders the text output of a macro. Attribute value must match
    the value of the ``name`` attribute of a ``cs:macro`` element (see `Macro`_).
 -  ``term`` - renders a term. Attribute value must be one of the terms listed in
@@ -2266,6 +2267,10 @@ status
 
 title
     primary title of the item
+
+title-short
+    short form of the primary title of the item (also maps to the "short" form
+    of the "title" variable)
 
 URL
     Uniform Resource Locator (e.g.
