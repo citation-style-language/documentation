@@ -766,7 +766,7 @@ the month term. E.g.,
 would result in "May 2008" and "Winter 2009".
 
 Approximate Dates
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^
 
 Approximate dates test "true" for the ``is-uncertain-date`` conditional (see
 `Choose`_). For example,
@@ -1296,7 +1296,7 @@ are set with the attributes:
     numeric text.
     
 ``is-uncertain-date``
-    Tests whether the given `date variables`_ contain `uncertain dates`_.
+    Tests whether the given `date variables`_ contain `approximate dates`_.
     
 ``locator``
     Tests whether the locator matches the given locator types (see `Locators`_).
