@@ -2121,14 +2121,11 @@ than "en", items are assumed to be non-English. An item is only considered to be
 English if the value of its ``language`` field starts with the "en" primary
 language tag.
 
-Appendices
-----------
-
 Appendix I - Variables
-~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 Standard Variables
-^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~
 
 abstract
     abstract of the item (e.g. the abstract of a journal article)
@@ -2259,7 +2256,7 @@ year-suffix
     disambiguating year suffix in author-date styles (e.g. "a" in "Doe, 1999a")
 
 Number Variables
-''''''''''''''''
+^^^^^^^^^^^^^^^^
 
 Number variables are a subset of the `Standard Variables`_.
 
@@ -2292,7 +2289,7 @@ volume
     book volume 2)
 
 Date Variables
-^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~
 
 accessed
     date the item has been accessed
@@ -2313,7 +2310,7 @@ submitted
     date the item (e.g. a manuscript) has been submitted for publication
 
 Name Variables
-^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~
 
 author
     author
@@ -2348,7 +2345,7 @@ translator
     translator
 
 Appendix II - Types
-~~~~~~~~~~~~~~~~~~~
+-------------------
 
 -  article
 -  article-magazine
@@ -2386,10 +2383,10 @@ Appendix II - Types
 -  webpage
 
 Appendix III - Terms
-~~~~~~~~~~~~~~~~~~~~
+--------------------
 
 Categories
-^^^^^^^^^^
+~~~~~~~~~~
 
 -  anthropology
 -  astronomy
@@ -2419,7 +2416,7 @@ Categories
 -  zoology
 
 Locators
-^^^^^^^^
+~~~~~~~~
 
 -  book
 -  chapter
@@ -2439,7 +2436,7 @@ Locators
 -  volume
 
 Months
-^^^^^^
+~~~~~~
 
 -  month-01
 -  month-02
@@ -2455,7 +2452,7 @@ Months
 -  month-12
 
 Ordinals
-^^^^^^^^
+~~~~~~~~
 
 -  ordinal-01
 -  ordinal-02
@@ -2473,7 +2470,7 @@ Ordinals
 -  long-ordinal-10
 
 Quotation marks
-^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~
 
 -  open-quote
 -  close-quote
@@ -2481,7 +2478,7 @@ Quotation marks
 -  close-inner-quote
 
 Roles
-^^^^^
+~~~~~
 
 -  author
 -  collection-editor
@@ -2496,7 +2493,7 @@ Roles
 -  translator
 
 Seasons
-^^^^^^^
+~~~~~~~
 
 -  season-01
 -  season-02
@@ -2504,7 +2501,7 @@ Seasons
 -  season-04
 
 Miscellaneous
-^^^^^^^^^^^^^
+~~~~~~~~~~~~~
 
 -  accessed
 -  ad
@@ -2533,7 +2530,7 @@ Miscellaneous
 -  retrieved
 
 Appendix IV - Page Range Formats
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------
 
 The page abbreviation rules for the different values of the
 ``page-range-format`` attribute on ``cs:style`` are:
