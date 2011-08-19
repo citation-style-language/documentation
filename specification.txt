@@ -2152,9 +2152,6 @@ authority
 call-number
     call number (to locate the item in a library)
 
-chapter-number
-    chapter number
-
 citation-label
     label identifying the item in in-text citations of label styles (e.g.
     "Ferr78"). May be assigned by the CSL processor based on item metadata.
@@ -2162,10 +2159,6 @@ citation-label
 citation-number
     index (starting at 1) of the cited reference in the bibliography (generated
     by the CSL processor)
-
-collection-number
-    number identifying the collection holding the item (e.g. the series number
-    for a book)
 
 collection-title
     title of the collection holding the item (e.g. the series title for a book)
@@ -2176,10 +2169,6 @@ container-title
 
 DOI
     Digital Object Identifier (e.g. "10.1128/AEM.02591-07")
-
-edition
-    (container) edition holding the item (e.g. "3" when citing a chapter in the
-    third edition of a book)
 
 event
     name of the related event (e.g. the conference name when citing a conference
@@ -2201,10 +2190,6 @@ genre
 ISBN
     International Standard Book Number
 
-issue
-    (container) issue holding the item (e.g. "5" when citing a journal article
-    from journal volume 2, issue 5)
-
 jurisdiction
     geographic scope of relevance (e.g. "US" for a US patent)
 
@@ -2221,15 +2206,6 @@ medium
 note
     (short) inline note giving additional item details (e.g. a concise summary
     or commentary)
-
-number
-    number identifying the item (e.g. a report number)
-
-number-of-pages
-    total number of pages of the cited item
-
-number-of-volumes
-    total number of volumes, usable for citing multi-volume books and such
 
 original-publisher
     original publisher, for items that have been republished by a different
@@ -2279,12 +2255,41 @@ URL
 version
     version of the item (e.g. "2.0.9" for a software program)
 
+year-suffix
+    disambiguating year suffix in author-date styles (e.g. "a" in "Doe, 1999a")
+
+Number Variables
+''''''''''''''''
+
+Number variables are a subset of the `Standard Variables`_.
+
+chapter-number
+    chapter number
+
+collection-number
+    number identifying the collection holding the item (e.g. the series number
+    for a book)
+
+edition
+    (container) edition holding the item (e.g. "3" when citing a chapter in the
+    third edition of a book)
+
+issue
+    (container) issue holding the item (e.g. "5" when citing a journal article
+    from journal volume 2, issue 5)
+
+number
+    number identifying the item (e.g. a report number)
+
+number-of-pages
+    total number of pages of the cited item
+
+number-of-volumes
+    total number of volumes, usable for citing multi-volume books and such
+
 volume
     (container) volume holding the item (e.g. "2" when citing a chapter from
     book volume 2)
-
-year-suffix
-    disambiguating year suffix in author-date styles (e.g. "a" in "Doe, 1999a")
 
 Date Variables
 ^^^^^^^^^^^^^^
@@ -2341,17 +2346,6 @@ recipient
 
 translator
     translator
-
-Number Variables
-^^^^^^^^^^^^^^^^
-
-See `Standard Variables`_ for variable descriptions.
-
-- edition
-- issue
-- number
-- number-of-volumes
-- volume
 
 Appendix II - Types
 ~~~~~~~~~~~~~~~~~~~
