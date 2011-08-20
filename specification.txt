@@ -1198,18 +1198,18 @@ Label
 ~~~~~
 
 The ``cs:label`` rendering element outputs the term matching the variable
-selected with the required ``variable`` attribute, which must be set to either
-"page" or "locator" (in the case of "locator", the rendered term matches the
-`locators`_ type). Terms are only rendered for non-empty variables, and match
-the pluralization of the variable content. The example below renders the
-contents of the "page" variable, preceded by the singular form of the "page"
-term for a single page ("page 5"), or the plural form for a page range ("pages
-5-7").
+selected with the required ``variable`` attribute, which must be set to
+"locator, "page", or one of the `number variables`_. The term, which is only
+rendered if the selected variable is non-empty, matches the plurality of the
+variable content. Content is considered plural when it contains multiple numbers
+(such as a page range, e.g. "page 5" and "pages 5-7", see example below), or,
+for the "number-of-pages" and "number-of-volumes" variables, when the number is
+higher than 1 ("1 volume" and "3 volumes").
 
 .. sourcecode:: xml
 
     <group delimiter=" ">
-      <label variable="page" form="long"/>
+      <label variable="page"/>
       <text variable="page"/>
     </group>
 
@@ -2194,8 +2194,11 @@ keyword
     keyword(s) or tag(s) attached to the item
 
 locator
-    locates information within the item (e.g. a page in a cited book, or a
-    volume in a cited multi-volume work)
+    a cite-specific pinpointer within the item (e.g. a page number within a
+    book, or a volume in a multi-volume work). Must be accompanied in the input
+    data by a label indicating the locator type (see the `Locators`_ term list),
+    which determines which term is rendered by ``cs:label`` when the "locator"
+    variable is selected.
 
 medium
     medium description (e.g. "CD", "DVD", etc.)
