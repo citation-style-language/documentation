@@ -527,7 +527,7 @@ Terms may be defined for specific forms by using ``cs:term`` with the optional
 -  "short" - e.g. "ed." and "eds." for the term "editor"
 -  "verb" - e.g. "edited by" for the term "editor"
 -  "verb-short" - e.g. "ed." for the term "editor"
--  "symbol" - e.g. "§" for the term "section"
+-  "symbol" - e.g. "§" and "§§" for the term "section"
 
 If a style uses a term in a form that is undefined (even after `Locale
 Fallback`_), there is fallback to other forms: "verb-short" first falls back to
@@ -1219,11 +1219,9 @@ higher than 1 ("1 volume" and "3 volumes").
 ``form``
     Selects the form of the term, with allowed values:
     
-    -  "long" - (default), e.g. "editor"/"editors" for the "editor" term
-    -  "verb" - e.g. "edited by" for the "editor" term
-    -  "short" - e.g. "ed."/"eds." for the "editor" term
-    -  "verb-short" - e.g. "ed." for the "editor" term
-    -  "symbol" - e.g. "§" for the singular "section" term
+    -  "long" - (default), e.g. "page"/"pages" for the "page" term
+    -  "short" - e.g. "p."/"pp." for the "page" term
+    -  "symbol" - e.g. "§"/"§§" for the "section" term
 
 ``plural``
     Sets pluralization of the term, with allowed values:
