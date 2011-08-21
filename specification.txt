@@ -1191,12 +1191,15 @@ Label in ``cs:names``
 The optional ``cs:label`` element (see `label`_) must be included after the
 ``cs:name`` and ``cs:et-al`` elements, but before the ``cs:substitute`` element.
 When used as a child element of ``cs:names``, ``cs:label`` does not carry the
-``variable`` attribute; instead, it renders the term matching the rendered name
-variable (e.g. "editors" in "Doe and Smith (editors)"). The ``form`` attribute
-may be set to "long", "short", "symbol", or one of the following two values:
+``variable`` attribute; it uses the variable(s) set on the parent ``cs:names``
+element instead. A second difference is that the ``form`` attribute may also be
+set to "verb" or "verb-short", so that the allowed values are:
 
+-  "long" - (default), e.g. "editor" and "editors" for the "editor" term
+-  "short" - e.g. "ed." and "eds." for the term "editor"
 -  "verb" - e.g. "edited by" for the term "editor"
 -  "verb-short" - e.g. "ed." for the term "editor"
+-  "symbol" - e.g. "§" and "§§" for the term "section"
 
 Label
 ~~~~~
