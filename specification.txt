@@ -535,10 +535,54 @@ Fallback`_), there is fallback to other forms: "verb-short" first falls back to
 back to "long". If no locale or form fallback is available, the term is rendered
 as a empty string.
 
+`Gender-specific ordinals`_ are activated through the ``gender`` and
+``gender-form`` attributes on ``cs:term``, which are described below.
+
 Term content should not contain markup such as LaTeX or HTML. `Superscripted
 Unicode characters`__ can be used for superscripting.
 
 __ http://unicode.org/reports/tr30/datafiles/SuperscriptFolding.txt
+
+Gender-specific Ordinals
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Some languages use gender-specific ordinals. For example, the English "1st" and
+"first" translate in French to "1\ :sup:`er`\ " and "premier" if the target noun
+is masculine, and "1\ :sup:`re`\ " and "première" if the noun is feminine.
+
+Feminine and masculine variants of the ordinal terms (see `Ordinals`_) may be
+specified by setting the ``gender-form`` attribute to "feminine" or "masculine"
+(the term without ``gender-form`` represents the neuter variant). There are two
+types of target nouns: a) the terms accompanying the `number variables`_, and b)
+the month terms (see `Months`_). The gender of these nouns may be specified on
+the "long" (default) form of the term using the ``gender`` attribute (set to
+"feminine" or "masculine"). When a number variable is rendered with
+``cs:number`` in the "ordinal" or "long-ordinal" form, the ordinal term of the
+same gender is used, with a fallback to the neuter variant if the feminine or
+masculine variant is undefined. When the "day" date-part is rendered in the
+"ordinal" form, the ordinal gender is matched against that of the month term.
+
+The example below gives "1re éd." ("1st ed."), "1er janvier" ("January 1st"),
+and "3e janvier" ("January 3rd"):
+
+.. sourcecode:: xml
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <locale xml:lang="fr-FR">
+      <terms>
+        <term name="edition" gender="feminine">
+          <single>édition</single>
+          <multiple>éditions</multiple>
+        </term>
+        <term name="edition" form="short">éd.</term>
+        <term name="month-01" gender="masculine">janvier</term>
+        <term name="ordinal-01" gender-form="feminine">re</term>
+        <term name="ordinal-01" gender-form="masculine">er</term>
+        <term name="ordinal-02">e</term>
+        <term name="ordinal-03">e</term>
+        <term name="ordinal-04">e</term>
+      </terms>
+    </locale>
 
 Localized Date Formats
 ~~~~~~~~~~~~~~~~~~~~~~
