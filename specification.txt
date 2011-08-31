@@ -1645,8 +1645,8 @@ Whitespace
 
 ``line-spacing``
     Specifies vertical line distance. Defaults to "1" (single-spacing), and can
-    be set to any non-negative integer to specify a multiple of the standard
-    unit of line height (e.g. "2" for double-spacing).
+    be set to any positive integer to specify a multiple of the standard unit of
+    line height (e.g. "2" for double-spacing).
 
 ``entry-spacing``
     Specifies vertical distance between bibliographic entries. By default (with
