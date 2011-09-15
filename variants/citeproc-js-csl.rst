@@ -323,6 +323,29 @@ the ``cs:layout`` under ``cs:bibliography``. An example follows:
 The construct above is used in the draft OSCOLA legal style to generate
 cross-reference entries for shipping and trademark cases.
 
+=====================================
+``subsequent-author-substitute-rule``
+=====================================
+
+The ``subsequent-author-substitute-rule`` attribute is a companion
+for use with ``subsequent-author-substitute``. Use it to control
+the method of applying the substitution slug:
+
+``complete-all`` (default)
+   if the names in a name variable completely match
+   those in the preceding bibliographic entry, the value of subsequent-author-
+   substitute substitutes once for all rendered names.
+
+``complete-each``
+   if the names in a name variable completely match those in
+   the preceding bibliographic entry, the value of subsequent-author-substitute
+   substitutes for each rendered name.
+
+``partial``
+   if one or more names in a name variable match those in the
+   preceding bibliographic entry, the value of subsequent-author-substitute
+   substitutes for each rendered matching name (matching starts with the first
+   author, and continues up to the first mismatch)..
 
 
 =======================================
