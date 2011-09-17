@@ -347,9 +347,9 @@ the method of applying the substitution slug:
    substitutes for each rendered matching name (matching starts with the first
    author, and continues up to the first mismatch)..
 
-=========================
-``locator-date`` variable
-=========================
+===================================================
+``locator-date`` and ``locator-revision`` variables
+===================================================
 
 The variable "locator-date" is parsed out from the user-supplied
 locator, using the following syntax:
@@ -372,6 +372,28 @@ at which the resource was referenced. This permits a single item in
 the calling application's database to represent the volume on the
 library shelf, the page date being optionally supplied by the user
 when citing into a document.
+
+The ``locator-revision`` variable consists of any trailing string
+following the ``locator-date`` (if any). It can be used for version
+descriptions associated with looseleaf services.
+
+================================
+``supplement`` term and variable
+================================
+
+The ``supplement`` variable and associated locale term is useful
+for secondary sources that are regularly updated between fresh
+editions. Such fine-grained updates are found in secondary
+legal publications.
+
+========================
+``periodical`` item type
+========================
+
+The ``periodical`` item type can be used to refer to a serial
+as a whole. It should also be used for the looseleaf services 
+found in legal publishing, as these often require citation formatting
+that differs from that of a book.
 
 
 =======================================
