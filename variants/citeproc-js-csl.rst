@@ -341,11 +341,16 @@ the method of applying the substitution slug:
    the preceding bibliographic entry, the value of subsequent-author-substitute
    substitutes for each rendered name.
 
-``partial``
+``partial-each``
    if one or more names in a name variable match those in the
    preceding bibliographic entry, the value of subsequent-author-substitute
    substitutes for each rendered matching name (matching starts with the first
    author, and continues up to the first mismatch)..
+
+``partial-first``
+   same matching behavior as above, but substitution is limited to the
+   first name in the nameset.
+
 
 ===================================================
 ``locator-date`` and ``locator-revision`` variables
