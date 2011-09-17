@@ -17,7 +17,7 @@ __ http://citationstylist.org/
 
 .. class:: date
 
-   September 3, 2011
+   September 17, 2011
 
 .. |citeproc-js| replace:: ``citeproc-js``
 .. |link| image:: link.png
@@ -346,6 +346,32 @@ the method of applying the substitution slug:
    preceding bibliographic entry, the value of subsequent-author-substitute
    substitutes for each rendered matching name (matching starts with the first
    author, and continues up to the first mismatch)..
+
+=========================
+``locator-date`` variable
+=========================
+
+The variable "locator-date" is parsed out from the user-supplied
+locator, using the following syntax:
+
+.. sourcecode:: csh
+
+   123|2010-12-01
+
+In this example, "123" is the value of the ``locator`` variable
+(a page or other pinpoint string), the ``|`` character marks the
+end of the pinpoint, and the ten-character string immediately
+following is a full date, which must be given as shown above,
+zero-padded, in year-month-day order, and with no space between
+the date and the ``|`` character. Non-conforming strings following
+the ``|`` marker will be ignored.
+
+This variable is useful for citing looseleaf services commonly used in
+law, the dates of which vary depending on the page cited and the time
+at which the resource was referenced. This permits a single item in
+the calling application's database to represent the volume on the
+library shelf, the page date being optionally supplied by the user
+when citing into a document.
 
 
 =======================================
