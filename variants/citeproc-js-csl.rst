@@ -17,7 +17,7 @@ __ http://citationstylist.org/
 
 .. class:: date
 
-   September 17, 2011
+   September 29, 2011
 
 .. |citeproc-js| replace:: ``citeproc-js``
 .. |link| image:: link.png
@@ -38,9 +38,11 @@ __ http://citationstylist.org/
 Overview
 ========
 
-This document is a companion to the CSL Specification, for use by
+This document is a companion to the `CSL 1.0 Specification`__, for use by
 style authors making use of extensions to the CSL language available
 in citeproc-js.
+
+__ http://citationstyles.org/downloads/specification.html
 
 ======================================
 Numeric variables |(approved for CSL)|
@@ -139,9 +141,123 @@ might come out something like this:
 
    1re éd.
 
+==========================================================
+``subsequent-author-substitute-rule`` |(approved for CSL)|
+==========================================================
+
+The ``subsequent-author-substitute-rule`` attribute is a companion
+for use with ``subsequent-author-substitute``. Use it to control
+the method of applying the substitution slug:
+
+``complete-all`` (default)
+   if the names in a name variable completely match
+   those in the preceding bibliographic entry, the value of subsequent-author-
+   substitute substitutes once for all rendered names.
+
+``complete-each``
+   if the names in a name variable completely match those in
+   the preceding bibliographic entry, the value of subsequent-author-substitute
+   substitutes for each rendered name.
+
+``partial-each``
+   if one or more names in a name variable match those in the
+   preceding bibliographic entry, the value of subsequent-author-substitute
+   substitutes for each rendered matching name (matching starts with the first
+   author, and continues up to the first mismatch)..
+
+``partial-first``
+   same matching behavior as above, but substitution is limited to the
+   first name in the nameset.
+
+================================================================
+Courts, institutions, and media-neutral citations (working note)
+================================================================
+
+There are some extremely thorny issues in the citation of legal cases
+that are going to treat us to some jarring speed bumps.
+
+Parallel citations have been addressed in ``citeproc-js`` already, and
+the code for handling them is reasonably well tested. When we turn
+this code loose on a range of real-world content and styles, however,
+we may find that it needs some turning. The code and the processing
+flow is arcane and difficult, because it involves implicit logic based
+on field content across successive cites, with on-the-fly removal of
+elements *after* the cites have been cast into the processor's
+internal representation, and before serialization. If the tuning work
+gets too hairy, I may be in for some refactoring of this code to make
+it more transparent. So I'm fastening my seat belt for that prospect
+as I write this.
+
+"Media-neutral" or "universal" citations are a new thing in legal
+citation styles, that are catching on in multiple jurisdictions and
+citation styles.  Their essential characteristic is not actually media
+neutrality, but the fact that they represent text published directly
+by the court, without a private publishing intermediary.  They are a
+special problem in several ways:
+
+* Different formatting may be required for such cites, so we need to
+  cast them as input data in a way that allows them to be readily
+  identified without relying on field-testing tricks that may vary
+  between jurisdictions.
+
+* Media-neutral/universal cites, and possibly traditional cites as
+  well, need to treat the court and its division separately in some
+  styles (composing a single "reporter" string that encapsulates
+  both) and separately in others (with court and division rendered
+  in separate locations). This is a hard problem.
+
+* Media-neutral/universal cites need to play well with traditional
+  cites when rendered in parallel. About the only thing we can depend
+  on is that the media-neutral/universal cite appears as the first
+  in the series.
+
+* The presence of a media-neutral/universal cite at the start of
+  a parallel series can affect the content that appears in subsequent
+  traditional cites in the series. The known case of this is the court
+  division in OSCOLA cites, documented at section 2.1.1 of the OSCOLA
+  guide.
+
+Looking at the issues, I'm thinking that something like the following
+might allow us to thread the needle on this:
+
+Set court as ``original-author`` on legal_case
+    If courts themselves are set as institutional authors on
+    the legal_case type, we can leverage the representation
+    of the court/division information as a unitary key
+    in the Abbreviations mechanism, rendering the elements
+    as a unit where the full string is recognized as a single key,
+    and as separate subunits only are recognized.
+
+Extend implicit logic in parallel cite rendering
+    To suppress court and subdivision details where they
+    are supplied by an initial media-neutral/universal cite,
+    the parallel citation collapsing mechanism would need to be
+    tuned with hard-wired logic for that purpose. I don't much like
+    this, but it is limited to the ``legal_case`` and ``statute`` types,
+    and should be controllable.
+
+Change the input order of institution name subelements
+    Currently institutions are *big-endian*, with the largest institutional
+    subunit at the end. This is inconvenient in a UI that sorts on the
+    raw name string, since the subelements are not clustered together.
+    For useability in simple systems, this ordering should be reversed.
+    The marginal pain of this is relatively small at this point, since
+    \(a) Zotero does not yet recognize institutional authors, and (b)
+    we've just very recently changed the subfield delimiter to ``|`` anyway.
+    If institution names are going to be heavily used in this way,
+    this change really should be made.
+
+
+
 ===============================================
 ``cs:number``, ``cs:label``, and ``is-numeric``
 ===============================================
+
+.. admonition:: Important
+
+   The implementation described in this section has been simplified
+   in ``citeproc-js``. Please stand by (for a week or two),
+   pending an update to this documentation.
 
 The ``citeproc-js`` processor is able to process multiple number
 values in the ``cs:number`` element, performing range collapsing
@@ -323,35 +439,6 @@ the ``cs:layout`` under ``cs:bibliography``. An example follows:
 The construct above is used in the draft OSCOLA legal style to generate
 cross-reference entries for shipping and trademark cases.
 
-=====================================
-``subsequent-author-substitute-rule``
-=====================================
-
-The ``subsequent-author-substitute-rule`` attribute is a companion
-for use with ``subsequent-author-substitute``. Use it to control
-the method of applying the substitution slug:
-
-``complete-all`` (default)
-   if the names in a name variable completely match
-   those in the preceding bibliographic entry, the value of subsequent-author-
-   substitute substitutes once for all rendered names.
-
-``complete-each``
-   if the names in a name variable completely match those in
-   the preceding bibliographic entry, the value of subsequent-author-substitute
-   substitutes for each rendered name.
-
-``partial-each``
-   if one or more names in a name variable match those in the
-   preceding bibliographic entry, the value of subsequent-author-substitute
-   substitutes for each rendered matching name (matching starts with the first
-   author, and continues up to the first mismatch)..
-
-``partial-first``
-   same matching behavior as above, but substitution is limited to the
-   first name in the nameset.
-
-
 ===================================================
 ``locator-date`` and ``locator-revision`` variables
 ===================================================
@@ -399,6 +486,18 @@ The ``periodical`` item type can be used to refer to a serial
 as a whole. It should also be used for the looseleaf services 
 found in legal publishing, as these often require citation formatting
 that differs from that of a book.
+
+==================================
+``minimal-two`` page collapse rule
+==================================
+
+The OSCOLA style (and possibly others), requires that numeric ranges
+be collapsed to the minimum number of characters that express the
+range unambiguously, but always with at least two characters (if present)
+on the second element of the range. This rule for use with the 
+``page-range-format`` attribute implements that behavior.
+
+When in force, this rule is also applied to year ranges.
 
 
 =======================================
@@ -532,6 +631,9 @@ should appear in citations, with one (extremely rare) exception: when
 an unaffiliated author is included in a list of names that includes
 one or more institutions, the name of the unaffiliated author(s)
 should come *after* that of the last institution in the list.
+
+Subunits of an organizational name should be separated with a
+field separator character ``|``.
 
 
 ^^^^^^^^^^^^^^^^^^
@@ -937,7 +1039,7 @@ provides the following guidance and example:
     author, the author [sic] should be included in a
     parenthetical at the end of the citation.
 
-        U.N. Econ. & Soc. Council [ECOSOC], Sub- Comm. on Prevention
+        U.N. Econ. & Soc. Council [ECOSOC], Sub-Comm. on Prevention
         of Discrimination & Prot. of Minorities, Working Group on
         Minorities, *Working Paper: Universal and Regional Mechanisms
         for Minority Protection*, |para| 17, U.N. Doc. E/CN.4/Sub.2/AC.5/1999/WP.6
