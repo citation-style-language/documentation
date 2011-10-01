@@ -245,8 +245,9 @@ independent styles, ``cs:info`` has the following child elements:
     style name (e.g. "APA").
 
 ``cs:updated``
-    May appear once. The optional contents of ``cs:updated`` must be a |link|
-    `timestamp <http://books.xmlschemata.org/relaxng/ch19-77049.html>`_.
+    Must appear once. The contents of ``cs:updated`` must be a |link| `timestamp
+    <http://books.xmlschemata.org/relaxng/ch19-77049.html>`_ that shows when the
+    style was last updated.
 
 The ``cs:link``, ``cs:rights``, ``cs:summary``, ``cs:title`` and
 ``cs:title-short`` elements may carry a ``xml:lang`` attribute to specify the

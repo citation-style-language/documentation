@@ -134,15 +134,6 @@ https://github.com/citation-style-language/schema/commit/4f1a318de1050100a400ca6
 https://github.com/citation-style-language/schema/commit/5a1b291961bd1ca49bc9d14cb58637350d81f9ef
 https://github.com/citation-style-language/schema/commit/66636d2bee489400d8eb375640f0a2336dfc0f95
 
-Updated
-~~~~~~~
-
-The ``cs:updated`` element has now become optional. The element may now also be
-used without content (i.e. ``<updated/>`` or ``<updated></updated>``).
-
-https://github.com/citation-style-language/schema/commit/7a6a5be7a206c6bff068584688a1cfa1f7c5a906
-https://github.com/citation-style-language/schema/commit/cab0cc6fae60771bfe9638d471f4f1bc4c75b4bf
-
 Attributes on ``cs:style``
 --------------------------
 
