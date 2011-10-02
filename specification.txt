@@ -1490,31 +1490,34 @@ condition testing "true" [Step (5)] (see `Choose`_).
 Cite Grouping
 '''''''''''''
 
-With cite grouping, cites in a citation are grouped by name and optionally
-collapsed, e.g. "(Doe 1999, 2006; Smith 2002; Doe & Jones 2007)" instead of
-"(Doe 1999; Smith 2002; Doe 2006; Doe & Jones 2007)".
- 
-Cites are only grouped if ``cs:citation`` carries the ``collapse`` or
-``cite-group-delimiter`` attributes (see `Cite Collapsing`_). Grouping is
-limited to those cites that start with the output of a ``cs:names`` element,
-followed by a year or "no date" term. They may end with other rendering
-elements, e.g. to render the "locator" or explicit "year-suffix" variables.
+With cite grouping, cites in in-text citations with identical rendered names are
+grouped together, e.g. the year-sorted "(Doe 1999; Smith 2002; Doe 2006; Doe et
+al. 2007)" becomes "(Doe 1999; Doe 2006; Smith 2002; Doe et al. 2007)". The
+comparison is limited to the output of the (first) ``cs:names`` element, but
+includes output rendered through ``cs:substitute``. Cite grouping takes places
+after cite sorting and disambiguation. Grouped cites maintain their relative
+order, and are moved to the original location of the first cite of the group.
 
-After cite sorting and disambiguation, qualifying cites with the same output of
-the ``cs:names`` element (this includes any output rendered through
-``cs:substitute``) are grouped into a cite group. Cites group with the first
-cite of the group while maintaining their original order relative to each other.
-E.g. the citation "(Doe 2002, Smith 2004, Doe 1999)" becomes "(Doe 2002, Doe
-1999, Smith 2004)", where the two references by Doe form a cite group.
+Cite grouping can be activated by setting the ``cite-group-delimiter`` attribute
+or the ``collapse`` attributes on ``cs:citation`` (see also `Cite Collapsing`_).
+
+``cite-group-delimiter``
+    Activates cite grouping and specifies the delimiter for cites within a cite
+    group. Defaults to the delimiter set on ``cs:layout`` in ``cs:citation``.
+    E.g. with ``delimiter`` on ``cs:layout`` in ``cs:citation`` set to "; " and
+    ``cite-group-delimiter`` set to ", ", citations look like "(Doe 1999, Doe
+    2001; Jones 2000)".
 
 Cite Collapsing
 '''''''''''''''
 
-Cite groups in citations of author-date styles, and cite ranges in citations in
-numeric styles can be collapsed through the use of the ``collapse`` attribute.
+Cite groups (author and author-date styles), and numeric cite ranges (numeric
+styles) can be collapsed through the use of the ``collapse`` attribute.
+Delimiters for collapsed cite groups can be customized with the
+``year-suffix-delimiter`` and ``after-collapse-delimiter`` attributes:
 
 ``collapse``
-    Activates cite collapsing. Allowed values:
+    Activates cite grouping and collapsing. Allowed values:
     
     -  "citation-number" - collapses ranges of cite numbers (rendered through
        the "citation-number" variable) in citations for "numeric" styles (e.g.
@@ -1531,17 +1534,9 @@ numeric styles can be collapsed through the use of the ``collapse`` attribute.
        ranges of year-suffixes, e.g. "(Doe 2000a-c,e)" instead of "(Doe 2000a,
        b, c, e)".
     
-    "year-suffix" and "year-suffix-ranged" fall back to "year" for cites with
-    any output after the year or "no date" term, such as a locator. E.g. "(Doe
-    2000a-c, 2000d, p. 5, 2000e,f)" (in this citation, the cite for "Doe 2000d"
-    has a locator, preventing the cite from further collapsing).
-
-``cite-group-delimiter``
-    Specifies the delimiter for cites within a cite group. Defaults to the
-    delimiter set on ``cs:layout`` in ``cs:citation``. E.g. with ``collapse``
-    set to "year", ``delimiter`` on ``cs:layout`` in ``cs:citation`` set to ";
-    ", and ``cite-group-delimiter`` set to ", ", citations look like "(Doe 1999,
-    2001; Jones 2000)".
+    "year-suffix" and "year-suffix-ranged" fall back to "year" for cites with a
+    locator. E.g. "(Doe 2000a-c, 2000d, p. 5, 2000e,f)", where the cite for "Doe
+    2000d" has a locator that prevents the cite from further collapsing.
 
 ``year-suffix-delimiter``
     Specifies the delimiter for year-suffixes. Defaults to the delimiter set on
