@@ -12,7 +12,7 @@ __ http://citationstyles.org/
 
 .. class:: info-version
 
-   version 2011-07-13
+   version 2011-10-04
 
 .. class:: contributors
 
@@ -32,13 +32,16 @@ __ http://citationstyles.org/
 Introduction
 ------------
 
-**Note: the changes listed below are still in flux, and only will become
-definite with the actual release of CSL 1.0.1.**
+**Temporary Notice: the changes listed below are still in flux, and only will
+become definite with the actual release of CSL 1.0.1. Please give feedback via
+the referenced issue tickets, the |link| `xbiblio mailing list
+<https://lists.sourceforge.net/lists/listinfo/xbiblio-devel>`_, or the Zotero
+forums.**
 
 This document describes the changes introduced with version 1.0.1 of the
-Citation Style Language (CSL), as compared to the CSL 1.0 schema and 2010-05-30
-update of the CSL 1.0 specification. For full details on how to use new
-features, see the CSL 1.0.1 specification.
+Citation Style Language (CSL), as compared to the CSL 1.0 schema and the
+2010-05-30 update of the CSL 1.0 specification. For full details on how to use
+new features, see the CSL 1.0.1 specification.
 
 CSL 1.0.1 is a backwards compatible release, meaning that any valid CSL 1.0
 style should validate against the CSL 1.0.1 schema and work with any CSL
@@ -65,11 +68,18 @@ https://github.com/citation-style-language/documentation/compare/fc49f31c821a668
 Specification
 -------------
 
-The CSL specification has been largely rewritten for increased precision and
-clarity. New sections include |link| `Terminology
-<http://citationstyles.org/downloads/specification.html#terminology>`_, |link|
-`File Types
-<http://citationstyles.org/downloads/specification.html#file-types>`_, ...
+The CSL specification has been largely rewritten for improved precision and
+clarity. There are several new paragraphs, such as |link| `Terminology
+<http://citationstyles.org/downloads/specification.html#terminology>`_ and
+|link| `File Types
+<http://citationstyles.org/downloads/specification.html#file-types>`_. `CSL
+variables
+<http://citationstyles.org/downloads/specification.html#appendix-i-variables>`_
+are now listed with a short description.
+
+Ticket(s):
+
+- https://github.com/citation-style-language/schema/issues/3 (variable descriptions)
 
 Style Metadata
 --------------
@@ -134,8 +144,8 @@ https://github.com/citation-style-language/schema/commit/4f1a318de1050100a400ca6
 https://github.com/citation-style-language/schema/commit/5a1b291961bd1ca49bc9d14cb58637350d81f9ef
 https://github.com/citation-style-language/schema/commit/66636d2bee489400d8eb375640f0a2336dfc0f95
 
-Attributes on ``cs:style``
---------------------------
+Different Attributes on ``cs:style`` for Dependent and Independent Styles
+-------------------------------------------------------------------------
 
 For dependent styles, ``cs:style`` may no longer carry the "default-locale"
 attribute or any of the global options (the "demote-non-dropping-particle",
@@ -151,6 +161,18 @@ https://github.com/citation-style-language/schema/commit/0a47df698d924aeba988416
 https://github.com/citation-style-language/schema/commit/56cc0c97e86cf05bfb0aad98910af616e3ea38e7
 https://github.com/citation-style-language/schema/commit/874daedca7efe027ca11157dbc771e481d243a25
 
+Gender-specific ordinals
+------------------------
+
+It is now possible to define feminine, masculine and neuter variants of ordinal
+suffixes, and specify the gender of the relevant noun CSL variables. See |link|
+`Gender-specific Ordinals
+<http://citationstyles.org/downloads/specification.html#gender-specific-ordinals>`_.
+
+Ticket(s):
+
+- https://github.com/citation-style-language/schema/issues/7
+
 Names
 -----
 
@@ -163,7 +185,7 @@ rendered as a result of et-al abbreviation. The new optional
 to be used instead (e.g. "Doe, et al. 2000" instead of "Doe et al. 2000"), with
 control options similar to "delimiter-precedes-last".
 
-See also http://citationstyles.org/downloads/specification.html#name.
+See also |link| `Name <http://citationstyles.org/downloads/specification.html#name>`_.
 
 https://github.com/citation-style-language/schema/commit/45f934d446849c394c4b5dbf0f3c9188f176ab98
 
@@ -211,7 +233,43 @@ set independently on ``cs:key``.
 
 https://github.com/citation-style-language/schema/commit/f1407079ec0f53ae58cb70000139a38651366e87
 
-Input data model
+Variables
+---------
+
+``cs:label`` for Number Variables
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+``cs:label``, which previously only worked with the "locator" and "page"
+variables, can now also be used with any `number variable
+<http://citationstyles.org/downloads/specification.html#number-variables>`_.
+
+Ticket(s):
+
+- https://github.com/citation-style-language/schema/issues/8
+
+Dedicated Variables for "short" Forms
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The "short" forms of the CSL variables "title" and "container-title" can now be
+also be accessed through the dedicated "title-short" and "container-title-short"
+variables. This makes it possible to test whether an abbreviation exists.
+
+Ticket(s):
+
+- https://github.com/citation-style-language/schema/issues/2
+
+More Number Variables
+~~~~~~~~~~~~~~~~~~~~~
+
+The CSL variables "chapter-number", "collection-number" and "number-of-pages"
+have become number variables, and can now be rendered through ``cs:number`` as
+well as ``cs:text``.
+
+Ticket(s):
+
+- https://github.com/citation-style-language/schema/issues/9
+
+Input Data Model
 ----------------
 
 The `CSL schema <https://github.com/citation-style-language/schema>`_ GitHub
