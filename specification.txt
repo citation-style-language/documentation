@@ -1658,17 +1658,103 @@ Reference Grouping
 ''''''''''''''''''
 
 ``subsequent-author-substitute``
-    If set, the text string value of this attribute replaces the names in a
-    bibliographic entry, when these names are identical to those in the
-    preceding bibliographic entry. Substitution is limited to the first
-    ``cs:names`` element rendered. An example, with
-    ``subsequent-author-substitute`` set to "---":
+    If set, the value of this attribute replaces names in a bibliographic entry
+    that also occur in the preceding entry. The exact method of substitution
+    depends on the value of the ``subsequent-author-substitute-rule`` attribute.
+    Substitution is limited to the names of the first ``cs:names`` element
+    rendered.
+
+``subsequent-author-substitute-rule``
+    Specifies when and how names are substituted as a result of
+    ``subsequent-author-substitute``. Allowed values:
+
+    - "complete-all" - (default), when all rendered names of the name variable
+      match those in the preceding bibliographic entry, the value of
+      ``subsequent-author-substitute`` replaces the entire name list (including
+      punctuation and terms like "et al" and "and"), except for the affixes set
+      on the ``cs:names`` element.
+    
+    - "complete-each" - requires a complete match like "complete-all", but now
+      the value of ``subsequent-author-substitute`` substitutes for each
+      rendered name.
+    
+    - "partial-each" - when one or more rendered names in the name variable
+      match those in the preceding bibliographic entry, the value of
+      ``subsequent-author-substitute`` substitutes for each matching name.
+      Matching starts with the first name, and continues up to the first
+      mismatch.
+    
+    - "partial-first" - as "partial-each", but substitution is limited to the
+      first name of the name variable.    
+    
+    For example, take the following bibliographic entries:
     
     ::
     
-        Asimov. Foundation, 1951.
-        ---. Foundation and Empire, 1952.
-        ---. Second Foundation, 1953.
+        Doe. 1999.
+        Doe. 2000.
+        Doe, Johnson & Williams. 2001.
+        Doe & Smith. 2002.
+        Doe, Stevens & Miller. 2003.
+        Doe, Stevens & Miller. 2004.
+        Doe, Williams et al. 2005.
+        Doe, Williams et al. 2006.
+        
+    With ``subsequent-author-substitute`` set to "---", and
+    ``subsequent-author-substitute-rule`` set to "complete-all", this becomes:
+    
+    ::
+    
+        Doe. 1999.
+        ---. 2000.
+        Doe, Johnson & Williams. 2001.
+        Doe & Smith. 2002.
+        Doe, Stevens & Miller. 2003.
+        ---. 2004.
+        Doe, Williams et al. 2005.
+        ---. 2005.
+    
+    With ``subsequent-author-substitute-rule`` set to "complete-each", this
+    becomes:
+    
+    ::
+    
+        Doe. 1999.
+        ---. 2000.
+        Doe, Johnson & Williams. 2001.
+        Doe & Smith. 2002.
+        Doe, Stevens & Miller. 2003.
+        ---, --- & ---. 2004.
+        Doe, Williams et al. 2005.
+        ---, --- et al. 2006.
+    
+    With ``subsequent-author-substitute-rule`` set to "partial-each", this
+    becomes:
+    
+    ::
+    
+        Doe. 1999.
+        ---. 2000.
+        Doe, Johnson & Williams. 2001.
+        --- & Smith. 2002.
+        Doe, Stevens & Miller. 2003.
+        ---, --- & ---. 2004.
+        Doe, Williams et al. 2005.
+        ---, --- et al. 2005.
+    
+    With ``subsequent-author-substitute-rule`` set to "partial-first", this
+    becomes:
+    
+    ::
+    
+        Doe. 1999.
+        ---. 2000.
+        Doe, Johnson & Williams. 2001.
+        --- & Smith. 2002.
+        Doe, Stevens & Miller. 2003.
+        ---, Stevens & Miller. 2004.
+        Doe, Williams et al. 2005.
+        ---, Williams et al. 2005.
 
 Global Options
 ^^^^^^^^^^^^^^
