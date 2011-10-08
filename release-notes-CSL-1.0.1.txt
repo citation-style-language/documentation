@@ -165,9 +165,13 @@ Gender-specific ordinals
 ------------------------
 
 It is now possible to define feminine, masculine and neuter variants of ordinal
-suffixes, and specify the gender of the relevant noun CSL variables. See |link|
-`Gender-specific Ordinals
-<http://citationstyles.org/downloads/specification.html#gender-specific-ordinals>`_.
+suffixes, and specify the gender of the relevant noun CSL variables. For
+example, this allows for automatic localization of the English "1st" and "first"
+in French to "1er" and "premier" if the target noun is masculine (e.g. "1er
+janvier" for "January 1st"), and "1re" and "première" if the noun is feminine
+(e.g. "1re édition" for "1st edition"). See |link| `Gender-specific Ordinals
+<http://citationstyles.org/downloads/specification.html#gender-specific-ordinals>`_
+for details.
 
 Ticket(s):
 
