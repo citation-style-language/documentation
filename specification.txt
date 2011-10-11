@@ -2299,6 +2299,10 @@ container-title
     title of the container holding the item (e.g. the book title for a book
     chapter, the journal title for a journal article)
 
+container-title-short
+    short/abbreviated form of "container-title" (also accessible through the
+    "short" form of the "container-title" variable)
+    
 DOI
     Digital Object Identifier (e.g. "10.1128/AEM.02591-07")
 
@@ -2380,7 +2384,7 @@ title
     primary title of the item
 
 title-short
-    short form of the primary title of the item (also maps to the "short" form
+    short/abbreviated form of "title" (also accessible through the "short" form
     of the "title" variable)
 
 URL
