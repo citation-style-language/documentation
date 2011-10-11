@@ -1499,8 +1499,8 @@ are always tried in the listed order:
         Allowed values of ``givenname-disambiguation-rule``:
 
         "all-names"
-            Default. Name expansion has the dual purpose of disambiguating cites
-            and names. All rendered ambiguous names, in both ambiguous and
+            Name expansion has the dual purpose of disambiguating cites and
+            names. All rendered ambiguous names, in both ambiguous and
             umambiguous cites, are subject to disambiguation. Each name is
             progressively transformed until it is disambiguated. Names that can
             not be disambiguated remain in their original form.
@@ -1518,8 +1518,8 @@ are always tried in the listed order:
             ``initialize-with`` is not set, no disambiguation attempt is made.
 
         "by-cite"
-            As "all-names", but the goal of name expansion is limited to
-            disambiguating cites. Only ambiguous names in ambiguous cites are
+            Default. As "all-names", but the goal of name expansion is limited
+            to disambiguating cites. Only ambiguous names in ambiguous cites are
             affected, and disambiguation stops after the first name that
             eliminates cite ambiguity.
 
