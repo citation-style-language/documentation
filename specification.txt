@@ -1010,6 +1010,13 @@ The attributes affecting personal names:
     ``cs:names`` element (taking into account the effects of et-al abbreviation
     and editor/translator collapsing), which allows for advanced `sorting`_.
 
+``initialize``
+    When set to "false" (the default is "true"), given names are no longer
+    initialized when "initialize-with" is set. However, the value of
+    "initialize-with" is still added after initials present in the full name
+    (e.g. with ``initialize`` set to "false", and ``initialize-with`` set to
+    ".", "James T Kirk" becomes "James T. Kirk").
+
 ``initialize-with``
     When set, given names are converted to initials. The attribute value is
     added after each initial ("." results in "J.J. Doe"). For compound given
@@ -1483,17 +1490,19 @@ are always tried in the listed order:
     **Expansion of Individual Names**
         The steps for expanding individual names are:
 
-        1. If ``initialize-with`` is set, then:
+        1. If ``initialize-with`` is set and ``initialize`` has its default
+           value of "true", then:
 
            \(a) Initials can be shown by rendering the name with a ``form``
            value of "long" instead of "short" (e.g. "Doe" becomes "J. Doe").
            
-           \(b) Full given names can be shown instead of initials by ignoring
-           ``initialize-with`` (e.g. "J. Doe" becomes "John Doe").
+           \(b) Full given names can be shown instead of initials by rendering
+           the name with ``initialize`` set to "false" (e.g. "J. Doe" becomes
+           "John Doe").
 
-        2. If ``initialize-with`` is *not* set, full given names can be shown
-           by rendering the name with a ``form`` value of "long" instead of
-           "short" (e.g. "Doe" becomes "John Doe").
+        2. If ``initialize-with`` is *not* set, full given names can be shown by
+           rendering the name with a ``form`` value of "long" instead of "short"
+           (e.g. "Doe" becomes "John Doe").
     
     **Given Name Disambiguation Rules**
         Allowed values of ``givenname-disambiguation-rule``:
@@ -1506,16 +1515,18 @@ are always tried in the listed order:
             not be disambiguated remain in their original form.
 
         "all-names-with-initials"
-            As "all-names", but name expansion is limited to step 1(a). If
-            ``initialize-with`` is not set, no disambiguation attempt is made.
+            As "all-names", but name expansion is limited to showing initials
+            (see step 1(a) above). No disambiguation attempt is made when
+            ``initialize-with`` is not set or when ``initialize`` is set to
+            "false".
 
         "primary-name"
             As "all-names", but disambiguation is limited to the first name of
             each cite.
 
         "primary-name-with-initials"
-            As "primary-name", but name expansion is limited to step 1(a). If
-            ``initialize-with`` is not set, no disambiguation attempt is made.
+            As "all-names-with-initials", but disambiguation is limited to the
+            first name of each cite.
 
         "by-cite"
             Default. As "all-names", but the goal of name expansion is limited
@@ -1875,11 +1886,11 @@ to repeat the same attributes and attribute values for every occurrence of the
 The available inheritable attributes for ``cs:name`` are ``and``,
 ``delimiter-precedes-et-al``, ``delimiter-precedes-last``, ``et-al-min``,
 ``et-al-use-first``, ``et-al-use-last``, ``et-al-subsequent-min``,
-``et-al-subsequent-use-first``, ``initialize-with``, ``name-as-sort-order`` and
-``sort-separator``. The attributes ``name-form`` and ``name-delimiter``
-correspond to the ``form`` and ``delimiter`` attributes on ``cs:name``.
-Similarly, ``names-delimiter`` corresponds to the ``delimiter`` attribute on
-``cs:names``.
+``et-al-subsequent-use-first``, ``initialize``, ``initialize-with``,
+``name-as-sort-order`` and ``sort-separator``. The attributes ``name-form`` and
+``name-delimiter`` correspond to the ``form`` and ``delimiter`` attributes on
+``cs:name``. Similarly, ``names-delimiter`` corresponds to the ``delimiter``
+attribute on ``cs:names``.
 
 When an inheritable name attribute is set on ``cs:style``, ``cs:citation`` or
 ``cs:bibliography``, its value is used for all ``cs:names`` elements within the
