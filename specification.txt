@@ -1604,9 +1604,11 @@ Delimiters for collapsed cite groups can be customized with the
        ranges of year-suffixes, e.g. "(Doe 2000a |--| c,e)" instead of "(Doe
        2000a, b, c, e)".
     
-    "year-suffix" and "year-suffix-ranged" fall back to "year" for cites with a
-    locator. E.g. "(Doe 2000a-c, 2000d, p. 5, 2000e,f)", where the cite for "Doe
-    2000d" has a locator that prevents the cite from further collapsing.
+    "year-suffix" and "year-suffix-ranged" fall back to "year" when
+    ``disambiguate-add-year-suffix`` is "false" (see `Disambiguation`_), or when
+    a cite has a locator (e.g. "(Doe 2000a-c, 2000d, p. 5, 2000e,f)", where the
+    cite for "Doe 2000d" has a locator that prevents the cite from further
+    collapsing).
 
 ``year-suffix-delimiter``
     Specifies the delimiter for year-suffixes. Defaults to the delimiter set on
