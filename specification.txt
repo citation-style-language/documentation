@@ -1343,7 +1343,7 @@ would be superfluous, ``cs:else`` must contain at least one rendering element.
 are set with the attributes:
 
 ``disambiguate``
-    When set to "true" (the only allowed value), the content of element is
+    When set to "true" (the only allowed value), the element content is only
     rendered if it disambiguates two otherwise identical citations. This attempt
     at `disambiguation`_ is only made when all other disambiguation methods have
     failed to uniquely identify the target source.

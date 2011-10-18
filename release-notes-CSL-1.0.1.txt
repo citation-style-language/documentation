@@ -69,13 +69,13 @@ Specification
 -------------
 
 The CSL specification has been largely rewritten for improved precision and
-clarity. There are several new paragraphs, such as |link| `Terminology
+clarity. There are several new paragraphs (e.g., |link| `Terminology
 <http://citationstyles.org/downloads/specification.html#terminology>`_ and
 |link| `File Types
-<http://citationstyles.org/downloads/specification.html#file-types>`_. `CSL
-variables
+<http://citationstyles.org/downloads/specification.html#file-types>`_), and
+every `CSL variable
 <http://citationstyles.org/downloads/specification.html#appendix-i-variables>`_
-are now listed with a short description.
+is now accompanied by a short description.
 
 Ticket(s):
 
@@ -161,15 +161,15 @@ https://github.com/citation-style-language/schema/commit/0a47df698d924aeba988416
 https://github.com/citation-style-language/schema/commit/56cc0c97e86cf05bfb0aad98910af616e3ea38e7
 https://github.com/citation-style-language/schema/commit/874daedca7efe027ca11157dbc771e481d243a25
 
-Gender-specific ordinals
+Gender-specific Ordinals
 ------------------------
 
 It is now possible to define feminine, masculine and neuter variants of ordinal
 suffixes, and specify the gender of the relevant noun CSL variables. For
 example, this allows for automatic localization of the English "1st" and "first"
-in French to "1er" and "premier" if the target noun is masculine (e.g. "1er
+in French to "1er" and "premier" if the target noun is masculine (e.g., "1er
 janvier" for "January 1st"), and "1re" and "première" if the noun is feminine
-(e.g. "1re édition" for "1st edition"). See |link| `Gender-specific Ordinals
+(e.g., "1re édition" for "1st edition"). See |link| `Gender-specific Ordinals
 <http://citationstyles.org/downloads/specification.html#gender-specific-ordinals>`_
 for details.
 
@@ -240,23 +240,48 @@ https://github.com/citation-style-language/schema/commit/f1407079ec0f53ae58cb700
 Variables
 ---------
 
-``cs:label`` for Number Variables
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Using ``cs:label`` with Number Variables
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``cs:label``, which previously only worked with the "locator" and "page"
-variables, can now also be used with any `number variable
+The ``cs:label`` element, which previously could only be used for the "locator"
+and "page" variables (and name variables, when used as a child element of
+``cs:names``), can now also be used with any `number variable
 <http://citationstyles.org/downloads/specification.html#number-variables>`_.
 
 Ticket(s):
 
 - https://github.com/citation-style-language/schema/issues/8
 
-Dedicated Variables for "short" Forms
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Dedicated Variables "title" and "container-title" abbreviations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The "short" forms of the CSL variables "title" and "container-title" can now be
-also be accessed through the dedicated "title-short" and "container-title-short"
-variables. This makes it possible to test whether an abbreviation exists.
+Previously, "title" and "container-title" abbreviations were only accessible
+through the "short" forms of these variables. As a result, it was impossible to
+specifically test whether an abbreviation existed (``<if variable="title"/>``
+tests "true" whenever a "long" or "short" form of "title" exists).
+
+Now, these abbreviations can also be accessed through the dedicated
+"title-short" and "container-title-short" variables. For example,
+
+.. sourcecode:: xml
+
+    <choose>
+      <if variable="title-short">
+        <group delimiter=" ">
+          <text variable="title-short"/>
+          <text variable="title" prefix="(" suffix=")"/>
+        </group>
+      </if>
+      <else>
+        <text variable="title"/>
+      </else>
+    </choose>
+
+would give title listings like:
+
+The Hobbit (The Hobbit, or There and Back Again)
+Lord of the Rings
+Free Culture (Free Culture: The Nature and Future of Creativity)
 
 Ticket(s):
 
@@ -265,13 +290,26 @@ Ticket(s):
 More Number Variables
 ~~~~~~~~~~~~~~~~~~~~~
 
-The CSL variables "chapter-number", "collection-number" and "number-of-pages"
-have become number variables, and can now be rendered through ``cs:number`` as
-well as ``cs:text``.
+The CSL variables "chapter-number", "collection-number" and "number-of-pages",
+which previously were standard variables, have now become number variables. As a
+result, they can now be rendered through either ``cs:number`` or ``cs:text``.
 
 Ticket(s):
 
 - https://github.com/citation-style-language/schema/issues/9
+
+Line Spacing
+------------
+
+The minimum value for line spacing has been increased to "1".
+
+Ticket(s):
+
+- https://github.com/citation-style-language/schema/issues/73
+
+cite-group-delimiter
+--------------------
+
 
 Input Data Model
 ----------------
