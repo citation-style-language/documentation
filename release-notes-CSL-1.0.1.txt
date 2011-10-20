@@ -117,7 +117,9 @@ URI of the style license, e.g.:
       License</rights>
     </info>
 
-https://github.com/citation-style-language/schema/commit/912ec31e3572d2b4ba4693bb4d83af3811af7509
+Ticket(s):
+
+- https://github.com/citation-style-language/schema/issues/45
 
 Links
 ~~~~~
@@ -229,13 +231,34 @@ The ``cs:name`` element is no longer a required child element of ``cs:names``.
 
 https://github.com/citation-style-language/schema/commit/cab0cc6fae60771bfe9638d471f4f1bc4c75b4bf
 
-Independent "name-min" and "names-use-first"
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Independent ``name-min`` and ``names-use-first``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The CSL schema now allows the "name-min" and "names-use-first" attributes to be
-set independently on ``cs:key``.
+The CSL schema now allows the ``name-min`` and ``names-use-first`` attributes to
+be set independently on ``cs:key``.
 
 https://github.com/citation-style-language/schema/commit/f1407079ec0f53ae58cb70000139a38651366e87
+
+Normalizing Initials in "long" Form Names
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The new ``initialize`` attribute for ``cs:name`` can be set to "false" (the
+default is "true") to stop ``initialize-with`` from activating name
+initializing. However, in this case, the value of ``initialize-with`` is still
+appended to initials present in the "long" form of names. For example,
+
+.. sourcecode:: xml
+
+    <names variable="author">
+      <name initialize-with=". " initialize="false"/>
+    </names>
+
+reformats the names "James T Kirk" and "Hunter S. Thompson" to "James T. Kirk"
+and "Hunter S. Thompson".
+
+Ticket(s):
+
+- https://github.com/citation-style-language/schema/issues/60
 
 Variables
 ---------
@@ -307,9 +330,26 @@ Ticket(s):
 
 - https://github.com/citation-style-language/schema/issues/73
 
-cite-group-delimiter
---------------------
+Cite Grouping
+-------------
 
+In in-text citations, cites with indentical names are often grouped, e.g. "(Doe
+2001, 2004; Smith 2002)" instead of "(Doe 2001, Smith 2002, Doe 2004)". For CSL,
+we refer to this as "cite grouping".
+
+While cite grouping already existed for cites that were collapsed (e.g. "(Doe
+2001, 2004; Smith 2002)"), cites can now also be grouped without collapsing.
+
+A new attribute for ``cs:citation``, ``cite-group-delimiter``, allows a custom
+delimiter to be set for cites in a group. Whenever this attribute or the
+"collapse" attribute is used, cite grouping is activated. With
+``cite-group-delimiter``, it is now possible to generate citations like "(Doe
+2001, Doe 2004; Smith 2002; Anderson 2005)". See also
+`http://citationstyles.org/downloads/specification.html#cite-grouping`_
+
+Ticket(s):
+
+- https://github.com/citation-style-language/schema/issues/52
 
 Input Data Model
 ----------------
