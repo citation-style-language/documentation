@@ -65,6 +65,166 @@ up to
 
 https://github.com/citation-style-language/documentation/compare/fc49f31c821a668492975757b903ad4ef6dec21f...065cacd0326d2235b66bd332d31b1317cbc6ebdf
 
+Cite Grouping
+-------------
+
+In in-text citations, cites with indentical names are often grouped, e.g. "(Doe
+2001, 2004; Smith 2002)" instead of "(Doe 2001, Smith 2002, Doe 2004)". For CSL,
+we refer to this as "cite grouping".
+
+While cite grouping already existed for cites that were collapsed (e.g. "(Doe
+2001, 2004; Smith 2002)"), cites can now also be grouped without collapsing.
+
+A new attribute for ``cs:citation``, ``cite-group-delimiter``, allows a custom
+delimiter to be set for cites in a group. Whenever this attribute or the
+"collapse" attribute is used, cite grouping is activated. With
+``cite-group-delimiter``, it is now possible to generate citations like "(Doe
+2001, Doe 2004; Smith 2002; Anderson 2005)". See also |link|
+`http://citationstyles.org/downloads/specification.html#cite-grouping`_
+
+Ticket(s):
+
+- |link| https://github.com/citation-style-language/schema/issues/52
+
+Disambiguation
+--------------
+
+The default value of ``givenname-disambiguation-rule`` has been changed from
+"all-names" to "by-cite". The latter is a less aggressive disambiguation method
+that is limited to ambiguous cites.
+
+Ticket(s):
+
+- |link| https://github.com/citation-style-language/schema/issues/76
+
+Gender-specific Ordinals
+------------------------
+
+It is now possible to define feminine, masculine and neuter variants of ordinal
+suffixes, and specify the gender of the relevant noun CSL variables. For
+example, this allows for automatic localization of the English "1st" and "first"
+in French to "1er" and "premier" if the target noun is masculine (e.g., "1er
+janvier" for "January 1st"), and "1re" and "première" if the noun is feminine
+(e.g., "1re édition" for "1st edition"). See |link| `Gender-specific Ordinals
+<http://citationstyles.org/downloads/specification.html#gender-specific-ordinals>`_
+for details.
+
+Ticket(s):
+
+- |link| https://github.com/citation-style-language/schema/issues/7
+
+Input Data Model
+----------------
+
+The |link| `CSL schema <https://github.com/citation-style-language/schema>`_
+GitHub repository now contains a JSON schema describing the CSL input data model
+(csl-data.json, and, to describe the citation objects that are embedded in word
+processor documents, csl-citation.json). At this point, it is modeled on the
+input model used by citeproc-js. The schemas are not necessarily incomplete and
+aren't normative.
+
+- |link| https://github.com/citation-style-language/schema/blob/master/csl-data.json
+- |link| https://github.com/citation-style-language/schema/blob/master/csl-citation.json
+
+Line Spacing
+------------
+
+The minimum value for line spacing has been increased to "1".
+
+Ticket(s):
+
+- |link| https://github.com/citation-style-language/schema/issues/73
+
+Names
+-----
+
+Affixes on Name-parts
+~~~~~~~~~~~~~~~~~~~~~
+
+The ``prefix`` and ``suffix`` attributes are now also allowed on
+``cs:name-part``, allowing for name formatting like "DOE (Jane)".
+
+Ticket(s):
+
+- |link| https://github.com/citation-style-language/schema/issues/47
+
+``cs:name`` Optional
+~~~~~~~~~~~~~~~~~~~~
+
+The ``cs:name`` element is no longer a required child element of ``cs:names``.
+
+Ticket(s):
+
+- |link| https://github.com/citation-style-language/schema/issues/53
+
+Et-al Abbreviation with Last Name
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+By using the new ``et-al-use-last`` attribute for ``cs:name``, it is now
+possible to use et-al abbreviation and show the last author (as required by the
+6th edition of the APA style). In this case an ellipsis, preceded by the name
+delimiter, replaces the "et-al" or "and others" term, e.g.:
+
+::
+
+    A. Goffeau, B. G. Barrell, H. Bussey, R. W. Davis, B. Dujon, H. Feldmann, …
+    S. G. Oliver
+
+The accompanying ``names-use-last`` attribute for ``cs:key`` can be used to
+override the value of ``et-al-use-last`` for sorting.
+
+See also |link| http://citationstyles.org/downloads/specification.html#name.
+
+Ticket(s):
+
+- |link| https://github.com/citation-style-language/schema/issues/11
+
+Et-al Delimiter
+~~~~~~~~~~~~~~~
+
+Previously, the "et-al" and "and others" terms were preceded by a space when
+rendered as a result of et-al abbreviation. The new optional
+``delimiter-precedes-et-al`` attribute for ``cs:name`` allows the name delimiter
+to be used instead (e.g. "Doe, et al. 2000" instead of "Doe et al. 2000"), with
+control options similar to ``delimiter-precedes-last``.
+
+See also |link| `Name <http://citationstyles.org/downloads/specification.html#name>`_.
+
+Ticket(s):
+
+- |link| https://github.com/citation-style-language/schema/issues/12
+
+Independent ``name-min`` and ``names-use-first``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The CSL schema now allows the ``name-min`` and ``names-use-first`` attributes to
+be set independently on ``cs:key``.
+
+Ticket(s):
+
+- |link| https://github.com/citation-style-language/schema/issues/82
+
+Normalizing Initials in "long" Form Names
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The new ``initialize`` attribute for ``cs:name`` can be set to "false" (the
+default is "true") to stop ``initialize-with`` from activating name
+initializing. However, in this case, the value of ``initialize-with`` is still
+appended to initials present in the "long" form of names. For example,
+
+.. sourcecode:: xml
+
+    <names variable="author">
+      <name initialize-with=". " initialize="false"/>
+    </names>
+
+reformats the names "James T Kirk" and "Hunter S. Thompson" to "James T. Kirk"
+and "Hunter S. Thompson".
+
+Ticket(s):
+
+- |link| https://github.com/citation-style-language/schema/issues/60
+
 Specification
 -------------
 
@@ -79,7 +239,7 @@ is now accompanied by a short description.
 
 Ticket(s):
 
-- https://github.com/citation-style-language/schema/issues/3 (variable descriptions)
+- |link| https://github.com/citation-style-language/schema/issues/3 (variable descriptions)
 
 Style Metadata
 --------------
@@ -101,12 +261,14 @@ explictly specified, e.g.:
       <eissn>1098-5336</eissn>
     </info>
 
-https://github.com/citation-style-language/schema/commit/74f6a4c75c0296a754d60aab0d127541d4c485a4
+Ticket(s):
+
+- |link| https://github.com/citation-style-language/schema/issues/51
 
 License
 ~~~~~~~
 
-The ``cs:rights`` element may now carry a "license" attribute to indicate the
+The ``cs:rights`` element may now carry a ``license`` attribute to indicate the
 URI of the style license, e.g.:
 
 .. sourcecode:: xml
@@ -119,14 +281,7 @@ URI of the style license, e.g.:
 
 Ticket(s):
 
-- https://github.com/citation-style-language/schema/issues/45
-
-Links
-~~~~~
-
-The CSL schema has become more strict about the use of the "rel" attribute on
-``cs:link``. The values "independent-parent" and "template" are now only allowed
-for dependent and independent styles, respectively.
+- |link| https://github.com/citation-style-language/schema/issues/45
 
 Short Title
 ~~~~~~~~~~~
@@ -141,141 +296,51 @@ style title, e.g.:
       <title-short>PNAS</title-short>
     </info>
 
-https://github.com/citation-style-language/schema/commit/5b1d9341183b73c88307614ffae5733cf7564135
-https://github.com/citation-style-language/schema/commit/4f1a318de1050100a400ca6dc4560d6fba4a6147
-https://github.com/citation-style-language/schema/commit/5a1b291961bd1ca49bc9d14cb58637350d81f9ef
-https://github.com/citation-style-language/schema/commit/66636d2bee489400d8eb375640f0a2336dfc0f95
+Ticket(s):
 
-Different Attributes on ``cs:style`` for Dependent and Independent Styles
--------------------------------------------------------------------------
+- |link| https://github.com/citation-style-language/schema/issues/83
 
-For dependent styles, ``cs:style`` may no longer carry the "default-locale"
-attribute or any of the global options (the "demote-non-dropping-particle",
-"initialize-with-hyphen", and "page-range-format" attributes) and inheritable
-name options, whereas the "class" attribute has become optional (while "class"
-has no function in dependent styles, it will only be disallowed in the next
-backward incompatible CSL release, as it's a required attribute for CSL 1.0
-styles).
+Validation
+----------
 
-https://github.com/citation-style-language/schema/commit/36b2d4d0c34582dd49c3580d018ccd891277daac
-https://github.com/citation-style-language/schema/commit/957a32f4b2314fe972dc7edeb08cacac135758b9
-https://github.com/citation-style-language/schema/commit/0a47df698d924aeba988416f8c52f9a91b4098ec
-https://github.com/citation-style-language/schema/commit/56cc0c97e86cf05bfb0aad98910af616e3ea38e7
-https://github.com/citation-style-language/schema/commit/874daedca7efe027ca11157dbc771e481d243a25
+The schema has become slightly stricter when it comes to style validation. While
+backward incompatible, the additional validation only concerns attributes that
+had no use in CSL 1.0 styles.
 
-Gender-specific Ordinals
-------------------------
+Differences between Dependent and Independent Styles
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-It is now possible to define feminine, masculine and neuter variants of ordinal
-suffixes, and specify the gender of the relevant noun CSL variables. For
-example, this allows for automatic localization of the English "1st" and "first"
-in French to "1er" and "premier" if the target noun is masculine (e.g., "1er
-janvier" for "January 1st"), and "1re" and "première" if the noun is feminine
-(e.g., "1re édition" for "1st edition"). See |link| `Gender-specific Ordinals
-<http://citationstyles.org/downloads/specification.html#gender-specific-ordinals>`_
-for details.
+For dependent styles, ``cs:style`` may no longer carry the ``default-locale``
+attribute or any of the global options (the ``demote-non-dropping-particle``,
+``initialize-with-hyphen``, and ``page-range-format`` attributes) and
+inheritable name options, whereas the ``class`` attribute has become optional
+(while ``class`` has no function in dependent styles, it will only be disallowed
+in the next backward incompatible CSL release, as it's a required attribute for
+CSL 1.0 styles).
+
+In addition, the CSL schema has become more strict about the use of the ``rel``
+attribute on ``cs:link``. The values "independent-parent" and "template" are now
+only allowed for dependent and independent styles, respectively.
 
 Ticket(s):
 
-- https://github.com/citation-style-language/schema/issues/7
+- |link| https://github.com/citation-style-language/schema/issues/39
 
-Names
------
+No "verb" and "verb-short" Forms on Standalone ``cs:label``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Et-al Delimiter
-~~~~~~~~~~~~~~~
-
-Previously, the "et-al" and "and others" terms were preceded by a space when
-rendered as a result of et-al abbreviation. The new optional
-"delimiter-precedes-et-al" attribute for ``cs:name`` allows the name delimiter
-to be used instead (e.g. "Doe, et al. 2000" instead of "Doe et al. 2000"), with
-control options similar to "delimiter-precedes-last".
-
-See also |link| `Name <http://citationstyles.org/downloads/specification.html#name>`_.
-
-https://github.com/citation-style-language/schema/commit/45f934d446849c394c4b5dbf0f3c9188f176ab98
-
-Et-al Abbreviation with Last Name
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-By using the new "et-al-use-last" attribute for ``cs:name``, it is now possible
-to use et-al abbreviation and show the last author (as required by the 6th
-edition of the APA style). In this case an ellipsis, preceded by the name
-delimiter, replaces the "et-al" or "and others" term, e.g.:
-
-::
-
-    A. Goffeau, B. G. Barrell, H. Bussey, R. W. Davis, B. Dujon, H. Feldmann, â€¦
-    S. G. Oliver
-
-The accompanying "names-use-last" attribute for ``cs:key`` can be used to
-override the value of "et-al-use-last" for sorting.
-
-See also http://citationstyles.org/downloads/specification.html#name.
-
-https://github.com/citation-style-language/schema/commit/275b1e31fdf92269e744c8c71dda76ed2b58c521
-https://github.com/citation-style-language/schema/commit/f1407079ec0f53ae58cb70000139a38651366e87
-
-Affixes on Name-parts
-~~~~~~~~~~~~~~~~~~~~~
-
-The "prefix" and "suffix" attributes are now also allowed on ``cs:name-part``,
-allowing for name formatting like "DOE (Jane)".
-
-https://github.com/citation-style-language/schema/commit/48c9abe5d7c917114e96d5b3068c803693e09841
-
-``cs:name`` Optional
-~~~~~~~~~~~~~~~~~~~~
-
-The ``cs:name`` element is no longer a required child element of ``cs:names``.
-
-https://github.com/citation-style-language/schema/commit/cab0cc6fae60771bfe9638d471f4f1bc4c75b4bf
-
-Independent ``name-min`` and ``names-use-first``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The CSL schema now allows the ``name-min`` and ``names-use-first`` attributes to
-be set independently on ``cs:key``.
-
-https://github.com/citation-style-language/schema/commit/f1407079ec0f53ae58cb70000139a38651366e87
-
-Normalizing Initials in "long" Form Names
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The new ``initialize`` attribute for ``cs:name`` can be set to "false" (the
-default is "true") to stop ``initialize-with`` from activating name
-initializing. However, in this case, the value of ``initialize-with`` is still
-appended to initials present in the "long" form of names. For example,
-
-.. sourcecode:: xml
-
-    <names variable="author">
-      <name initialize-with=". " initialize="false"/>
-    </names>
-
-reformats the names "James T Kirk" and "Hunter S. Thompson" to "James T. Kirk"
-and "Hunter S. Thompson".
+It is no longer allowed to set the ``form`` attribute to "verb" or "verb-short"
+on standalone ``cs:label`` elements (these values are still allowed if
+``cs:label`` is a child element of ``cs:names``).
 
 Ticket(s):
 
-- https://github.com/citation-style-language/schema/issues/60
+- |link| https://github.com/citation-style-language/schema/issues/71
 
 Variables
 ---------
 
-Using ``cs:label`` with Number Variables
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The ``cs:label`` element, which previously could only be used for the "locator"
-and "page" variables (and name variables, when used as a child element of
-``cs:names``), can now also be used with any `number variable
-<http://citationstyles.org/downloads/specification.html#number-variables>`_.
-
-Ticket(s):
-
-- https://github.com/citation-style-language/schema/issues/8
-
-Dedicated Variables "title" and "container-title" abbreviations
+Dedicated Variables "title" and "container-title" Abbreviations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Previously, "title" and "container-title" abbreviations were only accessible
@@ -302,13 +367,13 @@ Now, these abbreviations can also be accessed through the dedicated
 
 would give title listings like:
 
-The Hobbit (The Hobbit, or There and Back Again)
-Lord of the Rings
-Free Culture (Free Culture: The Nature and Future of Creativity)
+  * The Hobbit (The Hobbit, or There and Back Again)
+  * Lord of the Rings
+  * Free Culture (Free Culture: The Nature and Future of Creativity)
 
 Ticket(s):
 
-- https://github.com/citation-style-language/schema/issues/2
+- |link| https://github.com/citation-style-language/schema/issues/2
 
 More Number Variables
 ~~~~~~~~~~~~~~~~~~~~~
@@ -319,47 +384,16 @@ result, they can now be rendered through either ``cs:number`` or ``cs:text``.
 
 Ticket(s):
 
-- https://github.com/citation-style-language/schema/issues/9
+- |link| https://github.com/citation-style-language/schema/issues/9
 
-Line Spacing
-------------
+Using ``cs:label`` with Number Variables
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The minimum value for line spacing has been increased to "1".
-
-Ticket(s):
-
-- https://github.com/citation-style-language/schema/issues/73
-
-Cite Grouping
--------------
-
-In in-text citations, cites with indentical names are often grouped, e.g. "(Doe
-2001, 2004; Smith 2002)" instead of "(Doe 2001, Smith 2002, Doe 2004)". For CSL,
-we refer to this as "cite grouping".
-
-While cite grouping already existed for cites that were collapsed (e.g. "(Doe
-2001, 2004; Smith 2002)"), cites can now also be grouped without collapsing.
-
-A new attribute for ``cs:citation``, ``cite-group-delimiter``, allows a custom
-delimiter to be set for cites in a group. Whenever this attribute or the
-"collapse" attribute is used, cite grouping is activated. With
-``cite-group-delimiter``, it is now possible to generate citations like "(Doe
-2001, Doe 2004; Smith 2002; Anderson 2005)". See also
-`http://citationstyles.org/downloads/specification.html#cite-grouping`_
+The ``cs:label`` element, which previously could only be used for the "locator"
+and "page" variables (and name variables, when used as a child element of
+``cs:names``), can now also be used with any |link| `number variable
+<http://citationstyles.org/downloads/specification.html#number-variables>`_.
 
 Ticket(s):
 
-- https://github.com/citation-style-language/schema/issues/52
-
-Input Data Model
-----------------
-
-The `CSL schema <https://github.com/citation-style-language/schema>`_ GitHub
-repository now contains a JSON schema describing the CSL input data model
-(csl-data.json, and, to describe the citation objects that are embedded in word
-processor documents, csl-citation.json). At this point, it is modeled on the
-input model used by citeproc-js. The schemas are not necessarily incomplete and
-aren't normative.
-
-https://github.com/citation-style-language/schema/blob/master/csl-data.json
-https://github.com/citation-style-language/schema/blob/master/csl-citation.json
+- |link| https://github.com/citation-style-language/schema/issues/8
