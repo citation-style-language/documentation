@@ -12,7 +12,7 @@ __ http://citationstyles.org/
 
 .. class:: info-version
 
-   version 2011-10-04
+   version 2011-10-20
 
 .. class:: contributors
 
@@ -32,11 +32,11 @@ __ http://citationstyles.org/
 Introduction
 ------------
 
-**Temporary Notice: the changes listed below are still in flux, and only will
+**Temporary Notice:** the changes listed below are still in flux, and only will
 become definite with the actual release of CSL 1.0.1. Please give feedback via
-the referenced issue tickets, the |link| `xbiblio mailing list
+the referenced issue Ticket, the |link| `xbiblio mailing list
 <https://lists.sourceforge.net/lists/listinfo/xbiblio-devel>`_, or the Zotero
-forums.**
+forums.
 
 This document describes the changes introduced with version 1.0.1 of the
 Citation Style Language (CSL), as compared to the CSL 1.0 schema and the
@@ -55,6 +55,7 @@ up to
 06f663099afcd619cd5edbb743a533952ebd74d0 (June 29, 2011)
 
 https://github.com/citation-style-language/schema/compare/75240da3ee54184009f40982a485dc68e7a0fa5f...06f663099afcd619cd5edbb743a533952ebd74d0
+https://github.com/citation-style-language/schema/compare/06f663099afcd619cd5edbb743a533952ebd74d0...master
 
 https://github.com/citation-style-language/documentation/blob/master/specification.txt
 
@@ -64,6 +65,7 @@ up to
 065cacd0326d2235b66bd332d31b1317cbc6ebdf (July 26, 2011)
 
 https://github.com/citation-style-language/documentation/compare/fc49f31c821a668492975757b903ad4ef6dec21f...065cacd0326d2235b66bd332d31b1317cbc6ebdf
+https://github.com/citation-style-language/documentation/compare/065cacd0326d2235b66bd332d31b1317cbc6ebdf...master
 
 Cite Grouping
 -------------
@@ -79,10 +81,10 @@ A new attribute for ``cs:citation``, ``cite-group-delimiter``, allows a custom
 delimiter to be set for cites in a group. Whenever this attribute or the
 "collapse" attribute is used, cite grouping is activated. With
 ``cite-group-delimiter``, it is now possible to generate citations like "(Doe
-2001, Doe 2004; Smith 2002; Anderson 2005)". See also |link|
-`http://citationstyles.org/downloads/specification.html#cite-grouping`_
+2001,2004; Smith 2002; Anderson 2005)". See also |link| `Cite Grouping
+<http://citationstyles.org/downloads/specification.html#cite-grouping>`_.
 
-Ticket(s):
+Ticket:
 
 - |link| https://github.com/citation-style-language/schema/issues/52
 
@@ -93,7 +95,7 @@ The default value of ``givenname-disambiguation-rule`` has been changed from
 "all-names" to "by-cite". The latter is a less aggressive disambiguation method
 that is limited to ambiguous cites.
 
-Ticket(s):
+Ticket:
 
 - |link| https://github.com/citation-style-language/schema/issues/76
 
@@ -109,7 +111,7 @@ janvier" for "January 1st"), and "1re" and "première" if the noun is feminine
 <http://citationstyles.org/downloads/specification.html#gender-specific-ordinals>`_
 for details.
 
-Ticket(s):
+Ticket:
 
 - |link| https://github.com/citation-style-language/schema/issues/7
 
@@ -131,7 +133,7 @@ Line Spacing
 
 The minimum value for line spacing has been increased to "1".
 
-Ticket(s):
+Ticket:
 
 - |link| https://github.com/citation-style-language/schema/issues/73
 
@@ -144,7 +146,7 @@ Affixes on Name-parts
 The ``prefix`` and ``suffix`` attributes are now also allowed on
 ``cs:name-part``, allowing for name formatting like "DOE (Jane)".
 
-Ticket(s):
+Ticket:
 
 - |link| https://github.com/citation-style-language/schema/issues/47
 
@@ -153,7 +155,7 @@ Ticket(s):
 
 The ``cs:name`` element is no longer a required child element of ``cs:names``.
 
-Ticket(s):
+Ticket:
 
 - |link| https://github.com/citation-style-language/schema/issues/53
 
@@ -173,9 +175,9 @@ delimiter, replaces the "et-al" or "and others" term, e.g.:
 The accompanying ``names-use-last`` attribute for ``cs:key`` can be used to
 override the value of ``et-al-use-last`` for sorting.
 
-See also |link| http://citationstyles.org/downloads/specification.html#name.
+See also |link| `Name <http://citationstyles.org/downloads/specification.html#name>`_.
 
-Ticket(s):
+Ticket:
 
 - |link| https://github.com/citation-style-language/schema/issues/11
 
@@ -190,7 +192,7 @@ control options similar to ``delimiter-precedes-last``.
 
 See also |link| `Name <http://citationstyles.org/downloads/specification.html#name>`_.
 
-Ticket(s):
+Ticket:
 
 - |link| https://github.com/citation-style-language/schema/issues/12
 
@@ -200,7 +202,7 @@ Independent ``name-min`` and ``names-use-first``
 The CSL schema now allows the ``name-min`` and ``names-use-first`` attributes to
 be set independently on ``cs:key``.
 
-Ticket(s):
+Ticket:
 
 - |link| https://github.com/citation-style-language/schema/issues/82
 
@@ -221,9 +223,32 @@ appended to initials present in the "long" form of names. For example,
 reformats the names "James T Kirk" and "Hunter S. Thompson" to "James T. Kirk"
 and "Hunter S. Thompson".
 
-Ticket(s):
+Ticket:
 
 - |link| https://github.com/citation-style-language/schema/issues/60
+
+Subsequent Author Substitution
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A new attribute for ``cs:bibliography``, ``subsequent-author-substitute-rule``,
+gives more options for subsequent author substitution. Whereas previously only
+the whole name list could be substituted in case of a complete match, now names
+can be substituted on an individual basis, even for incomplete matches for the
+name list. For example, it is now possible to obtain bibliographic entries like:
+
+::
+
+    Doe, Johnson & Williams. 2001.
+    --- & Smith. 2002.
+    Doe, Stevens & Miller. 2003.
+    ---, --- & ---. 2004.
+
+See |link| `Reference Grouping
+<http://citationstyles.org/downloads/specification.html#reference-grouping>`_.
+
+Ticket:
+
+- |link| https://github.com/citation-style-language/schema/issues/4
 
 Specification
 -------------
@@ -237,7 +262,7 @@ every `CSL variable
 <http://citationstyles.org/downloads/specification.html#appendix-i-variables>`_
 is now accompanied by a short description.
 
-Ticket(s):
+Ticket:
 
 - |link| https://github.com/citation-style-language/schema/issues/3 (variable descriptions)
 
@@ -261,7 +286,7 @@ explictly specified, e.g.:
       <eissn>1098-5336</eissn>
     </info>
 
-Ticket(s):
+Ticket:
 
 - |link| https://github.com/citation-style-language/schema/issues/51
 
@@ -279,7 +304,7 @@ URI of the style license, e.g.:
       License</rights>
     </info>
 
-Ticket(s):
+Ticket:
 
 - |link| https://github.com/citation-style-language/schema/issues/45
 
@@ -296,7 +321,7 @@ style title, e.g.:
       <title-short>PNAS</title-short>
     </info>
 
-Ticket(s):
+Ticket:
 
 - |link| https://github.com/citation-style-language/schema/issues/83
 
@@ -322,7 +347,7 @@ In addition, the CSL schema has become more strict about the use of the ``rel``
 attribute on ``cs:link``. The values "independent-parent" and "template" are now
 only allowed for dependent and independent styles, respectively.
 
-Ticket(s):
+Ticket:
 
 - |link| https://github.com/citation-style-language/schema/issues/39
 
@@ -333,9 +358,20 @@ It is no longer allowed to set the ``form`` attribute to "verb" or "verb-short"
 on standalone ``cs:label`` elements (these values are still allowed if
 ``cs:label`` is a child element of ``cs:names``).
 
-Ticket(s):
+Ticket:
 
 - |link| https://github.com/citation-style-language/schema/issues/71
+
+Tests for ``condition`` on ``cs:if`` and ``cs:else-if``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+While the specification already required ``condition`` on ``cs:if`` and
+``cs:else-if`` to carry at least one condition attribute, the CSL schema also
+validated cases where ``condition`` specified no tests. This has been corrected.
+
+Ticket:
+
+- |link| https://github.com/citation-style-language/schema/issues/77
 
 Variables
 ---------
@@ -367,11 +403,13 @@ Now, these abbreviations can also be accessed through the dedicated
 
 would give title listings like:
 
-  * The Hobbit (The Hobbit, or There and Back Again)
-  * Lord of the Rings
-  * Free Culture (Free Culture: The Nature and Future of Creativity)
+::
 
-Ticket(s):
+    The Hobbit (The Hobbit, or There and Back Again)
+    Lord of the Rings
+    Free Culture (Free Culture: The Nature and Future of Creativity)
+
+Ticket:
 
 - |link| https://github.com/citation-style-language/schema/issues/2
 
@@ -382,7 +420,7 @@ The CSL variables "chapter-number", "collection-number" and "number-of-pages",
 which previously were standard variables, have now become number variables. As a
 result, they can now be rendered through either ``cs:number`` or ``cs:text``.
 
-Ticket(s):
+Ticket:
 
 - |link| https://github.com/citation-style-language/schema/issues/9
 
@@ -394,6 +432,6 @@ and "page" variables (and name variables, when used as a child element of
 ``cs:names``), can now also be used with any |link| `number variable
 <http://citationstyles.org/downloads/specification.html#number-variables>`_.
 
-Ticket(s):
+Ticket:
 
 - |link| https://github.com/citation-style-language/schema/issues/8
