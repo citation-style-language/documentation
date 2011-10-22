@@ -332,25 +332,6 @@ The schema has become slightly stricter when it comes to style validation. While
 backward incompatible, the additional validation only concerns attributes that
 had no use in CSL 1.0 styles.
 
-Differences between Dependent and Independent Styles
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-For dependent styles, ``cs:style`` may no longer carry the ``default-locale``
-attribute or any of the global options (the ``demote-non-dropping-particle``,
-``initialize-with-hyphen``, and ``page-range-format`` attributes) and
-inheritable name options, whereas the ``class`` attribute has become optional
-(while ``class`` has no function in dependent styles, it will only be disallowed
-in the next backward incompatible CSL release, as it's a required attribute for
-CSL 1.0 styles).
-
-In addition, the CSL schema has become more strict about the use of the ``rel``
-attribute on ``cs:link``. The values "independent-parent" and "template" are now
-only allowed for dependent and independent styles, respectively.
-
-Ticket:
-
-- |link| https://github.com/citation-style-language/schema/issues/39
-
 No "verb" and "verb-short" Forms on Standalone ``cs:label``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

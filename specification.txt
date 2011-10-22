@@ -134,9 +134,8 @@ carries the following attributes:
     The CSL version of the style. Must be "1.0" for CSL 1.0-compatible styles.
 
 In addition, ``cs:style`` may carry any of the `global options`_ and
-`inheritable name options`_. In dependent styles, attributes on ``cs:style`` are
-limited to ``version`` (required) and ``class`` (optional; this legacy attribute
-is scheduled for removal from dependent styles and has no effect).
+`inheritable name options`_. Dependent styles only require ``version`` on
+``cs:style`` (all other attributes, while allowed, are ignored).
 
 An example of ``cs:style`` for an independent style, preceded by the XML
 declaration:
@@ -258,7 +257,7 @@ target.
 
 In `dependent styles`_, ``cs:link`` must be used with ``rel`` set to
 "independent-parent", with the URI of the independent parent style set on
-``href``. In addition, ``cs:link`` may not be used with ``rel`` set to
+``href``. In addition, ``cs:link`` should not be used with ``rel`` set to
 "template".
 
 An example of ``cs:info`` for an independent style:
