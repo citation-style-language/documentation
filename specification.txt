@@ -2314,7 +2314,11 @@ container-title
 container-title-short
     short/abbreviated form of "container-title" (also accessible through the
     "short" form of the "container-title" variable)
-    
+
+dimensions
+    physical (e.g. size), temporal (e.g. running time), or relative (e.g. scale)
+    dimensions of the item
+
 DOI
     Digital Object Identifier (e.g. "10.1128/AEM.02591-07")
 
@@ -2337,6 +2341,9 @@ genre
 
 ISBN
     International Standard Book Number
+
+ISSN
+    International Standard Serial Number
 
 jurisdiction
     geographic scope of relevance (e.g. "US" for a US patent)
