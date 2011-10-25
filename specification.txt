@@ -2389,6 +2389,9 @@ references
 section
     container section holding the item (e.g. "politics" for a newspaper article)
 
+source
+    from whence the item originates (e.g. a library catalog or database)
+
 status
     (publication) status of the item (e.g. "forthcoming")
 
