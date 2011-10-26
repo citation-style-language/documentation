@@ -2384,6 +2384,12 @@ page-first
     first page of the range of pages the item (e.g. a journal article) covers in
     a container (e.g. a journal issue)
 
+PMCID
+    PubMed Central reference number
+
+PMID
+    PubMed reference number
+
 publisher
     publisher
 
