@@ -474,9 +474,10 @@ locale code must also be used in the file name of the locale file (the "xx-XX"
 in "locales-xx-XX.xml"). The root element must carry the ``version`` attribute,
 indicating the CSL version of the locale file (must be "1.0" for CSL
 1.0-compatible locale files). Locale files have the same requirements for
-`namespacing`_ as styles. The ``cs:locale`` element has three required child
-elements, described below: ``cs:terms``, ``cs:date`` and ``cs:style-options``.
-An example showing part of a locale file:
+`namespacing`_ as styles. The ``cs:locale`` element may contain ``cs:info`` as
+its first child element, and requires the child elements ``cs:terms``,
+``cs:date`` and ``cs:style-options`` (these elements are described below). An
+example showing part of a locale file:
 
 .. sourcecode:: xml
 
@@ -506,6 +507,32 @@ An example showing part of a locale file:
         </term>
       </terms>
     </locale>
+
+Info
+~~~~
+
+The ``cs:info`` element may be used to give metadata on the locale file. It has
+the following child elements:
+
+``cs:translator`` (optional)
+    ``cs:translator``, used to acknowledge locale translators, may be used
+    multiple times. Within the element, the child element ``cs:name`` must
+    appear once, while ``cs:email`` and ``cs:uri`` each may appear once. These
+    child elements should contain respectively the name, email address and URI
+    of the translator.
+
+``cs:rights`` (optional)
+    May appear once. The contents of ``cs:rights`` specifies the license under
+    which the locale file is released. The element may carry a ``license``
+    attribute to specify the URI of the license, and a ``xml:lang`` attribute to
+    specify the language of the element's content (the value must be an |link|
+    `xsd:language locale code
+    <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
+
+``cs:updated`` (optional)
+    May appear once. The contents of ``cs:updated`` must be a |link| `timestamp
+    <http://books.xmlschemata.org/relaxng/ch19-77049.html>`_ that shows when the
+    locale file was last updated.
 
 Terms
 ~~~~~
