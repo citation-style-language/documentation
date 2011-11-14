@@ -74,7 +74,7 @@ In in-text citations, cites with indentical names are often grouped, e.g. "(Doe
 2001, 2004; Smith 2002)" instead of "(Doe 2001, Smith 2002, Doe 2004)". For CSL,
 we refer to this as "cite grouping".
 
-While cite grouping already existed for cites that were collapsed (e.g. "(Doe
+While cite grouping already existed for cites that were collapsed (e.g., "(Doe
 2001, 2004; Smith 2002)"), cites can now also be grouped without collapsing.
 
 A new attribute for ``cs:citation``, ``cite-group-delimiter``, allows a custom
@@ -404,6 +404,25 @@ result, they can now be rendered through either ``cs:number`` or ``cs:text``.
 Ticket:
 
 - |link| https://github.com/citation-style-language/schema/issues/9
+
+New Variables: "dimensions", "ISSN", "PMCID", "PMID", "source"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+New CSL variables have been introduced:
+
+- "dimensions" - for physical (e.g., size of an object), temporal (e.g., the
+running time of a movie) or relative dimensions (e.g., the scale of a map)
+- "ISSN" - International Standard Serial Number
+- "PMCID" - PubMed Central reference number
+- "PMID" - PubMed reference number
+- "source" - from whence the item originates (e.g. a library catalog or database)
+
+Tickets:
+
+- |link| https://github.com/citation-style-language/schema/issues/14 ("dimensions")
+- |link| https://github.com/citation-style-language/schema/issues/86 ("ISSN")
+- |link| https://github.com/citation-style-language/schema/issues/87 ("PMCID", "PMID")
+- |link| https://github.com/citation-style-language/schema/issues/88 ("source")
 
 Using ``cs:label`` with Number Variables
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
