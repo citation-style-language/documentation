@@ -2385,6 +2385,12 @@ page-first
     first page of the range of pages the item (e.g. a journal article) covers in
     a container (e.g. a journal issue)
 
+PMCID
+    PubMed Central reference number
+
+PMID
+    PubMed reference number
+
 publisher
     publisher
 
@@ -2496,6 +2502,9 @@ editor
 
 editorial-director
     managing editor ("Directeur de la Publication" in French)
+
+illustrator
+    illustrator (e.g. of a children's book)
 
 interviewer
     interviewer (e.g. of an interview)
@@ -2652,6 +2661,7 @@ Roles
 -  editor
 -  editorial-director
 -  editortranslator
+-  illustrator
 -  interviewer
 -  original-author
 -  recipient
