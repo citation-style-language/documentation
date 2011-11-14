@@ -1356,10 +1356,11 @@ are set with the attributes:
     
 ``locator``
     Tests whether the locator matches the given locator types (see `Locators`_).
+    Use "sub-verbo" to test for the "sub verbo" locator type.
 
 ``position``
     Tests whether the cite position matches the given positions (terminology:
-    citations consist of one or more cites to individual items) When called
+    citations consist of one or more cites to individual items). When called
     within the scope of cs:bibliography, ``position`` tests "false". The
     positions that can be tested are:
    
