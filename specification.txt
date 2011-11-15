@@ -618,15 +618,14 @@ Two localized date formats can be defined with ``cs:date`` elements: a "numeric"
 (e.g. "12-15-2005") and a "text" format (e.g. "December 15, 2005"). The format
 is set on ``cs:date`` with the required ``form`` attribute.
 
-A date format is constructed using ``cs:date-part`` child elements. With a
-required ``name`` attribute set to either ``day``, ``month`` or ``year``, the
-order of these elements reflects the display order of respectively the day,
-month, and year. The date can be formatted with `formatting`_ attributes on the
-``cs:date`` and ``cs:date-part`` elements, as well as several
-``cs:date-part``-specific attributes (see `Date-part`_). The `delimiter`_
-attribute may be set on ``cs:date`` to specify the delimiter for the
-``cs:date-part`` elements, and `affixes`_ may be applied to the ``cs:date-part``
-elements.
+A date format is constructed using ``cs:date-part`` child elements (see
+`Date-part`_). With a required ``name`` attribute set to either ``day``,
+``month`` or ``year``, the order of these elements reflects the display order of
+respectively the day, month, and year. The date can be formatted with
+`formatting`_ and `text-case`_ attributes on the ``cs:date`` and
+``cs:date-part`` elements. The `delimiter`_ attribute may be set on ``cs:date``
+to specify the delimiter for the ``cs:date-part`` elements, and `affixes`_ may
+be applied to the ``cs:date-part`` elements.
 
 **Note** Affixes are not allowed on ``cs:date`` when defining localized date
 formats. This restriction is in place to separate locale-specific affixes (set
@@ -739,7 +738,7 @@ the ``cs:date-part`` elements, and `affixes`_ may be applied to the
 ``cs:date-part`` elements.
 
 For both localized and non-localized dates, ``cs:date`` may carry `affixes`_,
-`display`_ and `formatting`_ attributes.
+`display`_, `formatting`_ and `text-case`_ attributes.
 
 Date-part
 ^^^^^^^^^
