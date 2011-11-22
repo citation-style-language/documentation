@@ -45,6 +45,8 @@ CSL 1.0.1 is a backwards compatible release, meaning that any valid CSL 1.0
 style should validate against the CSL 1.0.1 schema and work with any CSL
 1.0.1-compatible CSL processor.
 
+`Rendered version <http://goo.gl/mD2Ez>`_
+
 Changes:
 https://github.com/citation-style-language/schema
 From
@@ -193,6 +195,16 @@ Ticket:
 
 - https://github.com/citation-style-language/schema/issues/12
 
+Illustrator
+~~~~~~~~~~~
+
+A new name variable, "illustrator", has been added, for e.g. illustrators of
+comics or children's books.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/89
+
 Independent ``name-min`` and ``names-use-first``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -326,7 +338,7 @@ The specification now describes how sentence and title casing (set with the
 ``text-case`` attribute) works. Title casing is now limited to items that can be
 assumed to be English. See `Text-case <http://goo.gl/0UfDl#text-case>`_.
 
-Ticket:
+Tickets:
 
 - https://github.com/citation-style-language/documentation/issues/13
 - https://github.com/citation-style-language/schema/issues/55
@@ -429,6 +441,27 @@ Tickets:
 - https://github.com/citation-style-language/schema/issues/86 ("ISSN")
 - https://github.com/citation-style-language/schema/issues/87 ("PMCID", "PMID")
 - https://github.com/citation-style-language/schema/issues/88 ("source")
+
+"sub verbo" Locator Type
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+CSL 1.0 contained a bug: it was impossible to test for the "sub verbo" locator
+type (because the value of the "locator" attribute is read as a list, "sub
+verbo" is read as "sub" and "verbo"). To circumvent this limitation, "sub-verbo"
+can now be used as a test value (the "sub verbo" term and input field remain
+unchanged). An example:
+
+.. sourcecode:: xml
+
+    <choose>
+      <if locator="page sub-verbo" match="any">
+        ...
+      </if>
+    </choose>
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/72
 
 Using ``cs:label`` with Number Variables
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
