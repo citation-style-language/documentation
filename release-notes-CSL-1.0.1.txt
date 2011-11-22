@@ -429,7 +429,7 @@ New Variables: "dimensions", "ISSN", "PMCID", "PMID", "source"
 New CSL variables have been introduced:
 
 - "dimensions" - for physical (e.g., size of an object), temporal (e.g., the
-running time of a movie) or relative dimensions (e.g., the scale of a map)
+  running time of a movie) or relative dimensions (e.g., the scale of a map)
 - "ISSN" - International Standard Serial Number
 - "PMCID" - PubMed Central reference number
 - "PMID" - PubMed reference number
