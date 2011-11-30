@@ -136,6 +136,20 @@ Ticket:
 
 - https://github.com/citation-style-language/schema/issues/73
 
+Locale Metadata
+---------------
+
+Locale files may now include ``cs:info`` as the first child element of the
+``cs:locale`` root element. This element may contain several child elements:
+``cs:translator`` (one or more), ``cs:rights`` and ``cs:updated``.
+``cs:translator`` can be used to specify the translator of the locale file,
+using the same child elements available for ``cs:author`` and ``cs:contributor``
+in styles (``cs:name``, ``cs:email`` and ``cs:uri``). 
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/10
+
 Names
 -----
 
