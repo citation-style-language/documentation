@@ -39,7 +39,7 @@ This document describes the changes introduced with version 1.0.1 of the
 Citation Style Language (CSL), as compared to the CSL 1.0 schema and the
 2010-05-30 update of the CSL 1.0 specification. For full details on how to use
 new features, see the `draft CSL 1.0.1 specification
-<http://goo.gl/0UfDl#cite-grouping>`_.
+<http://goo.gl/0UfDl>`_.
 
 CSL 1.0.1 is a backwards compatible release, meaning that any valid CSL 1.0
 style should validate against the CSL 1.0.1 schema and work with any CSL
@@ -106,8 +106,8 @@ It is now possible to define feminine, masculine and neuter variants of ordinal
 suffixes, and specify the gender of the relevant noun CSL variables. For
 example, this allows for automatic localization of the English "1st" and "first"
 in French to "1er" and "premier" if the target noun is masculine (e.g., "1er
-janvier" for "January 1st"), and "1re" and "première" if the noun is feminine
-(e.g., "1re édition" for "1st edition"). See `Gender-specific Ordinals
+janvier" for "January 1st"), and "1re" and "premiï¿½re" if the noun is feminine
+(e.g., "1re ï¿½dition" for "1st edition"). See `Gender-specific Ordinals
 <http://goo.gl/0UfDl#gender-specific-ordinals>`_ for details.
 
 Ticket:
@@ -197,7 +197,7 @@ delimiter, replaces the "et-al" or "and others" term, e.g.:
 
 ::
 
-    A. Goffeau, B. G. Barrell, H. Bussey, R. W. Davis, B. Dujon, H. Feldmann, …
+    A. Goffeau, B. G. Barrell, H. Bussey, R. W. Davis, B. Dujon, H. Feldmann, ï¿½
     S. G. Oliver
 
 The accompanying ``names-use-last`` attribute for ``cs:key`` can be used to
