@@ -1810,10 +1810,12 @@ Page Ranges
 '''''''''''
 
 ``page-range-format``
-    Specifies the format of page ranges: "expanded" (e.g. "321 |--| 328"),
-    "minimal" ("321 |--| 8"), or "chicago" ("321 |--| 28") (for detailed format
-    descriptions, see `Appendix IV - Page Range Formats`_). If the attribute is
-    not set, page ranges are rendered without reformatting.
+    Activates expansion or collapsing of page ranges: "expanded" (e.g. "321 |--|
+    328"), "minimal" ("321 |--| 8"), or "chicago" ("321 |--| 28") (see also
+    `Appendix IV - Page Range Formats`_). Delimits page ranges with the
+    "page-range-delimiter" term (introduced with CSL 1.0.1, and defaults to an
+    en-dash). If the attribute is not set, page ranges are rendered without
+    reformatting.
 
 Name Particles
 ''''''''''''''
