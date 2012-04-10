@@ -34,6 +34,8 @@ __ http://citationstyles.org/
 
 .. |link| image:: link.png
 
+.. |--| unicode:: U+2013
+   :trim:
 
 ========
 
@@ -802,9 +804,6 @@ dates. For example,
     </style>
 
 would result in "1-4 May 2008", "May |--| July 2008" and "May 2008/June 2009".
-
-.. |--| unicode:: U+2013
-   :trim:
 
 AD and BC
 ^^^^^^^^^
@@ -1810,12 +1809,12 @@ Page Ranges
 '''''''''''
 
 ``page-range-format``
-    Activates expansion or collapsing of page ranges: "expanded" (e.g. "321 |--|
-    328"), "minimal" ("321 |--| 8"), or "chicago" ("321 |--| 28") (see also
-    `Appendix IV - Page Range Formats`_). Delimits page ranges with the
-    "page-range-delimiter" term (introduced with CSL 1.0.1, and defaults to an
-    en-dash). If the attribute is not set, page ranges are rendered without
-    reformatting.
+    Activates expansion or collapsing of page ranges: "chicago" ("321 |--| 28"),
+    "expanded" (e.g. "321 |--| 328"), "minimal" ("321 |--| 8"), or "minimal-two"
+    ("321 |--| 28") (see also `Appendix IV - Page Range Formats`_). Delimits
+    page ranges with the "page-range-delimiter" term (introduced with CSL 1.0.1,
+    and defaults to an en-dash). If the attribute is not set, page ranges are
+    rendered without reformatting.
 
 Name Particles
 ''''''''''''''
@@ -2738,39 +2737,41 @@ Appendix IV - Page Range Formats
 The page abbreviation rules for the different values of the
 ``page-range-format`` attribute on ``cs:style`` are:
 
-"minimal"
-    All digits repeated in the second number are left out: 42 |--| 5, 321 |--|
-    8, 2787 |--| 816
+"chicago"
+    Page ranges are abbreviated according to the |link|
+    `Chicago Manual of Style-rules <http://www.aahn.org/guidelines.html>`_:
+    
+    +------------------------+--------------------------+--------------------------+
+    | First number           | Second number            | Examples                 |
+    +========================+==========================+==========================+
+    | Less than 100          | Use all digits           | 3 |--| 10; 71 |--| 72    |
+    +------------------------+--------------------------+--------------------------+
+    | 100 or multiple of 100 | Use all digits           | 100 |--| 104;            |
+    |                        |                          | 600 |--| 613;            |
+    |                        |                          | 1100 |--| 1123           |
+    +------------------------+--------------------------+--------------------------+
+    | 101 through 109 (in    | Use changed part only,   | 107 |--| 8; 505 |--| 17; |
+    | multiples of 100)      | omitting unneeded zeros  | 1002 |--| 6              |
+    +------------------------+--------------------------+--------------------------+
+    | 110 through 199 (in    | Use two digits, or more  | 321 |--| 25;             |
+    | multiples of 100)      | as needed                | 415 |--| 532;            |
+    |                        |                          | 11564 |--| 68;           |
+    |                        |                          | 13792 |--| 803           |
+    +------------------------+--------------------------+--------------------------+
+    | 4 digits               | If numbers are four      | 1496 |--| 1504;          |
+    |                        | digits long and three    | 2787 |--| 2816           |
+    |                        | digits change, use all   |                          |
+    |                        | digits                   |                          |
+    +------------------------+--------------------------+--------------------------+
 
 "expanded"
     Abbreviated page ranges are expanded to their non-abbreviated form: 42 |--|
     45, 321 |--| 328, 2787 |--| 2816
 
-"chicago"
-    Page ranges are abbreviated according to the |link|
-    `Chicago Manual of Style-rules <http://www.aahn.org/guidelines.html>`_:
+"minimal"
+    All digits repeated in the second number are left out: 42 |--| 5, 321 |--|
+    8, 2787 |--| 816
 
-Table: **Chicago Manual of Style page range abbreviation rules**
-
-+------------------------+--------------------------+--------------------------+
-| First number           | Second number            | Examples                 |
-+========================+==========================+==========================+
-| Less than 100          | Use all digits           | 3 |--| 10; 71 |--| 72    |
-+------------------------+--------------------------+--------------------------+
-| 100 or multiple of 100 | Use all digits           | 100 |--| 104;            |
-|                        |                          | 600 |--| 613;            |
-|                        |                          | 1100 |--| 1123           |
-+------------------------+--------------------------+--------------------------+
-| 101 through 109 (in    | Use changed part only,   | 107 |--| 8; 505 |--| 17; |
-| multiples of 100)      | omitting unneeded zeros  | 1002 |--| 6              |
-+------------------------+--------------------------+--------------------------+
-| 110 through 199 (in    | Use two digits, or more  | 321 |--| 25;             |
-| multiples of 100)      | as needed                | 415 |--| 532;            |
-|                        |                          | 11564 |--| 68;           |
-|                        |                          | 13792 |--| 803           |
-+------------------------+--------------------------+--------------------------+
-| 4 digits               | If numbers are four      | 1496 |--| 1504;          |
-|                        | digits long and three    | 2787 |--| 2816           |
-|                        | digits change, use all   |                          |
-|                        | digits                   |                          |
-+------------------------+--------------------------+--------------------------+
+"minimal-two"
+    As "minimal", but at least two digits are kept in the second number when it
+    has two or more digits long.

@@ -287,6 +287,19 @@ Ticket:
 
 - https://github.com/citation-style-language/schema/issues/4
 
+Page Range Formats
+------------------
+
+Page ranges can now be reformatted in the format used by the Oxford University
+Standard for Citation of Legal Authorities (OSCOLA). With ``page-range-format``
+set to "minimal-two", page ranges are abbreviated as with "minimal", except that
+the second number keeps at least two digits for numbers of 10 and up (e.g.
+"1-5", "20-28", "100-16").
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/84
+
 Specification
 -------------
 
