@@ -314,6 +314,19 @@ Ticket:
 
 - https://github.com/citation-style-language/schema/issues/3 (variable descriptions)
 
+Style Locale in Dependent Styles
+------------------------------------
+
+While it was already possible to set the ``default-locale`` attribute on
+``cs:style`` in dependent styles, doing so had no effect. Now, when a dependent
+style sets a style locale with ``default-locale``, this locale should be used
+when rendering the style, overriding the style locale of the independent parent
+style.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/91
+
 Style Metadata
 --------------
 
