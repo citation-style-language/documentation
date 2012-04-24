@@ -2350,8 +2350,7 @@ container-title-short
     "short" form of the "container-title" variable)
 
 dimensions
-    physical (e.g. size), temporal (e.g. running time), or relative (e.g. scale)
-    dimensions of the item
+    physical (e.g. size) or temporal (e.g. running time) dimensions of the item
 
 DOI
     Digital Object Identifier (e.g. "10.1128/AEM.02591-07")
@@ -2432,6 +2431,9 @@ publisher-place
 
 references
     resources related to the procedural history of a legal case
+
+scale
+    scale of e.g. a map
 
 section
     container section holding the item (e.g. "politics" for a newspaper article)
@@ -2737,6 +2739,7 @@ Miscellaneous
 -  presented at
 -  reference
 -  retrieved
+-  scale
 
 Appendix IV - Page Range Formats
 --------------------------------

@@ -389,13 +389,15 @@ Ticket:
 Terms
 -----
 
-"available at"
-~~~~~~~~~~~~~~
+New Terms: "available at", "scale"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A new term in the "miscellaneous" category is now available: "available at".
+Two new terms in the "miscellaneous" category are now available: "available at"
+and "scale" (accompanying the "scale" variable).
 
 Tickets:
 
+- https://github.com/citation-style-language/schema/issues/14
 - https://github.com/citation-style-language/schema/issues/90
 
 "page-range-delimiter"
@@ -502,21 +504,22 @@ Ticket:
 
 - https://github.com/citation-style-language/schema/issues/9
 
-New Variables: "dimensions", "ISSN", "PMCID", "PMID", "source"
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+New Variables: "dimensions", "ISSN", "PMCID", "PMID", "scale", "source"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 New CSL variables have been introduced:
 
-- "dimensions" - for physical (e.g., size of an object), temporal (e.g., the
-  running time of a movie) or relative dimensions (e.g., the scale of a map)
+- "dimensions" - for physical (e.g., size of an object) or temporal (e.g., the
+  running time of a movie) dimensions
 - "ISSN" - International Standard Serial Number
 - "PMCID" - PubMed Central reference number
 - "PMID" - PubMed reference number
+- "scale" - scale of e.g. a map
 - "source" - from whence the item originates (e.g. a library catalog or database)
 
 Tickets:
 
-- https://github.com/citation-style-language/schema/issues/14 ("dimensions")
+- https://github.com/citation-style-language/schema/issues/14 ("dimensions", "scale")
 - https://github.com/citation-style-language/schema/issues/86 ("ISSN")
 - https://github.com/citation-style-language/schema/issues/87 ("PMCID", "PMID")
 - https://github.com/citation-style-language/schema/issues/88 ("source")
