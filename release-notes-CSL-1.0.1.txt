@@ -386,6 +386,30 @@ Ticket:
 
 - https://github.com/citation-style-language/schema/issues/83
 
+Terms
+-----
+
+"available at"
+~~~~~~~~~~~~~~
+
+A new term in the "miscellaneous" category is now available: "available at".
+
+Tickets:
+
+- https://github.com/citation-style-language/schema/issues/90
+
+"page-range-delimiter"
+~~~~~~~~~~~~~~~~~~~~~~
+
+The new term "page-range-delimiter" makes it possible to customize (and
+localize) the delimiter used for page ranges. The delimiter is only used when
+the ``page-range-format`` attribute is set. As this term did not exist in CSL
+1.0 and will be absent from CSL 1.0 locale files, it defaults to an en-dash.
+
+Tickets:
+
+- https://github.com/citation-style-language/schema/issues/56
+
 Text Case
 ---------
 
@@ -397,18 +421,6 @@ Tickets:
 
 - https://github.com/citation-style-language/documentation/issues/13
 - https://github.com/citation-style-language/schema/issues/55
-
-Terms
------
-
-A new term, "page-range-delimiter", makes it possible to customize (and
-localize) the delimiter used for page ranges. The delimiter is only used when
-the ``page-range-format`` is set. As this term did not exist in CSL 1.0 and will
-be absent from CSL 1.0 locale files, it defaults to an en-dash.
-
-Tickets:
-
-- https://github.com/citation-style-language/schema/issues/56
 
 Validation
 ----------
