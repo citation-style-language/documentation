@@ -15,7 +15,7 @@ __ http://citationstyles.org/
 
 .. class:: info-version
 
-   version 2012-04-29
+   2012-04-29
 
 .. class:: contributors
 
