@@ -16,7 +16,7 @@ __ http://citationstyles.org/
 .. class:: version-links
 
     This version:
-        http://citationstyles.org/downloads/specification-csl101-20110726.html
+        http://citationstyles.org/downloads/specification-csl101-20120429.html
     Latest version:
         http://citationstyles.org/downloads/specification.html
     Previous versions: 
@@ -26,7 +26,7 @@ __ http://citationstyles.org/
 .. class:: contributors
 
    Author
-       * Rintze M. Zelle
+       * Rintze M. Zelle, PhD
        
    Contributors
        * Frank G. Bennett, Jr.
@@ -2240,8 +2240,9 @@ The ``strip-periods`` attribute may be set on ``cs:date-part`` (but only if
 Text-case
 ~~~~~~~~~
 
-The ``text-case`` attribute may be set on ``cs:date-part``, ``cs:label``,
-``cs:name-part``, ``cs:number`` and ``cs:text``. The allowed values:
+The ``text-case`` attribute may be set on ``cs:date``, ``cs:date-part``,
+``cs:label``, ``cs:name-part``, ``cs:number`` and ``cs:text``. The allowed
+values:
 
 -  "lowercase": renders text in lowercase
 -  "uppercase": renders text in uppercase

@@ -15,7 +15,7 @@ __ http://citationstyles.org/
 
 .. class:: info-version
 
-   version 2012-04-25
+   version 2012-04-29
 
 .. class:: contributors
 
@@ -38,8 +38,6 @@ feedback via the referenced issue ticket, the `xbiblio mailing list
 <https://lists.sourceforge.net/lists/listinfo/xbiblio-devel>`_, or the Zotero
 forums.
 
-`Rendered version <http://goo.gl/mD2Ez>`_
-
 These release notes describe the changes in Citation Style Language (CSL) 1.0.1
 as compared to the CSL 1.0 schema and specification (2010-05-30 update). Many of
 the new features listed here are described in more detail in the `draft CSL
@@ -48,28 +46,6 @@ the new features listed here are described in more detail in the `draft CSL
 CSL 1.0.1 is a backwards compatible release, and any valid CSL 1.0 style or
 locale file should validate against the CSL 1.0.1 schema and work with any CSL
 1.0.1-compatible CSL processor.
-
-
-
-Changes:
-https://github.com/citation-style-language/schema
-From
-75240da3ee54184009f40982a485dc68e7a0fa5f (March 21, 2010)
-up to
-06f663099afcd619cd5edbb743a533952ebd74d0 (June 29, 2011)
-
-https://github.com/citation-style-language/schema/compare/75240da3ee54184009f40982a485dc68e7a0fa5f...06f663099afcd619cd5edbb743a533952ebd74d0
-https://github.com/citation-style-language/schema/compare/06f663099afcd619cd5edbb743a533952ebd74d0...master
-
-https://github.com/citation-style-language/documentation/blob/master/specification.txt
-
-From
-fc49f31c821a668492975757b903ad4ef6dec21f (March 21, 2010)
-up to
-065cacd0326d2235b66bd332d31b1317cbc6ebdf (July 26, 2011)
-
-https://github.com/citation-style-language/documentation/compare/fc49f31c821a668492975757b903ad4ef6dec21f...065cacd0326d2235b66bd332d31b1317cbc6ebdf
-https://github.com/citation-style-language/documentation/compare/065cacd0326d2235b66bd332d31b1317cbc6ebdf...master
 
 Cite Grouping
 -------------
@@ -329,6 +305,9 @@ set to "minimal-two", page ranges are abbreviated as with "minimal", except that
 the second number keeps at least two digits for numbers of 10 and up (e.g.,
 "1-5", "20-28", "100-16").
 
+Also, an error in the CSL 1.0 specification has been corrected: the "minimal"
+page range format was previously mistakenly listed as "minimum".
+
 See `Page Ranges <http://goo.gl/0UfDl#page-ranges>`_ in the CSL 1.0.1
 specification.
 
@@ -471,6 +450,10 @@ Text Case
 The specification now describes how sentence and title case conversions work
 (which are selected with the ``text-case`` attribute). Title casing is now
 limited to items that can be assumed to be English.
+
+In addition, the ``text-case`` attribute can now also be used on ``cs:date``.
+This allows dates to be formatted as "April 2002" and "24 april 2002", where the
+month is only capitalized in the absence of a preceding day.
 
 See `Text-case <http://goo.gl/0UfDl#text-case>`_ in the CSL 1.0.1 specification.
 
