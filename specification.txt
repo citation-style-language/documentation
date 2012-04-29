@@ -13,6 +13,10 @@ __ `Table of Contents`_
 
 __ http://citationstyles.org/
 
+.. class:: info-version
+
+   2012-04-29
+
 .. class:: version-links
 
     This version:
