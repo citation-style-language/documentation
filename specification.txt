@@ -2437,6 +2437,9 @@ publisher-place
 references
     resources related to the procedural history of a legal case
 
+reviewed-title
+    title of the item reviewed by the current item
+
 scale
     scale of e.g. a map
 
@@ -2554,6 +2557,9 @@ original-author
 
 recipient
     recipient (e.g. of a letter)
+
+reviewed-author
+    author of the item reviewed by the current item
 
 translator
     translator

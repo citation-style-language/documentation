@@ -577,6 +577,18 @@ Tickets:
 - https://github.com/citation-style-language/schema/issues/87 ("PMCID", "PMID")
 - https://github.com/citation-style-language/schema/issues/88 ("source")
 
+New Variables: "reviewed-author" and "reviewed-title"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A new name variable, "reviewed-author", and a new standard variable,
+"reviewed-title", have been introduced for (basic) support of reviews (e.g.,
+book reviews). These variables should be made available on the
+"article-magazine", "article-newspaper", and "article-journal" item types.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/5
+
 "sub verbo" Locator Type
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
