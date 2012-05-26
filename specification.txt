@@ -15,7 +15,7 @@ __ http://citationstyles.org/
 
 .. class:: info-version
 
-   2012-04-29
+   2012-05-25
 
 .. class:: version-links
 
@@ -2540,6 +2540,9 @@ container-author
     author of the container holding the item (e.g. the book author for a book
     chapter)
 
+director
+    director (e.g. of a film)
+
 editor
     editor
 
@@ -2704,6 +2707,7 @@ Roles
 -  collection-editor
 -  composer
 -  container-author
+-  director
 -  editor
 -  editorial-director
 -  editortranslator
@@ -2711,6 +2715,7 @@ Roles
 -  interviewer
 -  original-author
 -  recipient
+-  reviewed-author
 -  translator
 
 Seasons

@@ -15,7 +15,7 @@ __ http://citationstyles.org/
 
 .. class:: info-version
 
-   2012-04-29
+   2012-05-25
 
 .. class:: contributors
 
@@ -554,13 +554,14 @@ Ticket:
 
 - https://github.com/citation-style-language/schema/issues/9
 
-New Variables: "dimensions", "ISSN", "PMCID", "PMID", "scale", and "source"
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+New Variables: "dimensions", "director", "ISSN", "PMCID", "PMID", "scale", and "source"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 New CSL variables have been introduced:
 
 - "dimensions" - for physical (e.g., size of an object) or temporal (e.g., the
   running time of a movie) dimensions
+- "director" - name variable for directors of e.g. films
 - "ISSN" - International Standard Serial Number
 - "PMCID" - PubMed Central reference number
 - "PMID" - PubMed reference number
@@ -573,6 +574,7 @@ See `Standard Variables <http://goo.gl/0UfDl#standard-variables>`_ in the CSL
 Tickets:
 
 - https://github.com/citation-style-language/schema/issues/14 ("dimensions", "scale")
+- https://github.com/citation-style-language/schema/issues/96 ("director")
 - https://github.com/citation-style-language/schema/issues/86 ("ISSN")
 - https://github.com/citation-style-language/schema/issues/87 ("PMCID", "PMID")
 - https://github.com/citation-style-language/schema/issues/88 ("source")
