@@ -71,6 +71,15 @@ Ticket:
 
 - https://github.com/citation-style-language/schema/issues/52
 
+"dataset" Item Type
+-------------------
+
+A new item type, "dataset", is available to describe datasets.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/74
+
 Disambiguation
 --------------
 
