@@ -36,10 +36,7 @@ __ http://citationstyles.org/
        * Frank G. Bennett, Jr.
        * Bruce D'Arcus
 
-.. |link| image:: http://citationstyles.org/downloads/link.png
-
-.. |nbsp| unicode:: U+00A0
-   :trim:
+.. |link| image:: link.png
 
 .. |--| unicode:: U+2013
    :trim:
@@ -62,27 +59,26 @@ formatting of citations, notes and bibliographies, offering:
 -  Extensive support for style requirements
 -  Automatic style localization
 -  Infrastructure for style distribution and updating
--  Already over 2000 freely available styles (Creative Commons BY-SA licensed)
+-  Already over 1500 freely available styles (Creative Commons BY-SA licensed)
 
 For additional documentation, the CSL schema, styles, and locales, visit the CSL
-project home, |link| |nbsp| `citationstyles.org <http://citationstyles.org>`_.
+project home, |link| `citationstyles.org <http://citationstyles.org>`_.
 
 Terminology
 ~~~~~~~~~~~
 
 The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
 RECOMMENDED, MAY, and OPTIONAL, are to be interpreted as described in |link|
-|nbsp| `IETF RFC 2119 <http://tools.ietf.org/html/rfc2119>`_.
+`IETF RFC 2119 <http://tools.ietf.org/html/rfc2119>`_.
 
 Namespacing
 -----------
 
-The CSL |link| |nbsp| `XML namespace URI
-<http://en.wikipedia.org/wiki/XML_Namespace>`_ is
-"http://purl.org/net/xbiblio/csl". The namespace prefix ``cs:`` is used
+The CSL |link| `XML namespace URI <http://en.wikipedia.org/wiki/XML_Namespace>`_
+is "http://purl.org/net/xbiblio/csl". The namespace prefix ``cs:`` is used
 throughout this specification when referring to CSL elements, but is generally
-omitted in favor of a default namespace declaration (set with the ``xmlns``
-attribute) on the root ``cs:style`` or ``cs:locale`` element.
+omitted in favor of a default namespace declaration (set with
+the ``xmlns`` attribute) on the root ``cs:style`` or ``cs:locale`` element.
 
 File Types
 ----------
@@ -139,8 +135,8 @@ carries the following attributes:
     notes ("note").
 
 ``default-locale`` (optional)
-    Sets a default locale for style localization. Value must be a |link| |nbsp|
-    `locale code <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_.
+    Sets a default locale for style localization. Value must be a |link| `locale
+    code <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_.
 
 ``version``
     The CSL version of the style. Must be "1.0" for CSL 1.0-compatible styles.
@@ -189,9 +185,8 @@ Info
 ^^^^
 
 The ``cs:info`` element contains the style's metadata. Its structure is based on
-the |link| |nbsp| `Atom Syndication Format
-<http://tools.ietf.org/html/rfc4287>`_. In independent styles, ``cs:info`` has
-the following child elements:
+the |link| `Atom Syndication Format <http://tools.ietf.org/html/rfc4287>`_. In
+independent styles, ``cs:info`` has the following child elements:
 
 ``cs:author`` and ``cs:contributor`` (optional)
     ``cs:author`` and ``cs:contributor``, used to respectively acknowledge style
@@ -224,9 +219,8 @@ the following child elements:
     The ``cs:issn`` element may be used multiple times to indicate the ISSN
     identifier(s) of the journal for which the style was written. The
     ``cs:eissn`` and ``cs:issnl`` elements may each be used once for the eISSN
-    and |link| |nbsp| `ISSN-L
-    <http://www.issn.org/2-22637-What-is-an-ISSN-L.php>`_ identifiers,
-    respectively.
+    and |link| `ISSN-L <http://www.issn.org/2-22637-What-is-an-ISSN-L.php>`_
+    identifiers, respectively.
 
 ``cs:link`` (optional)
     May be used multiple times. ``cs:link`` must carry two attributes: ``href``,
@@ -240,7 +234,7 @@ the following child elements:
     The ``cs:link`` element may contain content describing the link.
 
 ``cs:published`` (optional)
-    May appear once. The contents of ``cs:published`` must be a |link| |nbsp|
+    May appear once. The contents of ``cs:published`` must be a |link|
     `timestamp <http://books.xmlschemata.org/relaxng/ch19-77049.html>`_,
     indicating when the style was initially created or made available.
 
@@ -262,16 +256,16 @@ the following child elements:
     style name (e.g. "APA").
 
 ``cs:updated``
-    Must appear once. The contents of ``cs:updated`` must be a |link| |nbsp|
-    `timestamp <http://books.xmlschemata.org/relaxng/ch19-77049.html>`_ that
-    shows when the style was last updated.
+    Must appear once. The contents of ``cs:updated`` must be a |link| `timestamp
+    <http://books.xmlschemata.org/relaxng/ch19-77049.html>`_ that shows when the
+    style was last updated.
 
 The ``cs:link``, ``cs:rights``, ``cs:summary``, ``cs:title`` and
 ``cs:title-short`` elements may carry a ``xml:lang`` attribute to specify the
-language of the element's content (the value must be an |link| |nbsp|
-`xsd:language locale code
-<http://books.xmlschemata.org/relaxng/ch19-77191.html>`_). For ``cs:link``, the
-attribute can also be used to indicate the language of the link target.
+language of the element's content (the value must be an |link| `xsd:language
+locale code <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_). For
+``cs:link``, the attribute can also be used to indicate the language of the link
+target.
 
 In `dependent styles`_, ``cs:link`` must be used with ``rel`` set to
 "independent-parent", with the URI of the independent parent style set on
@@ -405,7 +399,7 @@ may be redefined or supplemented with ``cs:locale`` elements, which should be
 placed directly after the ``cs:info`` element.
 
 The value of the optional ``xml:lang`` attribute on ``cs:locale``, which must be
-set to an |link| |nbsp| `xsd:language locale code
+set to an |link| `xsd:language locale code
 <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_, determines which
 languages or language dialects are affected (see `Locale Fallback`_).
 
@@ -544,13 +538,13 @@ the following child elements:
     which the locale file is released. The element may carry a ``license``
     attribute to specify the URI of the license, and a ``xml:lang`` attribute to
     specify the language of the element's content (the value must be an |link|
-    |nbsp| `xsd:language locale code
+    `xsd:language locale code
     <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
 
 ``cs:updated`` (optional)
-    May appear once. The contents of ``cs:updated`` must be a |link| |nbsp|
-    `timestamp <http://books.xmlschemata.org/relaxng/ch19-77049.html>`_ that
-    shows when the locale file was last updated.
+    May appear once. The contents of ``cs:updated`` must be a |link| `timestamp
+    <http://books.xmlschemata.org/relaxng/ch19-77049.html>`_ that shows when the
+    locale file was last updated.
 
 Terms
 ~~~~~
@@ -1066,8 +1060,7 @@ The attributes affecting personal names:
 
 ``name-as-sort-order``
     Specifies that names should be displayed with the given name following the
-    family name (e.g. "John Doe" becomes "Doe, John"). The attribute has two
-    possible values:
+    family name (e.g. "John Doe" becomes "Doe, John"). The attribute has two possible values:
     
     - "first" - attribute only has an effect on the first name of each name
       variable 
@@ -2772,7 +2765,7 @@ The page abbreviation rules for the different values of the
 ``page-range-format`` attribute on ``cs:style`` are:
 
 "chicago"
-    Page ranges are abbreviated according to the |link| |nbsp|
+    Page ranges are abbreviated according to the |link|
     `Chicago Manual of Style-rules <http://www.aahn.org/guidelines.html>`_:
     
     +------------------------+--------------------------+--------------------------+
