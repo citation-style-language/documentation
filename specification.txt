@@ -35,6 +35,11 @@ __ http://citationstyles.org/
    Contributors
        * Frank G. Bennett, Jr.
        * Bruce D'Arcus
+   
+   |CCBYSA|_
+
+.. |CCBYSA| image:: http://i.creativecommons.org/l/by-sa/3.0/80x15.png
+.. _CCBYSA: http://creativecommons.org/licenses/by-sa/3.0/
 
 .. |link| image:: link.png
 
@@ -59,7 +64,7 @@ formatting of citations, notes and bibliographies, offering:
 -  Extensive support for style requirements
 -  Automatic style localization
 -  Infrastructure for style distribution and updating
--  Already over 1500 freely available styles (Creative Commons BY-SA licensed)
+-  Already over 2000 freely available styles (Creative Commons BY-SA licensed)
 
 For additional documentation, the CSL schema, styles, and locales, visit the CSL
 project home, |link| `citationstyles.org <http://citationstyles.org>`_.
