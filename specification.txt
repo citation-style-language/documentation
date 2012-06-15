@@ -29,12 +29,14 @@ __ http://citationstyles.org/
 
 .. class:: contributors
 
-   Author
-       Rintze M. Zelle, PhD
+   **Author**
+   
+   Rintze M. Zelle, PhD
        
-   Contributors
-       | Frank G. Bennett, Jr.
-       | Bruce D'Arcus
+   **Contributors**
+
+   | Frank G. Bennett, Jr.
+   | Bruce D'Arcus
    
    |CCBYSA|_
 
