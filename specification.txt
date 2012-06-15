@@ -2250,10 +2250,9 @@ values:
 
 -  "lowercase": renders text in lowercase
 -  "uppercase": renders text in uppercase
--  "capitalize-first": capitalizes the first character (other
-   characters remain in their original case)
--  "capitalize-all": capitalizes the first character of every word (other
-   characters remain in their original case)
+-  "capitalize-first": capitalizes the first character of the first word, if the
+   word is lowercase
+-  "capitalize-all": capitalizes the first character of every lowercase word
 -  "sentence": renders text in sentence case
 -  "title": renders text in title case
 
@@ -2262,11 +2261,12 @@ Sentence Case Conversion
 
 Sentence case conversion (with ``text-case`` set to "sentence") is performed by:
 
-1. For uppercase strings, the first letter of the string is uppercased. All
-   other letters are lowercased.
+1. For uppercase strings, the first character of the string remains capitalized.
+   All other letters are lowercased.
 
-2. For lower or mixed case strings, the first letter of the string is
-   uppercased. Words entirely in uppercase are left untouched.
+2. For lower or mixed case strings, the first character of the first word is
+   capitalized if the word is lowercase. The case of all other words stays the
+   same.
 
 CSL processors don't recognize proper nouns. As a result, strings in sentence
 case can be accurately converted to title case, but not vice versa. For this
@@ -2279,11 +2279,11 @@ Title Case Conversion
 Title case conversion (with ``text-case`` set to "title") for English-language
 items is performed by:
 
-1. For uppercase strings, the first letter of each word remains in uppercase.
+1. For uppercase strings, the first character of each word remains capitalized.
    All other letters are lowercased.
 
-2. For lower or mixed case strings, the first letter of each word is uppercased.
-   Words entirely in uppercase are left untouched.
+2. For lower or mixed case strings, the first character of each lowercase word
+   is capitalized. The case of words in mixed or uppercase stays the same.
    
 In both cases, stop words are lowercased, unless they are the first or last word
 in the string, or follow a colon. The stop words are "a", "an", "and", "as",
