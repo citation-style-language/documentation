@@ -15,12 +15,12 @@ __ http://citationstyles.org/
 
 .. class:: info-version
 
-   2012-05-25
+   2012-06-15
 
 .. class:: version-links
 
     This version:
-        http://citationstyles.org/downloads/specification-csl101-20120429.html
+        http://citationstyles.org/downloads/specification-csl101-20120615.html
     Latest version:
         http://citationstyles.org/downloads/specification.html
     Previous versions: 

@@ -15,16 +15,23 @@ __ http://citationstyles.org/
 
 .. class:: info-version
 
-   version 2011-05-24
+   2012-06-15
 
 .. class:: contributors
 
-   Author
-       * Rintze M. Zelle
+   **Author**
+   
+   Rintze M. Zelle, PhD
        
-   Contributors
-       * Frank G. Bennett, Jr.
-       * Bruce D'Arcus
+   **Contributors**
+
+   | Frank G. Bennett, Jr.
+   | Bruce D'Arcus
+   
+   |CCBYSA|_
+
+.. |CCBYSA| image:: http://i.creativecommons.org/l/by-sa/3.0/80x15.png
+.. _CCBYSA: http://creativecommons.org/licenses/by-sa/3.0/
 
 ========
 

@@ -15,12 +15,18 @@ __ http://citationstyles.org/
 
 .. class:: info-version
 
-   version 2011-05-24
+   2012-06-15
 
 .. class:: contributors
 
-   Author
-       * Rintze M. Zelle
+   **Author**
+   
+   Rintze M. Zelle, PhD
+   
+   |CCBYSA|_
+
+.. |CCBYSA| image:: http://i.creativecommons.org/l/by-sa/3.0/80x15.png
+.. _CCBYSA: http://creativecommons.org/licenses/by-sa/3.0/
 
 ========
 
@@ -65,7 +71,7 @@ localization support: with a single CSL style, you can format citations and
 bibliographies in any of several dozen different languages, using localized
 terms, date formats, and punctuation.
 
-.. [#] Over 1500 CSL styles are available at http://www.zotero.org/styles
+.. [#] Over 2000 CSL styles are available at http://www.zotero.org/styles
 
 Different Classes of Citation Styles
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

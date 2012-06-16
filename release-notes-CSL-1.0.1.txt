@@ -15,12 +15,18 @@ __ http://citationstyles.org/
 
 .. class:: info-version
 
-   2012-05-25
+   2012-06-15
 
 .. class:: contributors
 
-   Author
-       * Rintze M. Zelle, PhD
+   **Author**
+   
+   Rintze M. Zelle, PhD
+   
+   |CCBYSA|_
+
+.. |CCBYSA| image:: http://i.creativecommons.org/l/by-sa/3.0/80x15.png
+.. _CCBYSA: http://creativecommons.org/licenses/by-sa/3.0/
 
 ========
 
