@@ -311,6 +311,20 @@ Ticket:
 
 - https://github.com/citation-style-language/schema/issues/4
 
+Numbers
+-------
+
+The rules for rendering number variables with ``cs:number`` have changed, as
+have the criteria for the "is-numeric" condition. Multiple numbers are now
+recognized as such (e.g., "2, 3 & 4), as are numbers with affixes ("2E").
+
+See `Number <http://goo.gl/0UfDl#number>`_ and `Choose
+<http://goo.gl/0UfDl#choose>`_ in the CSL 1.0.1 specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/6
+
 Page Range Formats
 ------------------
 

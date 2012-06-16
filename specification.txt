@@ -878,14 +878,22 @@ Number
 ~~~~~~
 
 The ``cs:number`` rendering element outputs the number variable selected with
-the required ``variable`` attribute.
+the required ``variable`` attribute. `Number variables`_ are a subset of the
+list of `standard variables`_.
 
-`Number variables`_ are a subset of the list of `standard variables`_. When a
-variable is rendered with ``cs:number`` and contains both numeric and
-non-numeric text, only the first number is extracted and used for rendering
-(e.g. "6" when the variable content is "Volume 6"). Variables containing only
-non-numeric text (e.g. "Special edition") are rendered in full. (Extracted)
-numbers can be formatted via the optional ``form`` attribute, with values:
+If a number variable is rendered with ``cs:number`` and only contains numeric
+content (as determined by the rules for ``is-numeric``, see `Choose`_), the
+number(s) are extracted. Variable content is rendered "as is" when the variable
+contains any non-numeric content (e.g. "Special edition").
+
+During the extraction, numbers separated by a hyphen are stripped of intervening
+spaces ("2 - 4" becomes "2-4"). Numbers separated by a comma receive one space
+after the comma ("2,3" and "2 , 3" become "2, 3"), while numbers separated by an
+ampersand receive one space before and one after the ampsersand ("2&3" becomes
+"2 & 3").
+
+Extracted numbers can be formatted via the optional ``form`` attribute, with
+values:
    
 -  "numeric" - (default), e.g. "1", "2", "3"
 -  "ordinal" - e.g. "1st", "2nd", "3rd". Ordinal suffixes are defined with the
@@ -899,9 +907,9 @@ numbers can be formatted via the optional ``form`` attribute, with values:
    "ordinal".
 -  "roman" - e.g. "i", "ii", "iii"
 
-Variables can be tested for numeric content with the ``is-numeric`` conditional,
-e.g. "12th edition" tests "true" while "third edition" tests "false" (see
-`Choose`_).
+Numbers with prefixes or suffixes are never ordinalized or rendered in roman
+numerals (e.g. "2E" remains "2E). Numbers without affixes are individually
+transformed ("2, 3" can become "2nd, 3rd", "second, third" or "ii, iii").
 
 ``cs:number`` may carry `affixes`_, `display`_, `formatting`_ and `text-case`_
 attributes.
@@ -1297,12 +1305,8 @@ Label
 
 The ``cs:label`` rendering element outputs the term matching the variable
 selected with the required ``variable`` attribute, which must be set to
-"locator, "page", or one of the `number variables`_. The term, which is only
-rendered if the selected variable is non-empty, matches the plurality of the
-variable content. Content is considered plural when it contains multiple numbers
-(such as a page range, e.g. "page 5" and "pages 5-7", see example below), or,
-for the "number-of-pages" and "number-of-volumes" variables, when the number is
-higher than 1 ("1 volume" and "3 volumes").
+"locator, "page", or one of the `number variables`_. The term is only rendered
+if the selected variable is non-empty. For example,
 
 .. sourcecode:: xml
 
@@ -1311,8 +1315,8 @@ higher than 1 ("1 volume" and "3 volumes").
       <text variable="page"/>
     </group>
 
-``cs:label`` may carry `affixes`_, `formatting`_, `text-case`_ and
-`strip-periods`_ attributes, as well as:
+can result in "page 3" or "pages 5-7". ``cs:label`` may carry the following
+attributes:
 
 ``form``
     Selects the form of the term, with allowed values:
@@ -1324,10 +1328,16 @@ higher than 1 ("1 volume" and "3 volumes").
 ``plural``
     Sets pluralization of the term, with allowed values:
     
-    -  "contextual" - (default), pluralization depends on the
-       variable content, e.g. "page 1" and "pages 1-3"
+    -  "contextual" - (default), the term plurality matches that of the variable
+       content. Content is considered plural when it contains multiple numbers
+       (e.g. "page 1", "pages 1-3", "volume 2", "volumes 2 & 4"), or, in the
+       case of the "number-of-pages" and "number-of-volumes" variables, when the
+       number is higher than 1 ("1 volume" and "3 volumes").
     -  "always" - always use the plural form, e.g. "pages 1" and "pages 1-3"
     -  "never" - always use the singular form, e.g. "page 1" and "page 1-3"
+
+``cs:label`` may also carry `affixes`_, `formatting`_, `text-case`_ and
+`strip-periods`_ attributes.
 
 Group
 ~~~~~
@@ -1387,13 +1397,17 @@ are set with the attributes:
     at `disambiguation`_ is only made when all other disambiguation methods have
     failed to uniquely identify the target source.
 
-``is-numeric``
+``is-numeric``    
     Tests whether the given variables (`Appendix I - Variables`_) contain
-    numeric text.
-    
+    numeric content. Content is considered numeric if it solely consists of
+    numbers. Numbers may have prefixes and suffixes ("D2", "2b", "L2d"), and may
+    be separated by a comma, hyphen, or ampersand, with or without spaces ("2,
+    3", "2-4", "2 & 4"). For example, "2nd" tests "true" whereas "second" and
+    "2nd edition" test "false".
+
 ``is-uncertain-date``
     Tests whether the given `date variables`_ contain `approximate dates`_.
-    
+
 ``locator``
     Tests whether the locator matches the given locator types (see `Locators`_).
     Use "sub-verbo" to test for the "sub verbo" locator type.
