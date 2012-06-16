@@ -323,7 +323,7 @@ See `Number <http://goo.gl/0UfDl#number>`_ and `Choose
 
 Ticket:
 
-- https://github.com/citation-style-language/schema/issues/6
+- https://github.com/citation-style-language/documentation/issues/6
 
 Page Range Formats
 ------------------
