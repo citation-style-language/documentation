@@ -240,19 +240,6 @@ Ticket:
 
 - https://github.com/citation-style-language/schema/issues/12
 
-Illustrator
-~~~~~~~~~~~
-
-A new name variable, "illustrator", has been added for creators such as
-illustrators of comics or children's books.
-
-See `Name Variables <http://goo.gl/0UfDl#name-variables>`_ in the CSL 1.0.1
-specification.
-
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/89
-
 Independent ``names-min`` and ``names-use-first``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -316,7 +303,7 @@ Numbers
 
 The rules for rendering number variables with ``cs:number`` have changed, as
 have the criteria for the "is-numeric" condition. Multiple numbers are now
-recognized as such (e.g., "2, 3 & 4), as are numbers with affixes ("2E").
+recognized as such (e.g., "2, 3 & 4"), as are numbers with affixes ("2E").
 
 See `Number <http://goo.gl/0UfDl#number>`_ and `Choose
 <http://goo.gl/0UfDl#choose>`_ in the CSL 1.0.1 specification.
@@ -529,8 +516,22 @@ Ticket:
 Variables
 ---------
 
-Dedicated Variables "title" and "container-title" Abbreviations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+More Number Variables
+~~~~~~~~~~~~~~~~~~~~~
+
+The CSL variables "chapter-number", "collection-number" and "number-of-pages",
+which previously were standard variables, have now become number variables. As a
+result, they can now be rendered through either ``cs:number`` or ``cs:text``.
+
+See `Number Variables <http://goo.gl/0UfDl#number-variables>`_ in the CSL 1.0.1
+specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/9
+
+New Variables: "container-title-short" and "title-short"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Previously, "title" and "container-title" abbreviations were only accessible
 through the "short" forms of these variables. As a result, it was impossible to
@@ -569,41 +570,30 @@ Ticket:
 
 - https://github.com/citation-style-language/schema/issues/2
 
-More Number Variables
-~~~~~~~~~~~~~~~~~~~~~
-
-The CSL variables "chapter-number", "collection-number" and "number-of-pages",
-which previously were standard variables, have now become number variables. As a
-result, they can now be rendered through either ``cs:number`` or ``cs:text``.
-
-See `Number Variables <http://goo.gl/0UfDl#number-variables>`_ in the CSL 1.0.1
-specification.
-
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/9
-
-New Variables: "dimensions", "director", "ISSN", "PMCID", "PMID", "scale", and "source"
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+New Variables: "dimensions", "director", "illustrator", "ISSN", "PMCID", "PMID", "scale", and "source"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 New CSL variables have been introduced:
 
 - "dimensions" - for physical (e.g., size of an object) or temporal (e.g., the
   running time of a movie) dimensions
 - "director" - name variable for directors of e.g. films
+- "illustrator" - name variable for illustrators of e.g. comics or children's
+  books
 - "ISSN" - International Standard Serial Number
 - "PMCID" - PubMed Central reference number
 - "PMID" - PubMed reference number
 - "scale" - scale of e.g. a map
 - "source" - origin of the item (e.g., a library catalog or database)
 
-See `Standard Variables <http://goo.gl/0UfDl#standard-variables>`_ in the CSL
-1.0.1 specification.
+See `Standard Variables <http://goo.gl/0UfDl#standard-variables>`_ and `Name
+Variables <http://goo.gl/0UfDl#name-variables>`_ in the CSL 1.0.1 specification.
 
 Tickets:
 
 - https://github.com/citation-style-language/schema/issues/14 ("dimensions", "scale")
 - https://github.com/citation-style-language/schema/issues/96 ("director")
+- https://github.com/citation-style-language/schema/issues/89 ("illustrator")
 - https://github.com/citation-style-language/schema/issues/86 ("ISSN")
 - https://github.com/citation-style-language/schema/issues/87 ("PMCID", "PMID")
 - https://github.com/citation-style-language/schema/issues/88 ("source")
