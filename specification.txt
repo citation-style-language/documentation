@@ -968,6 +968,13 @@ within a name variable. ``cs:name`` may carry the following attributes:
        
        - 1 name: "J. Doe et al."
        - 2 names: "J. Doe, S. Smith, et al."
+       
+    -  "after-inverted-name" - name delimiter is only used if the preceding name
+       is inverted as a result of the ``name-as-sort-order`` attribute. E.g.
+       with ``name-as-sort-order`` set to "first":
+       
+       - "Doe, J., et al."
+       - "Doe, J., S. Smith et al."
     
     -  "always" - name delimiter is always used
        
@@ -990,6 +997,13 @@ within a name variable. ``cs:name`` may carry the following attributes:
        
        - 2 names: "J. Doe and T. Williams"
        - 3 names: "J. Doe, S. Smith, and T. Williams"
+       
+    -  "after-inverted-name" - name delimiter is only used if the preceding name
+       is inverted as a result of the ``name-as-sort-order`` attribute. E.g.
+       with ``name-as-sort-order`` set to "first":
+       
+       - "Doe, J., and T. Williams"
+       - "Doe, J., S. Smith and T. Williams"
     
     -  "always" - name delimiter is always used
        

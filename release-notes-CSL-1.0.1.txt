@@ -203,6 +203,24 @@ Ticket:
 
 - https://github.com/citation-style-language/schema/issues/53
 
+``delimiter-precedes-et-al`` and ``delimiter-precedes-last`` - "after-inverted-name"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A new value has been added to the ``delimiter-precedes-et-al`` and
+``delimiter-precedes-last`` attributes. With "after-inverted-name", the name
+delimiter is only included before the "et-al" or "and" term when the preceding
+name has been inverted as a result of the ``name-as-sort-order`` attribute.
+E.g.:
+
+::
+
+    "Doe, J., and T. Williams"
+    "Doe, J., S. Smith and T. Williams"
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/97
+
 Et-al Abbreviation with Last Name
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
