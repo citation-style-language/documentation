@@ -15,7 +15,7 @@ __ http://citationstyles.org/
 
 .. class:: info-version
 
-   2012-06-15
+   2012-07-19
 
 .. class:: contributors
 
@@ -448,19 +448,20 @@ Ticket:
 Terms
 -----
 
-New Terms: "available at" and "scale"
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+New Terms: "available at", "scale", and "version"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Two new terms in the "miscellaneous" category are now available: "available at"
-and "scale" (accompanying the "scale" variable).
+Three new terms in the "miscellaneous" category are now available: "available
+at", "scale" (accompanying the new "scale" variable), and "version".
 
 See `Appendix III - Terms <http://goo.gl/0UfDl#appendix-iii-terms>`_ in the CSL
 1.0.1 specification.
 
 Tickets:
 
-- https://github.com/citation-style-language/schema/issues/14
-- https://github.com/citation-style-language/schema/issues/90
+- https://github.com/citation-style-language/schema/issues/90 ("available at")
+- https://github.com/citation-style-language/schema/issues/14 ("scale")
+- https://github.com/citation-style-language/schema/issues/98 ("version")
 
 "page-range-delimiter"
 ~~~~~~~~~~~~~~~~~~~~~~

@@ -15,7 +15,7 @@ __ http://citationstyles.org/
 
 .. class:: info-version
 
-   2012-06-15
+   2012-07-19
 
 .. class:: version-links
 
@@ -2790,6 +2790,7 @@ Miscellaneous
 -  reference
 -  retrieved
 -  scale
+-  version
 
 Appendix IV - Page Range Formats
 --------------------------------
