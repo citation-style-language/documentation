@@ -15,19 +15,23 @@ __ http://citationstyles.org/
 
 .. class:: info-version
 
-   version 2011-05-24
+   2012-06-15
 
 .. class:: contributors
 
-   Author
-       * Rintze M. Zelle
+   **Author**
+   
+   Rintze M. Zelle, PhD
        
-   Contributors
-       * Frank G. Bennett, Jr.
-       * Bruce D'Arcus
+   **Contributors**
 
-.. |link| image:: link.png
+   | Frank G. Bennett, Jr.
+   | Bruce D'Arcus
+   
+   |CCBYSA|_
 
+.. |CCBYSA| image:: http://i.creativecommons.org/l/by-sa/3.0/80x15.png
+.. _CCBYSA: http://creativecommons.org/licenses/by-sa/3.0/
 
 ========
 
@@ -38,7 +42,7 @@ __ http://citationstyles.org/
 Citation Style Language 1.0 - What's New?
 =========================================
 
-The release of |link| `Citation Style Language 1.0
+The release of `Citation Style Language 1.0
 <http://citationstyles.org/citation-style-language/schema/>`_ represents a
 significant update of the Citation Style Language (CSL), an open XML language to
 describe citation styles. This document describes the changes compared to CSL
@@ -56,15 +60,15 @@ the need to include this namespace for each element.
 Project Home(s)
 +++++++++++++++
 
-The first change is that |link| `CitationStyles.org
+The first change is that `CitationStyles.org
 <http://citationstyles.org/>`_ is the new home of the CSL project (the old home
-was located at |link| `<http://xbiblio.sourceforge.net/csl/>`_). The new website
+was located at `<http://xbiblio.sourceforge.net/csl/>`_). The new website
 will be the central location to find CSL schemas, documentation and styles.
 
-For CSL development the |link| `SourceForge xbiblio mailing list
+For CSL development the `SourceForge xbiblio mailing list
 <http://sourceforge.net/mailarchive/forum.php?forum_name=xbiblio-devel>`_ will
 be kept in use. Code hosting has moved around a bit. A switch from
-SourceForge.net to |link| `Bitbucket <https://bitbucket.org/bdarcus/>`_ in 2010
+SourceForge.net to `Bitbucket <https://bitbucket.org/bdarcus/>`_ in 2010
 has been followed by a move to `GitHub
 <https://github.com/citation-style-language/>`_ in 2011.
 
@@ -72,13 +76,13 @@ Documentation
 +++++++++++++
 
 Prior to the release of CSL 1.0, CSL documentation was rather scarce. Most of
-what was available was hosted on the |link| `Zotero wiki
+what was available was hosted on the `Zotero wiki
 <http://www.zotero.org/support/>`_. With CSL 1.0, we improved on this situation.
-In addition to these upgrade notes, a full |link| specification_ has been made
-available. As before, the |link| `schema
+In addition to these upgrade notes, a full specification_ has been made
+available. As before, the `schema
 <http://citationstyles.org/citation-style-language/schema/>`_ itself is also a
 source of information, although reading the schema requires some understanding
-of |link| `RELAX NG Compact <http://www.relaxng.org/>`_, the XML schema language
+of `RELAX NG Compact <http://www.relaxng.org/>`_, the XML schema language
 in which the CSL schema is written.
 
 .. _specification: http://citationstyles.org/downloads/specification.html
@@ -109,9 +113,9 @@ Validation
 The CSL 1.0 schema has been extended with two Schematron rules to make sure
 styles don't use ``cs:text`` and ``cs:key`` elements that call non-existing
 ``cs:macro`` elements. Note that not all validators support embedded Schematron
-code (e.g. |link| `Jing <http://www.thaiopensource.com/relaxng/jing.html>`_ just
+code (e.g. `Jing <http://www.thaiopensource.com/relaxng/jing.html>`_ just
 ignores the rules). In addition, the CSL 1.0 schema can now be used to validate
-the |link| `locales files`_ (e.g. "locales-en-US.xml"), which contain
+the `locales files`_ (e.g. "locales-en-US.xml"), which contain
 localizations of terms, date formats and style options.
 
 .. _locales files: https://github.com/citation-style-language/locales
@@ -124,11 +128,11 @@ Updating CSL 0.8 Styles
 
 CSL 1.0 is backward incompatible with CSL 0.8, which means that CSL 0.8 styles
 don't work with CSL 1.0 processors. Fortunately, it is possible to
-(automatically) update CSL 0.8 styles to the CSL 1.0 format using the |link|
+(automatically) update CSL 0.8 styles to the CSL 1.0 format using the
 `upgrade.xsl
 <https://github.com/citation-style-language/utilities/raw/master/update.xsl>`_
 XSLT stylesheet. This conversion has been performed for all the styles in the
-|link| `Zotero Style Repository <http://www.zotero.org/styles>`_. However, if
+`Zotero Style Repository <http://www.zotero.org/styles>`_. However, if
 you use (custom) CSL styles that aren't included in this style repository, you
 might need to do this yourself.
 
@@ -136,19 +140,19 @@ Using upgrade.xsl
 ~~~~~~~~~~~~~~~~~
 
 First, check whether the styles that you wish to update validate against the
-|link| `CSL 0.8.1 schema
+`CSL 0.8.1 schema
 <http://citationstyles.org/citation-style-language/schema/>`_.
 
 Then use an XSLT processor to update the styles. Available options are the
-command-line tools |link| `Saxon <http://saxon.sourceforge.net/>`_ and |link|
+command-line tools `Saxon <http://saxon.sourceforge.net/>`_ and
 `xsltproc <http://xmlsoft.org/XSLT/xsltproc2.html>`_. Alternatively, one of the
-(more user-friendly) online converters, such as the one offered by |link|
+(more user-friendly) online converters, such as the one offered by
 `www.shell-tools.net <http://www.shell-tools.net/index.php?op=xslt>`_ can be
 used. For the latter tool, the instructions are:
 
-1. Paste the contents of |link| `upgrade.xsl
+1. Paste the contents of `upgrade.xsl
    <https://github.com/citation-style-language/utilities/raw/master/update.xsl>`_
-   into the "xslt" text box at |link|
+   into the "xslt" text box at
    `<http://www.shell-tools.net/index.php?op=xslt>`_
 2. Paste the contents of the CSL 0.8 style into the "xml" text box
 3. Click the "Submit Query"-button
@@ -156,7 +160,7 @@ used. For the latter tool, the instructions are:
    Notepad on Windows) and save the file with a .csl-extension.
 
 Finally, after the conversion, it is recommended to validate the converted
-style, this time against the |link| `CSL 1.0 schema`_.
+style, this time against the `CSL 1.0 schema`_.
 
 .. _CSL 1.0 schema: http://citationstyles.org/citation-style-language/schema/
 
@@ -235,7 +239,7 @@ ISSN and ISSN-L
 ISSN-identifiers unambiguously identify journals. While CSL 0.8 allowed only a
 single ISSN identifier to be included in the style metadata section, CSL 1.0 now
 supports multiple ISSNs (e.g. the ISSNs of the print and online editions of a
-journal), as well as the relatively new |link| `ISSN-L
+journal), as well as the relatively new `ISSN-L
 <http://www.issn.org/2-22637-What-is-an-ISSN-L.php>`_ identifier. For example:
 
 .. sourcecode:: xml
@@ -628,7 +632,7 @@ names like "John SMITH":
 
     <names variable="author">
       <name form="long">
-        <name-part name="family" font-variant="capitalize-all"/>
+        <name-part name="family" text-case="uppercase"/>
       </name>
     </names>
 
@@ -1092,6 +1096,6 @@ CSL 1.0 also introduces a number of new terms:
   summer, fall and winter. See `Seasons`_.
 
 .. [1]
-   A hat tip to user |link| `komrade <http://www.zotero.org/komrade>`_ of
+   A hat tip to user `komrade <http://www.zotero.org/komrade>`_ of
    the Zotero forums, whose review of the major style guides led to
    this array of rule-sets.

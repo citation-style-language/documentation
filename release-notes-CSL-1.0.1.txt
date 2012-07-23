@@ -1,0 +1,667 @@
+=================================
+`Citation Style Language 1.0.1`__
+=================================
+?????????????
+Release Notes
+?????????????
+
+__ `Table of Contents`_
+
+.. class:: fixed
+
+   `citationstyles.org`__
+
+__ http://citationstyles.org/
+
+.. class:: info-version
+
+   2012-07-19
+
+.. class:: contributors
+
+   **Author**
+   
+   Rintze M. Zelle, PhD
+   
+   |CCBYSA|_
+
+.. |CCBYSA| image:: http://i.creativecommons.org/l/by-sa/3.0/80x15.png
+.. _CCBYSA: http://creativecommons.org/licenses/by-sa/3.0/
+
+========
+
+.. contents:: Table of Contents
+
+========
+
+
+Introduction
+------------
+
+**Temporary Notice:** the changes described in this document are still in flux,
+and only will become definite with the actual release of CSL 1.0.1. Please give
+feedback via the referenced issue ticket, the `xbiblio mailing list
+<https://lists.sourceforge.net/lists/listinfo/xbiblio-devel>`_, or the Zotero
+forums.
+
+These release notes describe the changes in Citation Style Language (CSL) 1.0.1
+as compared to the CSL 1.0 schema and specification (2010-05-30 update). Many of
+the new features listed here are described in more detail in the `draft CSL
+1.0.1 specification <http://goo.gl/0UfDl>`_.
+
+CSL 1.0.1 is a backwards compatible release, and any valid CSL 1.0 style or
+locale file should validate against the CSL 1.0.1 schema and work with any CSL
+1.0.1-compatible CSL processor.
+
+Cite Grouping
+-------------
+
+Within in-text citations, cites with indentical names are often grouped, e.g.
+"(Doe 2001, Doe 2004, Smith 2002)" instead of the chronologically ordered "(Doe
+2001, Smith 2002, Doe 2004)". We refer to this as "cite grouping".
+
+While cites were already grouped in CSL 1.0 as part of cite collapsing (e.g.,
+"(Doe 2001, 2004, Smith 2002)"), CSL 1.0.1 now allows cites to be grouped
+without collapsing (e.g., "(Doe 2001, Doe 2004, Smith 2002)") while offering
+more control over cite group formatting. A new attribute for ``cs:citation``,
+``cite-group-delimiter``, can be used to customize the delimiter for the cites
+within a group. Cite grouping is now activated whenever the
+``cite-group-delimiter`` or ``collapse`` attribute is used. With
+``cite-group-delimiter``, it has become possible to generate citations like
+"(Doe 2001, Doe 2004; Smith 2002; Anderson 2005)".
+
+See `Cite Grouping <http://goo.gl/0UfDl#cite-grouping>`_ in the CSL 1.0.1
+specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/52
+
+"dataset" Item Type
+-------------------
+
+A new item type, "dataset", is available to describe datasets.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/74
+
+Disambiguation
+--------------
+
+The default value of the ``givenname-disambiguation-rule`` attribute has been
+changed from "all-names" to "by-cite". The latter is a less aggressive
+disambiguation method that is limited to ambiguous cites.
+
+See `Disambiguation <http://goo.gl/0UfDl#disambiguation>`_ in the CSL 1.0.1
+specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/76
+
+Gender-specific Ordinals
+------------------------
+
+It is now possible to define feminine, masculine and neuter variants of ordinal
+suffixes, and specify the gender of the relevant CSL variables representing
+nouns. For example, the English "1st" and "first" can now automatically localize
+in French to "1er" and "premier" if the target noun is masculine (e.g., "1er
+janvier" for "January 1st"), and "1re" and "première" if the noun is feminine
+(e.g., "1re édition" for "1st edition").
+
+See `Gender-specific Ordinals <http://goo.gl/0UfDl#gender-specific-ordinals>`_
+in the CSL 1.0.1 specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/7
+
+Input Data Model
+----------------
+
+The `CSL schema <https://github.com/citation-style-language/schema>`_ GitHub
+repository now contains a JSON schema describing the CSL input data model
+(csl-data.json, and, to describe the citation objects that are embedded in word
+processor documents, csl-citation.json). At this point, it is modeled on the
+input model used by citeproc-js. The schemas are not necessarily complete and
+are not (yet) normative.
+
+- https://github.com/citation-style-language/schema/blob/master/csl-data.json
+- https://github.com/citation-style-language/schema/blob/master/csl-citation.json
+
+Line Spacing
+------------
+
+The minimum value for line spacing has been increased to "1".
+
+See `Whitespace <http://goo.gl/0UfDl#whitespace>`_ in the CSL 1.0.1
+specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/73
+
+Locale Metadata
+---------------
+
+Locale files may now include ``cs:info`` as the first child element of the
+``cs:locale`` root element. This element may contain one or more
+``cs:translator`` child elements, as well as a ``cs:rights`` and ``cs:updated``
+child element. ``cs:translator`` can be used to specify the translator of the
+locale file, using the same child elements available for ``cs:author`` and
+``cs:contributor`` in styles: ``cs:name``, ``cs:email`` and ``cs:uri``. For
+example:
+
+.. sourcecode:: xml
+
+    <locale>
+      <info>
+        <translator>
+          <name>John Doe</name>
+          <email>john.doe@domain.com</email>
+        </translator>
+        <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This
+        work is licensed under a Creative Commons Attribution-ShareAlike 3.0
+        License</rights>
+        <updated>2011-10-10T23:31:02+00:00</updated>
+      </info>
+      ...
+    </locale>
+
+See `Locale Files - Structure <http://goo.gl/0UfDl#locale-files-structure>`_ in
+the CSL 1.0.1 specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/10
+
+Names
+-----
+
+Affixes on Name-parts
+~~~~~~~~~~~~~~~~~~~~~
+
+The ``prefix`` and ``suffix`` attributes are now also allowed on
+``cs:name-part``, allowing for name formatting like "DOE (Jane)".
+
+See `Name-part Formatting <http://goo.gl/0UfDl#name-part-formatting>`_ in the
+CSL 1.0.1 specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/47
+
+``cs:name`` Optional
+~~~~~~~~~~~~~~~~~~~~
+
+The ``cs:name`` element is no longer a required child element of ``cs:names``.
+
+See `Name <http://goo.gl/0UfDl#name>`_ in the CSL 1.0.1 specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/53
+
+``delimiter-precedes-et-al`` and ``delimiter-precedes-last`` - "after-inverted-name"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A new value has been added to the ``delimiter-precedes-et-al`` and
+``delimiter-precedes-last`` attributes. With "after-inverted-name", the name
+delimiter is only included before the "et-al" or "and" term when the preceding
+name has been inverted as a result of the ``name-as-sort-order`` attribute.
+E.g.:
+
+::
+
+    "Doe, J., and T. Williams"
+    "Doe, J., S. Smith and T. Williams"
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/97
+
+Et-al Abbreviation with Last Name
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+By using the new ``et-al-use-last`` attribute for ``cs:name``, it is now
+possible to use et-al abbreviation and show the last author, as required by the
+6th edition of APA Style. An ellipsis, preceded by the name delimiter, separates
+the last name from the abbreviated name list, e.g.:
+
+::
+
+    A. Goffeau, B. G. Barrell, H. Bussey, R. W. Davis, B. Dujon, H. Feldmann, …
+    S. G. Oliver
+
+The accompanying new ``names-use-last`` attribute for ``cs:key`` can be used to
+override the value of ``et-al-use-last`` for sorting.
+
+See `Name <http://goo.gl/0UfDl#name>`_ and `Sorting
+<http://goo.gl/0UfDl#sorting>`_ in the CSL 1.0.1 specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/11
+
+Et-al Delimiter
+~~~~~~~~~~~~~~~
+
+With CSL 1.0, the "et-al" and "and others" terms were always preceded by a space
+when rendered as a result of et-al abbreviation. With the new optional
+``delimiter-precedes-et-al`` attribute for ``cs:name``, the name delimiter can
+be used instead (e.g. "Doe, et al. 2000" instead of "Doe et al. 2000").
+
+See `Name <http://goo.gl/0UfDl#name>`_ in the CSL 1.0.1 specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/12
+
+Independent ``names-min`` and ``names-use-first``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The CSL schema now allows the ``names-min`` and ``names-use-first`` attributes
+to be set independently on ``cs:key``.
+
+See `Sorting <http://goo.gl/0UfDl#sorting>`_ in the CSL 1.0.1 specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/82
+
+Normalizing Initials in "long" Form Names
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The new ``initialize`` attribute for ``cs:name`` can be set to "false" (the
+default is "true") to stop ``initialize-with`` from activating name
+initializing. However, in this case, the value of ``initialize-with`` is still
+appended to initials present in the "long" form of names. For example,
+
+.. sourcecode:: xml
+
+    <names variable="author">
+      <name initialize-with=". " initialize="false"/>
+    </names>
+
+reformats the names "James T Kirk" and "Hunter S. Thompson" to "James T. Kirk"
+and "Hunter S. Thompson".
+
+See `Name <http://goo.gl/0UfDl#name>`_ in the CSL 1.0.1 specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/60
+
+Subsequent Author Substitution
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A new attribute for ``cs:bibliography``, ``subsequent-author-substitute-rule``,
+gives more options for subsequent author substitution. Whereas previously only
+the whole name list could be substituted in case of a complete match, now names
+can be substituted on an individual basis, even for incomplete matches for the
+name list. For example, it is now possible to obtain bibliographic entries like:
+
+::
+
+    Doe, Johnson & Williams. 2001.
+    --- & Smith. 2002.
+    Doe, Stevens & Miller. 2003.
+    ---, --- & ---. 2004.
+
+See `Reference Grouping <http://goo.gl/0UfDl#reference-grouping>`_ in the CSL
+1.0.1 specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/4
+
+Numbers
+-------
+
+The rules for rendering number variables with ``cs:number`` have changed, as
+have the criteria for the "is-numeric" condition. Multiple numbers are now
+recognized as such (e.g., "2, 3 & 4"), as are numbers with affixes ("2E").
+
+See `Number <http://goo.gl/0UfDl#number>`_ and `Choose
+<http://goo.gl/0UfDl#choose>`_ in the CSL 1.0.1 specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/documentation/issues/6
+
+Page Range Formats
+------------------
+
+Page ranges can now be reformatted in the format used by the Oxford University
+Standard for Citation of Legal Authorities (OSCOLA). With ``page-range-format``
+set to "minimal-two", page ranges are abbreviated as with "minimal", except that
+the second number keeps at least two digits for numbers of 10 and up (e.g.,
+"1-5", "20-28", "100-16").
+
+Also, an error in the CSL 1.0 specification has been corrected: the "minimal"
+page range format was previously mistakenly listed as "minimum".
+
+See `Page Ranges <http://goo.gl/0UfDl#page-ranges>`_ in the CSL 1.0.1
+specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/84
+
+Specification
+-------------
+
+The CSL specification has been largely rewritten for improved precision and
+clarity. There are several new paragraphs (e.g., `Terminology
+<http://goo.gl/0UfDl#terminology>`_ and `File Types
+<http://goo.gl/0UfDl#file-types>`_), and every `CSL variable
+<http://goo.gl/0UfDl#appendix-i-variables>`_ is now accompanied by a short
+description.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/3 (variable descriptions)
+
+Style Locale in Dependent Styles
+--------------------------------
+
+While it was already possible to set the ``default-locale`` attribute on
+``cs:style`` in dependent styles, doing so had no effect. Now, when a dependent
+style sets a style locale with ``default-locale``, this locale should be used
+when rendering the style, overriding the style locale of the independent parent
+style.
+
+See `The Root Element - cs:style
+<http://goo.gl/0UfDl#the-root-element-cs-style>`_ in the CSL 1.0.1
+specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/91
+
+Style Metadata
+--------------
+
+eISSN
+~~~~~
+
+Previously, the ``cs:issn`` and ``cs:issnl`` elements could already be used to
+indicate respectively the different ISSNs for journal-specific styles (e.g., of
+the print and online editions), and the journal's ISSN-L. The new optional
+``cs:eissn`` element allows the ISSN of the online edition (the eISSN) to be
+explictly specified, e.g.:
+
+.. sourcecode:: xml
+
+    <info>
+      <title>Applied and Environmental Microbiology</title>
+      <issn>0099-2240</issn>
+      <eissn>1098-5336</eissn>
+    </info>
+
+See `Info <http://goo.gl/0UfDl#info>`_ in the CSL 1.0.1 specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/51
+
+License
+~~~~~~~
+
+The ``cs:rights`` element may now carry a ``license`` attribute to indicate the
+URI of the style license, e.g.:
+
+.. sourcecode:: xml
+
+    <info>
+      <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work
+      is licensed under a Creative Commons Attribution-ShareAlike 3.0
+      License</rights>
+    </info>
+
+See `Info <http://goo.gl/0UfDl#info>`_ in the CSL 1.0.1 specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/45
+
+Short Title
+~~~~~~~~~~~
+
+The new optional ``cs:title-short`` element can be used to give a shortened
+style title, e.g.:
+
+.. sourcecode:: xml
+
+    <info>
+      <title>Proceedings of the National Academy of Sciences</title>
+      <title-short>PNAS</title-short>
+    </info>
+
+See `Info <http://goo.gl/0UfDl#info>`_ in the CSL 1.0.1 specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/83
+
+Terms
+-----
+
+New Terms: "available at", "scale", and "version"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Three new terms in the "miscellaneous" category are now available: "available
+at", "scale" (accompanying the new "scale" variable), and "version".
+
+See `Appendix III - Terms <http://goo.gl/0UfDl#appendix-iii-terms>`_ in the CSL
+1.0.1 specification.
+
+Tickets:
+
+- https://github.com/citation-style-language/schema/issues/90 ("available at")
+- https://github.com/citation-style-language/schema/issues/14 ("scale")
+- https://github.com/citation-style-language/schema/issues/98 ("version")
+
+"page-range-delimiter"
+~~~~~~~~~~~~~~~~~~~~~~
+
+The new term "page-range-delimiter" makes it possible to customize (and
+localize) the delimiter used for page ranges. The delimiter is only used when
+the ``page-range-format`` attribute is set. As this term did not exist in CSL
+1.0 and will be absent from CSL 1.0 locale files, it defaults to an en-dash if
+not defined.
+
+See `Page Ranges <http://goo.gl/0UfDl#page-ranges>`_ in the CSL 1.0.1
+specification.
+
+Tickets:
+
+- https://github.com/citation-style-language/schema/issues/56
+
+Text Case
+---------
+
+The specification now describes how sentence and title case conversions work
+(which are selected with the ``text-case`` attribute). Title casing is now
+limited to items that can be assumed to be English.
+
+In addition, the ``text-case`` attribute can now also be used on ``cs:date``.
+This allows dates to be formatted as "April 2002" and "24 april 2002", where the
+month is only capitalized in the absence of a preceding day.
+
+See `Text-case <http://goo.gl/0UfDl#text-case>`_ in the CSL 1.0.1 specification.
+
+Tickets:
+
+- https://github.com/citation-style-language/documentation/issues/13
+- https://github.com/citation-style-language/schema/issues/55
+
+Validation
+----------
+
+The schema has become slightly stricter when it comes to style validation. While
+this causes some backward incompatibility, the additional validation only
+concerns attributes that had no logical use in CSL 1.0 styles, and shouldn't
+affect any CSL 1.0 styles obtained from the `official CSL style repository
+<https://github.com/citation-style-language/styles>`_.
+
+No "verb" and "verb-short" Forms on Standalone ``cs:label``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+It is no longer allowed to set the ``form`` attribute to "verb" or "verb-short"
+on standalone ``cs:label`` elements (these values are still allowed if
+``cs:label`` is a child element of ``cs:names``).
+
+See `Label <http://goo.gl/0UfDl#label>`_ in the CSL 1.0.1 specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/71
+
+Tests for conditions on ``cs:if`` and ``cs:else-if``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+While the specification already required ``cs:if`` and ``cs:else-if`` to carry
+at least one condition attribute, the CSL schema also validated cases where no
+conditions were specified. This has been corrected.
+
+See `Choose <http://goo.gl/0UfDl#choose>`_ in the CSL 1.0.1 specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/77
+
+Variables
+---------
+
+More Number Variables
+~~~~~~~~~~~~~~~~~~~~~
+
+The CSL variables "chapter-number", "collection-number" and "number-of-pages",
+which previously were standard variables, have now become number variables. As a
+result, they can now be rendered through either ``cs:number`` or ``cs:text``.
+
+See `Number Variables <http://goo.gl/0UfDl#number-variables>`_ in the CSL 1.0.1
+specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/9
+
+New Variables: "container-title-short" and "title-short"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Previously, "title" and "container-title" abbreviations were only accessible
+through the "short" forms of these variables. As a result, it was impossible to
+specifically test whether an abbreviation existed (``<if variable="title"/>``
+tests "true" whether a "long" or "short" form of "title" exists).
+
+Now, these abbreviations can also be accessed through the dedicated
+"title-short" and "container-title-short" variables. For example,
+
+.. sourcecode:: xml
+
+    <choose>
+      <if variable="title-short">
+        <group delimiter=" ">
+          <text variable="title-short"/>
+          <text variable="title" prefix="(" suffix=")"/>
+        </group>
+      </if>
+      <else>
+        <text variable="title"/>
+      </else>
+    </choose>
+
+would give title listings like:
+
+::
+
+    The Hobbit (The Hobbit, or There and Back Again)
+    Lord of the Rings
+    Free Culture (Free Culture: The Nature and Future of Creativity)
+
+See `Standard Variables <http://goo.gl/0UfDl#standard-variables>`_ in the CSL
+1.0.1 specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/2
+
+New Variables: "dimensions", "director", "illustrator", "ISSN", "PMCID", "PMID", "scale", and "source"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+New CSL variables have been introduced:
+
+- "dimensions" - for physical (e.g., size of an object) or temporal (e.g., the
+  running time of a movie) dimensions
+- "director" - name variable for directors of e.g. films
+- "illustrator" - name variable for illustrators of e.g. comics or children's
+  books
+- "ISSN" - International Standard Serial Number
+- "PMCID" - PubMed Central reference number
+- "PMID" - PubMed reference number
+- "scale" - scale of e.g. a map
+- "source" - origin of the item (e.g., a library catalog or database)
+
+See `Standard Variables <http://goo.gl/0UfDl#standard-variables>`_ and `Name
+Variables <http://goo.gl/0UfDl#name-variables>`_ in the CSL 1.0.1 specification.
+
+Tickets:
+
+- https://github.com/citation-style-language/schema/issues/14 ("dimensions", "scale")
+- https://github.com/citation-style-language/schema/issues/96 ("director")
+- https://github.com/citation-style-language/schema/issues/89 ("illustrator")
+- https://github.com/citation-style-language/schema/issues/86 ("ISSN")
+- https://github.com/citation-style-language/schema/issues/87 ("PMCID", "PMID")
+- https://github.com/citation-style-language/schema/issues/88 ("source")
+
+New Variables: "reviewed-author" and "reviewed-title"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A new name variable, "reviewed-author", and a new standard variable,
+"reviewed-title", have been introduced for (basic) support of reviews (e.g.,
+book reviews). These variables should be made available on the
+"article-magazine", "article-newspaper", and "article-journal" item types.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/5
+
+"sub verbo" Locator Type
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+CSL 1.0 contained a bug: it was impossible to test for the "sub verbo" locator
+type, because the value of the "locator" attribute is read as a list, and "sub
+verbo" is read as "sub" and "verbo". To circumvent this limitation, "sub-verbo"
+can now be used as a test value (the "sub verbo" term and input field remain
+unchanged). An example:
+
+.. sourcecode:: xml
+
+    <choose>
+      <if locator="page sub-verbo" match="any">
+        ...
+      </if>
+    </choose>
+
+See `Choose <http://goo.gl/0UfDl#choose>`_ in the CSL 1.0.1 specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/72
+
+Using ``cs:label`` with Number Variables
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The ``cs:label`` element, which previously could only be used for the "locator"
+and "page" variables (and name variables, when used as a child element of
+``cs:names``), can now be used with any number variable.
+
+See `Label <http://goo.gl/0UfDl#label>`_ and `Number Variables
+<http://goo.gl/0UfDl#number-variables>`_ in the CSL 1.0.1 specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/8
