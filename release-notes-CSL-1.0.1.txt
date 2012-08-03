@@ -133,7 +133,7 @@ are not (yet) normative.
 Line Spacing
 ------------
 
-The minimum value for line spacing has been increased to "1".
+The minimum value for the ``line-spacing`` attribute has been increased to "1".
 
 See `Whitespace <http://goo.gl/0UfDl#whitespace>`_ in the CSL 1.0.1
 specification.
@@ -175,6 +175,20 @@ the CSL 1.0.1 specification.
 Ticket:
 
 - https://github.com/citation-style-language/schema/issues/10
+
+Localization of Ordinals
+------------------------
+
+To improve support for the localization of ordinals, such as "2nd" and "3rd",
+the number of ordinal terms has been expanded, and a ``match`` attribute has
+been introduced.
+
+See `Ordinal Suffixes <http://goo.gl/0UfDl#ordinal-suffixes>`_ in the CSL 1.0.1
+specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/66
 
 Names
 -----

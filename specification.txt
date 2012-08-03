@@ -601,16 +601,16 @@ be overridden for certain numbers with the following terms:
 - "ordinal-00" through "ordinal-09" - by default, a term in this group is used
   when the last digit in the term name matches the last digit of the rendered
   number. E.g. "ordinal-00" would match the numbers "0", "10", "20", etc. By
-  setting the optional ``match`` attribute to "2-digits" ("1-digit" is the
-  default), matches are limited to numbers where the two last digits agree ("0",
-  "100", "200", etc.). When ``match`` is set to "whole-number", there is only a
-  match if the number is the same as that of the term.
+  setting the optional ``match`` attribute to "last-two-digits" ("last-digit" is
+  the default), matches are limited to numbers where the two last digits agree
+  ("0", "100", "200", etc.). When ``match`` is set to "whole-number", there is
+  only a match if the number is the same as that of the term.
   
 - "ordinal-10" through "ordinal-99" - by default, a term in this group is used
   when the last two digits in the term name match the last two digits of the
   rendered number. When the optional ``match`` attribute is set to
-  "whole-number", there is only a match if the number is the same as that of the
-  term.
+  "whole-number" ("last-two-digits" is the default), there is only a match if
+  the number is the same as that of the term.
 
 When a number has matching terms from both groups (e.g. "13" can match
 "ordinal-03" and "ordinal-13"), the term from the "ordinal-10" through
@@ -644,7 +644,7 @@ masculine variant is undefined. When the "day" date-part is rendered in the
 "ordinal" form, the ordinal gender is matched against that of the month term.
 
 The example below gives "1re éd." ("1st ed."), "1er janvier" ("January 1st"),
-and "3e janvier" ("January 3rd"):
+and "3e édition" ("3rd edition"):
 
 .. sourcecode:: xml
 
