@@ -477,6 +477,19 @@ Tickets:
 - https://github.com/citation-style-language/schema/issues/14 ("scale")
 - https://github.com/citation-style-language/schema/issues/98 ("version")
 
+New Terms: "ordinal", "ordinal-00", and "ordinal-05" through "ordinal-99"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The terms "ordinal", "ordinal-00", and "ordinal-05" through "ordinal-99" are now
+available to improve the `localization of ordinals`_.
+
+See `Appendix III - Terms <http://goo.gl/0UfDl#appendix-iii-terms>`_ in the CSL
+1.0.1 specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/66
+
 "page-range-delimiter"
 ~~~~~~~~~~~~~~~~~~~~~~
 
