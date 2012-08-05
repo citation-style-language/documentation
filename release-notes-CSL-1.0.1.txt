@@ -15,7 +15,7 @@ __ http://citationstyles.org/
 
 .. class:: info-version
 
-   2012-07-19
+   2012-08-04
 
 .. class:: contributors
 
@@ -49,26 +49,27 @@ as compared to the CSL 1.0 schema and specification (2010-05-30 update). Many of
 the new features listed here are described in more detail in the `draft CSL
 1.0.1 specification <http://goo.gl/0UfDl>`_.
 
-CSL 1.0.1 is a backwards compatible release, and any valid CSL 1.0 style or
-locale file should validate against the CSL 1.0.1 schema and work with any CSL
-1.0.1-compatible CSL processor.
+With minor exceptions (discussed below), CSL 1.0.1 is a backwards compatible
+release, and valid CSL 1.0 styles and locale files will generally validate
+against the CSL 1.0.1 schema and work with any CSL 1.0.1-compatible CSL
+processor.
 
 Cite Grouping
 -------------
 
-Within in-text citations, cites with indentical names are often grouped, e.g.
-"(Doe 2001, Doe 2004, Smith 2002)" instead of the chronologically ordered "(Doe
-2001, Smith 2002, Doe 2004)". We refer to this as "cite grouping".
+Within in-text citations, cites with identical names are sometimes grouped. E.g.
+"(Doe 2001, Doe 2004, Smith 2002)" instead of a chronologically ordered "(Doe
+2001, Smith 2002, Doe 2004)". We refer to this as "cite grouping". In CSL 1.0,
+cite grouping was active when the ``collapse`` attribute on ``cs:citation`` was
+used (with ``collapse`` set to "year", the previous example would group and
+collapse to "(Doe 2001, 2004, Smith 2002)").
 
-While cites were already grouped in CSL 1.0 as part of cite collapsing (e.g.,
-"(Doe 2001, 2004, Smith 2002)"), CSL 1.0.1 now allows cites to be grouped
-without collapsing (e.g., "(Doe 2001, Doe 2004, Smith 2002)") while offering
-more control over cite group formatting. A new attribute for ``cs:citation``,
-``cite-group-delimiter``, can be used to customize the delimiter for the cites
-within a group. Cite grouping is now activated whenever the
-``cite-group-delimiter`` or ``collapse`` attribute is used. With
-``cite-group-delimiter``, it has become possible to generate citations like
-"(Doe 2001, Doe 2004; Smith 2002; Anderson 2005)".
+CSL 1.0.1 introduces a new attribute, ``cite-group-delimiter``, which can be
+used on ``cs:citation`` to customize the delimiter for cites within cite groups
+(the default cite delimiter is specified with ``delimiter`` on ``cs:layout``).
+As an added benefit, because cite grouping is now activated whenever the
+``cite-group-delimiter`` or ``collapse`` attribute is used, it is now also
+possible to group cites without any cite collapsing taking place.
 
 See `Cite Grouping <http://goo.gl/0UfDl#cite-grouping>`_ in the CSL 1.0.1
 specification.
@@ -100,23 +101,6 @@ Ticket:
 
 - https://github.com/citation-style-language/schema/issues/76
 
-Gender-specific Ordinals
-------------------------
-
-It is now possible to define feminine, masculine and neuter variants of ordinal
-suffixes, and specify the gender of the relevant CSL variables representing
-nouns. For example, the English "1st" and "first" can now automatically localize
-in French to "1er" and "premier" if the target noun is masculine (e.g., "1er
-janvier" for "January 1st"), and "1re" and "première" if the noun is feminine
-(e.g., "1re édition" for "1st edition").
-
-See `Gender-specific Ordinals <http://goo.gl/0UfDl#gender-specific-ordinals>`_
-in the CSL 1.0.1 specification.
-
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/7
-
 Input Data Model
 ----------------
 
@@ -124,8 +108,9 @@ The `CSL schema <https://github.com/citation-style-language/schema>`_ GitHub
 repository now contains a JSON schema describing the CSL input data model
 (csl-data.json, and, to describe the citation objects that are embedded in word
 processor documents, csl-citation.json). At this point, it is modeled on the
-input model used by citeproc-js. The schemas are not necessarily complete and
-are not (yet) normative.
+input model used by `citeproc-js
+<https://bitbucket.org/fbennett/citeproc-js/wiki/Home>`_. The schemas are not
+necessarily complete and are not (yet) normative.
 
 - https://github.com/citation-style-language/schema/blob/master/csl-data.json
 - https://github.com/citation-style-language/schema/blob/master/csl-citation.json
@@ -176,20 +161,6 @@ Ticket:
 
 - https://github.com/citation-style-language/schema/issues/10
 
-Localization of Ordinals
-------------------------
-
-To improve support for the localization of ordinals, such as "2nd" and "3rd",
-the number of ordinal terms has been expanded, and a ``match`` attribute has
-been introduced.
-
-See `Ordinal Suffixes <http://goo.gl/0UfDl#ordinal-suffixes>`_ in the CSL 1.0.1
-specification.
-
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/66
-
 Names
 -----
 
@@ -216,6 +187,20 @@ See `Name <http://goo.gl/0UfDl#name>`_ in the CSL 1.0.1 specification.
 Ticket:
 
 - https://github.com/citation-style-language/schema/issues/53
+
+``delimiter-precedes-et-al``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+With CSL 1.0, the "et-al" and "and others" terms were always preceded by a space
+when rendered as a result of et-al abbreviation. With the new optional
+``delimiter-precedes-et-al`` attribute for ``cs:name``, the name delimiter can
+be used instead (e.g. "Doe, et al. 2000" instead of "Doe et al. 2000").
+
+See `Name <http://goo.gl/0UfDl#name>`_ in the CSL 1.0.1 specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/12
 
 ``delimiter-precedes-et-al`` and ``delimiter-precedes-last`` - "after-inverted-name"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -258,20 +243,6 @@ Ticket:
 
 - https://github.com/citation-style-language/schema/issues/11
 
-Et-al Delimiter
-~~~~~~~~~~~~~~~
-
-With CSL 1.0, the "et-al" and "and others" terms were always preceded by a space
-when rendered as a result of et-al abbreviation. With the new optional
-``delimiter-precedes-et-al`` attribute for ``cs:name``, the name delimiter can
-be used instead (e.g. "Doe, et al. 2000" instead of "Doe et al. 2000").
-
-See `Name <http://goo.gl/0UfDl#name>`_ in the CSL 1.0.1 specification.
-
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/12
-
 Independent ``names-min`` and ``names-use-first``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -289,8 +260,8 @@ Normalizing Initials in "long" Form Names
 
 The new ``initialize`` attribute for ``cs:name`` can be set to "false" (the
 default is "true") to stop ``initialize-with`` from activating name
-initializing. However, in this case, the value of ``initialize-with`` is still
-appended to initials present in the "long" form of names. For example,
+initializing. In this case, the value of ``initialize-with`` is still appended
+to initials already present in the "long" form of names. For example,
 
 .. sourcecode:: xml
 
@@ -344,13 +315,47 @@ Ticket:
 
 - https://github.com/citation-style-language/documentation/issues/6
 
+Ordinals
+--------
+
+Gender-specific Ordinals
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+It is now possible to define feminine, masculine and neuter variants of ordinal
+suffixes, and specify the gender of the relevant CSL variables representing
+nouns. For example, the English "1st" and "first" can now automatically localize
+in French to "1er" and "premier" if the target noun is masculine (e.g., "1er
+janvier" for "January 1st"), and "1re" and "première" if the noun is feminine
+(e.g., "1re édition" for "1st edition").
+
+See `Gender-specific Ordinals <http://goo.gl/0UfDl#gender-specific-ordinals>`_
+in the CSL 1.0.1 specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/7
+
+Localization of Ordinals
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+To improve support for the localization of ordinals, such as "2nd" and "3rd",
+the number of ordinal terms has been expanded, and a ``match`` attribute has
+been introduced on ``cs:term``.
+
+See `Ordinal Suffixes <http://goo.gl/0UfDl#ordinal-suffixes>`_ in the CSL 1.0.1
+specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/66
+
 Page Range Formats
 ------------------
 
 Page ranges can now be reformatted in the format used by the Oxford University
 Standard for Citation of Legal Authorities (OSCOLA). With ``page-range-format``
 set to "minimal-two", page ranges are abbreviated as with "minimal", except that
-the second number keeps at least two digits for numbers of 10 and up (e.g.,
+the second number keeps at least two digits for numbers of 10 and up (e.g.
 "1-5", "20-28", "100-16").
 
 Also, an error in the CSL 1.0 specification has been corrected: the "minimal"
@@ -382,9 +387,8 @@ Style Locale in Dependent Styles
 
 While it was already possible to set the ``default-locale`` attribute on
 ``cs:style`` in dependent styles, doing so had no effect. Now, when a dependent
-style sets a style locale with ``default-locale``, this locale should be used
-when rendering the style, overriding the style locale of the independent parent
-style.
+style sets a style locale with ``default-locale``, this locale overrides the
+style locale of the independent parent style.
 
 See `The Root Element - cs:style
 <http://goo.gl/0UfDl#the-root-element-cs-style>`_ in the CSL 1.0.1
@@ -401,7 +405,7 @@ eISSN
 ~~~~~
 
 Previously, the ``cs:issn`` and ``cs:issnl`` elements could already be used to
-indicate respectively the different ISSNs for journal-specific styles (e.g., of
+indicate respectively the different ISSNs for journal-specific styles (e.g. of
 the print and online editions), and the journal's ISSN-L. The new optional
 ``cs:eissn`` element allows the ISSN of the online edition (the eISSN) to be
 explictly specified, e.g.:
@@ -490,7 +494,7 @@ Ticket:
 
 - https://github.com/citation-style-language/schema/issues/66
 
-"page-range-delimiter"
+New Term: "page-range-delimiter"
 ~~~~~~~~~~~~~~~~~~~~~~
 
 The new term "page-range-delimiter" makes it possible to customize (and
