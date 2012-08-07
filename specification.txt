@@ -212,8 +212,8 @@ independent styles, ``cs:info`` has the following child elements:
     -  "note" - the citation appears as a footnote or endnote
     
     ``cs:category`` may be used multiple times with the ``field`` attribute, set
-    to one of the discipline `categories`_, to indicates the field(s) for which
-    the style is relevant.
+    to one of the discipline categories (see `Appendix I - Categories`_), to
+    indicates the field(s) for which the style is relevant.
 
 ``cs:id``
     Must appear once. The element should contain a URI to establish the identity
@@ -558,7 +558,7 @@ Terms are localized strings (e.g. by using the "and" term, "Doe and Smith"
 automatically becomes "Doe und Smith" when the style locale is switched from
 English to German). Terms are defined with ``cs:term`` elements, child elements
 of ``cs:terms``. Each ``cs:term`` element must carry a ``name`` attribute, set
-to one of the terms listed in `Appendix III - Terms`_.
+to one of the terms listed in `Appendix II - Terms`_.
 
 Terms are either directly defined in the content of ``cs:term``, or, in cases
 where singular and plural variants are needed (e.g. "page" and "pages"), in the
@@ -737,7 +737,7 @@ following attributes to select what should be rendered:
 -  ``macro`` - renders the text output of a macro. Attribute value must match
    the value of the ``name`` attribute of a ``cs:macro`` element (see `Macro`_).
 -  ``term`` - renders a term. Attribute value must be one of the terms listed in
-   `Appendix III - Terms`_. May be accompanied by the ``plural`` attribute to
+   `Appendix II - Terms`_. May be accompanied by the ``plural`` attribute to
    select the singular ("false", default) or plural ("true") variant of a term,
    and by the ``form`` attribute to select the "long" (default), "short",
    "verb", "verb-short" or "symbol" form variant (see also `Terms`_).
@@ -1444,7 +1444,7 @@ are set with the attributes:
     failed to uniquely identify the target source.
 
 ``is-numeric``    
-    Tests whether the given variables (`Appendix I - Variables`_) contain
+    Tests whether the given variables (`Appendix IV - Variables`_) contain
     numeric content. Content is considered numeric if it solely consists of
     numbers. Numbers may have prefixes and suffixes ("D2", "2b", "L2d"), and may
     be separated by a comma, hyphen, or ampersand, with or without spaces ("2,
@@ -1499,11 +1499,11 @@ are set with the attributes:
     position="subsequent" also tests true.
 
 ``type``
-    Tests whether the item matches the given types (`Appendix II - Types`_).
+    Tests whether the item matches the given types (`Appendix III - Types`_).
 
 ``variable``
-    Tests whether the default (long) forms of the given variables (`Appendix I -
-    Variables`_) contain non-empty values.
+    Tests whether the default (long) forms of the given variables (`Appendix IV
+    - Variables`_) contain non-empty values.
 
 With the exception of ``disambiguate``, all conditions allow for multiple test
 values (separated with spaces, e.g. "book thesis").
@@ -1886,9 +1886,9 @@ Page Ranges
 ``page-range-format``
     Activates expansion or collapsing of page ranges: "chicago" ("321 |--| 28"),
     "expanded" (e.g. "321 |--| 328"), "minimal" ("321 |--| 8"), or "minimal-two"
-    ("321 |--| 28") (see also `Appendix IV - Page Range Formats`_). Delimits
-    page ranges with the "page-range-delimiter" term (introduced with CSL 1.0.1,
-    and defaults to an en-dash). If the attribute is not set, page ranges are
+    ("321 |--| 28") (see also `Appendix V - Page Range Formats`_). Delimits page
+    ranges with the "page-range-delimiter" term (introduced with CSL 1.0.1, and
+    defaults to an en-dash). If the attribute is not set, page ranges are
     rendered without reformatting.
 
 Name Particles
@@ -2021,8 +2021,8 @@ the absence of ``cs:sort``, cites and bibliographic entries appear in the order
 in which they are cited.
 
 The ``cs:sort`` element must contain one or more ``cs:key`` child elements. The
-sort key, set as an attribute on ``cs:key``, must be a variable (see `Appendix I
-- Variables`_) or macro name. For each ``cs:key`` element, the sort direction
+sort key, set as an attribute on ``cs:key``, must be a variable (see `Appendix
+IV - Variables`_) or macro name. For each ``cs:key`` element, the sort direction
 can be set to either "ascending" (default) or "descending" with the ``sort``
 attribute. The attributes ``names-min``, ``names-use-first``, and
 ``names-use-last`` may be used to override the values of the corresponding
@@ -2372,8 +2372,198 @@ than "en", items are assumed to be non-English. An item is only considered to be
 English if the value of its ``language`` field starts with the "en" primary
 language tag.
 
-Appendix I - Variables
-----------------------
+Appendix I - Categories
+-----------------------
+
+-  anthropology
+-  astronomy
+-  biology
+-  botany
+-  chemistry
+-  communications
+-  engineering
+-  generic-base - used for generic styles like Harvard and APA
+-  geography
+-  geology
+-  history
+-  humanities
+-  law
+-  linguistics
+-  literature
+-  math
+-  medicine
+-  philosophy
+-  physics
+-  political\_science
+-  psychology
+-  science
+-  social\_science
+-  sociology
+-  theology
+-  zoology
+
+Appendix II - Terms
+-------------------
+
+Locators
+~~~~~~~~
+
+-  book
+-  chapter
+-  column
+-  figure
+-  folio
+-  issue
+-  line
+-  note
+-  opus
+-  page
+-  paragraph
+-  part
+-  section
+-  sub verbo
+-  verse
+-  volume
+
+Months
+~~~~~~
+
+-  month-01
+-  month-02
+-  month-03
+-  month-04
+-  month-05
+-  month-06
+-  month-07
+-  month-08
+-  month-09
+-  month-10
+-  month-11
+-  month-12
+
+Ordinals
+~~~~~~~~
+
+-  ordinal
+-  ordinal-00 through ordinal-99
+-  long-ordinal-01
+-  long-ordinal-02
+-  long-ordinal-03
+-  long-ordinal-04
+-  long-ordinal-05
+-  long-ordinal-06
+-  long-ordinal-07
+-  long-ordinal-08
+-  long-ordinal-09
+-  long-ordinal-10
+
+Quotation marks
+~~~~~~~~~~~~~~~
+
+-  open-quote
+-  close-quote
+-  open-inner-quote
+-  close-inner-quote
+
+Roles
+~~~~~
+
+-  author
+-  collection-editor
+-  composer
+-  container-author
+-  director
+-  editor
+-  editorial-director
+-  editortranslator
+-  illustrator
+-  interviewer
+-  original-author
+-  recipient
+-  reviewed-author
+-  translator
+
+Seasons
+~~~~~~~
+
+-  season-01
+-  season-02
+-  season-03
+-  season-04
+
+Miscellaneous
+~~~~~~~~~~~~~
+
+-  accessed
+-  ad
+-  and
+-  and others
+-  anonymous
+-  at
+-  available at
+-  bc
+-  by
+-  circa
+-  cited
+-  edition
+-  et-al
+-  forthcoming
+-  from
+-  ibid
+-  in
+-  in press
+-  internet
+-  interview
+-  letter
+-  no date
+-  online
+-  presented at
+-  reference
+-  retrieved
+-  scale
+-  version
+
+Appendix III - Types
+--------------------
+
+-  article
+-  article-magazine
+-  article-newspaper
+-  article-journal
+-  bill
+-  book
+-  broadcast
+-  chapter
+-  dataset
+-  entry
+-  entry-dictionary
+-  entry-encyclopedia
+-  figure
+-  graphic
+-  interview
+-  legislation
+-  legal\_case
+-  manuscript
+-  map
+-  motion\_picture
+-  musical\_score
+-  pamphlet
+-  paper-conference
+-  patent
+-  post
+-  post-weblog
+-  personal\_communication
+-  report
+-  review
+-  review-book
+-  song
+-  speech
+-  thesis
+-  treaty
+-  webpage
+
+Appendix IV - Variables
+-----------------------
 
 Standard Variables
 ~~~~~~~~~~~~~~~~~~
@@ -2632,198 +2822,8 @@ reviewed-author
 translator
     translator
 
-Appendix II - Types
--------------------
-
--  article
--  article-magazine
--  article-newspaper
--  article-journal
--  bill
--  book
--  broadcast
--  chapter
--  dataset
--  entry
--  entry-dictionary
--  entry-encyclopedia
--  figure
--  graphic
--  interview
--  legislation
--  legal\_case
--  manuscript
--  map
--  motion\_picture
--  musical\_score
--  pamphlet
--  paper-conference
--  patent
--  post
--  post-weblog
--  personal\_communication
--  report
--  review
--  review-book
--  song
--  speech
--  thesis
--  treaty
--  webpage
-
-Appendix III - Terms
---------------------
-
-Categories
-~~~~~~~~~~
-
--  anthropology
--  astronomy
--  biology
--  botany
--  chemistry
--  communications
--  engineering
--  generic-base - used for generic styles like Harvard and APA
--  geography
--  geology
--  history
--  humanities
--  law
--  linguistics
--  literature
--  math
--  medicine
--  philosophy
--  physics
--  political\_science
--  psychology
--  science
--  social\_science
--  sociology
--  theology
--  zoology
-
-Locators
-~~~~~~~~
-
--  book
--  chapter
--  column
--  figure
--  folio
--  issue
--  line
--  note
--  opus
--  page
--  paragraph
--  part
--  section
--  sub verbo
--  verse
--  volume
-
-Months
-~~~~~~
-
--  month-01
--  month-02
--  month-03
--  month-04
--  month-05
--  month-06
--  month-07
--  month-08
--  month-09
--  month-10
--  month-11
--  month-12
-
-Ordinals
-~~~~~~~~
-
--  ordinal
--  ordinal-00 through ordinal-99
--  long-ordinal-01
--  long-ordinal-02
--  long-ordinal-03
--  long-ordinal-04
--  long-ordinal-05
--  long-ordinal-06
--  long-ordinal-07
--  long-ordinal-08
--  long-ordinal-09
--  long-ordinal-10
-
-Quotation marks
-~~~~~~~~~~~~~~~
-
--  open-quote
--  close-quote
--  open-inner-quote
--  close-inner-quote
-
-Roles
-~~~~~
-
--  author
--  collection-editor
--  composer
--  container-author
--  director
--  editor
--  editorial-director
--  editortranslator
--  illustrator
--  interviewer
--  original-author
--  recipient
--  reviewed-author
--  translator
-
-Seasons
-~~~~~~~
-
--  season-01
--  season-02
--  season-03
--  season-04
-
-Miscellaneous
-~~~~~~~~~~~~~
-
--  accessed
--  ad
--  and
--  and others
--  anonymous
--  at
--  available at
--  bc
--  by
--  circa
--  cited
--  edition
--  et-al
--  forthcoming
--  from
--  ibid
--  in
--  in press
--  internet
--  interview
--  letter
--  no date
--  online
--  presented at
--  reference
--  retrieved
--  scale
--  version
-
-Appendix IV - Page Range Formats
---------------------------------
+Appendix V - Page Range Formats
+-------------------------------
 
 The page abbreviation rules for the different values of the
 ``page-range-format`` attribute on ``cs:style`` are:
