@@ -694,9 +694,10 @@ a localized date format:
 Localized Options
 ~~~~~~~~~~~~~~~~~
 
-There is one localized option, ``punctuation-in-quote`` (see `Locale Options`_).
-This global option (affecting both citations and the bibliography) is set as an
-optional attribute on ``cs:style-options``.
+There are two localized options, ``limit-day-ordinals-to-day-1`` and
+``punctuation-in-quote`` (see `Locale Options`_). These global options (which
+affect both citations and the bibliography) are set as optional attributes on
+``cs:style-options``.
 
 Rendering Elements
 ------------------
@@ -806,6 +807,11 @@ describes the date part selected with the required ``name`` attribute:
     -  "numeric" - (default), e.g. "1"
     -  "numeric-leading-zeros" - e.g. "01"
     -  "ordinal" - e.g. "1st"
+    
+    Some languages, such as French, only use the "ordinal" form for the first
+    day of the month ("1er janvier", "2 janvier", "3 janvier", etc.). Such
+    output can be achieved with the "ordinal" form and use of the
+    ``limit-day-ordinals-to-day-1`` attribute (see `Locale Options`_).
 
 "month"
     For "month", ``cs:date-part`` may carry the `strip-periods`_ and ``form``
@@ -2003,6 +2009,16 @@ hierarchical levels, the value set at the lowest level is used.
 
 Locale Options
 ^^^^^^^^^^^^^^
+
+``limit-day-ordinals-to-day-1``
+   Date formats are defined by the ``cs:date`` element and its ``cs:date-part``
+   child elements (see `Date`_). By default, when the ``cs:date-part`` element
+   with ``name`` set to "day" has ``form`` set to "ordinal", all days (1 through
+   31) are rendered in the ordinal form, e.g. "January 1st", "January 2nd", etc.
+   By setting ``limit-day-ordinals-to-day-1`` to "true" ("false" is the
+   default), the "ordinal" form is limited to the first day of each month (other
+   days will use the "numeric" form). This is desirable for some languages, such
+   as French: "1er janvier", but "2 janvier", "3 janvier", etc.
 
 ``punctuation-in-quote``
     For ``cs:text`` elements rendered with the ``quotes`` attribute set to
