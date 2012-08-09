@@ -15,7 +15,7 @@ __ http://citationstyles.org/
 
 .. class:: info-version
 
-   2012-08-04
+   2012-08-08
 
 .. class:: contributors
 
@@ -216,6 +216,8 @@ E.g.:
     "Doe, J., and T. Williams"
     "Doe, J., S. Smith and T. Williams"
 
+See `Name <http://goo.gl/0UfDl#name>`_ in the CSL 1.0.1 specification.
+
 Ticket:
 
 - https://github.com/citation-style-language/schema/issues/97
@@ -342,12 +344,18 @@ To improve support for the localization of ordinals, such as "2nd" and "3rd",
 the number of ordinal terms has been expanded, and a ``match`` attribute has
 been introduced on ``cs:term``.
 
-See `Ordinal Suffixes <http://goo.gl/0UfDl#ordinal-suffixes>`_ in the CSL 1.0.1
-specification.
+In addition, a ``limit-day-ordinals-to-day-1`` attribute has been added for use
+on ``cs:style-options``. This localized option can be used to limit day ordinals
+to the first day of the month when rendering date variables, as is required for
+languages such as French.
 
-Ticket:
+See `Ordinal Suffixes <http://goo.gl/0UfDl#ordinal-suffixes>`_ and `Locale
+Options <http://goo.gl/0UfDl#locale-options>`_ in the CSL 1.0.1 specification.
+
+Tickets:
 
 - https://github.com/citation-style-language/schema/issues/66
+- https://github.com/citation-style-language/schema/issues/99
 
 Page Range Formats
 ------------------
@@ -375,7 +383,7 @@ The CSL specification has been largely rewritten for improved precision and
 clarity. There are several new paragraphs (e.g., `Terminology
 <http://goo.gl/0UfDl#terminology>`_ and `File Types
 <http://goo.gl/0UfDl#file-types>`_), and every `CSL variable
-<http://goo.gl/0UfDl#appendix-i-variables>`_ is now accompanied by a short
+<http://goo.gl/0UfDl#appendix-iv-variables>`_ is now accompanied by a short
 description.
 
 Ticket:
@@ -472,7 +480,7 @@ New Terms: "available at", "scale", and "version"
 Three new terms in the "miscellaneous" category are now available: "available
 at", "scale" (accompanying the new "scale" variable), and "version".
 
-See `Appendix III - Terms <http://goo.gl/0UfDl#appendix-iii-terms>`_ in the CSL
+See `Appendix II - Terms <http://goo.gl/0UfDl#appendix-ii-terms>`_ in the CSL
 1.0.1 specification.
 
 Tickets:
@@ -487,7 +495,7 @@ New Terms: "ordinal", "ordinal-00", and "ordinal-05" through "ordinal-99"
 The terms "ordinal", "ordinal-00", and "ordinal-05" through "ordinal-99" are now
 available to improve the `localization of ordinals`_.
 
-See `Appendix III - Terms <http://goo.gl/0UfDl#appendix-iii-terms>`_ in the CSL
+See `Appendix II - Terms <http://goo.gl/0UfDl#appendix-ii-terms>`_ in the CSL
 1.0.1 specification.
 
 Ticket:
@@ -509,6 +517,18 @@ specification.
 Tickets:
 
 - https://github.com/citation-style-language/schema/issues/56
+
+Retired Terms: "field" Categories
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+CSL 1.0 locale files contained terms for all the field categories (the values of
+the ``field`` attribute on ``cs:category``). While potentially useful (e.g. for
+localizing a style browsing UI), they have been removed to make the locale files
+more compact.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/100
 
 Text Case
 ---------
