@@ -503,7 +503,7 @@ Ticket:
 - https://github.com/citation-style-language/schema/issues/66
 
 New Term: "page-range-delimiter"
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The new term "page-range-delimiter" makes it possible to customize (and
 localize) the delimiter used for page ranges. The delimiter is only used when
