@@ -15,12 +15,12 @@ __ http://citationstyles.org/
 
 .. class:: info-version
 
-   2012-08-08
+   2012-09-03
 
 .. class:: version-links
 
     This version:
-        http://citationstyles.org/downloads/specification-csl101-20120615.html
+        http://citationstyles.org/downloads/specification-csl101-20120903.html
     Latest version:
         http://citationstyles.org/downloads/specification.html
     Previous versions: 
@@ -64,7 +64,7 @@ formatting of citations, notes and bibliographies, offering:
 -  Extensive support for style requirements
 -  Automatic style localization
 -  Infrastructure for style distribution and updating
--  Already over 2000 freely available styles (Creative Commons BY-SA licensed)
+-  Already over 2500 freely available styles (Creative Commons BY-SA licensed)
 
 For additional documentation, the CSL schema, styles, and locales, visit the CSL
 project home, `citationstyles.org <http://citationstyles.org>`_.
@@ -1299,8 +1299,8 @@ Et-al abbreviation, controlled via the ``et-al-...`` attributes (see `Name`_),
 can be further customized with the optional ``cs:et-al`` element, which must
 follow the ``cs:name`` element (if present). The ``term`` attribute may be set
 to either "et-al" (the default) or to "and others" to use either term. The
-`affixes`_ and `formatting`_ attributes may also be used, for example to
-italicize the "et-al" term:
+`formatting`_ attributes may also be used, for example to italicize the "et-al"
+term:
 
 .. sourcecode:: xml
 
@@ -2188,14 +2188,14 @@ Affixes
 The affixes attributes ``prefix`` and ``suffix`` may be set on ``cs:date``
 (except when ``cs:date`` defines a localized date format), ``cs:date-part``
 (except when the parent ``cs:date`` element calls a localized date format),
-``cs:et-al``, ``cs:group``, ``cs:label``, ``cs:layout``, ``cs:name``,
-``cs:name-part``, ``cs:names``, ``cs:number`` and ``cs:text``. The attribute
-value is either added before (``prefix``) or after (``suffix``) the output of
-the element carrying the attribute, but affixes are only rendered if the element
-produces output. With the exception of affixes set on ``cs:layout``, affixes are
-outside the scope of `formatting`_, `quotes`_, `strip-periods`_ and `text-case`_
-attributes set on the same element (as a workaround, these attributes take
-effect on affixes when set on a parent ``cs:group`` element).
+``cs:group``, ``cs:label``, ``cs:layout``, ``cs:name``, ``cs:name-part``,
+``cs:names``, ``cs:number`` and ``cs:text``. The attribute value is either added
+before (``prefix``) or after (``suffix``) the output of the element carrying the
+attribute, but affixes are only rendered if the element produces output. With
+the exception of affixes set on ``cs:layout``, affixes are outside the scope of
+`formatting`_, `quotes`_, `strip-periods`_ and `text-case`_ attributes set on
+the same element (as a workaround, these attributes take effect on affixes when
+set on a parent ``cs:group`` element).
 
 Delimiter
 ~~~~~~~~~

@@ -15,7 +15,7 @@ __ http://citationstyles.org/
 
 .. class:: info-version
 
-   2012-08-08
+   2012-09-03
 
 .. class:: contributors
 
@@ -163,6 +163,18 @@ Ticket:
 
 Names
 -----
+
+Affixes on ``cs:et-al``
+~~~~~~~~~~~~~~~~~~~~~~~
+
+The ``prefix`` and ``suffix`` attributes are no longer available on
+``cs:et-al``.
+
+See `Et-al <http://goo.gl/0UfDl#et-al>`_ in the CSL 1.0.1 specification.
+
+Ticket:
+
+- https://github.com/citation-style-language/schema/issues/101
 
 Affixes on Name-parts
 ~~~~~~~~~~~~~~~~~~~~~
