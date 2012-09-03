@@ -315,12 +315,12 @@ be used to specify how cites within a citation should be sorted (see
 
 .. sourcecode:: xml
 
-    <citation option="option-value">
+    <citation>
       <sort>
-        <!-- sort keys -->
+        <key variable="citation-number"/>
       </sort>
       <layout>
-        <!-- rendering elements -->
+        <text variable="citation-number"/>
       </layout>
     </citation>
 
@@ -344,12 +344,15 @@ a ``cs:bibliography`` element:
 
 .. sourcecode:: xml
 
-    <bibliography option="option-value">
+    <bibliography>
       <sort>
-        <!-- sort keys -->
+        <key macro="author"/>
       </sort>
       <layout>
-        <!-- rendering elements -->
+        <group delimiter=". ">
+          <text macro="author"/>
+          <text variable="title"/>
+        </group>
       </layout>
     </bibliography>
 
@@ -2241,7 +2244,7 @@ The allowed values:
             <text display="left-margin" variable="citation-number"
                 prefix="[" suffix="]"/>
             <group display="right-inline">
-              <!-- citation rendering elements -->
+              <!-- rendering elements -->
             </group>
           </layout>
         </bibliography>
@@ -2300,7 +2303,7 @@ The allowed values:
         <bibliography>
           <layout>
             <group display="block">
-              <!-- citation rendering elements -->
+              <!-- rendering elements -->
             </group>
             <text display="indent" variable="abstract" />
           </layout>
