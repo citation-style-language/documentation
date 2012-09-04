@@ -38,16 +38,10 @@ __ http://citationstyles.org/
 Introduction
 ------------
 
-**Temporary Notice:** the changes described in this document are still in flux,
-and only will become definite with the actual release of CSL 1.0.1. Please give
-feedback via the referenced issue ticket, the `xbiblio mailing list
-<https://lists.sourceforge.net/lists/listinfo/xbiblio-devel>`_, or the Zotero
-forums.
-
 These release notes describe the changes in Citation Style Language (CSL) 1.0.1
 as compared to the CSL 1.0 schema and specification (2010-05-30 update). Many of
-the new features listed here are described in more detail in the `draft CSL
-1.0.1 specification <http://goo.gl/0UfDl>`_.
+the new features listed here are described in more detail in the `CSL 1.0.1
+specification <http://citationstyles.org/downloads/specification.html>`_.
 
 With minor exceptions (discussed below), CSL 1.0.1 is a backwards compatible
 release, and valid CSL 1.0 styles and locale files will generally validate
@@ -71,8 +65,9 @@ As an added benefit, because cite grouping is now activated whenever the
 ``cite-group-delimiter`` or ``collapse`` attribute is used, it is now also
 possible to group cites without any cite collapsing taking place.
 
-See `Cite Grouping <http://goo.gl/0UfDl#cite-grouping>`_ in the CSL 1.0.1
-specification.
+See `Cite Grouping
+<http://citationstyles.org/downloads/specification.html#cite-grouping>`_ in the
+CSL 1.0.1 specification.
 
 Ticket:
 
@@ -94,8 +89,9 @@ The default value of the ``givenname-disambiguation-rule`` attribute has been
 changed from "all-names" to "by-cite". The latter is a less aggressive
 disambiguation method that is limited to ambiguous cites.
 
-See `Disambiguation <http://goo.gl/0UfDl#disambiguation>`_ in the CSL 1.0.1
-specification.
+See `Disambiguation
+<http://citationstyles.org/downloads/specification.html#disambiguation>`_ in the
+CSL 1.0.1 specification.
 
 Ticket:
 
@@ -120,8 +116,8 @@ Line Spacing
 
 The minimum value for the ``line-spacing`` attribute has been increased to "1".
 
-See `Whitespace <http://goo.gl/0UfDl#whitespace>`_ in the CSL 1.0.1
-specification.
+See `Whitespace <http://citationstyles.org/downloads/specification.html#whitespace>`_
+in the CSL 1.0.1 specification.
 
 Ticket:
 
@@ -154,8 +150,9 @@ example:
       ...
     </locale>
 
-See `Locale Files - Structure <http://goo.gl/0UfDl#locale-files-structure>`_ in
-the CSL 1.0.1 specification.
+See `Locale Files - Structure
+<http://citationstyles.org/downloads/specification.html#locale-files-structure>`_
+in the CSL 1.0.1 specification.
 
 Ticket:
 
@@ -170,7 +167,8 @@ Affixes on ``cs:et-al``
 The ``prefix`` and ``suffix`` attributes are no longer available on
 ``cs:et-al``.
 
-See `Et-al <http://goo.gl/0UfDl#et-al>`_ in the CSL 1.0.1 specification.
+See `Et-al <http://citationstyles.org/downloads/specification.html#et-al>`_ in
+the CSL 1.0.1 specification.
 
 Ticket:
 
@@ -182,8 +180,9 @@ Affixes on Name-parts
 The ``prefix`` and ``suffix`` attributes are now also allowed on
 ``cs:name-part``, allowing for name formatting like "DOE (Jane)".
 
-See `Name-part Formatting <http://goo.gl/0UfDl#name-part-formatting>`_ in the
-CSL 1.0.1 specification.
+See `Name-part Formatting
+<http://citationstyles.org/downloads/specification.html#name-part-formatting>`_
+in the CSL 1.0.1 specification.
 
 Ticket:
 
@@ -194,7 +193,8 @@ Ticket:
 
 The ``cs:name`` element is no longer a required child element of ``cs:names``.
 
-See `Name <http://goo.gl/0UfDl#name>`_ in the CSL 1.0.1 specification.
+See `Name <http://citationstyles.org/downloads/specification.html#name>`_ in the
+CSL 1.0.1 specification.
 
 Ticket:
 
@@ -208,7 +208,8 @@ when rendered as a result of et-al abbreviation. With the new optional
 ``delimiter-precedes-et-al`` attribute for ``cs:name``, the name delimiter can
 be used instead (e.g. "Doe, et al. 2000" instead of "Doe et al. 2000").
 
-See `Name <http://goo.gl/0UfDl#name>`_ in the CSL 1.0.1 specification.
+See `Name <http://citationstyles.org/downloads/specification.html#name>`_ in the
+CSL 1.0.1 specification.
 
 Ticket:
 
@@ -228,7 +229,8 @@ E.g.:
     "Doe, J., and T. Williams"
     "Doe, J., S. Smith and T. Williams"
 
-See `Name <http://goo.gl/0UfDl#name>`_ in the CSL 1.0.1 specification.
+See `Name <http://citationstyles.org/downloads/specification.html#name>`_ in the
+CSL 1.0.1 specification.
 
 Ticket:
 
@@ -250,8 +252,9 @@ the last name from the abbreviated name list, e.g.:
 The accompanying new ``names-use-last`` attribute for ``cs:key`` can be used to
 override the value of ``et-al-use-last`` for sorting.
 
-See `Name <http://goo.gl/0UfDl#name>`_ and `Sorting
-<http://goo.gl/0UfDl#sorting>`_ in the CSL 1.0.1 specification.
+See `Name <http://citationstyles.org/downloads/specification.html#name>`_ and
+`Sorting <http://citationstyles.org/downloads/specification.html#sorting>`_ in
+the CSL 1.0.1 specification.
 
 Ticket:
 
@@ -263,7 +266,8 @@ Independent ``names-min`` and ``names-use-first``
 The CSL schema now allows the ``names-min`` and ``names-use-first`` attributes
 to be set independently on ``cs:key``.
 
-See `Sorting <http://goo.gl/0UfDl#sorting>`_ in the CSL 1.0.1 specification.
+See `Sorting <http://citationstyles.org/downloads/specification.html#sorting>`_
+in the CSL 1.0.1 specification.
 
 Ticket:
 
@@ -286,7 +290,8 @@ to initials already present in the "long" form of names. For example,
 reformats the names "James T Kirk" and "Hunter S. Thompson" to "James T. Kirk"
 and "Hunter S. Thompson".
 
-See `Name <http://goo.gl/0UfDl#name>`_ in the CSL 1.0.1 specification.
+See `Name <http://citationstyles.org/downloads/specification.html#name>`_ in the
+CSL 1.0.1 specification.
 
 Ticket:
 
@@ -308,8 +313,9 @@ name list. For example, it is now possible to obtain bibliographic entries like:
     Doe, Stevens & Miller. 2003.
     ---, --- & ---. 2004.
 
-See `Reference Grouping <http://goo.gl/0UfDl#reference-grouping>`_ in the CSL
-1.0.1 specification.
+See `Reference Grouping
+<http://citationstyles.org/downloads/specification.html#reference-grouping>`_ in
+the CSL 1.0.1 specification.
 
 Ticket:
 
@@ -322,8 +328,9 @@ The rules for rendering number variables with ``cs:number`` have changed, as
 have the criteria for the "is-numeric" condition. Multiple numbers are now
 recognized as such (e.g., "2, 3 & 4"), as are numbers with affixes ("2E").
 
-See `Number <http://goo.gl/0UfDl#number>`_ and `Choose
-<http://goo.gl/0UfDl#choose>`_ in the CSL 1.0.1 specification.
+See `Number <http://citationstyles.org/downloads/specification.html#number>`_
+and `Choose <http://citationstyles.org/downloads/specification.html#choose>`_ in
+the CSL 1.0.1 specification.
 
 Ticket:
 
@@ -342,7 +349,8 @@ in French to "1er" and "premier" if the target noun is masculine (e.g., "1er
 janvier" for "January 1st"), and "1re" and "première" if the noun is feminine
 (e.g., "1re édition" for "1st edition").
 
-See `Gender-specific Ordinals <http://goo.gl/0UfDl#gender-specific-ordinals>`_
+See `Gender-specific Ordinals
+<http://citationstyles.org/downloads/specification.html#gender-specific-ordinals>`_
 in the CSL 1.0.1 specification.
 
 Ticket:
@@ -361,8 +369,11 @@ on ``cs:style-options``. This localized option can be used to limit day ordinals
 to the first day of the month when rendering date variables, as is required for
 languages such as French.
 
-See `Ordinal Suffixes <http://goo.gl/0UfDl#ordinal-suffixes>`_ and `Locale
-Options <http://goo.gl/0UfDl#locale-options>`_ in the CSL 1.0.1 specification.
+See `Ordinal Suffixes
+<http://citationstyles.org/downloads/specification.html#ordinal-suffixes>`_ and
+`Locale Options
+<http://citationstyles.org/downloads/specification.html#locale-options>`_ in the
+CSL 1.0.1 specification.
 
 Tickets:
 
@@ -381,8 +392,9 @@ the second number keeps at least two digits for numbers of 10 and up (e.g.
 Also, an error in the CSL 1.0 specification has been corrected: the "minimal"
 page range format was previously mistakenly listed as "minimum".
 
-See `Page Ranges <http://goo.gl/0UfDl#page-ranges>`_ in the CSL 1.0.1
-specification.
+See `Page Ranges
+<http://citationstyles.org/downloads/specification.html#page-ranges>`_ in the
+CSL 1.0.1 specification.
 
 Ticket:
 
@@ -393,10 +405,11 @@ Specification
 
 The CSL specification has been largely rewritten for improved precision and
 clarity. There are several new paragraphs (e.g., `Terminology
-<http://goo.gl/0UfDl#terminology>`_ and `File Types
-<http://goo.gl/0UfDl#file-types>`_), and every `CSL variable
-<http://goo.gl/0UfDl#appendix-iv-variables>`_ is now accompanied by a short
-description.
+<http://citationstyles.org/downloads/specification.html#terminology>`_ and `File
+Types <http://citationstyles.org/downloads/specification.html#file-types>`_),
+and every `CSL variable
+<http://citationstyles.org/downloads/specification.html#appendix-iv-variables>`_
+is now accompanied by a short description.
 
 Ticket:
 
@@ -411,8 +424,8 @@ style sets a style locale with ``default-locale``, this locale overrides the
 style locale of the independent parent style.
 
 See `The Root Element - cs:style
-<http://goo.gl/0UfDl#the-root-element-cs-style>`_ in the CSL 1.0.1
-specification.
+<http://citationstyles.org/downloads/specification.html#the-root-element-cs-style>`_
+in the CSL 1.0.1 specification.
 
 Ticket:
 
@@ -438,7 +451,8 @@ explictly specified, e.g.:
       <eissn>1098-5336</eissn>
     </info>
 
-See `Info <http://goo.gl/0UfDl#info>`_ in the CSL 1.0.1 specification.
+See `Info <http://citationstyles.org/downloads/specification.html#info>`_ in the
+CSL 1.0.1 specification.
 
 Ticket:
 
@@ -458,7 +472,8 @@ URI of the style license, e.g.:
       License</rights>
     </info>
 
-See `Info <http://goo.gl/0UfDl#info>`_ in the CSL 1.0.1 specification.
+See `Info <http://citationstyles.org/downloads/specification.html#info>`_ in the
+CSL 1.0.1 specification.
 
 Ticket:
 
@@ -477,7 +492,8 @@ style title, e.g.:
       <title-short>PNAS</title-short>
     </info>
 
-See `Info <http://goo.gl/0UfDl#info>`_ in the CSL 1.0.1 specification.
+See `Info <http://citationstyles.org/downloads/specification.html#info>`_ in the
+CSL 1.0.1 specification.
 
 Ticket:
 
@@ -492,8 +508,9 @@ New Terms: "available at", "scale", and "version"
 Three new terms in the "miscellaneous" category are now available: "available
 at", "scale" (accompanying the new "scale" variable), and "version".
 
-See `Appendix II - Terms <http://goo.gl/0UfDl#appendix-ii-terms>`_ in the CSL
-1.0.1 specification.
+See `Appendix II - Terms
+<http://citationstyles.org/downloads/specification.html#appendix-ii-terms>`_ in
+the CSL 1.0.1 specification.
 
 Tickets:
 
@@ -507,8 +524,9 @@ New Terms: "ordinal", "ordinal-00", and "ordinal-05" through "ordinal-99"
 The terms "ordinal", "ordinal-00", and "ordinal-05" through "ordinal-99" are now
 available to improve the `localization of ordinals`_.
 
-See `Appendix II - Terms <http://goo.gl/0UfDl#appendix-ii-terms>`_ in the CSL
-1.0.1 specification.
+See `Appendix II - Terms
+<http://citationstyles.org/downloads/specification.html#appendix-ii-terms>`_ in
+the CSL 1.0.1 specification.
 
 Ticket:
 
@@ -523,8 +541,9 @@ the ``page-range-format`` attribute is set. As this term did not exist in CSL
 1.0 and will be absent from CSL 1.0 locale files, it defaults to an en-dash if
 not defined.
 
-See `Page Ranges <http://goo.gl/0UfDl#page-ranges>`_ in the CSL 1.0.1
-specification.
+See `Page Ranges
+<http://citationstyles.org/downloads/specification.html#page-ranges>`_ in the
+CSL 1.0.1 specification.
 
 Tickets:
 
@@ -553,7 +572,9 @@ In addition, the ``text-case`` attribute can now also be used on ``cs:date``.
 This allows dates to be formatted as "April 2002" and "24 april 2002", where the
 month is only capitalized in the absence of a preceding day.
 
-See `Text-case <http://goo.gl/0UfDl#text-case>`_ in the CSL 1.0.1 specification.
+See `Text-case
+<http://citationstyles.org/downloads/specification.html#text-case>`_ in the CSL
+1.0.1 specification.
 
 Tickets:
 
@@ -576,7 +597,8 @@ It is no longer allowed to set the ``form`` attribute to "verb" or "verb-short"
 on standalone ``cs:label`` elements (these values are still allowed if
 ``cs:label`` is a child element of ``cs:names``).
 
-See `Label <http://goo.gl/0UfDl#label>`_ in the CSL 1.0.1 specification.
+See `Label <http://citationstyles.org/downloads/specification.html#label>`_ in
+the CSL 1.0.1 specification.
 
 Ticket:
 
@@ -589,7 +611,8 @@ While the specification already required ``cs:if`` and ``cs:else-if`` to carry
 at least one condition attribute, the CSL schema also validated cases where no
 conditions were specified. This has been corrected.
 
-See `Choose <http://goo.gl/0UfDl#choose>`_ in the CSL 1.0.1 specification.
+See `Choose <http://citationstyles.org/downloads/specification.html#choose>`_ in
+the CSL 1.0.1 specification.
 
 Ticket:
 
@@ -605,8 +628,9 @@ The CSL variables "chapter-number", "collection-number" and "number-of-pages",
 which previously were standard variables, have now become number variables. As a
 result, they can now be rendered through either ``cs:number`` or ``cs:text``.
 
-See `Number Variables <http://goo.gl/0UfDl#number-variables>`_ in the CSL 1.0.1
-specification.
+See `Number Variables
+<http://citationstyles.org/downloads/specification.html#number-variables>`_ in
+the CSL 1.0.1 specification.
 
 Ticket:
 
@@ -645,8 +669,9 @@ would give title listings like:
     Lord of the Rings
     Free Culture (Free Culture: The Nature and Future of Creativity)
 
-See `Standard Variables <http://goo.gl/0UfDl#standard-variables>`_ in the CSL
-1.0.1 specification.
+See `Standard Variables
+<http://citationstyles.org/downloads/specification.html#standard-variables>`_ in
+the CSL 1.0.1 specification.
 
 Ticket:
 
@@ -668,8 +693,11 @@ New CSL variables have been introduced:
 - "scale" - scale of e.g. a map
 - "source" - origin of the item (e.g., a library catalog or database)
 
-See `Standard Variables <http://goo.gl/0UfDl#standard-variables>`_ and `Name
-Variables <http://goo.gl/0UfDl#name-variables>`_ in the CSL 1.0.1 specification.
+See `Standard Variables
+<http://citationstyles.org/downloads/specification.html#standard-variables>`_
+and `Name Variables
+<http://citationstyles.org/downloads/specification.html#name-variables>`_ in the
+CSL 1.0.1 specification.
 
 Tickets:
 
@@ -709,7 +737,8 @@ unchanged). An example:
       </if>
     </choose>
 
-See `Choose <http://goo.gl/0UfDl#choose>`_ in the CSL 1.0.1 specification.
+See `Choose <http://citationstyles.org/downloads/specification.html#choose>`_ in
+the CSL 1.0.1 specification.
 
 Ticket:
 
@@ -722,8 +751,10 @@ The ``cs:label`` element, which previously could only be used for the "locator"
 and "page" variables (and name variables, when used as a child element of
 ``cs:names``), can now be used with any number variable.
 
-See `Label <http://goo.gl/0UfDl#label>`_ and `Number Variables
-<http://goo.gl/0UfDl#number-variables>`_ in the CSL 1.0.1 specification.
+See `Label <http://citationstyles.org/downloads/specification.html#label>`_ and
+`Number Variables
+<http://citationstyles.org/downloads/specification.html#number-variables>`_ in
+the CSL 1.0.1 specification.
 
 Ticket:
 
