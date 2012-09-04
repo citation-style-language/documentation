@@ -69,18 +69,10 @@ See `Cite Grouping
 <http://citationstyles.org/downloads/specification.html#cite-grouping>`_ in the
 CSL 1.0.1 specification.
 
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/52
-
 "dataset" Item Type
 -------------------
 
 A new item type, "dataset", is available to describe datasets.
-
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/74
 
 Disambiguation
 --------------
@@ -92,10 +84,6 @@ disambiguation method that is limited to ambiguous cites.
 See `Disambiguation
 <http://citationstyles.org/downloads/specification.html#disambiguation>`_ in the
 CSL 1.0.1 specification.
-
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/76
 
 Input Data Model
 ----------------
@@ -118,10 +106,6 @@ The minimum value for the ``line-spacing`` attribute has been increased to "1".
 
 See `Whitespace <http://citationstyles.org/downloads/specification.html#whitespace>`_
 in the CSL 1.0.1 specification.
-
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/73
 
 Locale Metadata
 ---------------
@@ -154,10 +138,6 @@ See `Locale Files - Structure
 <http://citationstyles.org/downloads/specification.html#locale-files-structure>`_
 in the CSL 1.0.1 specification.
 
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/10
-
 Names
 -----
 
@@ -170,10 +150,6 @@ The ``prefix`` and ``suffix`` attributes are no longer available on
 See `Et-al <http://citationstyles.org/downloads/specification.html#et-al>`_ in
 the CSL 1.0.1 specification.
 
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/101
-
 Affixes on Name-parts
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -184,10 +160,6 @@ See `Name-part Formatting
 <http://citationstyles.org/downloads/specification.html#name-part-formatting>`_
 in the CSL 1.0.1 specification.
 
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/47
-
 ``cs:name`` Optional
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -195,10 +167,6 @@ The ``cs:name`` element is no longer a required child element of ``cs:names``.
 
 See `Name <http://citationstyles.org/downloads/specification.html#name>`_ in the
 CSL 1.0.1 specification.
-
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/53
 
 ``delimiter-precedes-et-al``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -210,10 +178,6 @@ be used instead (e.g. "Doe, et al. 2000" instead of "Doe et al. 2000").
 
 See `Name <http://citationstyles.org/downloads/specification.html#name>`_ in the
 CSL 1.0.1 specification.
-
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/12
 
 ``delimiter-precedes-et-al`` and ``delimiter-precedes-last`` - "after-inverted-name"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -231,10 +195,6 @@ E.g.:
 
 See `Name <http://citationstyles.org/downloads/specification.html#name>`_ in the
 CSL 1.0.1 specification.
-
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/97
 
 Et-al Abbreviation with Last Name
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -256,10 +216,6 @@ See `Name <http://citationstyles.org/downloads/specification.html#name>`_ and
 `Sorting <http://citationstyles.org/downloads/specification.html#sorting>`_ in
 the CSL 1.0.1 specification.
 
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/11
-
 Independent ``names-min`` and ``names-use-first``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -268,10 +224,6 @@ to be set independently on ``cs:key``.
 
 See `Sorting <http://citationstyles.org/downloads/specification.html#sorting>`_
 in the CSL 1.0.1 specification.
-
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/82
 
 Normalizing Initials in "long" Form Names
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -293,10 +245,6 @@ and "Hunter S. Thompson".
 See `Name <http://citationstyles.org/downloads/specification.html#name>`_ in the
 CSL 1.0.1 specification.
 
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/60
-
 Subsequent Author Substitution
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -317,10 +265,6 @@ See `Reference Grouping
 <http://citationstyles.org/downloads/specification.html#reference-grouping>`_ in
 the CSL 1.0.1 specification.
 
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/4
-
 Numbers
 -------
 
@@ -331,10 +275,6 @@ recognized as such (e.g., "2, 3 & 4"), as are numbers with affixes ("2E").
 See `Number <http://citationstyles.org/downloads/specification.html#number>`_
 and `Choose <http://citationstyles.org/downloads/specification.html#choose>`_ in
 the CSL 1.0.1 specification.
-
-Ticket:
-
-- https://github.com/citation-style-language/documentation/issues/6
 
 Ordinals
 --------
@@ -352,10 +292,6 @@ janvier" for "January 1st"), and "1re" and "première" if the noun is feminine
 See `Gender-specific Ordinals
 <http://citationstyles.org/downloads/specification.html#gender-specific-ordinals>`_
 in the CSL 1.0.1 specification.
-
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/7
 
 Localization of Ordinals
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -375,11 +311,6 @@ See `Ordinal Suffixes
 <http://citationstyles.org/downloads/specification.html#locale-options>`_ in the
 CSL 1.0.1 specification.
 
-Tickets:
-
-- https://github.com/citation-style-language/schema/issues/66
-- https://github.com/citation-style-language/schema/issues/99
-
 Page Range Formats
 ------------------
 
@@ -396,10 +327,6 @@ See `Page Ranges
 <http://citationstyles.org/downloads/specification.html#page-ranges>`_ in the
 CSL 1.0.1 specification.
 
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/84
-
 Specification
 -------------
 
@@ -410,10 +337,6 @@ Types <http://citationstyles.org/downloads/specification.html#file-types>`_),
 and every `CSL variable
 <http://citationstyles.org/downloads/specification.html#appendix-iv-variables>`_
 is now accompanied by a short description.
-
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/3 (variable descriptions)
 
 Style Locale in Dependent Styles
 --------------------------------
@@ -426,10 +349,6 @@ style locale of the independent parent style.
 See `The Root Element - cs:style
 <http://citationstyles.org/downloads/specification.html#the-root-element-cs-style>`_
 in the CSL 1.0.1 specification.
-
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/91
 
 Style Metadata
 --------------
@@ -454,10 +373,6 @@ explictly specified, e.g.:
 See `Info <http://citationstyles.org/downloads/specification.html#info>`_ in the
 CSL 1.0.1 specification.
 
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/51
-
 License
 ~~~~~~~
 
@@ -475,10 +390,6 @@ URI of the style license, e.g.:
 See `Info <http://citationstyles.org/downloads/specification.html#info>`_ in the
 CSL 1.0.1 specification.
 
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/45
-
 Short Title
 ~~~~~~~~~~~
 
@@ -495,10 +406,6 @@ style title, e.g.:
 See `Info <http://citationstyles.org/downloads/specification.html#info>`_ in the
 CSL 1.0.1 specification.
 
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/83
-
 Terms
 -----
 
@@ -512,12 +419,6 @@ See `Appendix II - Terms
 <http://citationstyles.org/downloads/specification.html#appendix-ii-terms>`_ in
 the CSL 1.0.1 specification.
 
-Tickets:
-
-- https://github.com/citation-style-language/schema/issues/90 ("available at")
-- https://github.com/citation-style-language/schema/issues/14 ("scale")
-- https://github.com/citation-style-language/schema/issues/98 ("version")
-
 New Terms: "ordinal", "ordinal-00", and "ordinal-05" through "ordinal-99"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -527,10 +428,6 @@ available to improve the `localization of ordinals`_.
 See `Appendix II - Terms
 <http://citationstyles.org/downloads/specification.html#appendix-ii-terms>`_ in
 the CSL 1.0.1 specification.
-
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/66
 
 New Term: "page-range-delimiter"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -545,10 +442,6 @@ See `Page Ranges
 <http://citationstyles.org/downloads/specification.html#page-ranges>`_ in the
 CSL 1.0.1 specification.
 
-Tickets:
-
-- https://github.com/citation-style-language/schema/issues/56
-
 Retired Terms: "field" Categories
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -556,10 +449,6 @@ CSL 1.0 locale files contained terms for all the field categories (the values of
 the ``field`` attribute on ``cs:category``). While potentially useful (e.g. for
 localizing a style browsing UI), they have been removed to make the locale files
 more compact.
-
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/100
 
 Text Case
 ---------
@@ -575,11 +464,6 @@ month is only capitalized in the absence of a preceding day.
 See `Text-case
 <http://citationstyles.org/downloads/specification.html#text-case>`_ in the CSL
 1.0.1 specification.
-
-Tickets:
-
-- https://github.com/citation-style-language/documentation/issues/13
-- https://github.com/citation-style-language/schema/issues/55
 
 Validation
 ----------
@@ -600,10 +484,6 @@ on standalone ``cs:label`` elements (these values are still allowed if
 See `Label <http://citationstyles.org/downloads/specification.html#label>`_ in
 the CSL 1.0.1 specification.
 
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/71
-
 Tests for conditions on ``cs:if`` and ``cs:else-if``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -613,10 +493,6 @@ conditions were specified. This has been corrected.
 
 See `Choose <http://citationstyles.org/downloads/specification.html#choose>`_ in
 the CSL 1.0.1 specification.
-
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/77
 
 Variables
 ---------
@@ -631,10 +507,6 @@ result, they can now be rendered through either ``cs:number`` or ``cs:text``.
 See `Number Variables
 <http://citationstyles.org/downloads/specification.html#number-variables>`_ in
 the CSL 1.0.1 specification.
-
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/9
 
 New Variables: "container-title-short" and "title-short"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -673,10 +545,6 @@ See `Standard Variables
 <http://citationstyles.org/downloads/specification.html#standard-variables>`_ in
 the CSL 1.0.1 specification.
 
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/2
-
 New Variables: "dimensions", "director", "illustrator", "ISSN", "PMCID", "PMID", "scale", and "source"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -699,15 +567,6 @@ and `Name Variables
 <http://citationstyles.org/downloads/specification.html#name-variables>`_ in the
 CSL 1.0.1 specification.
 
-Tickets:
-
-- https://github.com/citation-style-language/schema/issues/14 ("dimensions", "scale")
-- https://github.com/citation-style-language/schema/issues/96 ("director")
-- https://github.com/citation-style-language/schema/issues/89 ("illustrator")
-- https://github.com/citation-style-language/schema/issues/86 ("ISSN")
-- https://github.com/citation-style-language/schema/issues/87 ("PMCID", "PMID")
-- https://github.com/citation-style-language/schema/issues/88 ("source")
-
 New Variables: "reviewed-author" and "reviewed-title"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -715,10 +574,6 @@ A new name variable, "reviewed-author", and a new standard variable,
 "reviewed-title", have been introduced for (basic) support of reviews (e.g.,
 book reviews). These variables should be made available on the
 "article-magazine", "article-newspaper", and "article-journal" item types.
-
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/5
 
 "sub verbo" Locator Type
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -740,10 +595,6 @@ unchanged). An example:
 See `Choose <http://citationstyles.org/downloads/specification.html#choose>`_ in
 the CSL 1.0.1 specification.
 
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/72
-
 Using ``cs:label`` with Number Variables
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -755,7 +606,3 @@ See `Label <http://citationstyles.org/downloads/specification.html#label>`_ and
 `Number Variables
 <http://citationstyles.org/downloads/specification.html#number-variables>`_ in
 the CSL 1.0.1 specification.
-
-Ticket:
-
-- https://github.com/citation-style-language/schema/issues/8
