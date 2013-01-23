@@ -227,13 +227,14 @@ independent styles, ``cs:info`` has the following child elements:
     and `ISSN-L <http://www.issn.org/2-22637-What-is-an-ISSN-L.php>`_
     identifiers, respectively.
 
-``cs:link`` (optional)
+``cs:link`` (optional for independent styles)
     May be used multiple times. ``cs:link`` must carry two attributes: ``href``,
     set to a URI (usually a URL), and ``rel``, whose value indicates how the URI
     relates to the style. The possible values of ``rel``:
     
-    -  "self" - style URI
-    -  "template" - URI of the style from which the current style is derived
+    -  "self" - style URI, can be provided for independent styles only
+    -  "template" - URI of the style from which the current style is derived, can be provided for independent styles only
+    -  "independent-parent" - URI of the independent parent of a dependent style, must be provided for dependent styles, must not be provided for independent styles
     -  "documentation - URI of style documentation
     
     The ``cs:link`` element may contain content describing the link.
