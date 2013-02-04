@@ -190,8 +190,9 @@ Info
 ^^^^
 
 The ``cs:info`` element contains the style's metadata. Its structure is based on
-the `Atom Syndication Format <http://tools.ietf.org/html/rfc4287>`_. In
-independent styles, ``cs:info`` has the following child elements:
+the `Atom Syndication Format <http://tools.ietf.org/html/rfc4287>`_.
+
+In independent styles, ``cs:info`` has the following child elements:
 
 ``cs:author`` and ``cs:contributor`` (optional)
     ``cs:author`` and ``cs:contributor``, used to respectively acknowledge style
@@ -234,7 +235,7 @@ independent styles, ``cs:info`` has the following child elements:
     
     -  "self" - style URI
     -  "template" - URI of the style from which the current style is derived
-    -  "documentation - URI of style documentation
+    -  "documentation" - URI of style documentation
     
     The ``cs:link`` element may contain content describing the link.
 
