@@ -287,8 +287,8 @@ An example of ``cs:info`` for an independent style:
       <link href="http://www.zotero.org/styles/style-title" rel="self"/>
       <author>
         <name>Author Name</name>
-        <email>name@domain.com</email>
-        <uri>http://www.domain.com/name</uri>
+        <email>name@example.org</email>
+        <uri>http://www.example.org/name</uri>
       </author>
       <category citation-format="author-date"/>
       <category field="zoology"/>
