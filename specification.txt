@@ -190,8 +190,9 @@ Info
 ^^^^
 
 The ``cs:info`` element contains the style's metadata. Its structure is based on
-the `Atom Syndication Format <http://tools.ietf.org/html/rfc4287>`_. In
-independent styles, ``cs:info`` has the following child elements:
+the `Atom Syndication Format <http://tools.ietf.org/html/rfc4287>`_.
+
+In independent styles, ``cs:info`` has the following child elements:
 
 ``cs:author`` and ``cs:contributor`` (optional)
     ``cs:author`` and ``cs:contributor``, used to respectively acknowledge style
@@ -234,7 +235,7 @@ independent styles, ``cs:info`` has the following child elements:
     
     -  "self" - style URI
     -  "template" - URI of the style from which the current style is derived
-    -  "documentation - URI of style documentation
+    -  "documentation" - URI of style documentation
     
     The ``cs:link`` element may contain content describing the link.
 
@@ -274,7 +275,7 @@ target.
 
 In `dependent styles`_, ``cs:link`` must be used with ``rel`` set to
 "independent-parent", with the URI of the independent parent style set on
-``href``. In addition, ``cs:link`` should not be used with ``rel`` set to
+``href``. In addition, ``cs:link`` may not be used with ``rel`` set to
 "template".
 
 An example of ``cs:info`` for an independent style:
@@ -285,6 +286,7 @@ An example of ``cs:info`` for an independent style:
       <title>Style Title</title>
       <id>http://www.zotero.org/styles/style-title</id>
       <link href="http://www.zotero.org/styles/style-title" rel="self"/>
+      <link href="http://www.example.org/instructions-to-authors#references" rel="documentation"/>
       <author>
         <name>Author Name</name>
         <email>name@example.org</email>
@@ -292,7 +294,7 @@ An example of ``cs:info`` for an independent style:
       </author>
       <category citation-format="author-date"/>
       <category field="zoology"/>
-      <updated>2008-10-29T21:01:24+00:00</updated>
+      <updated>2011-10-29T21:01:24+00:00</updated>
       <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work
       is licensed under a Creative Commons Attribution-Share Alike 3.0 Unported
       License</rights>
