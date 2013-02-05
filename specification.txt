@@ -1130,7 +1130,8 @@ The attributes affecting personal names:
 
 ``name-as-sort-order``
     Specifies that names should be displayed with the given name following the
-    family name (e.g. "John Doe" becomes "Doe, John"). The attribute has two possible values:
+    family name (e.g. "John Doe" becomes "Doe, John"). The attribute has two
+    possible values:
     
     - "first" - attribute only has an effect on the first name of each name
       variable 
@@ -1139,15 +1140,16 @@ The attributes affecting personal names:
     Note that even when ``name-as-sort-order`` changes the name-part order, the
     display order is not necessarily the same as the sorting order for names
     containing particles and suffixes (see `Name-part order`_). Also,
-    ``name-as-sort-order`` only affects names written in the latin or Cyrillic
-    alphabets. Names written in other alphabets (e.g. Asian scripts) are always
-    displayed with the family name preceding the given name.
+    ``name-as-sort-order`` only affects names written in scripts where the given
+    name typically precedes the family name, such as Latin, Greek, Cyrillic and
+    Arabic. In contrast, names written in Asian scripts are always displayed
+    with the family name preceding the given name.
 
 ``sort-separator``
     Sets the delimiter for name-parts that have switched positions as a result
     of ``name-as-sort-order``. The default value is ", " ("Doe, John"). As is
     the case for ``name-as-sort-order``, this attribute only affects names
-    written in the latin or Cyrillic alphabets.
+    in scripts that know "given-name family-name" order.
 
 ``cs:name`` may also carry `affixes`_ and `formatting`_ attributes.
 
@@ -1157,10 +1159,10 @@ Name-part Order
 The order of name-parts depends on the values of the ``form`` and
 ``name-as-sort-order`` attributes on ``cs:name``, the value of the
 ``demote-non-dropping-particle`` attribute on ``cs:style`` (one of the `global
-options`_), and the alphabet of the individual name. Note that the display and
+options`_), and the script of the individual name. Note that the display and
 sorting order of name-parts often differs. An overview of the possible orders:
 
-**Display order of latin/Cyrillic names**
+**Display order of names in "given-name family-name" scripts (Latin, etc.)**
 
 ----
 
@@ -1211,7 +1213,7 @@ sorting order of name-parts often differs. An overview of the possible orders:
 
 ----
 
-**Sorting order of latin/Cyrillic names**
+**Sorting order of names in "given-name family-name" scripts (Latin, etc.)**
 
 N.B. The sort keys are listed in descending order of priority.
 
@@ -1240,7 +1242,7 @@ N.B. The sort keys are listed in descending order of priority.
 
 ----
 
-**Display and sorting order of non-latin/Cyrillic names**
+**Display and sorting order of names in "family-name given-name" scripts (Chinese, etc.)**
 
 ----
 
