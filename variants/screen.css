@@ -1,3 +1,7 @@
+ul li {
+   margin-top: 0.5em;
+}
+
 p.fixed {
   position: fixed;
   top: 0;

@@ -201,10 +201,11 @@ special problem in several ways:
   between jurisdictions.
 
 * Media-neutral/universal cites, and possibly traditional cites as
-  well, need to treat the court and its division separately in some
+  well, need to treat the court and its division as a unit in some
   styles (composing a single "reporter" string that encapsulates
   both) and separately in others (with court and division rendered
-  in separate locations). This is a hard problem.
+  in separate locations). This is a hard problem with only messy
+  solutions if the data is spread across multiple fields.
 
 * Media-neutral/universal cites need to play well with traditional
   cites when rendered in parallel. About the only thing we can depend
@@ -226,7 +227,9 @@ Set court as ``original-author`` on legal_case
     of the court/division information as a unitary key
     in the Abbreviations mechanism, rendering the elements
     as a unit where the full string is recognized as a single key,
-    and as separate subunits only are recognized.
+    and as separate subunits when they are recognized individually.
+    Some changes in the processor will be needed to make this
+    work, but it's very doable.
 
 Extend implicit logic in parallel cite rendering
     To suppress court and subdivision details where they
@@ -247,7 +250,14 @@ Change the input order of institution name subelements
     If institution names are going to be heavily used in this way,
     this change really should be made.
 
+=============================================
+``skip-words`` attribute to ``style-options``
+=============================================
 
+Different languages treat different words as noise words when
+sorting or making text-case adjustments. The processor defines
+a default set of these words. The ``skip-words`` attribute
+permits the list to be reset for a given locale.
 
 ===============================================
 ``cs:number``, ``cs:label``, and ``is-numeric``
@@ -453,21 +463,25 @@ locator, using the following syntax:
 In this example, "123" is the value of the ``locator`` variable
 (a page or other pinpoint string), the ``|`` character marks the
 end of the pinpoint, and the ten-character string immediately
-following is a full date, which must be given as shown above,
+following is a full date. If supplied, dates must be given as shown above,
 zero-padded, in year-month-day order, and with no space between
 the date and the ``|`` character. Non-conforming strings following
-the ``|`` marker will be ignored.
+the ``|`` marker will be treated as a ``locator-revision`` variable.
 
-This variable is useful for citing looseleaf services commonly used in
-law, the dates of which vary depending on the page cited and the time
-at which the resource was referenced. This permits a single item in
-the calling application's database to represent the volume on the
-library shelf, the page date being optionally supplied by the user
-when citing into a document.
+The ``locator-revision`` variable consists of a string that is not a
+date, following the ``locator-date`` string (if any) as described
+above.  If supplied without a ``locator-date``, the
+``locator-revision`` string must be preceded by a ``|`` field
+separator character.  This variable can be used for version
+descriptions associated with some looseleaf services.
 
-The ``locator-revision`` variable consists of any trailing string
-following the ``locator-date`` (if any). It can be used for version
-descriptions associated with looseleaf services.
+These extensions are useful with looseleaf services, because the dates
+of the content in these services varies depending on the page cited
+and the time at which the resource was referenced. These extensions
+permit a single item in the calling application's database to
+represent the volume on the library shelf, the page date being
+optionally supplied by the user when citing into a document.
+
 
 ================================
 ``supplement`` term and variable
