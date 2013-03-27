@@ -15,14 +15,18 @@ __ http://citationstyles.org/
 
 .. class:: info-version
 
-   version 2011-05-24
+   2012-06-15
 
 .. class:: contributors
 
-   Author
-       * Rintze M. Zelle
+   **Author**
+   
+   Rintze M. Zelle, PhD
+   
+   |CCBYSA|_
 
-.. |link| image:: link.png
+.. |CCBYSA| image:: http://i.creativecommons.org/l/by-sa/3.0/80x15.png
+.. _CCBYSA: http://creativecommons.org/licenses/by-sa/3.0/
 
 ========
 
@@ -41,7 +45,7 @@ This primer is meant as a first introduction to the Citation Style Language
 (CSL), and is primarily aimed towards those wishing to create or modify CSL
 styles. Some knowledge about the structure of XML or HTML will come in handy. If
 you are completely unfamiliar with either markup language, check out one of the
-many online introductions to XML, e.g. W3Schools' |link| `XML Tutorial
+many online introductions to XML, e.g. W3Schools' `XML Tutorial
 <http://www.w3schools.com/xml/>`_.
 
 What is CSL?
@@ -67,7 +71,7 @@ localization support: with a single CSL style, you can format citations and
 bibliographies in any of several dozen different languages, using localized
 terms, date formats, and punctuation.
 
-.. [#] Over 1500 CSL styles are available at |link| http://www.zotero.org/styles
+.. [#] Over 2000 CSL styles are available at http://www.zotero.org/styles
 
 Different Classes of Citation Styles
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -157,7 +161,7 @@ A) **"in-text"** styles: when a work is cited, a *citation* is added to the
    
    .. [#] The illustrating sentence is from Gidijala L, Kiel JAKW, Douma RD,
           Seifar RM, van Gulik WM, et al. 2009 An Engineered Yeast Efficiently
-          Secreting Penicillin. PLoS ONE 4(12): e8317. |link|
+          Secreting Penicillin. PLoS ONE 4(12): e8317.
           `doi:10.1371/journal.pone.0008317
           <http://dx.doi.org/10.1371/journal.pone.0008317>`_
 
@@ -177,7 +181,7 @@ B) **"note"** styles: when a work is cited, a *marker* is added to the sentence.
     .. [*] Sir J. E. Tennent, 'Ceylon,' vol. ii. 1859, p. 107.
    
    .. [#] Example taken from Darwin 1882 The descent of man, and selection in 
-          relation to sex. London: John Murray. 2nd ed., 15th thousand, |link|
+          relation to sex. London: John Murray. 2nd ed., 15th thousand,
           http://darwin-online.org.uk/content/frameset?itemID=F955&viewtype=image&pageseq=1.
 
 In-text citations or foot and endnotes can reference multiple works. In CSL
@@ -462,7 +466,7 @@ After making changes to a CSL style, it is always a good idea to check whether
 the style still *validates*. Correct processing of CSL styles requires that CSL
 styles are both written in correct XML and conform to the CSL schema. Both these
 checks can be performed with an XML validator. Here we will use the
-online validator |link| `Validator.nu <http://validator.nu/>`_:
+online validator `Validator.nu <http://validator.nu/>`_:
 
 1. Select the style you want to validate. When using "Address" option, provide
    the URL to the style and check the "Be lax about HTTP Content-Type"
@@ -483,7 +487,7 @@ When we perform these steps, we get an error:
 
 .. |return| unicode:: U+21a9
 
-Oops! It seems that "doi" is an invalid variable name. After checking the |link|
+Oops! It seems that "doi" is an invalid variable name. After checking the
 `CSL 1.0 specification`_, we discover that the variable name should be
 capitalized ("DOI"). When we make this correction (``<text variable="DOI"
 prefix=", "/>``) and run the validation again, we get the message:
@@ -499,7 +503,7 @@ Learning More
 -------------
 
 You now know the purpose of the Citation Style Language and the basic structure
-of CSL 1.0 styles. To learn more, browse the documentation at |link|
+of CSL 1.0 styles. To learn more, browse the documentation at
 `CitationStyles.org <http://citationstyles.org>`_. In addition to reading the
-|link| `CSL 1.0 specification`_, it can be very useful to take a look at other
+`CSL 1.0 specification`_, it can be very useful to take a look at other
 CSL 1.0 styles.
