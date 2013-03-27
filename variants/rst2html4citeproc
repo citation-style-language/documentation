@@ -15,10 +15,21 @@ except:
 
 
 from docutils import nodes, parsers
-from docutils.parsers.rst import states, directives
-from docutils.core import publish_cmdline, default_description
-
+from docutils.parsers.rst import states, directives, roles
+from docutils.core import publish_cmdline_to_binary, default_description
 import tempfile, os
+from docutils.writers.html4css1 import HTMLTranslator
+from docutils.writers.html4css1 import Writer
+
+
+class smallcaps (nodes.Inline, nodes.TextElement): pass
+def role_smallcaps(name, rawtext, text, lineno, inliner,
+            options={}, content=[]):
+    newnode = smallcaps(rawsource=rawtext, text=text)
+    return [newnode], []
+roles.register_local_role("small-caps", role_smallcaps)
+
+
 
 def getCommandOutput2(command):
     child_stdin, child_stdout = os.popen2(command)
@@ -90,11 +101,28 @@ code_block.content = 1
 directives.register_directive( 'sourcecode', code_block )
 
 
+class MyHTMLTranslator(HTMLTranslator):
+
+    def __init__(self, document):
+        HTMLTranslator.__init__(self, document)
+
+    def visit_smallcaps(self, node):
+        self.body.append(self.starttag(node, 'span style="font-variant:small-caps;"',''))
+
+    def depart_smallcaps(self, node):
+        self.body.append('</span>')
+
+
+class MyWriter(Writer):
+
+    def __init__(self):
+        Writer.__init__(self)
+        self.translator_class = MyHTMLTranslator
+
 description = ('Generates (X)HTML documents from standalone reStructuredText '
-               'sources.  ' + default_description)
+               'sources.')
+writer = MyWriter()
+output = publish_cmdline_to_binary(reader=None, reader_name="standalone", writer=writer,
+    settings_overrides={'sectnum_depth':0}, description=description)
+print ""
 
-# Command line
-publish_cmdline(writer_name='html', description=description)
-
-#from pygments.formatters import HtmlFormatter
-#print HtmlFormatter().get_style_defs()
