@@ -296,8 +296,7 @@ An example of ``cs:info`` for an independent style:
       <category field="zoology"/>
       <updated>2011-10-29T21:01:24+00:00</updated>
       <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work
-      is licensed under a Creative Commons Attribution-Share Alike 3.0 Unported
-      License</rights>
+      is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
     </info>
 
 Citation
