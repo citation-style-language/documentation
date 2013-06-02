@@ -2046,9 +2046,9 @@ The ``cs:sort`` element must contain one or more ``cs:key`` child elements. The
 sort key, set as an attribute on ``cs:key``, must be a variable (see `Appendix
 IV - Variables`_) or macro name. For each ``cs:key`` element, the sort direction
 can be set to either "ascending" (default) or "descending" with the ``sort``
-attribute. The attributes ``names-min``, ``names-use-first``, and
-``names-use-last`` may be used to override the values of the corresponding
-``et-al-min``/``et-al-subsequent-min``,
+attribute. Sorting is case-insensitive. The attributes ``names-min``,
+``names-use-first``, and ``names-use-last`` may be used to override the values
+of the corresponding ``et-al-min``/``et-al-subsequent-min``,
 ``et-al-use-first``/``et-al-subsequent-use-first`` and ``et-al-use-last``
 attributes, and affect all names generated via macros called by ``cs:key``.
 
