@@ -628,6 +628,11 @@ terms "ordinal-01" through "ordinal-04", the original CSL 1.0 scheme is used:
 for those ending on a 3 (except those ending on 13) and "ordinal-04" for all
 other numbers.
 
+The "ordinal" term, and "ordinal-00" through "ordinal-99" terms, behave
+differently from other terms when it comes to `Locale Fallback`. Whereas other
+terms can be (re)defined individually, (re)defining any of the ordinal terms
+through ``cs:locale`` replaces all previously defined ordinal terms.
+
 Gender-specific Ordinals
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
