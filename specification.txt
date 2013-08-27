@@ -1549,20 +1549,22 @@ Citation-specific Options
 Disambiguation
 ''''''''''''''
 
-A cite is ambiguous when it matches multiple bibliographic entries [#]_. There
-are four methods available to eliminate such ambiguity:
+A cite is ambiguous when it matches multiple bibliographic entries [#]_. Four
+methods are available to eliminate such ambiguity, which are always tried in the
+following order:
 
 1. Show more names
 2. Expand names (adding initials or full given names)
-3. Add a year-suffix
-4. Render the cite with the ``disambiguate`` attribute of ``cs:choose``
+3. Render the cite with the ``disambiguate`` attribute of ``cs:choose``
    conditions testing "true"
+4. Add a year-suffix
 
-Method 2 can also be used for global *name disambiguation*, covering all cites,
-ambiguous and unambiguous, throughout the document.
+Method 2 can also be used for the separate purpose of global *name
+disambiguation*, covering both ambiguous and unambiguous cites throughout the
+document.
 
-Disambiguation methods are activated with the following optional attributes, and
-are always tried in the listed order:
+The four disambiguation methods can be individually activated with the following
+optional attributes:
 
 ``disambiguate-add-names`` [Step (1)]
     If set to "true" ("false" is the default), names that would otherwise be
@@ -1646,23 +1648,23 @@ are always tried in the listed order:
             affected, and disambiguation stops after the first name that
             eliminates cite ambiguity.
 
-``disambiguate-add-year-suffix`` [Step (3)]
+A disambiguation attempt can also be made by rendering ambiguous cites with the
+``disambiguate`` condition testing "true" [Step (3)] (see `Choose`_).
+
+``disambiguate-add-year-suffix`` [Step (4)]
     If set to "true" ("false" is the default), an alphabetic year-suffix is
     added to ambiguous cites (e.g. "Doe 2007, Doe 2007" becomes "Doe 2007a, Doe
-    2007b") and to their corresponding bibliographic entries. The assignment of
-    the year-suffixes follows the order of the bibliographies entries, and
-    additional letters are used once "z" is reached ("z", "aa", "ab", ..., "az",
-    "ba", etc.). By default the year-suffix is appended to the cite, and to the
-    first year rendered through ``cs:date`` in the bibliographic entry, but its
-    location can be controlled by explicitly rendering the "year-suffix"
-    variable using ``cs:text``. If "year-suffix" is rendered through ``cs:text``
-    in the scope of ``cs:citation``, it is suppressed for ``cs:bibliography``,
-    unless it is also rendered through ``cs:text`` in the scope of
-    ``cs:bibliography``, and vice versa.
-
-If ambiguous cites remain after applying the selected disambiguation methods
-described above, a final disambiguation attempt is made by rendering these cites
-with the ``disambiguate`` condition testing "true" [Step (4)] (see `Choose`_).
+    2007b") and to their corresponding bibliographic entries. This
+    disambiguation method is always successful. The assignment of year-suffixes
+    follows the order of the bibliographies entries, and additional letters are
+    used once "z" is reached ("z", "aa", "ab", ..., "az", "ba", etc.). By
+    default the year-suffix is appended to the cite, and to the first year
+    rendered through ``cs:date`` in the bibliographic entry, but its location
+    can be controlled by explicitly rendering the "year-suffix" variable using
+    ``cs:text``. If "year-suffix" is rendered through ``cs:text`` in the scope
+    of ``cs:citation``, it is suppressed for ``cs:bibliography``, unless it is
+    also rendered through ``cs:text`` in the scope of ``cs:bibliography``, and
+    vice versa.
 
 .. [#] The presence of uncited entries in the bibliography can make cites in the
        document ambiguous. To make sure such cites are disambiguated, the CSL
