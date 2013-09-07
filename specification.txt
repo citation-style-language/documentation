@@ -1570,7 +1570,9 @@ optional attributes:
     If set to "true" ("false" is the default), names that would otherwise be
     hidden as a result of et-al abbreviation are added one by one to all members
     of a set of ambiguous cites, until no more cites in the set can be
-    disambiguated by adding names.
+    disambiguated by adding names. If necessary to render the disambiguating
+    names in the bibliography, et-al abbreviation in the corresponding
+    bibliographic entries is similarly relaxed for the affected name variables.
 
 ``disambiguate-add-givenname`` [Step (2)]
     If set to "true" ("false" is the default), ambiguous names (names that are
@@ -1591,7 +1593,10 @@ optional attributes:
     hidden as a result of et-al abbreviation after the disambiguation attempt of
     ``disambiguate-add-names`` are added one by one to all members of a set of
     ambiguous cites, until no more cites in the set can be disambiguated by
-    adding expanded names.
+    adding expanded names. If necessary to render the disambiguating expanded
+    names in the bibliography, the affected name variables in the corresponding
+    bibliographic entries are similarly subjected to name expansion and
+    relaxation of et-al abbreviation.
 
 ``givenname-disambiguation-rule``
     Specifies a) whether the purpose of name expansion is limited to
@@ -1654,7 +1659,7 @@ A disambiguation attempt can also be made by rendering ambiguous cites with the
 ``disambiguate-add-year-suffix`` [Step (4)]
     If set to "true" ("false" is the default), an alphabetic year-suffix is
     added to ambiguous cites (e.g. "Doe 2007, Doe 2007" becomes "Doe 2007a, Doe
-    2007b") and to their corresponding bibliographic entries. This
+    2007b") and to their corresponding bibliographic entries. This final
     disambiguation method is always successful. The assignment of year-suffixes
     follows the order of the bibliographies entries, and additional letters are
     used once "z" is reached ("z", "aa", "ab", ..., "az", "ba", etc.). By
@@ -1666,10 +1671,10 @@ A disambiguation attempt can also be made by rendering ambiguous cites with the
     also rendered through ``cs:text`` in the scope of ``cs:bibliography``, and
     vice versa.
 
-.. [#] The presence of uncited entries in the bibliography can make cites in the
+.. [#] Including uncited entries in the bibliography can make cites in the
        document ambiguous. To make sure such cites are disambiguated, the CSL
-       processor should create hidden "ghost" cites for all uncited
-       bibliographic entries and include them in the disambiguation process.
+       processor should include (invisible) cites for such uncited bibliographic
+       entries in the disambiguation process.
 
 Cite Grouping
 '''''''''''''
