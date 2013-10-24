@@ -17,7 +17,7 @@ __ http://citationstylist.org/
 
 .. class:: date
 
-   September 29, 2011
+   October 23, 2013
 
 .. |citeproc-js| replace:: ``citeproc-js``
 .. |link| image:: link.png
@@ -38,217 +38,20 @@ __ http://citationstylist.org/
 Overview
 ========
 
-This document is a companion to the `CSL 1.0 Specification`__, for use by
-style authors making use of extensions to the CSL language available
-in citeproc-js.
+This document is a companion to the `CSL 1.0.1 Specification`__. It is aimed at
+style authors, and covers extensions to the CSL language implemented in
+``citeproc-js`` and enabled in Multilingual Zotero (MLZ).
 
 __ http://citationstyles.org/downloads/specification.html
-
-======================================
-Numeric variables |(approved for CSL)|
-======================================
-
-In CSL 1.0, ``chapter-number``, ``collection-number`` and ``number-of-pages``
-were not classified as number variables, and so could not be used with the
-``cs:number``.
-
-The development version of the official CSL schema has been amended
-to add ``chapter-number``, ``collection-number`` and ``number-of-pages``
-to the set of numeric variables. See
-`the list of number variables`__ in the CSL Specification source text.
-
-__ https://github.com/citation-style-language/documentation/blob/master/specification.txt#L2266
-
-The MLZ extended schema reflects this change.
-
-======================================================
-``cs:label`` for number variables |(approved for CSL)|
-======================================================
-
-In CSL 1.0, only a subset of the cs:number variables were available for use
-with the ``cs:label`` element, which provides automatic pluralization
-of terms when the corresponding variable is plural.
-
-The development version of the CSL schema permits all number variables to be used
-with ``cs:label``. See `the description of the label element`__
-in the CSL Specification source text.
-
-__ https://github.com/citation-style-language/documentation/blob/master/specification.txt#L1204
-
-
-The MLZ extended schema reflects this change.
 
 =============================================
 ``title-short`` variable |(approved for CSL)|
 =============================================
 
-In CSL 1.0, titles can be rendered in short form, using the
-value (in Zotero) of the "Short title" field. However, there is
-no means of testing whether a short title exists for an item,
-which is required by some styles.
+In CSL 1.0.1, the ``title-short`` variable can be used in lieu of ``title`` with
+``form="short"``, and can be tested as a variable via ``cs:if`` and ``cs:else-if``.
 
-This has been remedied in the development version of the official CSL
-schema by the addition of a ``title-short`` variable, which may be
-tested for on ``cs:if`` and ``cs:else-if`` elements.
-
-The MLZ extended schema reflects this change.
-
-
-========================================================
-Gender-sensitive ordinals and terms |(approved for CSL)|
-========================================================
-
-CSL 1.0 provided for localization of ordinal terms, but
-without support for languages in which the form of an
-ordinal varies according to the gender of its subject.
-
-The development version of the CSL schema has been amended
-to provide such support. The official description can be
-found in the draft source of the `CSL Specification`__, but
-a brief description is provided below.
-
-__ https://github.com/citation-style-language/documentation/blob/master/specification.txt
-
-For languages in which the ordinal suffix to days varies
-according to the subject to which they apply the MLZ extended
-schema offers a means of linking the gender form of terms to the
-gender of the related noun. An example:
-
-.. sourcecode:: xml
-
-   <term name="edition" gender="feminine">
-     <single>édition</single>
-     <multiple>éditions</multiple>
-   </term>
-
-   <term name="month-01" gender="masculine">janvier</term>
-
-   <term name="ordinal-01" gender-form="feminine">re</term>
-   <term name="ordinal-01" gender-form="masculine">er</term>
-   <term name="ordinal-02">e</term>
-   <term name="ordinal-03">e</term>
-   <term name="ordinal-04">e</term>
-
-With the code above set in the locale, rendering the date
-"2001-01-01" in its full text form might yield (the ordinal set on
-the day is in this case is controlled by the month, a logic
-built into the processor):
-
-   1er janvier 2001
-
-If an labeled edition number is rendered as an ordinal, it
-might come out something like this:
-
-   1re éd.
-
-==========================================================
-``subsequent-author-substitute-rule`` |(approved for CSL)|
-==========================================================
-
-The ``subsequent-author-substitute-rule`` attribute is a companion
-for use with ``subsequent-author-substitute``. Use it to control
-the method of applying the substitution slug:
-
-``complete-all`` (default)
-   if the names in a name variable completely match
-   those in the preceding bibliographic entry, the value of subsequent-author-
-   substitute substitutes once for all rendered names.
-
-``complete-each``
-   if the names in a name variable completely match those in
-   the preceding bibliographic entry, the value of subsequent-author-substitute
-   substitutes for each rendered name.
-
-``partial-each``
-   if one or more names in a name variable match those in the
-   preceding bibliographic entry, the value of subsequent-author-substitute
-   substitutes for each rendered matching name (matching starts with the first
-   author, and continues up to the first mismatch)..
-
-``partial-first``
-   same matching behavior as above, but substitution is limited to the
-   first name in the nameset.
-
-================================================================
-Courts, institutions, and media-neutral citations (working note)
-================================================================
-
-There are some extremely thorny issues in the citation of legal cases
-that are going to treat us to some jarring speed bumps.
-
-Parallel citations have been addressed in ``citeproc-js`` already, and
-the code for handling them is reasonably well tested. When we turn
-this code loose on a range of real-world content and styles, however,
-we may find that it needs some turning. The code and the processing
-flow is arcane and difficult, because it involves implicit logic based
-on field content across successive cites, with on-the-fly removal of
-elements *after* the cites have been cast into the processor's
-internal representation, and before serialization. If the tuning work
-gets too hairy, I may be in for some refactoring of this code to make
-it more transparent. So I'm fastening my seat belt for that prospect
-as I write this.
-
-"Media-neutral" or "universal" citations are a new thing in legal
-citation styles, that are catching on in multiple jurisdictions and
-citation styles.  Their essential characteristic is not actually media
-neutrality, but the fact that they represent text published directly
-by the court, without a private publishing intermediary.  They are a
-special problem in several ways:
-
-* Different formatting may be required for such cites, so we need to
-  cast them as input data in a way that allows them to be readily
-  identified without relying on field-testing tricks that may vary
-  between jurisdictions.
-
-* Media-neutral/universal cites, and possibly traditional cites as
-  well, need to treat the court and its division as a unit in some
-  styles (composing a single "reporter" string that encapsulates
-  both) and separately in others (with court and division rendered
-  in separate locations). This is a hard problem with only messy
-  solutions if the data is spread across multiple fields.
-
-* Media-neutral/universal cites need to play well with traditional
-  cites when rendered in parallel. About the only thing we can depend
-  on is that the media-neutral/universal cite appears as the first
-  in the series.
-
-* The presence of a media-neutral/universal cite at the start of
-  a parallel series can affect the content that appears in subsequent
-  traditional cites in the series. The known case of this is the court
-  division in OSCOLA cites, documented at section 2.1.1 of the OSCOLA
-  guide.
-
-Looking at the issues, I'm thinking that something like the following
-might allow us to thread the needle on this:
-
-Set court as ``original-author`` on legal_case
-    If courts themselves are set as institutional authors on
-    the legal_case type, we can leverage the representation
-    of the court/division information as a unitary key
-    in the Abbreviations mechanism, rendering the elements
-    as a unit where the full string is recognized as a single key,
-    and as separate subunits when they are recognized individually.
-    Some changes in the processor will be needed to make this
-    work, but it's very doable.
-
-Extend implicit logic in parallel cite rendering
-    To suppress court and subdivision details where they
-    are supplied by an initial media-neutral/universal cite,
-    the parallel citation collapsing mechanism would need to be
-    tuned with hard-wired logic for that purpose. I don't much like
-    this, but it is limited to the ``legal_case`` and ``statute`` types,
-    and should be controllable.
-
-Change the input order of institution name subelements
-    Currently institutions are *big-endian*, with the largest institutional
-    subunit at the end. This is inconvenient in a UI that sorts on the
-    raw name string, since the subelements are not clustered together.
-    For useability in simple systems, this ordering should be reversed.
-    The marginal pain of this is relatively small at this point, since
-    \(a) Zotero does not yet recognize institutional authors, and (b)
-    we've just very recently changed the subfield delimiter to ``|`` anyway.
-    If institution names are going to be heavily used in this way,
-    this change really should be made.
+The content of the ``title-short`` 
 
 =============================================
 ``skip-words`` attribute to ``style-options``
@@ -299,9 +102,6 @@ following:
        </if>
      </choose>
    <group>
-
-
-
 
 --------------
 Single numbers
@@ -405,53 +205,9 @@ Input                       Output
 ``12nd edn. (reissue)``     12th edn. (reissue)
 =======================     ============================
 
-=======================
-``cs:generate`` element
-=======================
-
-In lists of authorities, cross-reference entries are often provided
-for the convenience of the reader. The ``cs:generate`` element can
-be used to add cross-reference or supplementary entries derived from
-the content of an item. As currently implemented in ``citeproc-js``,
-``cs:generate`` accepts the following attributes:
-
-type-map [required]
-      This attribute takes a list of exactly two item types. The first-listed
-      type is a constraint; no item will be generated unless the item type
-      of the input item matches the first-listed type. The second-listed
-      type is a mapping. The generated item will carry this type. The first
-      and the second listed types may be identical, but both must be provided.
-
-trigger-fields [currently required]
-      The trigger-fields attribute is list of fields that must be present on
-      the item for an entry to be generated. The fields in the list will be
-      removed from the item before rendering.
-
-Other transforms rules to complement ``trigger-fields`` may be introduced
-in future. At that time, ``trigger-fields`` will become one option within
-the set of rule attributes.
-
-Any ``cs:generate`` elements must appear as the first elements with
-the ``cs:layout`` under ``cs:bibliography``. An example follows:
-
-.. sourcecode:: xml
-
-   <bibliography>
-     <sort>
-      <key macro="sortkey"/>
-     </sort>
-     <layout>
-       <generate type-map="legal_case legal_case" trigger-fields="title-short"/>
-       <text macro="oscola-bib-case"/>
-     </layout>
-   </bibliography>
-
-The construct above is used in the draft OSCOLA legal style to generate
-cross-reference entries for shipping and trademark cases.
-
-===================================================
-``locator-date`` and ``locator-revision`` variables
-===================================================
+====================================================
+Variables: ``locator-date`` and ``locator-revision``
+====================================================
 
 The variable "locator-date" is parsed out from the user-supplied
 locator, using the following syntax:
@@ -483,36 +239,14 @@ represent the volume on the library shelf, the page date being
 optionally supplied by the user when citing into a document.
 
 
-================================
-``supplement`` term and variable
-================================
+=================================
+Term and variable: ``supplement``
+=================================
 
 The ``supplement`` variable and associated locale term is useful
 for secondary sources that are regularly updated between fresh
 editions. Such fine-grained updates are found in secondary
 legal publications.
-
-========================
-``periodical`` item type
-========================
-
-The ``periodical`` item type can be used to refer to a serial
-as a whole. It should also be used for the looseleaf services 
-found in legal publishing, as these often require citation formatting
-that differs from that of a book.
-
-==================================
-``minimal-two`` page collapse rule
-==================================
-
-The OSCOLA style (and possibly others), requires that numeric ranges
-be collapsed to the minimum number of characters that express the
-range unambiguously, but always with at least two characters (if present)
-on the second element of the range. This rule for use with the 
-``page-range-format`` attribute implements that behavior.
-
-When in force, this rule is also applied to year ranges.
-
 
 =======================================
 Extensible number term |(multilingual)|
@@ -539,62 +273,13 @@ Zotero client, but because it is not useful without the
 ``jurisdiction`` variable, and that can currently be defined only in
 the multilingual version.
 
-
-========================
-Extensible ordinal terms
-========================
-
-Some languages have different rules than English for applying
-ordinal suffixes to numbers. CSL 1.0 provides only four ordinal
-suffix terms, as required for English ("st", "nd", "rd" and "th").
-To support ordinal suffixes for a larger set of languages, a more
-flexible algorithm is being prepared, which will be controlled
-by providing extended ordinal terms with appropriate values in
-the locale.
-
-This functionality comes to us from Sylvester Keil, author of the
-``citeproc-ruby`` CSL processor. It has not yet been implemented
-in ``citeproc-js``, but the extended schema has been amended to
-open the way for its introduction. When it is ready, documentation
-on its use will be provided here (or in the official CSL schema,
-if extended ordinal terms are approved for adoption).
-
-===============================
-Normalized punctuation in names
-===============================
-
-CSL 1.0 normalizes punctuation when names are converted to
-initials with the ``initialize-with`` attribute on ``cs:name``.
-When initials are present in names that are *not* converted to
-initials, however, normalization is not performed.
-
-The MLZ extended schema fills this gap by providing an ``initialize``
-attribute that may be set to either true or false. The default is
-true (perform initialization). When set to false, names are not
-converted to initials, but initials that already exist in the full
-form of the name are normalized, using the value set on ``initialize-with``.
-For example:
-
-.. sourcecode:: xml
-
-   <names variable="author">
-     <name initialize="false" initialize-with="."/>
-   </names>
-
-With the code above, a name entered with "Marcus Ts. J W" as the
-given name, and "Blaggyfuddle" as the family name will be rendered
-as:
-
-   Marcus Ts. J.W. Blaggyfuddle
-
-
 ==================================
 Institution names |(multilingual)|
 ==================================
 
 Institutional names are fundamentally different in structure from
 personal names. CSL provides quite robust support for the presentation
-and sorting of personal names, but in CSL 1.0, institutional names
+and sorting of personal names, but in CSL 1.0.1, institutional names
 have just one fixed form, and are otherwise treated the same as
 personal names in a list of creators.
 
@@ -625,7 +310,7 @@ variables, although all parties listed are equally authors of the
 resource.  Example 6 can be produced in CSL 0.8, but examples 7 and 8
 cannot.
 
-The MLZ extensions to CSL 1.0 provide a cs:institution element, which
+The MLZ extensions to CSL 1.0.1 provide a cs:institution element, which
 can be used to produce any of the above forms, without interfering
 with the formatting of ordinary personal names. The extension is
 always enabled in |citeproc-js|, but the application calling
@@ -753,7 +438,7 @@ the list of samples at the top of this section:
     </names>
 
 ~~~~~~~~~~~~~~~~~~~~~~~~
-Attribute: reverse-order
+Attribute: ``reverse-order``
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 By convention, organizational names are rendered in "big endian"
@@ -773,7 +458,7 @@ provide for cases such as example 2 in the list of samples, a
     </names>
     
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Attribute: institution-parts
+Attribute: ``institution-parts``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     
 The components of organization names are normally rendered in their
@@ -793,7 +478,7 @@ if it is available, and falling back to the long form otherwise.
 __ http://onezotero.org/tools/
 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Element: cs:institution-part
+Element: ``cs:institution-part``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 One or more cs:institution-part elements can be used to control the
@@ -803,7 +488,7 @@ formatting of the target name element, specified (as on ``cs:name-part``)
 with a required ``name`` attribute.
 
 ~~~~~~~~~~~~~~~~~~~
-Attribute: if-short
+Attribute: ``if-short``
 ~~~~~~~~~~~~~~~~~~~
 
 In example 3, the parentheses should be included only if a short form
@@ -823,7 +508,7 @@ following CSL would render example 3 in the list of samples:
     </names>
 
 ^^^^^^^^^^^^^
-Element: with
+Element: ``cs:with``
 ^^^^^^^^^^^^^
 
 In rendered output, unaffiliated personal names are joined to a
@@ -857,15 +542,15 @@ above would look like this in CSL:
     </names>
 
 
-===========================================
-``jurisdiction`` condition |(multilingual)|
-===========================================
+===========================
+Condition: ``jurisdiction``
+===========================
 
 When citing primary legal resources, the form of citation is often
 fixed, for ease of reference, by the issuing 
 jurisdiction\ |mdash|\  "jurisdiction" referring in this case to
 international rule-making bodies as well as national governments.
-CSL 1.0 provides a ``jurisdiction`` variable, but it cannot be used
+CSL 1.0.1 provides a ``jurisdiction`` variable, but it cannot be used
 because Zotero does not currently have a corresponding field.
 
 The particular requirement for this variable is that it be tested in a
@@ -878,9 +563,9 @@ content that would be damaging to CSL as a language.
 
 The solution is in two parts, described below.
 
------------------
-Jurisdiction list
------------------
+----------------------------
+Jurisdiction constraint list
+----------------------------
 
 First, the CSL schema has been extended
 in accordance with the proposed `URN:LEX`_ standard for a uniform
@@ -900,9 +585,9 @@ cited) organizations.
 
 .. _`ISO 3166 Alpha-2`: http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
 
--------------------------
-The ``jurisdiction`` test
--------------------------
+---------------
+Controlled list
+---------------
 
 The list of acceptable jurisdictions codes is coupled with an
 extension of the ``cs:if`` and ``cs:else-if`` elements, providing a
@@ -1035,7 +720,7 @@ An item with four authors, however, will render as follows:
    Title of the Article / A.I. Stamou et al.
 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-``suppress-min`` with a value of ``0``
+Attribute value: ``suppress-min`` with a value of ``0``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 When set to zero, the ``suppress-min`` attribute is specific to the
@@ -1096,3 +781,99 @@ render like this:
 
    Doe, J, Roe, J, Noakes, R, et al. (11 co-authors)
 
+==================
+Complex Conditions
+==================
+
+=======================
+Attribute value: "nand"
+=======================
+
+===========================
+Space characters in affixes
+===========================
+
+=========================
+Attribute: ``label-form``
+=========================
+
+======================================================
+Attribute value: ``locator`` on ``cs:number@variable``
+======================================================
+
+==================================
+Attribute: ``leading-noise-words``
+==================================
+
+=================================================
+Attribute: ``subgroup-delimiter`` on ``cs:group``
+=================================================
+
+===============================================================
+Attribute: ``subgroup-delimiter-precedes-last`` on ``cs:group``
+===============================================================
+
+===================
+Attribute: ``oops``
+===================
+
+
+==========================
+Attribute: ``is-parallel``
+==========================
+
+================================
+Attribute: ``year-range-format``
+================================
+
+======================
+Condition: ``context``
+======================
+
+Condition: ``has-year-only``
+
+Condition: ``has-to-month-or-season``
+
+Condition: ``has-day``
+
+Condition: ``page``
+
+Condition: ``subjurisdictions``
+
+Condition: ``locale``
+
+Attribute value: ``normal`` on ``text-case``
+
+Variable: ``volume-title``
+
+Variable: ``hereinafter``
+
+Variable: ``authority``
+
+Variable: ``container-title-short``
+
+Variable: ``page`` and ``page-first``
+
+Term: ``unpublished``
+
+Locators: ``Chapter``, ``Section``, ``article``, ``rule``, ``title``
+
+Item type: ``classic``
+
+Item type: ``gazette``
+
+Item type: ``regulation``
+
+Item type: ``video``
+
+Item type: ``hearing``
+
+Name variable: ``dummy``
+
+Date variable: ``available-date``
+
+Date variable: ``locator-date``
+
+Date variable: ``publication-date``
+
+Number variable: ``publication-number``
