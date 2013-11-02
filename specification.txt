@@ -1566,15 +1566,13 @@ document.
 The four disambiguation methods can be individually activated with the following
 optional attributes:
 
-``disambiguate-add-names`` [Step (1)]
+``disambiguate-add-names`` [Method (1)]
     If set to "true" ("false" is the default), names that would otherwise be
     hidden as a result of et-al abbreviation are added one by one to all members
     of a set of ambiguous cites, until no more cites in the set can be
-    disambiguated by adding names. If necessary to render the disambiguating
-    names in the bibliography, et-al abbreviation in the corresponding
-    bibliographic entries is similarly relaxed for the affected name variables.
+    disambiguated by adding names.
 
-``disambiguate-add-givenname`` [Step (2)]
+``disambiguate-add-givenname`` [Method (2)]
     If set to "true" ("false" is the default), ambiguous names (names that are
     identical in their "short" or initialized "long" form, but differ when
     initials are added or the full given name is shown) are expanded. Name
@@ -1593,10 +1591,7 @@ optional attributes:
     hidden as a result of et-al abbreviation after the disambiguation attempt of
     ``disambiguate-add-names`` are added one by one to all members of a set of
     ambiguous cites, until no more cites in the set can be disambiguated by
-    adding expanded names. If necessary to render the disambiguating expanded
-    names in the bibliography, the affected name variables in the corresponding
-    bibliographic entries are similarly subjected to name expansion and
-    relaxation of et-al abbreviation.
+    adding expanded names.
 
 ``givenname-disambiguation-rule``
     Specifies a) whether the purpose of name expansion is limited to
@@ -1653,10 +1648,21 @@ optional attributes:
             affected, and disambiguation stops after the first name that
             eliminates cite ambiguity.
 
-A disambiguation attempt can also be made by rendering ambiguous cites with the
-``disambiguate`` condition testing "true" [Step (3)] (see `Choose`_).
+In the description of disambiguation methods (1) and (2) above, we assumed that
+each (disambiguated) cite has an unambiguous link to its bibliographic entry. To
+assure that each cite does in fact uniquely identify its entry in the
+bibliography, detail that distinguishes cites (such as names, initials, and full
+given names) must be shown in the corresponding bibliography entries. If this is
+not the case, disambiguation methods (1) and (2) also act on all members of a
+set of ambiguously cited bibliographic entries, until no more entries in the set
+can be unambiguously cited by adding (expanded) names. Each method only takes
+effect on the involved bibliographic entries after it has been used to
+disambiguate cites.
 
-``disambiguate-add-year-suffix`` [Step (4)]
+A disambiguation attempt can also be made by rendering ambiguous cites with the
+``disambiguate`` condition testing "true" [Method (3)] (see `Choose`_).
+
+``disambiguate-add-year-suffix`` [Method (4)]
     If set to "true" ("false" is the default), an alphabetic year-suffix is
     added to ambiguous cites (e.g. "Doe 2007, Doe 2007" becomes "Doe 2007a, Doe
     2007b") and to their corresponding bibliographic entries. This final
