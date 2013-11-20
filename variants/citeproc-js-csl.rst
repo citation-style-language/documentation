@@ -7,9 +7,10 @@
 
 .. class:: fixed
 
-   `CitationStylist.org`__
+   .. raw:: html
 
-__ http://citationstylist.org/
+      <p><a href="http://citationstyles.org" target="_blank">citationstyles.org</a></p>
+      <p><a href="http://citationstylist.org"><span style="font-variant:small-caps;">CitationStylist.org</span></a></p>
 
 .. class:: contributors
 
@@ -33,15 +34,6 @@ __ http://citationstylist.org/
 
 ========
 
-.. contents:: Table of Contents
-
-========
-
-
-%%%%%%%%
-Overview
-%%%%%%%%
-
 This supplement is a companion to the `CSL 1.0.1 Specification`__. It is aimed at
 style authors, and documents differences between official CSL and the
 CSL-m schema recognised by Multilingual Zotero.
@@ -62,6 +54,13 @@ The changes are of two types:
 
 __ http://citationstyles.org/downloads/specification.html
 
+========
+
+.. contents:: Table of Contents
+
+========
+
+
 %%%%%%%%%%
 Item Types
 %%%%%%%%%%
@@ -70,33 +69,151 @@ Item Types
 ``classic`` |(extension)|
 =========================
 
+Use the ``classic`` type for sources commonly cited within a field. Cites
+of this type do not appear in the bibliography, and can be completely
+reformatted to a compact, style-specific form using the **Classic**
+abbreviation list in the **Abbreviation Filter**.
+
+When a short form is supplied for a **Classic** item, the ``title``
+variable is suppressed, and the short form entirely replaces the
+``author`` variable. When a volume number or other details are included,
+these can be rendered on either side of the composite abbreviated form,
+but not of course within it.
+
+.. sourcecode:: xml
+
+   <choose>
+     <if type="classic">
+       <group delimiter=" ">
+         <text variable="volume"/>
+         <group delimiter=", ">
+           <names variable="author"/>
+           <text variable="title"/>
+         </group>
+     </if>
+   </choose>
+
+
+
 =========================
 ``gazette`` |(extension)|
 =========================
+
+Use the ``gazette`` type for instruments published through an official
+gazette. Typical use cases would be cites to amending acts, to the initial
+version of legislation, or to orders and other instruments that are not
+available from other official sources. For consolidated acts or codified
+statutes or regulations, use the ``legislation`` (MLZ **Statute**) or
+``regulation`` (MLZ **Regulation**) types instead.
+
+.. sourcecode:: xml
+
+   <choose>
+     <if type="gazette">
+        <text macro="gazette-mac"/>
+     </if>
+   </choose>
+
+The format of gazette citations may vary among jurisdictions. Test the
+``jurisdiction`` variable (see below) to discriminate between citation
+forms.
 
 =========================
 ``hearing`` |(extension)|
 =========================
 
+The ``hearing`` type is primarily intended for transcripts of official
+hearings by government committees and the like (other documents
+produced by a committee should be cast as the ``report`` type
+instead). The body conducting a hearing is set in the ``authority``
+variable (**Legis. Body** in MLZ).
+
+.. sourcecode:: xml
+
+   <choose>
+     <if type="hearing">
+        <text macro="hearing-mac"/>
+     </if>
+   </choose>
+   
 ============================
 ``regulation`` |(extension)|
 ============================
 
+Use the ``regulation`` type for administrative orders at all
+levels of government.
+
+.. sourcecode:: xml
+
+   <choose>
+     <if type="regulation">
+        <text macro="hearing-mac"/>
+     </if>
+   </choose>
+   
 =======================
 ``video`` |(extension)|
 =======================
 
+The ``video`` type is appropriate for video works that are not
+disseminated through an access-restricted distribution channel. For
+example, content hosted on YouTube should be set to ``video``, while
+a DVD release of "The Wizard of Oz" should be set to ``motion_picture``.
+
+.. sourcecode:: xml
+
+   <choose>
+     <if type="regulation">
+        <text macro="hearing-mac"/>
+     </if>
+   </choose>
+   
 %%%%%%%%
 Elements
 %%%%%%%%
 
-==============================================
-``conditions`` and ``condition`` |(extension)|
-==============================================
+===============================
+``cs:conditions`` |(extension)|
+===============================
 
-=============================
-``institution`` |(extension)|
-=============================
+Condition statements in official CSL take a single "match" attribute,
+which determines how the tests will be combined. The match attribute
+value (``all``, ``any``, ``none``) applies to all tests within the
+statement: grouping of tests with separate match values is not possible.
+To simplify the coding of complex styles, CSL-m introduces an optional
+alternative syntax for condition statements.
+
+The alternative syntax may be applied to ``cs:if`` or ``cs:else-if``
+elements (the "parent node" in this description). The parent node must
+have no attributes, and a single ``cs:conditions`` node as its first
+child element. The ``cs:conditions`` node must have one or more
+``cs:condition`` children. The ``cs:condition`` children each define a
+conditional statement with attributes specified in the CSL 1.0.1
+schema and in this Supplement. The ``cs:condition`` statements are
+joined according to a mandatory "match" attribute on
+``cs:conditions``.
+
+Note that CSL-m adds a "nand" match value (true if at least one of
+the tests or condition statements to which it applies returns false),
+in addition to "all", "any", and "none".
+
+.. sourcecode:: xml
+
+   <choose>
+     <if>
+       <conditions match="any">
+         <condition type="chapter"/>
+         <condition variable="container-title collection-title" match="nand"/>
+       </conditions>
+       <text macro="some-chapter-mac"/>
+     </if>
+   </choose>
+   
+
+
+================================
+``cs:institution`` |(extension)|
+================================
 
 Institutional names are fundamentally different in structure from
 personal names. CSL provides quite robust support for the presentation
@@ -363,9 +480,9 @@ above would look like this in CSL:
     </names>
 
 
-=========================
-``layout`` |(extension)|
-=========================
+===========================
+``cs:layout`` |(extension)|
+===========================
 
 In publishing outside of the English language domain, citation
 of foreign material in the style of the originating language
@@ -414,17 +531,83 @@ Variables
 ``authority`` |(modification)|
 ==============================
 
-===================================
-``available-date`` |(modification)|
-===================================
+In CSL-m, ``authority`` is handled as an institutional creator, not as an ordinary
+variable. It is rendered with a ``cs:names`` element.
+
+.. sourcecode:: xml
+
+   <macro name="std-authority-child">
+     <names variable="authority">
+       <name suppress-min="0"/>
+       <institution institution-parts="short" use-first="1"/>
+     </names>
+   </macro>
+
+The use of ``suppress-min="0"`` in this example is documented below
+under `suppress-min (extension)`_.
+
+================================
+``available-date`` |(extension)|
+================================
+
+The CSL-m ``available-date`` variable is appropriate for the date on
+which a ``treaty`` was made available for signing.
+
+.. sourcecode:: xml
+
+   <group delimiter=" ">
+     <text value="opened for signature" font-style="italic"/>
+     <date date-parts="year-month-day" form="text" variable="available-date"/>
+   </group>
+
 
 =======================
 ``dummy`` |(extension)|
 =======================
 
+The ``dummy`` name variable is always empty. Use it to force *all*
+name variables called through a ``cs:names`` node to render through
+``cs:substitute``, and so suppress whichever is chosen for rendering
+to be suppressed through the remainder of the current cite.
+
+.. sourcecode:: xml
+
+   <names variable="dummy">
+     <name/>
+     <label/>
+     <substitute>
+       <names variable="author"/>
+       <names variable="editor"/>
+     </substitute>
+   </names>
+
+
 =============================
 ``hereinafter`` |(extension)|
 =============================
+
+The ``hereinafter`` variable is a backreference form specific to a
+particular item and style. In MLZ, it can be set only through the
+Abbreviation Filter. The role of the variable in a given cite
+(i.e. whether it provides an alternative title, an acronym or a
+more complete formatted citation) depends on the the style and context.
+
+.. sourcecode:: xml
+
+   <choose>
+     <if match="all" type="bill gazette legislation" variable="hereinafter">
+       <text variable="hereinafter"/>
+     </if>
+     <else>
+       <text variable="title" form="short"/>
+     </else>
+   </choose>
+
+The Abbreviation Filter will offer an entry in the ``hereinafter`` list
+for every item cited in the document. It is not necessary to use ``form="short"``
+on the ``cs:text`` node that renders the variable.
+
+
 =======================================================
 ``locator-date`` and ``locator-revision`` |(extension)|
 =======================================================
@@ -463,87 +646,318 @@ optionally supplied by the user when citing into a document.
 ``page`` and ``page-first`` |(modification)|
 ============================================
 
+The ``page`` and ``page-first`` variables are numeric in CSL-m.
+The validator requires that they be rendered with ``cs:number``.
+
+.. sourcecode:: xml
+
+   <number variable="page"/>
+
 ==================================
 ``publication-date`` |(extension)|
 ==================================
+
+CSL-m adds a ``publication-date`` variable to the language schema.
+It is available on the ``gazette``, ``legal_case``, ``legislation``, ``patent``
+and ``regulation`` types, and provides the date on which the instrument
+was published in the given reporter. On the ``patent`` type, it represents
+the date on which the patent was published for opposition (applicable only in certain
+jurisdictions).
+
+.. sourcecode:: xml
+
+   <date date-parts="year-month-day" form="text" variable="publication-date"/>
+
 
 ====================================
 ``publication-number`` |(extension)|
 ====================================
 
+The ``publication-number`` variable is available on the ``patent`` type,
+and provides the number assigned to a patent published for opposition.
+It is a numeric variable, and validation requires that it be rendered
+with ``cs:number``.
+
+.. sourcecode:: xml
+
+   <number variable="publication-number"/>
+
 ============================
 ``supplement`` |(extension)|
 ============================
 
-The ``supplement`` variable and associated locale term is useful
+The ``supplement`` variable and its associated locale term are useful
 for secondary sources that are regularly updated between fresh
-editions. Such fine-grained updates are found in secondary
-legal publications.
+editions. Such fine-grained updates are found in secondary legal
+publications. Although a supplement may be identified by number or by
+name, ``supplement`` is a numeric variable, and validation requires
+that it be rendered with ``cs:number``.
 
-================================
-``title-short`` |(modification)|
-================================
+.. sourcecode:: xml
 
-In CSL 1.0.1, the ``title-short`` variable can be used in lieu of ``title`` with
-``form="short"``, and can be tested as a variable via ``cs:if`` and ``cs:else-if``.
-
-The content of the ``title-short`` 
-
+   <choose>
+     <if is-numeric="supplement">
+       <group delimiter=" ">
+         <label variable="supplement"/>
+         <number variable="supplement"/>
+       </group>
+     </if>
+     <else>
+       <number variable="supplement"/>
+     </else>
+   </choose>
 
 ==============================
 ``volume-title`` |(extension)|
 ==============================
+
+The ``volume-title`` variable is available on items of the ``book``
+and ``chapter`` type. Use it to identify the name of a volume within a
+larger work known by an umbrella title (which may in turn be a part of
+a publisher's series, described  by ``collection-title``).
+
+.. sourcecode:: xml
+
+   <text variable="volume-title"/>
 
 
 %%%%%%%%%%
 Attributes
 %%%%%%%%%%
 
+=====================================
+``default-locale-sort`` |(extension)|
+=====================================
+
+Use the ``default-locale-sort`` attribute on the ``cs:style`` node to specify
+the language collation to govern sorting behaviour. The sort locale has no effect
+on the language of standard terms and labels.
+
+.. sourcecode:: xml
+
+   <style xmlns="http://purl.org/net/xbiblio/csl" 
+          class="note" version="1.1mlz1"
+          default-locale="en-US"
+          default-locale-sort="zh-TW">
+
+
+If this attribute is *not* set, the sort locale is aligned with the default locale
+of the style or processor instance.
+
+=================================
+``form="short"`` |(modification)|
+=================================
+
+In CSL 1.0.1, rendering the ``title`` variable with the attribute
+``form="short"`` produces the same result with any item type: if the
+``title-short`` variable has a value, that it used; otherwise the
+``title`` variable is rendered as a fallback.
+
+In CSL-m, on the ``legal_case`` type only, the ``form="short"``
+attribute does not attempt to render ``title-short``, but instead
+renders the ``title`` variable, transformed by the Abbreviation Filter
+if an entry for it exists in the list there. This permits the
+application of style-specific abbreviation rules, as required by
+law-specific style guides such as *The Bluebook: A Uniform System
+of Citation*.
+
+.. sourcecode:: xml
+
+   <text variable="title" form="short"/>
+
 =============================
 ``is-parallel`` |(extension)|
 =============================
+
+Set on a ``cs:group`` node, the ``is-parallel`` attribute includes
+or suppresses the content of the group node depending on whether it
+is rendered in a trailing parallel cite. Four values are recognised
+on the attribute:
+
+``false``
+    Renders when the cite is not one of a series of
+    parallel cites.
+
+``true``
+    Renders when the cite is one of several cites in a parallel
+    series.
+
+``master``
+    Renders when the cite is one of several in a parallel series,
+    and is the first cite in the series.
+
+``servant``
+    Renders when the cite is one of several in a parallel series,
+    and is *not* the first in the series.
+
+
+.. sourcecode:: xml
+
+   <group delimiter=" ">
+     <text font-style="italic" value="supra"/>
+     <text value="note"/>
+     <text variable="first-reference-note-number"/>
+   </group>
+   <group delimiter=" " is-parallel="false">
+     <text value="at"/>
+     <number variable="page-first"/>
+   </group>
+   <group delimiter=" " is-parallel="true">
+     <number variable="volume"/>
+     <text variable="container-title"/>
+     <number variable="page-first"/>
+   </group>
 
 ============================
 ``label-form`` |(extension)|
 ============================
 
+The ``label-form`` attribute can be used on ``cs:number`` and on
+``cs:text`` with the ``macro`` attribute. It accepts the same arguments
+as the ``form`` attribute for localised terms: ``long``, ``verb``,
+``short``, ``verb-short`` and ``symbol``. Its effect is to override
+the ``form`` attribute applicable to terms called via the parent ``cs:text``
+or ``cs:number`` node. This can be useful where macros are copied
+across styles that require different label forms.
+
+.. sourcecode:: xml
+
+   <text macro="locator-mac" label-form="symbol"/>
+
 =====================================
 ``leading-noise-words`` |(extension)|
 =====================================
+
+When set on a ``cs:style-options`` node in a locale file or in a
+style, the ``leading-noise-words`` attribute takes a comma-delimited
+list of words as its argument.
+
+When a list is set, the same attribute on a ``cs:text`` node with
+``variable="title" takes an argument of ``demote`` or ``drop``.  With
+the ``demote`` attribute, noise words at the start of the field are
+rendered after the remainder of the title field, delimited by a comma.
+With the ``drop`` attribute the leading noise words are simply
+removed.
+
+.. sourcecode:: xml
+
+   <style-options leading-noise-words="a,an,the"/>
+
+and
+
+.. sourcecode:: xml
+
+   <text variable="title" leading-noise-words="demote"/>
+
 
 ============================
 ``locator`` |(modification)|
 ============================
 
-======================
-``nand`` |(extension)|
-======================
+In CSL-m, ``locator`` is a numeric variable. Validation requires that
+it be rendered with ``cs:number``.
+
+.. sourcecode:: xml
+
+   <number variable="locator"/>
+
+==============================
+``match="nand"`` |(extension)|
+==============================
+
+With the ``nand`` argument to the ``match`` attribute, a node test is true
+if at least one of the tests it invokes is false.
+
+.. sourcecode:: xml
+
+   <choose>
+     <if variable="volume issue" match="nand">
+       <text macro="volume-issue-mac"/>
+     </if>
+   </choose>
 
 ======================
 ``oops`` |(extension)|
 ======================
 
+This attribute is deprecated. Use ``is-parallel`` instead.
 
 ============================================
 ``prefix`` and ``suffix`` |(modification)|
 ============================================
 
+Ordinary affixes in CSL-m are subject to a restriction: a ``prefix``
+attribute may not begin with a space, and a ``suffix`` attribute may
+not end with a space. Affixes on ``cs:label`` within a ``cs:names``
+element, and affixes within the scope of a ``cs:date`` element are
+not subject to this constraint.
+
+The purpose of this requirement is to assure that styles are incapable
+of rendering cites with stray punctuation or multiple spaces. Where
+spaces are required between elements, they should be applied using
+a ``delimiter`` attribute value on a ``cs:group`` element.
+
+.. sourcecode:: xml
+
+   <group delimiter=", ">
+     <number variable="volume"/>
+     <text variable="container-title"/>
+   </group>
+
 ============================
 ``skip-words`` |(extension)|
 ============================
 
-Different languages treat different words as noise words when
-sorting or making text-case adjustments. The processor defines
-a default set of these words. The ``skip-words`` attribute
-permits the list to be reset for a given locale.
+The processor carries a list of prepositions and other terms that
+will not be capitalised when rendering a field with ``text-case="title"``.
+Within a locale, the ``skip-words`` attribute on ``cs:style-options``
+can be used to replace this list of terms with another. The attribute
+value should be a comma-delimited list of words or phrases.
 
-====================================
-``subgroup-delimiter`` |(extension)|
-====================================
+.. sourcecode:: xml
 
-==================================================
-``subgroup-delimiter-precedes-last`` |(extension)|
-==================================================
+   <style-options skip-list="a,an,the,or,and,over,under"/>
+
+====================================================================================
+``subgroup-delimiter``,  ``subgroup-delimiter-precedes-last``, ``and`` |(extension)|
+====================================================================================
+
+The ``subgroup-delimiter`` attribute is a field-parsing hack coded
+into the ``citeproc-js`` processor, enabled when the processor is run
+in CSL-m mode. In a group containing *only* ``cs:text`` elements rendering
+the ``publisher`` and ``publisher-place`` variables, the processor will
+split the content of both fields on a semicolon. If the length of the
+resulting list objects is equal, each ``publisher``/``publisher-place``
+pair will be joined with the ``delimiter`` string set on the enclosing
+``cs:group`` element. The composed pairs are then joined using the
+``subgroup-delimiter`` value.
+
+The ``subgroup-delimiter-precedes-last`` attribute controls the use of
+the delimiter between the last and the penultimate pair in the same
+manner as ``delimiter-precedes-last`` on a ``cs:name`` element. The
+``and`` attribute with an argument of ``text`` or ``symbol`` may be
+used on the ``cs:group`` element to join the final item with the
+specified term.
+
+.. sourcecode:: xml
+
+   <group delimiter=" " subgroup-delimiter=", "
+          subgroup-delimiter-precedes-last="always">
+     <text variable="publisher"/>
+     <text variable="publisher-place"/>
+   </group>
+
+or
+
+.. sourcecode:: xml
+
+   <group delimiter=" " subgroup-delimiter=", " 
+          subgroup-delimiter-precedes-last="never"
+          and="symbol">
+     <text variable="publisher"/>
+     <text variable="publisher-place"/>
+   </group>
+
 
 
 ==============================
@@ -667,9 +1081,21 @@ render like this:
 
    Doe, J, Roe, J, Noakes, R, et al. (11 co-authors)
 
-====================================
-``text-case`` [normal] |(extension)|
-====================================
+===========================
+``text-case`` |(extension)|
+===========================
+
+CSL-m adds a ``normal`` argument to the possible values of
+``text-case``.  This is mainly useful when rendering a ``cs:number``
+element in the scope of an element that applies a ``text-case``
+transform, to prevent text content in the rendered variable from being
+affected by the transform.
+
+(The need for this attribute value is open to question.)
+
+.. sourcecode:: xml
+
+   <number variable="number" text-case="normal"/>
 
 ===================================
 ``year-range-format`` |(extension)|
@@ -682,6 +1108,12 @@ Conditions
 =========================
 ``context`` |(extension)|
 =========================
+
+
+
+=======================
+``genre`` |(extension)|
+=======================
 
 =========================
 ``has-day`` |(extension)|
@@ -712,7 +1144,7 @@ varied according to the issuing jurisdiction. Testing of field content
 is contrary to the design of CSL, so the approach of the MLZ extended
 CSL schema is strictly circumscribed to address this particular need,
 without opening a door to uncontrolled general testing of field
-content that would be damaging to CSL as a language.
+content.
 
 The solution is in two parts, described below.
 
@@ -720,7 +1152,7 @@ The solution is in two parts, described below.
 Jurisdiction constraint list
 ----------------------------
 
-First, the CSL schema has been extended
+The CSL schema has been extended
 in accordance with the proposed `URN:LEX`_ standard for a uniform
 resource namespace for sources of law. This standard provides a
 concept of "jurisdiction" that suits the requirements of legal
@@ -738,6 +1170,8 @@ cited) organizations.
 
 .. _`ISO 3166 Alpha-2`: http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
 
+
+
 ---------------
 Controlled list
 ---------------
@@ -752,19 +1186,6 @@ When the ``jurisdiction`` test attribute is used, its value is
 compared with the value of the ``jurisdiction`` variable on the item
 being processed. If the values match, the test returns true, otherwise
 false.
-
-The lack of a Zotero field for ``jurisdiction`` can be overcome in the
-short term only in the multilingual client, using a workaround that is
-not permitted in the official Zotero release. To set a value of ``ru``
-on the CSL ``jurisdiction`` variable in the multilingual client, enter
-the following in the **Extra** field of the item:
-
-   {:jurisdiction: ru}
-
-The field value will be extracted by the processor and set on the
-item. If the style uses the **Extra** field for other purposes (which
-is generally something to avoid), the braces and their content will be
-removed before the field content is rendered.
 
 ========================
 ``locale`` |(extension)|
