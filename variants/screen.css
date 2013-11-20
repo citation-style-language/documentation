@@ -6,10 +6,13 @@ ul li {
    margin-top: 0.5em;
 }
 
-p.fixed {
+div.fixed {
   position: fixed;
   top: 0;
   right: 0;
+}
+
+div.fixed p {
   padding-right: 0.5em;
   padding-left: 0.5em;
   margin-right: 0.5em;
@@ -17,7 +20,7 @@ p.fixed {
   background: white;
 }
 
-p.fixed a {
+div.fixed p a {
   border-bottom: none 0px #999;
 }
 
@@ -312,7 +315,7 @@ a.fn-backref {
 .vi { color: #19177C } /* Name.Variable.Instance */
 .il { color: #666666 } /* Literal.Number.Integer.Long */
 
-table.codeblock, tr.codeblock, td.linenos, td.codeblock, table.codeblock pre { 
+div.codeblock table, tr.codeblock, td.linenos, td.codeblock, table.codeblock pre { 
 	margin: 0; 
 	padding: 0; 
 	border: 0; 
