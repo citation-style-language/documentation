@@ -2376,6 +2376,8 @@ In both cases, stop words are lowercased, unless they are the first or last word
 in the string, or follow a colon. The stop words are listed in the file
 `stop-words.json
 <https://raw.github.com/citation-style-language/documentation/master/stop-words.json>`_.
+Hyphenated word parts are treated as distinct words (e.g., "two-thirds" becomes
+"Two-Thirds").
 
 Non-English Items
 '''''''''''''''''
