@@ -2841,6 +2841,29 @@ reviewed-author
 translator
     translator
 
+MLZ Variables
+~~~~~~~~~~~~~
+
+available-date
+    date on which a document becomes available for use (e.g. the date a
+    treaty is opened for signing)
+
+contributor
+    non-standard variable that may be used for special purposes in some
+    styles (e.g. to identify the author if interest in a multi-authored
+    work in publications listings)
+
+pending-number
+    number of an application or other executory document (e.g. a patent
+    application)
+
+publication-date
+    date of secondary publication of offically issued material
+    (e.g. the date of commercial publication of a court decision)
+
+rank-number
+    number of position in a queue or hierarchy (e.g. a patent priority number)
+
 Appendix V - Page Range Formats
 -------------------------------
 
