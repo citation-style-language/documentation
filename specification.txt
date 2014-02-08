@@ -190,8 +190,9 @@ Info
 ^^^^
 
 The ``cs:info`` element contains the style's metadata. Its structure is based on
-the `Atom Syndication Format <http://tools.ietf.org/html/rfc4287>`_. In
-independent styles, ``cs:info`` has the following child elements:
+the `Atom Syndication Format <http://tools.ietf.org/html/rfc4287>`_.
+
+In independent styles, ``cs:info`` has the following child elements:
 
 ``cs:author`` and ``cs:contributor`` (optional)
     ``cs:author`` and ``cs:contributor``, used to respectively acknowledge style
@@ -234,7 +235,7 @@ independent styles, ``cs:info`` has the following child elements:
     
     -  "self" - style URI
     -  "template" - URI of the style from which the current style is derived
-    -  "documentation - URI of style documentation
+    -  "documentation" - URI of style documentation
     
     The ``cs:link`` element may contain content describing the link.
 
@@ -274,7 +275,7 @@ target.
 
 In `dependent styles`_, ``cs:link`` must be used with ``rel`` set to
 "independent-parent", with the URI of the independent parent style set on
-``href``. In addition, ``cs:link`` should not be used with ``rel`` set to
+``href``. In addition, ``cs:link`` may not be used with ``rel`` set to
 "template".
 
 An example of ``cs:info`` for an independent style:
@@ -285,17 +286,17 @@ An example of ``cs:info`` for an independent style:
       <title>Style Title</title>
       <id>http://www.zotero.org/styles/style-title</id>
       <link href="http://www.zotero.org/styles/style-title" rel="self"/>
+      <link href="http://www.example.org/instructions-to-authors#references" rel="documentation"/>
       <author>
         <name>Author Name</name>
-        <email>name@domain.com</email>
-        <uri>http://www.domain.com/name</uri>
+        <email>name@example.org</email>
+        <uri>http://www.example.org/name</uri>
       </author>
       <category citation-format="author-date"/>
       <category field="zoology"/>
-      <updated>2008-10-29T21:01:24+00:00</updated>
+      <updated>2011-10-29T21:01:24+00:00</updated>
       <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work
-      is licensed under a Creative Commons Attribution-Share Alike 3.0 Unported
-      License</rights>
+      is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
     </info>
 
 Citation
@@ -1128,7 +1129,8 @@ The attributes affecting personal names:
 
 ``name-as-sort-order``
     Specifies that names should be displayed with the given name following the
-    family name (e.g. "John Doe" becomes "Doe, John"). The attribute has two possible values:
+    family name (e.g. "John Doe" becomes "Doe, John"). The attribute has two
+    possible values:
     
     - "first" - attribute only has an effect on the first name of each name
       variable 
@@ -1137,15 +1139,16 @@ The attributes affecting personal names:
     Note that even when ``name-as-sort-order`` changes the name-part order, the
     display order is not necessarily the same as the sorting order for names
     containing particles and suffixes (see `Name-part order`_). Also,
-    ``name-as-sort-order`` only affects names written in the latin or Cyrillic
-    alphabets. Names written in other alphabets (e.g. Asian scripts) are always
-    displayed with the family name preceding the given name.
+    ``name-as-sort-order`` only affects names written in scripts where the given
+    name typically precedes the family name, such as Latin, Greek, Cyrillic and
+    Arabic. In contrast, names written in Asian scripts are always displayed
+    with the family name preceding the given name.
 
 ``sort-separator``
     Sets the delimiter for name-parts that have switched positions as a result
     of ``name-as-sort-order``. The default value is ", " ("Doe, John"). As is
     the case for ``name-as-sort-order``, this attribute only affects names
-    written in the latin or Cyrillic alphabets.
+    in scripts that know "given-name family-name" order.
 
 ``cs:name`` may also carry `affixes`_ and `formatting`_ attributes.
 
@@ -1155,10 +1158,10 @@ Name-part Order
 The order of name-parts depends on the values of the ``form`` and
 ``name-as-sort-order`` attributes on ``cs:name``, the value of the
 ``demote-non-dropping-particle`` attribute on ``cs:style`` (one of the `global
-options`_), and the alphabet of the individual name. Note that the display and
+options`_), and the script of the individual name. Note that the display and
 sorting order of name-parts often differs. An overview of the possible orders:
 
-**Display order of latin/Cyrillic names**
+**Display order of names in "given-name family-name" scripts (Latin, etc.)**
 
 ----
 
@@ -1209,7 +1212,7 @@ sorting order of name-parts often differs. An overview of the possible orders:
 
 ----
 
-**Sorting order of latin/Cyrillic names**
+**Sorting order of names in "given-name family-name" scripts (Latin, etc.)**
 
 N.B. The sort keys are listed in descending order of priority.
 
@@ -1238,7 +1241,7 @@ N.B. The sort keys are listed in descending order of priority.
 
 ----
 
-**Display and sorting order of non-latin/Cyrillic names**
+**Display and sorting order of names in "family-name given-name" scripts (Chinese, etc.)**
 
 ----
 
