@@ -102,7 +102,7 @@ bibliographies. While mostly self-contained, they rely on locale files for
 Dependent Styles
 ~~~~~~~~~~~~~~~~
 
-A dependent style is an alias for an independent style. Its contents is limited
+A dependent style is an alias for an independent style. Its contents are limited
 to style metadata, and doesn't include any formatting instructions (the sole
 exception is that dependent styles can specify an overriding style locale). By
 linking dependent styles for journals that share the same citation style (e.g.,
