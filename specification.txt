@@ -1402,13 +1402,13 @@ Group
 
 The ``cs:group`` rendering element must contain one or more `rendering
 elements`_ (with the exception of ``cs:layout``). ``cs:group`` may carry the
-`delimiter`_ attribute to separate its child elements, as well as `affixes`_ and
-`display`_ attributes (applied to the output of the group as a whole) and
-`formatting`_ attributes (transmitted to the enclosed elements). ``cs:group``
-implicitly acts as a conditional: ``cs:group`` and its child elements are
-suppressed if a) at least one rendering element in ``cs:group`` calls a variable
-(either directly or via a macro), and b) all variables that are called are
-empty. This accommodates descriptive ``cs:text`` elements. For example,
+`delimiter`_ attribute to separate its child elements, as well as `affixes`_,
+`display`_ and `formatting`_ attributes (applied to the output of the group as
+a whole). ``cs:group`` implicitly acts as a conditional: ``cs:group`` and its
+child elements are suppressed if a) at least one rendering element in
+``cs:group`` calls a variable (either directly or via a macro), and b) all
+variables that are called are empty. This accommodates descriptive ``cs:text``
+elements. For example,
 
 .. sourcecode:: xml
 
