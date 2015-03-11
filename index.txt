@@ -11,5 +11,6 @@ Citation Style Language - Documentation
 
    primer
    specification
-   release-notes-CSL-1.0.1
-   upgrade-notes
+   translating-locale-files
+   release-notes-1.0.1
+   release-notes-1.0

@@ -605,6 +605,6 @@ You finished the primer. Good job! If you're interested in learning more about C
 Feedback
 ~~~~~~~~
 
-If you found a typo, or have something else to report regarding this primer, please contact me on Twitter at `@rintzezelle`_, or create an issue on GitHub `here <https://github.com/rmzelle/writing/issues>`_.
+Questions or feedback? Contact us on Twitter at `@csl_styles`_.
 
-.. _@rintzezelle: https://twitter.com/rintzezelle
+.. _@csl_styles: https://twitter.com/csl_styles
