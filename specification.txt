@@ -1,5 +1,5 @@
-CSL 1.0.1 Specification (2012-09-03)
-====================================
+CSL 1.0.1 Specification
+=======================
 
 by `Rintze M. Zelle, PhD <https://twitter.com/rintzezelle>`_
 
@@ -145,7 +145,7 @@ elements:
 
 ``cs:locale`` (optional)
     May appear multiple times. Used to specify (overriding) localization data.
-    
+
 In `dependent styles`_, ``cs:style`` has only one child element, ``cs:info``.
 
 Info
@@ -167,13 +167,13 @@ In independent styles, ``cs:info`` has the following child elements:
     Styles may be assigned one or more categories. ``cs:category`` may be used
     once to describe how in-text citations are rendered, using the
     ``citation-format`` attribute set to one of the following values:
-    
+
     -  "author-date" - e.g. "... (Doe, 1999)"
     -  "author" - e.g. "... (Doe)"
     -  "numeric" - e.g. "... [1]"
     -  "label" - e.g. "... [doe99]"
     -  "note" - the citation appears as a footnote or endnote
-    
+
     ``cs:category`` may be used multiple times with the ``field`` attribute, set
     to one of the discipline categories (see `Appendix I - Categories`_), to
     indicates the field(s) for which the style is relevant.
@@ -194,11 +194,11 @@ In independent styles, ``cs:info`` has the following child elements:
     May be used multiple times. ``cs:link`` must carry two attributes: ``href``,
     set to a URI (usually a URL), and ``rel``, whose value indicates how the URI
     relates to the style. The possible values of ``rel``:
-    
+
     -  "self" - style URI
     -  "template" - URI of the style from which the current style is derived
     -  "documentation" - URI of style documentation
-    
+
     The ``cs:link`` element may contain content describing the link.
 
 ``cs:published`` (optional)
@@ -437,7 +437,7 @@ B. Locale files
 
 If the chosen output locale is a language (e.g. "de"), the (primary) dialect is
 used in step 1 (e.g. "de-DE").
-   
+
 Fallback stops once a localizable unit has been found. For terms, this even is
 the case when they are defined as empty strings (e.g. ``<term name="and"/>`` or
 ``<term name="and"></term>``). Locale fallback takes precedence over fallback of
@@ -571,7 +571,7 @@ be overridden for certain numbers with the following terms:
   the default), matches are limited to numbers where the two last digits agree
   ("0", "100", "200", etc.). When ``match`` is set to "whole-number", there is
   only a match if the number is the same as that of the term.
-  
+
 - "ordinal-10" through "ordinal-99" - by default, a term in this group is used
   when the last two digits in the term name match the last two digits of the
   rendered number. When the optional ``match`` attribute is set to
@@ -769,11 +769,11 @@ describes the date part selected with the required ``name`` attribute:
 
 "day"
     For "day", ``cs:date-part`` may carry the ``form`` attribute, with values:
-    
+
     -  "numeric" - (default), e.g. "1"
     -  "numeric-leading-zeros" - e.g. "01"
     -  "ordinal" - e.g. "1st"
-    
+
     Some languages, such as French, only use the "ordinal" form for the first
     day of the month ("1er janvier", "2 janvier", "3 janvier", etc.). Such
     output can be achieved with the "ordinal" form and use of the
@@ -785,7 +785,7 @@ describes the date part selected with the required ``name`` attribute:
     month `terms`_) should be defined with periods if applicable (e.g. "Jan.",
     "Feb.", etc.). These periods can be removed by setting `strip-periods`_ to
     "true" ("false" is the default). The ``form`` attribute can be set to:
-    
+
     -  "long" - (default), e.g. "January"
     -  "short" - e.g. "Jan."
     -  "numeric" - e.g. "1"
@@ -793,7 +793,7 @@ describes the date part selected with the required ``name`` attribute:
 
 "year"
     For "year", ``cs:date-part`` may carry the ``form`` attribute, with values:
-    
+
     -  "long" - (default), e.g. "2005"
     -  "short" - e.g. "05"
 
@@ -812,7 +812,7 @@ largest date part ("year", "month", or "day") that differs between the two
 dates. For example,
 
 .. sourcecode:: xml
-    
+
     <style>
       <citation>
         <layout>
@@ -842,7 +842,7 @@ If a date includes a season instead of a month, a season term ("season-01" to
 the month term. E.g.,
 
 .. sourcecode:: xml
-    
+
     <style>
       <citation>
         <layout>
@@ -901,7 +901,7 @@ ampersand receive one space before and one after the ampsersand ("2&3" becomes
 
 Extracted numbers can be formatted via the optional ``form`` attribute, with
 values:
-   
+
 -  "numeric" - (default), e.g. "1", "2", "3"
 -  "ordinal" - e.g. "1st", "2nd", "3rd". Ordinal suffixes are defined with
    terms (see `Ordinal Suffixes`_).
@@ -966,27 +966,27 @@ within a name variable. ``cs:name`` may carry the following attributes:
     Determines when the name delimiter or a space is used between a truncated
     name list and the "et-al" (or "and others") term in case of et-al
     abbreviation. Allowed values:
-    
+
     -  "contextual" - (default), name delimiter is only used for name lists
        truncated to two or more names
-       
+
        - 1 name: "J. Doe et al."
        - 2 names: "J. Doe, S. Smith, et al."
-       
+
     -  "after-inverted-name" - name delimiter is only used if the preceding name
        is inverted as a result of the ``name-as-sort-order`` attribute. E.g.
        with ``name-as-sort-order`` set to "first":
-       
+
        - "Doe, J., et al."
        - "Doe, J., S. Smith et al."
-    
+
     -  "always" - name delimiter is always used
-       
+
        - 1 name: "J. Doe, et al."
        - 2 names: "J. Doe, S. Smith, et al."
-    
+
     -  "never" - name delimiter is never used
-       
+
        - 1 name: "J. Doe et al."
        - 2 names: "J. Doe, S. Smith et al."
 
@@ -995,27 +995,27 @@ within a name variable. ``cs:name`` may carry the following attributes:
     and the last name in name lists (if ``and`` is not set, the name delimiter
     is always used, regardless of the value of ``delimiter-precedes-last``).
     Allowed values:
-    
+
     -  "contextual" - (default), name delimiter is only used for name lists
        with three or more names
-       
+
        - 2 names: "J. Doe and T. Williams"
        - 3 names: "J. Doe, S. Smith, and T. Williams"
-       
+
     -  "after-inverted-name" - name delimiter is only used if the preceding name
        is inverted as a result of the ``name-as-sort-order`` attribute. E.g.
        with ``name-as-sort-order`` set to "first":
-       
+
        - "Doe, J., and T. Williams"
        - "Doe, J., S. Smith and T. Williams"
-    
+
     -  "always" - name delimiter is always used
-       
+
        - 2 names: "J. Doe, and T. Williams"
        - 3 names: "J. Doe, S. Smith, and T. Williams"
-    
+
     -  "never" - name delimiter is never used
-       
+
        - 2 names: "J. Doe and T. Williams"
        - 3 names: "J. Doe, S. Smith and T. Williams"
 
@@ -1030,7 +1030,7 @@ within a name variable. ``cs:name`` may carry the following attributes:
     to two or more names, the name delimiter is used (e.g. "Doe, Smith, et
     al."). This behavior can be changed with the ``delimiter-precedes-et-al``
     attribute.
-    
+
 ``et-al-subsequent-min`` / ``et-al-subsequent-use-first``
     If used, the values of these attributes replace those of respectively
     ``et-al-min`` and ``et-al-use-first`` for subsequent cites (cites
@@ -1044,9 +1044,9 @@ within a name variable. ``cs:name`` may carry the following attributes:
     (for this the value of ``et-al-use-first``/``et-al-subsequent-min`` must be
     at least 2 less than the value of
     ``et-al-min``/``et-al-subsequent-use-first``). An example:
-    
+
     ::
-    
+
         A. Goffeau, B. G. Barrell, H. Bussey, R. W. Davis, B. Dujon, H.
         Feldmann, … S. G. Oliver
 
@@ -1093,11 +1093,11 @@ The attributes affecting personal names:
     Specifies that names should be displayed with the given name following the
     family name (e.g. "John Doe" becomes "Doe, John"). The attribute has two
     possible values:
-    
+
     - "first" - attribute only has an effect on the first name of each name
-      variable 
+      variable
     - "all" - attribute has an effect on all names
-    
+
     Note that even when ``name-as-sort-order`` changes the name-part order, the
     display order is not necessarily the same as the sorting order for names
     containing particles and suffixes (see `Name-part order`_). Also,
@@ -1340,14 +1340,14 @@ attributes:
 
 ``form``
     Selects the form of the term, with allowed values:
-    
+
     -  "long" - (default), e.g. "page"/"pages" for the "page" term
     -  "short" - e.g. "p."/"pp." for the "page" term
     -  "symbol" - e.g. "§"/"§§" for the "section" term
 
 ``plural``
     Sets pluralization of the term, with allowed values:
-    
+
     -  "contextual" - (default), the term plurality matches that of the variable
        content. Content is considered plural when it contains multiple numbers
        (e.g. "page 1", "pages 1-3", "volume 2", "volumes 2 & 4"), or, in the
@@ -1417,7 +1417,7 @@ are set with the attributes:
     at `disambiguation`_ is only made when all other disambiguation methods have
     failed to uniquely identify the target source.
 
-``is-numeric``    
+``is-numeric``
     Tests whether the given variables (`Appendix IV - Variables`_) contain
     numeric content. Content is considered numeric if it solely consists of
     numbers. Numbers may have prefixes and suffixes ("D2", "2b", "L2d"), and may
@@ -1437,20 +1437,20 @@ are set with the attributes:
     citations consist of one or more cites to individual items). When called
     within the scope of cs:bibliography, ``position`` tests "false". The
     positions that can be tested are:
-   
+
     - "first": position of cites that are the first to reference an item
     - "ibid"/"ibid-with-locator"/"subsequent": cites referencing previously
       cited items have the "subsequent" position. Such cites may also have the
       "ibid" or "ibid-with-locator" position when:
-      
+
       a) the current cite immediately follows on another cite, within the same
          citation, that references the same item
-           
+
       or
-      
+
       b) the current cite is the first cite in the citation, and the previous
          citation consists of a single cite referencing the same item
-           
+
       If either requirement is met, the presence of locators determines which
       position is assigned:
 
@@ -1461,13 +1461,13 @@ are set with the attributes:
         locator, the position of the current cite is "ibid". If the locator
         differs the position is "ibid-with-locator". If the current cite lacks a
         locator its only position is "subsequent".
-         
+
     - "near-note": position of a cite following another cite referencing the
       same item. Both cites have to be located in foot or endnotes, and the
       distance between both cites may not exceed the maximum distance (measured
       in number of foot or endnotes) set with the ``near-note-distance`` option
       (see `Note Distance`_).
-      
+
     Whenever position="ibid-with-locator" tests true, position="ibid" also tests
     true. And whenever position="ibid" or position="near-note" test true,
     position="subsequent" also tests true.
@@ -1569,7 +1569,7 @@ are always tried in the listed order:
 
            \(a) Initials can be shown by rendering the name with a ``form``
            value of "long" instead of "short" (e.g. "Doe" becomes "J. Doe").
-           
+
            \(b) Full given names can be shown instead of initials by rendering
            the name with ``initialize`` set to "false" (e.g. "J. Doe" becomes
            "John Doe").
@@ -1577,7 +1577,7 @@ are always tried in the listed order:
         2. If ``initialize-with`` is *not* set, full given names can be shown by
            rendering the name with a ``form`` value of "long" instead of "short"
            (e.g. "Doe" becomes "John Doe").
-    
+
     **Given Name Disambiguation Rules**
         Allowed values of ``givenname-disambiguation-rule``:
 
@@ -1662,7 +1662,7 @@ Delimiters for collapsed cite groups can be customized with the
 
 ``collapse``
     Activates cite grouping and collapsing. Allowed values:
-    
+
     -  "citation-number" - collapses ranges of cite numbers (rendered through
        the "citation-number" variable) in citations for "numeric" styles (e.g.
        from "[1, 2, 3, 5]" to "[1 |--| 3, 5]"). Only increasing ranges collapse,
@@ -1677,7 +1677,7 @@ Delimiters for collapsed cite groups can be customized with the
     -  "year-suffix-ranged" - collapses as "year-suffix", but also collapses
        ranges of year-suffixes, e.g. "(Doe 2000a |--| c,e)" instead of "(Doe
        2000a, b, c, e)".
-    
+
     "year-suffix" and "year-suffix-ranged" fall back to "year" when
     ``disambiguate-add-year-suffix`` is "false" (see `Disambiguation`_), or when
     a cite has a locator (e.g. "(Doe 2000a-c, 2000d, p. 5, 2000e,f)", where the
@@ -1723,9 +1723,9 @@ Whitespace
     "margin", the first field is put in the margin, and subsequent lines are
     aligned with the margin. An example, where the first field is ``<text
     variable="citation-number" suffix=". "/>``:
-    
+
     ::
-    
+
         9.  Adams, D. (2002). The Ultimate Hitchhiker's Guide to the
             Galaxy (1st ed.).
         10. Asimov, I. (1951). Foundation.
@@ -1760,24 +1760,24 @@ Reference Grouping
       ``subsequent-author-substitute`` replaces the entire name list (including
       punctuation and terms like "et al" and "and"), except for the affixes set
       on the ``cs:names`` element.
-    
+
     - "complete-each" - requires a complete match like "complete-all", but now
       the value of ``subsequent-author-substitute`` substitutes for each
       rendered name.
-    
+
     - "partial-each" - when one or more rendered names in the name variable
       match those in the preceding bibliographic entry, the value of
       ``subsequent-author-substitute`` substitutes for each matching name.
       Matching starts with the first name, and continues up to the first
       mismatch.
-    
+
     - "partial-first" - as "partial-each", but substitution is limited to the
-      first name of the name variable.    
-    
+      first name of the name variable.
+
     For example, take the following bibliographic entries:
-    
+
     ::
-    
+
         Doe. 1999.
         Doe. 2000.
         Doe, Johnson & Williams. 2001.
@@ -1786,12 +1786,12 @@ Reference Grouping
         Doe, Stevens & Miller. 2004.
         Doe, Williams et al. 2005.
         Doe, Williams et al. 2006.
-        
+
     With ``subsequent-author-substitute`` set to "---", and
     ``subsequent-author-substitute-rule`` set to "complete-all", this becomes:
-    
+
     ::
-    
+
         Doe. 1999.
         ---. 2000.
         Doe, Johnson & Williams. 2001.
@@ -1800,12 +1800,12 @@ Reference Grouping
         ---. 2004.
         Doe, Williams et al. 2005.
         ---. 2005.
-    
+
     With ``subsequent-author-substitute-rule`` set to "complete-each", this
     becomes:
-    
+
     ::
-    
+
         Doe. 1999.
         ---. 2000.
         Doe, Johnson & Williams. 2001.
@@ -1814,12 +1814,12 @@ Reference Grouping
         ---, --- & ---. 2004.
         Doe, Williams et al. 2005.
         ---, --- et al. 2006.
-    
+
     With ``subsequent-author-substitute-rule`` set to "partial-each", this
     becomes:
-    
+
     ::
-    
+
         Doe. 1999.
         ---. 2000.
         Doe, Johnson & Williams. 2001.
@@ -1828,12 +1828,12 @@ Reference Grouping
         ---, --- & ---. 2004.
         Doe, Williams et al. 2005.
         ---, --- et al. 2005.
-    
+
     With ``subsequent-author-substitute-rule`` set to "partial-first", this
     becomes:
-    
+
     ::
-    
+
         Doe. 1999.
         ---. 2000.
         Doe, Johnson & Williams. 2001.
@@ -1875,9 +1875,9 @@ and dropping particles, respectively. A single name can contain particles of
 both types (with non-dropping particles always following dropping particles).
 For example, "W. de Koning" and the French name "Jean de La Fontaine" can be
 deconstructed into:
-    
+
     ::
-    
+
         {
             "author": [
                 {
@@ -1890,7 +1890,7 @@ deconstructed into:
                     "dropping-particle": "de",
                     "non-dropping-particle": "La",
                     "family": "Fontaine"
-                } 
+                }
             ]
         }
 
@@ -1925,7 +1925,7 @@ The handling of the non-dropping-particle can be customized with the
 ``demote-non-dropping-particle``
     Sets the display and sorting behavior of the non-dropping-particle in
     inverted names (e.g. "Koning, W. de"). Allowed values:
-    
+
     -  "never": the non-dropping-particle is treated as part of the family name,
        whereas the dropping-particle is appended (e.g. "de Koning, W.", "La
        Fontaine, Jean de"). The non-dropping-particle is part of the primary
@@ -1943,13 +1943,13 @@ particle should just be included in the family name field, for example for the
 French general Charles de Gaulle:
 
     ::
-    
+
         {
             "author": [
                 {
                     "family": "de Gaulle",
                     "given": "Charles"
-                }   
+                }
             ]
         }
 
@@ -1994,7 +1994,7 @@ Locale Options
     or period, ``punctuation-in-quote`` specifies whether this punctuation is
     placed outside (value "false", default) or inside (value "true") the closing
     quotation mark.
-    
+
 Sorting
 ~~~~~~~
 
@@ -2119,33 +2119,33 @@ The following formatting attributes may be set on ``cs:date``, ``cs:date-part``,
 
 ``font-style``
     Sets the font style, with values:
-    
+
     -  "normal" (default)
     -  "italic"
     -  "oblique" (i.e. slanted)
 
 ``font-variant``
     Allows for the use of small capitals, with values:
-    
+
     -  "normal" (default)
     -  "small-caps"
 
 ``font-weight``
     Sets the font weight, with values:
-    
+
     -  "normal" (default)
     -  "bold"
     -  "light"
 
 ``text-decoration``
     Allows for the use of underlining, with values:
-    
+
     -  "none" (default)
     -  "underline"
 
 ``vertical-align``
     Sets the vertical alignment, with values:
-    
+
     -  "baseline" (default)
     -  "sup" (superscript)
     -  "sub" (subscript)
@@ -2195,15 +2195,15 @@ The allowed values:
 - "indent" - block indented to the right by a standard amount. Extends to the
   right margin.
 
-**Examples** 
+**Examples**
 
 (A) Instead of using ``second-field-align`` (see `Whitespace`_), a similar
     layout can be achieved with a "left-margin" and "right-inline" block. A
     potential benefit is that the styling of blocks can be further controlled in
     the final output (e.g. using CSS for HTML, styles for Word, etc.).
-    
+
     .. sourcecode:: xml
-    
+
         <bibliography>
           <layout>
             <text display="left-margin" variable="citation-number"
@@ -2221,7 +2221,7 @@ The allowed values:
     names is only rendered once for items by the same authors.
 
     .. sourcecode:: xml
-    
+
         <bibliography subsequent-author-substitute="">
           <sort>
             <key variable="author"/>
@@ -2241,9 +2241,9 @@ The allowed values:
             </group>
           </layout>
         </bibliography>
-    
+
     The output of this example would look like:
-    
+
     +-------------------+-----------------------+
     | Author1                                   |
     +-------------------+-----------------------+
@@ -2262,9 +2262,9 @@ The allowed values:
 
 (C) An annotated bibliography, where the annotation appears in an indented block
     below the reference.
-    
+
     .. sourcecode:: xml
-    
+
         <bibliography>
           <layout>
             <group display="block">
@@ -2333,7 +2333,7 @@ items is performed by:
 
 2. For lower or mixed case strings, the first character of each lowercase word
    is capitalized. The case of words in mixed or uppercase stays the same.
-   
+
 In both cases, stop words are lowercased, unless they are the first or last word
 in the string, or follow a colon. The stop words are "a", "an", "and", "as",
 "at", "but", "by", "down", "for", "from", "in", "into", "nor", "of", "on",
@@ -2767,7 +2767,7 @@ Name Variables
 
 author
     author
-    
+
 collection-editor
     editor of the collection holding the item (e.g. the series editor for a
     book)
@@ -2815,7 +2815,7 @@ The page abbreviation rules for the different values of the
 "chicago"
     Page ranges are abbreviated according to the
     `Chicago Manual of Style-rules <http://www.aahn.org/guidelines.html>`_:
-    
+
     +------------------------+--------------------------+--------------------------+
     | First number           | Second number            | Examples                 |
     +========================+==========================+==========================+

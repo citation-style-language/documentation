@@ -10,10 +10,5 @@ Citation Style Language - Documentation
    :maxdepth: 1
 
    primer
-   specification
    translating-locale-files
-   release-notes-1.0.1
-   release-notes-1.0
-   releases/specification-csl101-20120903
-   releases/specification-csl10-20100530
-   releases/specification-csl10-20100321
+   specification
