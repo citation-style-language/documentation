@@ -15,7 +15,7 @@ with contributions from Frank G. Bennett, Jr. and Bruce D'Arcus.
 Introduction
 ------------
 
-The Citation Style Language (CSL) is an |link| `XML
+The Citation Style Language (CSL) is an `XML
 <http://en.wikipedia.org/wiki/XML>`_ format for describing the formatting of
 in-text citations, notes and bibliographies. CSL offers:
 
@@ -29,7 +29,7 @@ in-text citations, notes and bibliographies. CSL offers:
 This document is meant as a complete and accurate specification of CSL 1.0.
 Additional documentation, such as the CSL schema, CSL styles, and information on
 how to add CSL support to applications, can be found at the official home of
-CSL, |link| `citationstyles.org <http://citationstyles.org>`_.
+CSL, `citationstyles.org <http://citationstyles.org>`_.
 
 CSL Styles - Basic Structure
 ----------------------------
@@ -37,7 +37,7 @@ CSL Styles - Basic Structure
 Namespacing
 ~~~~~~~~~~~
 
-All elements in CSL are |link| `namespaced
+All elements in CSL are `namespaced
 <http://en.wikipedia.org/wiki/XML_Namespace>`_. The recommended prefix ``cs`` is
 attached to element names throughout this specification, but is usually omitted
 from CSL styles when the default namespace is declared in the root ``cs:style``
@@ -68,7 +68,7 @@ following arguments:
     ("in-text").
 
 ``default-locale`` (optional)
-    Fixes style localization to the |link| `locale code
+    Fixes style localization to the `locale code
     <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_ specified. This is
     desirable for most journal styles.
 
@@ -125,7 +125,7 @@ Info
 ^^^^
 
 The ``cs:info`` element contains all the style's metadata, many elements of
-which are borrowed from the |link| `Atom Syndication Format
+which are borrowed from the `Atom Syndication Format
 <http://tools.ietf.org/html/rfc4287>`_. Although it has no influence on how
 citations are formatted, complete and correct metadata is important if styles
 are made publicly available. Below is an example of a ``cs:info`` element,
@@ -186,7 +186,7 @@ followed by a description of all possible elements.
     Journal-specific styles may include one or more ``cs:issn`` elements,
     containing the journal's ISSN identifiers (multiple ISSNs can be assigned to
     a single journal, e.g. for the print and online editions). In addition, the
-    ``cs:issnl`` element may be used for the newly established |link| `ISSN-L
+    ``cs:issnl`` element may be used for the newly established `ISSN-L
     identifier <http://www.issn.org/2-22637-What-is-an-ISSN-L.php>`_.
 
 ``cs:link`` (optional)
@@ -207,37 +207,37 @@ followed by a description of all possible elements.
     The ``cs:link`` element may contain textual content to describe the link,
     and may carry the ``xml:lang`` attribute to specify the language of either
     the link description or of the link target (the value should be a
-    |link| `xsd:language locale code
+    `xsd:language locale code
     <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
 
 ``cs:published`` (optional)
-    The contents of this element must be a |link| `timestamp
+    The contents of this element must be a `timestamp
     <http://books.xmlschemata.org/relaxng/ch19-77049.html>`_. This timestamp
     indicates when the style was initially created or made available.
 
 ``cs:rights`` (optional)
     This element specifies the license under which the style file is released.
-    See, e.g. the |link| `Creative Commons
+    See, e.g. the `Creative Commons
     <http://creativecommons.org/license/>`_. The element may include a
     ``xml:lang`` attribute to specify the language of the content (the value
-    should be an |link| `xsd:language locale code
+    should be an `xsd:language locale code
     <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
 
 ``cs:summary`` (optional)
     This element gives a summary of the style.The element may include a
     ``xml:lang`` attribute to specify the language of the content (the value
-    should be an |link| `xsd:language locale code
+    should be an `xsd:language locale code
     <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
 
 ``cs:title``
     The contents of this required element should be the name of the style as it
     should be shown to users. The element may include a ``xml:lang`` attribute
-    to specify the language of the content (the value should be an |link|
+    to specify the language of the content (the value should be an
     `xsd:language locale code
     <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_).
 
 ``cs:updated``
-    The contents of this required element must be a |link| `timestamp
+    The contents of this required element must be a `timestamp
     <http://books.xmlschemata.org/relaxng/ch19-77049.html>`_. This timestamp is
     used for automatic updating of styles.
 
@@ -354,7 +354,7 @@ US English). Localization data can also be included in styles, using one or more
 of the optional ``cs:locale`` elements, which by convention are included
 directly after the ``cs:info`` element. For each ``cs:locale`` element, the
 relevant locale can be indicated with the ``xml:lang`` attribute (set to an
-|link| `xsd:language locale code
+`xsd:language locale code
 <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_). If the attribute is
 absent, the ``cs:locale`` element's localization data will apply to all locales.
 
@@ -2283,7 +2283,7 @@ The page abbreviation rules for the different values of the
     321-328, 2787-2816
 
 "chicago"
-    Page ranges are abbreviated according to the |link|
+    Page ranges are abbreviated according to the
     `Chicago Manual of Style-rules <http://www.aahn.org/guidelines.html>`_:
 
 Table: **Chicago Manual of Style page range abbreviation rules**
