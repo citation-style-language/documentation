@@ -1,57 +1,19 @@
-=================================
-`Citation Style Language 1.0.1`__
-=================================
-~~~~~~~~~~~~~~~~~~~~~~
-Language Specification
-~~~~~~~~~~~~~~~~~~~~~~
+CSL 1.0.1 Specification (2012-09-03)
+====================================
 
-__ `Table of Contents`_
+by `Rintze M. Zelle, PhD <https://twitter.com/rintzezelle>`_
 
-.. class:: fixed
+with contributions from Frank G. Bennett, Jr. and Bruce D'Arcus.
 
-   `citationstyles.org`__
+|CCBYSA|_
 
-__ http://citationstyles.org/
-
-.. class:: info-version
-
-   2012-09-03
-
-.. class:: version-links
-
-    This version:
-        http://citationstyles.org/downloads/specification-csl101-20120903.html
-    Latest version:
-        http://citationstyles.org/downloads/specification.html
-    Previous versions: 
-        - http://citationstyles.org/downloads/specification-csl10-20100321.html
-        - http://citationstyles.org/downloads/specification-csl10-20100530.html
-
-.. class:: contributors
-
-   **Author**
-   
-   Rintze M. Zelle, PhD
-       
-   **Contributors**
-
-   | Frank G. Bennett, Jr.
-   | Bruce D'Arcus
-   
-   |CCBYSA|_
-
-.. |CCBYSA| image:: http://i.creativecommons.org/l/by-sa/3.0/80x15.png
+.. |CCBYSA| image:: /media/cc-by-sa-80x15.png
 .. _CCBYSA: http://creativecommons.org/licenses/by-sa/3.0/
+
+.. contents:: **Table of Contents**
 
 .. |--| unicode:: U+2013
    :trim:
-
-========
-
-.. contents:: Table of Contents
-
-========
-
 
 Introduction
 ------------

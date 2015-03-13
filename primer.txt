@@ -5,7 +5,7 @@ by `Rintze M. Zelle, PhD <https://twitter.com/rintzezelle>`_
 
 |CCBYSA|_
 
-.. |CCBYSA| image:: media/cc-by-sa-80x15.png
+.. |CCBYSA| image:: /media/cc-by-sa-80x15.png
 .. _CCBYSA: http://creativecommons.org/licenses/by-sa/3.0/
 
 .. contents:: **Table of Contents**
@@ -104,7 +104,7 @@ To understand how CSL works, let's start by taking a look at the various bits an
 
 |csl-infrastructure|
 
-.. |csl-infrastructure| image:: media/csl-infrastructure.png
+.. |csl-infrastructure| image:: /media/csl-infrastructure.png
    :width: 257pt
 
 Independent and Dependent Styles

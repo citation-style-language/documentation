@@ -1,45 +1,16 @@
-===============================
-`Citation Style Language 1.0`__
-===============================
-~~~~~~~~~~~~~~~~~~~~~~
-Language Specification
-~~~~~~~~~~~~~~~~~~~~~~
+CSL 1.0 Specification (2010-05-30)
+==================================
 
-__ `Table of Contents`_
+by `Rintze M. Zelle, PhD <https://twitter.com/rintzezelle>`_
 
-.. class:: fixed
+with contributions from Frank G. Bennett, Jr. and Bruce D'Arcus.
 
-   `citationstyles.org`__
+|CCBYSA|_
 
-__ http://citationstyles.org/
+.. |CCBYSA| image:: /media/cc-by-sa-80x15.png
+.. _CCBYSA: http://creativecommons.org/licenses/by-sa/3.0/
 
-.. class:: version-links
-
-    This version:
-        http://citationstyles.org/downloads/specification-csl10-20100530.html
-    Latest version:
-        http://citationstyles.org/downloads/specification.html
-    Previous versions: 
-        - http://citationstyles.org/downloads/specification-csl10-20100321.html
-
-.. class:: contributors
-
-   Author
-       * Rintze M. Zelle
-       
-   Contributors
-       * Frank G. Bennett, Jr.
-       * Bruce D'Arcus
-
-.. |link| image:: link.png
-
-
-========
-
-.. contents:: Table of Contents
-
-========
-
+.. contents:: **Table of Contents**
 
 Introduction
 ------------
@@ -541,7 +512,7 @@ value of the optional ``form`` attribute. The different forms are:
 -  "short" - e.g. "ed" and "eds" for the term "editor"
 -  "verb" - e.g. "edited by" for the term "editor"
 -  "verb-short" - e.g. "ed" for the term "editor"
--  "symbol" - e.g. "§" for the term "section"
+-  "symbol" - e.g. "Â§" for the term "section"
 
 Examples of how terms are defined have been given above (`Locale Files - Basic
 Structure`_). The complete list of terms can be found in `Appendix III -
@@ -997,7 +968,7 @@ sorting order of name-parts often differs. An overview of the different orders:
     4) family
     5) suffix
 
-:Example: [Gérard] [de] [la] [Martinière] [III]
+:Example: [GÃ©rard] [de] [la] [MartiniÃ¨re] [III]
 
 ----
 
@@ -1011,7 +982,7 @@ sorting order of name-parts often differs. An overview of the different orders:
     4) dropping-particle
     5) suffix
 
-:Example: [la] [Martinière], [Gérard] [de], [III]
+:Example: [la] [MartiniÃ¨re], [GÃ©rard] [de], [III]
 
 ----
 
@@ -1025,7 +996,7 @@ sorting order of name-parts often differs. An overview of the different orders:
     4) non-dropping-particle
     5) suffix
 
-:Example: [Martinière], [Gérard] [de] [la], [III]
+:Example: [MartiniÃ¨re], [GÃ©rard] [de] [la], [III]
 
 ----
 
@@ -1034,7 +1005,7 @@ sorting order of name-parts often differs. An overview of the different orders:
     1) non-dropping-particles
     2) family
 
-:Example: [la] [Martinière]
+:Example: [la] [MartiniÃ¨re]
 
 ----
 
@@ -1051,7 +1022,7 @@ N.B. The sort keys are listed in descending order of importance.
     3) given
     4) suffix
 
-:Example: [la Martinière] [de] [Gérard] [III]
+:Example: [la MartiniÃ¨re] [de] [GÃ©rard] [III]
 
 ----
 
@@ -1062,7 +1033,7 @@ N.B. The sort keys are listed in descending order of importance.
     3) given
     4) suffix
 
-:Example: [Martinière] [de la] [Gérard] [III]
+:Example: [MartiniÃ¨re] [de la] [GÃ©rard] [III]
 
 ----
 
@@ -1205,7 +1176,7 @@ The ``cs:label`` element may carry attributes for `affixes`_, `formatting`_,
     -  "verb": e.g. "edited by" for the "editor" term
     -  "short": e.g. "ed"/"eds" for the "editor" term
     -  "verb-short": e.g. "ed" for the "editor" term
-    -  "symbol": e.g. "§" for the singular "section" term
+    -  "symbol": e.g. "Â§" for the singular "section" term
 
 ``plural``
     Sets pluralization of the term, with values:
@@ -1617,16 +1588,16 @@ be either maintained or dropped when only the surname is shown (from now on we
 will refer to these two types as non-dropping-particle and dropping-particle,
 respectively). A single name can contain particles of both types (with the
 non-dropping-particle always following the dropping-particle). For example, the
-French name "Gérard de la Martinière" can be deconstructed into:
+French name "GÃ©rard de la MartiniÃ¨re" can be deconstructed into:
     
     ::
     
         {
             "author": {
-                "given": "Gérard",
+                "given": "GÃ©rard",
                 "dropping-particle": "de",
                 "non-dropping-particle": "la",
-                "family": "Martinière"
+                "family": "MartiniÃ¨re"
             },
             {
                 "given": "W.",
@@ -1636,7 +1607,7 @@ French name "Gérard de la Martinière" can be deconstructed into:
         }
 
 When just the surname is shown, only the non-dropping-particle is kept: "La
-Martinière".
+MartiniÃ¨re".
 
 Whereas the dropping-particle is always treated the same, styles vary in how the
 non-dropping-particle is handled in case of inverted names, where the family
@@ -1652,15 +1623,15 @@ dropping-particle, if available (sort order B).
 
 **Sort order A: non-dropping-particle not demoted**
 
--  primary sort key: "la Martinière"
+-  primary sort key: "la MartiniÃ¨re"
 -  secondary sort key: "de"
--  tertiary sort key: "Gérard"
+-  tertiary sort key: "GÃ©rard"
 
 **Sort order B: non-dropping-particle demoted**
 
--  primary sort key: "Martinière"
+-  primary sort key: "MartiniÃ¨re"
 -  secondary sort key: "de la"
--  tertiary sort key: "Gérard"
+-  tertiary sort key: "GÃ©rard"
 
 Some names include a particle that should never be demoted. For these cases the
 particle should just be included in the family name field, for example for the
@@ -1684,14 +1655,14 @@ The handling of particles for inverted names is set with the
     
     -  "never": the non-dropping-particle is treated as part of the family name,
        whereas the dropping-particle is appended (e.g. "de Koning, W.", "la
-       Martinière, Gérard de"). The non-dropping-particle is part of the primary
+       MartiniÃ¨re, GÃ©rard de"). The non-dropping-particle is part of the primary
        sort key (sort order A, e.g. "de Koning, W." appears under "D").
     -  "sort-only": same display behavior as "never", but the
        non-dropping-particle is demoted to a secondary sort key (see sort order
        B, e.g. "de Koning, W." appears under "K").
     -  "display-and-sort" (default): the dropping and non-dropping-particle are
-       appended to the rest of the name (e.g. "Koning, W. de" and "Martinière,
-       Gérard de la"). When names are sorted, all particles are part of the
+       appended to the rest of the name (e.g. "Koning, W. de" and "MartiniÃ¨re,
+       GÃ©rard de la"). When names are sorted, all particles are part of the
        secondary sort key (see sort order B, e.g. "Koning, W. de" appears under
        "K").
 
