@@ -16,7 +16,7 @@ Preface
 These release notes describe the changes in Citation Style Language (CSL) 1.0.1
 as compared to the CSL 1.0 schema and specification (2010-05-30 update). Many of
 the new features listed here are described in more detail in the `CSL 1.0.1
-specification <http://citationstyles.org/downloads/specification.html>`_.
+specification <specification.html>`_.
 
 With minor exceptions (discussed below), CSL 1.0.1 is a backwards compatible
 release, and valid CSL 1.0 styles and locale files will generally validate
@@ -41,7 +41,7 @@ As an added benefit, because cite grouping is now activated whenever the
 possible to group cites without any cite collapsing taking place.
 
 See `Cite Grouping
-<http://citationstyles.org/downloads/specification.html#cite-grouping>`_ in the
+<specification.html#cite-grouping>`_ in the
 CSL 1.0.1 specification.
 
 "dataset" Item Type
@@ -57,7 +57,7 @@ changed from "all-names" to "by-cite". The latter is a less aggressive
 disambiguation method that is limited to ambiguous cites.
 
 See `Disambiguation
-<http://citationstyles.org/downloads/specification.html#disambiguation>`_ in the
+<specification.html#disambiguation>`_ in the
 CSL 1.0.1 specification.
 
 Input Data Model
@@ -79,7 +79,7 @@ Line Spacing
 
 The minimum value for the ``line-spacing`` attribute has been increased to "1".
 
-See `Whitespace <http://citationstyles.org/downloads/specification.html#whitespace>`_
+See `Whitespace <specification.html#whitespace>`_
 in the CSL 1.0.1 specification.
 
 Locale Metadata
@@ -110,7 +110,7 @@ example:
     </locale>
 
 See `Locale Files - Structure
-<http://citationstyles.org/downloads/specification.html#locale-files-structure>`_
+<specification.html#locale-files-structure>`_
 in the CSL 1.0.1 specification.
 
 Names
@@ -122,7 +122,7 @@ Affixes on ``cs:et-al``
 The ``prefix`` and ``suffix`` attributes are no longer available on
 ``cs:et-al``.
 
-See `Et-al <http://citationstyles.org/downloads/specification.html#et-al>`_ in
+See `Et-al <specification.html#et-al>`_ in
 the CSL 1.0.1 specification.
 
 Affixes on Name-parts
@@ -132,7 +132,7 @@ The ``prefix`` and ``suffix`` attributes are now also allowed on
 ``cs:name-part``, allowing for name formatting like "DOE (Jane)".
 
 See `Name-part Formatting
-<http://citationstyles.org/downloads/specification.html#name-part-formatting>`_
+<specification.html#name-part-formatting>`_
 in the CSL 1.0.1 specification.
 
 ``cs:name`` Optional
@@ -140,7 +140,7 @@ in the CSL 1.0.1 specification.
 
 The ``cs:name`` element is no longer a required child element of ``cs:names``.
 
-See `Name <http://citationstyles.org/downloads/specification.html#name>`_ in the
+See `Name <specification.html#name>`_ in the
 CSL 1.0.1 specification.
 
 ``delimiter-precedes-et-al``
@@ -151,7 +151,7 @@ when rendered as a result of et-al abbreviation. With the new optional
 ``delimiter-precedes-et-al`` attribute for ``cs:name``, the name delimiter can
 be used instead (e.g. "Doe, et al. 2000" instead of "Doe et al. 2000").
 
-See `Name <http://citationstyles.org/downloads/specification.html#name>`_ in the
+See `Name <specification.html#name>`_ in the
 CSL 1.0.1 specification.
 
 ``delimiter-precedes-et-al`` and ``delimiter-precedes-last`` - "after-inverted-name"
@@ -168,7 +168,7 @@ E.g.:
     "Doe, J., and T. Williams"
     "Doe, J., S. Smith and T. Williams"
 
-See `Name <http://citationstyles.org/downloads/specification.html#name>`_ in the
+See `Name <specification.html#name>`_ in the
 CSL 1.0.1 specification.
 
 Et-al Abbreviation with Last Name
@@ -187,8 +187,8 @@ the last name from the abbreviated name list, e.g.:
 The accompanying new ``names-use-last`` attribute for ``cs:key`` can be used to
 override the value of ``et-al-use-last`` for sorting.
 
-See `Name <http://citationstyles.org/downloads/specification.html#name>`_ and
-`Sorting <http://citationstyles.org/downloads/specification.html#sorting>`_ in
+See `Name <specification.html#name>`_ and
+`Sorting <specification.html#sorting>`_ in
 the CSL 1.0.1 specification.
 
 Independent ``names-min`` and ``names-use-first``
@@ -197,7 +197,7 @@ Independent ``names-min`` and ``names-use-first``
 The CSL schema now allows the ``names-min`` and ``names-use-first`` attributes
 to be set independently on ``cs:key``.
 
-See `Sorting <http://citationstyles.org/downloads/specification.html#sorting>`_
+See `Sorting <specification.html#sorting>`_
 in the CSL 1.0.1 specification.
 
 Normalizing Initials in "long" Form Names
@@ -217,7 +217,7 @@ to initials already present in the "long" form of names. For example,
 reformats the names "James T Kirk" and "Hunter S. Thompson" to "James T. Kirk"
 and "Hunter S. Thompson".
 
-See `Name <http://citationstyles.org/downloads/specification.html#name>`_ in the
+See `Name <specification.html#name>`_ in the
 CSL 1.0.1 specification.
 
 Subsequent Author Substitution
@@ -237,7 +237,7 @@ name list. For example, it is now possible to obtain bibliographic entries like:
     ---, --- & ---. 2004.
 
 See `Reference Grouping
-<http://citationstyles.org/downloads/specification.html#reference-grouping>`_ in
+<specification.html#reference-grouping>`_ in
 the CSL 1.0.1 specification.
 
 Numbers
@@ -247,8 +247,8 @@ The rules for rendering number variables with ``cs:number`` have changed, as
 have the criteria for the "is-numeric" condition. Multiple numbers are now
 recognized as such (e.g., "2, 3 & 4"), as are numbers with affixes ("2E").
 
-See `Number <http://citationstyles.org/downloads/specification.html#number>`_
-and `Choose <http://citationstyles.org/downloads/specification.html#choose>`_ in
+See `Number <specification.html#number>`_
+and `Choose <specification.html#choose>`_ in
 the CSL 1.0.1 specification.
 
 Ordinals
@@ -265,7 +265,7 @@ janvier" for "January 1st"), and "1re" and "première" if the noun is feminine
 (e.g., "1re édition" for "1st edition").
 
 See `Gender-specific Ordinals
-<http://citationstyles.org/downloads/specification.html#gender-specific-ordinals>`_
+<specification.html#gender-specific-ordinals>`_
 in the CSL 1.0.1 specification.
 
 Localization of Ordinals
@@ -281,9 +281,9 @@ to the first day of the month when rendering date variables, as is required for
 languages such as French.
 
 See `Ordinal Suffixes
-<http://citationstyles.org/downloads/specification.html#ordinal-suffixes>`_ and
+<specification.html#ordinal-suffixes>`_ and
 `Locale Options
-<http://citationstyles.org/downloads/specification.html#locale-options>`_ in the
+<specification.html#locale-options>`_ in the
 CSL 1.0.1 specification.
 
 Page Range Formats
@@ -299,7 +299,7 @@ Also, an error in the CSL 1.0 specification has been corrected: the "minimal"
 page range format was previously mistakenly listed as "minimum".
 
 See `Page Ranges
-<http://citationstyles.org/downloads/specification.html#page-ranges>`_ in the
+<specification.html#page-ranges>`_ in the
 CSL 1.0.1 specification.
 
 Specification
@@ -307,10 +307,10 @@ Specification
 
 The CSL specification has been largely rewritten for improved precision and
 clarity. There are several new paragraphs (e.g., `Terminology
-<http://citationstyles.org/downloads/specification.html#terminology>`_ and `File
-Types <http://citationstyles.org/downloads/specification.html#file-types>`_),
+<specification.html#terminology>`_ and `File
+Types <specification.html#file-types>`_),
 and every `CSL variable
-<http://citationstyles.org/downloads/specification.html#appendix-iv-variables>`_
+<specification.html#appendix-iv-variables>`_
 is now accompanied by a short description.
 
 Style Locale in Dependent Styles
@@ -322,7 +322,7 @@ style sets a style locale with ``default-locale``, this locale overrides the
 style locale of the independent parent style.
 
 See `The Root Element - cs:style
-<http://citationstyles.org/downloads/specification.html#the-root-element-cs-style>`_
+<specification.html#the-root-element-cs-style>`_
 in the CSL 1.0.1 specification.
 
 Style Metadata
@@ -345,7 +345,7 @@ explictly specified, e.g.:
       <eissn>1098-5336</eissn>
     </info>
 
-See `Info <http://citationstyles.org/downloads/specification.html#info>`_ in the
+See `Info <specification.html#info>`_ in the
 CSL 1.0.1 specification.
 
 License
@@ -362,7 +362,7 @@ URI of the style license, e.g.:
       License</rights>
     </info>
 
-See `Info <http://citationstyles.org/downloads/specification.html#info>`_ in the
+See `Info <specification.html#info>`_ in the
 CSL 1.0.1 specification.
 
 Short Title
@@ -378,7 +378,7 @@ style title, e.g.:
       <title-short>PNAS</title-short>
     </info>
 
-See `Info <http://citationstyles.org/downloads/specification.html#info>`_ in the
+See `Info <specification.html#info>`_ in the
 CSL 1.0.1 specification.
 
 Terms
@@ -391,7 +391,7 @@ Three new terms in the "miscellaneous" category are now available: "available
 at", "scale" (accompanying the new "scale" variable), and "version".
 
 See `Appendix II - Terms
-<http://citationstyles.org/downloads/specification.html#appendix-ii-terms>`_ in
+<specification.html#appendix-ii-terms>`_ in
 the CSL 1.0.1 specification.
 
 New Terms: "ordinal", "ordinal-00", and "ordinal-05" through "ordinal-99"
@@ -401,7 +401,7 @@ The terms "ordinal", "ordinal-00", and "ordinal-05" through "ordinal-99" are now
 available to improve the `localization of ordinals`_.
 
 See `Appendix II - Terms
-<http://citationstyles.org/downloads/specification.html#appendix-ii-terms>`_ in
+<specification.html#appendix-ii-terms>`_ in
 the CSL 1.0.1 specification.
 
 New Term: "page-range-delimiter"
@@ -414,7 +414,7 @@ the ``page-range-format`` attribute is set. As this term did not exist in CSL
 not defined.
 
 See `Page Ranges
-<http://citationstyles.org/downloads/specification.html#page-ranges>`_ in the
+<specification.html#page-ranges>`_ in the
 CSL 1.0.1 specification.
 
 Retired Terms: "field" Categories
@@ -437,7 +437,7 @@ This allows dates to be formatted as "April 2002" and "24 april 2002", where the
 month is only capitalized in the absence of a preceding day.
 
 See `Text-case
-<http://citationstyles.org/downloads/specification.html#text-case>`_ in the CSL
+<specification.html#text-case>`_ in the CSL
 1.0.1 specification.
 
 Validation
@@ -456,7 +456,7 @@ It is no longer allowed to set the ``form`` attribute to "verb" or "verb-short"
 on standalone ``cs:label`` elements (these values are still allowed if
 ``cs:label`` is a child element of ``cs:names``).
 
-See `Label <http://citationstyles.org/downloads/specification.html#label>`_ in
+See `Label <specification.html#label>`_ in
 the CSL 1.0.1 specification.
 
 Tests for conditions on ``cs:if`` and ``cs:else-if``
@@ -466,7 +466,7 @@ While the specification already required ``cs:if`` and ``cs:else-if`` to carry
 at least one condition attribute, the CSL schema also validated cases where no
 conditions were specified. This has been corrected.
 
-See `Choose <http://citationstyles.org/downloads/specification.html#choose>`_ in
+See `Choose <specification.html#choose>`_ in
 the CSL 1.0.1 specification.
 
 Variables
@@ -480,7 +480,7 @@ which previously were standard variables, have now become number variables. As a
 result, they can now be rendered through either ``cs:number`` or ``cs:text``.
 
 See `Number Variables
-<http://citationstyles.org/downloads/specification.html#number-variables>`_ in
+<specification.html#number-variables>`_ in
 the CSL 1.0.1 specification.
 
 New Variables: "container-title-short" and "title-short"
@@ -517,7 +517,7 @@ would give title listings like:
     Free Culture (Free Culture: The Nature and Future of Creativity)
 
 See `Standard Variables
-<http://citationstyles.org/downloads/specification.html#standard-variables>`_ in
+<specification.html#standard-variables>`_ in
 the CSL 1.0.1 specification.
 
 New Variables: "dimensions", "director", "illustrator", "ISSN", "PMCID", "PMID", "scale", and "source"
@@ -537,9 +537,9 @@ New CSL variables have been introduced:
 - "source" - origin of the item (e.g., a library catalog or database)
 
 See `Standard Variables
-<http://citationstyles.org/downloads/specification.html#standard-variables>`_
+<specification.html#standard-variables>`_
 and `Name Variables
-<http://citationstyles.org/downloads/specification.html#name-variables>`_ in the
+<specification.html#name-variables>`_ in the
 CSL 1.0.1 specification.
 
 New Variables: "reviewed-author" and "reviewed-title"
@@ -567,7 +567,7 @@ unchanged). An example:
       </if>
     </choose>
 
-See `Choose <http://citationstyles.org/downloads/specification.html#choose>`_ in
+See `Choose <specification.html#choose>`_ in
 the CSL 1.0.1 specification.
 
 Using ``cs:label`` with Number Variables
@@ -577,7 +577,7 @@ The ``cs:label`` element, which previously could only be used for the "locator"
 and "page" variables (and name variables, when used as a child element of
 ``cs:names``), can now be used with any number variable.
 
-See `Label <http://citationstyles.org/downloads/specification.html#label>`_ and
+See `Label <specification.html#label>`_ and
 `Number Variables
-<http://citationstyles.org/downloads/specification.html#number-variables>`_ in
+<specification.html#number-variables>`_ in
 the CSL 1.0.1 specification.

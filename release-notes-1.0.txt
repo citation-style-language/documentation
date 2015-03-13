@@ -55,7 +55,7 @@ information, although reading the schema requires some understanding of `RELAX
 NG Compact <http://www.relaxng.org/>`_, the XML schema language in which the CSL
 schema is written.
 
-.. _specification: http://citationstyles.org/downloads/specification.html
+.. _specification: specification.html
 
 Schema
 ------

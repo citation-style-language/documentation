@@ -16,7 +16,7 @@ Preface
 This primer is an introduction to the `Citation Style Language`_ (CSL), an open XML-based language to describe the formatting of citations and bibliographies. For a more technical and in-depth description of CSL, see the `CSL Specification`_.
 
 .. _Citation Style Language: http://citationstyles.org
-.. _CSL Specification: http://citationstyles.org/downloads/specification.html
+.. _CSL Specification: specification.html
 
 What is CSL?
 ~~~~~~~~~~~~

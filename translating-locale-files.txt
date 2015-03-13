@@ -33,7 +33,7 @@ their own localization data to override the defaults), and styles can be
 Below we will describe the structure of a locale file, give instructions on how
 to translate all its parts, and explain how you can submit your translations.
 See the `CSL specification
-<http://citationstyles.org/downloads/specification.html>`_ for more in-depth
+<specification.html>`_ for more in-depth
 documentation on the structure and function of locale files.
 
 Getting Started
@@ -118,7 +118,7 @@ Next up is the ``style-options`` element:
 
 This element is used to define localized grammar rules, as described in the
 `Locale Options
-<http://citationstyles.org/downloads/specification.html#locale-options>`_
+<specification.html#locale-options>`_
 section in the CSL specification.
 
 Date Formats
@@ -182,9 +182,9 @@ produces incorrect output for dates that don't have a day, or don't have a day
 and month ("September, 2012" and ", 2012", respectively).
 
 To read more about customizing date formats, see the `Localized Date Formats
-<http://citationstyles.org/downloads/specification.html#localized-date-formats>`_
+<specification.html#localized-date-formats>`_
 and `Date-part
-<http://citationstyles.org/downloads/specification.html#date-part>`_ sections in
+<specification.html#date-part>`_ sections in
 the CSL specification.
 
 Terms
@@ -204,7 +204,7 @@ between the start and end tag:
       <term name="et-al">et al.</term>
     </terms>
 
-See the `Terms <http://citationstyles.org/downloads/specification.html#terms>`_
+See the `Terms <specification.html#terms>`_
 section in the CSL specification.
 
 
@@ -272,7 +272,7 @@ The "ad" and "bc" terms are used to format years before 1000. E.g. the year "79"
 becomes "79AD", and "-2500" becomes "2500BC".
 
 See the `AD and BC
-<http://citationstyles.org/downloads/specification.html#ad-and-bc>`_ section in
+<specification.html#ad-and-bc>`_ section in
 the CSL specification.
 
 Punctuation
@@ -307,8 +307,8 @@ The "page-range-delimiter" terms is used to connect the first and last page of
 page ranges, e.g. "15–18" (it's default value is an en-dash).
 
 See the `Quotes
-<http://citationstyles.org/downloads/specification.html#quotes>`_ and `Page
-Ranges <http://citationstyles.org/downloads/specification.html#page-ranges>`_
+<specification.html#quotes>`_ and `Page
+Ranges <specification.html#page-ranges>`_
 sections in the CSL specification.
 
 Ordinals
@@ -342,7 +342,7 @@ any number in the "ordinal" form (e.g., "2nd", "15th", "231st"), without having
 to define a term for each number.
 
 The logic for defining ordinal suffixes with terms is described at `Ordinal Suffixes
-<http://citationstyles.org/downloads/specification.html#ordinal-suffixes>`_, and
+<specification.html#ordinal-suffixes>`_, and
 won't be revisited here. Instead, we'll look at an example.
 
 In English, there are four different ordinal suffixes in use: "st", "nd", and
@@ -445,7 +445,7 @@ feminine or masculine (with ``match`` set to "whole-number", the term does not
 repeat), e.g. "1re édition" but "11e édition".
 
 For more information, see the `Gender-specific Ordinals
-<http://citationstyles.org/downloads/specification.html#gender-specific-ordinals>`_
+<specification.html#gender-specific-ordinals>`_
 section in the CSL specification.
 
 Submitting Contributions
