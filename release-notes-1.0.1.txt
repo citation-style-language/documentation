@@ -1,42 +1,17 @@
-=================================
-`Citation Style Language 1.0.1`__
-=================================
-?????????????
-Release Notes
-?????????????
+CSL 1.0.1 Release Notes 
+=======================
 
-__ `Table of Contents`_
+by `Rintze M. Zelle, PhD <https://twitter.com/rintzezelle>`_
 
-.. class:: fixed
+|CCBYSA|_
 
-   `citationstyles.org`__
-
-__ http://citationstyles.org/
-
-.. class:: info-version
-
-   2012-09-03
-
-.. class:: contributors
-
-   **Author**
-   
-   Rintze M. Zelle, PhD
-   
-   |CCBYSA|_
-
-.. |CCBYSA| image:: http://i.creativecommons.org/l/by-sa/3.0/80x15.png
+.. |CCBYSA| image:: media/cc-by-sa-80x15.png
 .. _CCBYSA: http://creativecommons.org/licenses/by-sa/3.0/
 
-========
+.. contents:: **Table of Contents**
 
-.. contents:: Table of Contents
-
-========
-
-
-Introduction
-------------
+Preface
+-------
 
 These release notes describe the changes in Citation Style Language (CSL) 1.0.1
 as compared to the CSL 1.0 schema and specification (2010-05-30 update). Many of
