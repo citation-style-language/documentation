@@ -1325,7 +1325,7 @@ Label
 
 The ``cs:label`` rendering element outputs the term matching the variable
 selected with the required ``variable`` attribute, which must be set to
-"locator, "page", or one of the `number variables`_. The term is only rendered
+"locator", "page", or one of the `number variables`_. The term is only rendered
 if the selected variable is non-empty. For example,
 
 .. sourcecode:: xml
