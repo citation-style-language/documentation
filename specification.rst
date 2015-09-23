@@ -73,7 +73,7 @@ File Types
 ----------
 
 There are three types of CSL files: independent and dependent styles (both types
-use the “.csl” extension), and locale files (named "locales-xx-XX.xml", where
+use the ".csl" extension), and locale files (named "locales-xx-XX.xml", where
 "xx-XX" is a language dialect, e.g. "en-US" for American English).
 
 Independent Styles
@@ -190,10 +190,10 @@ In independent styles, ``cs:info`` has the following child elements:
     once to describe how in-text citations are rendered, using the
     ``citation-format`` attribute set to one of the following values:
 
-    -  "author-date" - e.g. “… (Doe, 1999)”
-    -  "author" - e.g. “… (Doe)”
-    -  "numeric" - e.g. “… [1]”
-    -  "label" - e.g. “… [doe99]”
+    -  "author-date" - e.g. "… (Doe, 1999)"
+    -  "author" - e.g. "… (Doe)"
+    -  "numeric" - e.g. "… [1]"
+    -  "label" - e.g. "… [doe99]"
     -  "note" - the citation appears as a footnote or endnote
 
     ``cs:category`` may be used multiple times with the ``field`` attribute, set
@@ -991,7 +991,7 @@ within a name variable. ``cs:name`` may carry the following attributes:
 
 ``delimiter``
     Specifies the text string used to separate names in a name variable. Default
-    is “, ” (e.g. "Doe, Smith").
+    is ", " (e.g. "Doe, Smith").
 
 ``delimiter-precedes-et-al``
     Determines when the name delimiter or a space is used between a truncated
@@ -1091,10 +1091,11 @@ defined as:
 -  "suffix" - name suffix, e.g. "Jr." in "John Smith Jr." and "III" in "Bill
    Gates III"
 -  "non-dropping-particle" - name particles that are not dropped when only the
-   surname is shown ("de" in the Dutch surname "de Koning") but which may be
+   surname is shown ("van" in the Dutch surname "van Gogh") but which may be
    treated separately from the family name, e.g. for sorting
 -  "dropping-particle" - name particles that are dropped when only the surname
-   is shown ("van" in "Ludwig van Beethoven", which becomes "Beethoven")
+   is shown ("van" in "Ludwig van Beethoven", which becomes "Beethoven", or
+   "von" in "Alexander von Humboldt", which becomes "Humboldt")
 
 The attributes affecting personal names:
 
@@ -1111,11 +1112,11 @@ The attributes affecting personal names:
     initialized when "initialize-with" is set. However, the value of
     "initialize-with" is still added after initials present in the full name
     (e.g. with ``initialize`` set to "false", and ``initialize-with`` set to
-    “.”, "James T Kirk" becomes "James T. Kirk").
+    ".", "James T Kirk" becomes "James T. Kirk").
 
 ``initialize-with``
     When set, given names are converted to initials. The attribute value is
-    added after each initial (“.” results in "J.J. Doe"). For compound given
+    added after each initial ("." results in "J. J. Doe"). For compound given
     names (e.g. "Jean-Luc"), hyphenation of the initials can be controlled with
     the global ``initialize-with-hyphen`` option (see `Hyphenation of
     Initialized Names`_).
@@ -1139,7 +1140,7 @@ The attributes affecting personal names:
 
 ``sort-separator``
     Sets the delimiter for name-parts that have switched positions as a result
-    of ``name-as-sort-order``. The default value is “, ” ("Doe, John"). As is
+    of ``name-as-sort-order``. The default value is ", " ("Doe, John"). As is
     the case for ``name-as-sort-order``, this attribute only affects names
     in scripts that know "given-name family-name" order.
 
@@ -1166,7 +1167,8 @@ sorting order of name-parts often differs. An overview of the possible orders:
     4) family
     5) suffix
 
-:Example: [Jean] [de] [La] [Fontaine] [III]
+:Example: [Vincent] [] [van] [Gogh] [III]
+:Example: [Alexander] [von] [] [Humboldt] [Jr.]
 
 ----
 
@@ -1179,7 +1181,7 @@ sorting order of name-parts often differs. An overview of the possible orders:
     4) dropping-particle
     5) suffix
 
-:Example: [La] [Fontaine], [Jean] [de], [III]
+:Example: [van] [Gogh], [Vincent] [], [III]
 
 ----
 
@@ -1192,7 +1194,7 @@ sorting order of name-parts often differs. An overview of the possible orders:
     4) non-dropping-particle
     5) suffix
 
-:Example: [Fontaine], [Jean] [de] [La], [III]
+:Example: [Gogh], [Vincent] [] [van], [III]
 
 ----
 
@@ -1201,7 +1203,7 @@ sorting order of name-parts often differs. An overview of the possible orders:
     1) non-dropping-particles
     2) family
 
-:Example: [La] [Fontaine]
+:Example: [van] [Gogh]
 
 ----
 
@@ -1218,7 +1220,7 @@ N.B. The sort keys are listed in descending order of priority.
     3) given
     4) suffix
 
-:Example: [La Fontaine] [de] [Jean] [III]
+:Example: [van Gogh] [] [Vincent] [III]
 
 ----
 
@@ -1230,7 +1232,7 @@ N.B. The sort keys are listed in descending order of priority.
     3) given
     4) suffix
 
-:Example: [Fontaine] [de La] [Jean] [III]
+:Example: [Gogh] [van] [Vincent] [III]
 
 ----
 
@@ -1695,9 +1697,9 @@ or the ``collapse`` attributes on ``cs:citation`` (see also `Cite Collapsing`_).
 
 ``cite-group-delimiter``
     Activates cite grouping and specifies the delimiter for cites within a cite
-    group. Defaults to “, ”. E.g. with ``delimiter`` on ``cs:layout`` in
-    ``cs:citation`` set to “; ”, ``collapse`` set to "year", and
-    ``cite-group-delimiter`` set to “,”, citations look like "(Doe 1999,2001;
+    group. Defaults to ", ". E.g. with ``delimiter`` on ``cs:layout`` in
+    ``cs:citation`` set to "; ", ``collapse`` set to "year", and
+    ``cite-group-delimiter`` set to ",", citations look like "(Doe 1999,2001;
     Jones 2000)".
 
 Cite Collapsing
@@ -1735,15 +1737,15 @@ Delimiters for collapsed cite groups can be customized with the
 ``year-suffix-delimiter``
     Specifies the delimiter for year-suffixes. Defaults to the delimiter set on
     ``cs:layout`` in ``cs:citation``. E.g. with ``collapse`` set to
-    "year-suffix", ``delimiter`` on ``cs:layout`` in ``cs:citation`` set to “;
-    ”, and ``year-suffix-delimiter`` set to “,”, citations look like "(Doe
+    "year-suffix", ``delimiter`` on ``cs:layout`` in ``cs:citation`` set to ";
+    ", and ``year-suffix-delimiter`` set to ",", citations look like "(Doe
     1999a,b; Jones 2000)".
 
 ``after-collapse-delimiter``
     Specifies the cite delimiter to be used *after* a collapsed cite group.
     Defaults to the delimiter set on ``cs:layout`` in ``cs:citation``. E.g. with
     ``collapse`` set to "year", ``delimiter`` on ``cs:layout`` in
-    ``cs:citation`` set to “, ”, and ``after-collapse-delimiter`` set to “; ”,
+    ``cs:citation`` set to ", ", and ``after-collapse-delimiter`` set to "; ",
     citations look like "(Doe 1999, 2001; Jones 2000, Brown 2001)".
 
 Note Distance
@@ -1900,7 +1902,7 @@ Hyphenation of Initialized Names
 ``initialize-with-hyphen``
     Specifies whether compound given names (e.g. "Jean-Luc") should be
     initialized with a hyphen ("J.-L.", value "true", default) or without
-    ("J.L.", value "false").
+    ("J. L.", value "false").
 
 Page Ranges
 '''''''''''
@@ -1916,12 +1918,14 @@ Page Ranges
 Name Particles
 ''''''''''''''
 
-Western names frequently contain one or more name particles (e.g. "de" in the
-Dutch name "W. de Koning"). These name particles can be either kept or dropped
-when only the surname is shown: these two types are referred to as non-dropping
-and dropping particles, respectively. A single name can contain particles of
-both types (with non-dropping particles always following dropping particles).
-For example, "W. de Koning" and the French name "Jean de La Fontaine" can be
+Western names frequently contain one or more name particles (e.g. "van" in the
+Dutch name "Vincent van Gogh"). These name particles can be either kept or
+dropped when only the surname is shown: these two types are referred to as
+non-dropping and dropping particles, respectively. Theoretically, a single name
+might contain particles of both types (with non-dropping particles always
+following dropping particles), though currently we are not aware of any
+real-life examples. For example, the Dutch name "Vincent van Gogh", the German
+name "Alexander von Humboldt", and the Arabic name "Tawfiq al-Hakim" can be
 deconstructed into:
 
     ::
@@ -1929,77 +1933,88 @@ deconstructed into:
         {
             "author": [
                 {
-                    "given": "W.",
-                    "non-dropping-particle": "de",
-                    "family": "Koning"
+                    "given": "Vincent",
+                    "non-dropping-particle": "van",
+                    "family": "Gogh"
                 },
                 {
-                    "given": "Jean",
-                    "dropping-particle": "de",
-                    "non-dropping-particle": "La",
-                    "family": "Fontaine"
+                    "given": "Alexander",
+                    "dropping-particle": "von",
+                    "family": "Humboldt"
+                }
+                {
+                    "given": "Tawfiq",
+                    "non-dropping-particle": "al-",
+                    "family": "Hakim"
                 }
             ]
         }
 
-When just the surname is shown, only the non-dropping-particle is kept: "De
-Koning" and "La Fontaine".
+When just the surname is shown, only the non-dropping-particle is kept: "Van
+Gogh" and "al-Hakim", but "Humboldt".
 
 In the case of inverted names, where the family name precedes the given name,
 the dropping-particle is always appended to the family name, but the
-non-dropping-particle can be either prepended (e.g. "de Koning, W.") or appended
-(after initials or given names, e.g. "Koning, W. de"). For inverted names where
-the non-dropping-particle is prepended, names can either be sorted by keeping
-the non-dropping-particle together with the family name as part of the primary
-sort key (sort order A), or by separating the non-dropping-particle from the
-family name and have it become (part of) a secondary sort key, joining the
-dropping-particle, if available (sort order B):
+non-dropping-particle can be either prepended (e.g. "van Gogh, Vincent") or
+appended (after initials or given names, e.g. "Gogh, Vincent van"). For inverted
+names where the non-dropping-particle is prepended, names can either be sorted
+by keeping the non-dropping-particle together with the family name as part of
+the primary sort key (sort order A), or by separating the non-dropping-particle
+from the family name and have it become (part of) a secondary sort key, joining
+the dropping-particle, if available (sort order B):
 
 **Sort order A: non-dropping-particle not demoted**
 
--  primary sort key: "La Fontaine"
--  secondary sort key: "de"
--  tertiary sort key: "Jean"
+-  primary sort key: "van Gogh"
+-  secondary sort key: ""
+-  tertiary sort key: "Vincent"
 
 **Sort order B: non-dropping-particle demoted**
 
--  primary sort key: "Fontaine"
--  secondary sort key: "de La"
--  tertiary sort key: "Jean"
+-  primary sort key: "Gogh"
+-  secondary sort key: "van"
+-  tertiary sort key: "Vincent"
 
 The handling of the non-dropping-particle can be customized with the
 ``demote-non-dropping-particle`` option:
 
 ``demote-non-dropping-particle``
     Sets the display and sorting behavior of the non-dropping-particle in
-    inverted names (e.g. "Koning, W. de"). Allowed values:
+    inverted names (e.g. "Gogh, Vincent van"). Allowed values:
 
     -  "never": the non-dropping-particle is treated as part of the family name,
-       whereas the dropping-particle is appended (e.g. "de Koning, W.", "La
-       Fontaine, Jean de"). The non-dropping-particle is part of the primary
-       sort key (sort order A, e.g. "de Koning, W." appears under "D").
+       whereas the dropping-particle is appended (e.g. "van Gogh, Vincent", 
+       "Humboldt, Alexander von"). The non-dropping-particle is part of the
+       primary sort key (sort order A, e.g. "van Gogh, Vincent" appears under
+       "V").
     -  "sort-only": same display behavior as "never", but the
        non-dropping-particle is demoted to a secondary sort key (sort order B,
-       e.g. "de Koning, W." appears under "K").
+       e.g. "van Gogh, Vincent" appears under "G").
     -  "display-and-sort" (default): the dropping and non-dropping-particle are
-       appended (e.g. "Koning, W. de" and "Fontaine, Jean de La"). For name
+       appended (e.g. "Gogh, Vincent van" and "Humboldt, Alexander von"). For name
        sorting, all particles are part of the secondary sort key (sort order B,
-       e.g. "Koning, W. de" appears under "K").
+       e.g. "Gogh, Vincent van" appears under "G").
 
 Some names include a particle that should never be demoted. For these cases the
 particle should just be included in the family name field, for example for the
-French general Charles de Gaulle:
+French general Charles de Gaulle and the writer Jean de La Fontaine:
 
     ::
 
         {
             "author": [
                 {
-                    "family": "de Gaulle",
                     "given": "Charles"
+                    "family": "de Gaulle",
+                },
+                {
+                    "given": "Jean"
+                    "dropping-particle": "de",
+                    "family": "La Fontaine",
                 }
             ]
         }
+
 
 Inheritable Name Options
 ^^^^^^^^^^^^^^^^^^^^^^^^
