@@ -2748,7 +2748,8 @@ accessed
     date the item has been accessed
 
 container
-    ?
+    date the container (e.g. an entire multivolume, multiyear work) holding
+    the item was issued/published
 
 event-date
     date the related event took place
