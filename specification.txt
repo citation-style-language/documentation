@@ -167,10 +167,10 @@ independent styles, ``cs:info`` has the following child elements:
     once to describe how in-text citations are rendered, using the
     ``citation-format`` attribute set to one of the following values:
 
-    -  "author-date" - e.g. “... (Doe, 1999)”
-    -  "author" - e.g. “... (Doe)”
-    -  "numeric" - e.g. “... [1]”
-    -  "label" - e.g. “... [doe99]”
+    -  "author-date" - e.g. “… (Doe, 1999)”
+    -  "author" - e.g. “… (Doe)”
+    -  "numeric" - e.g. “… [1]”
+    -  "label" - e.g. “… [doe99]”
     -  "note" - the citation appears as a footnote or endnote
 
     ``cs:category`` may be used multiple times with the ``field`` attribute, set
@@ -1260,7 +1260,7 @@ are rendered. An example, yielding names like "Jane DOE":
 Et-al
 ^^^^^
 
-Et-al abbreviation, controlled via the ``et-al-...`` attributes (see `Name`_),
+Et-al abbreviation, controlled via the ``et-al-…`` attributes (see `Name`_),
 can be further customized with the optional ``cs:et-al`` element, which must
 follow the ``cs:name`` element (if present). The ``term`` attribute may be set
 to either "et-al" (the default) or to "and others" to use either term. The
@@ -1610,7 +1610,7 @@ are always tried in the listed order:
     added to ambiguous cites (e.g. "Doe 2007, Doe 2007" becomes "Doe 2007a, Doe
     2007b") and to their corresponding bibliographic entries. The assignment of
     the year-suffixes follows the order of the bibliographies entries, and
-    additional letters are used once "z" is reached ("z", "aa", "ab", ..., "az",
+    additional letters are used once "z" is reached ("z", "aa", "ab", …, "az",
     "ba", etc.). By default the year-suffix is appended to the cite, and to the
     first year rendered through ``cs:date`` in the bibliographic entry, but its
     location can be controlled by explicitly rendering the "year-suffix"
