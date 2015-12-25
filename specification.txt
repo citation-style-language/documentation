@@ -26,7 +26,7 @@ formatting of citations, notes and bibliographies, offering:
 -  Extensive support for style requirements
 -  Automatic style localization
 -  Infrastructure for style distribution and updating
--  Already over 2500 freely available styles (Creative Commons BY-SA licensed)
+-  Thousands of freely available styles (Creative Commons BY-SA licensed)
 
 For additional documentation, the CSL schema, styles, and locales, visit the CSL
 project home, `citationstyles.org <http://citationstyles.org>`_.
@@ -543,7 +543,7 @@ If a style uses a term in a form that is undefined (even after `Locale
 Fallback`_), there is fallback to other forms: "verb-short" first falls back to
 "verb", "symbol" first falls back to "short", and "verb" and "short" both fall
 back to "long". If no locale or form fallback is available, the term is rendered
-as a empty string.
+as an empty string.
 
 The ``match``, ``gender``, and ``gender-form`` attributes can be used on
 ``cs:term`` for the formatting of number variables rendered as ordinals (e.g.
@@ -896,7 +896,7 @@ contains any non-numeric content (e.g. "Special edition").
 During the extraction, numbers separated by a hyphen are stripped of intervening
 spaces ("2 - 4" becomes "2-4"). Numbers separated by a comma receive one space
 after the comma ("2,3" and "2 , 3" become "2, 3"), while numbers separated by an
-ampersand receive one space before and one after the ampsersand ("2&3" becomes
+ampersand receive one space before and one after the ampersand ("2&3" becomes
 "2 & 3").
 
 Extracted numbers can be formatted via the optional ``form`` attribute, with
@@ -1406,10 +1406,10 @@ it exists, and the "no date" term when it doesn't:
 ``cs:choose`` requires a ``cs:if`` child element, which may be followed by one
 or more ``cs:else-if`` child elements, and an optional closing ``cs:else`` child
 element. The ``cs:if`` and ``cs:else-if`` elements may contain any number of
-`rendering elements`_ (except for ``cs:layout``). As an empty cs:else element
-would be superfluous, ``cs:else`` must contain at least one rendering element.
-``cs:if`` and ``cs:else-if`` elements must carry one or more conditions, which
-are set with the attributes:
+`rendering elements`_ (except for ``cs:layout``). As an empty ``cs:else``
+element would be superfluous, ``cs:else`` must contain at least one rendering
+element. ``cs:if`` and ``cs:else-if`` elements must carry one or more
+conditions, which are set with the attributes:
 
 ``disambiguate``
     When set to "true" (the only allowed value), the element content is only
@@ -1556,7 +1556,7 @@ are always tried in the listed order:
 ``givenname-disambiguation-rule``
     Specifies a) whether the purpose of name expansion is limited to
     disambiguating cites, or has the additional goal of disambiguating names
-    (only in the latter case are ambiguous names in unambigous cites expanded,
+    (only in the latter case are ambiguous names in unambiguous cites expanded,
     e.g. from "(Doe 1950; Doe 2000)" to "(Jane Doe 1950; John Doe 2000)"), b)
     whether name expansion targets all, or just the first name of each cite, and
     c) the method by which each name is expanded.
@@ -1584,9 +1584,9 @@ are always tried in the listed order:
         "all-names"
             Name expansion has the dual purpose of disambiguating cites and
             names. All rendered ambiguous names, in both ambiguous and
-            umambiguous cites, are subject to disambiguation. Each name is
-            progressively transformed until it is disambiguated. Names that can
-            not be disambiguated remain in their original form.
+            unambiguous cites, are subject to disambiguation. Each name is
+            progressively transformed until it is disambiguated. Names that
+            cannot be disambiguated remain in their original form.
 
         "all-names-with-initials"
             As "all-names", but name expansion is limited to showing initials
@@ -2217,7 +2217,7 @@ The allowed values:
 ----
 
 (B) A per-author publication listing. With ``subsequent-author-substitute`` (see
-    `Reference Grouping`_) set to an empty string , the block with the author
+    `Reference Grouping`_) set to an empty string, the block with the author
     names is only rendered once for items by the same authors.
 
     .. sourcecode:: xml
