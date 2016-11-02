@@ -1840,7 +1840,7 @@ The following formatting attributes may be set on ``cs:date``, ``cs:date-part``,
 
     -  "baseline" (default)
     -  "sup" (superscript)
-    -  "sup" (subscript)
+    -  "sub" (subscript)
 
 Affixes
 ~~~~~~~
