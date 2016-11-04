@@ -166,10 +166,10 @@ followed by a description of all possible elements.
     category type describes how in-text citations are rendered. For this type
     the ``citation-format`` attribute is set to one of the following values:
 
-    -  "author-date": e.g. "... (Doe, 1999)"
-    -  "author": e.g. "... (Doe)"
-    -  "numeric": e.g. "... [1]"
-    -  "label": e.g. "... [doe99]"
+    -  "author-date": e.g. “... (Doe, 1999)”
+    -  "author": e.g. “... (Doe)”
+    -  "numeric": e.g. “... [1]”
+    -  "label": e.g. “... [doe99]”
     -  "note": the citation appears as a footnote or endnote
 
     The second category type indicates the fields or disciplines for which the
@@ -853,7 +853,7 @@ variable are separated from each other. The attributes that may be used on
 
 ``delimiter``
     Specifies the text string to separate names of a name variable. The default
-    value is ", " ("J. Doe, S. Smith").
+    value is “, ” ("J. Doe, S. Smith").
 
 ``delimiter-precedes-last``
     Determines in which cases the delimiter used to delimit names is also used
@@ -916,7 +916,7 @@ these name-parts, which are delimited by single spaces in rendered names, are:
 ``initialize-with``
     If this attribute is set, given names are converted to initials. The
     attribute value specifies the suffix that is included after each initial
-    ("." results in "J.J. Doe"). Note that the global ``initialize-with-hyphen``
+    (“.” results in "J.J. Doe"). Note that the global ``initialize-with-hyphen``
     option controls how compound given names (e.g. "Jean-Luc") are hyphenated
     when initialized (see `Hyphenation of Initialized Names`_).
 
@@ -937,7 +937,7 @@ these name-parts, which are delimited by single spaces in rendered names, are:
 
 ``sort-separator``
     Sets the delimiter for name-parts that have switched positions as a result
-    of ``name-as-sort-order``. The default value is ", " ("Doe, John"). As is
+    of ``name-as-sort-order``. The default value is “, ” ("Doe, John"). As is
     the case for ``name-as-sort-order``, this attribute only affects names
     written in the latin or Cyrillic alphabet.
 
@@ -1483,7 +1483,7 @@ Citation Collapsing
     like "(Smith 1999a,b; 2000; Jones 2001)" are obtained when the ``collapse``
     attribute is set to "year-suffix", the ``delimiter`` on ``cs:layout`` in
     ``cs:citation`` is set to "; ", and the ``year-suffix-delimiter`` is set to
-    ",". When the ``year-suffix-delimiter`` attribute is not set, year-suffixes
+    “,”. When the ``year-suffix-delimiter`` attribute is not set, year-suffixes
     are delimited with the delimiter set on ``cs:layout`` in ``cs:citation``.
 
 ``after-collapse-delimiter``
@@ -1491,7 +1491,7 @@ Citation Collapsing
     collapsed cites. For example, citations like "(Smith 1999a, b, 2000; Jones
     2001, Brown 2007)" are obtained when the ``collapse`` attribute is set to
     "year-suffix", the ``delimiter`` on ``cs:layout`` in ``cs:citation`` is set
-    to ", " and ``after-collapse-delimiter`` is set to "; ".
+    to “, ” and ``after-collapse-delimiter`` is set to "; ".
 
 
 Note Distance
