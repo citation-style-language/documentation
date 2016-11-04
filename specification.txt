@@ -1083,7 +1083,7 @@ The attributes affecting personal names:
 
 ``initialize-with``
     When set, given names are converted to initials. The attribute value is
-    added after each initial ("." results in "J.J. Doe"). For compound given
+    added after each initial (“.” results in "J.J. Doe"). For compound given
     names (e.g. "Jean-Luc"), hyphenation of the initials can be controlled with
     the global ``initialize-with-hyphen`` option (see `Hyphenation of
     Initialized Names`_).
