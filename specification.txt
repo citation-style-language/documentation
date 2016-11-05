@@ -166,10 +166,10 @@ followed by a description of all possible elements.
     category type describes how in-text citations are rendered. For this type
     the ``citation-format`` attribute is set to one of the following values:
 
-    -  "author-date": e.g. “... (Doe, 1999)”
-    -  "author": e.g. “... (Doe)”
-    -  "numeric": e.g. “... [1]”
-    -  "label": e.g. “... [doe99]”
+    -  "author-date": e.g. “… (Doe, 1999)”
+    -  "author": e.g. “… (Doe)”
+    -  "numeric": e.g. “… [1]”
+    -  "label": e.g. “… [doe99]”
     -  "note": the citation appears as a footnote or endnote
 
     The second category type indicates the fields or disciplines for which the
