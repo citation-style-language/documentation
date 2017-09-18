@@ -26,7 +26,7 @@ formatting of citations, notes and bibliographies, offering:
 -  Extensive support for style requirements
 -  Automatic style localization
 -  Infrastructure for style distribution and updating
--  Already over 2500 freely available styles (Creative Commons BY-SA licensed)
+-  Thousands of freely available styles (Creative Commons BY-SA licensed)
 
 For additional documentation, the CSL schema, styles, and locales, visit the CSL
 project home, `citationstyles.org <http://citationstyles.org>`_.
@@ -51,7 +51,7 @@ File Types
 ----------
 
 There are three types of CSL files: independent and dependent styles (both types
-use the ".csl" extension), and locale files (named "locales-xx-XX.xml", where
+use the “.csl” extension), and locale files (named "locales-xx-XX.xml", where
 "xx-XX" is a language dialect, e.g. "en-US" for American English).
 
 Independent Styles
@@ -168,10 +168,10 @@ In independent styles, ``cs:info`` has the following child elements:
     once to describe how in-text citations are rendered, using the
     ``citation-format`` attribute set to one of the following values:
 
-    -  "author-date" - e.g. "... (Doe, 1999)"
-    -  "author" - e.g. "... (Doe)"
-    -  "numeric" - e.g. "... [1]"
-    -  "label" - e.g. "... [doe99]"
+    -  "author-date" - e.g. “… (Doe, 1999)”
+    -  "author" - e.g. “… (Doe)”
+    -  "numeric" - e.g. “… [1]”
+    -  "label" - e.g. “… [doe99]”
     -  "note" - the citation appears as a footnote or endnote
 
     ``cs:category`` may be used multiple times with the ``field`` attribute, set
@@ -543,7 +543,7 @@ If a style uses a term in a form that is undefined (even after `Locale
 Fallback`_), there is fallback to other forms: "verb-short" first falls back to
 "verb", "symbol" first falls back to "short", and "verb" and "short" both fall
 back to "long". If no locale or form fallback is available, the term is rendered
-as a empty string.
+as an empty string.
 
 The ``match``, ``gender``, and ``gender-form`` attributes can be used on
 ``cs:term`` for the formatting of number variables rendered as ordinals (e.g.
@@ -896,7 +896,7 @@ contains any non-numeric content (e.g. "Special edition").
 During the extraction, numbers separated by a hyphen are stripped of intervening
 spaces ("2 - 4" becomes "2-4"). Numbers separated by a comma receive one space
 after the comma ("2,3" and "2 , 3" become "2, 3"), while numbers separated by an
-ampersand receive one space before and one after the ampsersand ("2&3" becomes
+ampersand receive one space before and one after the ampersand ("2&3" becomes
 "2 & 3").
 
 Extracted numbers can be formatted via the optional ``form`` attribute, with
@@ -960,7 +960,7 @@ within a name variable. ``cs:name`` may carry the following attributes:
 
 ``delimiter``
     Specifies the text string used to separate names in a name variable. Default
-    is ", " (e.g. "Doe, Smith").
+    is “, ” (e.g. "Doe, Smith").
 
 ``delimiter-precedes-et-al``
     Determines when the name delimiter or a space is used between a truncated
@@ -1081,7 +1081,7 @@ The attributes affecting personal names:
     initialized when "initialize-with" is set. However, the value of
     "initialize-with" is still added after initials present in the full name
     (e.g. with ``initialize`` set to "false", and ``initialize-with`` set to
-    ".", "James T Kirk" becomes "James T. Kirk").
+    “.”, "James T Kirk" becomes "James T. Kirk").
 
 ``initialize-with``
     When set, given names are converted to initials. The attribute value is
@@ -1109,7 +1109,7 @@ The attributes affecting personal names:
 
 ``sort-separator``
     Sets the delimiter for name-parts that have switched positions as a result
-    of ``name-as-sort-order``. The default value is ", " ("Doe, John"). As is
+    of ``name-as-sort-order``. The default value is “, ” ("Doe, John"). As is
     the case for ``name-as-sort-order``, this attribute only affects names
     in scripts that know "given-name family-name" order.
 
@@ -1265,7 +1265,7 @@ are rendered. An example, yielding names like "Jane DOE":
 Et-al
 ^^^^^
 
-Et-al abbreviation, controlled via the ``et-al-...`` attributes (see `Name`_),
+Et-al abbreviation, controlled via the ``et-al-…`` attributes (see `Name`_),
 can be further customized with the optional ``cs:et-al`` element, which must
 follow the ``cs:name`` element (if present). The ``term`` attribute may be set
 to either "et-al" (the default) or to "and others" to use either term. The
@@ -1408,10 +1408,10 @@ it exists, and the "no date" term when it doesn't:
 ``cs:choose`` requires a ``cs:if`` child element, which may be followed by one
 or more ``cs:else-if`` child elements, and an optional closing ``cs:else`` child
 element. The ``cs:if`` and ``cs:else-if`` elements may contain any number of
-`rendering elements`_ (except for ``cs:layout``). As an empty cs:else element
-would be superfluous, ``cs:else`` must contain at least one rendering element.
-``cs:if`` and ``cs:else-if`` elements must carry one or more conditions, which
-are set with the attributes:
+`rendering elements`_ (except for ``cs:layout``). As an empty ``cs:else``
+element would be superfluous, ``cs:else`` must contain at least one rendering
+element. ``cs:if`` and ``cs:else-if`` elements must carry one or more
+conditions, which are set with the attributes:
 
 ``disambiguate``
     When set to "true" (the only allowed value), the element content is only
@@ -1558,7 +1558,7 @@ are always tried in the listed order:
 ``givenname-disambiguation-rule``
     Specifies a) whether the purpose of name expansion is limited to
     disambiguating cites, or has the additional goal of disambiguating names
-    (only in the latter case are ambiguous names in unambigous cites expanded,
+    (only in the latter case are ambiguous names in unambiguous cites expanded,
     e.g. from "(Doe 1950; Doe 2000)" to "(Jane Doe 1950; John Doe 2000)"), b)
     whether name expansion targets all, or just the first name of each cite, and
     c) the method by which each name is expanded.
@@ -1586,9 +1586,9 @@ are always tried in the listed order:
         "all-names"
             Name expansion has the dual purpose of disambiguating cites and
             names. All rendered ambiguous names, in both ambiguous and
-            umambiguous cites, are subject to disambiguation. Each name is
-            progressively transformed until it is disambiguated. Names that can
-            not be disambiguated remain in their original form.
+            unambiguous cites, are subject to disambiguation. Each name is
+            progressively transformed until it is disambiguated. Names that
+            cannot be disambiguated remain in their original form.
 
         "all-names-with-initials"
             As "all-names", but name expansion is limited to showing initials
@@ -1615,7 +1615,7 @@ are always tried in the listed order:
     added to ambiguous cites (e.g. "Doe 2007, Doe 2007" becomes "Doe 2007a, Doe
     2007b") and to their corresponding bibliographic entries. The assignment of
     the year-suffixes follows the order of the bibliographies entries, and
-    additional letters are used once "z" is reached ("z", "aa", "ab", ..., "az",
+    additional letters are used once "z" is reached ("z", "aa", "ab", …, "az",
     "ba", etc.). By default the year-suffix is appended to the cite, and to the
     first year rendered through ``cs:date`` in the bibliographic entry, but its
     location can be controlled by explicitly rendering the "year-suffix"
@@ -1649,9 +1649,9 @@ or the ``collapse`` attributes on ``cs:citation`` (see also `Cite Collapsing`_).
 
 ``cite-group-delimiter``
     Activates cite grouping and specifies the delimiter for cites within a cite
-    group. Defaults to ", ". E.g. with ``delimiter`` on ``cs:layout`` in
-    ``cs:citation`` set to "; ", ``collapse`` set to "year", and
-    ``cite-group-delimiter`` set to ",", citations look like "(Doe 1999,2001;
+    group. Defaults to “, ”. E.g. with ``delimiter`` on ``cs:layout`` in
+    ``cs:citation`` set to “; ”, ``collapse`` set to "year", and
+    ``cite-group-delimiter`` set to “,”, citations look like "(Doe 1999,2001;
     Jones 2000)".
 
 Cite Collapsing
@@ -1689,15 +1689,15 @@ Delimiters for collapsed cite groups can be customized with the
 ``year-suffix-delimiter``
     Specifies the delimiter for year-suffixes. Defaults to the delimiter set on
     ``cs:layout`` in ``cs:citation``. E.g. with ``collapse`` set to
-    "year-suffix", ``delimiter`` on ``cs:layout`` in ``cs:citation`` set to ";
-    ", and ``year-suffix-delimiter`` set to ",", citations look like "(Doe
+    "year-suffix", ``delimiter`` on ``cs:layout`` in ``cs:citation`` set to “;
+    ”, and ``year-suffix-delimiter`` set to “,”, citations look like "(Doe
     1999a,b; Jones 2000)".
 
 ``after-collapse-delimiter``
     Specifies the cite delimiter to be used *after* a collapsed cite group.
     Defaults to the delimiter set on ``cs:layout`` in ``cs:citation``. E.g. with
     ``collapse`` set to "year", ``delimiter`` on ``cs:layout`` in
-    ``cs:citation`` set to ", ", and ``after-collapse-delimiter`` set to "; ",
+    ``cs:citation`` set to “, ”, and ``after-collapse-delimiter`` set to “; ”,
     citations look like "(Doe 1999, 2001; Jones 2000, Brown 2001)".
 
 Note Distance
@@ -2232,7 +2232,7 @@ The allowed values:
 ----
 
 (B) A per-author publication listing. With ``subsequent-author-substitute`` (see
-    `Reference Grouping`_) set to an empty string , the block with the author
+    `Reference Grouping`_) set to an empty string, the block with the author
     names is only rendered once for items by the same authors.
 
     .. sourcecode:: xml
