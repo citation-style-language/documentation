@@ -2028,8 +2028,9 @@ Locale Options
 
 ``punctuation-in-quote``
     For ``cs:text`` elements rendered with the ``quotes`` attribute set to
-    "true" (see `Formatting`_), and for which the output is followed by a comma
-    or period, ``punctuation-in-quote`` specifies whether this punctuation is
+    "true" (see `Formatting`_), and for which the output is followed by a 
+    punctuation character (i.e. one of ``!``, ``?``, ``.``, ``:``, ``,``, or
+    ``;``), ``punctuation-in-quote`` specifies whether this punctuation is
     placed outside (value "false", default) or inside (value "true") the closing
     quotation mark.
     
@@ -2318,7 +2319,7 @@ Quotes
 The ``quotes`` attribute may set on ``cs:text``. When set to "true" ("false" is
 default), the rendered text is wrapped in quotes (the quotation marks used are
 terms). The localized ``punctuation-in-quote`` option controls whether
-an adjoining comma or period appears outside (default) or inside the closing
+an adjoining punctuation characters appear outside (default) or inside the closing
 quotation mark (see `Locale Options`_).
 
 Strip-periods
