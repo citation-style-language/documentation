@@ -406,21 +406,21 @@ For dialects of the same language, one is designated the primary dialect. All
 others are secondaries. At the moment of writing, the available locale files
 include:
 
-+-----------------+----------------------+
-| Primary dialect | Secondary dialect(s) |
-+=================+======================+
-| de-DE           | de-AT, de-CH         |
-+-----------------+----------------------+
-| en-US           | en-GB                |
-+-----------------+----------------------+
-| es-ES           | es-CL, es-MX         |
-+-----------------+----------------------+
-| fr-FR           | fr-CA                |
-+-----------------+----------------------+
-| pt-PT           | pt-BR                |
-+-----------------+----------------------+
-| zh-CN           | zh-TW                |
-+-----------------+----------------------+
++--------------------+--------------------------------------+
+| Primary dialect    | Secondary dialect(s)                 |
++====================+======================================+
+| de-DE (German)     | de-AT (Austria), de-CH (Switzerland) |
++--------------------+--------------------------------------+
+| en-US (English)    | en-GB (UK)                           |
++--------------------+--------------------------------------+
+| es-ES (Spanish)    | es-CL (Chile), es-MX (Mexico)        |
++--------------------+--------------------------------------+
+| fr-FR (French)     | fr-CA (Canada)                       |
++--------------------+--------------------------------------+
+| pt-PT (Portuguese) | pt-BR (Brazil)                       |
++--------------------+--------------------------------------+
+| zh-CN (Chinese)    | zh-TW (Taiwan)                       |
++--------------------+--------------------------------------+
 
 Locale fallback is best described with an example. If the chosen output locale
 is "de-AT" (Austrian German), localizable units are individually drawn from the
