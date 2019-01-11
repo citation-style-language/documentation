@@ -582,6 +582,12 @@ be overridden for certain numbers with the following terms:
   "whole-number" ("last-two-digits" is the default), there is only a match if
   the number is the same as that of the term.
 
+- "long-ordinal-01" through "long-ordinal-10" - a term in this group
+  is used when the number is the same as that of the term. If no term matches,
+  the number is matched against the "ordinal-00" through "ordinal-09" group
+  and/or the "ordinal-10" through "ordinal-99" group and follows the matching
+  rules of these groups.
+
 When a number has matching terms from both groups (e.g. "13" can match
 "ordinal-03" and "ordinal-13"), the term from the "ordinal-10" through
 "ordinal-99" group is used.
