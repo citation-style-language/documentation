@@ -44,7 +44,7 @@ https://github.com/citation-style-language/locales/.
 
 Each locale file contains the localization data for one language. Locale files
 are named "locales-xx-XX.xml", where "xx-XX" is a `BCP 47 language code
-<http://people.w3.org/rishida/utils/subtags/>`_ (e.g. the locale code
+<https://r12a.github.io/app-subtags/>`_ (e.g. the locale code
 for British English is "en-GB"). The `repository wiki
 <https://github.com/citation-style-language/locales/wiki>`_ lists the locale
 code, language, and translation status of all locale files in the repository.
