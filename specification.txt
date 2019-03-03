@@ -731,7 +731,7 @@ The ``cs:date`` rendering element outputs the date selected from the list of
 rendered in either a localized or non-localized format.
 
 `Localized date formats`_ are selected with the optional ``form`` attribute,
-which must set to either "numeric" (for fully numeric formats, e.g.
+which must be set to either "numeric" (for fully numeric formats, e.g.
 "12-15-2005"), or "text" (for formats with a non-numeric month, e.g. "December
 15, 2005"). Localized date formats can be customized in two ways. First, the
 ``date-parts`` attribute may be used to show fewer date parts. The possible
