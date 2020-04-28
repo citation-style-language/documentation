@@ -2560,7 +2560,7 @@ abstract
     abstract of the item (e.g. the abstract of a journal article)
 
 annote
-    reader's notes about the item content
+    annotations on the bibliography entry
 
 archive
     archive storing the item
