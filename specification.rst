@@ -2561,7 +2561,7 @@ abstract
 
 annote
     short markup, decoration, or annotation to the item (e.g., to indicate items included in a review); 
-	for descriptive text (e.g., in an annotated bibliography), use ``note`` instead
+    for descriptive text (e.g., in an annotated bibliography), use ``note`` instead
 
 archive
     archive storing the item
