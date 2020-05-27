@@ -2560,7 +2560,8 @@ abstract
     abstract of the item (e.g. the abstract of a journal article)
 
 annote
-    reader's notes about the item content
+    short markup, decoration, or annotation to the item (e.g., to indicate items included in a review); 
+	for descriptive text (e.g., in an annotated bibliography), use ``note`` instead
 
 archive
     archive storing the item
