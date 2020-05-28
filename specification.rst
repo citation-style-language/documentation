@@ -2523,6 +2523,7 @@ Appendix III - Types
 -  broadcast
 -  chapter
 -  dataset
+-  document
 -  entry
 -  entry-dictionary
 -  entry-encyclopedia
