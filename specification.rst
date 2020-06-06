@@ -1277,7 +1277,15 @@ term:
 .. sourcecode:: xml
 
     <names variable="author">
-      <et-al term="and others" font-style="italic"/>
+      <et-al font-style="italic"/>
+    </names>
+
+Or it can be used to select another term:
+
+.. sourcecode:: xml
+
+    <names variable="author">
+      <et-al term="and others"/>
     </names>
 
 Substitute
