@@ -8,6 +8,7 @@ with contributions from Frank G. Bennett, Jr. and Bruce D'Arcus.
 |CCBYSA|_
 
 .. |CCBYSA| image:: /media/cc-by-sa-80x15.png
+.. _CCBYSA: http://creativecommons.org/licenses/by-sa/3.0/
 
 .. contents:: **Table of Contents**
 
