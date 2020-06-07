@@ -1266,12 +1266,11 @@ are rendered. An example, yielding names like "Jane DOE":
 
 Et-al
 ^^^^^
-
 Et-al abbreviation, controlled via the ``et-al-…`` attributes (see `Name`_),
 can be further customized with the optional ``cs:et-al`` element, which must
-follow the ``cs:name`` element (if present). The ``term`` attribute may be set
-to either "et-al" (the default) or to "and others" to use either term. The
-`formatting`_ attributes may also be used, for example to italicize the "et-al"
+follow the ``cs:name`` element (if present).
+
+The `formatting`_ attributes may be used on ``cs:et-al``, for example to italicize the "et-al"
 term:
 
 .. sourcecode:: xml
@@ -1280,7 +1279,7 @@ term:
       <et-al font-style="italic"/>
     </names>
 
-Or it can be used to select another term:
+The ``term`` attribute may also be set, to either "et-al" (the default) or "and others", to use either term:
 
 .. sourcecode:: xml
 
