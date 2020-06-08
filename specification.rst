@@ -2521,42 +2521,163 @@ Miscellaneous
 Appendix III - Types
 --------------------
 
--  article
--  article-magazine
--  article-newspaper
--  article-journal
--  bill
--  book
--  broadcast
--  chapter
--  dataset
--  document
--  entry
--  entry-dictionary
--  entry-encyclopedia
--  figure
--  graphic
--  interview
--  legislation
--  legal\_case
--  manuscript
--  map
--  motion\_picture
--  musical\_score
--  pamphlet
--  paper-conference
--  patent
--  post
--  post-weblog
--  personal\_communication
--  report
--  review
--  review-book
--  song
--  speech
--  thesis
--  treaty
--  webpage
+article
+    An self-contained work made widely available but not published in a journal
+    or other publication;
+    Use for preprints, working papers, and similar works posted on a platform
+    where some level of persistence or stewardship is expected (e.g. ArXiV or 
+    other preprint repositories, working paper series);
+    For unpublished works not made widely available or only hosted on personal
+    websites, use ``manuscript``
+
+article-magazine
+    An article published in a non-academic magazine
+
+article-newspaper
+    An article published in a newspaper
+
+article-journal
+    An article published in an academic journal
+
+bill
+    A proposed piece of legislation
+
+book
+    a;
+    If a ``container-title`` is present, the item is interpreted as a book
+    republished in a collection or anthology
+
+broadcast
+    A recorded work broadcast over an electronic medium (e.g. a radio 
+    broadcast, a television show, a podcast);
+    If ``container-title`` is present, the item is interpreted as an episode
+    contained within a larger broadcast series (e.g. an episode in a television
+    show or an episode of a podcast)
+
+chapter
+    A part of a book cited separately from the book as a whole (e.g. a chapter
+    in an edited book); may also be used for introductions, forewards, and
+    similar supplmental components of a book
+
+dataset
+    A data set or a similar collection of (mostly) raw data
+
+document
+    A catch-all category for items not belonging to other types; use a more
+    specific type when appropriate
+
+entry
+    An entry in a database, directory, or catalog;
+    For entries in a dictionary, use ``entry-dictionary``;
+    For entries in an encyclopedia, use ``entry-encyclopedia``
+
+entry-dictionary
+    An entry in a dictionary
+
+entry-encyclopedia
+    An entry in an encyclopedia or similar reference work
+
+figure
+    a
+
+graphic
+    A visual work of art; use for 
+
+interview
+    An interview of a person; may also be used for a recording or transcript
+    of an interview;
+    ``author`` is interpreted as the interviewee
+
+legislation
+    a
+
+legal\_case
+    a
+
+manuscript
+    An unpublished manuscript; use for both modern unpublished works and 
+    classical manuscripts
+    For working papers, preprints, and similar works posted to a repository,
+    use ``article``
+
+map
+    a
+
+motion\_picture
+    A video or visual recording
+
+musical\_score
+    The printed score for a piece of music;
+    For a live performance of the music, use ``performance``;
+    For recordings of the music, use ``song`` (for audio recordings) or 
+    ``motion\_picture`` (for video recordings)
+
+pamphlet
+    a
+
+paper-conference
+    A paper formally published in conference proceedings;
+    For papers presented at a conference, but not published in a proceedings,
+    use ``speech``
+
+patent
+    A patent for an invention
+
+post
+    A post on a online forum, social media platform, or similar platform; also
+    use for comments posted to online items
+
+post-weblog
+    A blog post
+
+personal\_communication
+    a
+
+report
+    A technical report, government report, white paper, brief, or similar
+    work distributed by an institution; also used for manuals (e.g. a software, 
+    instrument, or test manual);
+    If a ``container-title`` is present, the item is interpreted as a chapter
+    contained within a larger report
+
+review
+    A review of an item other than a book (e.g. a film review, posted peer 
+    review of an article);
+    If ``reviewed-title`` is absent, ``title` is taken to be the title of the 
+    reviewed item
+
+review-book
+    A review of a book;
+    If ``reviewed-title`` is absent, ``title` is taken to be the title of the 
+    reviewed book
+
+song
+    An audio recording. 
+
+speech
+    A speech or other presentation (e.g. a paper, talk, poster, or symposium
+    at a conference);
+    Use ``genre`` to specify the type of presentation;
+    Use ``event`` to indicate the event where the presentation was made (e.g.
+    the conference name);
+    Use ``container-titlee`` if the presentation is part of a larger session
+    (e.g. a paper in a symposium);
+    For papers published in conference proceedings, use ``paper-conference``;
+    For artistic performance, use ``performance``
+
+thesis
+    A thesis written for an educational institution to satisfy the requirements
+    for a degree;
+    Use ``genre`` to specify the type of thesis
+
+treaty
+    A treaty agreement between two political authorities
+
+webpage
+    A website or page on a website;
+    Intended for sources which are intrinsically online; use a more specific
+    type when appropriate (e.g. ``article-journal``, ``post-weblog``, 
+    ``report``, ``entry``)
 
 Appendix IV - Variables
 -----------------------
@@ -2568,8 +2689,10 @@ abstract
     abstract of the item (e.g. the abstract of a journal article)
 
 annote
-    short markup, decoration, or annotation to the item (e.g., to indicate items included in a review); 
-    for descriptive text (e.g., in an annotated bibliography), use ``note`` instead
+    short markup, decoration, or annotation to the item (e.g., to indicate items 
+    included in a review); 
+    for descriptive text (e.g., in an annotated bibliography), use ``note`` 
+    instead
 
 archive
     archive storing the item
