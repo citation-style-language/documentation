@@ -2522,10 +2522,10 @@ Appendix III - Types
 --------------------
 
 article
-    An self-contained work made widely available but not published in a journal
+    A self-contained work made widely available but not published in a journal
     or other publication;
     Use for preprints, working papers, and similar works posted on a platform
-    where some level of persistence or stewardship is expected (e.g. ArXiV or 
+    where some level of persistence or stewardship is expected (e.g. arXiv or 
     other preprint repositories, working paper series);
     For unpublished works not made widely available or only hosted on personal
     websites, use ``manuscript``
@@ -2543,28 +2543,37 @@ bill
     A proposed piece of legislation
 
 book
-    a;
+    A book or similar work;
+    Can be an authored book or edited collection of self-contained chapters;
+    Can be a physical book or an ebook;
+    The format for an ebook may be specified using ``medium``;
+    Can be a single-volume work, a multivolume work, or one volume of 
+    a multivolume work;
     If a ``container-title`` is present, the item is interpreted as a book
-    republished in a collection or anthology
+    republished in a collection or anthology;
+    Also  used for whole conference proceedings volumes or exhibition catalogues 
+    by specifying ``event`` and related variables
 
 broadcast
     A recorded work broadcast over an electronic medium (e.g. a radio 
     broadcast, a television show, a podcast);
+    The type of broadcast may be specified using ``genre``;
     If ``container-title`` is present, the item is interpreted as an episode
     contained within a larger broadcast series (e.g. an episode in a television
     show or an episode of a podcast)
 
 chapter
     A part of a book cited separately from the book as a whole (e.g. a chapter
-    in an edited book); may also be used for introductions, forewards, and
-    similar supplmental components of a book
+    in an edited book);
+    Also used for introductions, forewords, and similar supplemental 
+    components of a book
 
 dataset
     A data set or a similar collection of (mostly) raw data
 
 document
-    A catch-all category for items not belonging to other types; use a more
-    specific type when appropriate
+    A catch-all category for items not belonging to other types;
+    Use a more specific type when appropriate
 
 entry
     An entry in a database, directory, or catalog;
@@ -2578,33 +2587,43 @@ entry-encyclopedia
     An entry in an encyclopedia or similar reference work
 
 figure
-    a
+    A figure illustrating or presenting research data; may be in any format 
+    (e.g. image, motion picture, audio recording);
+    The format of the item can be specified using ``medium``
 
 graphic
-    A visual work of art; use for 
+    A still visual work;
+    Can be used for artwork or other works (e.g. journalistic or historical 
+    photographs);
+    Can be used for any still visual work (e.g. photographs, drawings, 
+    paintings, sculptures, clothing);
+    The format of the item can be specified using ``medium``
 
 interview
-    An interview of a person; may also be used for a recording or transcript
-    of an interview;
+    An interview of a person;
+    Also used for a recording or transcript of an interview;
     ``author`` is interpreted as the interviewee
 
 legislation
-    a
+    An enacted piece of legislation
 
 legal\_case
-    a
+    A legal case
 
 manuscript
-    An unpublished manuscript; use for both modern unpublished works and 
-    classical manuscripts
+    An unpublished manuscript;
+    Use for both modern unpublished works and classical manuscripts;
     For working papers, preprints, and similar works posted to a repository,
     use ``article``
 
 map
-    a
+    A geographic map
 
 motion\_picture
-    A video or visual recording
+    A video or visual recording;
+    If a ``container-title`` is present, the item is interpreted as a part
+    contained within a larger compilation of recordings (e.g. a part of a
+    multipart documentary))
 
 musical\_score
     The printed score for a piece of music;
@@ -2613,7 +2632,8 @@ musical\_score
     ``motion\_picture`` (for video recordings)
 
 pamphlet
-    a
+    A fragment, historical document, or other unusually-published or ephemeral 
+    work (e.g. a sales brochure)
 
 paper-conference
     A paper formally published in conference proceedings;
@@ -2624,18 +2644,21 @@ patent
     A patent for an invention
 
 post
-    A post on a online forum, social media platform, or similar platform; also
-    use for comments posted to online items
+    A post on a online forum, social media platform, or similar platform; 
+    Also used for comments posted to online items
 
 post-weblog
     A blog post
 
 personal\_communication
-    a
+    Personal communications between multiple parties;
+    May be unpublished (e.g. private correspondence between two researchers) or 
+    collected/published (e.g. a letter published in a collection)
 
 report
     A technical report, government report, white paper, brief, or similar
-    work distributed by an institution; also used for manuals (e.g. a software, 
+    work distributed by an institution;
+    Also used for manuals and similar technical documentation (e.g. a software, 
     instrument, or test manual);
     If a ``container-title`` is present, the item is interpreted as a chapter
     contained within a larger report
@@ -2652,7 +2675,10 @@ review-book
     reviewed book
 
 song
-    An audio recording. 
+    An audio recording;
+    Can be used for any audio recording (not only music);
+    If a ``container-title`` is present, the item is interpreted as a track
+    contained within a larger album or compilation of recordings
 
 speech
     A speech or other presentation (e.g. a paper, talk, poster, or symposium
@@ -2663,21 +2689,22 @@ speech
     Use ``container-titlee`` if the presentation is part of a larger session
     (e.g. a paper in a symposium);
     For papers published in conference proceedings, use ``paper-conference``;
-    For artistic performance, use ``performance``
+    For artistic performances, use ``performance``
 
 thesis
-    A thesis written for an educational institution to satisfy the requirements
-    for a degree;
+    A thesis written to satisfy requirements for a degree;
     Use ``genre`` to specify the type of thesis
 
 treaty
-    A treaty agreement between two political authorities
+    A treaty agreement between political authorities
 
 webpage
     A website or page on a website;
     Intended for sources which are intrinsically online; use a more specific
     type when appropriate (e.g. ``article-journal``, ``post-weblog``, 
-    ``report``, ``entry``)
+    ``report``, ``entry``);
+    If a ``container-title`` is present, the item is interpreted as a page
+    contained within a larger website
 
 Appendix IV - Variables
 -----------------------
