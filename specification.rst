@@ -2696,7 +2696,7 @@ thesis
     Use ``genre`` to specify the type of thesis
 
 treaty
-    A treaty agreement between political authorities
+    A treaty agreement among political authorities
 
 webpage
     A website or page on a website;
