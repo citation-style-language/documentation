@@ -2854,3 +2854,21 @@ The page abbreviation rules for the different values of the
 "minimal-two"
     As "minimal", but at least two digits are kept in the second number when it
     has two or more digits long.
+
+
+Appendix VI: Links
+------------------
+
+The CSL syntax does not have support for configuration of links. However,
+processors should include links on bibliographic references, using the following
+rules:
+
+If the item includes the following identifiers, the target of the link should be
+set, in order of priority:
+
+1. ``url``: output as is
+2. ``doi``: prepend with ``https://dx.doi.org/``
+3. ``pmid``: prepend with ``https://www.ncbi.nlm.nih.gov/pubmed/``
+
+If the above variable is printed in the output, then that should be the link
+anchor; else the ``title`` should be the link anchor.
