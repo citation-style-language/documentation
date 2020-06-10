@@ -2544,7 +2544,7 @@ bill
 
 book
     A book or similar work;
-    Can be an authored book or edited collection of self-contained chapters;
+    Can be an authored book or an edited collection of self-contained chapters;
     Can be a physical book or an ebook;
     The format for an ebook may be specified using ``medium``;
     Can be a single-volume work, a multivolume work, or one volume of 
