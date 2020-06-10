@@ -2686,7 +2686,7 @@ speech
     Use ``genre`` to specify the type of presentation;
     Use ``event`` to indicate the event where the presentation was made (e.g.
     the conference name);
-    Use ``container-titlee`` if the presentation is part of a larger session
+    Use ``container-title`` if the presentation is part of a larger session
     (e.g. a paper in a symposium);
     For papers published in conference proceedings, use ``paper-conference``;
     For artistic performances, use ``performance``
