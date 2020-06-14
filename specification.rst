@@ -179,9 +179,9 @@ In independent styles, ``cs:info`` has the following child elements:
     indicates the field(s) for which the style is relevant.
 
 ``cs:id``
-    Must appear once. The element should contain a URI to establish the identity
-    of the style. A stable, unique and dereferenceable URI is desired for
-    publicly available styles.
+    Must appear once and contain a stable, unique identifier to establish the 
+    identity of the style. For historical reasons, existing styles may use 
+    URIs, but new styles should use a UUID to guarantee stability and uniqueness.
 
 ``cs:issn``/``cs:eissn``/``cs:issnl`` (optional)
     The ``cs:issn`` element may be used multiple times to indicate the ISSN
