@@ -2313,7 +2313,7 @@ values:
 -  "capitalize-first": capitalizes the first character of the first word, if the
    word is lowercase
 -  "capitalize-all": capitalizes the first character of every lowercase word
--  "sentence": renders text in sentence case
+-  "sentence": renders text in sentence case (deprecated; do not use)
 -  "title": renders text in title case
 
 Sentence Case Conversion
@@ -2332,6 +2332,8 @@ CSL processors don't recognize proper nouns. As a result, strings in sentence
 case can be accurately converted to title case, but not vice versa. For this
 reason, it is generally preferable to store strings such as titles in sentence
 case, and only use ``text-case`` if a style desires another case.
+
+Sentence case conversion is deprecated and will be removed in a future version.
 
 Title Case Conversion
 ^^^^^^^^^^^^^^^^^^^^^
