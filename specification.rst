@@ -179,9 +179,9 @@ In independent styles, ``cs:info`` has the following child elements:
     indicates the field(s) for which the style is relevant.
 
 ``cs:id``
-    Must appear once. The element should contain a URI to establish the identity
-    of the style. A stable, unique and dereferenceable URI is desired for
-    publicly available styles.
+    Must appear once and contain a stable, unique identifier to establish the 
+    identity of the style. For historical reasons, existing styles may use 
+    URIs, but new styles should use a UUID to guarantee stability and uniqueness.
 
 ``cs:issn``/``cs:eissn``/``cs:issnl`` (optional)
     The ``cs:issn`` element may be used multiple times to indicate the ISSN
@@ -1266,18 +1266,25 @@ are rendered. An example, yielding names like "Jane DOE":
 
 Et-al
 ^^^^^
-
 Et-al abbreviation, controlled via the ``et-al-…`` attributes (see `Name`_),
 can be further customized with the optional ``cs:et-al`` element, which must
-follow the ``cs:name`` element (if present). The ``term`` attribute may be set
-to either "et-al" (the default) or to "and others" to use either term. The
-`formatting`_ attributes may also be used, for example to italicize the "et-al"
+follow the ``cs:name`` element (if present).
+
+The `formatting`_ attributes may be used on ``cs:et-al``, for example to italicize the "et-al"
 term:
 
 .. sourcecode:: xml
 
     <names variable="author">
-      <et-al term="and others" font-style="italic"/>
+      <et-al font-style="italic"/>
+    </names>
+
+The ``term`` attribute may also be set, to either "et-al" (the default) or "and others", to use either term:
+
+.. sourcecode:: xml
+
+    <names variable="author">
+      <et-al term="and others"/>
     </names>
 
 Substitute
@@ -2306,7 +2313,7 @@ values:
 -  "capitalize-first": capitalizes the first character of the first word, if the
    word is lowercase
 -  "capitalize-all": capitalizes the first character of every lowercase word
--  "sentence": renders text in sentence case
+-  "sentence": renders text in sentence case (deprecated; do not use)
 -  "title": renders text in title case
 
 Sentence Case Conversion
@@ -2325,6 +2332,8 @@ CSL processors don't recognize proper nouns. As a result, strings in sentence
 case can be accurately converted to title case, but not vice versa. For this
 reason, it is generally preferable to store strings such as titles in sentence
 case, and only use ``text-case`` if a style desires another case.
+
+Sentence case conversion is deprecated and will be removed in a future version.
 
 Title Case Conversion
 ^^^^^^^^^^^^^^^^^^^^^
@@ -2523,6 +2532,7 @@ Appendix III - Types
 -  broadcast
 -  chapter
 -  dataset
+-  document
 -  entry
 -  entry-dictionary
 -  entry-encyclopedia
