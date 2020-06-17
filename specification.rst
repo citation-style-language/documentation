@@ -2404,7 +2404,7 @@ Appendix II - Terms
 
 Types
 ~~~~~~~~
-Tbd
+For each item type listed in Appendix III, there is a corresponding term.
 
 Locators
 ~~~~~~~~
