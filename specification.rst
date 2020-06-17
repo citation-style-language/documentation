@@ -179,8 +179,8 @@ In independent styles, ``cs:info`` has the following child elements:
     indicates the field(s) for which the style is relevant.
 
 ``cs:id``
-    Must appear once and contain a stable, unique identifier to establish the 
-    identity of the style. For historical reasons, existing styles may use 
+    Must appear once and contain a stable, unique identifier to establish the
+    identity of the style. For historical reasons, existing styles may use
     URIs, but new styles should use a UUID to guarantee stability and uniqueness.
 
 ``cs:issn``/``cs:eissn``/``cs:issnl`` (optional)
@@ -2402,6 +2402,10 @@ Appendix I - Categories
 Appendix II - Terms
 -------------------
 
+Types
+~~~~~~~~
+Tbd
+
 Locators
 ~~~~~~~~
 
@@ -2570,7 +2574,7 @@ abstract
     abstract of the item (e.g. the abstract of a journal article)
 
 annote
-    short markup, decoration, or annotation to the item (e.g., to indicate items included in a review); 
+    short markup, decoration, or annotation to the item (e.g., to indicate items included in a review);
     for descriptive text (e.g., in an annotated bibliography), use ``note`` instead
 
 archive
