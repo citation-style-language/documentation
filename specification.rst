@@ -2587,8 +2587,9 @@ entry-encyclopedia
     An entry in an encyclopedia or similar reference work
 
 figure
-    A figure illustrating or presenting research data; may be in any format 
-    (e.g. image, motion picture, audio recording);
+    A illustration or presentation of data, typically as part of a journal
+    article or other larger work;
+    May be in any format (e.g. image, video, audio recording, 3D model);
     The format of the item can be specified using ``medium``
 
 graphic
