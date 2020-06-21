@@ -2627,7 +2627,7 @@ legal\_case
     A legal case
 
 legislation
-    An enacted piece of legislation
+    A law or resolution enacted by a governing body
 
 manuscript
     An unpublished manuscript;
