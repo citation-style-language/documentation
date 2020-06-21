@@ -2532,14 +2532,14 @@ article
     For unpublished works not made widely available or only hosted on personal
     websites, use ``manuscript``
 
+article-journal
+    An article published in an academic journal
+
 article-magazine
     An article published in a non-academic magazine
 
 article-newspaper
     An article published in a newspaper
-
-article-journal
-    An article published in an academic journal
 
 bill
     A proposed piece of legislation
@@ -2553,7 +2553,7 @@ book
     a multivolume work;
     If a ``container-title`` is present, the item is interpreted as a book
     republished in a collection or anthology;
-    Also  used for whole conference proceedings volumes or exhibition catalogues 
+    Also  used for whole conference proceedings volumes or exhibition catalogs 
     by specifying ``event`` and related variables
 
 broadcast
@@ -2569,6 +2569,12 @@ chapter
     in an edited book);
     Also used for introductions, forewords, and similar supplemental 
     components of a book
+
+classic
+    A classical or ancient work, sometimes cited using a common abbreviation
+
+collection
+    An archival collection in a museum or other institution
 
 dataset
     A data set or a similar collection of (mostly) raw data
@@ -2588,6 +2594,13 @@ entry-dictionary
 entry-encyclopedia
     An entry in an encyclopedia or similar reference work
 
+event
+    An organized event (e.g., an exhibition or conference);
+    Use for direct citations to the event, rather than to works contained
+    within an event (e.g. a ``presentation`` in a conference, a ``graphic`` in 
+    an exhibition) or based on an event (e.g. a ``paper-conference`` published 
+    in a proceedings, an exhibition catalog)
+
 figure
     A illustration or representation of data, typically as part of a journal
     article or other larger work;
@@ -2602,16 +2615,19 @@ graphic
     paintings, sculptures, clothing);
     The format of the item can be specified using ``medium``
 
+hearing
+    A hearing by a government committee or transcript thereof
+
 interview
     An interview of a person;
     Also used for a recording or transcript of an interview;
     ``author`` is interpreted as the interviewee
 
-legislation
-    An enacted piece of legislation
-
 legal\_case
     A legal case
+
+legislation
+    An enacted piece of legislation
 
 manuscript
     An unpublished manuscript;
@@ -2646,6 +2662,20 @@ paper-conference
 patent
     A patent for an invention
 
+performance
+    A live performance of an artistic work;
+    For non-artistic presentations, use ``speech``;
+    For recordings of a performance, use ``song`` or ``motion\_picture``
+
+periodical
+    A full issue or run of issues in a periodical publication (e.g. a special 
+    issue of a journal)
+
+personal\_communication
+    Personal communications between multiple parties;
+    May be unpublished (e.g. private correspondence between two researchers) or 
+    collected/published (e.g. a letter published in a collection)
+
 post
     A post on a online forum, social media platform, or similar platform; 
     Also used for comments posted to online items
@@ -2653,10 +2683,8 @@ post
 post-weblog
     A blog post
 
-personal\_communication
-    Personal communications between multiple parties;
-    May be unpublished (e.g. private correspondence between two researchers) or 
-    collected/published (e.g. a letter published in a collection)
+regulation
+    An administrative order from any level of government
 
 report
     A technical report, government report, white paper, brief, or similar
@@ -2669,13 +2697,16 @@ report
 review
     A review of an item other than a book (e.g. a film review, posted peer 
     review of an article);
-    If ``reviewed-title`` is absent, ``title` is taken to be the title of the 
+    If ``reviewed-title`` is absent, ``title`` is taken to be the title of the 
     reviewed item
 
 review-book
     A review of a book;
-    If ``reviewed-title`` is absent, ``title` is taken to be the title of the 
+    If ``reviewed-title`` is absent, ``title`` is taken to be the title of the 
     reviewed book
+
+software
+    A computer program, app, or other piece of software
 
 song
     An audio recording;
@@ -2693,6 +2724,9 @@ speech
     (e.g. a paper in a symposium);
     For papers published in conference proceedings, use ``paper-conference``;
     For artistic performances, use ``performance``
+
+standard
+    A technical standard or similar set of rules or norms
 
 thesis
     A thesis written to satisfy requirements for a degree;
