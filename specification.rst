@@ -2867,8 +2867,9 @@ If the item includes the following identifiers, the target of the link should be
 set, in order of priority:
 
 1. ``url``: output as is
-2. ``doi``: prepend with ``https://dx.doi.org/``
+2. ``doi``: prepend with ``https://doi.org/``
 3. ``pmid``: prepend with ``https://www.ncbi.nlm.nih.gov/pubmed/``
+4. ``pmcid``: prepend with ``https://www.ncbi.nlm.nih.gov/pmc/articles/``
 
 If the above variable is printed in the output, then that should be the link
 anchor; else the ``title`` should be the link anchor.
