@@ -2741,6 +2741,9 @@ authority
 call-number
     call number (to locate the item in a library)
 
+citation-key
+    identified used 
+
 citation-label
     label identifying the item in in-text citations of label styles (e.g.
     "Ferr78"). May be assigned by the CSL processor based on item metadata.
@@ -2780,8 +2783,10 @@ first-reference-note-number
     notes.
 
 genre
-    class, type or genre of the item (e.g. "adventure" for an adventure movie,
-    "PhD dissertation" for a PhD thesis)
+    Type, class, or subtype of the item (e.g. "Doctoral dissertation" for a PhD 
+    thesis; "NIH Publication" for an NIH technical report);
+    Do not use for topical descriptions or categories (e.g. "adventure" for an 
+    adventure movie)
 
 ISBN
     International Standard Book Number
