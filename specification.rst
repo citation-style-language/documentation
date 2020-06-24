@@ -2741,9 +2741,19 @@ authority
 call-number
     call number (to locate the item in a library)
 
+citation-key
+    Identifier of the item in the input data file (analogous to BiTeX entrykey);
+    Use this variable to facilitate conversion between word-processor and 
+    plain-text writing systems;
+    For an identifer intended as formatted output label for a citation (e.g.
+    "Ferr78"), use ``citation-label`` instead
+
 citation-label
-    label identifying the item in in-text citations of label styles (e.g.
-    "Ferr78"). May be assigned by the CSL processor based on item metadata.
+    Label identifying the item in in-text citations of label styles (e.g.
+    "Ferr78");
+    May be assigned by the CSL processor based on item metadata;
+    For the identifier of the item in the input data file, use ``citation-key``
+    instead
 
 citation-number
     index (starting at 1) of the cited reference in the bibliography (generated
