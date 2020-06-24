@@ -2755,10 +2755,6 @@ citation-label
     For the identifier of the item in the input data file, use ``citation-key``
     instead
 
-citation-number
-    Index (starting at 1) of the cited reference in the bibliography (generated
-    by the CSL processor)
-
 collection-title
     Title of the collection holding the item (e.g. the series title for a book)
 
@@ -2784,12 +2780,6 @@ event
 event-place
     Geographic location of the event (e.g. "Amsterdam, The Netherlands")
 
-first-reference-note-number
-    Number of a preceding note containing the first reference to the item;
-    Assigned by the CSL processor; 
-    Empty in non-note-based styles or when the item hasn't been cited in any 
-    preceding notes in a document
-
 genre
     Type, class, or subtype of the item (e.g. "Doctoral dissertation" for a PhD 
     thesis; "NIH Publication" for an NIH technical report);
@@ -2808,13 +2798,6 @@ jurisdiction
 keyword
     Keyword(s) or tag(s) attached to the item
 
-locator
-    A cite-specific pinpointer within the item (e.g. a page number within a
-    book, or a volume in a multi-volume work);
-    Must be accompanied in the input data by a label indicating the locator type 
-    (see the `Locators`_ term list), which determines which term is rendered by 
-    ``cs:label`` when the ``locator`` variable is selected.
-
 medium
     Description of format or medium (e.g. "CD", "DVD", "Album", etc.)
 
@@ -2831,14 +2814,6 @@ original-publisher-place
 original-title
     Title of the original version (e.g. "Война и мир", the untranslated Russian
     title of "War and Peace")
-
-page
-    Range of pages the item (e.g. a journal article) covers in a container (e.g.
-    a journal issue)
-
-page-first
-    First page of the range of pages the item (e.g. a journal article) covers in
-    a container (e.g. a journal issue)
 
 PMCID
     PubMed Central reference number
@@ -2871,7 +2846,7 @@ source
     Source from whence the item originates (e.g. a library catalog or database)
 
 status
-    (Publication) status of the item (e.g. "forthcoming"; "in press"; "advance
+    Publication status of the item (e.g. "forthcoming"; "in press"; "advance
     online publication"; "retracted")
 
 title
@@ -2897,7 +2872,11 @@ Number Variables
 Number variables are a subset of the `Standard Variables`_.
 
 chapter-number
-    Chapter number
+    Chapter number (e.g. chapter number in a book; track number on an album)
+
+citation-number
+    Index (starting at 1) of the cited reference in the bibliography (generated
+    by the CSL processor)
 
 collection-number
     Number identifying the collection holding the item (e.g. the series number
@@ -2907,9 +2886,22 @@ edition
     (Container) edition holding the item (e.g. "3" when citing a chapter in the
     third edition of a book)
 
+first-reference-note-number
+    Number of a preceding note containing the first reference to the item;
+    Assigned by the CSL processor; 
+    Empty in non-note-based styles or when the item hasn't been cited in any 
+    preceding notes in a document
+
 issue
     (Container) issue holding the item (e.g. "5" when citing a journal article
     from journal volume 2, issue 5)
+
+locator
+    A cite-specific pinpointer within the item (e.g. a page number within a
+    book, or a volume in a multi-volume work);
+    Must be accompanied in the input data by a label indicating the locator type 
+    (see the `Locators`_ term list), which determines which term is rendered by 
+    ``cs:label`` when the ``locator`` variable is selected.
 
 number
     Number identifying the item (e.g. a report number)
@@ -2918,11 +2910,32 @@ number-of-pages
     Total number of pages of the cited item
 
 number-of-volumes
-    Total number of volumes, usable for citing multi-volume books and such
+    Total number of volumes, used when citing multi-volume books and such
+
+page
+    Range of pages the item (e.g. a journal article) covers in a container (e.g.
+    a journal issue)
+
+page-first
+    First page of the range of pages the item (e.g. a journal article) covers in
+    a container (e.g. a journal issue)
+
+part
+    Number of the specific part of the item being cited (e.g. part 2 of a 
+    journal article);
+    Use ``part-title`` for the title of the part, if any
+
+printing
+    Printing number of the item
+
+supplement
+    (Container) supplement number holding the item (e.g. for secondary legal
+    items that are regularly updated between editions)
 
 volume
-    (Container) volume holding the item (e.g. "2" when citing a chapter from
-    book volume 2)
+    (Container) volume number holding the item (e.g. "2" when citing a chapter
+    from volume 2 of a book);
+    Use ``volume-title`` for the title of the volume, if any
 
 Date Variables
 ~~~~~~~~~~~~~~
