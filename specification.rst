@@ -2806,8 +2806,7 @@ medium
     medium description (e.g. "CD", "DVD", etc.)
 
 note
-    (short) inline note giving additional item details (e.g. a concise summary
-    or commentary)
+    notes about an item (e.g. in an annotated bibliography)
 
 original-publisher
     original publisher, for items that have been republished by a different
