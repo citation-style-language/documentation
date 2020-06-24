@@ -2717,29 +2717,29 @@ Standard Variables
 ~~~~~~~~~~~~~~~~~~
 
 abstract
-    abstract of the item (e.g. the abstract of a journal article)
+    Abstract of the item (e.g. the abstract of a journal article)
 
 annote
-    short markup, decoration, or annotation to the item (e.g., to indicate items 
+    Short markup, decoration, or annotation to the item (e.g., to indicate items 
     included in a review); 
-    for descriptive text (e.g., in an annotated bibliography), use ``note`` 
+    For descriptive text (e.g., in an annotated bibliography), use ``note`` 
     instead
 
 archive
-    archive storing the item
+    Archive storing the item
 
 archive\_location
-    storage location within an archive (e.g. a box and folder number)
+    Storage location within an archive (e.g. a box and folder number)
 
 archive-place
-    geographic location of the archive
+    Geographic location of the archive
 
 authority
-    issuing or judicial authority (e.g. "USPTO" for a patent, "Fairfax Circuit
+    Issuing or judicial authority (e.g. "USPTO" for a patent, "Fairfax Circuit
     Court" for a legal case)
 
 call-number
-    call number (to locate the item in a library)
+    Call number (to locate the item in a library)
 
 citation-key
     Identifier of the item in the input data file (analogous to BiTeX entrykey);
@@ -2756,38 +2756,39 @@ citation-label
     instead
 
 citation-number
-    index (starting at 1) of the cited reference in the bibliography (generated
+    Index (starting at 1) of the cited reference in the bibliography (generated
     by the CSL processor)
 
 collection-title
-    title of the collection holding the item (e.g. the series title for a book)
+    Title of the collection holding the item (e.g. the series title for a book)
 
 container-title
-    title of the container holding the item (e.g. the book title for a book
-    chapter, the journal title for a journal article)
+    Title of the container holding the item (e.g. the book title for a book
+    chapter, the journal title for a journal article; the album title for a 
+    recording; the session title for multi-part presentation at a conference)
 
 container-title-short
-    short/abbreviated form of "container-title" (also accessible through the
+    Short/abbreviated form of "container-title" (also accessible through the
     "short" form of the "container-title" variable)
 
 dimensions
-    physical (e.g. size) or temporal (e.g. running time) dimensions of the item
+    Physical (e.g. size) or temporal (e.g. running time) dimensions of the item
 
 DOI
     Digital Object Identifier (e.g. "10.1128/AEM.02591-07")
 
 event
-    name of the related event (e.g. the conference name when citing a conference
-    paper)
+    Name of the event related to the item (e.g. the conference name when citing
+    a conference paper; the meeting where presentation was made)
 
 event-place
-    geographic location of the related event (e.g. "Amsterdam, the Netherlands")
+    Geographic location of the event (e.g. "Amsterdam, The Netherlands")
 
 first-reference-note-number
-    number of a preceding note containing the first reference to the item.
-    Assigned by the CSL processor. The variable holds no value for
-    non-note-based styles, or when the item hasn't been cited in any preceding
-    notes.
+    Number of a preceding note containing the first reference to the item;
+    Assigned by the CSL processor; 
+    Empty in non-note-based styles or when the item hasn't been cited in any 
+    preceding notes in a document
 
 genre
     Type, class, or subtype of the item (e.g. "Doctoral dissertation" for a PhD 
@@ -2802,41 +2803,41 @@ ISSN
     International Standard Serial Number
 
 jurisdiction
-    geographic scope of relevance (e.g. "US" for a US patent)
+    Geographic scope of relevance (e.g. "US" for a US patent)
 
 keyword
-    keyword(s) or tag(s) attached to the item
+    Keyword(s) or tag(s) attached to the item
 
 locator
-    a cite-specific pinpointer within the item (e.g. a page number within a
-    book, or a volume in a multi-volume work). Must be accompanied in the input
-    data by a label indicating the locator type (see the `Locators`_ term list),
-    which determines which term is rendered by ``cs:label`` when the "locator"
-    variable is selected.
+    A cite-specific pinpointer within the item (e.g. a page number within a
+    book, or a volume in a multi-volume work);
+    Must be accompanied in the input data by a label indicating the locator type 
+    (see the `Locators`_ term list), which determines which term is rendered by 
+    ``cs:label`` when the ``locator`` variable is selected.
 
 medium
     Description of format or medium (e.g. "CD", "DVD", "Album", etc.)
 
 note
-    notes about an item (e.g. in an annotated bibliography)
+    Descriptive text or notes about an item (e.g. in an annotated bibliography)
 
 original-publisher
-    original publisher, for items that have been republished by a different
+    Original publisher, for items that have been republished by a different
     publisher
 
 original-publisher-place
-    geographic location of the original publisher (e.g. "London, UK")
+    Geographic location of the original publisher (e.g. "London, UK")
 
 original-title
-    title of the original version (e.g. "Война и мир", the untranslated Russian
+    Title of the original version (e.g. "Война и мир", the untranslated Russian
     title of "War and Peace")
 
 page
-    range of pages the item (e.g. a journal article) covers in a container (e.g.
+    Range of pages the item (e.g. a journal article) covers in a container (e.g.
     a journal issue)
 
 page-first
-    first page of the range of pages the item (e.g. a journal article) covers in
+    First page of the range of pages the item (e.g. a journal article) covers in
     a container (e.g. a journal issue)
 
 PMCID
@@ -2846,48 +2847,49 @@ PMID
     PubMed reference number
 
 publisher
-    publisher
+    Publisher
 
 publisher-place
-    geographic location of the publisher
+    Geographic location of the publisher
 
 references
-    resources related to the procedural history of a legal case
+    Resources related to the procedural history of a legal case
 
 reviewed-genre
     Type of the item being reviewed by the current item (e.g. book, film)
 
 reviewed-title
-    title of the item reviewed by the current item
+    Title of the item reviewed by the current item
 
 scale
-    scale of e.g. a map
+    Scale of e.g. a map or model
 
 section
-    container section holding the item (e.g. "politics" for a newspaper article)
+    Container section holding the item (e.g. "politics" for a newspaper article)
 
 source
-    from whence the item originates (e.g. a library catalog or database)
+    Source from whence the item originates (e.g. a library catalog or database)
 
 status
-    (publication) status of the item (e.g. "forthcoming")
+    (Publication) status of the item (e.g. "forthcoming"; "in press"; "advance
+    online publication"; "retracted")
 
 title
-    primary title of the item
+    Primary title of the item
 
 title-short
-    short/abbreviated form of "title" (also accessible through the "short" form
+    Short/abbreviated form of "title" (also accessible through the "short" form
     of the "title" variable)
 
 URL
     Uniform Resource Locator (e.g.
-    "http://aem.asm.org/cgi/content/full/74/9/2766")
+    "https://aem.asm.org/cgi/content/full/74/9/2766")
 
 version
-    version of the item (e.g. "2.0.9" for a software program)
+    Version of the item (e.g. "2.0.9" for a software program)
 
 year-suffix
-    disambiguating year suffix in author-date styles (e.g. "a" in "Doe, 1999a")
+    Disambiguating year suffix in author-date styles (e.g. "a" in "Doe, 1999a")
 
 Number Variables
 ^^^^^^^^^^^^^^^^
@@ -2895,97 +2897,97 @@ Number Variables
 Number variables are a subset of the `Standard Variables`_.
 
 chapter-number
-    chapter number
+    Chapter number
 
 collection-number
-    number identifying the collection holding the item (e.g. the series number
+    Number identifying the collection holding the item (e.g. the series number
     for a book)
 
 edition
-    (container) edition holding the item (e.g. "3" when citing a chapter in the
+    (Container) edition holding the item (e.g. "3" when citing a chapter in the
     third edition of a book)
 
 issue
-    (container) issue holding the item (e.g. "5" when citing a journal article
+    (Container) issue holding the item (e.g. "5" when citing a journal article
     from journal volume 2, issue 5)
 
 number
-    number identifying the item (e.g. a report number)
+    Number identifying the item (e.g. a report number)
 
 number-of-pages
-    total number of pages of the cited item
+    Total number of pages of the cited item
 
 number-of-volumes
-    total number of volumes, usable for citing multi-volume books and such
+    Total number of volumes, usable for citing multi-volume books and such
 
 volume
-    (container) volume holding the item (e.g. "2" when citing a chapter from
+    (Container) volume holding the item (e.g. "2" when citing a chapter from
     book volume 2)
 
 Date Variables
 ~~~~~~~~~~~~~~
 
 accessed
-    date the item has been accessed
+    Date the item has been accessed
 
 container
     ?
 
 event-date
-    date the related event took place
+    Date the related event took place
 
 issued
-    date the item was issued/published
+    Date the item was issued/published
 
 original-date
-    (issue) date of the original version
+    (Issue) date of the original version
 
 submitted
-    date the item (e.g. a manuscript) has been submitted for publication
+    Date the item (e.g. a manuscript) has been submitted for publication
 
 Name Variables
 ~~~~~~~~~~~~~~
 
 author
-    author
+    Author
 
 collection-editor
-    editor of the collection holding the item (e.g. the series editor for a
+    Editor of the collection holding the item (e.g. the series editor for a
     book)
 
 composer
-    composer (e.g. of a musical score)
+    Composer (e.g. of a musical score)
 
 container-author
-    author of the container holding the item (e.g. the book author for a book
+    Author of the container holding the item (e.g. the book author for a book
     chapter)
 
 director
-    director (e.g. of a film)
+    Director (e.g. of a film)
 
 editor
-    editor
+    Editor
 
 editorial-director
-    managing editor ("Directeur de la Publication" in French)
+    Managing editor ("Directeur de la Publication" in French)
 
 illustrator
-    illustrator (e.g. of a children's book)
+    Illustrator (e.g. of a children's book)
 
 interviewer
-    interviewer (e.g. of an interview)
+    Interviewer (e.g. of an interview)
 
 original-author
     ?
 
 recipient
-    recipient (e.g. of a letter)
+    Recipient (e.g. of a letter)
 
 reviewed-author
-    author of the item reviewed by the current item
+    Author of the item reviewed by the current item
 
 translator
-    translator
+    Translator
 
 Appendix V - Page Range Formats
 -------------------------------
