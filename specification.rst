@@ -2769,7 +2769,7 @@ container-title
 
 container-title-short
     Short/abbreviated form of "container-title";
-    Deprecated use ``variable="container-title" form="short"`` instead
+    Deprecated; use ``variable="container-title" form="short"`` instead
 
 dimensions
     Physical (e.g. size) or temporal (e.g. running time) dimensions of the item
@@ -2879,7 +2879,7 @@ title
 
 title-short
     Short/abbreviated form of "title";
-    Deprecated use ``variable="container-title" form="short"`` instead
+    Deprecated; use ``variable="container-title" form="short"`` instead
 
 URL
     Uniform Resource Locator (e.g.
@@ -2930,26 +2930,35 @@ Date Variables
 accessed
     Date the item has been accessed
 
+available-date
+    Date the item was initially available (e.g. the online publication date of 
+    a journal article before its formal publication date; the date a treaty
+    was made available for signing)
+
 container
-    ?
+    Deprecated; do not use
 
 event-date
-    Date the related event took place
+    Date the event related to an item took place
 
 issued
     Date the item was issued/published
 
 original-date
-    (Issue) date of the original version
+    Issue date of the original version
 
 submitted
-    Date the item (e.g. a manuscript) has been submitted for publication
+    Date the item (e.g. a manuscript) was submitted for publication
 
 Name Variables
 ~~~~~~~~~~~~~~
 
 author
     Author
+
+chair
+    The person leading the session containing a presentation (e.g. the organizer
+    of the ``container-title`` of a ``speech``)
 
 collection-editor
     Editor of the collection holding the item (e.g. the series editor for a
@@ -2958,9 +2967,20 @@ collection-editor
 composer
     Composer (e.g. of a musical score)
 
+compiler
+    Person compiling or selecting material for an item from the works of various 
+    persons or bodies (e.g. for an anthology)
+
 container-author
     Author of the container holding the item (e.g. the book author for a book
     chapter)
+
+contributor
+    A minor contributor to the item; typically cited using "with" before the
+    name when listed in a bibliography
+
+curator
+    Curator of an exhibit or collection (e.g. in a museum)
 
 director
     Director (e.g. of a film)
@@ -2971,14 +2991,31 @@ editor
 editorial-director
     Managing editor ("Directeur de la Publication" in French)
 
+executive-producer
+    Executive producer (e.g. of a television series)
+
 illustrator
-    Illustrator (e.g. of a children's book)
+    Illustrator (e.g. of a children's book or graphic novel)
 
 interviewer
     Interviewer (e.g. of an interview)
 
+organizer
+    Organizer of an event (e.g. organizer of a workshop or conference)
+
 original-author
-    ?
+    The original creator of a work (e.g. the form of the author name listed on 
+    the original version of a book; the historical author of a work; the 
+    original songwriter or performer for a musical piece; the original developer 
+    or programmer for a piece of software; the original author of an adapted 
+    work such as a book adapted into a screenplay)
+
+performer
+    Performer of an item (e.g. an actor appearing in a film; a muscian
+    performing a piece of music)
+
+producer
+    Producer (e.g. of a television or radio broadcast)
 
 recipient
     Recipient (e.g. of a letter)
