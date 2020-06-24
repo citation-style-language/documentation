@@ -2741,9 +2741,6 @@ authority
 call-number
     call number (to locate the item in a library)
 
-citation-key
-    identified used 
-
 citation-label
     label identifying the item in in-text citations of label styles (e.g.
     "Ferr78"). May be assigned by the CSL processor based on item metadata.
@@ -2808,7 +2805,7 @@ locator
     variable is selected.
 
 medium
-    medium description (e.g. "CD", "DVD", etc.)
+    Description of format or medium (e.g. "CD", "DVD", "Album", etc.)
 
 note
     notes about an item (e.g. in an annotated bibliography)
