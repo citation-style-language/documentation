@@ -2728,6 +2728,9 @@ annote
 archive
     Archive storing the item
 
+archive\_collection
+    Collection the item is part of within an archive
+
 archive\_location
     Storage location within an archive (e.g. a box and folder number)
 
@@ -2756,7 +2759,8 @@ citation-label
     instead
 
 collection-title
-    Title of the collection holding the item (e.g. the series title for a book)
+    Title of the collection holding the item (e.g. the series title for a book;
+    the lecture series title for a presentation)
 
 container-title
     Title of the container holding the item (e.g. the book title for a book
@@ -2764,11 +2768,14 @@ container-title
     recording; the session title for multi-part presentation at a conference)
 
 container-title-short
-    Short/abbreviated form of "container-title";
+    Short/abbreviated form of ``container-title``;
     Deprecated; use ``variable="container-title" form="short"`` instead
 
 dimensions
     Physical (e.g. size) or temporal (e.g. running time) dimensions of the item
+
+division
+    Minor subdivision of a court with a ``jurisdiction`` for a legal item
 
 DOI
     Digital Object Identifier (e.g. "10.1128/AEM.02591-07")
@@ -2778,7 +2785,8 @@ event
     a conference paper; the meeting where presentation was made)
 
 event-place
-    Geographic location of the event (e.g. "Amsterdam, The Netherlands")
+    Geographic location of the event related to the item (e.g. "Amsterdam, The 
+    Netherlands")
 
 genre
     Type, class, or subtype of the item (e.g. "Doctoral dissertation" for a PhD 
@@ -2786,20 +2794,47 @@ genre
     Do not use for topical descriptions or categories (e.g. "adventure" for an 
     adventure movie)
 
+ISAN
+    International Standard Audiovisual Number
+
 ISBN
-    International Standard Book Number
+    International Standard Book Number (e.g. "978-3-8474-1017-1")
+
+ISCI
+    International Standard Collection Identifier
+
+ISMN
+    International Standard Music Number
+
+ISRC
+    International Standard Recording Code
 
 ISSN
     International Standard Serial Number
 
+ISWC
+    International Standard Musical Work Code
+
 jurisdiction
-    Geographic scope of relevance (e.g. "US" for a US patent)
+    Geographic scope of relevance (e.g. "US" for a US patent; the court hearing
+    a legal case)
 
 keyword
     Keyword(s) or tag(s) attached to the item
 
+language
+    The language of the item;
+    Should be entered as an ISO 639-1 two-letter language code 
+    (e.g. "en", "zh"), optionally with a two-letter locale code (e.g. "de-DE",
+    "de-AT")
+
+license
+    The license information applicable to an item (e.g. the license an article 
+    or software is released under; the copyright information for an item; the 
+    classification status of a document)
+
 medium
-    Description of format or medium (e.g. "CD", "DVD", "Album", etc.)
+    Description of the item's format or medium (e.g. "CD", "DVD", "Album", etc.)
 
 note
     Descriptive text or notes about an item (e.g. in an annotated bibliography)
@@ -2815,6 +2850,9 @@ original-title
     Title of the original version (e.g. "Война и мир", the untranslated Russian
     title of "War and Peace")
 
+part-title
+    Title of the specific part of an item being cited
+
 PMCID
     PubMed Central reference number
 
@@ -2828,7 +2866,10 @@ publisher-place
     Geographic location of the publisher
 
 references
-    Resources related to the procedural history of a legal case
+    Resources related to the procedural history of a legal case or legislation;
+    Can also be used to refer to the procedural history of other items
+    (e.g. "Conference canceled" for a presentation accepted as a conference that
+    was subsequently canceled; details of a retraction or correction notice)
 
 reviewed-genre
     Type of the item being reviewed by the current item (e.g. book, film)
@@ -2838,9 +2879,6 @@ reviewed-title
 
 scale
     Scale of e.g. a map or model
-
-section
-    Container section holding the item (e.g. "politics" for a newspaper article)
 
 source
     Source from whence the item originates (e.g. a library catalog or database)
@@ -2853,15 +2891,23 @@ title
     Primary title of the item
 
 title-short
-    Short/abbreviated form of "title";
+    Short/abbreviated form of ``title``;
     Deprecated; use ``variable="container-title" form="short"`` instead
+
+translated-title
+    Primary title of the item, translated into the lanugage of the citing
+    document, often by the author of the citing document (e.g. "Handbook of
+    industrial, work, and organizational psychology" for "Endüstri, iş ve örgüt 
+    psikolojisi: el kitabı")
 
 URL
     Uniform Resource Locator (e.g.
     "https://aem.asm.org/cgi/content/full/74/9/2766")
 
-version
-    Version of the item (e.g. "2.0.9" for a software program)
+volume-title
+    Title of the volume of the item or container holding the item;
+    Also use for titles of periodical special issues, special sections, and 
+    the like
 
 year-suffix
     Disambiguating year suffix in author-date styles (e.g. "a" in "Doe, 1999a")
@@ -2893,8 +2939,9 @@ first-reference-note-number
     preceding notes in a document
 
 issue
-    (Container) issue holding the item (e.g. "5" when citing a journal article
-    from journal volume 2, issue 5)
+    Issue number of the item or container holding the item (e.g. "5" when citing 
+    a journal article from journal volume 2, issue 5);
+    Use ``volume-title`` for the title of the issue, if any
 
 locator
     A cite-specific pinpointer within the item (e.g. a page number within a
@@ -2926,15 +2973,23 @@ part
     Use ``part-title`` for the title of the part, if any
 
 printing
-    Printing number of the item
+    Printing number of the item or container holding the item
+
+section
+    Section of the item or container holding the item (e.g. "§2.0.1" for a law; 
+    "politics" for a newspaper article)
 
 supplement
-    (Container) supplement number holding the item (e.g. for secondary legal
-    items that are regularly updated between editions)
+    Supplement number of the item or container holding the item (e.g. for 
+    secondary legal items that are regularly updated between editions)
+
+version
+    Version of the item (e.g. "2.0.9" for a software program)
 
 volume
-    (Container) volume number holding the item (e.g. "2" when citing a chapter
-    from volume 2 of a book);
+    Volume number of the item (e.g. "2" when citing volume 2 of a book) or the 
+    container holding the item (e.g. "2" when citing a chapter from volume 2 of 
+    a book);
     Use ``volume-title`` for the title of the volume, if any
 
 Date Variables
