@@ -2847,6 +2847,9 @@ publisher-place
 references
     resources related to the procedural history of a legal case
 
+reviewed-genre
+    Type of the item being reviewed by the current item (e.g. book, film)
+
 reviewed-title
     title of the item reviewed by the current item
 
