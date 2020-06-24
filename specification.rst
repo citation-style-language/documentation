@@ -2768,8 +2768,8 @@ container-title
     recording; the session title for multi-part presentation at a conference)
 
 container-title-short
-    Short/abbreviated form of "container-title" (also accessible through the
-    "short" form of the "container-title" variable)
+    Short/abbreviated form of "container-title";
+    Deprecated use ``variable="container-title" form="short"`` instead
 
 dimensions
     Physical (e.g. size) or temporal (e.g. running time) dimensions of the item
@@ -2878,8 +2878,8 @@ title
     Primary title of the item
 
 title-short
-    Short/abbreviated form of "title" (also accessible through the "short" form
-    of the "title" variable)
+    Short/abbreviated form of "title";
+    Deprecated use ``variable="container-title" form="short"`` instead
 
 URL
     Uniform Resource Locator (e.g.
