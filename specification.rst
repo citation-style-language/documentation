@@ -3003,9 +3003,6 @@ available-date
     a journal article before its formal publication date; the date a treaty
     was made available for signing)
 
-container
-    Deprecated; do not use
-
 event-date
     Date the event related to an item took place
 
