@@ -47,6 +47,26 @@ throughout this specification when referring to CSL elements, but is generally
 omitted in favor of a default namespace declaration (set with
 the ``xmlns`` attribute) on the root ``cs:style`` or ``cs:locale`` element.
 
+Whitespace Handling
+-------------------
+
+CSL styles are valid XML, but CSL processors MUST NOT normalize attribute values 
+by trimming leading or trailing whitespace from attributes which define text that 
+is intended for output:
+
+- after-collapse-delimiter
+- cite-group-delimiter
+- delimiter
+- initialize-with
+- name-delimiter
+- names-delimiter
+- prefix
+- range-delimiter
+- sort-separator
+- suffix
+- year-suffix-delimiter
+-value
+
 File Types
 ----------
 
@@ -1300,7 +1320,8 @@ values set on the ``cs:name`` and ``cs:et-al`` child elements of the original
 ``cs:names`` element, may also be used. If ``cs:substitute`` contains multiple
 child elements, the first element to return a non-empty result is used for
 substitution. Substituted variables are suppressed in the rest of the output to
-prevent duplication. An example, where an empty "author" name variable is
+prevent duplication. If the variable was rendered earlier in the citation, before the "substitute" element, 
+it is not suppressed. An example, where an empty "author" name variable is
 substituted by the "editor" name variable, or, when no editors exist, by the
 "title" macro:
 
@@ -2527,42 +2548,225 @@ Miscellaneous
 Appendix III - Types
 --------------------
 
--  article
--  article-magazine
--  article-newspaper
--  article-journal
--  bill
--  book
--  broadcast
--  chapter
--  dataset
--  document
--  entry
--  entry-dictionary
--  entry-encyclopedia
--  figure
--  graphic
--  interview
--  legislation
--  legal\_case
--  manuscript
--  map
--  motion\_picture
--  musical\_score
--  pamphlet
--  paper-conference
--  patent
--  post
--  post-weblog
--  personal\_communication
--  report
--  review
--  review-book
--  song
--  speech
--  thesis
--  treaty
--  webpage
+article
+    A self-contained work made widely available but not published in a journal
+    or other publication;
+    Use for preprints, working papers, and similar works posted on a platform
+    where some level of persistence or stewardship is expected (e.g. arXiv or 
+    other preprint repositories, working paper series);
+    For unpublished works not made widely available or only hosted on personal
+    websites, use ``manuscript``
+
+article-journal
+    An article published in an academic journal
+
+article-magazine
+    An article published in a non-academic magazine
+
+article-newspaper
+    An article published in a newspaper
+
+bill
+    A proposed piece of legislation
+
+book
+    A book or similar work;
+    Can be an authored book or an edited collection of self-contained chapters;
+    Can be a physical book or an ebook;
+    The format for an ebook may be specified using ``medium``;
+    Can be a single-volume work, a multivolume work, or one volume of 
+    a multivolume work;
+    If a ``container-title`` is present, the item is interpreted as a book
+    republished in a collection or anthology;
+    Also  used for whole conference proceedings volumes or exhibition catalogs 
+    by specifying ``event`` and related variables
+
+broadcast
+    A recorded work broadcast over an electronic medium (e.g. a radio 
+    broadcast, a television show, a podcast);
+    The type of broadcast may be specified using ``genre``;
+    If ``container-title`` is present, the item is interpreted as an episode
+    contained within a larger broadcast series (e.g. an episode in a television
+    show or an episode of a podcast)
+
+chapter
+    A part of a book cited separately from the book as a whole (e.g. a chapter
+    in an edited book);
+    Also used for introductions, forewords, and similar supplemental 
+    components of a book
+
+classic
+    A classical or ancient work, sometimes cited using a common abbreviation
+
+collection
+    An archival collection in a museum or other institution
+
+dataset
+    A data set or a similar collection of (mostly) raw data
+
+document
+    A catch-all category for items not belonging to other types;
+    Use a more specific type when appropriate
+
+entry
+    An entry in a database, directory, or catalog;
+    For entries in a dictionary, use ``entry-dictionary``;
+    For entries in an encyclopedia, use ``entry-encyclopedia``
+
+entry-dictionary
+    An entry in a dictionary
+
+entry-encyclopedia
+    An entry in an encyclopedia or similar reference work
+
+event
+    An organized event (e.g., an exhibition or conference);
+    Use for direct citations to the event, rather than to works contained
+    within an event (e.g. a ``presentation`` in a conference, a ``graphic`` in 
+    an exhibition) or based on an event (e.g. a ``paper-conference`` published 
+    in a proceedings, an exhibition catalog)
+
+figure
+    A illustration or representation of data, typically as part of a journal
+    article or other larger work;
+    May be in any format (e.g. image, video, audio recording, 3D model);
+    The format of the item can be specified using ``medium``
+
+graphic
+    A still visual work;
+    Can be used for artwork or other works (e.g. journalistic or historical 
+    photographs);
+    Can be used for any still visual work (e.g. photographs, drawings, 
+    paintings, sculptures, clothing);
+    The format of the item can be specified using ``medium``
+
+hearing
+    A hearing by a government committee or transcript thereof
+
+interview
+    An interview of a person;
+    Also used for a recording or transcript of an interview;
+    ``author`` is interpreted as the interviewee
+
+legal\_case
+    A legal case
+
+legislation
+    A law or resolution enacted by a governing body
+
+manuscript
+    An unpublished manuscript;
+    Use for both modern unpublished works and classical manuscripts;
+    For working papers, preprints, and similar works posted to a repository,
+    use ``article``
+
+map
+    A geographic map
+
+motion\_picture
+    A video or visual recording;
+    If a ``container-title`` is present, the item is interpreted as a part
+    contained within a larger compilation of recordings (e.g. a part of a
+    multipart documentary))
+
+musical\_score
+    The printed score for a piece of music;
+    For a live performance of the music, use ``performance``;
+    For recordings of the music, use ``song`` (for audio recordings) or 
+    ``motion\_picture`` (for video recordings)
+
+pamphlet
+    A fragment, historical document, or other unusually-published or ephemeral 
+    work (e.g. a sales brochure)
+
+paper-conference
+    A paper formally published in conference proceedings;
+    For papers presented at a conference, but not published in a proceedings,
+    use ``speech``
+
+patent
+    A patent for an invention
+
+performance
+    A live performance of an artistic work;
+    For non-artistic presentations, use ``speech``;
+    For recordings of a performance, use ``song`` or ``motion\_picture``
+
+periodical
+    A full issue or run of issues in a periodical publication (e.g. a special 
+    issue of a journal)
+
+personal\_communication
+    Personal communications between multiple parties;
+    May be unpublished (e.g. private correspondence between two researchers) or 
+    collected/published (e.g. a letter published in a collection)
+
+post
+    A post on a online forum, social media platform, or similar platform; 
+    Also used for comments posted to online items
+
+post-weblog
+    A blog post
+
+regulation
+    An administrative order from any level of government
+
+report
+    A technical report, government report, white paper, brief, or similar
+    work distributed by an institution;
+    Also used for manuals and similar technical documentation (e.g. a software, 
+    instrument, or test manual);
+    If a ``container-title`` is present, the item is interpreted as a chapter
+    contained within a larger report
+
+review
+    A review of an item other than a book (e.g. a film review, posted peer 
+    review of an article);
+    If ``reviewed-title`` is absent, ``title`` is taken to be the title of the 
+    reviewed item
+
+review-book
+    A review of a book;
+    If ``reviewed-title`` is absent, ``title`` is taken to be the title of the 
+    reviewed book
+
+software
+    A computer program, app, or other piece of software
+
+song
+    An audio recording;
+    Can be used for any audio recording (not only music);
+    If a ``container-title`` is present, the item is interpreted as a track
+    contained within a larger album or compilation of recordings
+
+speech
+    A speech or other presentation (e.g. a paper, talk, poster, or symposium
+    at a conference);
+    Use ``genre`` to specify the type of presentation;
+    Use ``event`` to indicate the event where the presentation was made (e.g.
+    the conference name);
+    Use ``container-title`` if the presentation is part of a larger session
+    (e.g. a paper in a symposium);
+    For papers published in conference proceedings, use ``paper-conference``;
+    For artistic performances, use ``performance``
+
+standard
+    A technical standard or similar set of rules or norms
+
+thesis
+    A thesis written to satisfy requirements for a degree;
+    Use ``genre`` to specify the type of thesis
+
+treaty
+    A treaty agreement among political authorities
+
+webpage
+    A website or page on a website;
+    Intended for sources which are intrinsically online; use a more specific
+    type when appropriate (e.g. ``article-journal``, ``post-weblog``, 
+    ``report``, ``entry``);
+    If a ``container-title`` is present, the item is interpreted as a page
+    contained within a larger website
 
 Appendix IV - Variables
 -----------------------
@@ -2574,8 +2778,10 @@ abstract
     abstract of the item (e.g. the abstract of a journal article)
 
 annote
-    short markup, decoration, or annotation to the item (e.g., to indicate items included in a review);
-    for descriptive text (e.g., in an annotated bibliography), use ``note`` instead
+    short markup, decoration, or annotation to the item (e.g., to indicate items 
+    included in a review); 
+    for descriptive text (e.g., in an annotated bibliography), use ``note`` 
+    instead
 
 archive
     archive storing the item
