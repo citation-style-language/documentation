@@ -3071,3 +3071,39 @@ The page abbreviation rules for the different values of the
 "minimal-two"
     As "minimal", but at least two digits are kept in the second number when it
     has two or more digits long.
+
+
+Appendix VI: Links
+------------------
+
+The CSL syntax does not have support for configuration of links. However,
+processors should include links on bibliographic references, using the following
+rules:
+
+If the bibliography entry for an item renders any of the following identifers,
+the identifer should be anchored as a link, with the target of the link as
+follows:
+
+1. ``url``: output as is
+2. ``doi``: prepend with ``https://doi.org/``
+3. ``pmid``: prepend with ``https://www.ncbi.nlm.nih.gov/pubmed/``
+4. ``pmcid``: prepend with ``https://www.ncbi.nlm.nih.gov/pmc/articles/``
+
+If the identifier is rendered as a URI, include rendered URI components 
+(e.g. ``https://doi.org/``) in the link anchor. Do not include any other 
+affix text in the link anchor (e.g. ``Available from: ``, ``doi: ``, ``PMID: ``).
+
+If the bibliography entry for an item does not render any of the above identifers,
+then set the anchor of the link as the item ``title``. If ``title`` is not rendered,
+then set the anchor of the link as the full bibilography entry for the item. Set the
+target of the link as one of the following, in order of priority:
+
+1. ``doi``: prepend with ``https://doi.org/``
+2. ``pmcid``: prepend with ``https://www.ncbi.nlm.nih.gov/pmc/articles/``
+3. ``pmid``: prepend with ``https://www.ncbi.nlm.nih.gov/pubmed/``
+4. ``url``: output as is
+
+If the item data does not include any of the above identifiers, do not include a link.
+
+Citation processors should include an option flag for calling applications to disable 
+bibliography linking behavior.
