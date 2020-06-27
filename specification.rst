@@ -2779,10 +2779,10 @@ abstract
     Abstract of the item (e.g. the abstract of a journal article)
 
 annote
-    Short markup, decoration, or annotation to the item (e.g., to indicate items 
-    included in a review); 
-    For descriptive text (e.g., in an annotated bibliography), use ``note`` 
-    instead
+    | Short markup, decoration, or annotation to the item (e.g., to indicate
+      items included in a review); 
+    | For descriptive text (e.g., in an annotated bibliography), use ``note`` 
+      instead
 
 archive
     Archive storing the item
@@ -2804,31 +2804,32 @@ call-number
     Call number (to locate the item in a library)
 
 citation-key
-    Identifier of the item in the input data file (analogous to BiTeX entrykey);
-    Use this variable to facilitate conversion between word-processor and 
-    plain-text writing systems;
-    For an identifer intended as formatted output label for a citation (e.g.
-    "Ferr78"), use ``citation-label`` instead
+    | Identifier of the item in the input data file (analogous to BiTeX 
+      entrykey);
+    | Use this variable to facilitate conversion between word-processor and 
+      plain-text writing systems;
+    | For an identifer intended as formatted output label for a citation (e.g.
+      "Ferr78"), use ``citation-label`` instead
 
 citation-label
-    Label identifying the item in in-text citations of label styles (e.g.
-    "Ferr78");
-    May be assigned by the CSL processor based on item metadata;
-    For the identifier of the item in the input data file, use ``citation-key``
-    instead
+    | Label identifying the item in in-text citations of label styles (e.g.
+      "Ferr78");
+    | May be assigned by the CSL processor based on item metadata;
+    | For the identifier of the item in the input data file, use 
+      ``citation-key`` instead
 
 collection-title
-    Title of the collection holding the item (e.g. the series title for a book;
-    the lecture series title for a presentation)
+    | Title of the collection holding the item (e.g. the series title for a 
+      book; the lecture series title for a presentation)
 
 container-title
-    Title of the container holding the item (e.g. the book title for a book
-    chapter, the journal title for a journal article; the album title for a 
-    recording; the session title for multi-part presentation at a conference)
+    | Title of the container holding the item (e.g. the book title for a book
+      chapter, the journal title for a journal article; the album title for a 
+      recording; the session title for multi-part presentation at a conference)
 
 container-title-short
-    Short/abbreviated form of ``container-title``;
-    Deprecated; use ``variable="container-title" form="short"`` instead
+    | Short/abbreviated form of ``container-title``;
+    | Deprecated; use ``variable="container-title" form="short"`` instead
 
 dimensions
     Physical (e.g. size) or temporal (e.g. running time) dimensions of the item
@@ -2848,10 +2849,10 @@ event-place
     Netherlands")
 
 genre
-    Type, class, or subtype of the item (e.g. "Doctoral dissertation" for a PhD 
-    thesis; "NIH Publication" for an NIH technical report);
-    Do not use for topical descriptions or categories (e.g. "adventure" for an 
-    adventure movie)
+    | Type, class, or subtype of the item (e.g. "Doctoral dissertation" for a
+      PhD thesis; "NIH Publication" for an NIH technical report);
+    | Do not use for topical descriptions or categories (e.g. "adventure" for an 
+      adventure movie)
 
 ISAN
     International Standard Audiovisual Number
@@ -2882,10 +2883,10 @@ keyword
     Keyword(s) or tag(s) attached to the item
 
 language
-    The language of the item;
-    Should be entered as an ISO 639-1 two-letter language code 
-    (e.g. "en", "zh"), optionally with a two-letter locale code (e.g. "de-DE",
-    "de-AT")
+    | The language of the item;
+    | Should be entered as an ISO 639-1 two-letter language code 
+      (e.g. "en", "zh"), optionally with a two-letter locale code (e.g. "de-DE",
+      "de-AT")
 
 license
     The license information applicable to an item (e.g. the license an article 
@@ -2925,10 +2926,12 @@ publisher-place
     Geographic location of the publisher
 
 references
-    Resources related to the procedural history of a legal case or legislation;
-    Can also be used to refer to the procedural history of other items
-    (e.g. "Conference canceled" for a presentation accepted as a conference that
-    was subsequently canceled; details of a retraction or correction notice)
+    | Resources related to the procedural history of a legal case or 
+      legislation;
+    | Can also be used to refer to the procedural history of other items
+      (e.g. "Conference canceled" for a presentation accepted as a conference
+      that was subsequently canceled; details of a retraction or correction
+      notice)
 
 reviewed-genre
     Type of the item being reviewed by the current item (e.g. book, film)
@@ -2950,8 +2953,8 @@ title
     Primary title of the item
 
 title-short
-    Short/abbreviated form of ``title``;
-    Deprecated; use ``variable="container-title" form="short"`` instead
+    | Short/abbreviated form of ``title``;
+    | Deprecated; use ``variable="container-title" form="short"`` instead
 
 translated-title
     Primary title of the item, translated into the lanugage of the citing
@@ -2964,9 +2967,9 @@ URL
     "https://aem.asm.org/cgi/content/full/74/9/2766")
 
 volume-title
-    Title of the volume of the item or container holding the item;
-    Also use for titles of periodical special issues, special sections, and 
-    the like
+    | Title of the volume of the item or container holding the item;
+    | Also use for titles of periodical special issues, special sections, and 
+      the like
 
 year-suffix
     Disambiguating year suffix in author-date styles (e.g. "a" in "Doe, 1999a")
@@ -2992,22 +2995,22 @@ edition
     third edition of a book)
 
 first-reference-note-number
-    Number of a preceding note containing the first reference to the item;
-    Assigned by the CSL processor; 
-    Empty in non-note-based styles or when the item hasn't been cited in any 
-    preceding notes in a document
+    | Number of a preceding note containing the first reference to the item;
+    | Assigned by the CSL processor; 
+    | Empty in non-note-based styles or when the item hasn't been cited in any 
+      preceding notes in a document
 
 issue
-    Issue number of the item or container holding the item (e.g. "5" when citing 
-    a journal article from journal volume 2, issue 5);
-    Use ``volume-title`` for the title of the issue, if any
+    | Issue number of the item or container holding the item (e.g. "5" when 
+      citing a journal article from journal volume 2, issue 5);
+    | Use ``volume-title`` for the title of the issue, if any
 
 locator
-    A cite-specific pinpointer within the item (e.g. a page number within a
-    book, or a volume in a multi-volume work);
-    Must be accompanied in the input data by a label indicating the locator type 
-    (see the `Locators`_ term list), which determines which term is rendered by 
-    ``cs:label`` when the ``locator`` variable is selected.
+    | A cite-specific pinpointer within the item (e.g. a page number within a
+      book, or a volume in a multi-volume work);
+    | Must be accompanied in the input data by a label indicating the locator 
+      type (see the `Locators`_ term list), which determines which term is 
+      rendered by ``cs:label`` when the ``locator`` variable is selected.
 
 number
     Number identifying the item (e.g. a report number)
@@ -3027,9 +3030,9 @@ page-first
     a container (e.g. a journal issue)
 
 part
-    Number of the specific part of the item being cited (e.g. part 2 of a 
-    journal article);
-    Use ``part-title`` for the title of the part, if any
+    | Number of the specific part of the item being cited (e.g. part 2 of a 
+      journal article);
+    | Use ``part-title`` for the title of the part, if any
 
 printing
     Printing number of the item or container holding the item
@@ -3046,10 +3049,10 @@ version
     Version of the item (e.g. "2.0.9" for a software program)
 
 volume
-    Volume number of the item (e.g. "2" when citing volume 2 of a book) or the 
-    container holding the item (e.g. "2" when citing a chapter from volume 2 of 
-    a book);
-    Use ``volume-title`` for the title of the volume, if any
+    | Volume number of the item (e.g. "2" when citing volume 2 of a book) or the 
+      container holding the item (e.g. "2" when citing a chapter from volume 2
+      of a book);
+    | Use ``volume-title`` for the title of the volume, if any
 
 Date Variables
 ~~~~~~~~~~~~~~
