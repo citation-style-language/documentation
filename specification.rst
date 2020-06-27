@@ -2673,7 +2673,7 @@ musical\_score
     The printed score for a piece of music;
     For a live performance of the music, use ``performance``;
     For recordings of the music, use ``song`` (for audio recordings) or 
-    ``motion\_picture`` (for video recordings)
+    ``motion_picture`` (for video recordings)
 
 pamphlet
     A fragment, historical document, or other unusually-published or ephemeral 
@@ -2690,7 +2690,7 @@ patent
 performance
     A live performance of an artistic work;
     For non-artistic presentations, use ``speech``;
-    For recordings of a performance, use ``song`` or ``motion\_picture``
+    For recordings of a performance, use ``song`` or ``motion_picture``
 
 periodical
     A full issue or run of issues in a periodical publication (e.g. a special 
