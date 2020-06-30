@@ -1422,7 +1422,7 @@ If a ``cs:group`` is nested within another ``cs:group``, the inner group is
 evaluated first: a non-empty nested ``cs:group`` is treated as a non-empty
 variable for the puropses of determining suppression of the outer ``cs:group``.
 
-If a ``cs:group`` contains a child ``cs:macro``, if the ``cs:macro`` is 
+When a ``cs:group`` contains a child ``cs:macro``, if the ``cs:macro`` is 
 non-empty, it is treated as a non-empty variable for the purposes of determining 
 suppression of the outer ``cs:group``.
 
