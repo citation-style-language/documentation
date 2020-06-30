@@ -1320,10 +1320,11 @@ values set on the ``cs:name`` and ``cs:et-al`` child elements of the original
 ``cs:names`` element, may also be used. If ``cs:substitute`` contains multiple
 child elements, the first element to return a non-empty result is used for
 substitution. Substituted variables are suppressed in the rest of the output to
-prevent duplication. If the variable was rendered earlier in the citation, before the "substitute" element, 
-it is not suppressed. An example, where an empty "author" name variable is
-substituted by the "editor" name variable, or, when no editors exist, by the
-"title" macro:
+prevent duplication. Substituted variables are considered empty for the purposes
+of determining whether to suppress an enclosing ``cs:group``. If the variable 
+was rendered earlier in the citation, before the "substitute" element, it is not 
+suppressed. An example, where an empty "author" name variable is substituted by 
+the "editor" name variable, or, when no editors exist, by the "title" macro:
 
 .. sourcecode:: xml
 
