@@ -1418,6 +1418,14 @@ empty. This accommodates descriptive ``cs:text`` elements. For example,
 can result in "retrieved from http://dx.doi.org/10.1128/AEM.02591-07", but
 doesn't generate output when the "URL" variable is empty.
 
+If a ``cs:group`` is nested within another ``cs:group``, the inner group is
+evaluated first: a non-empty nested ``cs:group`` is treated as a non-empty
+variable for the puropses of determining suppression of the outer ``cs:group``.
+
+If a ``cs:group`` contains a child ``cs:macro``, if the ``cs:macro`` is 
+non-empty, it is treated as a non-empty variable for the puropses of determining 
+suppression of the outer ``cs:group``.
+
 Choose
 ~~~~~~
 
