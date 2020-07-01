@@ -65,7 +65,7 @@ is intended for output:
 - sort-separator
 - suffix
 - year-suffix-delimiter
--value
+- value
 
 File Types
 ----------
