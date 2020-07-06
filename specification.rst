@@ -692,6 +692,7 @@ Localized Punctuation
 The terms ``colon``, ``comma``, and ``semicolon`` define locale-specific punctuation marks.
 When specified in the locale, all instances of the ":" (``colon``), "," (``comma``), and ";" (``semicolon``) characters specified in the style in ``value``, ``prefix``, ``suffix``, and ``delimiter`` attributes are replaced with their corresponding terms.
 Any ":", ",", or ";" characters contained in item data are unchanged.
+Other characters included in affected attributes aside from ":", ",", or ";" (e.g., spaces) are unchanged.
 
 Localized Options
 ~~~~~~~~~~~~~~~~~
