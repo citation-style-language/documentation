@@ -394,7 +394,7 @@ set to an `xsd:language locale code
 <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_, determines which
 languages or language dialects are affected (see `Locale Fallback`_).
 
-See `Terms`_, `Localized Date Formats`_ and `Localized Options`_ for further
+See `Terms`_, `Localized Date Formats`_, `Localized Punctuation`_, and `Localized Options`_ for further
 details on the use of ``cs:locale``.
 
 An example of ``cs:locale`` in a style:
@@ -685,6 +685,13 @@ a localized date format:
       <macro name="issued">
        <date variable="issued" form="numeric" prefix="(" suffix=")"/>
       </macro>
+
+Localized Punctuation
+~~~~~~~~~~~~~~~~~~~~~
+
+The terms ``colon``, ``comma``, and ``semicolon`` define locale-specific punctuation marks.
+When specified in the locale, all instances of the ":" (``colon``), "," (``comma``), and ";" (``semicolon``) characters specified in the style in ``value``, ``prefix``, ``suffix``, and ``delimiter`` attributes are replaced with their corresponding terms.
+Any ":", ",", or ";" characters contained in item data are unchanged.
 
 Localized Options
 ~~~~~~~~~~~~~~~~~
