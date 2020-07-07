@@ -64,8 +64,9 @@ is intended for output:
 - range-delimiter
 - sort-separator
 - suffix
+- title-delimiter
 - year-suffix-delimiter
--value
+- value
 
 File Types
 ----------
