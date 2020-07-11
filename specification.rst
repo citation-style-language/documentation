@@ -1325,10 +1325,11 @@ values set on the ``cs:name`` and ``cs:et-al`` child elements of the original
 ``cs:names`` element, may also be used. If ``cs:substitute`` contains multiple
 child elements, the first element to return a non-empty result is used for
 substitution. Substituted variables are suppressed in the rest of the output to
-prevent duplication. If the variable was rendered earlier in the citation, before the "substitute" element, 
-it is not suppressed. An example, where an empty "author" name variable is
-substituted by the "editor" name variable, or, when no editors exist, by the
-"title" macro:
+prevent duplication. Substituted variables are considered empty for the purposes
+of determining whether to suppress an enclosing ``cs:group``. If the variable 
+was rendered earlier in the citation, before the "substitute" element, it is not 
+suppressed. An example, where an empty "author" name variable is substituted by 
+the "editor" name variable, or, when no editors exist, by the "title" macro:
 
 .. sourcecode:: xml
 
@@ -1421,6 +1422,14 @@ empty. This accommodates descriptive ``cs:text`` elements. For example,
 
 can result in "retrieved from http://dx.doi.org/10.1128/AEM.02591-07", but
 doesn't generate output when the "URL" variable is empty.
+
+If a ``cs:group`` is nested within another ``cs:group``, the inner group is
+evaluated first: a non-empty nested ``cs:group`` is treated as a non-empty
+variable for the puropses of determining suppression of the outer ``cs:group``.
+
+When a ``cs:group`` contains a child ``cs:macro``, if the ``cs:macro`` is 
+non-empty, it is treated as a non-empty variable for the purposes of determining 
+suppression of the outer ``cs:group``.
 
 Choose
 ~~~~~~
