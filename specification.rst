@@ -723,6 +723,56 @@ An example of ``cs:text`` rendering the "title" variable:
 ``cs:text`` may also carry `affixes`_, `display`_, `formatting`_, `quotes`_,
 `strip-periods`_ and `text-case`_ attributes.
 
+Titles
+~~~~~~
+
+Titles are rendered with ``cs:text``. Title variables are a subset of
+the list of standard variables.
+
+Citeprocs split title variables into "main" and "sub" forms.
+Split-points can be explicitly provided in title variables by separating
+chunks of a title with two vertical bars:
+``Main Title:|| first subtitle:|| second subtitle``. The "main" form is
+the text before the first delimiter, the "sub" form is an array of the
+text following each delimiter. If no split-points are supplied in the
+data, the citeproc will derive them based on the inheritable attribute
+``title-split``. Options for this attribute are:
+
+::
+
+   * `"simple"`: Matches `. `, `: `, `:: `, `! `, `? `
+   * `"extended"`: Matches the values for `"simple"`, plus `; `
+   * `"full"`: Matches the values for `"simple"`, plus `—` and `; `
+   * `"chicago"`: Matches the values for `"simple"`, plus `; ` and `[;,] or[,:]`
+
+``<text variable="title">`` renders the "main" form followed by the
+"sub" form. The delimiter is set by the inheritable attribute
+``title-delimiter``, a text string. ``text variable="title" form="sub"``
+renders all of its elements, with the delimiter set by the inheritable
+attribute ``title-sub-delimiter`` (the same as ``title-delimiter`` if
+empty). If a title chunk already ends with a delimiter, no additional
+delimiter will be added.
+
+Delimiters are changed to the values specified by ``title-delimiter``
+and ``title-sub-delimiter``. Which delimiters are normalized is
+controlled via an inheritable attribute ``normalize-title-delimiters``.
+Options for this attribute are:
+
+::
+
+   * `"simple"`: Normalize `. `, `: `, `:: `
+   * `"extended"`: Normalize the values for `"simple"`, plus `; `
+   * `"full"`: Normalize the values for `"simple"`, plus `—` and `; `
+
+When rendering ``title`` with ``<text variable="title">``, text casing can be controlled
+via (additional) options settable on the ``text-case`` attribute:
+
+::
+
+   - `text-case="title"` - title casing is applied to `title-main` and each element of `title-sub`
+   - `text-case="capitalize-subtitle"` - the first letter of `title-main` and each element of `title-sub` is capitalized
+   - Other text cases have the current behavior.
+
 Date
 ~~~~
 
