@@ -5,10 +5,12 @@ by `Rintze M. Zelle, PhD <https://twitter.com/rintzezelle>`_
 
 with contributions from Frank G. Bennett, Jr. and Bruce D'Arcus.
 
-|CCBYSA|_
+| |CCBYSA|_
+| This work is licensed under a `Creative Commons Attribution-ShareAlike 4.0 International License`__.
 
 .. |CCBYSA| image:: /media/cc-by-sa-80x15.png
-.. _CCBYSA: http://creativecommons.org/licenses/by-sa/3.0/
+.. _CCBYSA: https://creativecommons.org/licenses/by-sa/4.0/
+__ CCBYSA_ 
 
 .. contents:: **Table of Contents**
 
