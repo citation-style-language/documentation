@@ -692,7 +692,7 @@ Localized Punctuation
 ~~~~~~~~~~~~~~~~~~~~~
 
 The terms ``colon``, ``comma``, and ``semicolon`` define locale-specific punctuation marks.
-When specified in the locale, all instances of the ":" (``colon``), "," (``comma``), and ";" (``semicolon``) characters specified in the style in the follow attributes are replaced with their corresponding terms:
+All instances of the ":" (``colon``), "," (``comma``), and ";" (``semicolon``) characters specified in the style in the follow attributes are replaced with their corresponding terms:
 
 - after-collapse-delimiter
 - cite-group-delimiter
@@ -709,8 +709,9 @@ When specified in the locale, all instances of the ":" (``colon``), "," (``comma
 - year-suffix-delimiter
 - value
 
+If the term contains whitespace character(s) before or after ":", ",", or ";" whitespace characters specified in the respective positions in affected attributes are removed (replaced by the whitespace in the term).
 Any ":", ",", or ";" characters contained in item data are unchanged.
-Other characters included in affected attributes aside from ":", ",", or ";" (e.g., spaces) are unchanged.
+Other characters included in affected attributes aside from ":", ",", or ";" and affected whitespace are unchanged.
 
 Localized Options
 ~~~~~~~~~~~~~~~~~
