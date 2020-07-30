@@ -64,8 +64,10 @@ is intended for output:
 - range-delimiter
 - sort-separator
 - suffix
+- title-delimiter
+- title-sub-delimiter
 - year-suffix-delimiter
--value
+- value
 
 File Types
 ----------
@@ -394,7 +396,7 @@ set to an `xsd:language locale code
 <http://books.xmlschemata.org/relaxng/ch19-77191.html>`_, determines which
 languages or language dialects are affected (see `Locale Fallback`_).
 
-See `Terms`_, `Localized Date Formats`_ and `Localized Options`_ for further
+See `Terms`_, `Localized Date Formats`_, `Localized Punctuation`_, and `Localized Options`_ for further
 details on the use of ``cs:locale``.
 
 An example of ``cs:locale`` in a style:
@@ -685,6 +687,31 @@ a localized date format:
       <macro name="issued">
        <date variable="issued" form="numeric" prefix="(" suffix=")"/>
       </macro>
+
+Localized Punctuation
+~~~~~~~~~~~~~~~~~~~~~
+
+The terms ``colon``, ``comma``, and ``semicolon`` define locale-specific punctuation marks.
+All instances of the ":" (``colon``), "," (``comma``), and ";" (``semicolon``) characters specified in the style in the follow attributes are replaced with their corresponding terms:
+
+- after-collapse-delimiter
+- cite-group-delimiter
+- delimiter
+- initialize-with
+- name-delimiter
+- names-delimiter
+- prefix
+- range-delimiter
+- sort-separator
+- suffix
+- title-delimiter
+- title-sub-delimiter
+- year-suffix-delimiter
+- value
+
+If the term contains whitespace character(s) before or after ":", ",", or ";" whitespace characters specified in the respective positions in affected attributes are removed (replaced by the whitespace in the term).
+Any ":", ",", or ";" characters contained in item data are unchanged.
+Other characters included in affected attributes aside from ":", ",", or ";" and affected whitespace are unchanged.
 
 Localized Options
 ~~~~~~~~~~~~~~~~~
