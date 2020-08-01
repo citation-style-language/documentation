@@ -3177,7 +3177,7 @@ The page abbreviation rules for the different values of the
 
 "chicago"
     Page ranges are abbreviated according to the
-    `Chicago Manual of Style-rules <http://www.aahn.org/guidelines.html>`_:
+    `Chicago Manual of Style-rules <http://cmosshoptalk.com/2018/04/10/316-7-316-17-or-316-317-chicago-style-for-number-ranges/>`_ (see section 9.61):
 
     +------------------------+--------------------------+--------------------------+
     | First number           | Second number            | Examples                 |
@@ -3196,10 +3196,12 @@ The page abbreviation rules for the different values of the
     |                        |                          | 11564 |--| 68;           |
     |                        |                          | 13792 |--| 803           |
     +------------------------+--------------------------+--------------------------+
-    | 4 digits               | If numbers are four      | 1496 |--| 1504;          |
-    |                        | digits long and three    | 2787 |--| 2816           |
-    |                        | digits change, use all   |                          |
-    |                        | digits                   |                          |
+    | everything else        | Use two digits, unless   | 321 |--| 28;             |
+    |                        | you need more digits to  | 498 |--| 532;            |
+    |                        | show the changed part    | 1,087 |--| 89;           |
+    |                        |                          | 1,496 |--| 500;          |
+    |                        |                          | 11,564 |--| 615;         |
+    |                        |                          | 12,991 |--| 3,001        |
     +------------------------+--------------------------+--------------------------+
 
 "expanded"
