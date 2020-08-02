@@ -1347,12 +1347,14 @@ the "editor" name variable, or, when no editors exist, by the "title" macro:
 Label in ``cs:names``
 ^^^^^^^^^^^^^^^^^^^^^
 
-The optional ``cs:label`` element (see `label`_) must be included after the
-``cs:name`` and ``cs:et-al`` elements, but before the ``cs:substitute`` element.
-When used as a child element of ``cs:names``, ``cs:label`` does not carry the
-``variable`` attribute; it uses the variable(s) set on the parent ``cs:names``
-element instead. A second difference is that the ``form`` attribute may also be
-set to "verb" or "verb-short", so that the allowed values are:
+A ``cs:label`` element (see `label`_) may optionally be included in 
+``cs:names``. It must appear before the ``cs:substitute`` element. The position 
+of ``cs:label`` relative to ``cs:name`` determines the order of the name and 
+label in the rendered text. When used as a child element of ``cs:names``, 
+``cs:label`` does not carry the ``variable`` attribute; it uses the variable(s) 
+set on the parent ``cs:names`` element instead. A second difference is that the 
+``form`` attribute may also be set to "verb" or "verb-short", so that the 
+allowed values are:
 
 -  "long" - (default), e.g. "editor" and "editors" for the "editor" term
 -  "short" - e.g. "ed." and "eds." for the term "editor"
