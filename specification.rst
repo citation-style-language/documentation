@@ -5,10 +5,12 @@ by `Rintze M. Zelle, PhD <https://twitter.com/rintzezelle>`_
 
 with contributions from Frank G. Bennett, Jr. and Bruce D'Arcus.
 
-|CCBYSA|_
+| |CCBYSA|_
+| This work is licensed under a `Creative Commons Attribution-ShareAlike 4.0 International License`__.
 
 .. |CCBYSA| image:: /media/cc-by-sa-80x15.png
-.. _CCBYSA: http://creativecommons.org/licenses/by-sa/3.0/
+.. _CCBYSA: https://creativecommons.org/licenses/by-sa/4.0/
+__ CCBYSA_ 
 
 .. contents:: **Table of Contents**
 
@@ -46,6 +48,26 @@ is "http://purl.org/net/xbiblio/csl". The namespace prefix ``cs:`` is used
 throughout this specification when referring to CSL elements, but is generally
 omitted in favor of a default namespace declaration (set with
 the ``xmlns`` attribute) on the root ``cs:style`` or ``cs:locale`` element.
+
+Whitespace Handling
+-------------------
+
+CSL styles are valid XML, but CSL processors MUST NOT normalize attribute values 
+by trimming leading or trailing whitespace from attributes which define text that 
+is intended for output:
+
+- after-collapse-delimiter
+- cite-group-delimiter
+- delimiter
+- initialize-with
+- name-delimiter
+- names-delimiter
+- prefix
+- range-delimiter
+- sort-separator
+- suffix
+- year-suffix-delimiter
+- value
 
 File Types
 ----------
@@ -179,9 +201,9 @@ In independent styles, ``cs:info`` has the following child elements:
     indicates the field(s) for which the style is relevant.
 
 ``cs:id``
-    Must appear once. The element should contain a URI to establish the identity
-    of the style. A stable, unique and dereferenceable URI is desired for
-    publicly available styles.
+    Must appear once and contain a stable, unique identifier to establish the
+    identity of the style. For historical reasons, existing styles may use
+    URIs, but new styles should use a UUID to guarantee stability and uniqueness.
 
 ``cs:issn``/``cs:eissn``/``cs:issnl`` (optional)
     The ``cs:issn`` element may be used multiple times to indicate the ISSN
@@ -406,17 +428,21 @@ For dialects of the same language, one is designated the primary dialect. All
 others are secondaries. At the moment of writing, the available locale files
 include:
 
-+-----------------+----------------------+
-| Primary dialect | Secondary dialect(s) |
-+=================+======================+
-| de-DE           | de-AT, de-CH         |
-+-----------------+----------------------+
-| en-US           | en-GB                |
-+-----------------+----------------------+
-| pt-PT           | pt-BR                |
-+-----------------+----------------------+
-| zh-CN           | zh-TW                |
-+-----------------+----------------------+
++--------------------+--------------------------------------+
+| Primary dialect    | Secondary dialect(s)                 |
++====================+======================================+
+| de-DE (German)     | de-AT (Austria), de-CH (Switzerland) |
++--------------------+--------------------------------------+
+| en-US (English)    | en-GB (UK)                           |
++--------------------+--------------------------------------+
+| es-ES (Spanish)    | es-CL (Chile), es-MX (Mexico)        |
++--------------------+--------------------------------------+
+| fr-FR (French)     | fr-CA (Canada)                       |
++--------------------+--------------------------------------+
+| pt-PT (Portuguese) | pt-BR (Brazil)                       |
++--------------------+--------------------------------------+
+| zh-CN (Chinese)    | zh-TW (Taiwan)                       |
++--------------------+--------------------------------------+
 
 Locale fallback is best described with an example. If the chosen output locale
 is "de-AT" (Austrian German), localizable units are individually drawn from the
@@ -590,6 +616,11 @@ terms "ordinal-01" through "ordinal-04", the original CSL 1.0 scheme is used:
 for those ending on a 3 (except those ending on 13) and "ordinal-04" for all
 other numbers.
 
+The "ordinal" term, and "ordinal-00" through "ordinal-99" terms, behave
+differently from other terms when it comes to `Locale Fallback`. Whereas other
+terms can be (re)defined individually, (re)defining any of the ordinal terms
+through ``cs:locale`` replaces all previously defined ordinal terms.
+
 Gender-specific Ordinals
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -727,7 +758,7 @@ The ``cs:date`` rendering element outputs the date selected from the list of
 rendered in either a localized or non-localized format.
 
 `Localized date formats`_ are selected with the optional ``form`` attribute,
-which must set to either "numeric" (for fully numeric formats, e.g.
+which must be set to either "numeric" (for fully numeric formats, e.g.
 "12-15-2005"), or "text" (for formats with a non-numeric month, e.g. "December
 15, 2005"). Localized date formats can be customized in two ways. First, the
 ``date-parts`` attribute may be used to show fewer date parts. The possible
@@ -1262,18 +1293,25 @@ are rendered. An example, yielding names like "Jane DOE":
 
 Et-al
 ^^^^^
-
 Et-al abbreviation, controlled via the ``et-al-…`` attributes (see `Name`_),
 can be further customized with the optional ``cs:et-al`` element, which must
-follow the ``cs:name`` element (if present). The ``term`` attribute may be set
-to either "et-al" (the default) or to "and others" to use either term. The
-`formatting`_ attributes may also be used, for example to italicize the "et-al"
+follow the ``cs:name`` element (if present).
+
+The `formatting`_ attributes may be used on ``cs:et-al``, for example to italicize the "et-al"
 term:
 
 .. sourcecode:: xml
 
     <names variable="author">
-      <et-al term="and others" font-style="italic"/>
+      <et-al font-style="italic"/>
+    </names>
+
+The ``term`` attribute may also be set, to either "et-al" (the default) or "and others", to use either term:
+
+.. sourcecode:: xml
+
+    <names variable="author">
+      <et-al term="and others"/>
     </names>
 
 Substitute
@@ -1289,9 +1327,11 @@ values set on the ``cs:name`` and ``cs:et-al`` child elements of the original
 ``cs:names`` element, may also be used. If ``cs:substitute`` contains multiple
 child elements, the first element to return a non-empty result is used for
 substitution. Substituted variables are suppressed in the rest of the output to
-prevent duplication. An example, where an empty "author" name variable is
-substituted by the "editor" name variable, or, when no editors exist, by the
-"title" macro:
+prevent duplication. Substituted variables are considered empty for the purposes
+of determining whether to suppress an enclosing ``cs:group``. If the variable 
+was rendered earlier in the citation, before the "substitute" element, it is not 
+suppressed. An example, where an empty "author" name variable is substituted by 
+the "editor" name variable, or, when no editors exist, by the "title" macro:
 
 .. sourcecode:: xml
 
@@ -1382,8 +1422,16 @@ empty. This accommodates descriptive `cs:text` and `cs:label`elements. For examp
       </group>
     </layout>
 
-can result in "retrieved from http://dx.doi.org/10.1128/AEM.02591-07", but
+can result in "retrieved from https://doi.org/10.1128/AEM.02591-07", but
 doesn't generate output when the "URL" variable is empty.
+
+If a ``cs:group`` is nested within another ``cs:group``, the inner group is
+evaluated first: a non-empty nested ``cs:group`` is treated as a non-empty
+variable for the puropses of determining suppression of the outer ``cs:group``.
+
+When a ``cs:group`` contains a child ``cs:macro``, if the ``cs:macro`` is 
+non-empty, it is treated as a non-empty variable for the purposes of determining 
+suppression of the outer ``cs:group``.
 
 Choose
 ~~~~~~
@@ -2008,9 +2056,9 @@ The ``cs:sort`` element must contain one or more ``cs:key`` child elements. The
 sort key, set as an attribute on ``cs:key``, must be a variable (see `Appendix
 IV - Variables`_) or macro name. For each ``cs:key`` element, the sort direction
 can be set to either "ascending" (default) or "descending" with the ``sort``
-attribute. The attributes ``names-min``, ``names-use-first``, and
-``names-use-last`` may be used to override the values of the corresponding
-``et-al-min``/``et-al-subsequent-min``,
+attribute. Sorting is case-insensitive. The attributes ``names-min``,
+``names-use-first``, and ``names-use-last`` may be used to override the values
+of the corresponding ``et-al-min``/``et-al-subsequent-min``,
 ``et-al-use-first``/``et-al-subsequent-use-first`` and ``et-al-use-last``
 attributes, and affect all names generated via macros called by ``cs:key``.
 
@@ -2302,7 +2350,7 @@ values:
 -  "capitalize-first": capitalizes the first character of the first word, if the
    word is lowercase
 -  "capitalize-all": capitalizes the first character of every lowercase word
--  "sentence": renders text in sentence case
+-  "sentence": renders text in sentence case (deprecated; do not use)
 -  "title": renders text in title case
 
 Sentence Case Conversion
@@ -2321,6 +2369,8 @@ CSL processors don't recognize proper nouns. As a result, strings in sentence
 case can be accurately converted to title case, but not vice versa. For this
 reason, it is generally preferable to store strings such as titles in sentence
 case, and only use ``text-case`` if a style desires another case.
+
+Sentence case conversion is deprecated and will be removed in a future version.
 
 Title Case Conversion
 ^^^^^^^^^^^^^^^^^^^^^
@@ -2388,6 +2438,10 @@ Appendix I - Categories
 
 Appendix II - Terms
 -------------------
+
+Types
+~~~~~~~~
+For each item type listed in Appendix III, there is a corresponding term.
 
 Locators
 ~~~~~~~~
@@ -2510,41 +2564,226 @@ Miscellaneous
 Appendix III - Types
 --------------------
 
--  article
--  article-magazine
--  article-newspaper
--  article-journal
--  bill
--  book
--  broadcast
--  chapter
--  dataset
--  entry
--  entry-dictionary
--  entry-encyclopedia
--  figure
--  graphic
--  interview
--  legislation
--  legal\_case
--  manuscript
--  map
--  motion\_picture
--  musical\_score
--  pamphlet
--  paper-conference
--  patent
--  post
--  post-weblog
--  personal\_communication
--  report
--  review
--  review-book
--  song
--  speech
--  thesis
--  treaty
--  webpage
+article
+    | A self-contained work made widely available but not published in a journal
+      or other publication;
+    | Use for preprints, working papers, and similar works posted on a platform
+      where some level of persistence or stewardship is expected (e.g. arXiv or 
+      other preprint repositories, working paper series);
+    | For unpublished works not made widely available or only hosted on personal
+      websites, use ``manuscript``
+
+article-journal
+    An article published in an academic journal
+
+article-magazine
+    An article published in a non-academic magazine
+
+article-newspaper
+    An article published in a newspaper
+
+bill
+    A proposed piece of legislation
+
+book
+    | A book or similar work;
+    | Can be an authored book or an edited collection of self-contained 
+      chapters;
+    | Can be a physical book or an ebook;
+    | The format for an ebook may be specified using ``medium``;
+    | Can be a single-volume work, a multivolume work, or one volume of 
+      a multivolume work;
+    | If a ``container-title`` is present, the item is interpreted as a book
+      republished in a collection or anthology;
+    | Also  used for whole conference proceedings volumes or exhibition catalogs 
+      by specifying ``event`` and related variables
+
+broadcast
+    | A recorded work broadcast over an electronic medium (e.g. a radio 
+      broadcast, a television show, a podcast);
+    | The type of broadcast may be specified using ``genre``;
+    | If ``container-title`` is present, the item is interpreted as an episode
+      contained within a larger broadcast series (e.g. an episode in a 
+      television show or an episode of a podcast)
+
+chapter
+    | A part of a book cited separately from the book as a whole (e.g. a chapter
+      in an edited book);
+    | Also used for introductions, forewords, and similar supplemental 
+      components of a book
+
+classic
+    A classical or ancient work, sometimes cited using a common abbreviation
+
+collection
+    An archival collection in a museum or other institution
+
+dataset
+    A data set or a similar collection of (mostly) raw data
+
+document
+    | A catch-all category for items not belonging to other types;
+    | Use a more specific type when appropriate
+
+entry
+    | An entry in a database, directory, or catalog;
+    | For entries in a dictionary, use ``entry-dictionary``;
+    | For entries in an encyclopedia, use ``entry-encyclopedia``
+
+entry-dictionary
+    An entry in a dictionary
+
+entry-encyclopedia
+    An entry in an encyclopedia or similar reference work
+
+event
+    | An organized event (e.g., an exhibition or conference);
+    | Use for direct citations to the event, rather than to works contained
+      within an event (e.g. a ``presentation`` in a conference, a ``graphic`` in 
+      an exhibition) or based on an event (e.g. a ``paper-conference`` published 
+      in a proceedings, an exhibition catalog)
+
+figure
+    | A illustration or representation of data, typically as part of a journal
+      article or other larger work;
+    | May be in any format (e.g. image, video, audio recording, 3D model);
+    | The format of the item can be specified using ``medium``
+
+graphic
+    | A still visual work;
+    | Can be used for artwork or other works (e.g. journalistic or historical 
+      photographs);
+    | Can be used for any still visual work (e.g. photographs, drawings, 
+      paintings, sculptures, clothing);
+    | The format of the item can be specified using ``medium``
+
+hearing
+    | A hearing by a government committee or transcript thereof
+
+interview
+    | An interview of a person;
+    | Also used for a recording or transcript of an interview;
+      ``author`` is interpreted as the interviewee
+
+legal\_case
+    A legal case
+
+legislation
+    A law or resolution enacted by a governing body
+
+manuscript
+    | An unpublished manuscript;
+    | Use for both modern unpublished works and classical manuscripts;
+    | For working papers, preprints, and similar works posted to a repository,
+      use ``article``
+
+map
+    A geographic map
+
+motion\_picture
+    | A video or visual recording;
+    | If a ``container-title`` is present, the item is interpreted as a part
+      contained within a larger compilation of recordings (e.g. a part of a
+      multipart documentary))
+
+musical\_score
+    | The printed score for a piece of music;
+    | For a live performance of the music, use ``performance``;
+    | For recordings of the music, use ``song`` (for audio recordings) or 
+      ``motion_picture`` (for video recordings)
+
+pamphlet
+    A fragment, historical document, or other unusually-published or ephemeral 
+    work (e.g. a sales brochure)
+
+paper-conference
+    | A paper formally published in conference proceedings;
+    | For papers presented at a conference, but not published in a proceedings,
+      use ``speech``
+
+patent
+    A patent for an invention
+
+performance
+    | A live performance of an artistic work;
+    | For non-artistic presentations, use ``speech``;
+    | For recordings of a performance, use ``song`` or ``motion_picture``
+
+periodical
+    A full issue or run of issues in a periodical publication (e.g. a special 
+    issue of a journal)
+
+personal\_communication
+    | Personal communications between multiple parties;
+    | May be unpublished (e.g. private correspondence between two researchers)
+      or collected/published (e.g. a letter published in a collection)
+
+post
+    A post on a online forum, social media platform, or similar platform; 
+    Also used for comments posted to online items
+
+post-weblog
+    A blog post
+
+regulation
+    An administrative order from any level of government
+
+report
+    | A technical report, government report, white paper, brief, or similar
+      work distributed by an institution;
+    | Also used for manuals and similar technical documentation (e.g. a 
+      software, instrument, or test manual);
+    | If a ``container-title`` is present, the item is interpreted as a chapter
+      contained within a larger report
+
+review
+    | A review of an item other than a book (e.g. a film review, posted peer 
+      review of an article);
+    | If ``reviewed-title`` is absent, ``title`` is taken to be the title of the 
+      reviewed item
+
+review-book
+    | A review of a book;
+    | If ``reviewed-title`` is absent, ``title`` is taken to be the title of the 
+      reviewed book
+
+software
+    A computer program, app, or other piece of software
+
+song
+    | An audio recording;
+    | Can be used for any audio recording (not only music);
+    | If a ``container-title`` is present, the item is interpreted as a track
+      contained within a larger album or compilation of recordings
+
+speech
+    | A speech or other presentation (e.g. a paper, talk, poster, or symposium
+      at a conference);
+    | Use ``genre`` to specify the type of presentation;
+    | Use ``event`` to indicate the event where the presentation was made (e.g.
+      the conference name);
+    | Use ``container-title`` if the presentation is part of a larger session
+      (e.g. a paper in a symposium);
+    | For papers published in conference proceedings, use ``paper-conference``;
+    | For artistic performances, use ``performance``
+
+standard
+    A technical standard or similar set of rules or norms
+
+thesis
+    | A thesis written to satisfy requirements for a degree;
+    | Use ``genre`` to specify the type of thesis
+
+treaty
+    A treaty agreement among political authorities
+
+webpage
+    | A website or page on a website;
+    | Intended for sources which are intrinsically online; use a more specific
+      type when appropriate (e.g. ``article-journal``, ``post-weblog``, 
+      ``report``, ``entry``);
+    | If a ``container-title`` is present, the item is interpreted as a page
+      contained within a larger website
 
 Appendix IV - Variables
 -----------------------
@@ -2553,113 +2792,142 @@ Standard Variables
 ~~~~~~~~~~~~~~~~~~
 
 abstract
-    abstract of the item (e.g. the abstract of a journal article)
+    Abstract of the item (e.g. the abstract of a journal article)
 
 annote
-    reader's notes about the item content
+    | Short markup, decoration, or annotation to the item (e.g., to indicate
+      items included in a review); 
+    | For descriptive text (e.g., in an annotated bibliography), use ``note`` 
+      instead
 
 archive
-    archive storing the item
+    Archive storing the item
+
+archive\_collection
+    Collection the item is part of within an archive
 
 archive\_location
-    storage location within an archive (e.g. a box and folder number)
+    Storage location within an archive (e.g. a box and folder number)
 
 archive-place
-    geographic location of the archive
+    Geographic location of the archive
 
 authority
-    issuing or judicial authority (e.g. "USPTO" for a patent, "Fairfax Circuit
+    Issuing or judicial authority (e.g. "USPTO" for a patent, "Fairfax Circuit
     Court" for a legal case)
 
 call-number
-    call number (to locate the item in a library)
+    Call number (to locate the item in a library)
+
+citation-key
+    | Identifier of the item in the input data file (analogous to BiTeX 
+      entrykey);
+    | Use this variable to facilitate conversion between word-processor and 
+      plain-text writing systems;
+    | For an identifer intended as formatted output label for a citation (e.g.
+      "Ferr78"), use ``citation-label`` instead
 
 citation-label
-    label identifying the item in in-text citations of label styles (e.g.
-    "Ferr78"). May be assigned by the CSL processor based on item metadata.
-
-citation-number
-    index (starting at 1) of the cited reference in the bibliography (generated
-    by the CSL processor)
+    | Label identifying the item in in-text citations of label styles (e.g.
+      "Ferr78");
+    | May be assigned by the CSL processor based on item metadata;
+    | For the identifier of the item in the input data file, use 
+      ``citation-key`` instead
 
 collection-title
-    title of the collection holding the item (e.g. the series title for a book)
+    | Title of the collection holding the item (e.g. the series title for a 
+      book; the lecture series title for a presentation)
 
 container-title
-    title of the container holding the item (e.g. the book title for a book
-    chapter, the journal title for a journal article)
+    | Title of the container holding the item (e.g. the book title for a book
+      chapter, the journal title for a journal article; the album title for a 
+      recording; the session title for multi-part presentation at a conference)
 
 container-title-short
-    short/abbreviated form of "container-title" (also accessible through the
-    "short" form of the "container-title" variable)
+    | Short/abbreviated form of ``container-title``;
+    | Deprecated; use ``variable="container-title" form="short"`` instead
 
 dimensions
-    physical (e.g. size) or temporal (e.g. running time) dimensions of the item
+    Physical (e.g. size) or temporal (e.g. running time) dimensions of the item
+
+division
+    Minor subdivision of a court with a ``jurisdiction`` for a legal item
 
 DOI
     Digital Object Identifier (e.g. "10.1128/AEM.02591-07")
 
 event
-    name of the related event (e.g. the conference name when citing a conference
-    paper)
+    Name of the event related to the item (e.g. the conference name when citing
+    a conference paper; the meeting where presentation was made)
 
 event-place
-    geographic location of the related event (e.g. "Amsterdam, the Netherlands")
-
-first-reference-note-number
-    number of a preceding note containing the first reference to the item.
-    Assigned by the CSL processor. The variable holds no value for
-    non-note-based styles, or when the item hasn't been cited in any preceding
-    notes.
+    Geographic location of the event related to the item (e.g. "Amsterdam, The 
+    Netherlands")
 
 genre
-    class, type or genre of the item (e.g. "adventure" for an adventure movie,
-    "PhD dissertation" for a PhD thesis)
+    | Type, class, or subtype of the item (e.g. "Doctoral dissertation" for a
+      PhD thesis; "NIH Publication" for an NIH technical report);
+    | Do not use for topical descriptions or categories (e.g. "adventure" for an 
+      adventure movie)
+
+ISAN
+    International Standard Audiovisual Number
 
 ISBN
-    International Standard Book Number
+    International Standard Book Number (e.g. "978-3-8474-1017-1")
+
+ISCI
+    International Standard Collection Identifier
+
+ISMN
+    International Standard Music Number
+
+ISRC
+    International Standard Recording Code
 
 ISSN
     International Standard Serial Number
 
+ISWC
+    International Standard Musical Work Code
+
 jurisdiction
-    geographic scope of relevance (e.g. "US" for a US patent)
+    Geographic scope of relevance (e.g. "US" for a US patent; the court hearing
+    a legal case)
 
 keyword
-    keyword(s) or tag(s) attached to the item
+    Keyword(s) or tag(s) attached to the item
 
-locator
-    a cite-specific pinpointer within the item (e.g. a page number within a
-    book, or a volume in a multi-volume work). Must be accompanied in the input
-    data by a label indicating the locator type (see the `Locators`_ term list),
-    which determines which term is rendered by ``cs:label`` when the "locator"
-    variable is selected.
+language
+    | The language of the item;
+    | Should be entered as an ISO 639-1 two-letter language code 
+      (e.g. "en", "zh"), optionally with a two-letter locale code (e.g. "de-DE",
+      "de-AT")
+
+license
+    The license information applicable to an item (e.g. the license an article 
+    or software is released under; the copyright information for an item; the 
+    classification status of a document)
 
 medium
-    medium description (e.g. "CD", "DVD", etc.)
+    Description of the item's format or medium (e.g. "CD", "DVD", "Album", etc.)
 
 note
-    (short) inline note giving additional item details (e.g. a concise summary
-    or commentary)
+    Descriptive text or notes about an item (e.g. in an annotated bibliography)
 
 original-publisher
-    original publisher, for items that have been republished by a different
+    Original publisher, for items that have been republished by a different
     publisher
 
 original-publisher-place
-    geographic location of the original publisher (e.g. "London, UK")
+    Geographic location of the original publisher (e.g. "London, UK")
 
 original-title
-    title of the original version (e.g. "Война и мир", the untranslated Russian
+    Title of the original version (e.g. "Война и мир", the untranslated Russian
     title of "War and Peace")
 
-page
-    range of pages the item (e.g. a journal article) covers in a container (e.g.
-    a journal issue)
-
-page-first
-    first page of the range of pages the item (e.g. a journal article) covers in
-    a container (e.g. a journal issue)
+part-title
+    Title of the specific part of an item being cited
 
 PMCID
     PubMed Central reference number
@@ -2668,45 +2936,59 @@ PMID
     PubMed reference number
 
 publisher
-    publisher
+    Publisher
 
 publisher-place
-    geographic location of the publisher
+    Geographic location of the publisher
 
 references
-    resources related to the procedural history of a legal case
+    | Resources related to the procedural history of a legal case or 
+      legislation;
+    | Can also be used to refer to the procedural history of other items
+      (e.g. "Conference canceled" for a presentation accepted as a conference
+      that was subsequently canceled; details of a retraction or correction
+      notice)
+
+reviewed-genre
+    Type of the item being reviewed by the current item (e.g. book, film)
 
 reviewed-title
-    title of the item reviewed by the current item
+    Title of the item reviewed by the current item
 
 scale
-    scale of e.g. a map
-
-section
-    container section holding the item (e.g. "politics" for a newspaper article)
+    Scale of e.g. a map or model
 
 source
-    from whence the item originates (e.g. a library catalog or database)
+    Source from whence the item originates (e.g. a library catalog or database)
 
 status
-    (publication) status of the item (e.g. "forthcoming")
+    Publication status of the item (e.g. "forthcoming"; "in press"; "advance
+    online publication"; "retracted")
 
 title
-    primary title of the item
+    Primary title of the item
 
 title-short
-    short/abbreviated form of "title" (also accessible through the "short" form
-    of the "title" variable)
+    | Short/abbreviated form of ``title``;
+    | Deprecated; use ``variable="container-title" form="short"`` instead
+
+translated-title
+    Primary title of the item, translated into the lanugage of the citing
+    document, often by the author of the citing document (e.g. "Handbook of
+    industrial, work, and organizational psychology" for "Endüstri, iş ve örgüt 
+    psikolojisi: el kitabı")
 
 URL
     Uniform Resource Locator (e.g.
-    "http://aem.asm.org/cgi/content/full/74/9/2766")
+    "https://aem.asm.org/cgi/content/full/74/9/2766")
 
-version
-    version of the item (e.g. "2.0.9" for a software program)
+volume-title
+    | Title of the volume of the item or container holding the item;
+    | Also use for titles of periodical special issues, special sections, and 
+      the like
 
 year-suffix
-    disambiguating year suffix in author-date styles (e.g. "a" in "Doe, 1999a")
+    Disambiguating year suffix in author-date styles (e.g. "a" in "Doe, 1999a")
 
 Number Variables
 ^^^^^^^^^^^^^^^^
@@ -2714,97 +2996,178 @@ Number Variables
 Number variables are a subset of the `Standard Variables`_.
 
 chapter-number
-    chapter number
+    Chapter number (e.g. chapter number in a book; track number on an album)
+
+citation-number
+    Index (starting at 1) of the cited reference in the bibliography (generated
+    by the CSL processor)
 
 collection-number
-    number identifying the collection holding the item (e.g. the series number
+    Number identifying the collection holding the item (e.g. the series number
     for a book)
 
 edition
-    (container) edition holding the item (e.g. "3" when citing a chapter in the
+    (Container) edition holding the item (e.g. "3" when citing a chapter in the
     third edition of a book)
 
+first-reference-note-number
+    | Number of a preceding note containing the first reference to the item;
+    | Assigned by the CSL processor; 
+    | Empty in non-note-based styles or when the item hasn't been cited in any 
+      preceding notes in a document
+
 issue
-    (container) issue holding the item (e.g. "5" when citing a journal article
-    from journal volume 2, issue 5)
+    | Issue number of the item or container holding the item (e.g. "5" when 
+      citing a journal article from journal volume 2, issue 5);
+    | Use ``volume-title`` for the title of the issue, if any
+
+locator
+    | A cite-specific pinpointer within the item (e.g. a page number within a
+      book, or a volume in a multi-volume work);
+    | Must be accompanied in the input data by a label indicating the locator 
+      type (see the `Locators`_ term list), which determines which term is 
+      rendered by ``cs:label`` when the ``locator`` variable is selected.
 
 number
-    number identifying the item (e.g. a report number)
+    Number identifying the item (e.g. a report number)
 
 number-of-pages
-    total number of pages of the cited item
+    Total number of pages of the cited item
 
 number-of-volumes
-    total number of volumes, usable for citing multi-volume books and such
+    Total number of volumes, used when citing multi-volume books and such
+
+page
+    Range of pages the item (e.g. a journal article) covers in a container (e.g.
+    a journal issue)
+
+page-first
+    First page of the range of pages the item (e.g. a journal article) covers in
+    a container (e.g. a journal issue)
+
+part
+    | Number of the specific part of the item being cited (e.g. part 2 of a 
+      journal article);
+    | Use ``part-title`` for the title of the part, if any
+
+printing
+    Printing number of the item or container holding the item
+
+section
+    Section of the item or container holding the item (e.g. "§2.0.1" for a law; 
+    "politics" for a newspaper article)
+
+supplement
+    Supplement number of the item or container holding the item (e.g. for 
+    secondary legal items that are regularly updated between editions)
+
+version
+    Version of the item (e.g. "2.0.9" for a software program)
 
 volume
-    (container) volume holding the item (e.g. "2" when citing a chapter from
-    book volume 2)
+    | Volume number of the item (e.g. "2" when citing volume 2 of a book) or the 
+      container holding the item (e.g. "2" when citing a chapter from volume 2
+      of a book);
+    | Use ``volume-title`` for the title of the volume, if any
 
 Date Variables
 ~~~~~~~~~~~~~~
 
 accessed
-    date the item has been accessed
+    Date the item has been accessed
 
-container
-    ?
+available-date
+    Date the item was initially available (e.g. the online publication date of 
+    a journal article before its formal publication date; the date a treaty
+    was made available for signing)
 
 event-date
-    date the related event took place
+    Date the event related to an item took place
 
 issued
-    date the item was issued/published
+    Date the item was issued/published
 
 original-date
-    (issue) date of the original version
+    Issue date of the original version
 
 submitted
-    date the item (e.g. a manuscript) has been submitted for publication
+    Date the item (e.g. a manuscript) was submitted for publication
 
 Name Variables
 ~~~~~~~~~~~~~~
 
 author
-    author
+    Author
+
+chair
+    The person leading the session containing a presentation (e.g. the organizer
+    of the ``container-title`` of a ``speech``)
 
 collection-editor
-    editor of the collection holding the item (e.g. the series editor for a
+    Editor of the collection holding the item (e.g. the series editor for a
     book)
 
 composer
-    composer (e.g. of a musical score)
+    Composer (e.g. of a musical score)
+
+compiler
+    Person compiling or selecting material for an item from the works of various 
+    persons or bodies (e.g. for an anthology)
 
 container-author
-    author of the container holding the item (e.g. the book author for a book
+    Author of the container holding the item (e.g. the book author for a book
     chapter)
 
+contributor
+    A minor contributor to the item; typically cited using "with" before the
+    name when listed in a bibliography
+
+curator
+    Curator of an exhibit or collection (e.g. in a museum)
+
 director
-    director (e.g. of a film)
+    Director (e.g. of a film)
 
 editor
-    editor
+    Editor
 
 editorial-director
-    managing editor ("Directeur de la Publication" in French)
+    Managing editor ("Directeur de la Publication" in French)
+
+executive-producer
+    Executive producer (e.g. of a television series)
 
 illustrator
-    illustrator (e.g. of a children's book)
+    Illustrator (e.g. of a children's book or graphic novel)
 
 interviewer
-    interviewer (e.g. of an interview)
+    Interviewer (e.g. of an interview)
+
+organizer
+    Organizer of an event (e.g. organizer of a workshop or conference)
 
 original-author
-    ?
+    The original creator of a work (e.g. the form of the author name listed on 
+    the original version of a book; the historical author of a work; the 
+    original songwriter or performer for a musical piece; the original developer 
+    or programmer for a piece of software; the original author of an adapted 
+    work such as a book adapted into a screenplay)
+
+performer
+    Performer of an item (e.g. an actor appearing in a film; a muscian
+    performing a piece of music)
+
+producer
+    Producer (e.g. of a television or radio broadcast)
 
 recipient
-    recipient (e.g. of a letter)
+    Recipient (e.g. of a letter)
 
 reviewed-author
-    author of the item reviewed by the current item
+    Author of the item reviewed by the current item
 
 translator
-    translator
+    Translator
 
 Appendix V - Page Range Formats
 -------------------------------
@@ -2850,3 +3213,38 @@ The page abbreviation rules for the different values of the
 "minimal-two"
     As "minimal", but at least two digits are kept in the second number when it
     has two or more digits long.
+
+Appendix VI: Links
+------------------
+
+The CSL syntax does not have support for configuration of links. However,
+processors should include links on bibliographic references, using the following
+rules:
+
+If the bibliography entry for an item renders any of the following identifiers,
+the identifier should be anchored as a link, with the target of the link as
+follows:
+
+1. ``url``: output as is
+2. ``doi``: prepend with "https://doi.org/"
+3. ``pmid``: prepend with "https://www.ncbi.nlm.nih.gov/pubmed/"
+4. ``pmcid``: prepend with "https://www.ncbi.nlm.nih.gov/pmc/articles/"
+
+If the identifier is rendered as a URI, include rendered URI components 
+(e.g. "https://doi.org/") in the link anchor. Do not include any other 
+affix text in the link anchor (e.g. "Available from: ", "doi: ", "PMID: ").
+
+If the bibliography entry for an item does not render any of the above identifiers,
+then set the anchor of the link as the item ``title``. If ``title`` is not rendered,
+then set the anchor of the link as the full bibliography entry for the item. Set the
+target of the link as one of the following, in order of priority:
+
+1. ``doi``: prepend with "https://doi.org/"
+2. ``pmcid``: prepend with "https://www.ncbi.nlm.nih.gov/pmc/articles/"
+3. ``pmid``: prepend with "https://www.ncbi.nlm.nih.gov/pubmed/"
+4. ``url``: output as is
+
+If the item data does not include any of the above identifiers, do not include a link.
+
+Citation processors should include an option flag for calling applications to disable 
+bibliography linking behavior.

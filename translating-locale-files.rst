@@ -3,10 +3,12 @@ Guide to Translating CSL Locale Files
 
 by `Rintze M. Zelle, PhD <https://twitter.com/rintzezelle>`_
 
-|CCBYSA|_
+| |CCBYSA|_
+| This work is licensed under a `Creative Commons Attribution-ShareAlike 4.0 International License`__.
 
 .. |CCBYSA| image:: /media/cc-by-sa-80x15.png
-.. _CCBYSA: http://creativecommons.org/licenses/by-sa/3.0/
+.. _CCBYSA: https://creativecommons.org/licenses/by-sa/4.0/
+__ CCBYSA_ 
 
 .. contents:: **Table of Contents**
 
@@ -44,7 +46,7 @@ https://github.com/citation-style-language/locales/.
 
 Each locale file contains the localization data for one language. Locale files
 are named "locales-xx-XX.xml", where "xx-XX" is a `BCP 47 language code
-<http://people.w3.org/rishida/utils/subtags/>`_ (e.g. the locale code
+<https://r12a.github.io/app-subtags/>`_ (e.g. the locale code
 for British English is "en-GB"). The `repository wiki
 <https://github.com/citation-style-language/locales/wiki>`_ lists the locale
 code, language, and translation status of all locale files in the repository.
