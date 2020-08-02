@@ -384,6 +384,11 @@ the item type is "book":
       </citation>
     </style>
 
+Rendered output of ``cs:macro`` is "encapsulated": it is treated as a single
+rendering element (e.g. for the purpose of rendering the `delimiter`_
+set on a parent ``cs:layout``, ``cs:group``, or ``cs:substitute`` 
+[inherited from ``cs:names``] element). 
+
 Locale
 ^^^^^^
 
@@ -1542,6 +1547,12 @@ control the testing logic, with allowed values:
    test value
 -  "none" - element only tests "true" when none of the conditions test "true"
    for any given test value
+
+Rendered output of ``cs:choose`` (i.e. child elements of the matching ``cs:if``,
+``cs:else-if``, or ``cs:else``) is _not_ "encapsulated": they are treated as 
+separate rendering elements (e.g. for the purpose of rendering the `delimiter`_
+set on a parent ``cs:layout``, ``cs:group``, or ``cs:substitute`` 
+[inherited from ``cs:names``] element). 
 
 Style Behavior
 --------------
