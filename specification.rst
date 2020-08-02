@@ -1410,7 +1410,7 @@ elements`_ (with the exception of ``cs:layout``). ``cs:group`` may carry the
 implicitly acts as a conditional: ``cs:group`` and its child elements are
 suppressed if a) at least one rendering element in ``cs:group`` calls a variable
 (either directly or via a macro), and b) all variables that are called are
-empty. This accommodates descriptive ``cs:text`` elements. For example,
+empty. This accommodates descriptive `cs:text` and `cs:label`elements. For example,
 
 .. sourcecode:: xml
 
@@ -1422,7 +1422,7 @@ empty. This accommodates descriptive ``cs:text`` elements. For example,
       </group>
     </layout>
 
-can result in "retrieved from http://dx.doi.org/10.1128/AEM.02591-07", but
+can result in "retrieved from https://doi.org/10.1128/AEM.02591-07", but
 doesn't generate output when the "URL" variable is empty.
 
 If a ``cs:group`` is nested within another ``cs:group``, the inner group is
@@ -3213,7 +3213,6 @@ The page abbreviation rules for the different values of the
 "minimal-two"
     As "minimal", but at least two digits are kept in the second number when it
     has two or more digits long.
-
 
 Appendix VI: Links
 ------------------
