@@ -3177,32 +3177,31 @@ The page abbreviation rules for the different values of the
 
 "chicago"
     Page ranges are abbreviated according to the
-    `Chicago Manual of Style-rules <http://cmosshoptalk.com/2018/04/10/316-7-316-17-or-316-317-chicago-style-for-number-ranges/>`_ (see section 9.61):
+    `Chicago Manual of Style (16th ed and later) rules <http://cmosshoptalk.com/2018/04/10/316-7-316-17-or-316-317-chicago-style-for-number-ranges/>`_ (see section 9.61):
 
-    +------------------------+--------------------------+--------------------------+
-    | First number           | Second number            | Examples                 |
-    +========================+==========================+==========================+
-    | Less than 100          | Use all digits           | 3 |--| 10; 71 |--| 72    |
-    +------------------------+--------------------------+--------------------------+
-    | 100 or multiple of 100 | Use all digits           | 100 |--| 104;            |
-    |                        |                          | 600 |--| 613;            |
-    |                        |                          | 1100 |--| 1123           |
-    +------------------------+--------------------------+--------------------------+
-    | 101 through 109 (in    | Use changed part only,   | 107 |--| 8; 505 |--| 17; |
-    | multiples of 100)      | omitting unneeded zeros  | 1002 |--| 6              |
-    +------------------------+--------------------------+--------------------------+
-    | 110 through 199 (in    | Use two digits, or more  | 321 |--| 25;             |
-    | multiples of 100)      | as needed                | 415 |--| 532;            |
-    |                        |                          | 11564 |--| 68;           |
-    |                        |                          | 13792 |--| 803           |
-    +------------------------+--------------------------+--------------------------+
-    | everything else        | Use two digits, unless   | 321 |--| 28;             |
-    |                        | you need more digits to  | 498 |--| 532;            |
-    |                        | show the changed part    | 1,087 |--| 89;           |
-    |                        |                          | 1,496 |--| 500;          |
-    |                        |                          | 11,564 |--| 615;         |
-    |                        |                          | 12,991 |--| 3,001        |
-    +------------------------+--------------------------+--------------------------+
+    +-----------------------------+--------------------------+-----------------+
+    | First number                | Second number            | Examples        |
+    +=============================+==========================+=================+
+    | Less than 100               | Use all digits           | 3 |--| 10;      |
+    |                             |                          | 71 |--| 72;     |
+    |                             |                          | 92 |--| 113;    |
+    +-----------------------------+--------------------------+-----------------+
+    | 100 or multiple of 100      | Use all digits           | 100 |--| 104;   |
+    |                             |                          | 600 |--| 613;   |
+    |                             |                          | 1100 |--| 1123  |
+    +-----------------------------+--------------------------+-----------------+
+    | 101 through 109,            | Use changed part only,   | 107 |--| 8;     |
+    | 201 through 209, etc.       | omitting unneeded zeros  | 505 |--| 17;    |
+    | (for each multiple of 100)  |                          | 1002 |--| 6     |
+    +-----------------------------+--------------------------+-----------------+
+    | Everything else             | Use two digits, unless   | 321 |--| 25;    |
+    | (110 through 199,           | more digits are needed   | 415 |--| 532;   |
+    |  210 through 299, etc.;     | to show the changed part | 1087 |--| 89;   |
+    |  for each multiple of 100)  |                          | 1496 |--| 500;  |
+    |                             |                          | 11564 |--| 68;  |
+    |                             |                          | 13792 |--| 803  |
+    |                             |                          | 12991 |--| 3001 |
+    +-----------------------------+--------------------------+-----------------+
 
 "expanded"
     Abbreviated page ranges are expanded to their non-abbreviated form: 42 |--|
