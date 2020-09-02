@@ -384,6 +384,9 @@ the item type is "book":
       </citation>
     </style>
 
+The output of a ``<text macro="...">`` is delimiter-encapsulated (see 
+`delimiter`_).
+
 Locale
 ^^^^^^
 
@@ -1543,6 +1546,13 @@ control the testing logic, with allowed values:
 -  "none" - element only tests "true" when none of the conditions test "true"
    for any given test value
 
+The output of ``cs:choose`` (i.e. the output of the matching ``cs:if``, 
+``cs:else-if``, or ``cs:else``) is _not_ delimiter-encapsulated (see 
+`delimiter`_): if there are multiple elements output by the chosen branch, when 
+rendering a `delimiter`_ set on the nearest parent delimiting element, they are 
+considered to be separate pieces of output and delimiters are placed between 
+them.
+
 Style Behavior
 --------------
 
@@ -2238,6 +2248,24 @@ allowed when ``cs:date`` calls a localized date format), ``cs:names``
 (delimiting name lists from different `name variables`_), ``cs:name``
 (delimiting names within name lists), ``cs:group`` and ``cs:layout`` (delimiting
 the output of the child elements).
+
+A delimiting element is any element as above which takes a ``delimiter`` 
+attribute, whether the attribute is supplied or not.
+
+The output of all delimiting elements is delimiter-encapsulated: no 
+``delimiter`` from a parent delimiting element will delimit between multiple 
+outputs of an inner delimiter-encapsulated element. The following produces
+``a; bc``:
+
+.. sourcecode:: xml
+
+    <group delimiter="; ">
+      <text value="a" />
+      <group>
+        <text value="b" />
+        <text value="c" />
+      </group>
+    </group>
 
 Display
 ~~~~~~~
