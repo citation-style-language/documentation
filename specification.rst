@@ -1547,7 +1547,7 @@ control the testing logic, with allowed values:
    for any given test value
 
 The output of ``cs:choose`` (i.e. the output of the matching ``cs:if``, 
-``cs:else-if``, or ``cs:else``) is _not_ delimiter-encapsulated (see 
+``cs:else-if``, or ``cs:else``) is *not* delimiter-encapsulated (see 
 `delimiter`_): if there are multiple elements output by the chosen branch, when 
 rendering a `delimiter`_ set on the nearest parent delimiting element, they are 
 considered to be separate pieces of output and delimiters are placed between 
