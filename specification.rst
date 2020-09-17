@@ -384,7 +384,7 @@ the item type is "book":
       </citation>
     </style>
 
-The output of a ``<text macro="...">`` does not have delimiters from a parent 
+The output of a ``<text macro="...">`` does not have delimiters from a parent
 delimiting element interspersed within it (see `delimiter`_).
 
 Locale
@@ -1546,8 +1546,8 @@ control the testing logic, with allowed values:
 -  "none" - element only tests "true" when none of the conditions test "true"
    for any given test value
 
-The output of ``cs:choose`` (i.e. the output of the matching ``cs:if``, 
-``cs:else-if``, or ``cs:else``) *does* have delimiters from a parent delimiting 
+The output of ``cs:choose`` (i.e. the output of the matching ``cs:if``,
+``cs:else-if``, or ``cs:else``) *does* have delimiters from a parent delimiting
 element interspersed within it (see `delimiter`_).
 
 Style Behavior
@@ -2249,10 +2249,9 @@ the output of the child elements).
 A delimiting element is any element as above which takes a ``delimiter`` 
 attribute, whether the attribute is supplied or not.
 
-The output of all delimiting elements is not subject to surrounding delimiters: 
-no ``delimiter`` from a parent delimiting element will delimit between multiple 
-outputs of an inner delimiting element. The following produces
-``retrieved: <http://example.com>``:
+The output of a delimiting element does not have delimiters from a parent
+delimiting element interspersed within it. The following produces ``retrieved:
+<http://example.com>``:
 
 .. sourcecode:: xml
 
@@ -2260,7 +2259,7 @@ outputs of an inner delimiting element. The following produces
       <text term="retrieved" />
       <group>
         <text value="&lt;" />
-        <text variable="URL"/>
+        <text variable="URL" />
         <text value="&gt;" />
       </group>
     </group>
