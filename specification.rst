@@ -2255,15 +2255,16 @@ attribute, whether the attribute is supplied or not.
 The output of all delimiting elements is delimiter-encapsulated: no 
 ``delimiter`` from a parent delimiting element will delimit between multiple 
 outputs of an inner delimiter-encapsulated element. The following produces
-``a; bc``:
+``retrieved: <http://example.com>``:
 
 .. sourcecode:: xml
 
-    <group delimiter="; ">
-      <text value="a" />
+    <group delimiter=": ">
+      <text term="retrieved" />
       <group>
-        <text value="b" />
-        <text value="c" />
+        <text value="&lt;" />
+        <text variable="URL"/>
+        <text value="&gt;" />
       </group>
     </group>
 
