@@ -384,8 +384,7 @@ the item type is "book":
       </citation>
     </style>
 
-The output of a ``<text macro="...">`` does not have delimiters from any
-ancestor delimiting element interspersed within it (see `delimiter`_).
+Delimiters from any ancestor delimiting element are not applied within the output of a ``<text macro="...">`` element (see `delimiter`_).
 
 Locale
 ^^^^^^
