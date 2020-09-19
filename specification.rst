@@ -1545,9 +1545,7 @@ control the testing logic, with allowed values:
 -  "none" - element only tests "true" when none of the conditions test "true"
    for any given test value
 
-The output of ``cs:choose`` (i.e. the output of the matching ``cs:if``,
-``cs:else-if``, or ``cs:else``) *does* have delimiters from the nearest
-ancestor delimiting element interspersed within it (see `delimiter`_).
+Delimiters from the nearest delimiters from the nearest ancestor delimiting element *are* applied within the output of ``cs:choose`` (i.e., the output of the matching ``cs:if``, ``cs:else-if``, or ``cs:else``; see `delimiter`_).
 
 Style Behavior
 --------------
