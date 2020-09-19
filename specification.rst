@@ -2248,9 +2248,7 @@ the output of the child elements).
 A delimiting element is any element as above which takes a ``delimiter`` 
 attribute, whether the attribute is supplied or not.
 
-The output of a delimiting element does not have delimiters from any ancestor
-delimiting element interspersed within it. The following produces ``retrieved:
-<http://example.com>``:
+Delimiters from any ancestor delimiting element are not applied within the output of a delimiting element. The following produces ``retrieved: <http://example.com>``:
 
 .. sourcecode:: xml
 
