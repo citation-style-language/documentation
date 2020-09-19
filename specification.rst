@@ -2243,8 +2243,7 @@ allowed when ``cs:date`` calls a localized date format), ``cs:names``
 (delimiting names within name lists), ``cs:group`` and ``cs:layout`` (delimiting
 the output of the child elements).
 
-A delimiting element is any element as above which takes a ``delimiter`` 
-attribute, whether the attribute is supplied or not.
+A delimiting element is any element as above which takes a ``delimiter`` attribute, whether the attribute is supplied or not.
 
 Delimiters from any ancestor delimiting element are not applied within the output of a delimiting element. The following produces ``retrieved: <http://example.com>``:
 
