@@ -3157,7 +3157,7 @@ interviewer
     Interviewer (e.g. of an interview)
 
 narrator
-    Narrator
+    Narrator (e.g. of an audio book)
 
 organizer
     Organizer of an event (e.g. organizer of a workshop or conference)
