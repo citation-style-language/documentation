@@ -3148,7 +3148,7 @@ guest
     Guest (e.g. of a TV show or podcast)
 
 host
-    Guest
+    Host (e.g. of a TV show or podcast)
 
 illustrator
     Illustrator (e.g. of a children's book or graphic novel)
