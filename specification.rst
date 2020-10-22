@@ -384,6 +384,8 @@ the item type is "book":
       </citation>
     </style>
 
+Delimiters from any ancestor delimiting element are not applied within the output of a ``<text macro="...">`` element (see `delimiter`_).
+
 Locale
 ^^^^^^
 
@@ -1543,6 +1545,8 @@ control the testing logic, with allowed values:
 -  "none" - element only tests "true" when none of the conditions test "true"
    for any given test value
 
+Delimiters from the nearest delimiters from the nearest ancestor delimiting element *are* applied within the output of ``cs:choose`` (i.e., the output of the matching ``cs:if``, ``cs:else-if``, or ``cs:else``; see `delimiter`_).
+
 Style Behavior
 --------------
 
@@ -2238,6 +2242,21 @@ allowed when ``cs:date`` calls a localized date format), ``cs:names``
 (delimiting name lists from different `name variables`_), ``cs:name``
 (delimiting names within name lists), ``cs:group`` and ``cs:layout`` (delimiting
 the output of the child elements).
+
+A delimiting element is any element as above which takes a ``delimiter`` attribute, whether the attribute is supplied or not.
+
+Delimiters from any ancestor delimiting element are not applied within the output of a delimiting element. The following produces ``retrieved: <http://example.com>``:
+
+.. sourcecode:: xml
+
+    <group delimiter=": ">
+      <text term="retrieved" />
+      <group>
+        <text value="&lt;" />
+        <text variable="URL" />
+        <text value="&gt;" />
+      </group>
+    </group>
 
 Display
 ~~~~~~~
