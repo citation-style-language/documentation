@@ -2454,13 +2454,17 @@ Ordinals
 -  long-ordinal-09
 -  long-ordinal-10
 
-Quotation marks
+Punctuation
 ~~~~~~~~~~~~~~~
 
 -  open-quote
 -  close-quote
 -  open-inner-quote
 -  close-inner-quote
+-  page-range-delimiter
+-  colon
+-  comma
+-  semicolon
 
 Roles
 ~~~~~
