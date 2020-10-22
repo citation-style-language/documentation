@@ -3049,7 +3049,7 @@ page-first
     First page of the range of pages the item (e.g. a journal article) covers in
     a container (e.g. a journal issue)
 
-part
+part-number
     | Number of the specific part of the item being cited (e.g. part 2 of a 
       journal article);
     | Use ``part-title`` for the title of the part, if any
