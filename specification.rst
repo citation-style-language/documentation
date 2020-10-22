@@ -3111,12 +3111,12 @@ collection-editor
     Editor of the collection holding the item (e.g. the series editor for a
     book)
 
-composer
-    Composer (e.g. of a musical score)
-
 compiler
     Person compiling or selecting material for an item from the works of various 
     persons or bodies (e.g. for an anthology)
+
+composer
+    Composer (e.g. of a musical score)
 
 container-author
     Author of the container holding the item (e.g. the book author for a book
