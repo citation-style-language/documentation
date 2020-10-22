@@ -3139,7 +3139,7 @@ editorial-director
     Managing editor ("Directeur de la Publication" in French)
 
 editor-translator
-    Editor and translator of a work. Should be automatically generated if editor and translator variables are identical
+    Editor and translator of a work. Must be automatically generated if editor and translator variables are identical
 
 executive-producer
     Executive producer (e.g. of a television series)
