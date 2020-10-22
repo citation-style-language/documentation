@@ -3061,7 +3061,7 @@ section
     Section of the item or container holding the item (e.g. "§2.0.1" for a law; 
     "politics" for a newspaper article)
 
-supplement
+supplement-number
     Supplement number of the item or container holding the item (e.g. for 
     secondary legal items that are regularly updated between editions)
 
