@@ -3186,7 +3186,7 @@ script-writer
     Script-writer (e.g. of a movie)
 
 series-creator
-    Creator of a series
+    Creator of a series (e.g. of a television series)
 
 translator
     Translator
