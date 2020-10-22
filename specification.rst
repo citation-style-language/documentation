@@ -3145,7 +3145,7 @@ executive-producer
     Executive producer (e.g. of a television series)
 
 guest
-    Host
+    Guest (e.g. of a TV show or podcast)
 
 host
     Guest
