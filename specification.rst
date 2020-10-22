@@ -2895,7 +2895,6 @@ ISBN
 ISSN
     International Standard Serial Number
 
-
 jurisdiction
     Geographic scope of relevance (e.g. "US" for a US patent; the court hearing
     a legal case)
