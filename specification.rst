@@ -3138,6 +3138,9 @@ editor
 editorial-director
     Managing editor ("Directeur de la Publication" in French)
 
+editor-translator
+    Automatically constructed if editor and translator are identical
+
 executive-producer
     Executive producer (e.g. of a television series)
 
