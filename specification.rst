@@ -3054,7 +3054,7 @@ part-number
       journal article);
     | Use ``part-title`` for the title of the part, if any
 
-printing
+printing-number
     Printing number of the item or container holding the item
 
 section
