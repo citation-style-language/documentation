@@ -2873,6 +2873,9 @@ DOI
     Digital Object Identifier (e.g. "10.1128/AEM.02591-07")
 
 event
+    Deprecated legacy variant of ``event-title``;
+
+event-title
     Name of the event related to the item (e.g. the conference name when citing
     a conference paper; the meeting where presentation was made)
 
