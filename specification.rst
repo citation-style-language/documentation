@@ -3141,11 +3141,20 @@ editorial-director
 executive-producer
     Executive producer (e.g. of a television series)
 
+guest
+    Host
+
+host
+    Guest
+
 illustrator
     Illustrator (e.g. of a children's book or graphic novel)
 
 interviewer
     Interviewer (e.g. of an interview)
+
+narrator
+    Narrator
 
 organizer
     Organizer of an event (e.g. organizer of a workshop or conference)
@@ -3169,6 +3178,12 @@ recipient
 
 reviewed-author
     Author of the item reviewed by the current item
+
+script-writer
+    Script-writer (e.g. of a movie)
+
+series-creator
+    Creator of a series
 
 translator
     Translator
