@@ -2886,26 +2886,12 @@ genre
     | Do not use for topical descriptions or categories (e.g. "adventure" for an 
       adventure movie)
 
-ISAN
-    International Standard Audiovisual Number
-
 ISBN
     International Standard Book Number (e.g. "978-3-8474-1017-1")
-
-ISCI
-    International Standard Collection Identifier
-
-ISMN
-    International Standard Music Number
-
-ISRC
-    International Standard Recording Code
 
 ISSN
     International Standard Serial Number
 
-ISWC
-    International Standard Musical Work Code
 
 jurisdiction
     Geographic scope of relevance (e.g. "US" for a US patent; the court hearing
