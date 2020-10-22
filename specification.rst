@@ -2405,22 +2405,32 @@ Appendix II - Terms
 Locators
 ~~~~~~~~
 
--  book
--  chapter
--  column
--  figure
--  folio
--  issue
--  line
--  note
--  opus
--  page
--  paragraph
--  part
--  section
--  sub verbo
--  verse
--  volume
+- appendix
+- article
+- book
+- canon
+- chapter
+- column
+- elocation
+- equation
+- figure
+- folio
+- issue
+- line
+- note
+- opus
+- page
+- paragraph
+- part
+- rule
+- section
+- sub verbo
+- supplement
+- table
+- timestamp
+- title
+- verse
+- volume
 
 Months
 ~~~~~~
