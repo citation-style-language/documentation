@@ -2523,7 +2523,6 @@ Roles
 ~~~~~
 
 For each name variable listed in Appendix IV, there is a corresponding term.
-Additionaly, there is a term "editortranslator" that is used when "editor" and "translator" are identical.
 
 Seasons
 ~~~~~~~
