@@ -2406,7 +2406,7 @@ Locators
 ~~~~~~~~
 
 - appendix
-- article
+- article-locator
 - book
 - canon
 - chapter
@@ -2424,7 +2424,7 @@ Locators
 - part
 - rule
 - section
-- sub verbo
+- sub-verbo
 - supplement
 - table
 - timestamp
