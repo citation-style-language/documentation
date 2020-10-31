@@ -567,11 +567,9 @@ Terms may be defined for specific forms by using ``cs:term`` with the optional
 -  "verb-short" - e.g. "ed." for the term "editor"
 -  "symbol" - e.g. "§" and "§§" for the term "section"
 
-If a style uses a term in a form that is undefined (even after `Locale
-Fallback`_), there is fallback to other forms: "verb-short" first falls back to
-"verb", "symbol" first falls back to "short", and "verb" and "short" both fall
-back to "long". If no locale or form fallback is available, the term is rendered
-as an empty string.
+If a style uses a term in a form that is undefined (even after `Locale Fallback`_), there is fallback to other forms:
+"verb-short" first falls back to "verb", "symbol" first falls back to "short", and "verb" and "short" both fall back to "long". 
+In addition, the terms "long-ordinal-1" to "long-ordinal-10" fall back to the set of ordinal suffix terms. If no locale or form fallback is available, the term is rendered as an empty string.
 
 The ``match``, ``gender``, and ``gender-form`` attributes can be used on
 ``cs:term`` for the formatting of number variables rendered as ordinals (e.g.
