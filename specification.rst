@@ -3176,8 +3176,38 @@ The page abbreviation rules for the different values of the
 ``page-range-format`` attribute on ``cs:style`` are:
 
 "chicago"
+    Alias for "chicago-15"; will change to be an alias for "chicago-16" in CSL v1.1.
+
+"chicago-15"
     Page ranges are abbreviated according to the
-    `Chicago Manual of Style (16th ed and later) rules <http://cmosshoptalk.com/2018/04/10/316-7-316-17-or-316-317-chicago-style-for-number-ranges/>`_ (see section 9.61):
+    `Chicago Manual of Style (15th ed and earlier) rules`_ (see 15th ed, section 9.64):
+
+    +------------------------+--------------------------+--------------------------+
+    | First number           | Second number            | Examples                 |
+    +========================+==========================+==========================+
+    | Less than 100          | Use all digits           | 3 |--| 10; 71 |--| 72    |
+    +------------------------+--------------------------+--------------------------+
+    | 100 or multiple of 100 | Use all digits           | 100 |--| 104;            |
+    |                        |                          | 600 |--| 613;            |
+    |                        |                          | 1100 |--| 1123           |
+    +------------------------+--------------------------+--------------------------+
+    | 101 through 109 (in    | Use changed part only,   | 107 |--| 8; 505 |--| 17; |
+    | multiples of 100)      | omitting unneeded zeros  | 1002 |--| 6              |
+    +------------------------+--------------------------+--------------------------+
+    | 110 through 199 (in    | Use two digits, or more  | 321 |--| 25;             |
+    | multiples of 100)      | as needed                | 415 |--| 532;            |
+    |                        |                          | 11564 |--| 68;           |
+    |                        |                          | 13792 |--| 803           |
+    +------------------------+--------------------------+--------------------------+
+    | 4 digits               | If numbers are four      | 1496 |--| 1504;          |
+    |                        | digits long and three    | 2787 |--| 2816           |
+    |                        | digits change, use all   |                          |
+    |                        | digits                   |                          |
+    +------------------------+--------------------------+--------------------------+
+
+"chicago-16"
+    Page ranges are abbreviated according to the
+     `Chicago Manual of Style (16th ed and later) rules <http://cmosshoptalk.com/2018/04/10/316-7-316-17-or-316-317-chicago-style-for-number-ranges/>`_ (see 16th ed, section 9.61):
 
     +-----------------------------+--------------------------+-----------------+
     | First number                | Second number            | Examples        |
