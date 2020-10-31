@@ -3185,7 +3185,7 @@ reviewed-author
     Author of the item reviewed by the current item
 
 script-writer
-    Script-writer (e.g. of a movie)
+    Writer of a script or screenplay (e.g. of a film)
 
 series-creator
     Creator of a series (e.g. of a television series)
