@@ -2143,22 +2143,15 @@ The sort key value for a macro called via ``cs:key`` via the ``macro`` attribute
 generally consists of the string value the macro would ordinarily generate,
 without rich text markup (exceptions are discussed below).
 
-For name sorting, there are four advantages in using the same macro for
-rendering and sorting, instead of sorting directly on the name variable. First,
-substitution is available (e.g. the "editor" variable might substitute for an
-empty "author" variable). Secondly, et-al abbreviation can be used (using either
-the ``et-al-min``/``et-al-subsequent-min``,
-``et-al-use-first``/``et-al-subsequent-use-first``, and ``et-al-use-last``
-options defined for the macro, or the overriding ``names-min``,
-``names-use-first`` and ``names-use-last`` attributes set on ``cs:key``). When
-et-al abbreviation occurs, the "et-al" and "and others" terms are excluded from
-the sort key values. Thirdly, names can be sorted by just the surname (using a
-macro for which the ``form`` attribute on ``cs:name`` is set to "short").
-Finally, it is possible to sort by the number of names in a name list, by
-calling a macro for which the ``form`` attribute on ``cs:name`` is set to
-"count". As for names sorted via the ``variable`` attribute, names sorted via
-``macro`` are returned with the ``cs:name`` attribute ``name-as-sort-order`` set
-to "all".
+When sorting by `name variables`_ rendered within the macro, any ``cs:label`` elements are excluded from the sort key values.
+Name variables are also returned with the ``cs:name`` attribute ``name-as-sort-order`` set to "all".
+When et-al abbreviation occurs, the "et-al" and "and others" terms are excluded from the sort key values. 
+
+There are four advantages in using the same macro for rendering and sorting, instead of sorting directly on the name variable. 
+First, substitution is available (e.g. the "editor" variable might substitute for an empty "author" variable). 
+Second, et-al abbreviation can be used (using either the ``et-al-min``/``et-al-subsequent-min``, ``et-al-use-first``/``et-al-subsequent-use-first``, and ``et-al-use-last`` options defined for the macro, or the overriding ``names-min``, ``names-use-first`` and ``names-use-last`` attributes set on ``cs:key``). 
+Third, names can be sorted by just the surname (using a macro for which the ``form`` attribute on ``cs:name`` is set to "short").
+Fourth, it is possible to sort by the number of names in a name list, by calling a macro for which the ``form`` attribute on ``cs:name`` is set to "count". 
 
 `Number variables`_ rendered within the macro with ``cs:number`` and `date
 variables`_ are treated the same as when they are called via ``variable``. The
