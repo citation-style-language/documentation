@@ -2892,6 +2892,9 @@ DOI
     Digital Object Identifier (e.g. "10.1128/AEM.02591-07")
 
 event
+    Deprecated legacy variant of ``event-title``
+
+event-title
     Name of the event related to the item (e.g. the conference name when citing
     a conference paper; the meeting where presentation was made)
 
@@ -2905,26 +2908,11 @@ genre
     | Do not use for topical descriptions or categories (e.g. "adventure" for an 
       adventure movie)
 
-ISAN
-    International Standard Audiovisual Number
-
 ISBN
     International Standard Book Number (e.g. "978-3-8474-1017-1")
 
-ISCI
-    International Standard Collection Identifier
-
-ISMN
-    International Standard Music Number
-
-ISRC
-    International Standard Recording Code
-
 ISSN
     International Standard Serial Number
-
-ISWC
-    International Standard Musical Work Code
 
 jurisdiction
     Geographic scope of relevance (e.g. "US" for a US patent; the court hearing
@@ -3080,19 +3068,19 @@ page-first
     First page of the range of pages the item (e.g. a journal article) covers in
     a container (e.g. a journal issue)
 
-part
+part-number
     | Number of the specific part of the item being cited (e.g. part 2 of a 
       journal article);
     | Use ``part-title`` for the title of the part, if any
 
-printing
+printing-number
     Printing number of the item or container holding the item
 
 section
     Section of the item or container holding the item (e.g. "§2.0.1" for a law; 
     "politics" for a newspaper article)
 
-supplement
+supplement-number
     Supplement number of the item or container holding the item (e.g. for 
     secondary legal items that are regularly updated between editions)
 
@@ -3142,12 +3130,12 @@ collection-editor
     Editor of the collection holding the item (e.g. the series editor for a
     book)
 
-composer
-    Composer (e.g. of a musical score)
-
 compiler
     Person compiling or selecting material for an item from the works of various 
     persons or bodies (e.g. for an anthology)
+
+composer
+    Composer (e.g. of a musical score)
 
 container-author
     Author of the container holding the item (e.g. the book author for a book
@@ -3169,14 +3157,28 @@ editor
 editorial-director
     Managing editor ("Directeur de la Publication" in French)
 
+editor-translator
+    | Combined editor and translator of a work;
+    | The citation processory must be automatically generate if ``editor`` and ``translator`` variables are identical;
+    | May also be provided directly in item data
+
 executive-producer
     Executive producer (e.g. of a television series)
+
+guest
+    Guest (e.g. on a TV show or podcast)
+
+host
+    Host (e.g. of a TV show or podcast)
 
 illustrator
     Illustrator (e.g. of a children's book or graphic novel)
 
 interviewer
     Interviewer (e.g. of an interview)
+
+narrator
+    Narrator (e.g. of an audio book)
 
 organizer
     Organizer of an event (e.g. organizer of a workshop or conference)
@@ -3200,6 +3202,12 @@ recipient
 
 reviewed-author
     Author of the item reviewed by the current item
+
+script-writer
+    Writer of a script or screenplay (e.g. of a film)
+
+series-creator
+    Creator of a series (e.g. of a television series)
 
 translator
     Translator
