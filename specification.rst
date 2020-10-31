@@ -2481,9 +2481,14 @@ For each item type listed in Appendix III, there is a corresponding term.
 Locators
 ~~~~~~~~
 
+-  appendix
+-  article-locator
 -  book
+-  canon
 -  chapter
 -  column
+-  elocation
+-  equation
 -  figure
 -  folio
 -  issue
@@ -2493,8 +2498,13 @@ Locators
 -  page
 -  paragraph
 -  part
+-  rule
 -  section
--  sub verbo
+-  sub-verbo
+-  supplement
+-  table
+-  timestamp
+-  title
 -  verse
 -  volume
 
