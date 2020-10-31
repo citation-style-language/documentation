@@ -2551,20 +2551,7 @@ Quotation marks
 Roles
 ~~~~~
 
--  author
--  collection-editor
--  composer
--  container-author
--  director
--  editor
--  editorial-director
--  editortranslator
--  illustrator
--  interviewer
--  original-author
--  recipient
--  reviewed-author
--  translator
+For each name variable listed in Appendix IV, there is a corresponding term.
 
 Seasons
 ~~~~~~~
