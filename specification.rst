@@ -2569,32 +2569,58 @@ Miscellaneous
 
 -  accessed
 -  ad
+-  advance-online-publication
+-  album
 -  and
 -  and others
 -  anonymous
 -  at
+-  audio-recording
 -  available at
 -  bc
+-  bce
 -  by
+-  ce
 -  circa
 -  cited
--  edition
 -  et-al
+-  film
 -  forthcoming
 -  from
+-  henceforth
 -  ibid
 -  in
 -  in press
 -  internet
 -  interview
 -  letter
+-  loc-cit
 -  no date
+-  no-place
+-  no-publisher
+-  on
 -  online
+-  op-cit
+-  original-work-published
+-  personal-communication
+-  podcast
+-  podcast-episode
+-  preprint
 -  presented at
+-  radio-broadcast
+-  radio-series
+-  radio-series-episode
 -  reference
 -  retrieved
+-  review-of
 -  scale
--  version
+-  special-issue
+-  special-section
+-  television-broadcast
+-  television-series
+-  television-series-episode
+-  video
+-  working-paper
 
 Appendix III - Types
 --------------------
