@@ -3240,8 +3240,11 @@ The page abbreviation rules for the different values of the
 ``page-range-format`` attribute on ``cs:style`` are:
 
 "chicago"
+    Alias for "chicago-15"; will change to be an alias for "chicago-16" in CSL v1.1.
+
+"chicago-15"
     Page ranges are abbreviated according to the
-    `Chicago Manual of Style-rules <http://www.aahn.org/guidelines.html>`_:
+    `Chicago Manual of Style (15th ed and earlier) rules`_ (see 15th ed, section 9.64):
 
     +------------------------+--------------------------+--------------------------+
     | First number           | Second number            | Examples                 |
@@ -3265,6 +3268,34 @@ The page abbreviation rules for the different values of the
     |                        | digits change, use all   |                          |
     |                        | digits                   |                          |
     +------------------------+--------------------------+--------------------------+
+
+"chicago-16"
+    Page ranges are abbreviated according to the
+     `Chicago Manual of Style (16th ed and later) rules <http://cmosshoptalk.com/2018/04/10/316-7-316-17-or-316-317-chicago-style-for-number-ranges/>`_ (see 16th ed, section 9.61):
+
+    +-----------------------------+--------------------------+-----------------+
+    | First number                | Second number            | Examples        |
+    +=============================+==========================+=================+
+    | Less than 100               | Use all digits           | 3 |--| 10;      |
+    |                             |                          | 71 |--| 72;     |
+    |                             |                          | 92 |--| 113;    |
+    +-----------------------------+--------------------------+-----------------+
+    | 100 or multiple of 100      | Use all digits           | 100 |--| 104;   |
+    |                             |                          | 600 |--| 613;   |
+    |                             |                          | 1100 |--| 1123  |
+    +-----------------------------+--------------------------+-----------------+
+    | 101 through 109,            | Use changed part only,   | 107 |--| 8;     |
+    | 201 through 209, etc.       | omitting unneeded zeros  | 505 |--| 17;    |
+    | (for each multiple of 100)  |                          | 1002 |--| 6     |
+    +-----------------------------+--------------------------+-----------------+
+    | Everything else             | Use two digits, unless   | 321 |--| 25;    |
+    | (110 through 199,           | more digits are needed   | 415 |--| 532;   |
+    |  210 through 299, etc.;     | to show the changed part | 1087 |--| 89;   |
+    |  for each multiple of 100)  |                          | 1496 |--| 500;  |
+    |                             |                          | 11564 |--| 68;  |
+    |                             |                          | 13792 |--| 803  |
+    |                             |                          | 12991 |--| 3001 |
+    +-----------------------------+--------------------------+-----------------+
 
 "expanded"
     Abbreviated page ranges are expanded to their non-abbreviated form: 42 |--|
