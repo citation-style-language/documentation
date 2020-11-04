@@ -2418,9 +2418,11 @@ items is performed by:
    is capitalized. The case of words in mixed or uppercase stays the same.
 
 In both cases, stop words are lowercased, unless they are the first or last word
-in the string, or follow a colon. The stop words are "a", "an", "and", "as",
-"at", "but", "by", "down", "for", "from", "in", "into", "nor", "of", "on",
-"onto", "or", "over", "so", "the", "till", "to", "up", "via", "with", and "yet".
+in the string, or follow a colon. The stop words are listed in the file
+`stop-words.json
+<https://raw.github.com/citation-style-language/documentation/master/stop-words.json>`_.
+Hyphenated word parts are treated as distinct words (e.g., "two-thirds" becomes
+"Two-Thirds").
 
 Non-English Items
 '''''''''''''''''
