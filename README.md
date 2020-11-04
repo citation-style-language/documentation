@@ -21,4 +21,4 @@ For general quesions and discussions, have a look at the [CSL forum](https://dis
 
 ## Licensing
 
-This repository is released under the [MIT license](LICENSE.txt).
+This repository is released under the [CC-BY-SA-4.0 License](LICENSE.txt).
