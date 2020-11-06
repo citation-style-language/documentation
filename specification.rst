@@ -3017,7 +3017,7 @@ title
 
 title-short
     | Short/abbreviated form of ``title``;
-    | Deprecated; use ``variable="container-title" form="short"`` instead
+    | Deprecated; use ``variable="title" form="short"`` instead
 
 translated-title
     Primary title of the item, translated into the lanugage of the citing
