@@ -1,4 +1,4 @@
-CSL 1.0.1 Specification
+CSL 1.0.2 Specification
 =======================
 
 by `Rintze M. Zelle, PhD <https://twitter.com/rintzezelle>`_
