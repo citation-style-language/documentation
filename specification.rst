@@ -1,9 +1,20 @@
 CSL 1.0.2 Specification
 =======================
 
-by `Rintze M. Zelle, PhD <https://twitter.com/rintzezelle>`_
+Principal Authors 
+`Rintze M. Zelle, PhD <https://twitter.com/rintzezelle>`_, 
+`Brenton M. Wiernik <https://twitter.com/bmwiernik>`_, 
+Frank G. Bennett, Jr., 
+Bruce D'Arcus,
+Denis Maier
 
-with contributions from Frank G. Bennett, Jr. and Bruce D'Arcus.
+with additional contributions from 
+Julien Gonzalez,
+Sebastian Karcher,
+Sylvester Kiel,
+Cormac Relf,
+Lars Willighagen,
+and other CSL contributors.
 
 | |CCBYSA|_
 | This work is licensed under a `Creative Commons Attribution-ShareAlike 4.0 International License`__.
