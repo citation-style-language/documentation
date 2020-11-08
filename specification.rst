@@ -2473,7 +2473,7 @@ Appendix II - Terms
 
 Types
 ~~~~~~~~
-For each item type listed in Appendix III, there is a corresponding term.
+For each item type listed in `Appendix III - Types`_, there is a corresponding term.
 
 Locators
 ~~~~~~~~
@@ -2552,7 +2552,11 @@ Punctuation
 Roles
 ~~~~~
 
-For each name variable listed in Appendix IV, there is a corresponding term.
+For each of the `Name Variables`_ listed in `Appendix IV - Variables`_, there is a corresponding term.
+
+Number variables
+~~~~~~~~~~~~~~~~
+For each of the `Number Variables`_ listed in `Appendix IV - Variables`_, there is a corresponding term.
 
 Seasons
 ~~~~~~~
