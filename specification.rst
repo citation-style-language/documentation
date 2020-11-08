@@ -1,4 +1,4 @@
-CSL 1.0.1 Specification
+CSL 1.0.2 Specification
 =======================
 
 by `Rintze M. Zelle, PhD <https://twitter.com/rintzezelle>`_
@@ -3021,7 +3021,7 @@ title
 
 title-short
     | Short/abbreviated form of ``title``;
-    | Deprecated; use ``variable="container-title" form="short"`` instead
+    | Deprecated; use ``variable="title" form="short"`` instead
 
 translated-title
     Primary title of the item, translated into the lanugage of the citing
