@@ -569,7 +569,7 @@ Terms may be defined for specific forms by using ``cs:term`` with the optional
 
 If a style uses a term in a form that is undefined (even after `Locale Fallback`_), there is fallback to other forms:
 "verb-short" first falls back to "verb", "symbol" first falls back to "short", and "verb" and "short" both fall back to "long". 
-In addition, the terms "long-ordinal-1" to "long-ordinal-10" fall back to the set of ordinal suffix terms. If no locale or form fallback is available, the term is rendered as an empty string.
+In addition, the terms "long-ordinal-01" to "long-ordinal-10" fall back to the set of ordinal suffix terms. If no locale or form fallback is available, the term is rendered as an empty string.
 
 The ``match``, ``gender``, and ``gender-form`` attributes can be used on
 ``cs:term`` for the formatting of number variables rendered as ordinals (e.g.
@@ -620,6 +620,15 @@ The "ordinal" term, and "ordinal-00" through "ordinal-99" terms, behave
 differently from other terms when it comes to `Locale Fallback`. Whereas other
 terms can be (re)defined individually, (re)defining any of the ordinal terms
 through ``cs:locale`` replaces all previously defined ordinal terms.
+
+Long Ordinals
+^^^^^^^^^^^^^
+| Number variables can be rendered with ``cs:number`` in the "long-ordinal" form, e.g. "second" (see `Number`_). 
+  The long ordinal terms (e.g. "second" for "2") are defined with the "long-ordinal-01" through "long-ordinal-10" terms.
+| Long ordinal forms are available for the numbers 1 through 10.
+  For other numbers "long-ordinal" falls back to "ordinal".
+| For the numbers 1 through 10 in "long-ordinal" form, the ``match`` attribute is always treated as "whole-number".
+  For other numbers rendered in "long-ordinal" form, the optional ``match`` attribute follows the behavior described in `Ordinal Suffixes`_ ("last-two-digits" is the default). 
 
 Gender-specific Ordinals
 ^^^^^^^^^^^^^^^^^^^^^^^^
