@@ -1573,33 +1573,22 @@ Citation-specific Options
 Disambiguation
 ''''''''''''''
 
-A cite is ambiguous when it matches multiple bibliographic entries [#]_. There
-are four methods available to eliminate such ambiguity:
+A cite is ambiguous when it matches multiple bibliographic entries [#]_.
+Four methods are available to eliminate such ambiguity, which are always tried in the following order:
 
-1. Show more names
-2. Expand names (adding initials or full given names)
-3. Add a year-suffix
-4. Render the cite with the ``disambiguate`` attribute of ``cs:choose``
-   conditions testing "true"
+1. Expand names (adding initials or full given names)
+2. Show more names
+3. Render the cite with the ``disambiguate`` attribute of ``cs:choose`` conditions testing "true"
+4. Add a year-suffix
 
-Method 2 can also be used for global *name disambiguation*, covering all cites,
-ambiguous and unambiguous, throughout the document.
+Method 1 can also be used for the separate purpose of global *name disambiguation*, covering both ambiguous and unambiguous cites throughout the document.
 
-Disambiguation methods are activated with the following optional attributes, and
-are always tried in the listed order:
+The four disambiguation methods can be individually activated with the following optional attributes:
 
-``disambiguate-add-names`` [Step (1)]
-    If set to "true" ("false" is the default), names that would otherwise be
-    hidden as a result of et-al abbreviation are added one by one to all members
-    of a set of ambiguous cites, until no more cites in the set can be
-    disambiguated by adding names.
-
-``disambiguate-add-givenname`` [Step (2)]
-    If set to "true" ("false" is the default), ambiguous names (names that are
-    identical in their "short" or initialized "long" form, but differ when
-    initials are added or the full given name is shown) are expanded. Name
-    expansion can be configured with ``givenname-disambiguation-rule``. An
-    example of cite disambiguation:
+``disambiguate-add-givenname`` [Method (1)]
+    If set to "true" ("false" is the default), ambiguous names (names that are identical in their "short" or initialized "long" form, but differ when initials are added or the full given name is shown) are expanded. 
+    Name expansion can be configured with ``givenname-disambiguation-rule``. 
+    An example of cite disambiguation:
 
     ================================  ===================================
     Original ambiguous cites          Disambiguated cites
@@ -1607,91 +1596,73 @@ are always tried in the listed order:
     (Simpson 2005; Simpson 2005)      (H. Simpson 2005; B. Simpson 2005)
     (Doe 1950; Doe 1950)              (John Doe 1950; Jane Doe 1950)
     ================================  ===================================
-
-    If cites cannot be (fully) disambiguated by expanding the rendered names,
-    and if ``disambiguate-add-names`` is set to "true", then the names still
-    hidden as a result of et-al abbreviation after the disambiguation attempt of
-    ``disambiguate-add-names`` are added one by one to all members of a set of
-    ambiguous cites, until no more cites in the set can be disambiguated by
-    adding expanded names.
-
+   
 ``givenname-disambiguation-rule``
-    Specifies a) whether the purpose of name expansion is limited to
-    disambiguating cites, or has the additional goal of disambiguating names
-    (only in the latter case are ambiguous names in unambiguous cites expanded,
-    e.g. from "(Doe 1950; Doe 2000)" to "(Jane Doe 1950; John Doe 2000)"), b)
-    whether name expansion targets all, or just the first name of each cite, and
-    c) the method by which each name is expanded.
+    Specifies 
+    (a) whether the purpose of name expansion is limited to disambiguating cites, or has the additional goal of disambiguating names (only in the latter case are ambiguous names in unambiguous cites expanded, e.g. from "(Doe 1950; Doe 2000)" to "(Jane Doe 1950; John Doe 2000)"), 
+    (b) whether name expansion targets all, or just the first name of each cite, and
+    (c) the method by which each name is expanded.
 
     **Expansion of Individual Names**
         The steps for expanding individual names are:
 
-        1. If ``initialize-with`` is set and ``initialize`` has its default
-           value of "true", then:
+        1. If ``initialize-with`` is set and ``initialize`` has its default value of "true", then:
 
-           \(a) Initials can be shown by rendering the name with a ``form``
-           value of "long" instead of "short" (e.g. "Doe" becomes "J. Doe").
+           \(a) Initials can be shown by rendering the name with a ``form`` value of "long" instead of "short" (e.g. "Doe" becomes "J. Doe").
 
-           \(b) Full given names can be shown instead of initials by rendering
-           the name with ``initialize`` set to "false" (e.g. "J. Doe" becomes
-           "John Doe").
+           \(b) Full given names can be shown instead of initials by rendering the name with ``initialize`` set to "false" (e.g. "J. Doe" becomes "John Doe").
 
-        2. If ``initialize-with`` is *not* set, full given names can be shown by
-           rendering the name with a ``form`` value of "long" instead of "short"
-           (e.g. "Doe" becomes "John Doe").
+        2. If ``initialize-with`` is *not* set, full given names can be shown by rendering the name with a ``form`` value of "long" instead of "short" (e.g. "Doe" becomes "John Doe").
 
     **Given Name Disambiguation Rules**
         Allowed values of ``givenname-disambiguation-rule``:
 
         "all-names"
-            Name expansion has the dual purpose of disambiguating cites and
-            names. All rendered ambiguous names, in both ambiguous and
-            unambiguous cites, are subject to disambiguation. Each name is
-            progressively transformed until it is disambiguated. Names that
-            cannot be disambiguated remain in their original form.
+            Name expansion has the dual purpose of disambiguating cites and names. 
+            All rendered ambiguous names, in both ambiguous and unambiguous cites, are subject to disambiguation. 
+            Each name is progressively transformed until it is disambiguated. 
+            Names that cannot be disambiguated remain in their original form.
 
         "all-names-with-initials"
-            As "all-names", but name expansion is limited to showing initials
-            (see step 1(a) above). No disambiguation attempt is made when
-            ``initialize-with`` is not set or when ``initialize`` is set to
-            "false".
+            As "all-names", but name expansion is limited to showing initials (see step 1(a) above). 
+            No disambiguation attempt is made when ``initialize-with`` is not set or when ``initialize`` is set to "false".
 
         "primary-name"
-            As "all-names", but disambiguation is limited to the first name of
-            each cite.
+            As "all-names", but disambiguation is limited to the first name of each cite.
 
         "primary-name-with-initials"
-            As "all-names-with-initials", but disambiguation is limited to the
-            first name of each cite.
+            As "all-names-with-initials", but disambiguation is limited to the first name of each cite.
 
         "by-cite"
-            Default. As "all-names", but the goal of name expansion is limited
-            to disambiguating cites. Only ambiguous names in ambiguous cites are
-            affected, and disambiguation stops after the first name that
-            eliminates cite ambiguity.
+            Default. As "all-names", but the goal of name expansion is limited to disambiguating cites. 
+            Only ambiguous names in ambiguous cites are affected, and disambiguation stops after the first name that eliminates cite ambiguity.
 
-``disambiguate-add-year-suffix`` [Step (3)]
-    If set to "true" ("false" is the default), an alphabetic year-suffix is
-    added to ambiguous cites (e.g. "Doe 2007, Doe 2007" becomes "Doe 2007a, Doe
-    2007b") and to their corresponding bibliographic entries. The assignment of
-    the year-suffixes follows the order of the bibliographies entries, and
-    additional letters are used once "z" is reached ("z", "aa", "ab", …, "az",
-    "ba", etc.). By default the year-suffix is appended to the cite, and to the
-    first year rendered through ``cs:date`` in the bibliographic entry, but its
-    location can be controlled by explicitly rendering the "year-suffix"
-    variable using ``cs:text``. If "year-suffix" is rendered through ``cs:text``
-    in the scope of ``cs:citation``, it is suppressed for ``cs:bibliography``,
-    unless it is also rendered through ``cs:text`` in the scope of
-    ``cs:bibliography``, and vice versa.
+``disambiguate-add-names`` [Method (2)]
+    If set to "true" ("false" is the default), names that would otherwise be hidden as a result of et-al abbreviation are added one by one to all members of a set of ambiguous cites, until no more cites in the set can be disambiguated by adding names.
 
-If ambiguous cites remain after applying the selected disambiguation methods
-described above, a final disambiguation attempt is made by rendering these cites
-with the ``disambiguate`` condition testing "true" [Step (4)] (see `Choose`_).
+If both ``disambiguate-add-givenname`` and ``disambiguate-add-names`` are set to "true", given name expansion is applied to rendered names first.
+If cites cannot be (fully) disambiguated by expanding the rendered names, then the names still hidden as a result of et-al abbreviation are added one by one to all members of a set of ambiguous cites. 
+Added names are expanded if doing so would disambiguate the ambiguous cites.
+This process contines until no more cites in the set can be disambiguated by adding expanded names.
 
-.. [#] The presence of uncited entries in the bibliography can make cites in the
-       document ambiguous. To make sure such cites are disambiguated, the CSL
-       processor should create hidden "ghost" cites for all uncited
-       bibliographic entries and include them in the disambiguation process.
+In the description of disambiguation methods (1) and (2) above, we assumed that each (disambiguated) cite has an unambiguous link to its bibliographic entry.
+To assure that each cite does in fact uniquely identify its entry in the bibliography, detail that distinguishes cites (such as names, initials, and full given names) must be shown in the corresponding bibliography entries.
+If this is not the case, disambiguation methods (1) and (2) also act on all members of a set of ambiguously cited bibliographic entries, until no more entries in the set can be unambiguously cited by adding (expanded) names. 
+Each method only takes effect on the involved bibliographic entries after it has been used to disambiguate cites.
+
+``disambiguate`` condition [Method (3)] 
+    A disambiguation attempt can also be made by rendering ambiguous cites with the ``disambiguate`` condition testing "true" (see `Choose`_).
+
+``disambiguate-add-year-suffix`` [Method (4)]
+    If set to "true" ("false" is the default), an alphabetic year-suffix is added to ambiguous cites (e.g. "Doe 2007, Doe 2007" becomes "Doe 2007a, Doe 2007b") and to their corresponding bibliographic entries. 
+    This final disambiguation method is always successful. 
+    The assignment of year-suffixes follows the order of the bibliographies entries, and additional letters are used once "z" is reached ("z", "aa", "ab", ..., "az", "ba", etc.). 
+    By default, the year-suffix is appended the first year rendered through ``cs:date`` in the cite and in the bibliographic entry, 
+    but its location  can be controlled by explicitly rendering the "year-suffix" variable using ``cs:text``. 
+    If "year-suffix" is rendered through ``cs:text`` in the scope of ``cs:citation``, it is suppressed for ``cs:bibliography``, unless it is also rendered through ``cs:text`` in the scope of ``cs:bibliography``, and vice versa.
+
+.. [#] Including uncited entries in the bibliography can make cites in the document ambiguous. 
+       To make sure such cites are disambiguated, the CSL processor should include (invisible) cites for such uncited bibliographic entries in the disambiguation process.
 
 Cite Grouping
 '''''''''''''
