@@ -1799,7 +1799,7 @@ Reference Grouping
     Specifies when and how names are substituted as a result of
     ``subsequent-author-substitute``. Allowed values:
 
-    - "complete-all" - (default), when all rendered names of the name variable
+    - "complete-all" - (default), when all names of the name variable
       match those in the preceding bibliographic entry, the value of
       ``subsequent-author-substitute`` replaces the entire name list (including
       punctuation and terms like "et al" and "and"), except for the affixes set
