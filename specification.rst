@@ -11,7 +11,7 @@ Denis Maier
 with additional contributions from 
 Julien Gonzalez,
 Sebastian Karcher,
-Sylvester Kiel,
+Sylvester Keil,
 Cormac Relf,
 Lars Willighagen,
 and other CSL contributors.
