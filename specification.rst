@@ -619,7 +619,7 @@ When a number has matching terms from both groups (e.g. "13" can match
 "ordinal-03" and "ordinal-13"), the term from the "ordinal-10" through
 "ordinal-99" group is used.
 
-Ordinal terms work differently in CSL 1.0.1 than they did in CSL 1.0. When
+Ordinal terms work differently in CSL 1.0.1 and later than they did in CSL 1.0. When
 neither the style or locale file define the "ordinal" term, but do define the
 terms "ordinal-01" through "ordinal-04", the original CSL 1.0 scheme is used:
 "ordinal-01" is used for numbers ending on a 1 (except those ending on 11),
