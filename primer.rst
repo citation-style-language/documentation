@@ -345,7 +345,7 @@ Finally, a real independent CSL style, one that actually defines a citation form
           <name>Bill Johnson</name>
         </contributor>
         <category citation-format="author-date"/>
-        <category field="science">
+        <category field="science"/>
         <updated>2014-10-15T18:17:09+00:00</updated>
         <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
       </info>
@@ -389,18 +389,20 @@ Finally, a real independent CSL style, one that actually defines a citation form
           <key macro="issued-year"/>
           <key variable="title"/>
         </sort>
-        <layout suffix="." delimiter=", ">
-          <group delimiter=". ">
-            <text macro="author"/>
-            <text macro="issued-year"/>
-            <text variable="title"/>
-            <text variable="container-title"/>
+        <layout suffix=".">
+          <group delimiter=", ">
+            <group delimiter=". ">
+              <text macro="author"/>
+              <text macro="issued-year"/>
+              <text variable="title"/>
+              <text variable="container-title"/>
+            </group>
+            <group>
+              <text variable="volume"/>
+              <text variable="issue" prefix="(" suffix=")"/>
+            </group>
+            <text variable="page"/>
           </group>
-          <group>
-            <text variable="volume"/>
-            <text variable="issue" prefix="(" suffix=")"/>
-          </group>
-          <text variable="page"/>
         </layout>
       </bibliography>
     </style>
