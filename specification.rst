@@ -1074,7 +1074,8 @@ within a name variable. ``cs:name`` may carry the following attributes:
     Use of these two attributes enables et-al abbreviation. If the number of
     names in a name variable matches or exceeds the number set on ``et-al-min``,
     the rendered name list is truncated after reaching the number of names set
-    on ``et-al-use-first``. The "et-al" (or "and others") term is appended to
+    on ``et-al-use-first`` (``et-al-min`` has to be greater than 
+    ``et-al-use-first``). The "et-al" (or "and others") term is appended to
     truncated name lists (see also `Et-al`_). By default, when a name list is
     truncated to a single name, the name and the "et-al" (or "and others") term
     are separated by a space (e.g. "Doe et al."). When a name list is truncated
