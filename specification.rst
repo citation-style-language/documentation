@@ -2583,7 +2583,6 @@ Miscellaneous
 -  in
 -  in press
 -  internet
--  interview
 -  letter
 -  loc-cit
 -  no date
