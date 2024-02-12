@@ -2473,6 +2473,7 @@ For each of the `Number Variables`_ listed in `Appendix IV - Variables`_, there 
 Locators
 ~~~~~~~~
 
+-  act
 -  appendix
 -  article-locator
 -  book
@@ -2491,13 +2492,15 @@ Locators
 -  paragraph
 -  part
 -  rule
+-  scene
 -  section
 -  sub-verbo
 -  supplement
 -  table
 -  timestamp
--  title
+-  title-locator
 -  verse
+-  version
 -  volume
 
 Months
@@ -2580,7 +2583,6 @@ Miscellaneous
 -  in
 -  in press
 -  internet
--  interview
 -  letter
 -  loc-cit
 -  no date
