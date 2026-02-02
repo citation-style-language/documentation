@@ -3105,7 +3105,7 @@ original-author
     The original creator of a work (e.g. the form of the author name listed on the original version of a book; the historical author of a work; the original songwriter or performer for a musical piece; the original developer or programmer for a piece of software; the original author of an adapted work such as a book adapted into a screenplay)
 
 performer
-    Performer of an item (e.g. an actor appearing in a film; a muscian performing a piece of music)
+    Performer of an item (e.g. an actor appearing in a film; a musician performing a piece of music)
 
 producer
     Producer (e.g. of a television or radio broadcast)
