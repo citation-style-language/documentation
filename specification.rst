@@ -3077,7 +3077,7 @@ editorial-director
 
 editor-translator
     | Combined editor and translator of a work;
-    | The citation processory must be automatically generate if ``editor`` and ``translator`` variables are identical;
+    | The citation processor must automatically generate it if ``editor`` and ``translator`` variables are identical;
     | May also be provided directly in item data
 
 executive-producer
